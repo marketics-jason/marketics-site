@@ -319,10 +319,11 @@ nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15)
   .sf-inner{grid-template-columns:1fr;gap:28px;}
   .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
   .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
-  body{overflow-x:hidden;}
-  img,iframe,video{max-width:100%;height:auto;}
-  pre,code,table{max-width:100%;overflow-x:auto;box-sizing:border-box;}
 }
+/* Bug 4: prevent horizontal overflow on mobile */
+html,body{overflow-x:hidden;max-width:100%;}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+img,iframe,video{max-width:100%;height:auto;}
 </style>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
 </head>

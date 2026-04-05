@@ -389,10 +389,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .sf-col a{font-size:12px;color:var(--stone,#B4B2A9);text-decoration:none;transition:color .15s;line-height:1.7;}
 .sf-col a:hover{color:var(--gold,#D6AD60);}
 .sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
-@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}  body{overflow-x:hidden;}
-  img,iframe,video{max-width:100%;height:auto;}
-  pre,code,table{max-width:100%;overflow-x:auto;box-sizing:border-box;}
-}
+@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+/* Bug 4: prevent horizontal overflow on mobile */
+html,body{overflow-x:hidden;max-width:100%;}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+img,iframe,video{max-width:100%;height:auto;}
 </style>
 
 <script type="application/ld+json">
