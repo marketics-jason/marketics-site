@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Money Behind the Booking: What Drives STR Demand — Marketics</title>
+<meta name="description" content="Travel demand doesn't disappear when the economy shifts. It migrates. Here's how to read the signals that tell you where it's going before it shows up in your dashboard.">
+<meta property="og:title" content="The Money Behind the Booking — Marketics">
+<meta property="og:description" content="The economic forces reshaping STR demand in 2026, and the five indicators every operator should track monthly.">
+<meta property="og:url" content="https://marketics.io/intel/economics">
+<meta property="og:image" content="https://marketics.io/og/default.jpg">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://marketics.io/intel/economics">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" media="print" onload="this.media='all'">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "The Money Behind the Booking: What Economic Forces Really Drive STR Demand",
+ "description": "Travel demand doesn't disappear when the economy shifts. It migrates. Here's how to read the signals that tell you where it's going before it shows up in your dashboard.",
+ "author": {"@type": "Person", "name": "Jason Baxter"},
+ "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io"},
+ "datePublished": "2026-04-01",
+ "url": "https://marketics.io/intel/economics"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://marketics.io"},
+  {"@type": "ListItem", "position": 2, "name": "Market Intel", "item": "https://marketics.io/intel"},
+  {"@type": "ListItem", "position": 3, "name": "The Money Behind the Booking", "item": "https://marketics.io/intel/economics"}
+ ]
+}
+</script>
+<style>
+:root{
+  --gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;
+  --white:#f8f6f2;--stone:#B4B2A9;--dim:#6B6A65;
+  --d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);transition:border-color .3s,background .3s;}
+nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15);box-shadow:0 1px 24px rgba(0,0,0,.4);}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
+.nav-wordmark{height:26px;width:auto;display:block;transition:opacity .2s;}
+.nav-logo:hover .nav-wordmark{opacity:.8;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}
+.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}
+.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
+.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}
+.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}
+.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .15s,background .15s;}
+.nav-mobile-menu a:hover{color:var(--white);background:rgba(255,255,255,.02);}
+.nav-mobile-menu .nm-sub{padding-left:36px;font-size:10px;color:var(--dim);}
+.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s;}
+.nav-mobile-menu .nm-cta:hover{filter:brightness(1.08);}
+@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}}
+@media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
+
+/* ── ARTICLE LAYOUT ── */
+.article-wrap{
+  display:grid;
+  grid-template-columns:1fr min(680px,100%) 1fr;
+  padding:0 24px;
+}
+.article-wrap > *{grid-column:2;}
+.article-wrap .full-bleed{grid-column:1/-1;}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{
+  padding:28px 0 0;
+  font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);
+  display:flex;align-items:center;gap:8px;
+}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color .15s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb-sep{opacity:.4;}
+
+/* ── ARTICLE HEADER ── */
+.article-header{padding:40px 0 48px;border-bottom:1px solid rgba(255,255,255,.06);}
+.ah-category{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.ah-category::before{content:'';width:20px;height:1px;background:var(--gold);}
+.article-header h1{
+  font-family:var(--d);font-size:clamp(30px,4.5vw,52px);
+  font-weight:200;letter-spacing:-.02em;line-height:1.1;
+  color:var(--white);margin-bottom:20px;
+}
+.article-header h1 em{font-style:normal;color:var(--gold);}
+.ah-deck{
+  font-size:18px;color:var(--stone);line-height:1.65;
+  margin-bottom:28px;
+}
+.ah-meta{
+  display:flex;align-items:center;gap:20px;
+  font-family:var(--m);font-size:10px;letter-spacing:.1em;
+  color:var(--dim);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:20px;
+}
+.ah-meta-divider{width:1px;height:12px;background:rgba(255,255,255,.12);}
+
+/* ── BODY TEXT ── */
+.article-body{padding:48px 0;}
+.article-body p{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
+.article-body p strong{color:var(--white);font-weight:500;}
+.article-body h2{
+  font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;
+  color:var(--white);margin:48px 0 16px;
+}
+.article-body h3{
+  font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin:36px 0 12px;
+}
+.article-body ul,
+.article-body ol{
+  padding-left:20px;margin-bottom:24px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.article-body li{font-size:16px;line-height:1.7;color:var(--stone);}
+.article-body li strong{color:var(--white);}
+
+/* ── CALLOUT BOXES ── */
+.callout{
+  background:var(--n3);
+  border:1px solid rgba(255,255,255,.07);
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  padding:24px 28px;
+  margin:32px 0;
+}
+.callout-label{
+  font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.callout p{font-size:15px;line-height:1.65;color:var(--stone);margin:0;}
+.callout p strong{color:var(--white);}
+
+/* ── CASE STUDY ── */
+.case-study{
+  background:var(--n3);
+  border:1px solid rgba(214,173,96,.12);
+  border-radius:4px;
+  margin:40px 0;
+  overflow:hidden;
+}
+.cs-header{
+  background:rgba(214,173,96,.06);
+  border-bottom:1px solid rgba(214,173,96,.12);
+  padding:20px 28px;
+  display:flex;align-items:center;gap:12px;
+}
+.cs-badge{
+  font-family:var(--m);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  background:rgba(214,173,96,.15);color:var(--gold);
+  padding:4px 10px;border-radius:2px;
+  border:1px solid rgba(214,173,96,.2);
+  flex-shrink:0;
+}
+.cs-title{
+  font-family:var(--d);font-size:14px;font-weight:700;letter-spacing:.04em;
+  color:var(--white);
+}
+.cs-body{padding:24px 28px;}
+.cs-body p{font-size:15px;line-height:1.7;color:var(--stone);margin-bottom:16px;}
+.cs-body p:last-child{margin-bottom:0;}
+.cs-body p strong{color:var(--white);}
+.cs-result{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
+  background:rgba(255,255,255,.05);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.cs-stat{
+  background:var(--n3);
+  padding:16px 20px;
+  text-align:center;
+}
+.cs-stat-val{
+  font-family:var(--d);font-size:20px;font-weight:600;
+  color:var(--gold);letter-spacing:-.02em;margin-bottom:3px;
+}
+.cs-stat-label{font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+
+/* ── SIGNAL TABLE ── */
+.signal-table{
+  width:100%;border-collapse:collapse;margin:24px 0;
+  font-size:14px;
+}
+.signal-table th{
+  font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-align:left;padding:10px 16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:var(--n3);
+}
+.signal-table td{
+  padding:12px 16px;color:var(--stone);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  line-height:1.5;
+}
+.signal-table tr:last-child td{border-bottom:none;}
+.signal-table td:first-child{color:var(--white);font-weight:500;}
+.signal-table td.impact-high{color:var(--gold);}
+.signal-table td.impact-med{color:var(--stone);}
+.signal-table td.impact-low{color:var(--dim);}
+.signal-table tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ── SERIES NAV ── */
+.series-nav{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:24px 28px;
+  background:var(--n3);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:4px;
+  margin:48px 0 0;
+}
+.series-label{
+  font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:6px;
+}
+.series-title{
+  font-family:var(--d);font-size:14px;font-weight:600;color:var(--white);
+}
+.series-link{
+  font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;white-space:nowrap;
+  padding:10px 20px;border:1px solid rgba(214,173,96,.3);border-radius:3px;
+  transition:background .15s,border-color .15s;flex-shrink:0;
+}
+.series-link:hover{background:rgba(214,173,96,.08);border-color:rgba(214,173,96,.6);}
+
+/* ── CONCLUSION CTA ── */
+.article-cta{
+  margin:40px 0 0;
+  padding:40px;
+  background:var(--n3);
+  border:1px solid rgba(214,173,96,.12);
+  border-radius:4px;
+  text-align:center;
+}
+.article-cta h3{
+  font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;
+  color:var(--white);margin-bottom:10px;
+}
+.article-cta h3 em{font-style:normal;color:var(--gold);}
+.article-cta p{font-size:14px;color:var(--stone);margin-bottom:24px;line-height:1.6;}
+.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;display:inline-block;}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+/* ── FOOTER ── */
+.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
+.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
+.sf-brand{padding-top:2px;}
+.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}
+.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}
+.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.sf-col{display:flex;flex-direction:column;gap:6px;}
+.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}
+.sf-col a:hover{color:var(--gold);}
+.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
+@media(max-width:768px){
+  .article-wrap{grid-template-columns:1fr;padding:0;}
+  .article-wrap > *{grid-column:1;padding-left:20px;padding-right:20px;}
+  .article-wrap .full-bleed{padding:0;}
+  .cs-result{grid-template-columns:1fr;}
+  .series-nav{flex-direction:column;align-items:flex-start;}
+  .site-footer{padding:40px 20px 24px;}
+  .sf-inner{grid-template-columns:1fr;gap:28px;}
+  .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
+  .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" style="height:26px;width:auto;display:block;flex-shrink:0;">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/story">Our Story</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel" class="active">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/story">Our Story</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/intel" class="active">Market Intel</a>
+  <a href="/intel/economics" class="nm-sub">↳ The Money Behind the Booking</a>
+  <a href="/intel/trust-architecture" class="nm-sub">↳ The Trust Architecture</a>
+  <a href="/intel/algorithm" class="nm-sub">↳ How the Algorithm Works</a>
+  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+</div>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <div class="breadcrumb">
+    <a href="/intel">Market Intel</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/intel#playbook">The Playbook</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--stone)">Economics</span>
+  </div>
+
+  <header class="article-header">
+    <div class="ah-category">The Playbook · Part 1 of 3</div>
+    <h1>The Money Behind <em>the Booking</em></h1>
+    <p class="ah-deck">Demand doesn't disappear when the economy shifts. It migrates. The operators who track where it's going are positioned to capture it. Everyone else wonders where the bookings went.</p>
+    <div class="ah-meta">
+      <span>Jason Baxter</span>
+      <div class="ah-meta-divider"></div>
+      <span>35× Superhost · 1,000+ Listings Optimized</span>
+      <div class="ah-meta-divider"></div>
+      <span>April 2026</span>
+    </div>
+  </header>
+
+  <div class="article-body">
+
+    <p>Every host I've worked with has a version of the same story. Things were great, then they weren't, and they can't quite identify when or why the shift happened. What changed? The market? The platform? The competition?</p>
+
+    <p>Usually, it was the economy. Not in the dramatic, recession-panic way. In the quiet, structural way that moves billions of dollars from one category of travel to another, from one type of property to another, from one price tier to another. By the time those shifts show up in your booking calendar, you've already missed the window to position for them.</p>
+
+    <p>Across 35 seasons of hosting and more than a thousand listing audits, I've learned that the most important intelligence for a short-term rental operator doesn't come from your booking dashboard. It comes from understanding the economic forces shaping who's traveling, where, and how much they're willing to spend before they ever open the app.</p>
+
+    <h2>The Paradox Most Operators Miss</h2>
+
+    <p>Here's something that keeps showing up in the data: consumer confidence in March 2026 sat at 91.8, its lowest reading in months, with hotel and motel spending falling out of the top five categories Americans planned to increase for the first time in recent memory. At the same moment, the global short-term rental market is tracking toward $154 billion this year, on pace for double-digit compound growth through 2035.</p>
+
+    <p>How do you hold those two facts at once? <strong>People don't stop traveling when the economy shifts. They travel differently.</strong> A family that would have booked a resort moves to a four-bedroom Airbnb with a pool. A couple that would have stayed at the Marriott searches for a well-reviewed one-bedroom near the convention center. The money migrates down the accommodation ladder and toward properties that clearly communicate value.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Core Insight</div>
+      <p>Inflation, interest rates, and consumer confidence don't destroy travel demand. They redirect it. <strong>For mid-range STR operators, economic anxiety is often a tailwind in disguise.</strong> The question is whether your listing is positioned at the right point in the migration path when the demand arrives.</p>
+    </div>
+
+    <h2>The Macro Forces: What's Actually Moving Demand</h2>
+
+    <h3>Supply Compression Is Doing You a Favor</h3>
+
+    <p>The era of runaway STR supply growth is over. Listing growth in the U.S. is projected at 4.6% in 2026, down from 20%+ peaks in 2021 and 2022. Higher mortgage rates have suppressed speculative new entries into the market. Operators already running properties face less competition for the same pool of guests than they did two years ago.</p>
+
+    <p>This is one of the clearest structural tailwinds in the current market: <strong>interest rates suppress new supply more than they suppress demand.</strong> When fewer hosts are entering the market, the hosts who've already built quality listings and review history have an expanding relative advantage.</p>
+
+    <h3>The K-Shaped Split Changes Everything About Positioning</h3>
+
+    <p>Consumer spending has bifurcated. The top two income quintiles are driving over 60% of total spending, and airlines are adding premium seats specifically because affluent travelers keep booking even as lower and middle-income households pull back. At the same time, Deloitte's 2026 Travel Industry Outlook flagged something worth watching: higher-income travelers reporting negative financial sentiment jumped to 15%, up from 9% the year before. Premium demand isn't gone, but it's less automatic than it was.</p>
+
+    <p>What this means in practice: the middle of the market is the most contested right now. Properties that are priced at premium but signal at standard, or priced at standard but delivering economy, are getting squeezed from both sides. Clear positioning to a specific tier has never been more important.</p>
+
+    <h3>The Currency Factor Gateway Operators Can't Ignore</h3>
+
+    <p>A strong dollar makes the U.S. expensive for inbound international travelers. A weaker dollar reverses that. The U.S. Travel Association projects inbound international visits to grow 3.7% in 2026, recovering from a 6.3% drop driven largely by Canadian border crossings declining for ten consecutive months in 2025.</p>
+
+    <p>For operators in Miami, New York, and Los Angeles, the dollar index moves demand more than any marketing campaign. The 2026 FIFA World Cup is expected to bring one in three international U.S. visitors specifically for the event, with World Cup host cities like Philadelphia already pacing at 6.3% RevPAR growth above seasonal norms.</p>
+
+    <div class="case-study">
+      <div class="cs-header">
+        <span class="cs-badge">Market Pattern</span>
+        <div class="cs-title">Drive-Market vs. Fly-Market During Gas Price Spikes</div>
+      </div>
+      <div class="cs-body">
+        <p><strong>The pattern:</strong> When gas prices spike — as they did following the Iran conflict in early 2026, with consumer comments about oil and energy costs spiking in the March Conference Board survey — travelers don't cancel. They shorten their radius. A family that would have driven five hours to a beach rental starts searching within two hours of home.</p>
+        <p><strong>What we see in our market data:</strong> Properties in drive-markets within 90 minutes of a major metro consistently outperform during fuel price spikes. Properties requiring a four-hour drive compress. The shift happens fast — within two to three weeks of a sustained gas price move — and reverses just as quickly when prices stabilize.</p>
+        <p><strong>The positioning implication:</strong> If you're in a close-radius drive market, gas price spikes are a demand catalyst, not a headwind. If you're in a remote destination, they're a signal to run promotional pricing or extend minimum stays to capture the guests who do make the drive.</p>
+      </div>
+      <div class="cs-result">
+        <div class="cs-stat">
+          <div class="cs-stat-val">90 min</div>
+          <div class="cs-stat-label">Drive-Market Sweet Spot</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-val">2–3 wks</div>
+          <div class="cs-stat-label">Demand Shift Speed</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-val">$4.00</div>
+          <div class="cs-stat-label">Gas Price Trigger</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Remote Work Structural Shift</h2>
+
+    <p>Approximately 22% of the U.S. workforce works remotely in 2025, down from pandemic peaks but dramatically higher than pre-pandemic. The hybrid model is now the dominant arrangement, and it's created an entirely new revenue category that didn't exist before: mid-term stays of 30 days or longer, where a knowledge worker arbitrages their income geography against their cost geography.</p>
+
+    <p>This shows up in booking data in a specific way. Six-bedroom properties saw 12.6% booking growth in 2025. Five-bedroom properties grew 10.7%. The driver isn't family vacations. It's multi-generational groups and remote-working teams who need space, reliable Wi-Fi, and dedicated workspaces more than they need proximity to a tourist corridor.</p>
+
+    <p><strong>For operators with larger properties or properties in mid-cost markets near major cities, mid-term stays are the highest-yield revenue category available right now.</strong> Lower turnover costs, predictable revenue, less wear-and-tear than weekend bookings, and guests who are operating on a work budget rather than a vacation budget.</p>
+
+    <h2>Five Indicators to Track Monthly</h2>
+
+    <p>You don't need a Bloomberg terminal. You need five data points, checked monthly, that tell you where demand is heading before it shows up in your booking dashboard.</p>
+
+    <table class="signal-table">
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>What to Watch</th>
+          <th>What It Tells You</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Conference Board Consumer Confidence</td>
+          <td>Expectations sub-index drops below 80</td>
+          <td class="impact-high">Booking windows shorten; price sensitivity rises</td>
+        </tr>
+        <tr>
+          <td>CPI, Lodging Away from Home</td>
+          <td>Rising faster than headline CPI</td>
+          <td class="impact-high">Hotels getting expensive; STR substitution accelerates</td>
+        </tr>
+        <tr>
+          <td>Federal Funds Rate</td>
+          <td>Rate direction and mortgage rate response</td>
+          <td class="impact-med">Rising rates thin new supply; falling rates expand competition</td>
+        </tr>
+        <tr>
+          <td>DXY Dollar Index</td>
+          <td>Direction of dollar strength</td>
+          <td class="impact-med">Weak dollar = more inbound international demand in gateway markets</td>
+        </tr>
+        <tr>
+          <td>AAA National Gas Average</td>
+          <td>Crosses above $4.00/gallon</td>
+          <td class="impact-high">Drive-market demand compresses radius; adjust marketing targeting</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">The Mental Model</div>
+      <p>Macro indicators tell you how much money is in the system. Micro indicators tell you where it flows. <strong>Your booking dashboard tells you what happened. The economy tells you what's coming.</strong> The operators who've internalized that distinction run at 85% occupancy in markets where their neighbors are wondering what went wrong.</p>
+    </div>
+
+    <h2>What Marketics Does With This</h2>
+
+    <p>Reading economic signals is only useful if it translates into specific decisions: adjusting your pricing calendar ahead of demand shifts, repositioning your property description to match migrating guest profiles, opening or closing minimum stays in response to booking window compression.</p>
+
+    <p>In every market we operate in, we're tracking these indicators alongside our clients' listing performance. When the Conference Board survey spikes with energy cost concerns, we know — two to three weeks ahead of the booking data — that drive-market properties are about to see a demand lift. When inbound international booking patterns shift with the dollar, we adjust the pricing and distribution strategy for gateway-market listings before the surge arrives.</p>
+
+    <p>The economy sends signals months in advance. The operators who catch them early don't just survive the next downturn. They use it to capture market share from the hosts who manage by hope and dashboard-watching.</p>
+
+    <div class="series-nav">
+      <div>
+        <div class="series-label">Next in The Playbook</div>
+        <div class="series-title">The Trust Architecture: How Every Signal in Your Listing Works Together</div>
+      </div>
+      <a href="/intel/trust-architecture" class="series-link">Read Part 2 →</a>
+    </div>
+
+    <div class="article-cta">
+      <h3>Want us to apply this to your <em>specific</em> market?</h3>
+      <p>We'll analyze the economic indicators relevant to your property's location, price tier, and guest profile — and tell you exactly what we'd adjust and why.</p>
+      <a href="/get-started" class="btn-primary">Get My Free Audit</a>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">Market Intel</a>
+        <a href="/intel/miami">Miami — FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka — Summer 2026</a>
+        <a href="/intel/economics">The Money Behind the Booking</a>
+        <a href="/intel/trust-architecture">The Trust Architecture</a>
+        <a href="/intel/algorithm">The Algorithm</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+
+<script>(function(){
+  var nav=document.querySelector('nav');
+  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}
+  var btn=document.getElementById('navHamburger');
+  var menu=document.getElementById('navMobileMenu');
+  if(!btn||!menu)return;
+  function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
+})();</script>
+</body>
+</html>

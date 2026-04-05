@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /join
+Disallow: /join/
+
+Sitemap: https://marketics.io/sitemap.xml

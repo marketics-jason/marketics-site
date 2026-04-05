@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNzUgMzc1Ij48cmVjdCB3aWR0aD0iMzc1IiBoZWlnaHQ9IjM3NSIgZmlsbD0iIzBmMGYwZiIvPjxwYXRoIGZpbGw9IiNENkFENjAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ3LjUsNDcuNSkiIGQ9Ik0gMTg3LjUgNTUuNjg3NSBMIDY3LjgwNDY4OCAxNDAuNDgwNDY5IEwgNjcuODA0Njg4IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDE1Mi44Nzg5MDYgTCAxMTUuNjgzNTk0IDE5My4xNDQ1MzEgTCAxMTUuNjgzNTk0IDI3Ny4wMzEyNSBMIDc3LjM3ODkwNiAyNzcuMDMxMjUgTCA3Ny4zNzg5MDYgMTQ1LjQxMDE1NiBMIDE4Ny41IDY3LjQxNzk2OSBMIDI5Ny42MjEwOTQgMTQ1LjQxMDE1NiBMIDI5Ny42MjEwOTQgMjc3LjAzMTI1IEwgMjU5LjMxNjQwNiAyNzcuMDMxMjUgTCAyNTkuMzE2NDA2IDE1OS42MzI4MTIgTCAyMDEuODYzMjgxIDExOS4zNjcxODggTCAyMDEuODYzMjgxIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDE0MC40ODA0NjkgWiBNIDEyNS4yNTc4MTIgMTk4LjEyNSBMIDE2My41NjI1IDE3MS4zMTI1IEwgMTYzLjU2MjUgMjc3LjAzMTI1IEwgMTI1LjI1NzgxMiAyNzcuMDMxMjUgWiBNIDI0OS43NDIxODggMjc3LjAzMTI1IEwgMjExLjQzNzUgMjc3LjAzMTI1IEwgMjExLjQzNzUgMTM3Ljc5Njg3NSBMIDI0OS43NDIxODggMTY0LjYwOTM3NSBaIE0gMjQ5Ljc0MjE4OCAyNzcuMDMxMjUiLz48L3N2Zz4=">
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="msapplication-TileColor" content="#D6AD60">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketics Market Intelligence: Austin, Nashville, Miami, Scottsdale, Cancún STR Optimization</title>
+<meta name="description" content="52 weeks of demand data, event intelligence, and competitor rate tracking for every Marketics market. Austin · Scottsdale · Nashville · Miami · Cancún.">
+<link rel="canonical" href="https://marketics.io/markets">
+<style>
+/* ══ NAV — STANDARD ══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:64px;
+  background:rgba(13,13,13,.95);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .25s ease,border-color .25s ease;
+}
+nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.12);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+
+.nav-wordmark{height:20px;width:auto;display:block;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#6B6A65;text-decoration:none;
+  transition:color .15s ease;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:1px;background:#D6AD60;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.nav-links a:hover{color:#f8f6f2;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:#f8f6f2;}
+.nav-cta{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 22px;background:#D6AD60;color:#0f0f0f;
+  border:none;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:filter .2s ease,transform .15s ease;
+  flex-shrink:0;white-space:nowrap;
+}
+.nav-cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;padding:10px;
+  background:transparent;border:none;cursor:pointer;flex-shrink:0;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;-webkit-user-select:none;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:1.5px;background:#B4B2A9;
+  border-radius:2px;transition:transform .28s ease,opacity .28s ease;
+  transform-origin:center;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#D6AD60;}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}
+.nav-mobile-menu{
+  position:fixed;top:64px;left:0;right:0;
+  background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(214,173,96,.12);
+  padding:0;max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;
+}
+.nav-mobile-menu.open{max-height:520px;padding-bottom:16px;}
+.nav-mobile-menu a{
+  display:block;padding:14px 24px;
+  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#B4B2A9;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:color .15s,background .15s;
+}
+.nav-mobile-menu a:hover{color:#f8f6f2;background:rgba(255,255,255,.02);}
+.nav-mobile-menu a.active{color:#D6AD60;}
+.nav-mobile-menu .nm-cta{
+  display:block;margin:12px 24px 0;padding:14px;
+  background:#D6AD60;color:#0f0f0f!important;
+  text-align:center;border-radius:2px;
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:filter .2s;
+}
+.nav-mobile-menu .nm-cta:hover{filter:brightness(1.1);}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none!important;}
+  .nav-cta{display:none!important;}
+  .nav-hamburger{display:flex!important;}
+}
+@media(min-width:769px){
+  .nav-hamburger{display:none!important;}
+  .nav-mobile-menu{display:none!important;}
+}
+
+/* ══ ROOT ══════════════════════════════════════════════ */
+:root{
+  --gold:#D6AD60;--gold-lo:rgba(214,173,96,.1);
+  --night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;--n4:#202020;--n5:#282828;
+  --stone:#B4B2A9;--dim:#6B6A65;--dim2:#4e4d4a;--white:#fff;
+  --ok:#2D7A4F;--ok-lo:rgba(45,122,79,.1);--warn:#C87E1A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html{scroll-padding-top:64px;}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--white);line-height:1.6;;padding-top:64px;}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(214,173,96,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.016) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+/* ══ SHARED PAGE LAYOUT ══════════════════════════════ */
+.page-section{position:relative;z-index:1;padding:80px 0;}
+.page-section+.page-section{border-top:1px solid rgba(255,255,255,.05);}
+.inner{max-width:1100px;margin:0 auto;padding:0 56px;}
+
+.eyebrow{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:16px;display:flex;align-items:center;gap:12px;
+}
+.eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.section-title{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(28px,4vw,52px);font-weight:200;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--white);line-height:1.05;margin-bottom:14px;
+}
+.section-title em{color:var(--gold);font-style:normal;}
+.section-sub{font-size:16px;font-weight:300;color:var(--stone);line-height:1.8;max-width:580px;}
+.section-sub strong{color:var(--white);font-weight:500;}
+
+/* ══ 1. HERO ══════════════════════════════════════════ */
+.markets-hero{
+  padding:140px 0 72px;background:var(--night);position:relative;overflow:hidden;
+}
+.markets-hero::after{
+  content:'';position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);
+  width:700px;height:360px;
+  background:radial-gradient(ellipse,rgba(214,173,96,.055) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;padding:0 56px;
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+}
+.hero-tag{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(214,173,96,.2);border-radius:3px;padding:5px 12px;
+}
+.hero-h1{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(40px,5.5vw,72px);font-weight:200;
+  letter-spacing:.03em;text-transform:uppercase;
+  color:var(--white);line-height:.95;margin-bottom:22px;
+}
+.hero-h1 em{color:var(--gold);font-style:normal;display:block;}
+.hero-sub{font-size:17px;font-weight:300;color:var(--stone);line-height:1.75;margin-bottom:32px;max-width:420px;}
+.hero-sub strong{color:var(--white);font-weight:500;}
+.btn-primary{
+  font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--night);background:var(--gold);border:none;
+  border-radius:4px;padding:15px 36px;cursor:pointer;
+  transition:filter .2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{filter:brightness(1.08);}
+@keyframes heroPulse{0%,100%{box-shadow:0 0 0 0 rgba(214,173,96,0);}50%{box-shadow:0 0 0 10px rgba(214,173,96,.13);}}
+.btn-primary{animation:heroPulse 2.8s ease-in-out infinite;}
+
+/* Hero right: market ticker */
+.hero-ticker{display:flex;flex-direction:column;gap:2px;}
+.ht-row{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 18px;background:var(--n2);
+  border:1px solid rgba(255,255,255,.05);
+  transition:border-color .25s;
+}
+.ht-row:first-child{border-radius:8px 8px 0 0;}
+.ht-row:last-child{border-radius:0 0 8px 8px;}
+.ht-row:hover{border-color:rgba(214,173,96,.18);}
+.ht-city{
+  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:600;
+  letter-spacing:.04em;color:var(--white);
+}
+.ht-flag{font-size:14px;margin-right:6px;}
+.ht-metrics{display:flex;gap:18px;}
+.ht-m{text-align:center;}
+.ht-mv{
+  font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:300;
+  color:var(--gold);letter-spacing:.04em;line-height:1;
+}
+.ht-ml{font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
+.ht-pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--ok);flex-shrink:0;
+  animation:livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(45,122,79,.4);}50%{box-shadow:0 0 0 5px rgba(45,122,79,0);}100%{box-shadow:0 0 0 0 rgba(45,122,79,0);}}
+
+/* ══ 2. MARKET PULSE WIDGET ══════════════════════════ */
+.pulse-section{background:var(--n2);padding:80px 0 0;}
+.pulse-wrap{max-width:1100px;margin:0 auto;padding:0 56px 0;}
+
+/* ── widget CSS scoped under .mp- ── */
+.mp-terminal{
+  background:#111;border:1px solid rgba(214,173,96,.14);
+  border-radius:8px;overflow:hidden;margin-top:36px;
+}
+.mp-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;background:#181818;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  flex-wrap:wrap;gap:12px;
+}
+.mp-tb-left{display:flex;align-items:center;gap:16px;}
+.mp-live-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--ok);flex-shrink:0;
+  animation:livePulse 2s ease-in-out infinite;
+}
+.mp-live-lbl{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(45,122,79,.9);
+}
+.mp-mkt-name{
+  font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:.06em;color:var(--white);
+}
+.mp-mkt-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+.mp-mkt-tab{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  background:transparent;border:1px solid rgba(255,255,255,.08);
+  color:var(--dim2);border-radius:4px;padding:6px 12px;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.mp-mkt-tab:hover{border-color:rgba(214,173,96,.3);color:var(--stone);}
+.mp-mkt-tab.active{background:rgba(214,173,96,.1);border-color:rgba(214,173,96,.35);color:var(--gold);}
+.mp-tb-right{display:flex;align-items:center;gap:20px;}
+.mp-qs{text-align:center;}
+.mp-qs-v{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--gold);letter-spacing:.04em;line-height:1;}
+.mp-qs-l{font-size:9px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-top:3px;}
+.mp-chart-wrap{padding:20px 20px 0;position:relative;}
+#mpChartCanvas{display:block;width:100%;cursor:crosshair;border-radius:4px;}
+.mp-ctip{
+  position:absolute;pointer-events:none;z-index:20;
+  background:rgba(16,16,16,.96);border:1px solid rgba(214,173,96,.3);
+  border-radius:6px;padding:10px 14px;min-width:160px;
+  display:none;box-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+.mp-ctip.vis{display:block;}
+.mp-ctip-week{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2);margin-bottom:8px;}
+.mp-ctip-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:4px;}
+.mp-ctip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.mp-ctip-lbl{font-size:11px;color:var(--dim2);flex:1;}
+.mp-ctip-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;}
+.mp-ctip-event{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(214,173,96,.7);font-style:italic;}
+.mp-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px 16px;flex-wrap:wrap;gap:8px;
+}
+.mp-legend{display:flex;gap:20px;flex-wrap:wrap;}
+.mp-leg{display:flex;align-items:center;gap:7px;}
+.mp-leg-line{width:24px;height:2px;border-radius:1px;}
+.mp-leg-txt{font-size:10px;color:var(--dim2);letter-spacing:.04em;}
+.mp-view-toggle{display:flex;gap:4px;}
+.mp-vtab{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--n4);border:1px solid rgba(255,255,255,.07);
+  color:var(--dim);border-radius:3px;padding:5px 10px;cursor:pointer;transition:all .2s;
+}
+.mp-vtab:hover{color:var(--stone);}
+.mp-vtab.active{background:rgba(214,173,96,.1);border-color:rgba(214,173,96,.25);color:var(--gold);}
+.mp-insights{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-top:1px solid rgba(255,255,255,.06);}
+.mp-ins{padding:16px 18px;background:#181818;transition:background .2s;cursor:default;}
+.mp-ins:hover{background:var(--n4);}
+.mp-ins-lbl{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:7px;}
+.mp-ins-val{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:200;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:4px;}
+.mp-ins-sub{font-size:10px;color:var(--dim2);font-weight:300;line-height:1.4;}
+.mp-ins-delta{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:3px;margin-top:4px;}
+.mp-ins-delta.up{background:rgba(45,122,79,.15);color:var(--ok);}
+.mp-ins-delta.dn{background:rgba(200,126,26,.12);color:var(--warn);}
+
+/* Pulse section footer CTA */
+.pulse-footer{
+  max-width:1100px;margin:0 auto;padding:32px 56px 72px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+}
+.pf-note{font-size:13px;font-weight:300;color:var(--dim);font-style:italic;}
+.btn-ghost{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;
+  display:flex;align-items:center;gap:8px;transition:color .2s;
+}
+.btn-ghost:hover{color:var(--gold);}
+.bgl{width:18px;height:1px;background:currentColor;position:relative;transition:width .2s;}
+.btn-ghost:hover .bgl{width:26px;}
+.bgl::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-right:1px solid currentColor;border-top:1px solid currentColor;transform:rotate(45deg);}
+
+/* ══ 3. MARKET CARDS ══════════════════════════════════ */
+.cards-section{background:var(--night);}
+.market-cards-3x3{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-top:48px;
+}
+/* Corner radius: top-left, top-right, bottom-left, bottom-right */
+.market-cards-3x3 .market-card:nth-child(1){border-radius:8px 0 0 0;}
+.market-cards-3x3 .market-card:nth-child(3){border-radius:0 8px 0 0;}
+.market-cards-3x3 .market-card:nth-child(7){border-radius:0 0 0 8px;}
+.market-cards-3x3 .market-card:nth-child(9){border-radius:0 0 8px 0;}
+.market-card{
+  background:var(--n2);border:1px solid rgba(255,255,255,.06);
+  border-radius:0;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .3s,transform .3s;
+  position:relative;
+}
+.market-card:hover{border-color:rgba(214,173,96,.22);transform:translateY(-2px);z-index:2;}
+
+.market-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:1;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .35s ease;
+}
+.market-card:hover::before{transform:scaleX(1);}
+
+/* Card header */
+.mc-head{
+  padding:22px 22px 16px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.mc-flag-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.mc-flag{font-size:20px;}
+.mc-status{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:var(--ok-lo);border:1px solid rgba(45,122,79,.2);
+  color:var(--ok);border-radius:3px;padding:3px 8px;
+  display:flex;align-items:center;gap:5px;
+}
+.mc-status::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ok);}
+.mc-city{
+  font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:200;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--white);
+  margin-bottom:3px;line-height:1.1;
+}
+.mc-region{font-size:12px;color:var(--dim);font-weight:300;}
+
+/* Card metrics row */
+.mc-metrics{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.mc-metric{padding:14px 16px;background:var(--n2);}
+.mc-mv{
+  font-family:'Josefin Sans',sans-serif;font-size:22px;font-weight:200;
+  color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:3px;
+}
+.mc-ml{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+}
+
+/* Events list */
+.mc-events{padding:14px 18px;flex:1;}
+.mc-events-lbl{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+  margin-bottom:10px;
+}
+.mc-event-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:12px;font-weight:300;color:var(--stone);
+  padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);
+  line-height:1.4;
+}
+.mc-event-item:last-child{border-bottom:none;padding-bottom:0;}
+.mc-event-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(200,126,26,.6);flex-shrink:0;margin-top:4px;
+}
+.mc-event-dot.high{background:rgba(200,126,26,.85);}
+
+/* Card footer */
+.mc-footer{
+  padding:14px 18px;
+  border-top:1px solid rgba(255,255,255,.05);
+  background:rgba(214,173,96,.02);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+}
+.mc-managed{
+  font-size:12px;font-weight:300;color:var(--dim2);
+}
+.mc-managed strong{color:var(--stone);font-weight:500;}
+.mc-learn{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(214,173,96,.6);text-decoration:none;
+  display:flex;align-items:center;gap:6px;transition:color .2s;
+}
+.mc-learn:hover{color:var(--gold);}
+.mc-learn-arrow{font-size:10px;}
+
+/* ══ 4. NOT LISTED ════════════════════════════════════ */
+.not-listed-section{background:var(--n2);}
+.nl-inner{
+  max-width:1100px;margin:0 auto;padding:0 56px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+}
+.nl-left{}
+.nl-right{
+  background:var(--n3);border:1px solid rgba(214,173,96,.14);
+  border-left:3px solid var(--gold);border-radius:0 4px 4px 0;
+  padding:32px 28px;
+}
+.nl-form-label{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:6px;display:block;
+}
+.nl-input{
+  width:100%;background:var(--n4);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:12px 14px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;
+  color:var(--white);outline:none;transition:border-color .2s;
+  min-height:46px;margin-bottom:10px;
+}
+.nl-input:focus{border-color:rgba(214,173,96,.4);}
+.nl-input::placeholder{color:var(--dim2);}
+.nl-submit{
+  width:100%;font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--night);background:var(--gold);border:none;
+  border-radius:4px;padding:14px 20px;cursor:pointer;transition:filter .2s;min-height:46px;
+}
+.nl-submit:hover{filter:brightness(1.08);}
+.nl-confirm{
+  display:none;margin-top:12px;padding:12px;
+  background:rgba(45,122,79,.08);border:1px solid rgba(45,122,79,.2);
+  border-radius:4px;font-size:13px;color:var(--ok);text-align:center;
+}
+.nl-confirm.vis{display:block;}
+
+/* ══ 5. INTELLIGENCE EXPLAINER ════════════════════════ */
+.intel-section{background:var(--night);}
+.intel-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-top:48px;
+}
+.intel-card{
+  background:var(--n2);padding:28px 24px;
+  border:1px solid rgba(255,255,255,.05);
+  position:relative;
+}
+.intel-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,rgba(214,173,96,.3),transparent);
+}
+.intel-cards-grid .intel-card:first-child{border-radius:8px 0 0 8px;}
+.intel-cards-grid .intel-card:last-child{border-radius:0 8px 8px 0;}
+.intel-icon{font-size:18px;margin-bottom:12px;}
+.intel-label{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;
+}
+.intel-name{
+  font-family:'Josefin Sans',sans-serif;font-size:15px;font-weight:300;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--white);
+  margin-bottom:8px;
+}
+.intel-copy{font-size:13px;font-weight:300;color:var(--stone);line-height:1.7;}
+.intel-copy strong{color:var(--white);font-weight:500;}
+.intel-freq{
+  margin-top:12px;font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:10px;
+}
+.intel-freq span{color:rgba(214,173,96,.7);}
+
+/* Signal counter bar */
+.signal-bar{
+  max-width:1100px;margin:0 auto;padding:0 56px;margin-top:2px;
+}
+.sb-inner{
+  background:var(--n3);border:1px solid rgba(214,173,96,.12);
+  border-radius:0 0 8px 8px;
+  padding:24px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;
+}
+.sb-stat{text-align:center;}
+.sb-n{
+  font-family:'Josefin Sans',sans-serif;font-size:clamp(22px,3vw,36px);
+  font-weight:200;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:4px;
+}
+.sb-l{
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.sb-divider{width:1px;height:36px;background:rgba(255,255,255,.08);}
+
+/* ══ FINAL CTA ════════════════════════════════════════ */
+.markets-cta{
+  background:var(--n2);padding:80px 0;text-align:center;position:relative;overflow:hidden;
+}
+.markets-cta::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:250px;
+  background:radial-gradient(ellipse,rgba(214,173,96,.06) 0%,transparent 70%);
+}
+.mc-inner{max-width:600px;margin:0 auto;padding:0 56px;position:relative;z-index:1;}
+.mc-ey{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.mc-ey::before,.mc-ey::after{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.mc-ey::after{transform:scaleX(-1);}
+.mc-h{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(32px,4.5vw,54px);font-weight:200;
+  letter-spacing:.04em;text-transform:uppercase;
+  color:var(--white);line-height:1;margin-bottom:16px;
+}
+.mc-h em{color:var(--gold);font-style:normal;}
+.mc-sub{font-size:15px;font-weight:300;color:var(--stone);line-height:1.75;margin-bottom:32px;}
+.mc-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.btn-outline{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);background:transparent;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:14px 28px;cursor:pointer;transition:all .2s;text-decoration:none;
+  display:inline-block;
+}
+.btn-outline:hover{color:var(--gold);border-color:rgba(214,173,96,.3);}
+
+/* ══ FOOTER ══════════════════════════════════════════ */
+.page-footer{
+  background:var(--n3);border-top:1px solid rgba(255,255,255,.06);
+  padding:24px 56px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.pf-copy{font-size:11px;color:var(--dim2);font-weight:300;}
+
+.pf-links a{font-size:11px;color:var(--dim2);text-decoration:none;transition:color .2s;}
+.pf-links a:hover{color:var(--gold);}
+
+/* ══ FADE IN ══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fi{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.fi.vis{opacity:1;transform:none;}
+.fi.animate{animation:fadeUp .65s ease forwards;}
+
+/* ══ RESPONSIVE ══════════════════════════════════════ */
+@media(max-width:1024px){
+  nav,.hero-inner,.inner,.pulse-wrap,.signal-bar,.pulse-footer,.nl-inner,.mc-inner,.page-footer{padding-left:24px;padding-right:24px;}
+}
+@media(max-width:860px){
+  nav 
+  .hero-inner{grid-template-columns:1fr;}
+  .market-cards-3x3{grid-template-columns:1fr 1fr;}
+  .market-cards-3x3 .market-card:nth-child(n){border-radius:0;}
+  .market-cards-3x3 .market-card:nth-child(1){border-radius:8px 0 0 0;}
+  .market-cards-3x3 .market-card:nth-child(2){border-radius:0 8px 0 0;}
+  .nl-inner{grid-template-columns:1fr;gap:32px;}
+  .intel-grid{grid-template-columns:1fr 1fr;}
+  .mp-insights{grid-template-columns:1fr 1fr;}
+  .mp-tb-right{display:none;}
+  .sb-inner{justify-content:center;}
+}
+@media(max-width:560px){
+  .markets-hero{padding:100px 0 56px;}
+  .market-cards-3x3{grid-template-columns:1fr;}
+  .market-cards-3x3 .market-card:nth-child(n){border-radius:0;}
+  .market-cards-3x3 .market-card:first-child{border-radius:8px 8px 0 0;}
+  .market-cards-3x3 .market-card:last-child{border-radius:0 0 8px 8px;}
+  .intel-grid{grid-template-columns:1fr;}
+  .mc-metrics{grid-template-columns:1fr 1fr;}
+}
+
+/* ═══ MOBILE NAV ════════════════════════════════════════════════ */
+
+/* ══ MOBILE NAV ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+@media(min-width:769px){
+  
+  
+}
+/* ══ END MOBILE NAV ══════════════════════════════════════════ */
+
+/* ══ SITE FOOTER — STANDARD ══════════════════════════════════════ */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:32px 56px;
+  background:rgba(10,10,10,.6);
+}
+.sf-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
+}
+.sf-logo{text-decoration:none;flex-shrink:0;opacity:.6;transition:opacity .15s;}
+.sf-logo:hover{opacity:1;}
+.sf-links{
+  display:flex;flex-wrap:wrap;gap:4px 20px;flex:1;
+}
+.sf-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:#6B6A65;text-decoration:none;
+  transition:color .15s;
+}
+.sf-links a:hover{color:#D6AD60;}
+.sf-right{margin-left:auto;text-align:right;}
+.sf-copy{font-family:'DM Mono','Courier New',monospace;font-size:10px;color:#6B6A65;letter-spacing:.06em;}
+.sf-tagline{font-family:'Josefin Sans',sans-serif;font-size:9px;color:rgba(214,173,96,.4);letter-spacing:.16em;text-transform:uppercase;margin-top:3px;}
+@media(max-width:768px){
+  .site-footer{padding:24px 20px;}
+  .sf-inner{gap:20px;}
+  .sf-right{margin-left:0;text-align:left;}
+}
+
+/* ── SITE FOOTER ── */
+.site-footer{position:relative;z-index:1;background:var(--n2,#111);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
+.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
+.sf-brand{padding-top:2px;}
+.sf-copy{font-family:var(--d,'Josefin Sans',sans-serif);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white,#f8f6f2);margin-bottom:8px;}
+.sf-location{font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;line-height:1.8;}
+.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.sf-col{display:flex;flex-direction:column;gap:6px;}
+.sf-col-label{font-family:var(--m,'DM Mono',monospace);font-size:9px;color:var(--dim,#6B6A65);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sf-col a{font-size:12px;color:var(--stone,#B4B2A9);text-decoration:none;transition:color .15s;line-height:1.7;}
+.sf-col a:hover{color:var(--gold,#D6AD60);}
+.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
+@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+</style>
+  <!-- Open Graph -->  <!-- Twitter Card -->  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Marketics">
+  <meta property="og:title" content="Marketics — 22 Active STR Markets Across US, Canada & Mexico">
+  <meta property="og:description" content="We operate in 22 hand-selected short-term rental markets. If your property is here, we already know what it should be earning.">
+  <meta property="og:url" content="https://marketics.io/markets">
+  <meta property="og:image" content="https://marketics.io/og/default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Marketics — 22 Active STR Markets Across US, Canada & Mexico">
+  <meta name="twitter:description" content="We operate in 22 hand-selected short-term rental markets. If your property is here, we already know what it should be earning.">
+  <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap"></noscript>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDcgMTIwIiB3aWR0aD0iNjA3IiBoZWlnaHQ9IjEyMCI+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2LjcxOTQsMC43MTQzKSBzY2FsZSgwLjM0NjMyMCwwLjM0NjMyMCkiPjxwYXRoIGZpbGw9IiNENkFENjAiIGQ9Ik0gMTg3LjUgNTUuNjg3NSBMIDY3LjgwNDY4OCAxNDAuNDgwNDY5IEwgNjcuODA0Njg4IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDE1Mi44Nzg5MDYgTCAxMTUuNjgzNTk0IDE5My4xNDQ1MzEgTCAxMTUuNjgzNTk0IDI3Ny4wMzEyNSBMIDc3LjM3ODkwNiAyNzcuMDMxMjUgTCA3Ny4zNzg5MDYgMTQ1LjQxMDE1NiBMIDE4Ny41IDY3LjQxNzk2OSBMIDI5Ny42MjEwOTQgMTQ1LjQxMDE1NiBMIDI5Ny42MjEwOTQgMjc3LjAzMTI1IEwgMjU5LjMxNjQwNiAyNzcuMDMxMjUgTCAyNTkuMzE2NDA2IDE1OS42MzI4MTIgTCAyMDEuODYzMjgxIDExOS4zNjcxODggTCAyMDEuODYzMjgxIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDE0MC40ODA0NjkgWiBNIDEyNS4yNTc4MTIgMTk4LjEyNSBMIDE2My41NjI1IDE3MS4zMTI1IEwgMTYzLjU2MjUgMjc3LjAzMTI1IEwgMTI1LjI1NzgxMiAyNzcuMDMxMjUgWiBNIDI0OS43NDIxODggMjc3LjAzMTI1IEwgMjExLjQzNzUgMjc3LjAzMTI1IEwgMjExLjQzNzUgMTM3Ljc5Njg3NSBMIDI0OS43NDIxODggMTY0LjYwOTM3NSBaIE0gMjQ5Ljc0MjE4OCAyNzcuMDMxMjUiLz48L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MS4zNzY2LDgxLjAwMDApIHNjYWxlKDAuMDM2NzEzLC0wLjAzNjcxMykiIGZpbGw9IiNENkFENjAiPgo8cGF0aCBkPSJNMTAxNDkgMTE0MiBjLTIxIC00IC0yMyAtNSAtNDMgLTYgLTE1IC0xIC0zMCAtMyAtNDEgLTUgLTMgLTEgLTEyCi0yIC0xOSAtNCAtOCAtMSAtMTggLTMgLTIyIC01IC01IC0xIC0xMSAtMiAtMTUgLTMgLTQgLTEgLTkgLTIgLTEyIC00IC0zIC0xCi04IC0zIC0xMSAtMyAtMyAtMSAtOCAtMiAtMTEgLTQgLTMgLTIgLTcgLTMgLTkgLTQgLTMgMCAtOCAtMiAtMTMgLTQgLTUgLTIKLTEwIC00IC0xMiAtNSAtMyAtMSAtOCAtMyAtMTEgLTUgLTQgLTEgLTggLTMgLTkgLTMgLTEgMCAtNCAtMiAtNyAtMyAtMyAtMgotNiAtNCAtNyAtNCAtMSAwIC00IC0yIC03IC0zIC0zIC0yIC03IC00IC05IC01IC0yIC0xIC02IC0zIC04IC01IC0zIC0xIC02Ci0zIC03IC00IC0xIDAgLTQgLTIgLTYgLTMgLTIgLTIgLTYgLTQgLTggLTUgLTIgLTEgLTUgLTMgLTcgLTQgLTIgLTIgLTQgLTMKLTQgLTMgLTEgMCAtNCAtMiAtNiAtNCAtMyAtMiAtNiAtNCAtOCAtNSAtNyAtNSAtMTMgLTkgLTI1IC0xOSAtMyAtMiAtNyAtNgotMTEgLTggLTMgLTIgLTcgLTYgLTkgLTcgLTEgLTIgLTcgLTcgLTEyIC0xMSAtMTMgLTEyIC0zOCAtMzggLTQ3IC00OSAtMTYKLTE5IC0xOCAtMjIgLTIxIC0yNyAtMiAtMiAtMyAtNCAtNCAtNCAtMSAtMSAtMyAtMyAtNCAtNiAtMiAtMyAtNSAtNyAtNiAtOAotMSAtMSAtMyAtNSAtNSAtOCAtMiAtMyAtNiAtOSAtOCAtMTMgLTMgLTQgLTUgLTcgLTUgLTggMCAwIC0xIC0yIC0zIC00IC0yCi0zIC02IC0xMSAtMTIgLTIxIC0xIC0zIC0zIC03IC01IC05IC0xIC0xIC0zIC01IC00IC05IC0xIC0zIC0zIC03IC01IC0xMCAtMQotMiAtMyAtNiAtMyAtOSAtMSAtMiAtMyAtNiAtNCAtOCAtMiAtMiAtMyAtNiAtNCAtOSAtMSAtMyAtMyAtOCAtNCAtMTEgLTIgLTMKLTMgLTYgLTMgLTcgMCAtMiAtMSAtNSAtMyAtOCAtMSAtMyAtNCAtMTIgLTYgLTE5IC0xIC03IC00IC0xNiAtNSAtMTkgLTEgLTQKLTMgLTExIC0zIC0xNiAtMSAtNSAtMyAtMTIgLTQgLTE1IC0xIC00IC0zIC0xMSAtMyAtMTYgLTEgLTggLTQgLTMwIC01IC0zNwotMiAtMTEgLTMgLTMzIC0zIC03NCAwIC00OCAwIC01NSA0IC04MyAyIC05IDMgLTIxIDQgLTI2IDEgLTUgMiAtMTIgMyAtMTYgMgotMyAzIC0xMCA0IC0xNCAwIC0zIDIgLTExIDMgLTE1IDIgLTUgNCAtMTUgNiAtMjEgMiAtNiA0IC0xNCA1IC0xNyAyIC0zIDMgLTcKMyAtOCAwIC0yIDEgLTUgMyAtOCAyIC0zIDQgLTggNCAtMTEgMSAtMyAzIC03IDQgLTkgMSAtMSAzIC01IDMgLTcgMSAtMyAzIC03CjUgLTEwIDEgLTIgMyAtNyA0IC0xMCAxIC0zIDMgLTcgNCAtOCAyIC0yIDQgLTYgNSAtOSA3IC0xMiAxMCAtMTggMTIgLTIxIDIKLTIgMyAtNCAzIC00IDAgLTEgMiAtNCA0IC03IDIgLTMgNCAtNiA0IC02IDAgLTEgOCAtMTMgMTIgLTE4IDMgLTUgNyAtMTAgMTEKLTE1IDEgLTMgNCAtNiA1IC04IDIgLTIgNiAtNiA4IC0xMCAyIC0zIDYgLTcgOCAtOSA4IC0xMCAxNCAtMTYgMTYgLTE4IDEgLTEKNiAtNiAxMCAtMTEgNSAtNSAxNCAtMTMgMjAgLTE5IDYgLTYgMTMgLTEyIDE0IC0xMyAyIC0yIDcgLTYgMTggLTE0IDExIC05IDE2Ci0xMyAxOSAtMTQgMSAtMSA1IC00IDkgLTcgMyAtMiA3IC01IDggLTYgMiAtMSA2IC0zIDggLTUgMyAtMiA3IC00IDkgLTUgMyAtMQo2IC0zIDggLTUgMiAtMiA1IC0zIDYgLTMgMCAwIDMgLTIgNiAtMyAyIC0yIDYgLTQgOCAtNSAyIC0xIDUgLTIgNiAtMyAyIC0xIDUKLTMgOCAtNCAzIC0yIDcgLTQgOSAtNSAyIC0yIDYgLTMgNyAtNCAyIDAgNiAtMiAxMCAtMyA0IC0yIDggLTQgMTAgLTQgMSAtMSA1Ci0zIDkgLTQgNCAtMiA5IC00IDEyIC01IDMgLTEgNyAtMiAxMCAtNCAyIC0xIDggLTMgMTIgLTQgNCAtMSA5IC0zIDExIC0zIDIKLTEgNyAtMyAxMiAtNCA1IC0xIDEyIC0zIDE2IC00IDMgLTEgOSAtMiAxMiAtMyAzIC0xIDEwIC0yIDE3IC0zIDIxIC00IDM3IC02CjUyIC03IDE4IC0xIDI3IC0yIDQxIC02IDEwIC0yIDEzIC0yIDM5IC0yIDE1IDAgMjggMCAyOSAxIDMgMyAxNSA1IDU1IDggNyAxCjE2IDIgMjAgMyA0IDAgMTQgMiAyMiA0IDcgMSAxNyAzIDIyIDQgNCAyIDExIDQgMTYgNSA1IDAgMTEgMiAxMyA0IDMgMSA4IDMKMTIgMyA0IDEgOSAzIDEwIDQgMSAxIDYgMyAxMCA0IDUgMSA5IDMgMTAgNCAyIDAgNiAyIDExIDQgNCAxIDkgMyAxMSA0IDEgMSA1CjMgOSA0IDMgMSA3IDMgOSA1IDIgMSA2IDMgOCAzIDIgMSA1IDMgNiA0IDIgMSA1IDMgNyA0IDMgMSA3IDMgOSA1IDIgMiA1IDMgNgozIDAgMCAzIDIgNSAzIDMgMiA2IDUgOCA2IDIgMCA3IDQgMTEgNyA0IDMgMTAgNyAxMyA5IDMgMSA1IDMgNSA0IDAgMCAxIDEgMwoyIDcgNCAyMyAxOCA0MiAzNyA4IDggOSA5IDkgMTIgLTEgMyAtNyA5IC0zNSAzOCAtMTMgMTMgLTE0IDE0IC0yMiA2IC02IC02Ci0xOSAtMTggLTI4IC0yNCAtMyAtMiAtNyAtNiAtMTAgLTggLTIgLTIgLTQgLTQgLTUgLTQgMCAwIC0zIC0yIC01IC00IC0zIC0yCi03IC01IC05IC02IC0zIC0yIC02IC00IC04IC01IC05IC03IC0xNSAtMTAgLTE2IC0xMCAwIDAgLTIgLTEgLTQgLTIgLTEgLTIKLTUgLTQgLTkgLTYgLTQgLTEgLTcgLTMgLTggLTQgLTEgLTEgLTIgLTIgLTMgLTIgMCAwIC01IC0yIC05IC01IC01IC0yIC05IC00Ci0xMCAtNCAtMSAwIC01IC0yIC05IC00IC01IC0yIC0xMSAtNSAtMTQgLTUgLTQgLTEgLTggLTMgLTExIC00IC0yIC0yIC03IC0zCi0xMCAtNCAtNCAtMSAtOSAtMiAtMTEgLTQgLTMgLTEgLTggLTMgLTEzIC0zIC01IC0xIC0xMSAtMyAtMTMgLTQgLTIgLTEgLTgKLTIgLTEyIC0zIC04IC0xIC0xMiAtMiAtMzEgLTYgLTggLTEgLTIxIC0yIC00MCAtNCAtMTQgLTEgLTgzIC0xIC05MyAwIC00IDAKLTEyIDEgLTE3IDEgLTUgMSAtMTAgMSAtMTAgMSAtMSAxIC00IDEgLTYgMSAtMyAxIC0xMCAyIC0xNiAzIC02IDEgLTE1IDMgLTIwCjMgLTUgMSAtMTMgMyAtMTcgNCAtNCAyIC0xMCA0IC0xNCA0IC00IDEgLTkgMiAtMTEgNCAtMyAxIC04IDIgLTExIDMgLTMgMSAtOAoyIC0xMSA0IC0yIDEgLTggMyAtMTIgNCAtNCAxIC0xMCAzIC0xMyA1IC0yIDIgLTcgMyAtOSA0IC0zIDEgLTYgMiAtOCA0IC0yIDEKLTYgMyAtOSA0IC0zIDEgLTYgMyAtOCA0IC0yIDIgLTUgMyAtNyA0IC0yIDEgLTUgMiAtNiAzIC0yIDEgLTUgMyAtNyA0IC0zIDEKLTcgMyAtMTAgNSAtMyAyIC02IDQgLTcgNCAwIDAgLTIgMSAtNCAzIC0yIDEgLTUgNCAtNyA1IC01IDIgLTEyIDcgLTE3IDExIC0yCjEgLTUgMyAtNiA0IC0yIDEgLTYgNSAtMTEgOCAtNCA0IC04IDcgLTkgOCAtNSAzIC0yOSAyNSAtMzQgMzAgLTMgNCAtNyA4IC05CjEwIC0zIDMgLTEwIDExIC0yMiAyNSAtNiA3IC0xNyAyMSAtMjAgMjYgLTEgMiAtMyA1IC00IDYgLTIgMiAtNCA1IC00IDcgLTEgMgotNCA2IC02IDggLTEgMiAtMyA2IC0zIDcgLTEgMSAtMiAzIC00IDUgLTEgMiAtMyA1IC01IDggLTEgMyAtMyA2IC0zIDcgLTEgMAotMiAzIC00IDcgLTIgMyAtNCA3IC01IDkgLTEgMSAtMyA0IC0zIDcgLTEgMyAtMyA2IC00IDggLTEgMSAtMyA0IC00IDcgLTEgMwotMyA4IC00IDEyIC0yIDQgLTQgMTAgLTUgMTMgLTEgNCAtMyA5IC00IDExIC0xIDEgLTMgNyAtMyAxMSAtMSA0IC0zIDEwIC01CjEzIC0xIDIgLTIgNyAtMyAxMCAwIDUgLTEgNyAtNSAyNCAtMiA3IC01IDMzIC04IDU4IC00IDM4IC0zIDkxIDQgMTM2IDEgNyAyCjE0IDIgMTYgMCAyIDEgNyAzIDEzIDIgNiAzIDE0IDQgMTggMSA0IDIgMTAgNCAxNCAyIDMgMyA5IDQgMTIgMCAyIDIgOCA0IDExCjEgNCAzIDggMyA5IDAgMSAyIDcgNSAxNCAzIDYgNSAxMyA2IDE0IDAgMSAxIDQgMiA1IDEgMSAzIDUgNCA4IDEgNCAzIDcgNCA4CjAgMSAyIDQgNCA3IDYgMTIgMTEgMjEgMTQgMjUgMSAxIDIgMyAyIDQgMCAwIDEgMiAzIDUgMSAyIDQgNSA0IDcgMiAzIDExIDE2CjE0IDE5IDAgMSAyIDIgMiAzIDIgMyA5IDEzIDE0IDE5IDIgMiA1IDYgNyA4IDYgNyAyNyAzMCAzNCAzNiA0IDMgOCA3IDEwIDkgOAo4IDExIDEwIDE0IDEyIDIgMiA2IDUgMTAgOSA0IDMgOSA2IDExIDcgMSAxIDMgMyA1IDQgMSAxIDMgMyA0IDQgMiAwIDUgMyA4IDUKMiAyIDUgNCA3IDQgMSAwIDMgMiA1IDMgMSAyIDQgNCA2IDQgMiAxIDUgMyA3IDQgMSAyIDQgNCA3IDUgMiAwIDUgMiA3IDQgMiAxCjUgMyA4IDMgMiAxIDUgMyA3IDQgMiAyIDYgMyA4IDQgMiAxIDYgMiA4IDQgMiAyIDcgMyA5IDQgMiAxIDYgMiA5IDQgMiAxIDggMwoxMiA0IDUgMiAxMSA0IDEzIDUgMiAxIDcgMyAxMiA0IDQgMSA5IDMgMTIgNCAyIDEgNyAyIDEwIDMgNCAxIDEwIDIgMTQgNCA0IDEKMTIgMyAxNyAzIDExIDIgMjQgNCAzMCA2IDIgMCAxMCAxIDE2IDIgNiAxIDE2IDEgMjEgMiA1IDAgMjkgMSA1MiAxIDQ3IC0xIDYzCi0yIDkwIC03IDkgLTIgMTkgLTMgMjMgLTQgNSAtMSAxMCAtMiAxMyAtMyAyIC0xIDggLTMgMTIgLTQgNCAwIDExIC0yIDE0IC0zCjMgLTIgOCAtNCAxMiAtNSAzIDAgOCAtMiAxMCAtMyAyIC0xIDcgLTMgMTIgLTQgNSAtMiAxMSAtNSAxNCAtNiAzIC0yIDYgLTMgNwotMyAxIDAgNCAtMiA3IC00IDQgLTEgNyAtMyA5IC00IDEgMCA0IC0yIDcgLTMgMiAtMiA2IC00IDggLTUgMiAtMSA1IC0yIDcgLTQKMiAtMSA1IC0zIDcgLTQgMiAwIDUgLTMgNyAtNCAyIC0yIDQgLTMgNSAtMyAxIDAgNiAtNCAxNiAtMTEgMSAtMSA1IC00IDggLTYKMyAtMSA1IC0zIDUgLTQgMCAwIDEgLTEgMyAtMiA2IC00IDMxIC0yNSAzNiAtMzEgNCAtNiA2IC01IDIyIDEyIDI5IDI5IDMyIDMzCjMyIDM1IDAgMyAtNSA4IC0yMiAyNCAtMTMgMTEgLTMxIDI3IC0zNiAzMCAtMiAwIC00IDIgLTYgNCAtMSAxIC00IDMgLTYgNCAtMgoxIC00IDMgLTUgNCAtMSAxIC00IDIgLTUgMyAtMiAxIC01IDMgLTcgNCAtMiAyIC02IDQgLTggNSAtMiAxIC02IDMgLTcgNSAtMgoxIC01IDIgLTYgMyAtMiAwIC01IDIgLTggNCAtMiAxIC02IDQgLTggNCAtMiAxIC01IDIgLTYgMyAtMiAxIC02IDMgLTkgNSAtNAoxIC03IDMgLTggMyAtMiAxIC02IDMgLTkgNCAtNCAxIC0xMCAzIC0xMyA1IC0zIDEgLTkgMyAtMTIgNCAtNCAxIC05IDMgLTExIDQKLTEgMSAtNiAzIC0xMCA0IC0zIDAgLTkgMiAtMTIgMyAtMyAyIC04IDMgLTEyIDQgLTQgMSAtMTEgMiAtMTYgNCAtMTAgMyAtMTYKNCAtNDUgOSAtMTggMyAtMTggMyAtMjcgNCAtNSAwIC0xNCAxIC0yMCAxIC0xMSAxIC0xNSAyIC0yNCAzIC0xIDEgLTMgMiAtNSAyCi0zIDMgLTUzIDMgLTYzIDB6Ii8+CjxwYXRoIGQ9Ik0xMTQ1OSAxMTQzIGMtNSAtMyAtMjIgLTUgLTQ3IC03IC05IC0xIC0yMSAtMiAtMjcgLTMgLTM2IC02IC00MiAtNwotNTIgLTExIC00IC0xIC0xMCAtMiAtMTQgLTMgLTQgLTEgLTggLTIgLTEwIC0zIC0xIC0xIC02IC0zIC0xMSAtNCAtNCAtMSAtOQotMyAtMTEgLTQgLTIgLTIgLTUgLTMgLTcgLTMgLTMgLTEgLTE0IC02IC0yNSAtMTIgLTIgLTEgLTcgLTMgLTExIC01IC0zIC0yCi02IC0zIC02IC00IC0xIC0xIC00IC0yIC03IC00IC0zIC0yIC02IC00IC03IC00IC0xIC0xIC0zIC0zIC02IC01IC0yIC0xIC03Ci00IC0xMCAtNyAtMyAtMiAtNyAtNSAtOSAtNyAtMTAgLTYgLTMyIC0yOSAtNDIgLTQxIC04IC0xMCAtMTcgLTIzIC0yMSAtMzAKLTEgLTIgLTMgLTYgLTUgLTcgLTEgLTIgLTIgLTYgLTMgLTggLTEgLTIgLTMgLTcgLTUgLTkgLTEgLTIgLTMgLTYgLTMgLTcgLTEKLTIgLTIgLTYgLTQgLTkgLTIgLTMgLTQgLTggLTQgLTExIC0xIC0zIC0yIC04IC00IC0xMCAtMSAtMyAtMiAtOCAtMyAtMTEgLTEKLTQgLTIgLTEyIC00IC0xOCAtMyAtMTcgLTQgLTM0IC00IC02NCAxIC0zMCAxIC0zMyA0IC00NSAxIC01IDMgLTEzIDQgLTE4IDAKLTYgMiAtMTMgMyAtMTUgMiAtMyAzIC04IDQgLTEwIDEgLTMgMyAtOCA1IC0xMiAxIC0zIDMgLTcgMyAtOCAwIC0xIDEgLTMgMwotNSAxIC0yIDMgLTYgNCAtOSAzIC01IDExIC0xNyAxNSAtMjIgMTIgLTE0IDMzIC0zNSA0MCAtNDAgMiAtMiA0IC0zIDQgLTQgMAowIDIgLTIgNSAtNCA3IC01IDE0IC0xMCAxNyAtMTIgMSAtMSAzIC0zIDUgLTMgMiAtMSA1IC00IDggLTYgMiAtMSA1IC0zIDUgLTMKMSAwIDQgLTIgNyAtMyAyIC0yIDYgLTQgNyAtNSAxIDAgNiAtMiAxMSAtNSA1IC0yIDkgLTQgMTAgLTQgMSAwIDQgLTIgOCAtMyAzCi0yIDcgLTQgOCAtNCAyIDAgNiAtMiAxMCAtMyAzIC0yIDggLTQgMTEgLTUgMiAwIDYgLTIgOSAtMyAzIC0xIDggLTMgMTEgLTQgMwotMSAxMCAtMyAxNyAtNSA2IC0yIDEyIC00IDE1IC00IDIgLTEgNiAtMiAxMCAtNCA0IC0yIDEwIC0zIDE0IC00IDMgLTEgOSAtMgoxMyAtNCAzIC0xIDggLTMgMTAgLTMgMyAtMSA5IC0yIDE0IC00IDUgLTIgMTQgLTQgMjAgLTUgNSAtMSAxNiAtNCAyMyAtNSA3Ci0yIDE0IC00IDE1IC00IDEgMCA2IC0xIDExIC0zIDUgLTIgMTQgLTQgMTkgLTQgNCAtMSAxMSAtMyAxMyAtNCAzIC0xIDkgLTMKMTMgLTQgNSAwIDExIC0yIDE0IC00IDQgLTEgMTAgLTMgMTUgLTMgNCAtMSAxMiAtMyAxNiAtNSA1IC0xIDEyIC00IDE3IC01IDQKMCA5IC0yIDExIC0zIDIgLTEgNyAtMyAxMSAtNCA0IDAgMTAgLTIgMTIgLTQgMyAtMSA4IC0zIDExIC00IDMgMCA5IC0yIDEyIC00CjMgLTIgNyAtMyA3IC0zIDEgMCA1IC0yIDggLTMgNCAtMiA5IC01IDEyIC01IDMgLTEgNiAtMyA5IC01IDIgLTIgNCAtMyA1IC0zCjAgMCA0IC0yIDggLTQgMyAtMyA3IC01IDcgLTUgMSAwIDMgLTEgNSAtMyAyIC0yIDUgLTQgNyAtNSAyIC0xIDQgLTMgNSAtNCAxCjAgNCAtMyA2IC00IDYgLTQgMjcgLTIzIDMzIC0yOSA0IC02IDEyIC0xNiAxMiAtMTcgMCAwIDIgLTMgNCAtNiAyIC0zIDQgLTggNQotMTAgMSAtMiAyIC01IDQgLTcgMSAtMiAzIC03IDMgLTEwIDEgLTQgMyAtOSA0IC0xMSA1IC05IDggLTUyIDYgLTczIC0yIC0yMwotMyAtMzEgLTYgLTM2IC0xIC0zIC0zIC04IC0zIC0xMiAtMSAtMyAtMyAtOCAtNCAtMTAgLTIgLTMgLTMgLTcgLTQgLTkgLTEgLTMKLTMgLTYgLTQgLTcgMCAtMSAtMiAtNCAtNCAtNyAtNSAtMTAgLTE0IC0yMSAtMjQgLTMzIC0xMyAtMTMgLTE2IC0xNiAtMzQgLTI5Ci0yIC0yIC02IC01IC04IC02IC0yIC0xIC01IC0zIC03IC00IC0xIC0yIC01IC00IC03IC01IC0zIC0xIC01IC0yIC01IC0zIC0xCjAgLTQgLTIgLTggLTQgLTMgLTEgLTggLTMgLTEwIC01IC0yIC0xIC02IC0yIC0xMCAtMyAtMyAtMSAtNyAtMyAtOSAtNCAtMyAtMgotOCAtMyAtMTIgLTQgLTUgLTEgLTEwIC0zIC0xMiAtNCAtMiAtMSAtOSAtMyAtMTYgLTQgLTYgLTEgLTE1IC0zIC0xOCAtNCAtOAotMiAtMzQgLTUgLTUwIC03IC01IDAgLTEzIC0xIC0xNyAtMSAtNCAtMSAtMjIgLTEgLTM5IC0yIC0zMCAwIC0zNSAwIC02MSAyCi0yNyAzIC01NSA2IC01OSA4IC0zIDEgLTE1IDMgLTI0IDQgLTUgMSAtMTEgMyAtMTQgNCAtMiAxIC04IDMgLTEzIDQgLTUgMAotMTAgMiAtMTMgMyAtMiAyIC03IDMgLTEwIDQgLTQgMSAtOSAyIC0xMiA0IC0zIDEgLTkgMyAtMTMgNCAtNCAyIC0xMCA0IC0xMwo1IC0yIDIgLTcgMyAtOSA0IC0yIDEgLTYgMiAtOCA0IC0zIDEgLTcgMyAtMTAgNCAtMyAxIC02IDMgLTcgNCAtMiAxIC01IDMgLTgKNCAtMyAxIC02IDMgLTcgMyAwIDEgLTMgMyAtNiA0IC00IDIgLTggNCAtMTAgNSAtMSAyIC00IDMgLTYgNCAtMiAxIC00IDIgLTUKMyAtMSAxIC00IDMgLTYgNCAtMiAxIC01IDMgLTYgNCAtMSAxIC00IDMgLTcgNSAtMyAyIC04IDYgLTEwIDggLTMgMiAtOCA2Ci0xMSA4IC0zIDIgLTEwIDkgLTE3IDE2IC0xMSAxMSAtMTQgMTIgLTE4IDEwIC0xIDAgLTIgLTIgLTMgLTQgLTEgLTIgLTMgLTYKLTQgLTggLTIgLTIgLTQgLTYgLTUgLTcgLTEgLTIgLTMgLTUgLTQgLTcgLTEgLTIgLTMgLTUgLTQgLTcgLTEgLTIgLTIgLTQgLTMKLTYgLTUgLTYgLTEwIC0xNCAtOSAtMTYgMSAtNCAyNSAtMjcgNDAgLTM4IDQgLTMgOSAtNyAxMiAtOSAyIC0yIDUgLTQgNSAtNCAxCjAgMiAtMSA0IC0zIDIgLTEgNSAtNCA3IC01IDIgMCA1IC0zIDcgLTQgMiAtMiA0IC0zIDUgLTMgMCAwIDMgLTEgNiAtMyA1IC00CjEyIC04IDIzIC0xMyA0IC0yIDcgLTQgOSAtNSAxIC0xIDQgLTMgNyAtMyAyIC0xIDYgLTMgOCAtNSAyIC0xIDYgLTMgOSAtNCAzCi0xIDcgLTMgMTAgLTQgMiAtMSA3IC0zIDEwIC00IDQgLTEgOSAtMyAxMCAtNCAyIC0xIDcgLTMgMTEgLTQgNCAtMSA5IC0zIDExCi00IDIgLTEgNyAtMyAxMCAtNCA0IDAgMTAgLTIgMTMgLTQgMyAtMSA4IC0yIDEyIC0zIDMgLTEgMTAgLTIgMTYgLTQgNiAtMiAxNwotNCAyNSAtNSA4IC0yIDE4IC00IDIzIC00IDggLTIgMjIgLTMgNDUgLTUgMTggLTEgMjYgLTMgMzEgLTUgNCAtMiA2IC0yIDM4Ci0yIDMyIDEgMzUgMSA0MCAzIDYgMiAyNSA0IDQ4IDUgNSAxIDE1IDIgMjEgMyAzMSA1IDQyIDcgNDkgMTAgNCAxIDEwIDMgMTQgNAo1IDAgMTAgMiAxMyAzIDIgMiA3IDQgMTEgNCA0IDEgOCAzIDkgNCAyIDEgNSAzIDkgNCAzIDAgNyAyIDEwIDQgMiAxIDcgMyAxMAo0IDMgMSA3IDMgMTAgNSAyIDEgNiAzIDggNCAyIDEgNCAyIDUgMyAxIDEgNCAyIDYgMyAzIDIgNiA0IDggNSAxIDEgNSA0IDggNQo5IDYgMTYgMTEgMTYgMTIgMCAwIDEgMSAzIDIgNCAzIDIxIDE4IDI4IDI1IDE2IDE3IDMxIDM4IDM4IDUzIDIgMiA0IDYgNSA4IDIKMiAzIDQgMyA0IDAgMSAyIDUgNCAxMCA5IDE4IDE5IDUyIDIwIDY5IDEgNCAyIDE1IDMgMjQgMSA5IDEgMjAgMSAyNSAtMSAxOAotMyA0MCAtNCA0OCAtMiAxMSAtOSAzOCAtMTEgNDMgLTIgMiAtNCA3IC01IDEwIDAgMyAtMyA3IC00IDEwIC0yIDIgLTMgNSAtMwo2IC0xIDEgLTIgNCAtNCA2IC0xIDIgLTQgNiAtNSA4IC0yIDMgLTMgNSAtNCA1IDAgMCAtMSAxIC0yIDMgLTMgNCAtMTQgMTcKLTIxIDI0IC01IDUgLTMwIDI3IC0zNiAzMiAtMyAyIC03IDUgLTkgNyAtMiAxIC03IDQgLTkgNSAtMyAyIC01IDMgLTUgNCAwIDAKLTIgMiAtNSAzIC0zIDIgLTYgNCAtOCA1IC0xIDEgLTMgMyAtNiAzIC0yIDEgLTYgMyAtOCA1IC0zIDIgLTYgMyAtOCA0IC0xIDAKLTUgMiAtOCAzIC00IDIgLTkgNSAtMTIgNSAtNCAxIC05IDMgLTEyIDUgLTQgMiAtOCAzIC05IDMgLTIgMCAtNiAxIC05IDMgLTQKMiAtOSA0IC0xMiA1IC00IDAgLTkgMiAtMTIgMyAtMiAyIC03IDMgLTEwIDQgLTQgMSAtMTEgMyAtMTYgNSAtNiAyIC0xNCA0Ci0xOCA0IC0zIDEgLTkgMyAtMTMgNCAtMyAyIC04IDMgLTEyIDQgLTMgMSAtOSAyIC0xMyA0IC00IDIgLTEwIDMgLTEyIDMgLTMgMQotMTAgMiAtMTUgNCAtNSAyIC0xNCA0IC0yMCA1IC02IDIgLTE2IDQgLTIyIDYgLTYgMSAtMTMgMyAtMTYgMyAtMiAxIC03IDIKLTEwIDMgLTQgMiAtOSAzIC0xMiA0IC02IDAgLTEyIDIgLTE3IDQgLTIgMSAtNyAzIC0xMiA0IC00IDAgLTEwIDIgLTEzIDMgLTQKMiAtOSAzIC0xMiA0IC0zIDEgLTEwIDMgLTE2IDQgLTUgMiAtMTMgNSAtMTcgNiAtMyAwIC05IDIgLTExIDQgLTMgMSAtNyAzCi0xMCAzIC0zIDEgLTcgMiAtMTAgNCAtMiAxIC02IDIgLTkgMyAtMiAxIC03IDMgLTEwIDQgLTIgMiAtNyA0IC0xMSA1IC0zIDEKLTcgMyAtOSA0IC0xIDEgLTUgMyAtNyA0IC0zIDEgLTYgMyAtNyA0IC0yIDEgLTUgMyAtOCA0IC02IDMgLTE0IDkgLTE3IDEyIC0yCjEgLTQgMyAtNSA0IC0xMCA2IC0zMyAyNyAtNDIgMzggLTIgNCAtNiA4IC03IDkgLTQgNSAtMTMgMjMgLTE3IDM1IC0yIDUgLTUKMTQgLTUgMTkgLTEgNCAtMyAxMiAtNCAxNiAtMiAxMSAtMiA1MiAwIDYyIDEgNCAzIDExIDQgMTYgMCA1IDIgMTIgMyAxNiA0IDExCjkgMjUgMTEgMjggMSAxIDIgNCAzIDYgMSAyIDMgNSA1IDggMSAyIDMgNSAzIDYgMCAwIDEgMiAzIDMgMSAyIDMgNCA0IDYgNyAxMgozMiAzNyA0NiA0NSAyIDIgNCA0IDQgNCAwIDAgMSAxIDMgMiAxIDEgNSAzIDggNSAyIDIgNiA0IDcgNSAxIDAgNSAyIDcgNCAzIDEKNyAzIDkgNCAyIDEgNSAyIDggNCAyIDEgNiAzIDkgNCAzIDAgNyAyIDEwIDQgMiAxIDcgMyAxMSAzIDMgMSA5IDMgMTIgNCAyIDIKNyAzIDExIDQgMyAwIDEwIDEgMTcgMyA2IDIgMTMgMyAxNiAzIDMgMSA3IDEgOCAyIDIgMCA2IDAgMTUgMSAyIDEgOCAxIDEzIDIKNSAwIDEzIDEgMTcgMSAxMiAyIDc0IDIgOTAgMCA2IC0xIDE2IC0yIDIxIC0zIDkgMCAyNiAtMyA0OCAtNyA2IC0yIDEzIC0zIDE0Ci0zIDEgMCA1IC0xIDkgLTMgNCAtMSAxMSAtMyAxNSAtNCA0IC0xIDkgLTIgMTIgLTQgMyAtMSA4IC0zIDEyIC00IDMgMCA4IC0yCjEwIC0zIDIgLTEgNiAtMyAxMCAtNCA0IDAgOSAtMyAxMyAtNCAzIC0yIDggLTQgMTEgLTUgMyAtMSA3IC0zIDkgLTQgMiAtMSA1Ci0zIDggLTQgMyAwIDYgLTIgOCAtNCAxIC0xIDUgLTMgNyAtMyAyIC0xIDUgLTMgNyAtNCAxIC0xIDUgLTMgOSAtNCAzIC0yIDYKLTQgOCAtNSAxIC0xIDMgLTMgNSAtMyAyIC0xIDUgLTMgNyAtNCAxIC0yIDQgLTQgNyAtNSAyIC0xIDUgLTMgNiAtNCA0IC01IDcKLTQgMTEgNCAyIDQgNSA5IDUgMTIgMSAyIDMgNiA0IDggMiAyIDMgNSA0IDggMCAyIDIgNSAzIDcgMiAyIDMgNCAzIDUgMCAwIDEKMyAzIDcgMiAzIDMgNiAzIDcgMCAyIC02IDggLTEwIDEwIC0yIDAgLTUgMiAtNiA0IC0yIDEgLTUgMyAtNyA0IC0yIDAgLTQgMgotNiAzIC0xIDEgLTUgMyAtOCA1IC00IDIgLTcgMyAtNyA0IC0xIDAgLTQgMiAtNyAzIC0zIDEgLTcgMyAtOCA1IC0yIDEgLTYgMwotOSA0IC0zIDEgLTYgMyAtNyA0IC0xIDAgLTUgMiAtOSAzIC00IDIgLTggNCAtOSA0IC0yIDEgLTcgMyAtMTEgNSAtNSAxIC0xMAozIC0xMSA0IC0xIDEgLTYgMyAtMTAgNCAtNSAxIC0xMCAzIC0xMSA0IC0yIDEgLTcgMyAtMTEgNCAtNSAxIC05IDMgLTExIDMgLTEKMSAtNiAzIC0xMSAzIC01IDEgLTEyIDMgLTE2IDQgLTkgMyAtMjUgNiAtMzUgOCAtMyAwIC05IDEgLTE0IDIgLTUgMSAtMTUgMgotMjIgMyAtMTIgMSAtMzUgNCAtNDEgNSAtMSAwIC01IDAgLTggMSAtMyAwIC03IDEgLTkgMiAtMiAxIC05IDEgLTI4IDEgLTE0IDAKLTI2IDAgLTI3IC0xeiIvPgo8cGF0aCBkPSJNMTAgMTEzMyBjLTEgLTEgLTQgLTMgLTQgLTQgLTIgLTIgLTIgLTUzIC0yIC01NTcgMCAtNDkyIDAgLTU1NSAxCi01NTcgMSAtMSAzIC0yIDQgLTMgMSAtMSAxNCAtMSAzNiAtMSAzMSAwIDMzIDAgMzUgMiAyIDIgMiAxMiAyIDQ3MCAwIDI1NyAwCjQ2OSAtMSA0NzAgMCAzIDIgOCA0IDggMiAwIDExIC0xMCAxMSAtMTIgMCAtMSAyIC01IDQgLTggMiAtNCA0IC04IDQgLTggMCAwCjEgLTIgMyAtNCAzIC01IDcgLTEzIDEzIC0yNCAyIC00IDQgLTcgNSAtOCAxIDAgMiAtMyAzIC01IDIgLTMgMyAtNiA0IC02IDEKLTEgMiAtNCA0IC03IDEgLTMgNCAtOCA2IC0xMCA3IC0xMyAxMSAtMjAgMTEgLTIxIDAgMCAxIC0yIDIgLTQgMiAtMSA0IC00IDUKLTcgMSAtMiAzIC02IDUgLTggMiAtMiAzIC01IDMgLTYgMCAwIDIgLTMgNCAtNiAxIC0zIDMgLTUgMyAtNiAwIDAgMiAtNCA0IC04CjMgLTMgNSAtNyA1IC04IDAgMCAyIC00IDUgLTcgMiAtNCA0IC04IDQgLTggMCAtMSAxIC0zIDIgLTQgMyAtMyA1IC04IDEzIC0yMgoyIC00IDQgLTggNiAtMTAgMSAtMSAyIC0zIDIgLTQgMCAwIDIgLTMgNCAtNiAyIC0zIDQgLTcgNSAtOSAwIC0yIDIgLTQgMyAtNQoyIC0yIDUgLTggMTEgLTIwIDIgLTQgNSAtOCA2IC0xMCAxIC0yIDUgLTggNyAtMTIgMiAtNCA2IC0xMSA4IC0xNCAyIC0zIDQgLTYKNCAtNiAwIC0xIDIgLTQgNCAtNyAyIC00IDQgLTcgNCAtOCAwIDAgMiAtNCA1IC03IDIgLTQgNCAtOCA0IC04IDAgLTEgMSAtMyAyCi00IDIgLTIgNCAtNiA2IC05IDUgLTEwIDkgLTE3IDEyIC0yMiAyIC0yIDMgLTQgMyAtNSAwIDAgMiAtNCA1IC04IDIgLTMgNCAtNwo0IC04IDAgMCAxIC0yIDMgLTQgMSAtMSAzIC01IDQgLTcgMCAtMiAyIC01IDMgLTYgMiAtMiA0IC02IDUgLTggMiAtMyA1IC05IDgKLTE0IDMgLTUgNiAtMTEgOCAtMTMgMSAtMyAzIC03IDUgLTkgMiAtMiAzIC01IDMgLTYgMCAwIDIgLTMgNCAtNyAyIC0zIDQgLTYKNCAtNyAwIDAgMSAtMyAzIC01IDIgLTIgNCAtNiA2IC0xMCA0IC04IDggLTE0IDExIC0xOCAxIC0zIDMgLTYgNCAtOCAxIC0yIDMKLTUgNCAtNyAyIC0yIDQgLTUgNCAtNyAxIC0yIDMgLTUgNCAtNyAyIC0xIDMgLTQgNCAtNiAxIC0yIDMgLTUgNCAtNyAyIC0zIDQKLTcgNSAtOSAxIC0zIDIgLTUgMyAtNiAxIDAgMiAtMiA0IC01IDEgLTMgMyAtNyA0IC04IDEgLTEgMyAtNCA0IC02IDEgLTMgMwotNyA1IC05IDIgLTIgMyAtNSAzIC02IDAgMCAyIC0zIDQgLTYgMSAtMyAzIC02IDQgLTcgMCAtMiAzIC01IDUgLTkgMiAtMyA0Ci03IDQgLTcgMCAtMSAxIC0zIDIgLTQgMiAtMiA0IC02IDYgLTkgMSAtMyAzIC02IDMgLTYgMCAwIDIgLTMgNCAtNyA3IC0xMyAxMgotMjEgMTMgLTIzIDEgLTEgMyAtMyAzIC01IDEgLTMgMyAtNSA0IC02IDEgLTIgMyAtNSA0IC03IDEgLTMgMyAtNiA0IC03IDEgLTEKMyAtNSA1IC04IDIgLTQgNSAtMTAgNyAtMTQgMyAtNCA2IC0xMCA3IC0xMiAyIC0yIDQgLTcgNiAtMTAgMiAtMyA0IC02IDQgLTYKMCAtMSAxIC0zIDMgLTUgMSAtMiAzIC01IDQgLTggMSAtMiAzIC02IDUgLTkgMiAtMyA0IC02IDQgLTcgMCAwIDEgLTIgMiAtNCAyCi0xIDQgLTUgNSAtOCAyIC0zIDUgLTcgNyAtOSAzIC00IDMgLTQgMjEgLTQgMTcgMCAxNyAwIDIxIDQgMiAyIDUgNyA3IDEwIDEgMwozIDYgNCA4IDEgMSAzIDMgNCA2IDAgMiAyIDQgMyA1IDEgMSAzIDUgNCA4IDIgMyA1IDggNiAxMSAyIDIgNSA3IDcgMTEgMTEgMTkKMTMgMjIgMTUgMjUgMiA0IDcgMTMgMTIgMjIgMiA0IDQgOCA2IDEwIDEgMSAzIDQgMyA2IDEgMyAzIDUgNCA3IDEgMSAzIDMgNCA1CjAgMyAyIDYgNCA4IDIgMiAzIDUgMTIgMjEgMSAzIDQgNyA0IDggMSAxIDMgNCA1IDggNiAxMCA5IDE3IDExIDE5IDEgMSAyIDIgMgo0IDEgMSAyIDQgNCA3IDIgMiA1IDcgNiAxMCAyIDMgMyA2IDQgNyAxIDAgMiAzIDQgNiAxIDMgMyA2IDQgOCAxIDEgMyAzIDQgNQowIDMgMiA2IDQgNyAxIDIgMyA1IDQgOCAxIDIgMyA2IDUgOCAyIDMgMyA2IDQgNyAwIDIgMSA0IDIgNSAzIDQgNyAxMSAxMiAyMQoyIDMgNCA2IDUgNyAwIDEgMiA0IDQgNyA4IDE1IDExIDIwIDEzIDIzIDIgMyAzIDUgMyA1IDAgMSAxIDQgMyA2IDIgMiA0IDYgNQo5IDIgMiA0IDYgNSA4IDIgMyAzIDUgMyA1IDAgMSAyIDQgNCA3IDIgNCA0IDcgNCA4IDAgMCAxIDMgMyA1IDIgMiA0IDYgNSA4IDEKMiAzIDYgNCA3IDEgMSAzIDUgNSA4IDcgMTQgOSAxOCAxMSAyMCAxIDEgMyA0IDQgNiAxIDMgMyA3IDUgOSAyIDIgMyA1IDMgNSAwCjEgMSA0IDMgNiAyIDIgNCA2IDUgNyAwIDIgMiA2IDQgOSAyIDMgNCA2IDQgNyAwIDAgMSAyIDIgNCAyIDEgNCA2IDYgMTAgMiAzCjYgOSA4IDEzIDIgNCA1IDEwIDcgMTMgMiA0IDQgNyA1IDggMSAwIDIgMyAzIDUgMiAzIDQgNyA1IDkgMiAyIDMgNCAzIDUgMCAwCjIgMyA0IDcgMiAzIDQgNiA0IDcgMCAwIDIgNCA1IDggMiAzIDQgNyA0IDggMCAwIDEgMyAzIDUgMiAyIDQgNiA1IDkgMSAyIDMgNAozIDUgMSAwIDMgNCA1IDggNiAxMiAxMCAxOCAxMSAyMCAxIDEgMyA0IDUgNyAxIDMgMyA3IDQgOCAxIDEgMyA0IDQgNiAwIDIgMgo1IDQgNyAxIDIgMyA2IDUgOSAxIDMgNCA4IDYgMTEgMiA0IDQgNyA1IDkgMSAxIDMgMyAzIDUgMSAyIDMgNiA1IDkgMiAzIDQgNgo0IDYgMCAxIDEgMyAyIDQgMiAzIDggMTMgMTMgMjMgMiAzIDQgNiA0IDcgMSAxIDMgNCA1IDggMiAzIDMgNiA0IDYgMCAxIDIgMwozIDcgMiAzIDQgNiA1IDggMiAyIDQgNiA1IDggMSAyIDQgOCA2IDEyIDQgNyAxMCAxMyAxMyAxMyAxIDAgMSAtMjcgMiAtMjY4IDAKLTE0NyAwIC0zMTAgMCAtMzYxIDEgLTUyIDEgLTE0NSAxIC0yMDcgMCAtMTA4IDAgLTExMyAyIC0xMTUgMiAtMiAyIC0yIDM2IC0yCjM0IDAgMzggMSA0MCA0IDAgMiAwIDc4IDAgNTI5IC0xIDQ5MSAtMiA1ODQgLTQgNTg3IC0xIDIgMiAyIC0zMyAyIC0yOCAwIC0yOAowIC0zMyAtNSAtMiAtMiAtNSAtNyAtNiAtOSAtMiAtMyAtNCAtNyAtNSAtOSAtMiAtMiAtMyAtNCAtMyAtNSAwIDAgLTIgLTQgLTQKLTggLTMgLTMgLTUgLTcgLTUgLTggMCAwIC0xIC0yIC0zIC00IC0xIC0yIC00IC02IC02IC0xMCAtMiAtNCAtNSAtOSAtNyAtMTMKLTIgLTQgLTYgLTkgLTggLTEzIC02IC0xMiAtMTEgLTE5IC0xMyAtMjMgLTIgLTQgLTQgLTggLTEwIC0xOCAtMiAtNCAtNCAtNwotNSAtOSAtMSAtMSAtMyAtMyAtNCAtNSAwIC0yIC0zIC02IC01IC05IC0xIC0zIC0zIC02IC0zIC02IDAgLTEgLTEgLTQgLTMgLTYKLTIgLTIgLTQgLTYgLTUgLTggLTEgLTMgLTMgLTcgLTUgLTkgLTIgLTIgLTMgLTUgLTMgLTYgMCAwIC0xIC0yIC0zIC00IC0zIC01Ci03IC0xMiAtMTIgLTIxIC0yIC00IC00IC03IC01IC04IDAgLTEgLTIgLTQgLTQgLTggLTcgLTEzIC0xMCAtMTkgLTEyIC0yMSAtMQotMSAtMyAtMyAtNCAtNSAwIC0zIC0zIC02IC00IC05IC0yIC0yIC0zIC00IC0zIC01IDAgMCAtMiAtNCAtNSAtOCAtMiAtMyAtNAotNyAtNCAtOCAwIDAgLTEgLTIgLTMgLTUgLTEgLTIgLTQgLTYgLTUgLTkgLTEgLTIgLTMgLTUgLTQgLTYgLTEgLTIgLTMgLTUgLTQKLTcgLTMgLTUgLTUgLTkgLTE2IC0yOCAtMiAtNCAtNiAtMTAgLTcgLTEzIC0yIC0zIC00IC03IC02IC05IC0xIC0xIC0yIC0zIC0yCi00IDAgMCAtMiAtNCAtNCAtOCAtMyAtMyAtNSAtNyAtNSAtNyAwIC0xIC0yIC00IC00IC03IC0yIC00IC00IC03IC00IC03IDAKLTEgLTEgLTMgLTMgLTYgLTIgLTIgLTQgLTYgLTUgLTkgLTEgLTIgLTMgLTUgLTQgLTYgLTIgLTIgLTcgLTExIC0xMSAtMTkgLTEKLTMgLTQgLTcgLTUgLTEwIC0yIC0zIC02IC04IC04IC0xMyAtMiAtNCAtNiAtMTEgLTggLTE0IC0yIC0zIC00IC02IC00IC03IDAKMCAtMiAtMyAtNCAtNyAtMiAtMyAtNCAtNiAtNCAtNiAwIC0xIC0yIC00IC00IC04IC0yIC0zIC00IC02IC00IC03IDAgMCAtMgotMyAtMyAtNiAtMiAtMyAtNSAtNyAtNSAtOSAtMSAtMiAtMyAtNCAtNCAtNSAtMSAtMiAtMyAtNCAtNCAtNyAwIC0yIC0yIC00Ci0zIC01IC0yIC0yIC01IC04IC0xMiAtMjIgLTIgLTQgLTUgLTggLTYgLTEwIC0xIC0yIC01IC04IC03IC0xMiAtMiAtNCAtNgotMTAgLTcgLTEzIC0yIC0yIC00IC02IC02IC05IC0xIC0zIC00IC04IC02IC0xMSAtMiAtNCAtNCAtOCAtNSAtOSAtMSAtMSAtMwotNCAtNCAtNyAtMSAtMiAtMyAtNSAtNCAtNyAtMSAtMSAtMyAtMyAtNCAtNiAwIC0yIC0yIC00IC0zIC01IC0xIC0yIC04IC0xNAotMTIgLTIxIC0xIC0zIC00IC04IC02IC0xMCAtMSAtMyAtMyAtNiAtNCAtNyAwIC0xIC0xIC00IC0yIC01IC0yIC0yIC00IC02Ci01IC04IC0xIC0yIC0zIC02IC00IC03IC0xIC0xIC0zIC01IC01IC04IC03IC0xNCAtOSAtMTggLTEyIC0yMCAtMSAtMiAtMyAtNQotMyAtNyAtMSAtMyAtMyAtNSAtNCAtNyAtMSAtMSAtMyAtMyAtNCAtNSAwIC0yIC0zIC02IC01IC05IC0xIC0zIC0zIC02IC0zCi02IDAgLTEgLTIgLTQgLTQgLTcgLTIgLTQgLTQgLTcgLTQgLTcgMCAtMSAtMiAtNCAtNCAtNyAtMiAtNCAtNCAtNyAtNCAtNyAwCi0xIC0xIC00IC0zIC02IC0yIC0yIC00IC02IC01IC05IC0yIC0yIC01IC04IC04IC0xMiAtMiAtNCAtNSAtMTAgLTcgLTE0IC0yCi00IC01IC04IC02IC0xMCAtMiAtMiAtMyAtNCAtMyAtNCAwIC0xIC0yIC00IC00IC04IC00IC03IC03IC05IC0xMCAtOCAtMSAxCi02IDkgLTEwIDE3IC0xIDMgLTQgNyAtNSAxMCAtMiAzIC00IDYgLTQgNiAwIDEgLTEgMyAtMiA1IC0xIDEgLTQgNCAtNSA3IC0xCjMgLTQgNyAtNSAxMCAtNCA2IC0xMCAxNiAtMTUgMjUgLTMgNSAtNiAxMCAtOCAxMyAtMiAzIC00IDcgLTQgOSAtMSAxIC0zIDUKLTUgNyAtMiAyIC0zIDUgLTMgNSAwIDEgLTEgNCAtMyA2IC0yIDIgLTQgNiAtNSA5IC0xIDIgLTMgNSAtNCA3IC0yIDIgLTQgNQotNCA3IC0xIDIgLTMgNiAtNSA5IC0yIDMgLTQgNiAtNCA2IDAgMSAtMSAzIC0zIDUgLTEgMiAtMyA1IC01IDggLTMgNiAtOSAxNwotMTYgMjggLTIgNCAtNSAxMCAtNyAxMyAtMSAyIC0zIDYgLTQgOCAtMiAxIC0zIDQgLTQgNiAtMSAxIC0zIDQgLTQgNyAtMiAyCi0zIDUgLTMgNiAtMSAxIC0zIDQgLTQgNyAtMiAzIC01IDcgLTUgOSAtMSAyIC0zIDQgLTQgNSAtMSAyIC0zIDUgLTQgOCAtMiAzCi0zIDYgLTQgNiAtMSAxIC0zIDQgLTUgOCAtNyAxNCAtMTQgMjYgLTIwIDM1IC0xIDMgLTMgNSAtMyA2IDAgMCAtMiAzIC0zIDYKLTIgMiAtNCA1IC00IDcgLTEgMSAtMyA1IC02IDggLTIgNCAtNCA4IC00IDggMCAxIC0xIDMgLTMgNiAtMiAyIC00IDYgLTUgOAotMSAyIC0zIDYgLTUgOCAtMiAzIC0zIDYgLTMgNiAwIDEgLTIgMyAtMyA2IC0yIDMgLTQgNiAtNCA2IDAgMSAtMSAzIC0yIDQgLTIKMiAtNCA3IC02IDExIC03IDEyIC0xMSAyMCAtMTQgMjIgLTEgMiAtMiA0IC0yIDUgMCAwIC0yIDMgLTQgNyAtMiAzIC00IDYgLTQKNyAwIDAgLTIgNCAtNCA3IC0zIDQgLTUgOCAtNSA4IDAgMSAtMiA0IC0zIDYgLTIgMyAtNCA2IC00IDYgMCAxIC0yIDUgLTQgOAotMyA0IC01IDggLTUgOCAwIDEgLTIgMyAtMyA2IC0yIDMgLTQgNiAtNSA3IDAgMSAtMSA0IC0zIDYgLTEgMSAtMyA1IC01IDkgLTIKMyAtNSA4IC02IDExIC0yIDMgLTQgNyAtNSA4IC0xIDEgLTMgNSAtNCA3IC0xIDIgLTMgNiAtNCA3IC0xIDEgLTMgNCAtNCA2IC0xCjMgLTMgNyAtNSA5IC0yIDIgLTMgNSAtMyA1IDAgMSAtMiA0IC00IDggLTIgMyAtNCA2IC00IDcgMCAwIC0yIDQgLTQgNyAtMyA0Ci01IDggLTUgOSAwIDAgLTEgMiAtMyA0IC0xIDEgLTMgNSAtNCA4IC0xIDIgLTMgNSAtMyA1IC0xIDEgLTggMTMgLTEyIDIyIC0yCjMgLTQgNyAtNiA4IC0xIDIgLTIgNCAtMyA2IC0xIDIgLTMgNSAtNSA4IC0yIDIgLTMgNSAtMyA1IDAgMSAtMSAzIC0zIDYgLTEgMgotNCA2IC02IDEwIC01IDEwIC05IDE3IC0xMiAyMSAtMSAxIC0zIDQgLTMgNiAtMSAzIC0zIDUgLTQgNyAtMSAxIC0zIDMgLTQgNgowIDIgLTIgNSAtMyA3IC0yIDEgLTQgNSAtNiA5IC02IDEwIC0xMCAxOSAtMTIgMjIgLTIgMiAtNSA3IC03IDExIC0yIDUgLTYgMTAKLTcgMTIgLTEgMiAtNCA2IC02IDEwIC01IDEwIC0xMSAyMCAtMTIgMjIgLTEgMSAtMyAzIC0zIDUgLTEgMyAtMyA1IC00IDcgLTEKMSAtMyAzIC00IDYgMCAyIC0yIDUgLTQgNyAtMSAxIC0zIDUgLTUgOCAtMSAzIC00IDggLTYgOSAtNCA0IC00IDQgLTI5IDQgLTE0CjAgLTI2IDAgLTI4IDAgLTEgMSAtNCAwIC02IDB6Ii8+CjxwYXRoIGQ9Ik0yMTk2IDExMzMgYy00IC0xIC0xMCAtMTAgLTEzIC0xOCAtMSAtMyAtMiAtNiAtMyAtNyAtMSAtMSAtMyAtNCAtMwotNyAtMSAtMyAtMyAtNiAtNCAtOCAtMSAtMiAtMyAtNSAtNCAtOSAtMSAtMyAtMyAtNyAtNCAtOCAtMSAtMiAtMyAtNyAtNSAtMTEKLTEgLTMgLTMgLTggLTQgLTEwIC0yIC0zIC0zIC02IC00IC04IC0xIC0zIC0yIC02IC0zIC03IC0yIC0yIC0zIC02IC00IC05IC0xCi0zIC0zIC03IC01IC05IC0xIC0yIC0zIC01IC0zIC03IC0xIC0zIC0zIC03IC00IC0xMCAtMiAtMiAtNCAtNyAtNSAtMTEgLTEKLTMgLTMgLTcgLTQgLTkgLTIgLTIgLTMgLTYgLTQgLTggLTEgLTMgLTMgLTcgLTQgLTkgLTIgLTIgLTMgLTQgLTMgLTUgMCAtMQotMiAtNSAtNCAtOSAtMiAtNCAtNCAtOSAtNCAtMTAgLTEgLTEgLTMgLTYgLTUgLTkgLTIgLTQgLTQgLTkgLTUgLTEyIDAgLTIgLTIKLTYgLTMgLTggLTIgLTIgLTMgLTYgLTQgLTkgLTEgLTMgLTMgLTYgLTQgLTcgLTEgLTIgLTMgLTQgLTMgLTYgLTEgLTIgLTMgLTcKLTUgLTEwIC0xIC00IC01IC0xMiAtOCAtMTggLTIgLTYgLTYgLTE0IC04IC0xOCAtMSAtNCAtNCAtOSAtNCAtMTEgLTEgLTIgLTMKLTYgLTQgLTggLTIgLTIgLTMgLTUgLTMgLTYgLTEgLTEgLTMgLTYgLTQgLTkgLTkgLTE4IC0xMSAtMjMgLTEzIC0yNyAwIC0yIC0yCi02IC00IC05IC0xIC0yIC0zIC03IC00IC0xMCAtMSAtMyAtMyAtNiAtNCAtOCAtMSAtMSAtMyAtNSAtNCAtNyAwIC0zIC0yIC03Ci00IC0xMCAtMiAtMiAtMyAtNSAtMyAtNiAwIC0xIC0yIC01IC00IC05IC0yIC01IC00IC0xMCAtNSAtMTIgLTEgLTMgLTIgLTYKLTQgLTggLTEgLTIgLTMgLTYgLTQgLTkgLTEgLTMgLTMgLTcgLTQgLTEwIC0yIC0yIC0zIC01IC00IC03IC0xIC0zIC0yIC02IC0zCi03IC0xIC0yIC0zIC01IC00IC05IC0xIC0zIC0zIC03IC01IC0xMCAtMSAtMiAtMyAtNyAtNCAtMTAgLTEgLTMgLTMgLTcgLTQKLTEwIC0yIC0yIC00IC02IC01IC04IDAgLTMgLTIgLTcgLTMgLTkgLTIgLTEgLTMgLTUgLTQgLTYgMCAtMiAtMSAtNSAtMyAtNwotMSAtMiAtMyAtNyAtNCAtMTAgLTEgLTMgLTMgLTcgLTQgLTggLTEgLTIgLTMgLTcgLTQgLTEwIC0yIC00IC00IC05IC01IC0xMQotMiAtMyAtMyAtNiAtNCAtOCAtMSAtMyAtMiAtNiAtNCAtOCAtMSAtMSAtMyAtNSAtNCAtOCAtMSAtMyAtMiAtNyAtNCAtOSAtMQotMiAtMiAtNSAtMyAtNyAtMSAtMyAtMiAtNyAtNCAtOSAtMiAtMyAtNCAtOCAtNSAtMTEgLTEgLTMgLTMgLTcgLTQgLTkgLTEgLTEKLTMgLTUgLTQgLTkgLTEgLTQgLTMgLTcgLTQgLTggLTEgLTIgLTMgLTUgLTQgLTggMCAtMyAtMiAtNyAtNCAtOSAtMSAtMiAtMwotNSAtMyAtOCAtMSAtMiAtMyAtNyAtNSAtMTEgLTIgLTQgLTUgLTkgLTUgLTEyIC0xIC0zIC0zIC01IC00IC02IDAgLTEgLTIgLTQKLTMgLTcgLTEgLTMgLTIgLTcgLTQgLTkgLTEgLTIgLTMgLTQgLTMgLTYgLTEgLTIgLTMgLTcgLTQgLTEwIC03IC0xNCAtMTMgLTI2Ci0xMyAtMjkgLTEgLTEgLTMgLTUgLTUgLTggLTEgLTQgLTMgLTggLTMgLTkgLTEgLTIgLTIgLTYgLTQgLTggLTIgLTIgLTMgLTYKLTQgLTggLTEgLTMgLTIgLTYgLTMgLTcgLTEgLTIgLTMgLTUgLTQgLTggLTEgLTMgLTMgLTggLTQgLTEwIC0yIC0zIC0zIC02IC0zCi03IC0xIC0xIC0zIC02IC01IC0xMSAtMiAtNSAtNiAtMTMgLTkgLTE3IC0yIC01IC00IC0xMSAtNSAtMTMgLTEgLTIgLTIgLTQKLTIgLTUgLTEgLTEgLTMgLTMgLTQgLTYgMCAtMyAtMyAtOCAtNCAtMTEgLTIgLTMgLTQgLTggLTUgLTExIC0xIC0zIC0zIC03IC00Ci05IC0yIC0yIC0zIC02IC00IC04IC0xIC0yIC0yIC02IC0zIC03IC0yIC0yIC00IC02IC00IC05IC0xIC0zIC0zIC03IC00IC04Ci0xIC0yIC0zIC01IC00IC04IC0xIC0zIC00IC05IC01IC0xMiAtMiAtNCAtNCAtNyAtNCAtOCAwIC0xIC0yIC01IC00IC05IC0yCi00IC00IC05IC00IC0xMCAtMSAtMiAtMiAtNSAtNCAtOCAtMiAtMiAtMyAtNSAtMyAtNiAwIDAgLTIgLTQgLTQgLTkgLTUgLTEwCi0xNCAtMzAgLTE0IC0zMCAwIC0xIC0xIC00IC0zIC03IC0yIC00IC00IC05IC01IC0xMiAtMSAtMiAtMyAtNSAtNCAtNiAwIC0xCi0yIC00IC0zIC02IDAgLTMgLTIgLTcgLTMgLTkgLTIgLTIgLTMgLTUgLTQgLTggLTEgLTMgLTMgLTcgLTUgLTEwIC0xIC0zIC0zCi03IC00IC05IC0xIC03IC0yIC03IDQyIC03IDI4IDAgMzkgMCA0MSAxIDIgMSAzIDMgNSA4IDEgMyAzIDYgNCA3IDAgMSAyIDUgMwo4IDEgNCAzIDggNSAxMSAxIDIgMyA3IDQgMTAgMSAzIDMgNiA0IDggMSAxIDMgNSA0IDggMCAzIDIgNyA0IDggMSAyIDMgNiA0IDkKMCAzIDIgNyAzIDggMSAyIDMgNiA1IDEwIDEgNCAzIDkgNSAxMiAxIDMgMyA3IDMgOSAxIDEgMiA0IDQgNiAxIDIgMyA2IDQgOCAwCjMgMiA3IDMgOSAyIDIgMyA2IDQgOCAxIDMgMyA4IDUgMTIgMiAzIDQgOCA0IDkgMSAxIDMgNSA0IDkgMiA0IDQgOCA0IDEwIDEgMQoyIDUgNCA3IDIgMiAzIDYgNCA5IDEgMiAyIDUgMyA2IDEgMiAzIDYgNCA5IDIgNCA0IDggNCA5IDEgMSAzIDYgNSAxMSAyIDQgNAo5IDUgMTEgMSAxIDMgNSA0IDggMCAzIDIgNyAzIDggMSAxIDMgNCA0IDcgMSAzIDMgNyA0IDEwIDIgMiAzIDUgMyA2IDAgMCAxIDQKMyA3IDIgMyA0IDkgNiAxNCAyIDQgNCA5IDUgMTEgMSAxIDIgNCAzIDcgMSAyIDMgNiA1IDEwIDEgMyAzIDcgMyA4IDEgMiAyIDUKNCA4IDIgMiAzIDUgMyA2IDAgMSAyIDUgNCA5IDIgNCA0IDggNCA5IDAgMSAyIDUgNSAxMSAyIDUgNCA5IDQgMTAgMCAxIDYgMTMKMTEgMjMgMiAzIDQgOCA0IDEwIDEgMyAzIDYgNCA4IDEgMSAzIDYgNSAxMCAxIDQgMyA5IDQgMTEgMSAxIDMgNSA0IDggMSA0IDMKNyA0IDkgMSAyIDMgNSA0IDggMCAzIDIgNiAzIDcgMSAyIDMgNiA0IDkgMSAzIDMgNyA0IDkgMSAxIDMgNiA1IDEwIDEgNCAzIDkKNSAxMiAxIDIgMiA1IDMgOCAxIDIgMiA2IDQgOCAyIDIgMyA3IDQgOSAxIDIgMiA2IDQgNyAxIDIgMyA2IDMgOSAxIDMgMyA3IDQKOCAxIDIgMyA2IDUgMTAgMSAzIDQgMTAgNiAxNCAxIDQgMyA3IDMgOCAwIDEgMSAzIDMgNSAxIDIgMyA2IDQgOSAwIDIgMiA2IDQKOCAxIDIgMyA2IDMgOCAxIDIgMyA3IDUgMTEgMiAzIDQgOCA1IDExIDEgNCAzIDcgNCA5IDEgMSAyIDUgMyA4IDEgMyAzIDYgNCA4CjEgMiAzIDUgNCA5IDEgMyAzIDYgNCA4IDEgMSAyIDQgMyA3IDEgMiAyIDYgNCA5IDEgMiAzIDYgNCA4IDIgNSA5IDIyIDEzIDMxCjIgMyA0IDggNSA5IDAgMSAyIDQgMyA3IDIgMiAzIDUgMyA2IDAgMSAyIDUgNSAxMCAyIDYgNCAxMCA0IDExIDAgMSAxMiAyNyAyMAo0MiAxIDQgMyA4IDMgOCAwIDEgMSA0IDMgNyAyIDQgNCA4IDUgMTEgMSAzIDQgOSA1IDEzIDIgMyA0IDggNCA5IDEgMSAyIDUgNAo4IDIgMiAzIDYgNCA4IDEgMyAyIDYgNCA4IDEgMiAyIDUgMyA3IDEgMyAyIDYgNCA5IDEgMiAzIDcgNSAxMSAxIDMgMyA4IDQgMTAKMSAxIDMgNiA0IDEwIDIgNCA0IDcgNSA4IDAgMSAyIDQgMyA3IDAgMiAyIDYgNCA4IDEgMiAzIDYgMyA5IDEgMyAzIDcgNCA5IDIKMiA0IDcgNSAxMSAyIDEwIDUgMTIgMTEgNiAyIC0yIDQgLTYgNSAtOSAxIC0zIDIgLTggNCAtMTAgMiAtMiAzIC02IDQgLTggMQotMyAyIC02IDQgLTkgMSAtMiAzIC03IDQgLTEwIDEgLTMgMyAtNyA1IC0xMCAxIC0yIDMgLTcgNCAtMTAgMSAtNCAzIC03IDQgLTgKMSAtMiAyIC00IDMgLTUgMCAtMiAyIC02IDMgLTkgMiAtNCA0IC04IDQgLTkgMSAtMSAzIC01IDQgLTkgMiAtNCA1IC05IDYgLTExCjEgLTMgMiAtNyA0IC0xMCAxIC0yIDMgLTcgNCAtMTAgMSAtMyAzIC02IDQgLTggMSAtMSAyIC00IDMgLTYgMSAtMyAzIC03IDQKLTEwIDIgLTMgNCAtOCA2IC0xMSAxIC00IDUgLTExIDcgLTE3IDMgLTcgNiAtMTQgNyAtMTcgMiAtMyA0IC04IDYgLTExIDIgLTQKMyAtNyAzIC04IDAgLTEgMSAtMyAyIC01IDIgLTIgNCAtNiA1IC04IDEgLTMgMiAtNyA0IC05IDEgLTMgMyAtOCA1IC0xMSAxIC00CjMgLTggNCAtOSAwIC0yIDIgLTYgMyAtOSAyIC00IDQgLTggNSAtMTAgMSAtMSAyIC01IDMgLTggMSAtMyAzIC02IDQgLTcgMSAtMgozIC02IDQgLTkgMSAtMyAzIC03IDQgLTkgMSAtMSAyIC00IDMgLTYgMSAtMyAzIC03IDUgLTExIDEgLTQgNCAtOSA0IC0xMSAxCi0zIDMgLTcgNSAtOSAxIC0yIDMgLTYgMyAtOSAxIC0yIDMgLTYgNCAtOCAyIC0yIDMgLTUgNCAtNiAwIC0yIDIgLTYgMyAtOSAyCi00IDQgLTggNSAtMTAgMSAtMyAzIC03IDQgLTEwIDIgLTQgNCAtOCA1IC0xMSAxIC0yIDIgLTYgNCAtOCAxIC0yIDMgLTYgNCAtOAowIC0zIDIgLTcgMyAtOCAxIC0xIDIgLTQgMyAtNiAxIC0yIDMgLTcgNSAtMTEgMiAtNCA0IC05IDUgLTExIDEgLTMgMyAtNyA0Ci05IDIgLTMgMyAtNyA0IC0xMCAxIC0yIDIgLTUgMyAtNyAyIC0yIDMgLTYgNCAtOCAwIC0yIDIgLTYgNCAtOCAyIC0zIDMgLTYgMwotNiAwIC0xIDIgLTUgNCAtMTAgMiAtNCA1IC0xMCA2IC0xMyAxIC0zIDMgLTggNSAtMTEgMSAtMyAzIC03IDMgLTkgMSAtMSAyCi00IDQgLTYgMSAtMiAzIC01IDMgLTcgMSAtMyAyIC03IDQgLTkgMiAtMyAzIC01IDMgLTYgMCAtMSAyIC01IDMgLTggMiAtNCA3Ci0xNCAxMCAtMjEgMyAtOCA4IC0xOCAxMCAtMjEgMSAtNCAzIC04IDMgLTkgMCAwIDEgLTMgMyAtNSAxIC0zIDMgLTYgMyAtNyAxCi0yIDMgLTcgNCAtMTAgNiAtMTIgMTEgLTIzIDE0IC0zMCAxIC00IDMgLTcgNCAtOCAwIC0xIDIgLTQgMyAtOCAxIC0zIDMgLTcgNAotOSAyIC0yIDMgLTUgNCAtOCAxIC0yIDIgLTYgNCAtOCAxIC0yIDMgLTYgNCAtOSAwIC0yIDIgLTcgNCAtOSAxIC0zIDMgLTggNAotMTEgMSAtMyAzIC03IDUgLTkgMSAtMiAzIC02IDQgLTkgMSAtNCAyIC03IDMgLTcgMSAwIDIgLTQgNCAtOCAxIC00IDQgLTkgNQotMTEgMSAtMSAyIC00IDMgLTYgMCAtMSAyIC03IDUgLTExIDIgLTUgNCAtMTAgNCAtMTEgMCAtMSAxIC00IDMgLTYgMiAtMyA0Ci03IDUgLTEwIDAgLTMgMiAtNiAzIC04IDEgLTEgMyAtNCA0IC03IDEgLTQgMyAtNyA0IC05IDAgLTEgMiAtNSA0IC05IDEgLTMgMwotOSA1IC0xMyAyIC0zIDQgLTggNCAtOSAxIC0yIDIgLTUgNCAtNyAxIC0yIDMgLTUgMyAtNyAxIC0zIDIgLTcgNCAtOSAyIC0yIDMKLTYgNCAtOCAxIC0yIDIgLTYgNCAtOCAxIC0zIDMgLTcgNCAtMTEgMiAtNCA0IC05IDYgLTEzIDIgLTMgMyAtNiAzIC03IDAgMCAyCi00IDQgLTkgMiAtNSA2IC0xMiA4IC0xNiAyIC00IDQgLTkgNCAtMTAgMSAtMSAzIC0zIDUgLTQgMiAtMiA2IC0yIDQxIC0yIDMwCjAgMzggMCA0MCAxIDIgMiAxIDkgLTMgMTQgLTEgMiAtMyA2IC00IDggLTEgMiAtMiA3IC00IDkgLTEgMiAtMyA3IC00IDEwIC0xCjMgLTMgNyAtNCA5IC0yIDIgLTMgNiAtNCA5IC0xIDMgLTMgNiAtNCA3IC0xIDIgLTMgNiAtNCA5IC0xIDMgLTMgNyAtNCA5IC0yCjIgLTMgNSAtMyA2IC0xIDEgLTMgNyAtNiAxMyAtMyA2IC01IDExIC01IDEyIDAgMSAtMSAzIC0zIDYgLTEgMiAtMyA2IC0zIDgKLTEgMSAtMiA1IC00IDcgLTEgMyAtMyA2IC00IDkgLTEgMiAtMiA1IC0zIDcgLTIgMiAtMyA1IC0zIDYgLTEgMSAtMyA2IC01IDEwCi0yIDQgLTQgOSAtNSAxMiAtMSAzIC0zIDggLTUgMTIgLTIgNCAtNCA3IC00IDggMCAxIC0xIDMgLTMgNiAtMSAyIC0zIDYgLTQgOQotMSAzIC0zIDcgLTQgOSAtMiAyIC0zIDQgLTMgNSAwIDEgLTIgNSAtMyA4IC0yIDQgLTUgOSAtNiAxMiAtMSAzIC0zIDkgLTUgMTIKLTIgNCAtNCA4IC00IDkgMCAxIC0xIDMgLTMgNiAtMSAyIC0zIDYgLTQgOSAtMSAyIC0zIDYgLTQgOSAtMiAyIC0zIDYgLTQgOAotMSAyIC0zIDcgLTQgOSAtMiAyIC00IDcgLTUgOSAwIDMgLTIgNyAtNCAxMCAtMSAyIC0zIDcgLTQgMTAgLTEgMyAtMyA2IC00IDgKLTEgMSAtMiA0IC0zIDYgLTEgMyAtMiA2IC00IDggLTEgMiAtMyA3IC00IDEwIC0yIDQgLTQgOCAtNCA5IC0xIDEgLTMgNiAtNCA5Ci0yIDQgLTQgOCAtNSA5IDAgMiAtMiA1IC0zIDkgLTIgMyAtNCA3IC01IDkgLTEgMSAtMiA0IC0zIDcgLTEgMiAtMiA1IC0zIDcKLTEgMiAtMyA2IC01IDEwIC0yIDQgLTUgMTIgLTggMTggLTMgNiAtNyAxNSAtOCAxOCAtMiA0IC00IDggLTUgMTAgLTEgMSAtMiA0Ci0zIDcgMCAyIC0yIDYgLTQgOCAtMiAzIC0zIDcgLTQgOSAtMSAyIC0yIDYgLTMgNyAtMSAyIC0zIDYgLTUgMTAgLTEgMyAtMyA5Ci01IDEyIC0yIDIgLTMgNiAtMyA4IC0xIDEgLTIgNSAtNCA3IC0xIDIgLTMgNiAtNCA5IC0xIDMgLTMgNyAtNCA5IC0yIDIgLTMgNQotNCA4IC0xIDIgLTMgNiAtNSAxMCAtMSAzIC0zIDYgLTMgNyAwIDEgLTIgNiAtNCAxMSAtMyA0IC01IDkgLTUgMTAgMCAxIC0xIDQKLTMgNiAtMSAzIC0zIDYgLTQgOSAtMSAyIC0yIDYgLTQgOCAtMSAyIC0zIDYgLTQgOSAtMSAyIC0yIDUgLTQgOCAtMSAyIC0zIDcKLTUgMTAgLTEgNCAtMyA5IC00IDExIC0yIDMgLTMgNiAtNCA5IC0xIDIgLTIgNSAtMyA2IC0xIDIgLTMgNSAtNCA5IC0xIDMgLTMKNiAtNCA4IC0xIDEgLTMgNCAtMyA3IC0xIDMgLTMgNyAtNSAxMCAtMSAzIC0zIDcgLTMgOCAtMSAyIC00IDggLTEzIDI3IC0xIDMKLTQgOSAtNSAxMSAwIDIgLTIgNSAtMyA2IC0xIDIgLTIgNSAtMyA4IC0xIDIgLTQgOCAtNiAxMiAtMiA1IC00IDkgLTQgMTAgMCAxCi0xIDMgLTMgNiAtMSAyIC0zIDcgLTUgMTAgLTEgNCAtMyA4IC00IDEwIC0xIDEgLTIgNCAtMyA2IC0xIDMgLTIgNiAtNCA4IC0xCjIgLTMgNiAtNCA5IC0xIDMgLTMgOCAtNCAxMCAtMiAyIC00IDcgLTUgMTEgLTEgMyAtMyA3IC00IDggLTEgMSAtMiA0IC0zIDcKLTEgMiAtMyA2IC00IDEwIC04IDE2IC0yMiA0NSAtMjIgNDcgMCAwIC0yIDMgLTMgNyAtMiA0IC00IDggLTQgOCAwIDEgLTEgNAotMyA2IC0xIDMgLTMgNiAtMyA3IC0xIDEgLTMgNiAtNCAxMCAtMiAzIC02IDExIC05IDE3IC0yIDYgLTYgMTQgLTggMTggLTEgMwotNCA5IC01IDEyIC0xIDMgLTMgNiAtNCA4IC0xIDEgLTIgNCAtMyA2IC0xIDMgLTIgNiAtMyA4IC0yIDIgLTQgNiAtNSA5IC0xIDQKLTMgOCAtNCAxMCAtMiAzIC0zIDYgLTQgOSAtMSAyIC0zIDYgLTUgMTAgLTEgMyAtMyA3IC00IDEwIC0xIDQgLTYgMTEgLTkgMTIKLTEgMSAtNzIgMiAtNzQgMXoiLz4KPHBhdGggZD0iTTQ4NDUgMTEzMyBjLTMxIDAgLTMzIC0xIC0zNSAtMiAtMSAtMiAtMSAtODAgLTEgLTU1OSAwIC01NTYgMCAtNTU3CjIgLTU1OSAyIC0yIDMgLTIgMzMgLTIgMTcgMCAzMyAwIDM2IC0xIDQgMCA1IDAgNyAyIDIgMiAyIDIgMiAxNDYgMCAxMTkgMAoxNDQgMSAxNDYgMiA0IDMgNSAzNCAzNyAxMSAxMSAzMSAzMSA0NCA0NSAxMyAxNCAyOCAyOSAzMyAzMyA0IDUgMTQgMTYgMjMgMjUKMzQgMzUgNjUgNjcgNzYgNzggNiA2IDE3IDE4IDI1IDI1IDcgOCAxMyAxNCAxNCAxNCA0IDEgNiAwIDEwIC01IDMgLTMgMTAgLTEyCjE2IC0xOSAxMSAtMTIgMTYgLTE5IDIzIC0yNiAxIC0yIDcgLTggMTIgLTE0IDUgLTUgMTEgLTEyIDEzIC0xNSAyIC0zIDYgLTcgOAotOSAxMCAtMTEgMzYgLTQxIDQzIC01MCA1IC01IDE1IC0xNyAyMyAtMjcgMTQgLTE1IDM1IC0zOSA0NSAtNTEgNCAtNSA3IC05CjE1IC0xNyA1IC01IDE3IC0xOSAyMCAtMjMgMSAtMiAxMSAtMTMgMjIgLTI1IDEwIC0xMiAyNiAtMzEgMzYgLTQyIDEwIC0xMSAxOQotMjEgMjAgLTIzIDEgLTEgNCAtNSA3IC03IDIgLTMgOSAtMTIgMTYgLTIwIDcgLTggMTUgLTE2IDE3IC0xOCAxIC0zIDEwIC0xMwoxOSAtMjMgOCAtOSAxOCAtMjAgMjEgLTIzIDIgLTQgMTUgLTE4IDI3IC0zMiAxMiAtMTQgMjYgLTMwIDMxIC0zNSA0IC01IDEwCi0xMiAxMyAtMTUgMyAtNCA3IC04IDggLTEwIDIgLTIgNiAtNiA4IC05IDMgLTMgNSAtNiA1IC02IDAgLTEgMiAtMiA0IC0zIDUKLTMgNSAtMyA0OSAtMyAyNCAwIDQ1IDAgNDUgMSAzIDEgMCA1IC0xMiAyMCAtOCA4IC0xMyAxNCAtMjggMzIgLTIgMiAtNSA2IC03CjggLTIgMyAtNiA3IC04IDEwIC0zIDIgLTcgNyAtOSAxMCAtMyA0IC0xMSAxMiAtMTcgMTkgLTYgOCAtMTIgMTUgLTE0IDE3IC0yCjIgLTcgOCAtMTEgMTMgLTUgNSAtMTMgMTUgLTE3IDIwIC01IDYgLTExIDEzIC0xMiAxNCAtMiAyIC01IDYgLTcgOSAtMyAyIC02CjYgLTkgOSAtNiA2IC0xMiAxNCAtMTcgMjAgLTIgMyAtOCA5IC0xMiAxNCAtNSA1IC0xMCAxMSAtMTIgMTQgLTEgMiAtNiA4IC0xMQoxMyAtNCA1IC0xMCAxMSAtMTIgMTQgLTYgOCAtMTMgMTUgLTE3IDIwIC0yIDIgLTUgNiAtNyA4IC0zIDMgLTYgNyAtNyA4IC0yIDIKLTYgNyAtOSAxMSAtNCA0IC0xMyAxNSAtMjEgMjQgLTggMTAgLTE3IDE5IC0xOCAyMiAtMiAyIC02IDYgLTggOSAtMyAyIC03IDcKLTkgMTEgLTMgMyAtMTAgMTEgLTE2IDE4IC03IDcgLTE3IDIwIC0yNCAyOCAtOCA4IC0xNyAxOSAtMjEgMjQgLTUgNSAtMTAgMTEKLTEyIDE0IC0yIDIgLTUgNiAtNiA3IC0yIDIgLTggOSAtMTMgMTYgLTE3IDE5IC0zMiAzNiAtMzYgNDEgLTIgMiAtOCA5IC0xMgoxNSAtNSA1IC0xNSAxNiAtMjEgMjQgLTcgNyAtMTQgMTUgLTE1IDE3IC0yIDIgLTUgNiAtOCA5IC0yIDMgLTcgOCAtOSAxMSAtMgozIC02IDcgLTkgMTAgLTQgNCAtNSA4IC0zIDEyIDEgMSA2IDcgMTMgMTQgNiA2IDI0IDI0IDM4IDQwIDE1IDE1IDMzIDM0IDQxCjQxIDcgNyAxNyAxOCAyMiAyMyA1IDYgMTcgMTggMjYgMjcgOCA5IDI0IDI1IDM1IDM2IDEwIDExIDI0IDI1IDMwIDMyIDYgNiAyMgoyMyAzNiAzNyAxMyAxMyAyNSAyNiAyNyAyOCAyIDIgMTMgMTQgMjUgMjYgMTIgMTIgMjcgMjggMzQgMzUgNyA4IDE0IDE1IDE2CjE3IDkgMTAgNDQgNDYgNTQgNTYgNiA3IDIxIDIxIDMyIDMzIDExIDEyIDI4IDI5IDM2IDM3IDkgOSAxNyAxNyAxNyAxOSAyIDUgNAo1IC00NSA1IC00NSAwIC00NSAwIC00OSAtMyAtMyAtMiAtNiAtNSAtOCAtNiAtMSAtMiAtMTAgLTExIC0xOSAtMjEgLTEwIC0xMAotMjYgLTI3IC0zNyAtMzggLTExIC0xMSAtMjMgLTI0IC0yNyAtMjggLTQgLTQgLTE3IC0xNyAtMjggLTI5IC0xMSAtMTIgLTI2Ci0yNiAtMzIgLTMzIC02IC02IC0yMiAtMjMgLTM1IC0zNiAtMTMgLTEzIC0yNyAtMjggLTMxIC0zMyAtNSAtNCAtMTggLTE4IC0zMAotMzEgLTEzIC0xMiAtMjggLTI4IC0zNCAtMzQgLTYgLTcgLTE1IC0xNiAtMTkgLTIwIC04IC05IC00MyAtNDQgLTU5IC02MSAtNgotNiAtMjIgLTIzIC0zNSAtMzcgLTE0IC0xMyAtMjYgLTI2IC0yOCAtMjggLTIwIC0yMCAtNTIgLTU0IC02OSAtNzIgLTcgLTcKLTE5IC0xOSAtMjYgLTI3IC04IC04IC0yNSAtMjYgLTM5IC0zOSAtMTMgLTE0IC0zMCAtMzIgLTM4IC00MCAtMjAgLTIxIC01MgotNTMgLTcxIC03MyAtMjcgLTI4IC0yNiAtMjggLTI5IC0yOCAtMiAwIC0zIDEgLTMgMiAtMSAwIC0xIDE2MSAtMSAzNTcgMCAzNTQKMCAzNTUgLTIgMzU3IC0xIDEgLTMgMiAtNSAyIC0yIDAgLTE4IC0xIC0zNyAtMXoiLz4KPHBhdGggZD0iTTg5MDcgMTEzMyBjLTEgLTEgLTIgLTIgLTMgLTQgLTEgLTMgLTEgLTExMTEgMCAtMTExNCAxIC0yIDIgLTMgMwotNCAxIDAgMTggMCAzOCAwIDMzIDAgMzUgMSAzNyAyIDEgMiAxIDgwIDEgNTU5IDAgNTU2IDAgNTU3IC0yIDU1OSAtMiAyIC0zIDIKLTM0IDIgLTE3IDAgLTMzIDAgLTM1IDAgLTEgMSAtNCAxIC01IDB6Ii8+CjxwYXRoIGQ9Ik0zMzI3IDExMzIgYy0xIC0xIC0yIC0yIC0zIC0zIDAgLTIgMCAtMTYgMCAtMzMgMCAtMjkgMCAtMzEgMSAtMzMgMgotMSAxOCAtMiAyMTQgLTIgMTE2IDAgMjE2IC0xIDIyMSAtMSA0IC0xIDE1IC0yIDI0IC0yIDggLTEgMTkgLTIgMjQgLTMgNSAwCjE0IC0xIDIwIC0zIDUgLTEgMTQgLTMgMTkgLTMgNSAtMSAxMyAtMyAxNyAtNCA0IC0yIDExIC00IDE1IC00IDQgLTEgOSAtMyAxMAotMyAxIC0xIDcgLTMgMTQgLTUgNiAtMiAxMiAtNCAxNSAtNiAyIC0xIDYgLTIgOCAtMyAzIC0xIDYgLTIgOSAtNCAyIC0yIDYgLTMKOCAtNCAyIC0xIDUgLTIgNyAtMyAxIC0yIDUgLTQgOCAtNSAxMiAtNyAyOCAtMTggMzAgLTIwIDAgLTEgMiAtMiA0IC00IDUgLTMKNyAtNSAyMiAtMTkgMTEgLTExIDEyIC0xMiAyMCAtMjIgNyAtMTAgMTIgLTE2IDE0IC0yMCAxIC0zIDQgLTYgNSAtOCAyIC0yIDMKLTUgNCAtOCAxIC0yIDMgLTYgNCAtNyAxIC0yIDMgLTUgMyAtNyAxIC0yIDMgLTYgNCAtOCAyIC0yIDMgLTYgNCAtOSAxIC0zIDIKLTcgMyAtOSAxIC0yIDQgLTEyIDcgLTIzIDUgLTE5IDcgLTMzIDkgLTUyIDAgLTUgMCAtMTEgMSAtMTIgMyAtMzAgLTEgLTgyIC05Ci0xMTIgLTIgLTggLTQgLTE2IC00IC0xNyAwIC0xIC0xIC00IC0zIC04IC0yIC0zIC0zIC04IC00IC0xMSAtMSAtMyAtMiAtNiAtMwotOCAtMiAtMiAtNCAtNiAtNSAtOSAtMSAtMiAtMiAtNiAtMyAtNyAtMSAtMiAtMyAtNSAtNSAtOCAtMSAtMyAtNCAtOSAtNyAtMTMKLTMgLTQgLTYgLTkgLTcgLTEwIC04IC0xMyAtMzYgLTQzIC00OSAtNTMgLTE0IC0xMCAtMjcgLTE5IC0zMiAtMjEgLTIgLTEgLTUKLTMgLTcgLTQgLTIgLTIgLTUgLTMgLTYgLTQgLTIgMCAtNSAtMiAtNyAtMyAtMyAtMiAtNiAtMyAtOCAtNCAtMyAtMSAtNiAtMgotNyAtMyAtNCAtMyAtMjAgLTkgLTM0IC0xMyAtNSAtMSAtMTIgLTMgLTE2IC00IC00IC0yIC0xMiAtNCAtMTcgLTQgLTYgLTEKLTEzIC0zIC0xNiAtNCAtNyAtMiAtMTYgLTMgLTM0IC01IC03IC0xIC0xOCAtMiAtMjUgLTMgLTEyIC0yIC0xNSAtMiAtMjMyIC0zCi0xMjEgMCAtMjIxIDAgLTIyMyAtMSAtMSAwIC0zIC0xIC00IC0xIC0xIC0xIC0xIC01OCAtMSAtMjE2IDAgLTExOCAwIC0yMTUgMQotMjE2IDEgLTQgNSAtNCA0MCAtNCAzNSAwIDM4IDAgMzkgNCAxIDEgMSA4MiAxIDE4MCAwIDE3OCAwIDE3OCAyIDE4MCAzIDMgMwozIDE3MSAzIDE3MiAwIDE5MyAxIDIxNSAzIDcgMSAxOCAyIDI1IDMgMTUgMiAxNyAxIDIzIC03IDggLTEyIDExIC0xNyAxNSAtMjIKMiAtMyA2IC04IDggLTEyIDMgLTQgNyAtOSA5IC0xMiAyIC0zIDUgLTcgNiAtOCAzIC01IDQgLTYgOSAtMTIgMiAtNCA2IC05IDgKLTEyIDIgLTMgNCAtNyA2IC05IDEgLTEgMyAtNCA0IC02IDEgLTEgNCAtNSA2IC04IDIgLTMgNiAtOCA4IC0xMCAxIC0zIDUgLTkKOCAtMTIgMyAtNCA3IC0xMCA5IC0xMiAxIC0zIDUgLTggNyAtMTEgMiAtMyA2IC04IDggLTEwIDcgLTEyIDE4IC0yNiAyNCAtMzUKMiAtMyA2IC04IDggLTExIDIgLTMgNCAtNiA0IC02IDEgMCAzIC0zIDUgLTcgMiAtMyA2IC04IDggLTExIDIgLTMgNSAtNyA2IC04CjEgLTIgMyAtNSA0IC02IDIgLTIgNCAtNSA1IC03IDEgLTIgNSAtNyA3IC0xMSA1IC02IDcgLTkgMTcgLTIzIDcgLTkgMTAgLTE0CjE1IC0yMiAzIC0zIDcgLTkgMTAgLTEyIDIgLTQgNSAtOCA2IC05IDEgLTIgMyAtNSA0IC02IDEgLTIgNSAtNyA4IC0xMSAxNQotMjIgMTcgLTI0IDIwIC0yNCAyIC0xIDIyIC0xIDQ0IC0xIDQ3IDEgNDUgMCAzOCAxMCAtMiAzIC02IDggLTggMTIgLTMgNCAtNwo5IC05IDEyIC0yIDMgLTYgOCAtOCAxMSAtMiAzIC00IDYgLTUgNyAwIDAgLTIgMyAtMyA1IC0xIDIgLTMgNCAtNCA2IC0xIDEgLTMKMyAtNCA1IC0xIDEgLTMgNCAtNCA3IC02IDcgLTggOSAtMTIgMTUgLTIgMyAtNCA2IC00IDYgMCAwIC0yIDMgLTQgNiAtMiAzIC02CjggLTggMTEgLTMgNCAtMTAgMTMgLTE3IDI1IC00IDQgLTEwIDEzIC0xNiAyMSAtMiAzIC01IDcgLTYgOCAtMSAyIC0zIDUgLTQgNgotMiAyIC00IDUgLTUgNyAtMyA0IC0xMCAxNSAtMTYgMjMgLTIgMyAtNiA4IC05IDEyIC0yIDQgLTYgOSAtOCAxMSAtMSAyIC00IDYKLTYgOSAtMSAyIC00IDYgLTUgNyAtMSAyIC00IDUgLTUgOCAtMiAyIC01IDYgLTcgOSAtMiAzIC02IDggLTggMTEgLTIgMyAtNCA2Ci00IDcgLTIgMSAtOCAxMCAtMTIgMTYgLTEgMSAtMyA0IC00IDUgLTEgMSAtMyA0IC00IDcgLTIgMiAtNSA2IC03IDkgLTIgMyAtNgo4IC05IDEyIC0yIDQgLTYgOSAtOCAxMiAtMiAzIC02IDggLTkgMTIgLTIgNCAtNiA5IC04IDEyIC0yIDMgLTUgNyAtNyAxMCAtMQoyIC00IDUgLTYgNyAtNCA1IC02IDEwIC01IDEzIDAgMiAyIDMgNyA0IDE4IDYgMzMgMTEgMzcgMTQgMiAxIDYgMyA5IDQgMyAwIDYKMiA4IDMgMSAxIDQgMyA3IDQgMyAxIDggMyAxMCA1IDIgMSA2IDMgNyAzIDEgMSA0IDIgNiAzIDEgMiA1IDQgOSA2IDcgNCAxMSA2CjE3IDExIDIgMiA1IDQgNSA0IDEgMCAzIDIgNSAzIDIgMiA0IDQgNSA1IDQgMiAzNCAzMCA0MiA0MCAxMyAxNCAxNyAyMCAyMSAyNwoyIDMgNCA1IDQgNiAxIDAgMiAyIDMgNCAxIDMgMyA2IDUgNyAxIDIgMyA1IDQgNyAxIDMgMyA2IDQgOCAyIDIgMyA2IDQgOCAxIDIKMiA1IDQgNyAxIDIgMyA1IDMgOCAxIDMgMyA3IDQgMTAgMiAzIDQgOCA1IDEzIDEgNCAzIDEwIDUgMTIgMSAyIDIgOCAzIDEyIDEKNCAyIDkgMyAxMiAyIDQgMyA5IDQgMTUgMSA1IDIgMTMgMiAxNiA1IDI0IDUgMjYgNSA3MyAwIDQxIDAgNDUgLTIgNTYgLTEgNgotMyAxOCAtNCAyNSAtMSA4IC0zIDE2IC00IDIwIC0yIDMgLTMgOSAtNCAxMyAtMSAzIC0yIDkgLTQgMTMgLTIgMyAtMyA3IC0zIDgKMCAxIC0yIDUgLTQgMTAgLTIgNSAtNCAxMSAtNiAxNSAtMSA0IC0zIDggLTQgOSAtMSAxIC0yIDUgLTMgNyAtMSAyIC0zIDYgLTUKOSAtMSAyIC0zIDUgLTQgNyAtMSAxIC0yIDMgLTMgNCAwIDEgLTIgMyAtMyA1IC0xIDIgLTQgNiAtNSA4IC0yIDMgLTYgOCAtOAoxMSAtMiA0IC02IDkgLTggMTEgLTMgMyAtNiA2IC03IDggLTExIDEzIC0zNSAzNiAtNDYgNDMgLTMgMyAtNiA1IC02IDUgMCAxCi0yIDIgLTQgMyAtMiAxIC01IDMgLTYgNCAtMSAxIC00IDQgLTYgNSAtNSAzIC0xMSA2IC0xOSAxMiAtMiAxIC02IDMgLTggNCAtMgoxIC01IDIgLTYgNCAtMiAxIC01IDMgLTggNCAtMiAxIC02IDIgLTggNCAtMSAxIC01IDMgLTggNCAtMyAxIC04IDMgLTEwIDQgLTMKMiAtOCAzIC0xMCA0IC0yIDEgLTcgMiAtMTEgNCAtNCAyIC0xMCA0IC0xMyA0IC00IDEgLTkgMyAtMTEgNCAtMiAxIC04IDMgLTEzCjQgLTQgMCAtMTEgMiAtMTMgMyAtMyAxIC0xMyA0IC0yMSA1IC05IDIgLTIxIDQgLTI3IDUgLTEyIDIgLTI3IDQgLTQyIDUgLTUgMAotMTIgMSAtMTUgMSAtOSAyIC00NTIgMiAtNDU1IDF6Ii8+CjxwYXRoIGQ9Ik02MjY4IDExMzIgYy0xIC0yIC0yIC00IC0yIC0zMiAwIC0xNyAwIC0zMiAwIC0zNCAxIC0yIDIgLTMgMyAtNCAxCi0xIDExNiAtMSAzNTkgLTEgMzU3IDAgMzU3IDAgMzYwIDIgMiAyIDIgMiAyIDM0IDAgMzEgMCAzMiAtMiAzNCAtMiAyIC0zIDIKLTM2MCAyIC0zMDcgMCAtMzU4IDAgLTM2MCAtMXoiLz4KPHBhdGggZD0iTTc0ODQgMTEzMSBjLTIgLTIgLTIgLTIgLTMgLTMzIDAgLTE3IDEgLTMxIDEgLTMzIDEgLTEgMiAtMiAzIC0zIDEKLTEgNjAgLTEgMTk4IC0xIDE5NiAwIDE5NiAwIDE5OSAtMyAzIC0yIDMgLTIgMyAtNTIyIDAgLTM4NyAwIC01MjAgMSAtNTIxIDEKLTIgMiAtMyAzIC00IDEgMCAxNyAwIDM2IDAgMzYgMCAzOCAwIDM5IDQgMSAxIDEgMjM1IDEgNTIwIDAgNDYwIDAgNTE4IDIgNTIxCjAgMiAyIDMgMyA0IDEgMSA2NSAxIDE5OCAxIDE5NiAwIDE5NiAwIDE5OCAyIDIgMyAyIDMgMiAzNCAwIDMwIC0xIDMyIC0yIDM0Ci0yIDIgLTIgMiAtNDQxIDIgLTQzMSAwIC00MzkgMCAtNDQxIC0yeiIvPgo8cGF0aCBkPSJNNjI2OCA2MTUgYy0xIDAgLTIgLTIgLTIgLTMgMCAtMSAwIC0xNiAwIC0zMyAwIC0yOSAxIC0zMSAyIC0zMyAyCi0xIDUzIC0xIDM2MCAtMSAzNTcgMCAzNTggMCAzNjAgMiAyIDIgMiAzIDIgMzEgMCAzNyAxIDM1IC0yIDM3IC0xIDEgLTY4IDEKLTM1OSAxIC0xOTcgMCAtMzU5IC0xIC0zNjEgLTF6Ii8+CjxwYXRoIGQ9Ik02MjcyIDgzIGMtMSAwIC0zIC0xIC00IC0yIC0yIC0yIC0yIC0yIC0yIC0zNCAwIC0zMSAwIC0zMiAyIC0zNCAyCi0yIDMgLTIgMzYwIC0yIDM1NyAwIDM1OCAwIDM2MCAyIDIgMiAyIDMgMiAzNCAwIDMyIDAgMzIgLTIgMzQgLTEgMSAtMyAyIC0zCjIgLTgzIDAgLTcxMiAwIC03MTMgMHoiLz4KPC9nPgo8L3N2Zz4=" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/story">Our Story</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/story">Our Story</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/intel">Market Intel</a>
+  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+</div>
+
+
+
+<!-- ══ NAV ══ -->
+<!-- ══ 1. HERO ══ -->
+<section class="markets-hero">
+  <div class="hero-inner">
+    <div class="fi">
+      <div class="hero-tag">Market Intelligence</div>
+      <h1 class="hero-h1">
+        We Know Your<br>Market.<br>
+        <em>Deeply.</em>
+      </h1>
+      <p class="hero-sub">
+ 52 weeks of demand data, event intelligence, and competitor rate tracking: per city, <strong>updated continuously.</strong>
+        This is why Marketics-managed properties outperform the market average by 22–44%.
+      </p>
+      <a href="#pulse" class="btn-primary">Explore Market Data ↓</a>
+    </div>
+    <div class="hero-ticker fi" style="transition-delay:.1s" id="heroTicker">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2. MARKET PULSE WIDGET ══ -->
+<section class="pulse-section page-section" id="pulse">
+  <div class="pulse-wrap">
+    <div class="eyebrow fi">Live Market Pulse</div>
+    <h2 class="section-title fi" style="transition-delay:.08s">
+      52 Weeks. Every Market.<br><em>Every Signal.</em>
+    </h2>
+    <p class="section-sub fi" style="transition-delay:.12s">
+      Select a market below. Toggle between Demand, Rates, and Occupancy.
+      Hover any week to see the data behind the line.
+      <strong>These are the same charts Marketics reads daily for every managed property.</strong>
+    </p>
+
+    <div class="mp-terminal fi" style="transition-delay:.16s">
+      <div class="mp-topbar">
+        <div class="mp-tb-left">
+          <div class="mp-live-dot"></div>
+          <div class="mp-live-lbl">Live Data</div>
+          <div class="mp-mkt-name" id="mpMktName">Austin, TX</div>
+        </div>
+        <div>
+          <div class="mp-mkt-tabs" id="mpMktTabs">
+            <button class="mp-mkt-tab active" data-mkt="austin">Austin</button>
+            <button class="mp-mkt-tab" data-mkt="scottsdale">Scottsdale</button>
+            <button class="mp-mkt-tab" data-mkt="nashville">Nashville</button>
+            <button class="mp-mkt-tab" data-mkt="miami">Miami</button>
+            <button class="mp-mkt-tab" data-mkt="cancun">Canc&#250;n</button>
+            <button class="mp-mkt-tab" data-mkt="neworleans">New Orleans</button>
+            <button class="mp-mkt-tab" data-mkt="sanantonio">San Antonio</button>
+            <button class="mp-mkt-tab" data-mkt="tulum">Tulum</button>
+            <button class="mp-mkt-tab" data-mkt="sanjuan">San Juan</button>
+          </div>
+        </div>
+        <div class="mp-tb-right">
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsPeak">$0</div><div class="mp-qs-l">Peak Rate</div></div>
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsAvg">0%</div><div class="mp-qs-l">Avg Occ</div></div>
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsEvents">0</div><div class="mp-qs-l">Events/Yr</div></div>
+        </div>
+      </div>
+      <div class="mp-chart-wrap">
+        <canvas id="mpChartCanvas" height="280"></canvas>
+        <div class="mp-ctip" id="mpCtip">
+          <div class="mp-ctip-week" id="mpCtipWeek">Week 1</div>
+          <div class="mp-ctip-row"><div class="mp-ctip-dot" style="background:#D6AD60"></div><span class="mp-ctip-lbl">Demand Index</span><span class="mp-ctip-val" id="mpCtipDemand" style="color:#D6AD60">—</span></div>
+          <div class="mp-ctip-row"><div class="mp-ctip-dot" style="background:rgba(180,178,169,.6)"></div><span class="mp-ctip-lbl">Comp Avg Rate</span><span class="mp-ctip-val" id="mpCtipComp" style="color:#B4B2A9">—</span></div>
+          <div class="mp-ctip-row"><div class="mp-ctip-dot" style="background:#2D7A4F"></div><span class="mp-ctip-lbl">Mkt Occupancy</span><span class="mp-ctip-val" id="mpCtipOcc" style="color:#2D7A4F">—</span></div>
+          <div class="mp-ctip-event" id="mpCtipEvent" style="display:none"></div>
+        </div>
+      </div>
+      <div class="mp-controls">
+        <div class="mp-legend">
+          <div class="mp-leg"><div class="mp-leg-line" style="background:#D6AD60;box-shadow:0 0 4px rgba(214,173,96,.4)"></div><span class="mp-leg-txt">Demand Index</span></div>
+          <div class="mp-leg"><div class="mp-leg-line" style="background:rgba(180,178,169,.45)"></div><span class="mp-leg-txt">Competitor Avg Rate</span></div>
+          <div class="mp-leg"><div class="mp-leg-line" style="background:rgba(45,122,79,.6)"></div><span class="mp-leg-txt">Market Occupancy</span></div>
+          <div class="mp-leg"><div class="mp-leg-line" style="background:rgba(200,126,26,.7);height:1px;border-top:2px dashed rgba(200,126,26,.6)"></div><span class="mp-leg-txt" style="color:rgba(200,126,26,.8)">Event Spike</span></div>
+        </div>
+        <div class="mp-view-toggle">
+          <button class="mp-vtab active" data-view="demand">Demand</button>
+          <button class="mp-vtab" data-view="rate">Rates</button>
+          <button class="mp-vtab" data-view="occ">Occupancy</button>
+        </div>
+      </div>
+      <div class="mp-insights" id="mpInsights">
+        <div class="mp-ins"><div class="mp-ins-lbl">Peak Month</div><div class="mp-ins-val" id="mpIPeakMo">—</div><div class="mp-ins-sub" id="mpIPeakSub">Highest demand period</div></div>
+        <div class="mp-ins"><div class="mp-ins-lbl">Biggest Event Spike</div><div class="mp-ins-val" id="mpISpike">—</div><div class="mp-ins-sub" id="mpISpikeSub">Above baseline demand</div></div>
+        <div class="mp-ins"><div class="mp-ins-lbl">Low Season Window</div><div class="mp-ins-val" id="mpILow">—</div><div class="mp-ins-sub" id="mpILowSub">Strategic pricing window</div></div>
+        <div class="mp-ins"><div class="mp-ins-lbl">Marketics Manages</div><div class="mp-ins-val" id="mpIManaged">—</div><div class="mp-ins-sub" id="mpIManagedSub">Active properties</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pulse-footer fi" style="transition-delay:.2s">
+    <p class="pf-note">Data updated continuously. Event calendar built 90 days ahead. Competitor rates tracked daily.</p>
+    <a href="/get-started" class="btn-ghost">Get My Free Market Analysis <span class="bgl"></span></a>
+  </div>
+</section>
+
+<!-- ══ 3. MARKET CARDS ══ -->
+<section class="cards-section page-section" id="market-cards">
+  <div class="inner">
+    <div class="eyebrow fi">Active Markets</div>
+    <h2 class="section-title fi" style="transition-delay:.08s">
+      Where Marketics<br><em>Operates.</em>
+    </h2>
+    <p class="section-sub fi" style="transition-delay:.12s">
+ Nine featured markets. Deep expertise in each.
+ The data below reflects Marketics-managed property performance, not market averages.
+ </p>
+
+    <div class="market-cards-3x3 fi" style="transition-delay:.16s">
+
+      <!-- ROW 1 -->
+      <!-- Austin -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Austin</div>
+          <div class="mc-region">Texas · Live Music Capital</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$221</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">85%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>SXSW: March · +3× baseline demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>F1 Grand Prix: Oct &amp; Nov · +3× baseline</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>ACL Music Festival: Oct · Two weekends</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>14</strong> active properties managed</span>
+          <a href="/markets/austin" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Scottsdale -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Scottsdale</div>
+          <div class="mc-region">Arizona · Desert Luxury</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$255</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">87%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Barrett-Jackson Auction: Jan · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Waste Mgmt Phoenix Open: Feb · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Spring Training: March · MLB camps</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>9</strong> active properties managed</span>
+          <a href="/markets/scottsdale" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Nashville -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Nashville</div>
+          <div class="mc-region">Tennessee · Music Row</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$208</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">83%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>CMA Music Festival: June · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>New Year's Eve: Dec 31 · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Bonnaroo: June · Regional overflow</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>11</strong> active properties managed</span>
+          <a href="/markets/nashville" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- ROW 2 -->
+      <!-- Miami -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Miami</div>
+          <div class="mc-region">Florida · Art Basel &amp; Ultra Capital</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$238</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">86%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Art Basel Miami: December · Peak of the year</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Ultra Music Festival: March · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Miami Open Tennis: March · F1 GP: May</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>18</strong> active properties managed</span>
+          <a href="/markets/miami" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Cancún -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇲🇽</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Canc&#250;n</div>
+          <div class="mc-region">Mexico · Riviera Maya Gateway</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$175</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">88%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Spring Break (US) — March · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Semana Santa: March/April · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Christmas &amp; New Year: Dec/Jan · Year peak</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>7</strong> active properties managed</span>
+          <a href="/markets/cancun" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- New Orleans -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">New Orleans</div>
+          <div class="mc-region">Louisiana · Mardi Gras Capital</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$196</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">84%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Mardi Gras: February · +3× baseline demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>French Quarter Fest: April · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Essence Fest: July · +3× demand</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>8</strong> active properties managed</span>
+          <a href="/markets/new-orleans" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- ROW 3 -->
+      <!-- San Antonio -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇺🇸</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">San Antonio</div>
+          <div class="mc-region">Texas · The Riverwalk City</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$168</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">82%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Fiesta San Antonio: April · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Holiday Riverwalk Lights: Nov/Dec</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Dia de Muertos Fest: Oct/Nov</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>6</strong> active properties managed</span>
+          <a href="/markets/san-antonio" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Tulum -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇲🇽</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">Tulum</div>
+          <div class="mc-region">Mexico · Riviera Maya</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$212</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">91%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Zamna Festival: Jan + Dec · Peak electronic</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Spring Break + Semana Santa: March/Apr</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Christmas / New Year: Dec/Jan · Year peak</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>5</strong> active properties managed</span>
+          <a href="/markets/tulum" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- San Juan -->
+      <div class="market-card">
+        <div class="mc-head">
+          <div class="mc-flag-row"><span class="mc-flag">🇵🇷</span><span class="mc-status">Active Market</span></div>
+          <div class="mc-city">San Juan</div>
+          <div class="mc-region">Puerto Rico · Old San Juan &amp; Condado</div>
+        </div>
+        <div class="mc-metrics">
+          <div class="mc-metric"><div class="mc-mv">$195</div><div class="mc-ml">Avg Nightly Rate</div></div>
+          <div class="mc-metric"><div class="mc-mv">88%</div><div class="mc-ml">Avg Occupancy</div></div>
+        </div>
+        <div class="mc-events">
+          <div class="mc-events-lbl">Top Demand Events</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Las Navidades: Dec/Jan · Year-end peak</div>
+          <div class="mc-event-item"><div class="mc-event-dot high"></div>Semana Santa: March/April · +3× demand</div>
+          <div class="mc-event-item"><div class="mc-event-dot"></div>Casals Music Festival: June</div>
+        </div>
+        <div class="mc-footer">
+          <span class="mc-managed"><strong>5</strong> active properties managed</span>
+          <a href="/markets/san-juan" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+        </div>
+      </div>
+
+    </div><!-- /market-cards-3x3 -->
+  </div>
+</section>
+
+<!-- ══ 4. NOT LISTED ══ -->
+<section class="not-listed-section page-section" id="not-listed">
+  <div class="nl-inner">
+    <div class="nl-left fi">
+      <div class="eyebrow">Your Market</div>
+      <h2 class="section-title">
+        Not Listed<br><em>Here?</em>
+      </h2>
+      <p class="section-sub" style="margin-bottom:20px;">
+ Marketics operates in 22 active markets: yet the Method works in any city where
+ Airbnb demand exceeds $3,500/month. <strong>Tell us your market.</strong>
+        We'll send you a free demand report within 48 hours.
+      </p>
+      <p class="section-sub">
+        Jason personally reviews every unlisted market inquiry.
+        If your city qualifies, you'll hear directly from him.
+      </p>
+    </div>
+    <div class="nl-right fi" style="transition-delay:.1s">
+      <label class="nl-form-label" for="nlEmail">Your Email</label>
+      <input type="email" class="nl-input" id="nlEmail" placeholder="you@example.com" autocomplete="email" inputmode="email">
+      <label class="nl-form-label" for="nlMarket">Your Market / City</label>
+      <input type="text" class="nl-input" id="nlMarket" placeholder="e.g. Whistler, BC or Tulum, Mexico" autocomplete="off">
+      <button class="nl-submit" id="nlSubmit">Send Me a Demand Report →</button>
+      <div class="nl-confirm" id="nlConfirm">
+        ✓ &nbsp;Got it. Expect your demand report within 48 hours.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. INTELLIGENCE EXPLAINER ══ -->
+<section class="intel-section page-section" id="intelligence">
+  <div class="inner">
+    <div class="eyebrow fi">How It Works</div>
+    <h2 class="section-title fi" style="transition-delay:.08s">
+      What Marketics<br><em>Monitors. Daily.</em>
+    </h2>
+    <p class="section-sub fi" style="transition-delay:.12s">
+      The market pulse graph isn't a report. It's a live feed.
+      <strong>Here's the signal stack behind every pricing decision.</strong>
+    </p>
+
+    <div class="intel-grid fi" style="transition-delay:.16s">
+      <div class="intel-card">
+        <div class="intel-icon">📈</div>
+        <div class="intel-label">Signal 01</div>
+        <div class="intel-name">Demand Index</div>
+        <p class="intel-copy">A composite score built from search volume, booking velocity, and historical fill rates. It predicts <strong>when guests will pay more before they start searching.</strong></p>
+        <div class="intel-freq">Updated: <span>Daily · 52-week rolling window</span></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-icon">🎯</div>
+        <div class="intel-label">Signal 02</div>
+        <div class="intel-name">Event Calendar</div>
+        <p class="intel-copy">Major events, festivals, conferences, and sporting events tracked <strong>90 days ahead</strong> per market. Pricing is set before competitors notice the search spike.</p>
+        <div class="intel-freq">Updated: <span>Weekly · 90-day forward window</span></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-icon">🔍</div>
+        <div class="intel-label">Signal 03</div>
+        <div class="intel-name">Competitor Rates</div>
+        <p class="intel-copy">Rate movements across comparable listings in your comp set, tracked daily. <strong>When a competitor sells out, your ceiling rises. When one drops, your floor adjusts.</strong></p>
+        <div class="intel-freq">Updated: <span>Daily · Per-listing granularity</span></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-icon">🏆</div>
+        <div class="intel-label">Signal 04</div>
+        <div class="intel-name">Search Ranking</div>
+        <p class="intel-copy">Your listing's position in Airbnb search across multiple query types. The algorithm's two primary signals — <strong>booking velocity and review recency</strong> — both tracked in real time.</p>
+        <div class="intel-freq">Updated: <span>Daily · Multiple query types</span></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-icon">⭐</div>
+        <div class="intel-label">Signal 05</div>
+        <div class="intel-name">Review Velocity</div>
+        <p class="intel-copy">How many reviews per month, what rating they land at, and whether the review cadence is <strong>fast enough to maintain rank visibility</strong> at your current pricing tier.</p>
+        <div class="intel-freq">Updated: <span>Real-time · Per-review trigger</span></div>
+      </div>
+      <div class="intel-card">
+        <div class="intel-icon">📊</div>
+        <div class="intel-label">Signal 06</div>
+        <div class="intel-name">Occupancy Trends</div>
+        <p class="intel-copy">Market occupancy curves by property type, bedroom count, and location cluster. Used to identify <strong>strategic midweek pricing windows</strong> before they close.</p>
+        <div class="intel-freq">Updated: <span>Weekly · Market-segment level</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="signal-bar fi" style="transition-delay:.22s">
+    <div class="sb-inner">
+      <div class="sb-stat"><div class="sb-n" id="sigCounter">0</div><div class="sb-l">Signals Per Property Per Day</div></div>
+      <div class="sb-divider"></div>
+      <div class="sb-stat"><div class="sb-n">52</div><div class="sb-l">Weeks Of Data Per Market</div></div>
+      <div class="sb-divider"></div>
+      <div class="sb-stat"><div class="sb-n">22</div><div class="sb-l">Active Markets</div></div>
+      <div class="sb-divider"></div>
+      <div class="sb-stat"><div class="sb-n">59+</div><div class="sb-l">Properties Managed</div></div>
+      <div class="sb-divider"></div>
+      <div class="sb-stat"><div class="sb-n">90</div><div class="sb-l">Days Forward Event Window</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="page-section" id="faq" style="border-top:1px solid rgba(255,255,255,.04);padding:80px 24px;">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="eyebrow fi">FAQ</div>
+    <h2 class="section-title fi" style="transition-delay:.08s;margin-bottom:48px;">Common Questions<br><em>From Hosts.</em></h2>
+
+    <div style="display:flex;flex-direction:column;gap:24px;">
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">What does Marketics actually do for my Airbnb?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics provides fully managed revenue optimization for short-term rentals. That includes dynamic pricing calibrated to your specific market and events, listing copy and photography optimization, Airbnb search ranking strategy, automated guest communication, and ongoing performance monitoring across 79 signals. You stay the host — we handle the revenue science.</p>
+      </details>
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">How much does Marketics cost?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics charges 10% of net booking revenue per property. There is a one-time $500 onboarding fee (refundable under the 90-day guarantee). No monthly retainers, no long-term contracts, no hidden fees. We only earn when you earn — if your revenue doesn't increase, we don't get paid more.</p>
+      </details>
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">What is the 90-day guarantee?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">If your property does not show measurable revenue improvement within 90 days of audit completion, your $500 setup fee is refunded in full. Measurable improvement is defined as a documented increase in monthly revenue compared to your pre-Marketics 90-day baseline. No fine print.</p>
+      </details>
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">What markets does Marketics operate in?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics currently operates across 9 active markets in the United States, Canada, and Mexico — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, and New Orleans. We also serve Muskoka (Ontario) and are expanding to Whistler and additional North American markets through 2026–27. If your market isn't listed, request a free audit — we may already have data on your area.</p>
+      </details>
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">How quickly will I see results?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">The median time from audit completion to first measurable revenue lift is 72 days across all Marketics-managed properties. Most hosts see initial pricing and ranking improvements within 2–4 weeks. The full optimization — including algorithm positioning, review velocity, and seasonal calibration — compounds over the first 90 days, which is why we benchmark against that window.</p>
+      </details>
+
+      <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
+        <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">Does Marketics work with VRBO and direct bookings, or just Airbnb?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics optimizes across all major booking platforms including Airbnb, VRBO, and direct booking channels. Our dynamic pricing, guest communication, and listing optimization strategies are platform-aware — meaning we calibrate differently for each channel based on its algorithm, guest behavior, and competitive dynamics.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does Marketics actually do for my Airbnb?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Marketics provides fully managed revenue optimization for short-term rentals. That includes dynamic pricing calibrated to your specific market and events, listing copy and photography optimization, Airbnb search ranking strategy, automated guest communication, and ongoing performance monitoring across 79 signals. You stay the host — we handle the revenue science."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much does Marketics cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Marketics charges 10% of net booking revenue per property. There is a one-time $500 onboarding fee (refundable under the 90-day guarantee). No monthly retainers, no long-term contracts, no hidden fees. We only earn when you earn — if your revenue doesn't increase, we don't get paid more."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the 90-day guarantee?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "If your property does not show measurable revenue improvement within 90 days of audit completion, your $500 setup fee is refunded in full. Measurable improvement is defined as a documented increase in monthly revenue compared to your pre-Marketics 90-day baseline. No fine print."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What markets does Marketics operate in?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Marketics currently operates across 9 active markets in the United States, Canada, and Mexico — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, and New Orleans. We also serve Muskoka (Ontario) and are expanding to Whistler and additional North American markets through 2026–27."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How quickly will I see results?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The median time from audit completion to first measurable revenue lift is 72 days across all Marketics-managed properties. Most hosts see initial pricing and ranking improvements within 2–4 weeks. The full optimization compounds over the first 90 days."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does Marketics work with VRBO and direct bookings, or just Airbnb?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Marketics optimizes across all major booking platforms including Airbnb, VRBO, and direct booking channels. Our dynamic pricing, guest communication, and listing optimization strategies are platform-aware — meaning we calibrate differently for each channel based on its algorithm, guest behavior, and competitive dynamics."
+   }
+  }
+ ]
+}
+</script>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="markets-cta" id="get-started">
+  <div class="mc-inner">
+    <div class="mc-ey fi">Ready</div>
+    <h2 class="mc-h fi" style="transition-delay:.08s">
+      Your Market.<br><em>Mastered.™</em>
+    </h2>
+    <p class="mc-sub fi" style="transition-delay:.14s">
+      The free revenue audit takes 48 hours.
+      By the end of week 1, your listing is in Stage 01
+      and the 79-signal monitoring system is running.
+    </p>
+    <div class="mc-btns fi" style="transition-delay:.2s">
+      <a href="/get-started" class="btn-primary">Start With a Free Audit</a>
+      <a href="/calculator" class="btn-outline">Calculate My Revenue Gap</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+
+
+<script>
+/* ══════════════════════════════════════════════════════
+   MARKET DATA (identical to marketics-marketpulse.html)
+══════════════════════════════════════════════════════ */
+function mkDemand(base,shape,events52){
+  return Array.from({length:52},(_,i)=>{
+    const t=i/51;let v=base+shape(t,i);
+    const ev=events52[i];if(ev)v+=ev.intensity*12;
+    return Math.max(8,Math.min(100,Math.round(v)));
+  });
+}
+function mkRate(base,demand,scale,events52){
+  return demand.map((d,i)=>{const ev=events52[i];const evBonus=ev?ev.intensity*30:0;return Math.round(base+(d-50)*scale+evBonus);});
+}
+function mkOcc(base,demand){
+  return demand.map(d=>Math.max(25,Math.min(97,Math.round(base+(d-50)*0.7))));
+}
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function weekToLabel(w){const mo=Math.floor(w/52*12);const wInMo=Math.round((w/52*12-mo)*4)+1;return MONTHS[mo]+' W'+Math.min(wInMo,4);}
+
+const austinEvts=new Array(52).fill(null);
+[{w:8,l:'SXSW',i:3},{w:13,l:'Formula 1 GP',i:3},{w:18,l:'ACL Weekend 1',i:2},{w:20,l:'ACL Weekend 2',i:2},{w:28,l:'Austin City Marathon',i:1},{w:40,l:'F1 Grand Prix',i:3},{w:45,l:'Thanksgiving',i:1},{w:50,l:'NYE',i:2}].forEach(e=>austinEvts[e.w]={label:e.l,intensity:e.i});
+const austinDemand=mkDemand(55,(t)=>22*Math.sin(t*Math.PI*1.8-0.4)+8*Math.sin(t*Math.PI*6)+5*Math.sin(t*Math.PI*12),austinEvts);
+const austinRate=mkRate(189,austinDemand,2.2,austinEvts);const austinOcc=mkOcc(72,austinDemand);
+
+const scEvts=new Array(52).fill(null);
+[{w:8,l:'Barrett-Jackson Auction',i:3},{w:10,l:'Waste Mgmt Phoenix Open',i:3},{w:12,l:'Spring Training',i:2},{w:20,l:'Spring Break Peak',i:2},{w:35,l:'McDowell Mtn Music',i:1},{w:42,l:'PF Chang Marathon',i:1},{w:50,l:"New Year's Eve",i:2}].forEach(e=>scEvts[e.w]={label:e.l,intensity:e.i});
+const scDemand=mkDemand(58,(t)=>{const winter=18*Math.exp(-Math.pow((t-0.1)*5,2));const spring=22*Math.exp(-Math.pow((t-0.28)*4,2));const summerDip=-18*Math.exp(-Math.pow((t-0.6)*3,2));const fall=12*Math.exp(-Math.pow((t-0.85)*4,2));return winter+spring+summerDip+fall+4*Math.sin(t*Math.PI*12);},scEvts);
+const scRate=mkRate(218,scDemand,2.4,scEvts);const scOcc=mkOcc(74,scDemand);
+
+const nashEvts=new Array(52).fill(null);
+[{w:4,l:'CMA Fest Pre-Events',i:1},{w:10,l:'Vanderbilt Grad Week',i:1},{w:18,l:'Bonnaroo Nearby',i:2},{w:23,l:'CMA Music Festival',i:3},{w:28,l:'NFL Draft (when held)',i:2},{w:33,l:'Nashville Pride',i:1},{w:39,l:'Tennessee State Fair',i:1},{w:45,l:'Thanksgiving Travel',i:2},{w:50,l:"New Year's Eve",i:3}].forEach(e=>nashEvts[e.w]={label:e.l,intensity:e.i});
+const nashDemand=mkDemand(60,(t)=>20*Math.sin(t*Math.PI*2-0.3)+10*Math.sin(t*Math.PI*4)+6*Math.sin(t*Math.PI*8),nashEvts);
+const nashRate=mkRate(176,nashDemand,1.9,nashEvts);const nashOcc=mkOcc(74,nashDemand);
+
+const miamiEvts=new Array(52).fill(null);
+[{w:2,l:'Art Basel Miami',i:3},{w:6,l:'Miami Open Tennis',i:2},{w:9,l:'Ultra Music Festival',i:3},{w:12,l:'Spring Break Peak',i:2},{w:28,l:'Independence Day Wknd',i:1},{w:36,l:'Miami Swim Week',i:1},{w:42,l:'Miami GP (F1)',i:2},{w:48,l:'Art Week Run-Up',i:2}].forEach(e=>miamiEvts[e.w]={label:e.l,intensity:e.i});
+const miamiDemand=mkDemand(62,(t)=>{const wp=20*Math.exp(-Math.pow((t-0.12)*4,2));const sp=18*Math.exp(-Math.pow((t-0.22)*4.5,2));const sd=-10*Math.exp(-Math.pow((t-0.58)*3,2));const fb=10*(t>0.65?(t-0.65)*3:0);const dp=18*Math.exp(-Math.pow((t-0.97)*5,2));return wp+sp+sd+fb+dp+4*Math.sin(t*Math.PI*10);},miamiEvts);
+const miamiRate=mkRate(201,miamiDemand,2.1,miamiEvts);const miamiOcc=mkOcc(76,miamiDemand);
+
+const cancunEvts=new Array(52).fill(null);
+[{w:2,l:'Riviera Maya Jazz Fest',i:1},{w:7,l:'Spring Break US',i:3},{w:9,l:'Spring Break Canada',i:3},{w:11,l:'Semana Santa',i:3},{w:23,l:'Summer Family Peak',i:2},{w:38,l:'Dia de Muertos',i:1},{w:44,l:'Ironman 70.3 CUN',i:1},{w:50,l:'Christmas/NYE',i:3}].forEach(e=>cancunEvts[e.w]={label:e.l,intensity:e.i});
+const cancunDemand=mkDemand(64,(t)=>{const jan=14*Math.exp(-Math.pow((t-0.04)*4,2));const sb=22*Math.exp(-Math.pow((t-0.19)*5,2));const summer=12*Math.sin(t*Math.PI*2-0.2);const dec=20*Math.exp(-Math.pow((t-0.97)*5,2));return jan+sb+summer+dec+3*Math.sin(t*Math.PI*14);},cancunEvts);
+const cancunRate=mkRate(148,cancunDemand,1.7,cancunEvts);const cancunOcc=mkOcc(78,cancunDemand);
+
+/* ── NEW ORLEANS LA ── */
+const nolaEvts=new Array(52).fill(null);
+[{w:4,l:'Mardi Gras',i:3},{w:5,l:'Mardi Gras Peak',i:3},{w:12,l:'French Quarter Fest',i:3},
+ {w:21,l:'Essence Fest',i:3},{w:24,l:'Satchmo Summerfest',i:1},{w:36,l:'Southern Decadence',i:2},
+ {w:44,l:'Voodoo Fest',i:2},{w:50,l:"New Year's Eve",i:3}].forEach(e=>nolaEvts[e.w]={label:e.l,intensity:e.i});
+const nolaDemand=mkDemand(58,(t)=>{
+  const mardi=26*Math.exp(-Math.pow((t-0.1)*5,2));
+  const french=22*Math.exp(-Math.pow((t-0.24)*5,2));
+  const essence=18*Math.exp(-Math.pow((t-0.41)*6,2));
+  const fall=12*Math.sin(t*Math.PI*2-0.8);
+  const nye=20*Math.exp(-Math.pow((t-0.97)*6,2));
+  return mardi+french+essence+fall+nye+5*Math.sin(t*Math.PI*10);
+},nolaEvts);
+const nolaRate=mkRate(196,nolaDemand,2.0,nolaEvts);
+const nolaOcc=mkOcc(73,nolaDemand);
+
+/* ── SAN ANTONIO TX ── */
+const satxEvts=new Array(52).fill(null);
+[{w:7,l:'Fiesta San Antonio',i:3},{w:8,l:'Fiesta Peak Week',i:3},{w:15,l:'Spurs Playoffs',i:2},
+ {w:22,l:'Texas Folklife Fest',i:1},{w:27,l:'Fourth of July Riverwalk',i:2},
+ {w:35,l:'Valero Texas Open',i:1},{w:44,l:'Dia de Muertos Fest',i:2},
+ {w:49,l:'Holiday Riverwalk Lights',i:2}].forEach(e=>satxEvts[e.w]={label:e.l,intensity:e.i});
+const satxDemand=mkDemand(56,(t)=>{
+  const fiesta=24*Math.exp(-Math.pow((t-0.17)*5,2));
+  const spring=14*Math.exp(-Math.pow((t-0.28)*5,2));
+  const summer=10*Math.sin(t*Math.PI*2-0.3);
+  const fall=14*Math.exp(-Math.pow((t-0.72)*4,2));
+  const holiday=16*Math.exp(-Math.pow((t-0.95)*6,2));
+  return fiesta+spring+summer+fall+holiday+4*Math.sin(t*Math.PI*10);
+},satxEvts);
+const satxRate=mkRate(168,satxDemand,1.8,satxEvts);
+const satxOcc=mkOcc(72,satxDemand);
+
+/* ── TULUM MX ── */
+const tulumEvts=new Array(52).fill(null);
+[{w:4,l:'Zamna Festival',i:3},{w:7,l:'Spring Break US',i:3},{w:10,l:'Semana Santa',i:3},
+ {w:14,l:'Day of the Dead',i:1},{w:24,l:'Summer Solstice',i:2},{w:41,l:'Dia de Muertos',i:2},
+ {w:48,l:'Zamna Dec Edition',i:3},{w:50,l:'Christmas/NYE',i:3}].forEach(e=>tulumEvts[e.w]={label:e.l,intensity:e.i});
+const tulumDemand=mkDemand(66,(t)=>{
+  const zamna=20*Math.exp(-Math.pow((t-0.08)*5,2));
+  const sb=24*Math.exp(-Math.pow((t-0.19)*5.5,2));
+  const sumDip=-8*Math.exp(-Math.pow((t-0.52)*3,2));
+  const nov=16*Math.exp(-Math.pow((t-0.8)*5,2));
+  const dec=22*Math.exp(-Math.pow((t-0.97)*5,2));
+  return zamna+sb+sumDip+nov+dec+4*Math.sin(t*Math.PI*12);
+},tulumEvts);
+const tulumRate=mkRate(212,tulumDemand,2.2,tulumEvts);
+const tulumOcc=mkOcc(80,tulumDemand);
+
+/* ── SAN JUAN PR ── */
+const sjEvts=new Array(52).fill(null);
+[{w:4,l:'Puerto Rico Carnival',i:2},{w:10,l:'Semana Santa',i:3},{w:14,l:'Puerto Rico Open Golf',i:1},
+ {w:22,l:'Casals Festival',i:2},{w:27,l:'San Sebastián Street Fest',i:1},{w:35,l:'Noche de Gala',i:1},
+ {w:48,l:'Las Navidades',i:3},{w:50,l:"New Year's Eve",i:3}].forEach(e=>sjEvts[e.w]={label:e.l,intensity:e.i});
+const sjDemand=mkDemand(65,(t)=>{
+  const winter=18*Math.exp(-Math.pow((t-0.06)*4,2));
+  const semana=22*Math.exp(-Math.pow((t-0.21)*5.5,2));
+  const summer=14*Math.sin(t*Math.PI*2-0.5);
+  const xmas=24*Math.exp(-Math.pow((t-0.97)*5,2));
+  const nav=20*Math.exp(-Math.pow((t-0.95)*6,2));
+  return winter+semana+summer+xmas+nav+4*Math.sin(t*Math.PI*10);
+},sjEvts);
+const sjRate=mkRate(195,sjDemand,2.0,sjEvts);
+const sjOcc=mkOcc(78,sjDemand);
+
+const MP_MARKETS={
+  austin:    {name:'Austin, TX',     demand:austinDemand, rate:austinRate, occ:austinOcc, events:austinEvts,    peakMo:'March',    peakSub:'SXSW + F1 season',              spike:'+38%', spikeSub:'SXSW week vs baseline',        low:'January',   lowSub:'Strategic midweek fill window', managed:'14',managedSub:'Active properties'},
+  scottsdale:{name:'Scottsdale, AZ', demand:scDemand,     rate:scRate,     occ:scOcc,     events:scEvts,        peakMo:'February', peakSub:'Barrett-Jackson + Spring Training',spike:'+41%',spikeSub:'B-J Auction week',           low:'August',    lowSub:'Summer heat = fill opportunity', managed:'9', managedSub:'Active properties'},
+  nashville: {name:'Nashville, TN',  demand:nashDemand,   rate:nashRate,   occ:nashOcc,   events:nashEvts,      peakMo:'June',     peakSub:'CMA Music Festival peak',        spike:'+35%', spikeSub:'CMA Fest week',                low:'February',  lowSub:'Pre-spring strategic fill',      managed:'11',managedSub:'Active properties'},
+  miami:     {name:'Miami, FL',      demand:miamiDemand,  rate:miamiRate,  occ:miamiOcc,  events:miamiEvts,     peakMo:'December', peakSub:'Art Basel + New Year period',    spike:'+44%', spikeSub:'Ultra Music Festival',         low:'September', lowSub:'Post-summer lowest demand',      managed:'18',managedSub:'Active properties'},
+  cancun:    {name:'Cancún, MX',     demand:cancunDemand, rate:cancunRate, occ:cancunOcc, events:cancunEvts,    peakMo:'March',    peakSub:'Spring Break + Semana Santa',    spike:'+52%', spikeSub:'Spring Break peak week',       low:'October',   lowSub:'Post-summer shoulder season',    managed:'7', managedSub:'Active properties'},
+  neworleans:{name:'New Orleans, LA', demand:nolaDemand,   rate:nolaRate,   occ:nolaOcc,   events:nolaEvts,      peakMo:'February', peakSub:'Mardi Gras + French Quarter Fest',spike:'+46%', spikeSub:'Mardi Gras peak week',         low:'July',      lowSub:'Summer heat shoulder window',    managed:'8', managedSub:'Active properties'},
+  sanantonio:{name:'San Antonio, TX', demand:satxDemand,   rate:satxRate,   occ:satxOcc,   events:satxEvts,       peakMo:'April',    peakSub:'Fiesta San Antonio',             spike:'+38%', spikeSub:'Fiesta peak week vs baseline', low:'August',    lowSub:'Summer heat shoulder window',    managed:'6', managedSub:'Active properties'},
+  tulum:     {name:'Tulum, MX',       demand:tulumDemand,  rate:tulumRate,  occ:tulumOcc,  events:tulumEvts,      peakMo:'December', peakSub:'Zamna Festival + NYE',           spike:'+55%', spikeSub:'Zamna December edition',       low:'September', lowSub:'Rainy season minimum demand',    managed:'5', managedSub:'Active properties'},
+  sanjuan:   {name:'San Juan, PR',     demand:sjDemand,     rate:sjRate,     occ:sjOcc,     events:sjEvts,         peakMo:'December', peakSub:'Las Navidades + NYE',            spike:'+48%', spikeSub:'Semana Santa week',            low:'October',   lowSub:'Post-summer shoulder window',    managed:'5', managedSub:'Active properties'},
+};
+
+/* ══ HERO TICKER ══════════════════════════════════════════ */
+(function buildTicker(){
+  const data=[
+    {city:'Austin, TX',     flag:'🇺🇸', rate:'$221', occ:'85%'},
+    {city:'Scottsdale, AZ', flag:'🇺🇸', rate:'$255', occ:'87%'},
+    {city:'Nashville, TN',  flag:'🇺🇸', rate:'$208', occ:'83%'},
+    {city:'Miami, FL',      flag:'🇺🇸', rate:'$238', occ:'86%'},
+    {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'88%'},
+    {city:'New Orleans, LA', flag:'🇺🇸', rate:'$196', occ:'84%'},
+    {city:'San Antonio, TX', flag:'🇺🇸', rate:'$168', occ:'82%'},
+    {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'91%'},
+    {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'88%'},
+  ];
+  const ticker=document.getElementById('heroTicker');
+  data.forEach(d=>{
+    ticker.innerHTML+=`
+    <div class="ht-row">
+      <div class="ht-city"><span class="ht-flag">${d.flag}</span>${d.city}</div>
+      <div class="ht-metrics">
+        <div class="ht-m"><div class="ht-mv">${d.rate}</div><div class="ht-ml">Avg Rate</div></div>
+        <div class="ht-m"><div class="ht-mv">${d.occ}</div><div class="ht-ml">Avg Occ</div></div>
+      </div>
+      <div class="ht-pulse"></div>
+    </div>`;
+  });
+})();
+
+/* ══ MARKET PULSE CHART ENGINE ══════════════════════════ */
+const mpCanvas=document.getElementById('mpChartCanvas');
+const mpCtx=mpCanvas.getContext('2d');
+const mpCtip=document.getElementById('mpCtip');
+const MP_PAD={top:24,right:20,bottom:36,left:52};
+let mpCurMkt='austin',mpCurView='demand',mpAnimFrame=null,mpAnimPct=0;
+
+function mpDpr(){return Math.min(window.devicePixelRatio||1,2);}
+function mpResize(){
+  if(!mpCanvas.parentElement)return;
+  const rect=mpCanvas.parentElement.getBoundingClientRect();
+  const w=rect.width-40,h=280,r=mpDpr();
+  mpCanvas.width=w*r;mpCanvas.height=h*r;
+  mpCanvas.style.width=w+'px';mpCanvas.style.height=h+'px';
+  mpCtx.scale(r,r);mpRenderChart(mpAnimPct);
+}
+
+function mpGetVD(mkt,view){
+  const m=MP_MARKETS[mkt];
+  if(view==='rate') return{data:m.rate,min:80,max:Math.max(...m.rate)*1.12,label:'$/night',color:'#D6AD60'};
+  if(view==='occ')  return{data:m.occ, min:20,max:100,label:'%',color:'#2D7A4F'};
+  return {data:m.demand,min:0,max:100,label:'Index',color:'#D6AD60'};
+}
+function mpGetComp(mkt,view){
+  const m=MP_MARKETS[mkt];
+  if(view==='rate') return m.rate.map(r=>Math.round(r*0.84));
+  if(view==='occ')  return m.occ.map(o=>Math.round(o*0.88));
+  return m.demand.map(d=>Math.round(d*0.82));
+}
+
+function mpRenderChart(pct){
+  if(!mpCanvas.width||!mpCanvas.height)return;
+  const W=mpCanvas.width/mpDpr(),H=mpCanvas.height/mpDpr();
+  const cw=W-MP_PAD.left-MP_PAD.right,ch=H-MP_PAD.top-MP_PAD.bottom;
+  mpCtx.clearRect(0,0,W,H);
+  const mkt=MP_MARKETS[mpCurMkt];
+  const vd=mpGetVD(mpCurMkt,mpCurView);
+  const comp=mpGetComp(mpCurMkt,mpCurView);
+  const data=vd.data;const dMin=vd.min,dMax=vd.max;
+  const xOf=i=>MP_PAD.left+(i/51)*cw;
+  const yOf=v=>MP_PAD.top+ch-(((v-dMin)/(dMax-dMin))*ch);
+
+  /* Season zones */
+  [{s:0,e:7,c:'rgba(180,178,169,.025)'},{s:8,e:21,c:'rgba(214,173,96,.03)'},{s:22,e:34,c:'rgba(214,173,96,.015)'},{s:35,e:47,c:'rgba(180,178,169,.02)'},{s:48,e:51,c:'rgba(214,173,96,.03)'}]
+  .forEach(z=>{mpCtx.fillStyle=z.c;mpCtx.fillRect(xOf(z.s),MP_PAD.top,xOf(z.e)-xOf(z.s),ch);});
+
+  /* Grid */
+  mpCtx.strokeStyle='rgba(255,255,255,.04)';mpCtx.lineWidth=1;
+  [0,.25,.5,.75,1].forEach(t=>{const y=MP_PAD.top+ch*(1-t);mpCtx.beginPath();mpCtx.moveTo(MP_PAD.left,y);mpCtx.lineTo(MP_PAD.left+cw,y);mpCtx.stroke();});
+  for(let m=0;m<12;m++){const w=Math.round(m/12*52);const x=xOf(w);mpCtx.beginPath();mpCtx.moveTo(x,MP_PAD.top);mpCtx.lineTo(x,MP_PAD.top+ch);mpCtx.stroke();}
+
+  /* Y labels */
+  mpCtx.fillStyle='rgba(180,178,169,.3)';mpCtx.font='8px DM Mono,monospace';mpCtx.textAlign='right';
+  [0,.25,.5,.75,1].forEach(t=>{const v=Math.round(dMin+(dMax-dMin)*t);const y=MP_PAD.top+ch*(1-t);const lbl=vd.label==='$/night'?'$'+Math.round(v/5)*5:v+(vd.label==='%'?'%':'');mpCtx.fillText(lbl,MP_PAD.left-5,y+3);});
+  mpCtx.textAlign='center';mpCtx.fillStyle='rgba(180,178,169,.25)';mpCtx.font='9px Josefin Sans,sans-serif';
+  MONTHS.forEach((mo,mi)=>{mpCtx.fillText(mo,xOf(Math.round(mi/12*52)),H-6);});
+
+  /* Event verticals */
+  mkt.events.forEach((ev,i)=>{
+    if(!ev)return;const x=xOf(i);const a=ev.intensity===3?.6:ev.intensity===2?.45:.3;
+    mpCtx.strokeStyle=`rgba(200,126,26,${a})`;mpCtx.lineWidth=1;mpCtx.setLineDash([3,3]);
+    mpCtx.beginPath();mpCtx.moveTo(x,MP_PAD.top);mpCtx.lineTo(x,MP_PAD.top+ch);mpCtx.stroke();mpCtx.setLineDash([]);
+    mpCtx.fillStyle=`rgba(200,126,26,${a+.1})`;mpCtx.beginPath();mpCtx.moveTo(x-4,MP_PAD.top+2);mpCtx.lineTo(x+4,MP_PAD.top+2);mpCtx.lineTo(x,MP_PAD.top+9);mpCtx.fill();
+  });
+
+  /* Comp line */
+  mpCtx.beginPath();mpCtx.strokeStyle='rgba(180,178,169,.3)';mpCtx.lineWidth=1.5;mpCtx.setLineDash([4,4]);
+  comp.forEach((v,i)=>{const x=xOf(i),y=yOf(v);i===0?mpCtx.moveTo(x,y):mpCtx.lineTo(x,y);});
+  mpCtx.stroke();mpCtx.setLineDash([]);
+
+  /* Occ line overlay */
+  if(mpCurView==='demand'){
+    const oy=v=>MP_PAD.top+ch-(((v-20)/(100-20))*ch);
+    mpCtx.beginPath();mpCtx.strokeStyle='rgba(45,122,79,.45)';mpCtx.lineWidth=1.5;
+    mkt.occ.forEach((v,i)=>{const x=xOf(i);i===0?mpCtx.moveTo(x,oy(v)):mpCtx.lineTo(x,oy(v));});
+    mpCtx.stroke();
+  }
+
+  /* Animated fill + line */
+  const dc=Math.round(pct*51);
+  if(dc>1){
+    mpCtx.beginPath();mpCtx.moveTo(xOf(0),MP_PAD.top+ch);
+    data.slice(0,dc+1).forEach((v,i)=>mpCtx.lineTo(xOf(i),yOf(v)));
+    mpCtx.lineTo(xOf(dc),MP_PAD.top+ch);mpCtx.closePath();
+    const g=mpCtx.createLinearGradient(0,MP_PAD.top,0,MP_PAD.top+ch);
+    g.addColorStop(0,mpCurView==='occ'?'rgba(45,122,79,.12)':'rgba(214,173,96,.18)');
+    g.addColorStop(1,'rgba(214,173,96,0)');mpCtx.fillStyle=g;mpCtx.fill();
+  }
+  mpCtx.beginPath();mpCtx.strokeStyle=mpCurView==='occ'?'#2D7A4F':vd.color;mpCtx.lineWidth=2;mpCtx.lineJoin='round';mpCtx.lineCap='round';
+  data.slice(0,dc+1).forEach((v,i)=>{const x=xOf(i),y=yOf(v);i===0?mpCtx.moveTo(x,y):mpCtx.lineTo(x,y);});
+  mpCtx.stroke();
+
+  /* Glow dot at front */
+  if(pct<1&&dc>0){
+    const gx=xOf(dc),gy=yOf(data[dc]);
+    const gc=mpCtx.createRadialGradient(gx,gy,0,gx,gy,10);
+    gc.addColorStop(0,'rgba(214,173,96,.6)');gc.addColorStop(1,'rgba(214,173,96,0)');
+    mpCtx.fillStyle=gc;mpCtx.beginPath();mpCtx.arc(gx,gy,10,0,Math.PI*2);mpCtx.fill();
+    mpCtx.fillStyle='#D6AD60';mpCtx.beginPath();mpCtx.arc(gx,gy,3,0,Math.PI*2);mpCtx.fill();
+  }
+}
+
+function mpAnimateIn(){
+  if(mpAnimFrame)cancelAnimationFrame(mpAnimFrame);
+  const start=performance.now(),dur=1400;
+  (function step(ts){
+    const t=Math.min((ts-start)/dur,1),e=1-Math.pow(1-t,3);
+    mpAnimPct=e;mpRenderChart(mpAnimPct);
+    if(t<1)mpAnimFrame=requestAnimationFrame(step);else mpAnimPct=1;
+  })(performance.now());
+}
+
+function mpUpdateStats(key){
+  const m=MP_MARKETS[key];
+  document.getElementById('mpMktName').textContent=m.name;
+  document.getElementById('mpQsPeak').textContent='$'+Math.max(...m.rate);
+  document.getElementById('mpQsAvg').textContent=Math.round(m.occ.reduce((a,b)=>a+b,0)/52)+'%';
+  document.getElementById('mpQsEvents').textContent=m.events.filter(Boolean).length;
+  document.getElementById('mpIPeakMo').textContent=m.peakMo;
+  document.getElementById('mpIPeakSub').textContent=m.peakSub;
+  document.getElementById('mpISpike').textContent=m.spike;
+  document.getElementById('mpISpikeSub').textContent=m.spikeSub;
+  document.getElementById('mpILow').textContent=m.low;
+  document.getElementById('mpILowSub').textContent=m.lowSub;
+  document.getElementById('mpIManaged').textContent=m.managed;
+  document.getElementById('mpIManagedSub').textContent=m.managedSub;
+}
+
+/* Tabs */
+document.getElementById('mpMktTabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.mp-mkt-tab');if(!tab)return;
+  document.querySelectorAll('.mp-mkt-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');mpCurMkt=tab.dataset.mkt;
+  mpUpdateStats(mpCurMkt);mpAnimPct=0;mpAnimateIn();
+});
+document.querySelectorAll('.mp-vtab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.mp-vtab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');mpCurView=t.dataset.view;mpAnimPct=0;mpAnimateIn();
+  });
+});
+
+/* Hover */
+mpCanvas.addEventListener('mousemove',e=>{
+  const rect=mpCanvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left,W=rect.width,H=rect.height;
+  const cw=W-MP_PAD.left-MP_PAD.right,ch=H-MP_PAD.top-MP_PAD.bottom;
+  if(mx<MP_PAD.left||mx>W-MP_PAD.right){mpCtip.classList.remove('vis');return;}
+  const wk=Math.round(((mx-MP_PAD.left)/cw)*51);
+  if(wk<0||wk>51)return;
+  const mkt=MP_MARKETS[mpCurMkt];
+  const xOf=i=>MP_PAD.left+(i/51)*cw;
+  const vd=mpGetVD(mpCurMkt,mpCurView);const comp=mpGetComp(mpCurMkt,mpCurView);
+  mpRenderChart(mpAnimPct);
+  const cx=xOf(wk);
+  mpCtx.strokeStyle='rgba(214,173,96,.25)';mpCtx.lineWidth=1;mpCtx.setLineDash([]);
+  mpCtx.beginPath();mpCtx.moveTo(cx,MP_PAD.top);mpCtx.lineTo(cx,MP_PAD.top+ch);mpCtx.stroke();
+  const dMin=vd.min,dMax=vd.max;const yOf=v=>MP_PAD.top+ch-(((v-dMin)/(dMax-dMin))*ch);
+  mpCtx.fillStyle='#D6AD60';mpCtx.beginPath();mpCtx.arc(cx,yOf(vd.data[wk]),4,0,Math.PI*2);mpCtx.fill();
+  document.getElementById('mpCtipWeek').textContent=weekToLabel(wk);
+  document.getElementById('mpCtipDemand').textContent=mpCurView==='rate'?'$'+mkt.rate[wk]:mpCurView==='occ'?mkt.occ[wk]+'%':mkt.demand[wk]+'/100';
+  document.getElementById('mpCtipComp').textContent=mpCurView==='rate'?('$'+comp[wk]):mpCurView==='occ'?(comp[wk]+'%'):(comp[wk]+'/100');
+  document.getElementById('mpCtipOcc').textContent=mkt.occ[wk]+'%';
+  const ev=mkt.events[wk];const evEl=document.getElementById('mpCtipEvent');
+  if(ev){evEl.style.display='block';evEl.textContent='⚡ '+ev.label;}else{evEl.style.display='none';}
+  const tw=180;let tx=e.clientX-rect.left+14;if(tx+tw>W-10)tx=e.clientX-rect.left-tw-14;
+  mpCtip.style.left=tx+'px';mpCtip.style.top=(e.clientY-rect.top-50)+'px';
+  mpCtip.classList.add('vis');
+});
+mpCanvas.addEventListener('mouseleave',()=>{mpCtip.classList.remove('vis');mpRenderChart(mpAnimPct);});
+
+/* Init with IntersectionObserver — draw on entry */
+let mpHasPlayed=false;
+const mpObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!mpHasPlayed){
+      mpHasPlayed=true;mpObs.unobserve(e.target);
+      mpResize();mpUpdateStats(mpCurMkt);setTimeout(()=>mpAnimateIn(),300);
+    }
+  });
+},{threshold:0.1});
+mpObs.observe(document.getElementById('pulse'));
+window.addEventListener('resize',()=>{mpResize();});
+mpResize();mpUpdateStats(mpCurMkt);
+
+/* ══ NOT LISTED FORM ══════════════════════════════════════ */
+document.getElementById('nlSubmit').addEventListener('click',()=>{
+  const email=document.getElementById('nlEmail').value.trim();
+  const market=document.getElementById('nlMarket').value.trim();
+  const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!re.test(email)){
+    const inp=document.getElementById('nlEmail');inp.style.borderColor='rgba(139,32,32,.6)';inp.focus();
+    setTimeout(()=>inp.style.borderColor='',1500);return;
+  }
+  if(market.length<2){
+    const inp=document.getElementById('nlMarket');inp.style.borderColor='rgba(139,32,32,.6)';inp.focus();
+    setTimeout(()=>inp.style.borderColor='',1500);return;
+  }
+  console.log('Market inquiry:',email,market); /* POST to endpoint */
+  document.getElementById('nlEmail').value='';document.getElementById('nlMarket').value='';
+  document.getElementById('nlConfirm').classList.add('vis');
+});
+document.getElementById('nlMarket').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('nlSubmit').click();});
+
+/* ══ SIGNAL COUNTER ANIMATION ══════════════════════════ */
+function animCount(el,target,dur){
+  const t0=Date.now();
+  (function tick(){
+    const t=Math.min((Date.now()-t0)/dur,1);
+    const e=1-Math.pow(1-t,3);
+    el.textContent=Math.round(e*target);
+    if(t<1)requestAnimationFrame(tick);
+  })();
+}
+const sigObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      animCount(document.getElementById('sigCounter'),79,1400);
+      sigObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+sigObs.observe(document.getElementById('intelligence'));
+
+/* ══ FADE-IN ════════════════════════════════════════════ */
+(function(){
+  function showAll(){
+    document.querySelectorAll('.fi').forEach(function(el,i){
+      setTimeout(function(){el.classList.add('vis');el.classList.add('animate');},Math.min(i*55,600));
+    });
+  }
+  var fallback=setTimeout(showAll,700);
+  var test=document.createElement('div');test.style.cssText='position:absolute;width:1px;height:1px;';
+  document.body.appendChild(test);
+  var tObs=new IntersectionObserver(function(){clearTimeout(fallback);tObs.disconnect();document.body.removeChild(test);});
+  tObs.observe(test);
+  const fiObs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);fiObs.unobserve(e.target);}});
+  },{threshold:0.06,rootMargin:'0px 0px -16px 0px'});
+  document.querySelectorAll('.fi').forEach(el=>fiObs.observe(el));
+})();
+</script>
+
+
+
+<script>
+</script>
+<script></script>
+
+
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">All Intel</a>
+        <a href="/intel/miami">Miami: FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka: Summer 2026</a>
+        <a href="/intel/algorithm">Airbnb Algorithm</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+<script>(function(){var nav=document.querySelector('nav:not(.sf-nav)');if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});})();</script>
+</body>
+</html>

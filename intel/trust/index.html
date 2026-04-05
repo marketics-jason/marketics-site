@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Trust Architecture: Marketics</title>
+<meta name="description" content="Two properties. Same market. Same size. Similar price. One runs at 87% occupancy, the other at 52%. The gap isn't the property — it's the signals the listing sends.">
+<meta property="og:title" content="The Trust Architecture — Marketics">
+<meta property="og:description" content="Guests don't book properties. They book confidence. Here's why misaligned listing signals are the most expensive problem most hosts never diagnose.">
+<meta property="og:url" content="https://marketics.io/intel/trust">
+<meta property="og:image" content="https://marketics.io/og/default.jpg">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://marketics.io/intel/trust">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" media="print" onload="this.media='all'">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "The Trust Architecture",
+ "description": "Two properties. Same market. Same size. Similar price. One runs at 87% occupancy, the other at 52%. The gap isn't the property — it's the signals the listing sends.",
+ "author": {"@type": "Person", "name": "Jason Baxter"},
+ "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io"},
+ "datePublished": "2026-04-01",
+ "url": "https://marketics.io/intel/trust"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://marketics.io"},
+  {"@type": "ListItem", "position": 2, "name": "Market Intel", "item": "https://marketics.io/intel"},
+  {"@type": "ListItem", "position": 3, "name": "The Trust Architecture", "item": "https://marketics.io/intel/trust"}
+ ]
+}
+</script>
+<style>
+:root{
+  --gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;
+  --white:#f8f6f2;--stone:#B4B2A9;--dim:#6B6A65;
+  --d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);transition:border-color .3s,background .3s;}
+nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15);box-shadow:0 1px 24px rgba(0,0,0,.4);}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
+.nav-wordmark{height:26px;width:auto;display:block;transition:opacity .2s;}
+.nav-logo:hover .nav-wordmark{opacity:.8;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}
+.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}
+.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
+.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}
+.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}
+.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .15s,background .15s;}
+.nav-mobile-menu a:hover{color:var(--white);background:rgba(255,255,255,.02);}
+.nav-mobile-menu .nm-sub{padding-left:36px;font-size:10px;color:var(--dim);}
+.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s;}
+.nav-mobile-menu .nm-cta:hover{filter:brightness(1.08);}
+.article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 24px;}
+.article-wrap > *{grid-column:2;}
+.article-wrap .full-bleed{grid-column:1/-1;}
+.breadcrumb{padding:28px 0 0;font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px;}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color .15s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb-sep{opacity:.4;}
+.article-header{padding:40px 0 48px;border-bottom:1px solid rgba(255,255,255,.06);}
+.ah-category{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.ah-category::before{content:'';width:20px;height:1px;background:var(--gold);}
+.article-header h1{font-family:var(--d);font-size:clamp(30px,4.5vw,52px);font-weight:200;letter-spacing:-.02em;line-height:1.1;color:var(--white);margin-bottom:20px;}
+.article-header h1 em{font-style:normal;color:var(--gold);}
+.ah-deck{font-size:18px;color:var(--stone);line-height:1.65;margin-bottom:28px;}
+.ah-meta{display:flex;align-items:center;gap:20px;font-family:var(--m);font-size:10px;letter-spacing:.1em;color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:20px;}
+.ah-meta-divider{width:1px;height:12px;background:rgba(255,255,255,.12);}
+.article-body{padding:48px 0;}
+.article-body p{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
+.article-body p strong{color:var(--white);font-weight:500;}
+.article-body h2{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin:48px 0 16px;}
+.article-body h3{font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:36px 0 12px;}
+.article-body ul,.article-body ol{padding-left:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
+.article-body li{font-size:16px;line-height:1.7;color:var(--stone);}
+.article-body li strong{color:var(--white);}
+.callout{background:var(--n3);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:24px 28px;margin:32px 0;}
+.callout-label{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.callout p{font-size:15px;line-height:1.65;color:var(--stone);margin:0;}
+.callout p strong{color:var(--white);}
+.case-study{background:var(--n3);border:1px solid rgba(214,173,96,.12);border-radius:4px;margin:40px 0;overflow:hidden;}
+.cs-header{background:rgba(214,173,96,.06);border-bottom:1px solid rgba(214,173,96,.12);padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.cs-badge{font-family:var(--m);font-size:8px;letter-spacing:.16em;text-transform:uppercase;background:rgba(214,173,96,.15);color:var(--gold);padding:4px 10px;border-radius:2px;border:1px solid rgba(214,173,96,.2);flex-shrink:0;}
+.cs-title{font-family:var(--d);font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--white);}
+.cs-body{padding:24px 28px;}
+.cs-body p{font-size:15px;line-height:1.7;color:var(--stone);margin-bottom:16px;}
+.cs-body p:last-child{margin-bottom:0;}
+.cs-body p strong{color:var(--white);}
+.cs-result{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.05);border-top:1px solid rgba(255,255,255,.06);}
+.cs-stat{background:var(--n3);padding:16px 20px;text-align:center;}
+.cs-stat-val{font-family:var(--d);font-size:20px;font-weight:600;color:var(--gold);letter-spacing:-.02em;margin-bottom:3px;}
+.cs-stat-label{font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:4px;overflow:hidden;margin:32px 0;}
+.tier-card{background:var(--n3);padding:24px;}
+.tier-label{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.tier-price{font-family:var(--d);font-size:18px;font-weight:600;color:var(--white);margin-bottom:12px;}
+.tier-guest{font-size:13px;color:var(--dim);font-style:italic;margin-bottom:16px;line-height:1.5;}
+.tier-signals{display:flex;flex-direction:column;gap:6px;}
+.tier-signal{font-size:13px;color:var(--stone);line-height:1.5;padding-left:12px;position:relative;}
+.tier-signal::before{content:'—';position:absolute;left:0;color:var(--dim);}
+.signal-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px;}
+.signal-table th{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:var(--n3);}
+.signal-table td{padding:12px 16px;color:var(--stone);border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5;}
+.signal-table tr:last-child td{border-bottom:none;}
+.signal-table td:first-child{color:var(--white);font-weight:500;}
+.signal-table tr:hover td{background:rgba(255,255,255,.02);}
+.article-cta{margin:56px 0 0;padding:40px;background:var(--n3);border:1px solid rgba(214,173,96,.12);border-radius:4px;text-align:center;}
+.article-cta h3{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin-bottom:10px;}
+.article-cta h3 em{font-style:normal;color:var(--gold);}
+.article-cta p{font-size:14px;color:var(--stone);margin-bottom:24px;line-height:1.6;}
+.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;display:inline-block;}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.next-article{margin:32px 0 0;padding:24px 28px;background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;transition:border-color .2s,background .2s;}
+.next-article:hover{border-color:rgba(214,173,96,.2);background:var(--n4);}
+.na-label{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.na-title{font-family:var(--d);font-size:16px;font-weight:600;color:var(--white);}
+.na-arrow{font-size:20px;color:var(--gold);flex-shrink:0;}
+.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
+.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
+.sf-brand{padding-top:2px;}
+.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}
+.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}
+.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.sf-col{display:flex;flex-direction:column;gap:6px;}
+.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}
+.sf-col a:hover{color:var(--gold);}
+.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none!important;}
+  .nav-cta{display:none!important;}
+  .nav-hamburger{display:flex!important;}
+  .article-wrap{grid-template-columns:1fr;padding:0;}
+  .article-wrap > *{grid-column:1;padding-left:20px;padding-right:20px;}
+  .article-wrap .full-bleed{padding:0;}
+  .tier-grid{grid-template-columns:1fr;}
+  .cs-result{grid-template-columns:1fr;}
+  .next-article{flex-direction:column;align-items:flex-start;}
+  .site-footer{padding:40px 20px 24px;}
+  .sf-inner{grid-template-columns:1fr;gap:28px;}
+  .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
+  .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
+}
+@media(min-width:769px){
+  .nav-hamburger{display:none!important;}
+  .nav-mobile-menu{display:none!important;}
+}
+</style>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" class="nav-wordmark">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/story">Our Story</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel" class="active">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/story">Our Story</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/intel" class="active">Market Intel</a>
+  <a href="/intel/miami" class="nm-sub">↳ Miami: FIFA 2026</a>
+  <a href="/intel/muskoka" class="nm-sub">↳ Muskoka: Summer 2026</a>
+  <a href="/intel/money" class="nm-sub">↳ The Money</a>
+  <a href="/intel/trust" class="nm-sub">↳ Trust Architecture</a>
+  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+</div>
+
+<!-- ARTICLE -->
+<main class="article-wrap">
+
+  <div class="breadcrumb">
+    <a href="/intel">Market Intel</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/intel#playbook">The Playbook</a>
+    <span class="breadcrumb-sep">/</span>
+    <span style="color:var(--stone)">Trust Architecture</span>
+  </div>
+
+  <header class="article-header">
+    <div class="ah-category">The Playbook</div>
+    <h1>The Trust <em>Architecture</em></h1>
+    <p class="ah-deck">Two properties. Same market. Same size. Similar price. One runs at 87% occupancy — the other at 52%. The gap isn't location. It isn't the property. It's the signals the listing sends, and whether every signal tells the same story.</p>
+    <div class="ah-meta">
+      <span>Jason Baxter</span>
+      <div class="ah-meta-divider"></div>
+      <span>35× Superhost · 1,000+ Listings Optimized</span>
+      <div class="ah-meta-divider"></div>
+      <span>April 2026</span>
+    </div>
+  </header>
+
+  <div class="article-body">
+
+    <p>In a recent audit, I pulled up a $280/night listing sitting at 54% occupancy. The owner was frustrated — she'd invested in the property, the furniture was good, the location was excellent. She kept adjusting her price downward, which made things worse, not better.</p>
+
+    <p>I could see the problem in the first five seconds. Professional photography but a cover photo taken from a bad angle that made the space look cramped. Aspirational copywriting pitched at a premium guest. But the amenities section listed instant coffee and mismatched plates. The reviews said things like "clean" and "convenient" — standard-tier language for a property priced at premium.</p>
+
+    <p>Every element of her listing was individually acceptable. Together, they were sending contradictory signals that no guest could reconcile. When guests can't reconcile signals, they hesitate. <strong>Hesitation kills bookings.</strong></p>
+
+    <h2>The Myth: Better Property = More Bookings</h2>
+
+    <p>The most common belief I encounter in audits is that property quality is the primary driver of performance. Better finishes, more amenities, nicer furniture — and the bookings will follow.</p>
+
+    <p>Property quality matters. But it matters a lot less than most hosts think, and a lot less than listing signal alignment.</p>
+
+    <p>I've reviewed properties with extraordinary interiors running at 55% occupancy, and modest but impeccably positioned listings running at 90%. The difference is almost never what's in the property. It's how the listing communicates what's in the property — and whether that communication is calibrated to the correct guest for the correct price.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Core Principle</div>
+      <p>Guests don't book properties. <strong>They book confidence.</strong> Every element of a listing either deposits into or withdraws from a guest's confidence account. The listing that accumulates the most confidence deposits relative to its price wins the booking. Not the nicest listing. Not the cheapest. The most coherent one.</p>
+    </div>
+
+    <h2>What Guests Are Actually Scanning</h2>
+
+    <p>A guest decides whether to keep reading your listing or scroll past it in roughly 13 seconds. In that window, they are not reading your description. They are not checking your cancellation policy. They are scanning for a single answer to a single unconscious question: <em>Is this place what I think it is?</em></p>
+
+    <p>The scanning sequence is predictable: cover photo → first five images → price → star rating and review count → two or three review snippets → amenity list → description. At each stage, the same question: <strong>does this match?</strong> Does the photography match the price? Do the reviews match the photos? Do the amenities match the description?</p>
+
+    <p>When everything matches, the guest feels certainty. When anything contradicts, they feel doubt. Doubt sends them to the next listing.</p>
+
+    <h2>The Four Tiers: Signals That Belong Where They Are</h2>
+
+    <p>Not all guests run the same mental checklist, because not all guests are searching for the same thing. The mistake most hosts make is presenting signals from the wrong tier — economy properties trying to look premium and pricing themselves into a dead zone, or premium properties under-presenting and being evaluated like standard listings.</p>
+
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-label">Economy</div>
+        <div class="tier-price">Under $100/night</div>
+        <div class="tier-guest">"Don't waste my money. Just be honest."</div>
+        <div class="tier-signals">
+          <div class="tier-signal">Bright, honest photos — accuracy over aesthetics</div>
+          <div class="tier-signal">Functional copy: clean, convenient, walkable</div>
+          <div class="tier-signal">Reviews that say "exactly as described"</div>
+          <div class="tier-signal">Goal: zero surprises</div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Standard</div>
+        <div class="tier-price">$100–$200/night</div>
+        <div class="tier-guest">"Comfortable and reliable, without the surprises."</div>
+        <div class="tier-signals">
+          <div class="tier-signal">Professional photography — now expected, not optional</div>
+          <div class="tier-signal">Specific copy: "10-minute walk to the waterfront"</div>
+          <div class="tier-signal">Reviews that say "felt like home, would stay again"</div>
+          <div class="tier-signal">Goal: comfortable reliability with personality</div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Premium</div>
+        <div class="tier-price">$200–$400/night</div>
+        <div class="tier-guest">"I'm investing in this trip. Make it worth remembering."</div>
+        <div class="tier-signals">
+          <div class="tier-signal">Editorial photography — lifestyle, not documentation</div>
+          <div class="tier-signal">Sensory copy: sun-drenched, architect-designed, curated</div>
+          <div class="tier-signal">Reviews that say "every detail was considered"</div>
+          <div class="tier-signal">Goal: an experience worth sharing</div>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Luxury</div>
+        <div class="tier-price">$400+/night</div>
+        <div class="tier-guest">"Anticipate what I need before I know I need it."</div>
+        <div class="tier-signals">
+          <div class="tier-signal">Cinematic photography — every frame could be published</div>
+          <div class="tier-signal">Restrained copy: specific materials, no exclamation marks</div>
+          <div class="tier-signal">Reviews that read like testimonials, mention names</div>
+          <div class="tier-signal">Goal: flawless execution that feels effortless</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The tier you're in determines what "good" looks like for every element of your listing. Instant coffee in a $300/night listing is a trust violation. A Nespresso machine in a $75/night listing is a delightful surprise. Context determines whether an amenity builds the signal or breaks it.</p>
+
+    <h2>Photography: The First Signal and the Revenue Infrastructure</h2>
+
+    <p>The most consistent finding across our audits is that hosts treat photography as a cost. It's not. It's revenue infrastructure.</p>
+
+    <p>The data is unambiguous: listings with professional photography see 40% more bookings. Properties with 30 or more high-quality images book twice as often as those with fewer. Professional photography supports 10–15% higher nightly rates. A shoot costing $300–$800 typically pays for itself within 30–60 days through increased booking velocity alone.</p>
+
+    <p>But the type of photography matters as much as the quality. Real estate photography documents space. Hospitality photography sells an experience. A wide-angle shot of an empty bedroom documents the room. A carefully styled image with soft light, rumpled linen, and a book on the nightstand invites the guest to imagine themselves there. One is information. The other is persuasion.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Cover Photo Rule</div>
+      <p>Your cover photo has one job: generate the tap. It needs to be striking at thumbnail size, show the most compelling space in the property, and match the tier you're targeting. Research shows that featuring the living room as a cover image increases booking rates by 35% versus other rooms. <strong>If a guest looked only at your cover photo, would they guess your actual price — or a lower one?</strong></p>
+    </div>
+
+    <h2>Reviews: They Calibrate, Not Just Validate</h2>
+
+    <p>Most hosts think of reviews as a report card. Good score means you're doing well; bad score means something's broken. The more useful frame is this: reviews calibrate future guests' expectations against your tier positioning.</p>
+
+    <p>When a guest writes "clean, comfortable, exactly as described," they are confirming economy and standard tier signals. When a guest writes "we didn't want to leave — every detail was considered," they are confirming premium signals. The language your guests use in reviews tells you, in real time, whether your trust architecture is working.</p>
+
+    <p>The most dangerous pattern we see in premium listings is a set of consistently positive reviews written in standard-tier language. "Great location, clean, responsive host" — all true, all good, all wrong. Reviews like that make a $250/night listing look like a $120/night listing to the next guest scanning the page. Over time, this mismatch erodes pricing power: new guests calibrate expectations to the standard tier, then feel the property is overpriced at the actual rate.</p>
+
+    <p>The fix isn't to manipulate reviews. It's to deliver tier-appropriate experiences that naturally produce tier-appropriate language. If you want reviews that say "every detail was considered," there need to be details worth mentioning — a handwritten welcome card, a curated local snack basket, quality coffee in real mugs. These cost dollars. They generate review language worth hundreds in future bookings.</p>
+
+    <h2>The Alignment Audit: Five Questions</h2>
+
+    <p>Before any Marketics engagement, we run a version of this audit on every listing. You can run it yourself:</p>
+
+    <ol>
+      <li><strong>If a guest saw only your first five photos, what tier would they guess?</strong> If they'd guess lower than your actual price, your photography is under-performing for the tier you're targeting.</li>
+      <li><strong>Does your description language match your price tier?</strong> Economy listings should sound efficient. Standard listings should sound welcoming. Premium listings should sound editorial. Luxury listings should sound effortless. Read it out loud.</li>
+      <li><strong>Do your amenities match your tier, or are you offering economy amenities at a premium price?</strong> One misaligned amenity can undermine an otherwise coherent listing.</li>
+      <li><strong>Read your last 20 reviews. What adjectives appear most often?</strong> If your $250/night listing's reviews say "clean" and "convenient" but never say "beautiful" or "thoughtful," the guest experience is calibrated to a lower tier than your price.</li>
+      <li><strong>Is there one element that contradicts everything else?</strong> A luxury listing with a plastic shower curtain. A premium listing with a cover photo taken on a cloudy day. A standard listing where the cleaning fee pushes the total into premium territory. Find the outlier.</li>
+    </ol>
+
+    <div class="case-study">
+      <div class="cs-header">
+        <span class="cs-badge">Audit Finding</span>
+        <div class="cs-title">The Review-Tier Mismatch: A $280/Night Listing Reviewed Like $120</div>
+      </div>
+      <div class="cs-body">
+        <p><strong>The situation:</strong> A well-located two-bedroom in a competitive market, priced at $280/night. Occupancy running at 54%. The owner had recently dropped rates to try to drive more bookings, which had made things worse.</p>
+        <p><strong>What we found:</strong> Professional photos, but staged inconsistently — premium angles in some shots, economy execution in others. The amenities included smart home tech and quality bedding but also a drip coffee maker with grocery-store grounds and mismatched kitchen supplies. Reviews consistently praised location, cleanliness, and check-in — standard-tier language that didn't support the premium price.</p>
+        <p><strong>What we changed:</strong> Replaced the cover photo. Added a Nespresso machine and a curated welcome basket. Rewrote the description in premium-tier language with sensory specifics. Recommended five targeted amenity upgrades under $200 total. Did not change the price.</p>
+        <p><strong>The result:</strong> Within 60 days of the listing changes, the next 8 reviews included phrases like "every detail was considered," "didn't want to leave," and "the best Airbnb we've stayed in." Occupancy climbed to 78% within the quarter without a price reduction.</p>
+      </div>
+      <div class="cs-result">
+        <div class="cs-stat">
+          <div class="cs-stat-val">54% → 78%</div>
+          <div class="cs-stat-label">Occupancy Lift</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-val">$0</div>
+          <div class="cs-stat-label">Price Change</div>
+        </div>
+        <div class="cs-stat">
+          <div class="cs-stat-val">&lt;$200</div>
+          <div class="cs-stat-label">Amenity Investment</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Compounding Effect of Alignment</h2>
+
+    <p>When photography, copy, amenities, price, and reviews all point at the same tier, a compounding effect takes hold. Professional photos attract the right guest for the tier. The right guest arrives with calibrated expectations. Calibrated expectations produce satisfied stays. Satisfied stays generate tier-appropriate reviews. Tier-appropriate reviews attract more of the right guests. The cycle accelerates.</p>
+
+    <p>The top 10% of hosts in any market capture a disproportionate share of bookings — estimated at 60–80% of available demand. They are not succeeding because they have better properties. They're succeeding because their trust architecture is internally consistent, and that consistency compounds over time through the algorithm, through reviews, and through guest-to-guest recommendation.</p>
+
+    <p>The market is mature enough now that misalignment has an accelerating cost. Airbnb's 2025 algorithm overhaul shifted weight toward recent guest satisfaction over historical performance. Properties that have allowed their alignment to drift — outdated photos, stale copy, inconsistent experience — are losing visibility faster than ever. The platform rewards what good hosts have always known: consistency is the product.</p>
+
+    <p>Your listing is not a description of your property. <strong>It is a trust system.</strong> Every photo, every word, every amenity, and every review either reinforces or undermines the promise your price makes. Get those signals aligned, and the algorithm — and the guests — will do the rest.</p>
+
+    <div class="article-cta">
+      <h3>Want us to run the alignment audit on <em>your</em> listing?</h3>
+      <p>We'll identify the tier mismatch, find the one or two elements that are contradicting your positioning, and tell you exactly what to change — and in what order.</p>
+      <a href="/get-started" class="btn-primary">Get My Free Audit</a>
+    </div>
+
+    <a href="/intel/algorithm" class="next-article">
+      <div>
+        <div class="na-label">Read Next in The Playbook</div>
+        <div class="na-title">How the Airbnb Algorithm Actually Works: Visibility, Click-Through, and the Signals That Decide Who Gets Shown</div>
+      </div>
+      <div class="na-arrow">→</div>
+    </a>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">Market Intel</a>
+        <a href="/intel/miami">Miami — FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka — Summer 2026</a>
+        <a href="/intel/money">The Money</a>
+        <a href="/intel/trust">Trust Architecture</a>
+        <a href="/intel/algorithm">The Algorithm</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+
+<script>(function(){
+  var nav=document.querySelector('nav');
+  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}
+  var btn=document.getElementById('navHamburger');
+  var menu=document.getElementById('navMobileMenu');
+  if(!btn||!menu)return;
+  function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
+})();</script>
+</body>
+</html>

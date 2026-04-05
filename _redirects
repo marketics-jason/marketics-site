@@ -1,0 +1,9 @@
+# Marketics — Netlify Redirects
+# Trailing slash handled in netlify.toml
+# Pretty URLs (folder/index.html) handled natively by Netlify
+# Only explicit rules needed here:
+
+/call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
+
+# 404 fallback
+/* /404.html 404

@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNzUgMzc1Ij48cmVjdCB3aWR0aD0iMzc1IiBoZWlnaHQ9IjM3NSIgZmlsbD0iIzBmMGYwZiIvPjxwYXRoIGZpbGw9IiNENkFENjAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ3LjUsNDcuNSkiIGQ9Ik0gMTg3LjUgNTUuNjg3NSBMIDY3LjgwNDY4OCAxNDAuNDgwNDY5IEwgNjcuODA0Njg4IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDE1Mi44Nzg5MDYgTCAxMTUuNjgzNTk0IDE5My4xNDQ1MzEgTCAxMTUuNjgzNTk0IDI3Ny4wMzEyNSBMIDc3LjM3ODkwNiAyNzcuMDMxMjUgTCA3Ny4zNzg5MDYgMTQ1LjQxMDE1NiBMIDE4Ny41IDY3LjQxNzk2OSBMIDI5Ny42MjEwOTQgMTQ1LjQxMDE1NiBMIDI5Ny42MjEwOTQgMjc3LjAzMTI1IEwgMjU5LjMxNjQwNiAyNzcuMDMxMjUgTCAyNTkuMzE2NDA2IDE1OS42MzI4MTIgTCAyMDEuODYzMjgxIDExOS4zNjcxODggTCAyMDEuODYzMjgxIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDE0MC40ODA0NjkgWiBNIDEyNS4yNTc4MTIgMTk4LjEyNSBMIDE2My41NjI1IDE3MS4zMTI1IEwgMTYzLjU2MjUgMjc3LjAzMTI1IEwgMTI1LjI1NzgxMiAyNzcuMDMxMjUgWiBNIDI0OS43NDIxODggMjc3LjAzMTI1IEwgMjExLjQzNzUgMjc3LjAzMTI1IEwgMjExLjQzNzUgMTM3Ljc5Njg3NSBMIDI0OS43NDIxODggMTY0LjYwOTM3NSBaIE0gMjQ5Ljc0MjE4OCAyNzcuMDMxMjUiLz48L3N2Zz4=">
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="msapplication-TileColor" content="#D6AD60">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Marketics Results: Real Hosts. Real Numbers.</title>
+<meta name="description" content="Documented outcomes from Marketics-managed properties. Before/after data, timelines, and the specific moves that produced results.">
+<link rel="canonical" href="https://marketics.io/results">
+<style>
+/* ══ NAV — STANDARD ══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:64px;
+  background:rgba(13,13,13,.95);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .25s ease,border-color .25s ease;
+}
+nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.12);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+
+.nav-wordmark{height:20px;width:auto;display:block;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#6B6A65;text-decoration:none;
+  transition:color .15s ease;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:1px;background:#D6AD60;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.nav-links a:hover{color:#f8f6f2;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:#f8f6f2;}
+.nav-cta{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 22px;background:#D6AD60;color:#0f0f0f;
+  border:none;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:filter .2s ease,transform .15s ease;
+  flex-shrink:0;white-space:nowrap;
+}
+.nav-cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;padding:10px;
+  background:transparent;border:none;cursor:pointer;flex-shrink:0;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;-webkit-user-select:none;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:1.5px;background:#B4B2A9;
+  border-radius:2px;transition:transform .28s ease,opacity .28s ease;
+  transform-origin:center;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#D6AD60;}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}
+.nav-mobile-menu{
+  position:fixed;top:64px;left:0;right:0;
+  background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(214,173,96,.12);
+  padding:0;max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;
+}
+.nav-mobile-menu.open{max-height:520px;padding-bottom:16px;}
+.nav-mobile-menu a{
+  display:block;padding:14px 24px;
+  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#B4B2A9;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:color .15s,background .15s;
+}
+.nav-mobile-menu a:hover{color:#f8f6f2;background:rgba(255,255,255,.02);}
+.nav-mobile-menu a.active{color:#D6AD60;}
+.nav-mobile-menu .nm-cta{
+  display:block;margin:12px 24px 0;padding:14px;
+  background:#D6AD60;color:#0f0f0f!important;
+  text-align:center;border-radius:2px;
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:filter .2s;
+}
+.nav-mobile-menu .nm-cta:hover{filter:brightness(1.1);}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-links{display:none!important;}
+  .nav-cta{display:none!important;}
+  .nav-hamburger{display:flex!important;}
+}
+@media(min-width:769px){
+  .nav-hamburger{display:none!important;}
+  .nav-mobile-menu{display:none!important;}
+}
+
+:root{
+  --gold:#D6AD60;--gold-lo:rgba(214,173,96,.1);--gold-mid:rgba(214,173,96,.25);
+  --night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;--n4:#202020;--n5:#282828;
+  --stone:#B4B2A9;--dim:#6B6A65;--dim2:#4a4946;--white:#fff;
+  --ok:#2D7A4F;--ok-lo:rgba(45,122,79,.1);--warn:#C87E1A;
+  --red-lo:rgba(160,40,40,.12);--red:#c05050;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html{scroll-padding-top:64px;}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--white);line-height:1.6;overflow-x:hidden;;padding-top:64px;}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(214,173,96,.014) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.014) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+/* ══ SHARED ══ */
+.z1{position:relative;z-index:1;}
+.inner{max-width:1100px;margin:0 auto;padding:0 56px;}
+.eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.section-title{font-family:'Josefin Sans',sans-serif;font-size:clamp(28px,4vw,52px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:1.05;margin-bottom:14px;}
+.section-title em{color:var(--gold);font-style:normal;}
+.section-sub{font-size:16px;font-weight:300;color:var(--stone);line-height:1.8;max-width:560px;}
+.section-sub strong{color:var(--white);font-weight:500;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fi{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.fi.vis{opacity:1;transform:none;}
+
+/* ══ 1. HERO ══ */
+.results-hero{padding:128px 0 0;background:var(--night);position:relative;overflow:hidden;}
+.results-hero::after{content:'';position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:800px;height:300px;background:radial-gradient(ellipse,rgba(214,173,96,.05) 0%,transparent 65%);pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;padding:0 56px 0;position:relative;z-index:1;}
+.hero-tag{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(214,173,96,.18);border-radius:3px;padding:5px 12px;}
+.hero-h1{font-family:'Josefin Sans',sans-serif;font-size:clamp(44px,7vw,88px);font-weight:200;letter-spacing:.02em;text-transform:uppercase;color:var(--white);line-height:.9;margin-bottom:28px;}
+.hero-h1 em{color:var(--gold);font-style:normal;display:block;}
+.hero-sub{font-size:16px;font-weight:300;color:var(--stone);line-height:1.8;max-width:500px;margin-bottom:0;}
+.hero-sub strong{color:var(--white);font-weight:500;}
+
+/* Legal note */
+.legal-strip{max-width:1100px;margin:0 auto;padding:20px 56px 0;position:relative;z-index:1;}
+.legal-note{font-size:11px;font-weight:300;color:var(--dim2);font-style:italic;border-top:1px solid rgba(255,255,255,.05);padding-top:14px;margin-top:0;}
+
+/* ══ 2. STATS BAR ══ */
+.stats-bar{background:var(--n2);border-top:1px solid rgba(214,173,96,.1);border-bottom:1px solid rgba(255,255,255,.05);padding:0;}
+.stats-inner{max-width:1100px;margin:0 auto;padding:0 56px;display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-cell{padding:28px 20px;border-right:1px solid rgba(255,255,255,.06);position:relative;}
+.stat-cell:last-child{border-right:none;}
+.stat-cell::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s ease;}
+.stat-cell.counted::before{transform:scaleX(1);}
+.stat-num{font-family:'Josefin Sans',sans-serif;font-size:clamp(26px,3.5vw,40px);font-weight:200;color:var(--gold);letter-spacing:.02em;line-height:1;margin-bottom:6px;}
+.stat-lbl{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+.stat-sub{font-size:11px;color:var(--dim2);margin-top:4px;font-weight:300;}
+
+/* ══ 3. FILTER + CARDS ══ */
+.cards-section{padding:72px 0 80px;background:var(--night);}
+.filter-bar{display:flex;align-items:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.filter-group{display:flex;gap:3px;background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:5px;padding:3px;}
+.filter-btn{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:none;color:var(--dim);border-radius:3px;padding:6px 12px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.filter-btn:hover{color:var(--stone);}
+.filter-btn.active{background:rgba(214,173,96,.12);color:var(--gold);}
+.filter-label{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2);padding:0 4px;}
+.result-count{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-left:auto;}
+.result-count span{color:var(--gold);}
+
+/* Card grid */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.cs-card{background:var(--n2);border:1px solid rgba(255,255,255,.06);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .25s;position:relative;}
+.cs-card:hover{border-color:rgba(214,173,96,.2);transform:translateY(-2px);z-index:2;}
+.cs-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.cs-card:hover::before{transform:scaleX(1);}
+.cards-grid .cs-card:nth-child(1){border-radius:8px 0 0 0;}
+.cards-grid .cs-card:nth-child(3){border-radius:0 8px 0 0;}
+.cards-grid .cs-card:nth-child(7){border-radius:0 0 0 8px;}
+.cards-grid .cs-card:nth-child(9){border-radius:0 0 8px 0;}
+.cs-card.hidden{display:none;}
+
+/* Card top */
+.ct{padding:18px 18px 14px;border-bottom:1px solid rgba(255,255,255,.05);}
+.ct-row1{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;}
+.ct-market{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px;}
+.mkt-dot{width:5px;height:5px;border-radius:50%;background:var(--ok);}
+.ct-badge{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:3px 7px;}
+.ct-name{font-size:16px;font-weight:600;color:var(--white);margin-bottom:2px;line-height:1.2;}
+.ct-prop{font-size:11px;color:var(--dim);font-weight:400;}
+
+/* Split before/after */
+.cs-split{display:grid;grid-template-columns:1fr 1px 1fr;flex:1;}
+.cs-side{padding:14px 14px 10px;}
+.cs-rule{background:rgba(255,255,255,.06);}
+.cs-side-lbl{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.cs-side-lbl::after{content:'';flex:1;height:1px;}
+.cs-side.before .cs-side-lbl{color:var(--dim);}
+.cs-side.before .cs-side-lbl::after{background:rgba(255,255,255,.06);}
+.cs-side.after .cs-side-lbl{color:var(--gold);}
+.cs-side.after .cs-side-lbl::after{background:rgba(214,173,96,.2);}
+.cs-metric{margin-bottom:9px;}
+.cs-mk{font-size:10px;color:var(--dim);font-weight:400;margin-bottom:2px;letter-spacing:.02em;}
+.cs-mv{font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:200;letter-spacing:.03em;line-height:1;}
+.cs-side.before .cs-mv{color:var(--stone);}
+.cs-side.after .cs-mv{color:var(--gold);}
+.cs-mv.lg{font-size:22px;}
+.cs-msub{font-size:9px;color:var(--dim2);margin-top:2px;font-weight:300;line-height:1.3;}
+.occ-track{height:3px;border-radius:2px;margin-top:4px;overflow:hidden;}
+.cs-side.before .occ-track{background:rgba(180,178,169,.12);}
+.cs-side.after .occ-track{background:rgba(214,173,96,.12);}
+.occ-fill{height:100%;border-radius:2px;transition:width .8s ease;}
+.cs-side.before .occ-fill{background:rgba(180,178,169,.45);}
+.cs-side.after .occ-fill{background:var(--gold);}
+.stars{display:flex;gap:2px;margin-top:1px;}
+.star{font-size:10px;color:var(--dim);}
+.star.full{color:var(--gold);}
+.cs-side.after .star.full{text-shadow:0 0 5px rgba(214,173,96,.4);}
+.rank-pill{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:3px;margin-top:2px;}
+.cs-side.before .rank-pill{background:rgba(255,255,255,.05);color:var(--dim);}
+.cs-side.after .rank-pill{background:rgba(214,173,96,.1);color:var(--gold);border:1px solid rgba(214,173,96,.2);}
+
+/* Revenue delta bar */
+.rev-delta{background:rgba(214,173,96,.04);border-top:1px solid rgba(214,173,96,.1);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.rd-lbl{font-size:11px;color:var(--dim2);font-weight:300;}
+.rd-val{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:600;color:var(--gold);white-space:nowrap;}
+
+/* Card bottom insight */
+.cb{padding:12px 16px;background:var(--n3);border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:flex-start;gap:10px;}
+.cb-icon{font-size:12px;flex-shrink:0;margin-top:2px;opacity:.7;}
+.cb-text{flex:1;}
+.cb-head{font-size:11px;font-weight:600;color:var(--white);margin-bottom:2px;}
+.cb-sub{font-size:10px;color:var(--dim2);font-weight:300;line-height:1.5;}
+.timeline-pill{flex-shrink:0;font-family:'DM Mono',monospace;font-size:10px;color:var(--ok);background:var(--ok-lo);border:1px solid rgba(45,122,79,.2);border-radius:3px;padding:3px 8px;white-space:nowrap;align-self:flex-start;margin-top:1px;}
+
+/* ══ 4. FEATURED STORY ══ */
+.featured-section{background:var(--n2);padding:80px 0;border-top:1px solid rgba(255,255,255,.05);}
+.featured-wrap{max-width:1100px;margin:0 auto;padding:0 56px;}
+.featured-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start;margin-top:48px;}
+
+/* Left: narrative */
+.feat-host-row{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.feat-avatar{width:52px;height:52px;border-radius:50%;background:var(--n4);border:2px solid rgba(214,173,96,.2);display:flex;align-items:center;justify-content:center;font-family:'Josefin Sans',sans-serif;font-size:16px;font-weight:200;color:var(--gold);flex-shrink:0;}
+.feat-host-info{}
+.feat-host-name{font-size:16px;font-weight:600;color:var(--white);margin-bottom:2px;}
+.feat-host-meta{font-size:12px;color:var(--dim);font-weight:300;}
+.feat-before-box{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-left:3px solid rgba(180,178,169,.3);border-radius:0 4px 4px 0;padding:16px 18px;margin-bottom:20px;}
+.feat-after-box{background:var(--n3);border:1px solid rgba(214,173,96,.12);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:16px 18px;margin-bottom:20px;}
+.feat-box-lbl{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;}
+.feat-before-box .feat-box-lbl{color:var(--dim);}
+.feat-after-box .feat-box-lbl{color:var(--gold);}
+.feat-box-text{font-size:13px;font-weight:300;color:var(--stone);line-height:1.7;}
+.feat-box-text strong{color:var(--white);font-weight:500;}
+.feat-quote{font-family:'Josefin Sans',sans-serif;font-size:clamp(14px,1.6vw,18px);font-weight:200;font-style:italic;color:var(--stone);line-height:1.65;margin:24px 0 12px;padding-left:20px;border-left:2px solid rgba(214,173,96,.35);}
+.feat-quote strong{color:var(--gold);font-style:normal;font-weight:600;}
+.feat-attribution{font-size:11px;color:var(--dim);font-weight:300;padding-left:20px;}
+
+/* Right: timeline + result metrics */
+.feat-right{}
+.stage-timeline{display:flex;flex-direction:column;gap:0;margin-bottom:32px;}
+.stage-item{display:flex;gap:16px;position:relative;}
+.stage-item+.stage-item .stage-line{margin-top:0;}
+.stage-connector{display:flex;flex-direction:column;align-items:center;width:32px;flex-shrink:0;}
+.stage-num{width:32px;height:32px;border-radius:50%;background:var(--n3);border:1px solid rgba(214,173,96,.2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--gold);flex-shrink:0;position:relative;z-index:1;}
+.stage-item.done .stage-num{background:rgba(214,173,96,.1);border-color:rgba(214,173,96,.4);}
+.stage-line{width:1px;flex:1;background:rgba(255,255,255,.06);min-height:20px;margin:0 auto;}
+.stage-item:last-child .stage-line{display:none;}
+.stage-/* body-override-removed */
+.stage-label{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.stage-head{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.stage-desc{font-size:12px;font-weight:300;color:var(--dim2);line-height:1.6;}
+.stage-result{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ok);background:var(--ok-lo);border:1px solid rgba(45,122,79,.2);border-radius:3px;padding:3px 8px;}
+
+/* Result metrics grid */
+.feat-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--n3);border-radius:8px;overflow:hidden;border:1px solid rgba(214,173,96,.1);}
+.feat-metric{padding:16px 14px;background:var(--n3);}
+.feat-metric:hover{background:var(--n4);}
+.feat-mv{font-family:'Josefin Sans',sans-serif;font-size:22px;font-weight:200;color:var(--gold);letter-spacing:.03em;line-height:1;margin-bottom:4px;}
+.feat-ml{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:2px;}
+.feat-msub{font-size:10px;color:var(--dim2);font-weight:300;}
+
+/* ══ 5. GUARANTEE ══ */
+.guarantee-bar{background:var(--night);border-top:1px solid rgba(255,255,255,.05);padding:48px 0;}
+.guarantee-inner{max-width:1100px;margin:0 auto;padding:0 56px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.guar-left{}
+.guar-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.guar-text{font-size:15px;font-weight:300;color:var(--stone);line-height:1.6;max-width:520px;}
+.guar-text strong{color:var(--white);font-weight:500;}
+.guar-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.btn-primary{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--night);background:var(--gold);border:none;border-radius:4px;padding:14px 28px;cursor:pointer;transition:filter .2s;text-decoration:none;display:inline-block;white-space:nowrap;}
+.btn-primary:hover{filter:brightness(1.08);}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(214,173,96,0);}50%{box-shadow:0 0 0 8px rgba(214,173,96,.12);}}
+.btn-primary{animation:glow 2.8s ease-in-out infinite;}
+.btn-ghost-link{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(214,173,96,.6);text-decoration:none;display:flex;align-items:center;gap:7px;transition:color .2s;white-space:nowrap;}
+.btn-ghost-link:hover{color:var(--gold);}
+.bgl{width:16px;height:1px;background:currentColor;position:relative;}
+.bgl::after{content:'';position:absolute;right:0;top:-3px;width:6px;height:6px;border-right:1px solid currentColor;border-top:1px solid currentColor;transform:rotate(45deg);}
+
+/* ══ FOOTER ══ */
+.page-footer{background:var(--n3);border-top:1px solid rgba(255,255,255,.06);padding:24px 56px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.pf-copy{font-size:11px;color:var(--dim2);font-weight:300;}
+
+.pf-links a{font-size:11px;color:var(--dim2);text-decoration:none;transition:color .2s;}
+.pf-links a:hover{color:var(--gold);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){nav,.hero-inner,.legal-strip,.inner,.stats-inner,.featured-wrap,.guarantee-inner,.page-footer{padding-left:24px;padding-right:24px;}}
+@media(max-width:860px){
+  nav 
+  .cards-grid{grid-template-columns:1fr 1fr;}
+  .cards-grid .cs-card:nth-child(n){border-radius:0;}
+  .cards-grid .cs-card:nth-child(1){border-radius:8px 0 0 0;}
+  .cards-grid .cs-card:nth-child(2){border-radius:0 8px 0 0;}
+  .featured-grid{grid-template-columns:1fr;}
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .stat-cell:nth-child(2){border-right:none;}
+  .filter-bar{gap:6px;}
+}
+@media(max-width:560px){
+  .cards-grid{grid-template-columns:1fr;}
+  .cards-grid .cs-card:nth-child(n){border-radius:0;}
+  .cards-grid .cs-card:first-child{border-radius:8px 8px 0 0;}
+  .cards-grid .cs-card:last-child{border-radius:0 0 8px 8px;}
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .feat-metrics{grid-template-columns:1fr 1fr;}
+}
+
+/* ═══ MOBILE NAV ════════════════════════════════════════════════ */
+
+/* ══ MOBILE NAV ══════════════════════════════════════════════ */
+@media(max-width:768px){
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+@media(min-width:769px){
+  
+  
+}
+/* ══ END MOBILE NAV ══════════════════════════════════════════ */
+
+/* ══ SITE FOOTER — STANDARD ══════════════════════════════════════ */
+.site-footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:32px 56px;
+  background:rgba(10,10,10,.6);
+}
+.sf-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
+}
+.sf-logo{text-decoration:none;flex-shrink:0;opacity:.6;transition:opacity .15s;}
+.sf-logo:hover{opacity:1;}
+.sf-links{
+  display:flex;flex-wrap:wrap;gap:4px 20px;flex:1;
+}
+.sf-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:#6B6A65;text-decoration:none;
+  transition:color .15s;
+}
+.sf-links a:hover{color:#D6AD60;}
+.sf-right{margin-left:auto;text-align:right;}
+.sf-copy{font-family:'DM Mono','Courier New',monospace;font-size:10px;color:#6B6A65;letter-spacing:.06em;}
+.sf-tagline{font-family:'Josefin Sans',sans-serif;font-size:9px;color:rgba(214,173,96,.4);letter-spacing:.16em;text-transform:uppercase;margin-top:3px;}
+@media(max-width:768px){
+  .site-footer{padding:24px 20px;}
+  .sf-inner{gap:20px;}
+  .sf-right{margin-left:0;text-align:left;}
+}
+
+/* ── SITE FOOTER ── */
+.site-footer{position:relative;z-index:1;background:var(--n2,#111);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
+.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
+.sf-brand{padding-top:2px;}
+.sf-copy{font-family:var(--d,'Josefin Sans',sans-serif);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white,#f8f6f2);margin-bottom:8px;}
+.sf-location{font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;line-height:1.8;}
+.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.sf-col{display:flex;flex-direction:column;gap:6px;}
+.sf-col-label{font-family:var(--m,'DM Mono',monospace);font-size:9px;color:var(--dim,#6B6A65);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sf-col a{font-size:12px;color:var(--stone,#B4B2A9);text-decoration:none;transition:color .15s;line-height:1.7;}
+.sf-col a:hover{color:var(--gold,#D6AD60);}
+.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
+@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+</style>
+  <!-- Open Graph -->  <!-- Twitter Card --><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://marketics.io/#business",
+  "name": "Marketics",
+  "url": "https://marketics.io",
+  "description": "Performance-based STR revenue optimization. 10% of net payout per booking.",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "28",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewBody": "Went from $8,200 to $12,400 per month in peak season in Whistler. Jason and the team rebuilt our listing strategy from the ground up. The data-driven approach is unlike anything we had tried before.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Whistler Property Owner"
+      },
+      "datePublished": "2026-01"
+    },
+    {
+      "@type": "Review",
+      "reviewBody": "Miami Beach condo went from 58% to 81% occupancy while our ADR also increased. The midweek gap-filling strategy alone paid for everything.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Miami Beach Host"
+      },
+      "datePublished": "2025-12"
+    },
+    {
+      "@type": "Review",
+      "reviewBody": "+74% annual revenue in Jackson Hole. The shoulder season strategy filling with corporate retreat clients was something we would never have figured out on our own.",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Jackson Hole Cabin Owner"
+      },
+      "datePublished": "2025-11"
+    }
+  ]
+}
+</script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Marketics">
+  <meta property="og:title" content="Marketics Results — Real Hosts. Real Numbers.">
+  <meta property="og:description" content="Documented outcomes from Marketics-managed properties. +63% average revenue increase in 90 days. $4,704/mo average gap closed.">
+  <meta property="og:url" content="https://marketics.io/results">
+  <meta property="og:image" content="https://marketics.io/og/default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Marketics Results — Real Hosts. Real Numbers.">
+  <meta name="twitter:description" content="Documented outcomes from Marketics-managed properties. +63% average revenue increase in 90 days. $4,704/mo average gap closed.">
+  <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap"></noscript>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDcgMTIwIiB3aWR0aD0iNjA3IiBoZWlnaHQ9IjEyMCI+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2LjcxOTQsMC43MTQzKSBzY2FsZSgwLjM0NjMyMCwwLjM0NjMyMCkiPjxwYXRoIGZpbGw9IiNENkFENjAiIGQ9Ik0gMTg3LjUgNTUuNjg3NSBMIDY3LjgwNDY4OCAxNDAuNDgwNDY5IEwgNjcuODA0Njg4IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDI4Ni42MDU0NjkgTCAxNzMuMTM2NzE5IDE1Mi44Nzg5MDYgTCAxMTUuNjgzNTk0IDE5My4xNDQ1MzEgTCAxMTUuNjgzNTk0IDI3Ny4wMzEyNSBMIDc3LjM3ODkwNiAyNzcuMDMxMjUgTCA3Ny4zNzg5MDYgMTQ1LjQxMDE1NiBMIDE4Ny41IDY3LjQxNzk2OSBMIDI5Ny42MjEwOTQgMTQ1LjQxMDE1NiBMIDI5Ny42MjEwOTQgMjc3LjAzMTI1IEwgMjU5LjMxNjQwNiAyNzcuMDMxMjUgTCAyNTkuMzE2NDA2IDE1OS42MzI4MTIgTCAyMDEuODYzMjgxIDExOS4zNjcxODggTCAyMDEuODYzMjgxIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDI4Ni42MDU0NjkgTCAzMDcuMTk1MzEyIDE0MC40ODA0NjkgWiBNIDEyNS4yNTc4MTIgMTk4LjEyNSBMIDE2My41NjI1IDE3MS4zMTI1IEwgMTYzLjU2MjUgMjc3LjAzMTI1IEwgMTI1LjI1NzgxMiAyNzcuMDMxMjUgWiBNIDI0OS43NDIxODggMjc3LjAzMTI1IEwgMjExLjQzNzUgMjc3LjAzMTI1IEwgMjExLjQzNzUgMTM3Ljc5Njg3NSBMIDI0OS43NDIxODggMTY0LjYwOTM3NSBaIE0gMjQ5Ljc0MjE4OCAyNzcuMDMxMjUiLz48L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MS4zNzY2LDgxLjAwMDApIHNjYWxlKDAuMDM2NzEzLC0wLjAzNjcxMykiIGZpbGw9IiNENkFENjAiPgo8cGF0aCBkPSJNMTAxNDkgMTE0MiBjLTIxIC00IC0yMyAtNSAtNDMgLTYgLTE1IC0xIC0zMCAtMyAtNDEgLTUgLTMgLTEgLTEyCi0yIC0xOSAtNCAtOCAtMSAtMTggLTMgLTIyIC01IC01IC0xIC0xMSAtMiAtMTUgLTMgLTQgLTEgLTkgLTIgLTEyIC00IC0zIC0xCi04IC0zIC0xMSAtMyAtMyAtMSAtOCAtMiAtMTEgLTQgLTMgLTIgLTcgLTMgLTkgLTQgLTMgMCAtOCAtMiAtMTMgLTQgLTUgLTIKLTEwIC00IC0xMiAtNSAtMyAtMSAtOCAtMyAtMTEgLTUgLTQgLTEgLTggLTMgLTkgLTMgLTEgMCAtNCAtMiAtNyAtMyAtMyAtMgotNiAtNCAtNyAtNCAtMSAwIC00IC0yIC03IC0zIC0zIC0yIC03IC00IC05IC01IC0yIC0xIC02IC0zIC04IC01IC0zIC0xIC02Ci0zIC03IC00IC0xIDAgLTQgLTIgLTYgLTMgLTIgLTIgLTYgLTQgLTggLTUgLTIgLTEgLTUgLTMgLTcgLTQgLTIgLTIgLTQgLTMKLTQgLTMgLTEgMCAtNCAtMiAtNiAtNCAtMyAtMiAtNiAtNCAtOCAtNSAtNyAtNSAtMTMgLTkgLTI1IC0xOSAtMyAtMiAtNyAtNgotMTEgLTggLTMgLTIgLTcgLTYgLTkgLTcgLTEgLTIgLTcgLTcgLTEyIC0xMSAtMTMgLTEyIC0zOCAtMzggLTQ3IC00OSAtMTYKLTE5IC0xOCAtMjIgLTIxIC0yNyAtMiAtMiAtMyAtNCAtNCAtNCAtMSAtMSAtMyAtMyAtNCAtNiAtMiAtMyAtNSAtNyAtNiAtOAotMSAtMSAtMyAtNSAtNSAtOCAtMiAtMyAtNiAtOSAtOCAtMTMgLTMgLTQgLTUgLTcgLTUgLTggMCAwIC0xIC0yIC0zIC00IC0yCi0zIC02IC0xMSAtMTIgLTIxIC0xIC0zIC0zIC03IC01IC05IC0xIC0xIC0zIC01IC00IC05IC0xIC0zIC0zIC03IC01IC0xMCAtMQotMiAtMyAtNiAtMyAtOSAtMSAtMiAtMyAtNiAtNCAtOCAtMiAtMiAtMyAtNiAtNCAtOSAtMSAtMyAtMyAtOCAtNCAtMTEgLTIgLTMKLTMgLTYgLTMgLTcgMCAtMiAtMSAtNSAtMyAtOCAtMSAtMyAtNCAtMTIgLTYgLTE5IC0xIC03IC00IC0xNiAtNSAtMTkgLTEgLTQKLTMgLTExIC0zIC0xNiAtMSAtNSAtMyAtMTIgLTQgLTE1IC0xIC00IC0zIC0xMSAtMyAtMTYgLTEgLTggLTQgLTMwIC01IC0zNwotMiAtMTEgLTMgLTMzIC0zIC03NCAwIC00OCAwIC01NSA0IC04MyAyIC05IDMgLTIxIDQgLTI2IDEgLTUgMiAtMTIgMyAtMTYgMgotMyAzIC0xMCA0IC0xNCAwIC0zIDIgLTExIDMgLTE1IDIgLTUgNCAtMTUgNiAtMjEgMiAtNiA0IC0xNCA1IC0xNyAyIC0zIDMgLTcKMyAtOCAwIC0yIDEgLTUgMyAtOCAyIC0zIDQgLTggNCAtMTEgMSAtMyAzIC03IDQgLTkgMSAtMSAzIC01IDMgLTcgMSAtMyAzIC03CjUgLTEwIDEgLTIgMyAtNyA0IC0xMCAxIC0zIDMgLTcgNCAtOCAyIC0yIDQgLTYgNSAtOSA3IC0xMiAxMCAtMTggMTIgLTIxIDIKLTIgMyAtNCAzIC00IDAgLTEgMiAtNCA0IC03IDIgLTMgNCAtNiA0IC02IDAgLTEgOCAtMTMgMTIgLTE4IDMgLTUgNyAtMTAgMTEKLTE1IDEgLTMgNCAtNiA1IC04IDIgLTIgNiAtNiA4IC0xMCAyIC0zIDYgLTcgOCAtOSA4IC0xMCAxNCAtMTYgMTYgLTE4IDEgLTEKNiAtNiAxMCAtMTEgNSAtNSAxNCAtMTMgMjAgLTE5IDYgLTYgMTMgLTEyIDE0IC0xMyAyIC0yIDcgLTYgMTggLTE0IDExIC05IDE2Ci0xMyAxOSAtMTQgMSAtMSA1IC00IDkgLTcgMyAtMiA3IC01IDggLTYgMiAtMSA2IC0zIDggLTUgMyAtMiA3IC00IDkgLTUgMyAtMQo2IC0zIDggLTUgMiAtMiA1IC0zIDYgLTMgMCAwIDMgLTIgNiAtMyAyIC0yIDYgLTQgOCAtNSAyIC0xIDUgLTIgNiAtMyAyIC0xIDUKLTMgOCAtNCAzIC0yIDcgLTQgOSAtNSAyIC0yIDYgLTMgNyAtNCAyIDAgNiAtMiAxMCAtMyA0IC0yIDggLTQgMTAgLTQgMSAtMSA1Ci0zIDkgLTQgNCAtMiA5IC00IDEyIC01IDMgLTEgNyAtMiAxMCAtNCAyIC0xIDggLTMgMTIgLTQgNCAtMSA5IC0zIDExIC0zIDIKLTEgNyAtMyAxMiAtNCA1IC0xIDEyIC0zIDE2IC00IDMgLTEgOSAtMiAxMiAtMyAzIC0xIDEwIC0yIDE3IC0zIDIxIC00IDM3IC02CjUyIC03IDE4IC0xIDI3IC0yIDQxIC02IDEwIC0yIDEzIC0yIDM5IC0yIDE1IDAgMjggMCAyOSAxIDMgMyAxNSA1IDU1IDggNyAxCjE2IDIgMjAgMyA0IDAgMTQgMiAyMiA0IDcgMSAxNyAzIDIyIDQgNCAyIDExIDQgMTYgNSA1IDAgMTEgMiAxMyA0IDMgMSA4IDMKMTIgMyA0IDEgOSAzIDEwIDQgMSAxIDYgMyAxMCA0IDUgMSA5IDMgMTAgNCAyIDAgNiAyIDExIDQgNCAxIDkgMyAxMSA0IDEgMSA1CjMgOSA0IDMgMSA3IDMgOSA1IDIgMSA2IDMgOCAzIDIgMSA1IDMgNiA0IDIgMSA1IDMgNyA0IDMgMSA3IDMgOSA1IDIgMiA1IDMgNgozIDAgMCAzIDIgNSAzIDMgMiA2IDUgOCA2IDIgMCA3IDQgMTEgNyA0IDMgMTAgNyAxMyA5IDMgMSA1IDMgNSA0IDAgMCAxIDEgMwoyIDcgNCAyMyAxOCA0MiAzNyA4IDggOSA5IDkgMTIgLTEgMyAtNyA5IC0zNSAzOCAtMTMgMTMgLTE0IDE0IC0yMiA2IC02IC02Ci0xOSAtMTggLTI4IC0yNCAtMyAtMiAtNyAtNiAtMTAgLTggLTIgLTIgLTQgLTQgLTUgLTQgMCAwIC0zIC0yIC01IC00IC0zIC0yCi03IC01IC05IC02IC0zIC0yIC02IC00IC04IC01IC05IC03IC0xNSAtMTAgLTE2IC0xMCAwIDAgLTIgLTEgLTQgLTIgLTEgLTIKLTUgLTQgLTkgLTYgLTQgLTEgLTcgLTMgLTggLTQgLTEgLTEgLTIgLTIgLTMgLTIgMCAwIC01IC0yIC05IC01IC01IC0yIC05IC00Ci0xMCAtNCAtMSAwIC01IC0yIC05IC00IC01IC0yIC0xMSAtNSAtMTQgLTUgLTQgLTEgLTggLTMgLTExIC00IC0yIC0yIC03IC0zCi0xMCAtNCAtNCAtMSAtOSAtMiAtMTEgLTQgLTMgLTEgLTggLTMgLTEzIC0zIC01IC0xIC0xMSAtMyAtMTMgLTQgLTIgLTEgLTgKLTIgLTEyIC0zIC04IC0xIC0xMiAtMiAtMzEgLTYgLTggLTEgLTIxIC0yIC00MCAtNCAtMTQgLTEgLTgzIC0xIC05MyAwIC00IDAKLTEyIDEgLTE3IDEgLTUgMSAtMTAgMSAtMTAgMSAtMSAxIC00IDEgLTYgMSAtMyAxIC0xMCAyIC0xNiAzIC02IDEgLTE1IDMgLTIwCjMgLTUgMSAtMTMgMyAtMTcgNCAtNCAyIC0xMCA0IC0xNCA0IC00IDEgLTkgMiAtMTEgNCAtMyAxIC04IDIgLTExIDMgLTMgMSAtOAoyIC0xMSA0IC0yIDEgLTggMyAtMTIgNCAtNCAxIC0xMCAzIC0xMyA1IC0yIDIgLTcgMyAtOSA0IC0zIDEgLTYgMiAtOCA0IC0yIDEKLTYgMyAtOSA0IC0zIDEgLTYgMyAtOCA0IC0yIDIgLTUgMyAtNyA0IC0yIDEgLTUgMiAtNiAzIC0yIDEgLTUgMyAtNyA0IC0zIDEKLTcgMyAtMTAgNSAtMyAyIC02IDQgLTcgNCAwIDAgLTIgMSAtNCAzIC0yIDEgLTUgNCAtNyA1IC01IDIgLTEyIDcgLTE3IDExIC0yCjEgLTUgMyAtNiA0IC0yIDEgLTYgNSAtMTEgOCAtNCA0IC04IDcgLTkgOCAtNSAzIC0yOSAyNSAtMzQgMzAgLTMgNCAtNyA4IC05CjEwIC0zIDMgLTEwIDExIC0yMiAyNSAtNiA3IC0xNyAyMSAtMjAgMjYgLTEgMiAtMyA1IC00IDYgLTIgMiAtNCA1IC00IDcgLTEgMgotNCA2IC02IDggLTEgMiAtMyA2IC0zIDcgLTEgMSAtMiAzIC00IDUgLTEgMiAtMyA1IC01IDggLTEgMyAtMyA2IC0zIDcgLTEgMAotMiAzIC00IDcgLTIgMyAtNCA3IC01IDkgLTEgMSAtMyA0IC0zIDcgLTEgMyAtMyA2IC00IDggLTEgMSAtMyA0IC00IDcgLTEgMwotMyA4IC00IDEyIC0yIDQgLTQgMTAgLTUgMTMgLTEgNCAtMyA5IC00IDExIC0xIDEgLTMgNyAtMyAxMSAtMSA0IC0zIDEwIC01CjEzIC0xIDIgLTIgNyAtMyAxMCAwIDUgLTEgNyAtNSAyNCAtMiA3IC01IDMzIC04IDU4IC00IDM4IC0zIDkxIDQgMTM2IDEgNyAyCjE0IDIgMTYgMCAyIDEgNyAzIDEzIDIgNiAzIDE0IDQgMTggMSA0IDIgMTAgNCAxNCAyIDMgMyA5IDQgMTIgMCAyIDIgOCA0IDExCjEgNCAzIDggMyA5IDAgMSAyIDcgNSAxNCAzIDYgNSAxMyA2IDE0IDAgMSAxIDQgMiA1IDEgMSAzIDUgNCA4IDEgNCAzIDcgNCA4CjAgMSAyIDQgNCA3IDYgMTIgMTEgMjEgMTQgMjUgMSAxIDIgMyAyIDQgMCAwIDEgMiAzIDUgMSAyIDQgNSA0IDcgMiAzIDExIDE2CjE0IDE5IDAgMSAyIDIgMiAzIDIgMyA5IDEzIDE0IDE5IDIgMiA1IDYgNyA4IDYgNyAyNyAzMCAzNCAzNiA0IDMgOCA3IDEwIDkgOAo4IDExIDEwIDE0IDEyIDIgMiA2IDUgMTAgOSA0IDMgOSA2IDExIDcgMSAxIDMgMyA1IDQgMSAxIDMgMyA0IDQgMiAwIDUgMyA4IDUKMiAyIDUgNCA3IDQgMSAwIDMgMiA1IDMgMSAyIDQgNCA2IDQgMiAxIDUgMyA3IDQgMSAyIDQgNCA3IDUgMiAwIDUgMiA3IDQgMiAxCjUgMyA4IDMgMiAxIDUgMyA3IDQgMiAyIDYgMyA4IDQgMiAxIDYgMiA4IDQgMiAyIDcgMyA5IDQgMiAxIDYgMiA5IDQgMiAxIDggMwoxMiA0IDUgMiAxMSA0IDEzIDUgMiAxIDcgMyAxMiA0IDQgMSA5IDMgMTIgNCAyIDEgNyAyIDEwIDMgNCAxIDEwIDIgMTQgNCA0IDEKMTIgMyAxNyAzIDExIDIgMjQgNCAzMCA2IDIgMCAxMCAxIDE2IDIgNiAxIDE2IDEgMjEgMiA1IDAgMjkgMSA1MiAxIDQ3IC0xIDYzCi0yIDkwIC03IDkgLTIgMTkgLTMgMjMgLTQgNSAtMSAxMCAtMiAxMyAtMyAyIC0xIDggLTMgMTIgLTQgNCAwIDExIC0yIDE0IC0zCjMgLTIgOCAtNCAxMiAtNSAzIDAgOCAtMiAxMCAtMyAyIC0xIDcgLTMgMTIgLTQgNSAtMiAxMSAtNSAxNCAtNiAzIC0yIDYgLTMgNwotMyAxIDAgNCAtMiA3IC00IDQgLTEgNyAtMyA5IC00IDEgMCA0IC0yIDcgLTMgMiAtMiA2IC00IDggLTUgMiAtMSA1IC0yIDcgLTQKMiAtMSA1IC0zIDcgLTQgMiAwIDUgLTMgNyAtNCAyIC0yIDQgLTMgNSAtMyAxIDAgNiAtNCAxNiAtMTEgMSAtMSA1IC00IDggLTYKMyAtMSA1IC0zIDUgLTQgMCAwIDEgLTEgMyAtMiA2IC00IDMxIC0yNSAzNiAtMzEgNCAtNiA2IC01IDIyIDEyIDI5IDI5IDMyIDMzCjMyIDM1IDAgMyAtNSA4IC0yMiAyNCAtMTMgMTEgLTMxIDI3IC0zNiAzMCAtMiAwIC00IDIgLTYgNCAtMSAxIC00IDMgLTYgNCAtMgoxIC00IDMgLTUgNCAtMSAxIC00IDIgLTUgMyAtMiAxIC01IDMgLTcgNCAtMiAyIC02IDQgLTggNSAtMiAxIC02IDMgLTcgNSAtMgoxIC01IDIgLTYgMyAtMiAwIC01IDIgLTggNCAtMiAxIC02IDQgLTggNCAtMiAxIC01IDIgLTYgMyAtMiAxIC02IDMgLTkgNSAtNAoxIC03IDMgLTggMyAtMiAxIC02IDMgLTkgNCAtNCAxIC0xMCAzIC0xMyA1IC0zIDEgLTkgMyAtMTIgNCAtNCAxIC05IDMgLTExIDQKLTEgMSAtNiAzIC0xMCA0IC0zIDAgLTkgMiAtMTIgMyAtMyAyIC04IDMgLTEyIDQgLTQgMSAtMTEgMiAtMTYgNCAtMTAgMyAtMTYKNCAtNDUgOSAtMTggMyAtMTggMyAtMjcgNCAtNSAwIC0xNCAxIC0yMCAxIC0xMSAxIC0xNSAyIC0yNCAzIC0xIDEgLTMgMiAtNSAyCi0zIDMgLTUzIDMgLTYzIDB6Ii8+CjxwYXRoIGQ9Ik0xMTQ1OSAxMTQzIGMtNSAtMyAtMjIgLTUgLTQ3IC03IC05IC0xIC0yMSAtMiAtMjcgLTMgLTM2IC02IC00MiAtNwotNTIgLTExIC00IC0xIC0xMCAtMiAtMTQgLTMgLTQgLTEgLTggLTIgLTEwIC0zIC0xIC0xIC02IC0zIC0xMSAtNCAtNCAtMSAtOQotMyAtMTEgLTQgLTIgLTIgLTUgLTMgLTcgLTMgLTMgLTEgLTE0IC02IC0yNSAtMTIgLTIgLTEgLTcgLTMgLTExIC01IC0zIC0yCi02IC0zIC02IC00IC0xIC0xIC00IC0yIC03IC00IC0zIC0yIC02IC00IC03IC00IC0xIC0xIC0zIC0zIC02IC01IC0yIC0xIC03Ci00IC0xMCAtNyAtMyAtMiAtNyAtNSAtOSAtNyAtMTAgLTYgLTMyIC0yOSAtNDIgLTQxIC04IC0xMCAtMTcgLTIzIC0yMSAtMzAKLTEgLTIgLTMgLTYgLTUgLTcgLTEgLTIgLTIgLTYgLTMgLTggLTEgLTIgLTMgLTcgLTUgLTkgLTEgLTIgLTMgLTYgLTMgLTcgLTEKLTIgLTIgLTYgLTQgLTkgLTIgLTMgLTQgLTggLTQgLTExIC0xIC0zIC0yIC04IC00IC0xMCAtMSAtMyAtMiAtOCAtMyAtMTEgLTEKLTQgLTIgLTEyIC00IC0xOCAtMyAtMTcgLTQgLTM0IC00IC02NCAxIC0zMCAxIC0zMyA0IC00NSAxIC01IDMgLTEzIDQgLTE4IDAKLTYgMiAtMTMgMyAtMTUgMiAtMyAzIC04IDQgLTEwIDEgLTMgMyAtOCA1IC0xMiAxIC0zIDMgLTcgMyAtOCAwIC0xIDEgLTMgMwotNSAxIC0yIDMgLTYgNCAtOSAzIC01IDExIC0xNyAxNSAtMjIgMTIgLTE0IDMzIC0zNSA0MCAtNDAgMiAtMiA0IC0zIDQgLTQgMAowIDIgLTIgNSAtNCA3IC01IDE0IC0xMCAxNyAtMTIgMSAtMSAzIC0zIDUgLTMgMiAtMSA1IC00IDggLTYgMiAtMSA1IC0zIDUgLTMKMSAwIDQgLTIgNyAtMyAyIC0yIDYgLTQgNyAtNSAxIDAgNiAtMiAxMSAtNSA1IC0yIDkgLTQgMTAgLTQgMSAwIDQgLTIgOCAtMyAzCi0yIDcgLTQgOCAtNCAyIDAgNiAtMiAxMCAtMyAzIC0yIDggLTQgMTEgLTUgMiAwIDYgLTIgOSAtMyAzIC0xIDggLTMgMTEgLTQgMwotMSAxMCAtMyAxNyAtNSA2IC0yIDEyIC00IDE1IC00IDIgLTEgNiAtMiAxMCAtNCA0IC0yIDEwIC0zIDE0IC00IDMgLTEgOSAtMgoxMyAtNCAzIC0xIDggLTMgMTAgLTMgMyAtMSA5IC0yIDE0IC00IDUgLTIgMTQgLTQgMjAgLTUgNSAtMSAxNiAtNCAyMyAtNSA3Ci0yIDE0IC00IDE1IC00IDEgMCA2IC0xIDExIC0zIDUgLTIgMTQgLTQgMTkgLTQgNCAtMSAxMSAtMyAxMyAtNCAzIC0xIDkgLTMKMTMgLTQgNSAwIDExIC0yIDE0IC00IDQgLTEgMTAgLTMgMTUgLTMgNCAtMSAxMiAtMyAxNiAtNSA1IC0xIDEyIC00IDE3IC01IDQKMCA5IC0yIDExIC0zIDIgLTEgNyAtMyAxMSAtNCA0IDAgMTAgLTIgMTIgLTQgMyAtMSA4IC0zIDExIC00IDMgMCA5IC0yIDEyIC00CjMgLTIgNyAtMyA3IC0zIDEgMCA1IC0yIDggLTMgNCAtMiA5IC01IDEyIC01IDMgLTEgNiAtMyA5IC01IDIgLTIgNCAtMyA1IC0zCjAgMCA0IC0yIDggLTQgMyAtMyA3IC01IDcgLTUgMSAwIDMgLTEgNSAtMyAyIC0yIDUgLTQgNyAtNSAyIC0xIDQgLTMgNSAtNCAxCjAgNCAtMyA2IC00IDYgLTQgMjcgLTIzIDMzIC0yOSA0IC02IDEyIC0xNiAxMiAtMTcgMCAwIDIgLTMgNCAtNiAyIC0zIDQgLTggNQotMTAgMSAtMiAyIC01IDQgLTcgMSAtMiAzIC03IDMgLTEwIDEgLTQgMyAtOSA0IC0xMSA1IC05IDggLTUyIDYgLTczIC0yIC0yMwotMyAtMzEgLTYgLTM2IC0xIC0zIC0zIC04IC0zIC0xMiAtMSAtMyAtMyAtOCAtNCAtMTAgLTIgLTMgLTMgLTcgLTQgLTkgLTEgLTMKLTMgLTYgLTQgLTcgMCAtMSAtMiAtNCAtNCAtNyAtNSAtMTAgLTE0IC0yMSAtMjQgLTMzIC0xMyAtMTMgLTE2IC0xNiAtMzQgLTI5Ci0yIC0yIC02IC01IC04IC02IC0yIC0xIC01IC0zIC03IC00IC0xIC0yIC01IC00IC03IC01IC0zIC0xIC01IC0yIC01IC0zIC0xCjAgLTQgLTIgLTggLTQgLTMgLTEgLTggLTMgLTEwIC01IC0yIC0xIC02IC0yIC0xMCAtMyAtMyAtMSAtNyAtMyAtOSAtNCAtMyAtMgotOCAtMyAtMTIgLTQgLTUgLTEgLTEwIC0zIC0xMiAtNCAtMiAtMSAtOSAtMyAtMTYgLTQgLTYgLTEgLTE1IC0zIC0xOCAtNCAtOAotMiAtMzQgLTUgLTUwIC03IC01IDAgLTEzIC0xIC0xNyAtMSAtNCAtMSAtMjIgLTEgLTM5IC0yIC0zMCAwIC0zNSAwIC02MSAyCi0yNyAzIC01NSA2IC01OSA4IC0zIDEgLTE1IDMgLTI0IDQgLTUgMSAtMTEgMyAtMTQgNCAtMiAxIC04IDMgLTEzIDQgLTUgMAotMTAgMiAtMTMgMyAtMiAyIC03IDMgLTEwIDQgLTQgMSAtOSAyIC0xMiA0IC0zIDEgLTkgMyAtMTMgNCAtNCAyIC0xMCA0IC0xMwo1IC0yIDIgLTcgMyAtOSA0IC0yIDEgLTYgMiAtOCA0IC0zIDEgLTcgMyAtMTAgNCAtMyAxIC02IDMgLTcgNCAtMiAxIC01IDMgLTgKNCAtMyAxIC02IDMgLTcgMyAwIDEgLTMgMyAtNiA0IC00IDIgLTggNCAtMTAgNSAtMSAyIC00IDMgLTYgNCAtMiAxIC00IDIgLTUKMyAtMSAxIC00IDMgLTYgNCAtMiAxIC01IDMgLTYgNCAtMSAxIC00IDMgLTcgNSAtMyAyIC04IDYgLTEwIDggLTMgMiAtOCA2Ci0xMSA4IC0zIDIgLTEwIDkgLTE3IDE2IC0xMSAxMSAtMTQgMTIgLTE4IDEwIC0xIDAgLTIgLTIgLTMgLTQgLTEgLTIgLTMgLTYKLTQgLTggLTIgLTIgLTQgLTYgLTUgLTcgLTEgLTIgLTMgLTUgLTQgLTcgLTEgLTIgLTMgLTUgLTQgLTcgLTEgLTIgLTIgLTQgLTMKLTYgLTUgLTYgLTEwIC0xNCAtOSAtMTYgMSAtNCAyNSAtMjcgNDAgLTM4IDQgLTMgOSAtNyAxMiAtOSAyIC0yIDUgLTQgNSAtNCAxCjAgMiAtMSA0IC0zIDIgLTEgNSAtNCA3IC01IDIgMCA1IC0zIDcgLTQgMiAtMiA0IC0zIDUgLTMgMCAwIDMgLTEgNiAtMyA1IC00CjEyIC04IDIzIC0xMyA0IC0yIDcgLTQgOSAtNSAxIC0xIDQgLTMgNyAtMyAyIC0xIDYgLTMgOCAtNSAyIC0xIDYgLTMgOSAtNCAzCi0xIDcgLTMgMTAgLTQgMiAtMSA3IC0zIDEwIC00IDQgLTEgOSAtMyAxMCAtNCAyIC0xIDcgLTMgMTEgLTQgNCAtMSA5IC0zIDExCi00IDIgLTEgNyAtMyAxMCAtNCA0IDAgMTAgLTIgMTMgLTQgMyAtMSA4IC0yIDEyIC0zIDMgLTEgMTAgLTIgMTYgLTQgNiAtMiAxNwotNCAyNSAtNSA4IC0yIDE4IC00IDIzIC00IDggLTIgMjIgLTMgNDUgLTUgMTggLTEgMjYgLTMgMzEgLTUgNCAtMiA2IC0yIDM4Ci0yIDMyIDEgMzUgMSA0MCAzIDYgMiAyNSA0IDQ4IDUgNSAxIDE1IDIgMjEgMyAzMSA1IDQyIDcgNDkgMTAgNCAxIDEwIDMgMTQgNAo1IDAgMTAgMiAxMyAzIDIgMiA3IDQgMTEgNCA0IDEgOCAzIDkgNCAyIDEgNSAzIDkgNCAzIDAgNyAyIDEwIDQgMiAxIDcgMyAxMAo0IDMgMSA3IDMgMTAgNSAyIDEgNiAzIDggNCAyIDEgNCAyIDUgMyAxIDEgNCAyIDYgMyAzIDIgNiA0IDggNSAxIDEgNSA0IDggNQo5IDYgMTYgMTEgMTYgMTIgMCAwIDEgMSAzIDIgNCAzIDIxIDE4IDI4IDI1IDE2IDE3IDMxIDM4IDM4IDUzIDIgMiA0IDYgNSA4IDIKMiAzIDQgMyA0IDAgMSAyIDUgNCAxMCA5IDE4IDE5IDUyIDIwIDY5IDEgNCAyIDE1IDMgMjQgMSA5IDEgMjAgMSAyNSAtMSAxOAotMyA0MCAtNCA0OCAtMiAxMSAtOSAzOCAtMTEgNDMgLTIgMiAtNCA3IC01IDEwIDAgMyAtMyA3IC00IDEwIC0yIDIgLTMgNSAtMwo2IC0xIDEgLTIgNCAtNCA2IC0xIDIgLTQgNiAtNSA4IC0yIDMgLTMgNSAtNCA1IDAgMCAtMSAxIC0yIDMgLTMgNCAtMTQgMTcKLTIxIDI0IC01IDUgLTMwIDI3IC0zNiAzMiAtMyAyIC03IDUgLTkgNyAtMiAxIC03IDQgLTkgNSAtMyAyIC01IDMgLTUgNCAwIDAKLTIgMiAtNSAzIC0zIDIgLTYgNCAtOCA1IC0xIDEgLTMgMyAtNiAzIC0yIDEgLTYgMyAtOCA1IC0zIDIgLTYgMyAtOCA0IC0xIDAKLTUgMiAtOCAzIC00IDIgLTkgNSAtMTIgNSAtNCAxIC05IDMgLTEyIDUgLTQgMiAtOCAzIC05IDMgLTIgMCAtNiAxIC05IDMgLTQKMiAtOSA0IC0xMiA1IC00IDAgLTkgMiAtMTIgMyAtMiAyIC03IDMgLTEwIDQgLTQgMSAtMTEgMyAtMTYgNSAtNiAyIC0xNCA0Ci0xOCA0IC0zIDEgLTkgMyAtMTMgNCAtMyAyIC04IDMgLTEyIDQgLTMgMSAtOSAyIC0xMyA0IC00IDIgLTEwIDMgLTEyIDMgLTMgMQotMTAgMiAtMTUgNCAtNSAyIC0xNCA0IC0yMCA1IC02IDIgLTE2IDQgLTIyIDYgLTYgMSAtMTMgMyAtMTYgMyAtMiAxIC03IDIKLTEwIDMgLTQgMiAtOSAzIC0xMiA0IC02IDAgLTEyIDIgLTE3IDQgLTIgMSAtNyAzIC0xMiA0IC00IDAgLTEwIDIgLTEzIDMgLTQKMiAtOSAzIC0xMiA0IC0zIDEgLTEwIDMgLTE2IDQgLTUgMiAtMTMgNSAtMTcgNiAtMyAwIC05IDIgLTExIDQgLTMgMSAtNyAzCi0xMCAzIC0zIDEgLTcgMiAtMTAgNCAtMiAxIC02IDIgLTkgMyAtMiAxIC03IDMgLTEwIDQgLTIgMiAtNyA0IC0xMSA1IC0zIDEKLTcgMyAtOSA0IC0xIDEgLTUgMyAtNyA0IC0zIDEgLTYgMyAtNyA0IC0yIDEgLTUgMyAtOCA0IC02IDMgLTE0IDkgLTE3IDEyIC0yCjEgLTQgMyAtNSA0IC0xMCA2IC0zMyAyNyAtNDIgMzggLTIgNCAtNiA4IC03IDkgLTQgNSAtMTMgMjMgLTE3IDM1IC0yIDUgLTUKMTQgLTUgMTkgLTEgNCAtMyAxMiAtNCAxNiAtMiAxMSAtMiA1MiAwIDYyIDEgNCAzIDExIDQgMTYgMCA1IDIgMTIgMyAxNiA0IDExCjkgMjUgMTEgMjggMSAxIDIgNCAzIDYgMSAyIDMgNSA1IDggMSAyIDMgNSAzIDYgMCAwIDEgMiAzIDMgMSAyIDMgNCA0IDYgNyAxMgozMiAzNyA0NiA0NSAyIDIgNCA0IDQgNCAwIDAgMSAxIDMgMiAxIDEgNSAzIDggNSAyIDIgNiA0IDcgNSAxIDAgNSAyIDcgNCAzIDEKNyAzIDkgNCAyIDEgNSAyIDggNCAyIDEgNiAzIDkgNCAzIDAgNyAyIDEwIDQgMiAxIDcgMyAxMSAzIDMgMSA5IDMgMTIgNCAyIDIKNyAzIDExIDQgMyAwIDEwIDEgMTcgMyA2IDIgMTMgMyAxNiAzIDMgMSA3IDEgOCAyIDIgMCA2IDAgMTUgMSAyIDEgOCAxIDEzIDIKNSAwIDEzIDEgMTcgMSAxMiAyIDc0IDIgOTAgMCA2IC0xIDE2IC0yIDIxIC0zIDkgMCAyNiAtMyA0OCAtNyA2IC0yIDEzIC0zIDE0Ci0zIDEgMCA1IC0xIDkgLTMgNCAtMSAxMSAtMyAxNSAtNCA0IC0xIDkgLTIgMTIgLTQgMyAtMSA4IC0zIDEyIC00IDMgMCA4IC0yCjEwIC0zIDIgLTEgNiAtMyAxMCAtNCA0IDAgOSAtMyAxMyAtNCAzIC0yIDggLTQgMTEgLTUgMyAtMSA3IC0zIDkgLTQgMiAtMSA1Ci0zIDggLTQgMyAwIDYgLTIgOCAtNCAxIC0xIDUgLTMgNyAtMyAyIC0xIDUgLTMgNyAtNCAxIC0xIDUgLTMgOSAtNCAzIC0yIDYKLTQgOCAtNSAxIC0xIDMgLTMgNSAtMyAyIC0xIDUgLTMgNyAtNCAxIC0yIDQgLTQgNyAtNSAyIC0xIDUgLTMgNiAtNCA0IC01IDcKLTQgMTEgNCAyIDQgNSA5IDUgMTIgMSAyIDMgNiA0IDggMiAyIDMgNSA0IDggMCAyIDIgNSAzIDcgMiAyIDMgNCAzIDUgMCAwIDEKMyAzIDcgMiAzIDMgNiAzIDcgMCAyIC02IDggLTEwIDEwIC0yIDAgLTUgMiAtNiA0IC0yIDEgLTUgMyAtNyA0IC0yIDAgLTQgMgotNiAzIC0xIDEgLTUgMyAtOCA1IC00IDIgLTcgMyAtNyA0IC0xIDAgLTQgMiAtNyAzIC0zIDEgLTcgMyAtOCA1IC0yIDEgLTYgMwotOSA0IC0zIDEgLTYgMyAtNyA0IC0xIDAgLTUgMiAtOSAzIC00IDIgLTggNCAtOSA0IC0yIDEgLTcgMyAtMTEgNSAtNSAxIC0xMAozIC0xMSA0IC0xIDEgLTYgMyAtMTAgNCAtNSAxIC0xMCAzIC0xMSA0IC0yIDEgLTcgMyAtMTEgNCAtNSAxIC05IDMgLTExIDMgLTEKMSAtNiAzIC0xMSAzIC01IDEgLTEyIDMgLTE2IDQgLTkgMyAtMjUgNiAtMzUgOCAtMyAwIC05IDEgLTE0IDIgLTUgMSAtMTUgMgotMjIgMyAtMTIgMSAtMzUgNCAtNDEgNSAtMSAwIC01IDAgLTggMSAtMyAwIC03IDEgLTkgMiAtMiAxIC05IDEgLTI4IDEgLTE0IDAKLTI2IDAgLTI3IC0xeiIvPgo8cGF0aCBkPSJNMTAgMTEzMyBjLTEgLTEgLTQgLTMgLTQgLTQgLTIgLTIgLTIgLTUzIC0yIC01NTcgMCAtNDkyIDAgLTU1NSAxCi01NTcgMSAtMSAzIC0yIDQgLTMgMSAtMSAxNCAtMSAzNiAtMSAzMSAwIDMzIDAgMzUgMiAyIDIgMiAxMiAyIDQ3MCAwIDI1NyAwCjQ2OSAtMSA0NzAgMCAzIDIgOCA0IDggMiAwIDExIC0xMCAxMSAtMTIgMCAtMSAyIC01IDQgLTggMiAtNCA0IC04IDQgLTggMCAwCjEgLTIgMyAtNCAzIC01IDcgLTEzIDEzIC0yNCAyIC00IDQgLTcgNSAtOCAxIDAgMiAtMyAzIC01IDIgLTMgMyAtNiA0IC02IDEKLTEgMiAtNCA0IC03IDEgLTMgNCAtOCA2IC0xMCA3IC0xMyAxMSAtMjAgMTEgLTIxIDAgMCAxIC0yIDIgLTQgMiAtMSA0IC00IDUKLTcgMSAtMiAzIC02IDUgLTggMiAtMiAzIC01IDMgLTYgMCAwIDIgLTMgNCAtNiAxIC0zIDMgLTUgMyAtNiAwIDAgMiAtNCA0IC04CjMgLTMgNSAtNyA1IC04IDAgMCAyIC00IDUgLTcgMiAtNCA0IC04IDQgLTggMCAtMSAxIC0zIDIgLTQgMyAtMyA1IC04IDEzIC0yMgoyIC00IDQgLTggNiAtMTAgMSAtMSAyIC0zIDIgLTQgMCAwIDIgLTMgNCAtNiAyIC0zIDQgLTcgNSAtOSAwIC0yIDIgLTQgMyAtNQoyIC0yIDUgLTggMTEgLTIwIDIgLTQgNSAtOCA2IC0xMCAxIC0yIDUgLTggNyAtMTIgMiAtNCA2IC0xMSA4IC0xNCAyIC0zIDQgLTYKNCAtNiAwIC0xIDIgLTQgNCAtNyAyIC00IDQgLTcgNCAtOCAwIDAgMiAtNCA1IC03IDIgLTQgNCAtOCA0IC04IDAgLTEgMSAtMyAyCi00IDIgLTIgNCAtNiA2IC05IDUgLTEwIDkgLTE3IDEyIC0yMiAyIC0yIDMgLTQgMyAtNSAwIDAgMiAtNCA1IC04IDIgLTMgNCAtNwo0IC04IDAgMCAxIC0yIDMgLTQgMSAtMSAzIC01IDQgLTcgMCAtMiAyIC01IDMgLTYgMiAtMiA0IC02IDUgLTggMiAtMyA1IC05IDgKLTE0IDMgLTUgNiAtMTEgOCAtMTMgMSAtMyAzIC03IDUgLTkgMiAtMiAzIC01IDMgLTYgMCAwIDIgLTMgNCAtNyAyIC0zIDQgLTYKNCAtNyAwIDAgMSAtMyAzIC01IDIgLTIgNCAtNiA2IC0xMCA0IC04IDggLTE0IDExIC0xOCAxIC0zIDMgLTYgNCAtOCAxIC0yIDMKLTUgNCAtNyAyIC0yIDQgLTUgNCAtNyAxIC0yIDMgLTUgNCAtNyAyIC0xIDMgLTQgNCAtNiAxIC0yIDMgLTUgNCAtNyAyIC0zIDQKLTcgNSAtOSAxIC0zIDIgLTUgMyAtNiAxIDAgMiAtMiA0IC01IDEgLTMgMyAtNyA0IC04IDEgLTEgMyAtNCA0IC02IDEgLTMgMwotNyA1IC05IDIgLTIgMyAtNSAzIC02IDAgMCAyIC0zIDQgLTYgMSAtMyAzIC02IDQgLTcgMCAtMiAzIC01IDUgLTkgMiAtMyA0Ci03IDQgLTcgMCAtMSAxIC0zIDIgLTQgMiAtMiA0IC02IDYgLTkgMSAtMyAzIC02IDMgLTYgMCAwIDIgLTMgNCAtNyA3IC0xMyAxMgotMjEgMTMgLTIzIDEgLTEgMyAtMyAzIC01IDEgLTMgMyAtNSA0IC02IDEgLTIgMyAtNSA0IC03IDEgLTMgMyAtNiA0IC03IDEgLTEKMyAtNSA1IC04IDIgLTQgNSAtMTAgNyAtMTQgMyAtNCA2IC0xMCA3IC0xMiAyIC0yIDQgLTcgNiAtMTAgMiAtMyA0IC02IDQgLTYKMCAtMSAxIC0zIDMgLTUgMSAtMiAzIC01IDQgLTggMSAtMiAzIC02IDUgLTkgMiAtMyA0IC02IDQgLTcgMCAwIDEgLTIgMiAtNCAyCi0xIDQgLTUgNSAtOCAyIC0zIDUgLTcgNyAtOSAzIC00IDMgLTQgMjEgLTQgMTcgMCAxNyAwIDIxIDQgMiAyIDUgNyA3IDEwIDEgMwozIDYgNCA4IDEgMSAzIDMgNCA2IDAgMiAyIDQgMyA1IDEgMSAzIDUgNCA4IDIgMyA1IDggNiAxMSAyIDIgNSA3IDcgMTEgMTEgMTkKMTMgMjIgMTUgMjUgMiA0IDcgMTMgMTIgMjIgMiA0IDQgOCA2IDEwIDEgMSAzIDQgMyA2IDEgMyAzIDUgNCA3IDEgMSAzIDMgNCA1CjAgMyAyIDYgNCA4IDIgMiAzIDUgMTIgMjEgMSAzIDQgNyA0IDggMSAxIDMgNCA1IDggNiAxMCA5IDE3IDExIDE5IDEgMSAyIDIgMgo0IDEgMSAyIDQgNCA3IDIgMiA1IDcgNiAxMCAyIDMgMyA2IDQgNyAxIDAgMiAzIDQgNiAxIDMgMyA2IDQgOCAxIDEgMyAzIDQgNQowIDMgMiA2IDQgNyAxIDIgMyA1IDQgOCAxIDIgMyA2IDUgOCAyIDMgMyA2IDQgNyAwIDIgMSA0IDIgNSAzIDQgNyAxMSAxMiAyMQoyIDMgNCA2IDUgNyAwIDEgMiA0IDQgNyA4IDE1IDExIDIwIDEzIDIzIDIgMyAzIDUgMyA1IDAgMSAxIDQgMyA2IDIgMiA0IDYgNQo5IDIgMiA0IDYgNSA4IDIgMyAzIDUgMyA1IDAgMSAyIDQgNCA3IDIgNCA0IDcgNCA4IDAgMCAxIDMgMyA1IDIgMiA0IDYgNSA4IDEKMiAzIDYgNCA3IDEgMSAzIDUgNSA4IDcgMTQgOSAxOCAxMSAyMCAxIDEgMyA0IDQgNiAxIDMgMyA3IDUgOSAyIDIgMyA1IDMgNSAwCjEgMSA0IDMgNiAyIDIgNCA2IDUgNyAwIDIgMiA2IDQgOSAyIDMgNCA2IDQgNyAwIDAgMSAyIDIgNCAyIDEgNCA2IDYgMTAgMiAzCjYgOSA4IDEzIDIgNCA1IDEwIDcgMTMgMiA0IDQgNyA1IDggMSAwIDIgMyAzIDUgMiAzIDQgNyA1IDkgMiAyIDMgNCAzIDUgMCAwCjIgMyA0IDcgMiAzIDQgNiA0IDcgMCAwIDIgNCA1IDggMiAzIDQgNyA0IDggMCAwIDEgMyAzIDUgMiAyIDQgNiA1IDkgMSAyIDMgNAozIDUgMSAwIDMgNCA1IDggNiAxMiAxMCAxOCAxMSAyMCAxIDEgMyA0IDUgNyAxIDMgMyA3IDQgOCAxIDEgMyA0IDQgNiAwIDIgMgo1IDQgNyAxIDIgMyA2IDUgOSAxIDMgNCA4IDYgMTEgMiA0IDQgNyA1IDkgMSAxIDMgMyAzIDUgMSAyIDMgNiA1IDkgMiAzIDQgNgo0IDYgMCAxIDEgMyAyIDQgMiAzIDggMTMgMTMgMjMgMiAzIDQgNiA0IDcgMSAxIDMgNCA1IDggMiAzIDMgNiA0IDYgMCAxIDIgMwozIDcgMiAzIDQgNiA1IDggMiAyIDQgNiA1IDggMSAyIDQgOCA2IDEyIDQgNyAxMCAxMyAxMyAxMyAxIDAgMSAtMjcgMiAtMjY4IDAKLTE0NyAwIC0zMTAgMCAtMzYxIDEgLTUyIDEgLTE0NSAxIC0yMDcgMCAtMTA4IDAgLTExMyAyIC0xMTUgMiAtMiAyIC0yIDM2IC0yCjM0IDAgMzggMSA0MCA0IDAgMiAwIDc4IDAgNTI5IC0xIDQ5MSAtMiA1ODQgLTQgNTg3IC0xIDIgMiAyIC0zMyAyIC0yOCAwIC0yOAowIC0zMyAtNSAtMiAtMiAtNSAtNyAtNiAtOSAtMiAtMyAtNCAtNyAtNSAtOSAtMiAtMiAtMyAtNCAtMyAtNSAwIDAgLTIgLTQgLTQKLTggLTMgLTMgLTUgLTcgLTUgLTggMCAwIC0xIC0yIC0zIC00IC0xIC0yIC00IC02IC02IC0xMCAtMiAtNCAtNSAtOSAtNyAtMTMKLTIgLTQgLTYgLTkgLTggLTEzIC02IC0xMiAtMTEgLTE5IC0xMyAtMjMgLTIgLTQgLTQgLTggLTEwIC0xOCAtMiAtNCAtNCAtNwotNSAtOSAtMSAtMSAtMyAtMyAtNCAtNSAwIC0yIC0zIC02IC01IC05IC0xIC0zIC0zIC02IC0zIC02IDAgLTEgLTEgLTQgLTMgLTYKLTIgLTIgLTQgLTYgLTUgLTggLTEgLTMgLTMgLTcgLTUgLTkgLTIgLTIgLTMgLTUgLTMgLTYgMCAwIC0xIC0yIC0zIC00IC0zIC01Ci03IC0xMiAtMTIgLTIxIC0yIC00IC00IC03IC01IC04IDAgLTEgLTIgLTQgLTQgLTggLTcgLTEzIC0xMCAtMTkgLTEyIC0yMSAtMQotMSAtMyAtMyAtNCAtNSAwIC0zIC0zIC02IC00IC05IC0yIC0yIC0zIC00IC0zIC01IDAgMCAtMiAtNCAtNSAtOCAtMiAtMyAtNAotNyAtNCAtOCAwIDAgLTEgLTIgLTMgLTUgLTEgLTIgLTQgLTYgLTUgLTkgLTEgLTIgLTMgLTUgLTQgLTYgLTEgLTIgLTMgLTUgLTQKLTcgLTMgLTUgLTUgLTkgLTE2IC0yOCAtMiAtNCAtNiAtMTAgLTcgLTEzIC0yIC0zIC00IC03IC02IC05IC0xIC0xIC0yIC0zIC0yCi00IDAgMCAtMiAtNCAtNCAtOCAtMyAtMyAtNSAtNyAtNSAtNyAwIC0xIC0yIC00IC00IC03IC0yIC00IC00IC03IC00IC03IDAKLTEgLTEgLTMgLTMgLTYgLTIgLTIgLTQgLTYgLTUgLTkgLTEgLTIgLTMgLTUgLTQgLTYgLTIgLTIgLTcgLTExIC0xMSAtMTkgLTEKLTMgLTQgLTcgLTUgLTEwIC0yIC0zIC02IC04IC04IC0xMyAtMiAtNCAtNiAtMTEgLTggLTE0IC0yIC0zIC00IC02IC00IC03IDAKMCAtMiAtMyAtNCAtNyAtMiAtMyAtNCAtNiAtNCAtNiAwIC0xIC0yIC00IC00IC04IC0yIC0zIC00IC02IC00IC03IDAgMCAtMgotMyAtMyAtNiAtMiAtMyAtNSAtNyAtNSAtOSAtMSAtMiAtMyAtNCAtNCAtNSAtMSAtMiAtMyAtNCAtNCAtNyAwIC0yIC0yIC00Ci0zIC01IC0yIC0yIC01IC04IC0xMiAtMjIgLTIgLTQgLTUgLTggLTYgLTEwIC0xIC0yIC01IC04IC03IC0xMiAtMiAtNCAtNgotMTAgLTcgLTEzIC0yIC0yIC00IC02IC02IC05IC0xIC0zIC00IC04IC02IC0xMSAtMiAtNCAtNCAtOCAtNSAtOSAtMSAtMSAtMwotNCAtNCAtNyAtMSAtMiAtMyAtNSAtNCAtNyAtMSAtMSAtMyAtMyAtNCAtNiAwIC0yIC0yIC00IC0zIC01IC0xIC0yIC04IC0xNAotMTIgLTIxIC0xIC0zIC00IC04IC02IC0xMCAtMSAtMyAtMyAtNiAtNCAtNyAwIC0xIC0xIC00IC0yIC01IC0yIC0yIC00IC02Ci01IC04IC0xIC0yIC0zIC02IC00IC03IC0xIC0xIC0zIC01IC01IC04IC03IC0xNCAtOSAtMTggLTEyIC0yMCAtMSAtMiAtMyAtNQotMyAtNyAtMSAtMyAtMyAtNSAtNCAtNyAtMSAtMSAtMyAtMyAtNCAtNSAwIC0yIC0zIC02IC01IC05IC0xIC0zIC0zIC02IC0zCi02IDAgLTEgLTIgLTQgLTQgLTcgLTIgLTQgLTQgLTcgLTQgLTcgMCAtMSAtMiAtNCAtNCAtNyAtMiAtNCAtNCAtNyAtNCAtNyAwCi0xIC0xIC00IC0zIC02IC0yIC0yIC00IC02IC01IC05IC0yIC0yIC01IC04IC04IC0xMiAtMiAtNCAtNSAtMTAgLTcgLTE0IC0yCi00IC01IC04IC02IC0xMCAtMiAtMiAtMyAtNCAtMyAtNCAwIC0xIC0yIC00IC00IC04IC00IC03IC03IC05IC0xMCAtOCAtMSAxCi02IDkgLTEwIDE3IC0xIDMgLTQgNyAtNSAxMCAtMiAzIC00IDYgLTQgNiAwIDEgLTEgMyAtMiA1IC0xIDEgLTQgNCAtNSA3IC0xCjMgLTQgNyAtNSAxMCAtNCA2IC0xMCAxNiAtMTUgMjUgLTMgNSAtNiAxMCAtOCAxMyAtMiAzIC00IDcgLTQgOSAtMSAxIC0zIDUKLTUgNyAtMiAyIC0zIDUgLTMgNSAwIDEgLTEgNCAtMyA2IC0yIDIgLTQgNiAtNSA5IC0xIDIgLTMgNSAtNCA3IC0yIDIgLTQgNQotNCA3IC0xIDIgLTMgNiAtNSA5IC0yIDMgLTQgNiAtNCA2IDAgMSAtMSAzIC0zIDUgLTEgMiAtMyA1IC01IDggLTMgNiAtOSAxNwotMTYgMjggLTIgNCAtNSAxMCAtNyAxMyAtMSAyIC0zIDYgLTQgOCAtMiAxIC0zIDQgLTQgNiAtMSAxIC0zIDQgLTQgNyAtMiAyCi0zIDUgLTMgNiAtMSAxIC0zIDQgLTQgNyAtMiAzIC01IDcgLTUgOSAtMSAyIC0zIDQgLTQgNSAtMSAyIC0zIDUgLTQgOCAtMiAzCi0zIDYgLTQgNiAtMSAxIC0zIDQgLTUgOCAtNyAxNCAtMTQgMjYgLTIwIDM1IC0xIDMgLTMgNSAtMyA2IDAgMCAtMiAzIC0zIDYKLTIgMiAtNCA1IC00IDcgLTEgMSAtMyA1IC02IDggLTIgNCAtNCA4IC00IDggMCAxIC0xIDMgLTMgNiAtMiAyIC00IDYgLTUgOAotMSAyIC0zIDYgLTUgOCAtMiAzIC0zIDYgLTMgNiAwIDEgLTIgMyAtMyA2IC0yIDMgLTQgNiAtNCA2IDAgMSAtMSAzIC0yIDQgLTIKMiAtNCA3IC02IDExIC03IDEyIC0xMSAyMCAtMTQgMjIgLTEgMiAtMiA0IC0yIDUgMCAwIC0yIDMgLTQgNyAtMiAzIC00IDYgLTQKNyAwIDAgLTIgNCAtNCA3IC0zIDQgLTUgOCAtNSA4IDAgMSAtMiA0IC0zIDYgLTIgMyAtNCA2IC00IDYgMCAxIC0yIDUgLTQgOAotMyA0IC01IDggLTUgOCAwIDEgLTIgMyAtMyA2IC0yIDMgLTQgNiAtNSA3IDAgMSAtMSA0IC0zIDYgLTEgMSAtMyA1IC01IDkgLTIKMyAtNSA4IC02IDExIC0yIDMgLTQgNyAtNSA4IC0xIDEgLTMgNSAtNCA3IC0xIDIgLTMgNiAtNCA3IC0xIDEgLTMgNCAtNCA2IC0xCjMgLTMgNyAtNSA5IC0yIDIgLTMgNSAtMyA1IDAgMSAtMiA0IC00IDggLTIgMyAtNCA2IC00IDcgMCAwIC0yIDQgLTQgNyAtMyA0Ci01IDggLTUgOSAwIDAgLTEgMiAtMyA0IC0xIDEgLTMgNSAtNCA4IC0xIDIgLTMgNSAtMyA1IC0xIDEgLTggMTMgLTEyIDIyIC0yCjMgLTQgNyAtNiA4IC0xIDIgLTIgNCAtMyA2IC0xIDIgLTMgNSAtNSA4IC0yIDIgLTMgNSAtMyA1IDAgMSAtMSAzIC0zIDYgLTEgMgotNCA2IC02IDEwIC01IDEwIC05IDE3IC0xMiAyMSAtMSAxIC0zIDQgLTMgNiAtMSAzIC0zIDUgLTQgNyAtMSAxIC0zIDMgLTQgNgowIDIgLTIgNSAtMyA3IC0yIDEgLTQgNSAtNiA5IC02IDEwIC0xMCAxOSAtMTIgMjIgLTIgMiAtNSA3IC03IDExIC0yIDUgLTYgMTAKLTcgMTIgLTEgMiAtNCA2IC02IDEwIC01IDEwIC0xMSAyMCAtMTIgMjIgLTEgMSAtMyAzIC0zIDUgLTEgMyAtMyA1IC00IDcgLTEKMSAtMyAzIC00IDYgMCAyIC0yIDUgLTQgNyAtMSAxIC0zIDUgLTUgOCAtMSAzIC00IDggLTYgOSAtNCA0IC00IDQgLTI5IDQgLTE0CjAgLTI2IDAgLTI4IDAgLTEgMSAtNCAwIC02IDB6Ii8+CjxwYXRoIGQ9Ik0yMTk2IDExMzMgYy00IC0xIC0xMCAtMTAgLTEzIC0xOCAtMSAtMyAtMiAtNiAtMyAtNyAtMSAtMSAtMyAtNCAtMwotNyAtMSAtMyAtMyAtNiAtNCAtOCAtMSAtMiAtMyAtNSAtNCAtOSAtMSAtMyAtMyAtNyAtNCAtOCAtMSAtMiAtMyAtNyAtNSAtMTEKLTEgLTMgLTMgLTggLTQgLTEwIC0yIC0zIC0zIC02IC00IC04IC0xIC0zIC0yIC02IC0zIC03IC0yIC0yIC0zIC02IC00IC05IC0xCi0zIC0zIC03IC01IC05IC0xIC0yIC0zIC01IC0zIC03IC0xIC0zIC0zIC03IC00IC0xMCAtMiAtMiAtNCAtNyAtNSAtMTEgLTEKLTMgLTMgLTcgLTQgLTkgLTIgLTIgLTMgLTYgLTQgLTggLTEgLTMgLTMgLTcgLTQgLTkgLTIgLTIgLTMgLTQgLTMgLTUgMCAtMQotMiAtNSAtNCAtOSAtMiAtNCAtNCAtOSAtNCAtMTAgLTEgLTEgLTMgLTYgLTUgLTkgLTIgLTQgLTQgLTkgLTUgLTEyIDAgLTIgLTIKLTYgLTMgLTggLTIgLTIgLTMgLTYgLTQgLTkgLTEgLTMgLTMgLTYgLTQgLTcgLTEgLTIgLTMgLTQgLTMgLTYgLTEgLTIgLTMgLTcKLTUgLTEwIC0xIC00IC01IC0xMiAtOCAtMTggLTIgLTYgLTYgLTE0IC04IC0xOCAtMSAtNCAtNCAtOSAtNCAtMTEgLTEgLTIgLTMKLTYgLTQgLTggLTIgLTIgLTMgLTUgLTMgLTYgLTEgLTEgLTMgLTYgLTQgLTkgLTkgLTE4IC0xMSAtMjMgLTEzIC0yNyAwIC0yIC0yCi02IC00IC05IC0xIC0yIC0zIC03IC00IC0xMCAtMSAtMyAtMyAtNiAtNCAtOCAtMSAtMSAtMyAtNSAtNCAtNyAwIC0zIC0yIC03Ci00IC0xMCAtMiAtMiAtMyAtNSAtMyAtNiAwIC0xIC0yIC01IC00IC05IC0yIC01IC00IC0xMCAtNSAtMTIgLTEgLTMgLTIgLTYKLTQgLTggLTEgLTIgLTMgLTYgLTQgLTkgLTEgLTMgLTMgLTcgLTQgLTEwIC0yIC0yIC0zIC01IC00IC03IC0xIC0zIC0yIC02IC0zCi03IC0xIC0yIC0zIC01IC00IC05IC0xIC0zIC0zIC03IC01IC0xMCAtMSAtMiAtMyAtNyAtNCAtMTAgLTEgLTMgLTMgLTcgLTQKLTEwIC0yIC0yIC00IC02IC01IC04IDAgLTMgLTIgLTcgLTMgLTkgLTIgLTEgLTMgLTUgLTQgLTYgMCAtMiAtMSAtNSAtMyAtNwotMSAtMiAtMyAtNyAtNCAtMTAgLTEgLTMgLTMgLTcgLTQgLTggLTEgLTIgLTMgLTcgLTQgLTEwIC0yIC00IC00IC05IC01IC0xMQotMiAtMyAtMyAtNiAtNCAtOCAtMSAtMyAtMiAtNiAtNCAtOCAtMSAtMSAtMyAtNSAtNCAtOCAtMSAtMyAtMiAtNyAtNCAtOSAtMQotMiAtMiAtNSAtMyAtNyAtMSAtMyAtMiAtNyAtNCAtOSAtMiAtMyAtNCAtOCAtNSAtMTEgLTEgLTMgLTMgLTcgLTQgLTkgLTEgLTEKLTMgLTUgLTQgLTkgLTEgLTQgLTMgLTcgLTQgLTggLTEgLTIgLTMgLTUgLTQgLTggMCAtMyAtMiAtNyAtNCAtOSAtMSAtMiAtMwotNSAtMyAtOCAtMSAtMiAtMyAtNyAtNSAtMTEgLTIgLTQgLTUgLTkgLTUgLTEyIC0xIC0zIC0zIC01IC00IC02IDAgLTEgLTIgLTQKLTMgLTcgLTEgLTMgLTIgLTcgLTQgLTkgLTEgLTIgLTMgLTQgLTMgLTYgLTEgLTIgLTMgLTcgLTQgLTEwIC03IC0xNCAtMTMgLTI2Ci0xMyAtMjkgLTEgLTEgLTMgLTUgLTUgLTggLTEgLTQgLTMgLTggLTMgLTkgLTEgLTIgLTIgLTYgLTQgLTggLTIgLTIgLTMgLTYKLTQgLTggLTEgLTMgLTIgLTYgLTMgLTcgLTEgLTIgLTMgLTUgLTQgLTggLTEgLTMgLTMgLTggLTQgLTEwIC0yIC0zIC0zIC02IC0zCi03IC0xIC0xIC0zIC02IC01IC0xMSAtMiAtNSAtNiAtMTMgLTkgLTE3IC0yIC01IC00IC0xMSAtNSAtMTMgLTEgLTIgLTIgLTQKLTIgLTUgLTEgLTEgLTMgLTMgLTQgLTYgMCAtMyAtMyAtOCAtNCAtMTEgLTIgLTMgLTQgLTggLTUgLTExIC0xIC0zIC0zIC03IC00Ci05IC0yIC0yIC0zIC02IC00IC04IC0xIC0yIC0yIC02IC0zIC03IC0yIC0yIC00IC02IC00IC05IC0xIC0zIC0zIC03IC00IC04Ci0xIC0yIC0zIC01IC00IC04IC0xIC0zIC00IC05IC01IC0xMiAtMiAtNCAtNCAtNyAtNCAtOCAwIC0xIC0yIC01IC00IC05IC0yCi00IC00IC05IC00IC0xMCAtMSAtMiAtMiAtNSAtNCAtOCAtMiAtMiAtMyAtNSAtMyAtNiAwIDAgLTIgLTQgLTQgLTkgLTUgLTEwCi0xNCAtMzAgLTE0IC0zMCAwIC0xIC0xIC00IC0zIC03IC0yIC00IC00IC05IC01IC0xMiAtMSAtMiAtMyAtNSAtNCAtNiAwIC0xCi0yIC00IC0zIC02IDAgLTMgLTIgLTcgLTMgLTkgLTIgLTIgLTMgLTUgLTQgLTggLTEgLTMgLTMgLTcgLTUgLTEwIC0xIC0zIC0zCi03IC00IC05IC0xIC03IC0yIC03IDQyIC03IDI4IDAgMzkgMCA0MSAxIDIgMSAzIDMgNSA4IDEgMyAzIDYgNCA3IDAgMSAyIDUgMwo4IDEgNCAzIDggNSAxMSAxIDIgMyA3IDQgMTAgMSAzIDMgNiA0IDggMSAxIDMgNSA0IDggMCAzIDIgNyA0IDggMSAyIDMgNiA0IDkKMCAzIDIgNyAzIDggMSAyIDMgNiA1IDEwIDEgNCAzIDkgNSAxMiAxIDMgMyA3IDMgOSAxIDEgMiA0IDQgNiAxIDIgMyA2IDQgOCAwCjMgMiA3IDMgOSAyIDIgMyA2IDQgOCAxIDMgMyA4IDUgMTIgMiAzIDQgOCA0IDkgMSAxIDMgNSA0IDkgMiA0IDQgOCA0IDEwIDEgMQoyIDUgNCA3IDIgMiAzIDYgNCA5IDEgMiAyIDUgMyA2IDEgMiAzIDYgNCA5IDIgNCA0IDggNCA5IDEgMSAzIDYgNSAxMSAyIDQgNAo5IDUgMTEgMSAxIDMgNSA0IDggMCAzIDIgNyAzIDggMSAxIDMgNCA0IDcgMSAzIDMgNyA0IDEwIDIgMiAzIDUgMyA2IDAgMCAxIDQKMyA3IDIgMyA0IDkgNiAxNCAyIDQgNCA5IDUgMTEgMSAxIDIgNCAzIDcgMSAyIDMgNiA1IDEwIDEgMyAzIDcgMyA4IDEgMiAyIDUKNCA4IDIgMiAzIDUgMyA2IDAgMSAyIDUgNCA5IDIgNCA0IDggNCA5IDAgMSAyIDUgNSAxMSAyIDUgNCA5IDQgMTAgMCAxIDYgMTMKMTEgMjMgMiAzIDQgOCA0IDEwIDEgMyAzIDYgNCA4IDEgMSAzIDYgNSAxMCAxIDQgMyA5IDQgMTEgMSAxIDMgNSA0IDggMSA0IDMKNyA0IDkgMSAyIDMgNSA0IDggMCAzIDIgNiAzIDcgMSAyIDMgNiA0IDkgMSAzIDMgNyA0IDkgMSAxIDMgNiA1IDEwIDEgNCAzIDkKNSAxMiAxIDIgMiA1IDMgOCAxIDIgMiA2IDQgOCAyIDIgMyA3IDQgOSAxIDIgMiA2IDQgNyAxIDIgMyA2IDMgOSAxIDMgMyA3IDQKOCAxIDIgMyA2IDUgMTAgMSAzIDQgMTAgNiAxNCAxIDQgMyA3IDMgOCAwIDEgMSAzIDMgNSAxIDIgMyA2IDQgOSAwIDIgMiA2IDQKOCAxIDIgMyA2IDMgOCAxIDIgMyA3IDUgMTEgMiAzIDQgOCA1IDExIDEgNCAzIDcgNCA5IDEgMSAyIDUgMyA4IDEgMyAzIDYgNCA4CjEgMiAzIDUgNCA5IDEgMyAzIDYgNCA4IDEgMSAyIDQgMyA3IDEgMiAyIDYgNCA5IDEgMiAzIDYgNCA4IDIgNSA5IDIyIDEzIDMxCjIgMyA0IDggNSA5IDAgMSAyIDQgMyA3IDIgMiAzIDUgMyA2IDAgMSAyIDUgNSAxMCAyIDYgNCAxMCA0IDExIDAgMSAxMiAyNyAyMAo0MiAxIDQgMyA4IDMgOCAwIDEgMSA0IDMgNyAyIDQgNCA4IDUgMTEgMSAzIDQgOSA1IDEzIDIgMyA0IDggNCA5IDEgMSAyIDUgNAo4IDIgMiAzIDYgNCA4IDEgMyAyIDYgNCA4IDEgMiAyIDUgMyA3IDEgMyAyIDYgNCA5IDEgMiAzIDcgNSAxMSAxIDMgMyA4IDQgMTAKMSAxIDMgNiA0IDEwIDIgNCA0IDcgNSA4IDAgMSAyIDQgMyA3IDAgMiAyIDYgNCA4IDEgMiAzIDYgMyA5IDEgMyAzIDcgNCA5IDIKMiA0IDcgNSAxMSAyIDEwIDUgMTIgMTEgNiAyIC0yIDQgLTYgNSAtOSAxIC0zIDIgLTggNCAtMTAgMiAtMiAzIC02IDQgLTggMQotMyAyIC02IDQgLTkgMSAtMiAzIC03IDQgLTEwIDEgLTMgMyAtNyA1IC0xMCAxIC0yIDMgLTcgNCAtMTAgMSAtNCAzIC03IDQgLTgKMSAtMiAyIC00IDMgLTUgMCAtMiAyIC02IDMgLTkgMiAtNCA0IC04IDQgLTkgMSAtMSAzIC01IDQgLTkgMiAtNCA1IC05IDYgLTExCjEgLTMgMiAtNyA0IC0xMCAxIC0yIDMgLTcgNCAtMTAgMSAtMyAzIC02IDQgLTggMSAtMSAyIC00IDMgLTYgMSAtMyAzIC03IDQKLTEwIDIgLTMgNCAtOCA2IC0xMSAxIC00IDUgLTExIDcgLTE3IDMgLTcgNiAtMTQgNyAtMTcgMiAtMyA0IC04IDYgLTExIDIgLTQKMyAtNyAzIC04IDAgLTEgMSAtMyAyIC01IDIgLTIgNCAtNiA1IC04IDEgLTMgMiAtNyA0IC05IDEgLTMgMyAtOCA1IC0xMSAxIC00CjMgLTggNCAtOSAwIC0yIDIgLTYgMyAtOSAyIC00IDQgLTggNSAtMTAgMSAtMSAyIC01IDMgLTggMSAtMyAzIC02IDQgLTcgMSAtMgozIC02IDQgLTkgMSAtMyAzIC03IDQgLTkgMSAtMSAyIC00IDMgLTYgMSAtMyAzIC03IDUgLTExIDEgLTQgNCAtOSA0IC0xMSAxCi0zIDMgLTcgNSAtOSAxIC0yIDMgLTYgMyAtOSAxIC0yIDMgLTYgNCAtOCAyIC0yIDMgLTUgNCAtNiAwIC0yIDIgLTYgMyAtOSAyCi00IDQgLTggNSAtMTAgMSAtMyAzIC03IDQgLTEwIDIgLTQgNCAtOCA1IC0xMSAxIC0yIDIgLTYgNCAtOCAxIC0yIDMgLTYgNCAtOAowIC0zIDIgLTcgMyAtOCAxIC0xIDIgLTQgMyAtNiAxIC0yIDMgLTcgNSAtMTEgMiAtNCA0IC05IDUgLTExIDEgLTMgMyAtNyA0Ci05IDIgLTMgMyAtNyA0IC0xMCAxIC0yIDIgLTUgMyAtNyAyIC0yIDMgLTYgNCAtOCAwIC0yIDIgLTYgNCAtOCAyIC0zIDMgLTYgMwotNiAwIC0xIDIgLTUgNCAtMTAgMiAtNCA1IC0xMCA2IC0xMyAxIC0zIDMgLTggNSAtMTEgMSAtMyAzIC03IDMgLTkgMSAtMSAyCi00IDQgLTYgMSAtMiAzIC01IDMgLTcgMSAtMyAyIC03IDQgLTkgMiAtMyAzIC01IDMgLTYgMCAtMSAyIC01IDMgLTggMiAtNCA3Ci0xNCAxMCAtMjEgMyAtOCA4IC0xOCAxMCAtMjEgMSAtNCAzIC04IDMgLTkgMCAwIDEgLTMgMyAtNSAxIC0zIDMgLTYgMyAtNyAxCi0yIDMgLTcgNCAtMTAgNiAtMTIgMTEgLTIzIDE0IC0zMCAxIC00IDMgLTcgNCAtOCAwIC0xIDIgLTQgMyAtOCAxIC0zIDMgLTcgNAotOSAyIC0yIDMgLTUgNCAtOCAxIC0yIDIgLTYgNCAtOCAxIC0yIDMgLTYgNCAtOSAwIC0yIDIgLTcgNCAtOSAxIC0zIDMgLTggNAotMTEgMSAtMyAzIC03IDUgLTkgMSAtMiAzIC02IDQgLTkgMSAtNCAyIC03IDMgLTcgMSAwIDIgLTQgNCAtOCAxIC00IDQgLTkgNQotMTEgMSAtMSAyIC00IDMgLTYgMCAtMSAyIC03IDUgLTExIDIgLTUgNCAtMTAgNCAtMTEgMCAtMSAxIC00IDMgLTYgMiAtMyA0Ci03IDUgLTEwIDAgLTMgMiAtNiAzIC04IDEgLTEgMyAtNCA0IC03IDEgLTQgMyAtNyA0IC05IDAgLTEgMiAtNSA0IC05IDEgLTMgMwotOSA1IC0xMyAyIC0zIDQgLTggNCAtOSAxIC0yIDIgLTUgNCAtNyAxIC0yIDMgLTUgMyAtNyAxIC0zIDIgLTcgNCAtOSAyIC0yIDMKLTYgNCAtOCAxIC0yIDIgLTYgNCAtOCAxIC0zIDMgLTcgNCAtMTEgMiAtNCA0IC05IDYgLTEzIDIgLTMgMyAtNiAzIC03IDAgMCAyCi00IDQgLTkgMiAtNSA2IC0xMiA4IC0xNiAyIC00IDQgLTkgNCAtMTAgMSAtMSAzIC0zIDUgLTQgMiAtMiA2IC0yIDQxIC0yIDMwCjAgMzggMCA0MCAxIDIgMiAxIDkgLTMgMTQgLTEgMiAtMyA2IC00IDggLTEgMiAtMiA3IC00IDkgLTEgMiAtMyA3IC00IDEwIC0xCjMgLTMgNyAtNCA5IC0yIDIgLTMgNiAtNCA5IC0xIDMgLTMgNiAtNCA3IC0xIDIgLTMgNiAtNCA5IC0xIDMgLTMgNyAtNCA5IC0yCjIgLTMgNSAtMyA2IC0xIDEgLTMgNyAtNiAxMyAtMyA2IC01IDExIC01IDEyIDAgMSAtMSAzIC0zIDYgLTEgMiAtMyA2IC0zIDgKLTEgMSAtMiA1IC00IDcgLTEgMyAtMyA2IC00IDkgLTEgMiAtMiA1IC0zIDcgLTIgMiAtMyA1IC0zIDYgLTEgMSAtMyA2IC01IDEwCi0yIDQgLTQgOSAtNSAxMiAtMSAzIC0zIDggLTUgMTIgLTIgNCAtNCA3IC00IDggMCAxIC0xIDMgLTMgNiAtMSAyIC0zIDYgLTQgOQotMSAzIC0zIDcgLTQgOSAtMiAyIC0zIDQgLTMgNSAwIDEgLTIgNSAtMyA4IC0yIDQgLTUgOSAtNiAxMiAtMSAzIC0zIDkgLTUgMTIKLTIgNCAtNCA4IC00IDkgMCAxIC0xIDMgLTMgNiAtMSAyIC0zIDYgLTQgOSAtMSAyIC0zIDYgLTQgOSAtMiAyIC0zIDYgLTQgOAotMSAyIC0zIDcgLTQgOSAtMiAyIC00IDcgLTUgOSAwIDMgLTIgNyAtNCAxMCAtMSAyIC0zIDcgLTQgMTAgLTEgMyAtMyA2IC00IDgKLTEgMSAtMiA0IC0zIDYgLTEgMyAtMiA2IC00IDggLTEgMiAtMyA3IC00IDEwIC0yIDQgLTQgOCAtNCA5IC0xIDEgLTMgNiAtNCA5Ci0yIDQgLTQgOCAtNSA5IDAgMiAtMiA1IC0zIDkgLTIgMyAtNCA3IC01IDkgLTEgMSAtMiA0IC0zIDcgLTEgMiAtMiA1IC0zIDcKLTEgMiAtMyA2IC01IDEwIC0yIDQgLTUgMTIgLTggMTggLTMgNiAtNyAxNSAtOCAxOCAtMiA0IC00IDggLTUgMTAgLTEgMSAtMiA0Ci0zIDcgMCAyIC0yIDYgLTQgOCAtMiAzIC0zIDcgLTQgOSAtMSAyIC0yIDYgLTMgNyAtMSAyIC0zIDYgLTUgMTAgLTEgMyAtMyA5Ci01IDEyIC0yIDIgLTMgNiAtMyA4IC0xIDEgLTIgNSAtNCA3IC0xIDIgLTMgNiAtNCA5IC0xIDMgLTMgNyAtNCA5IC0yIDIgLTMgNQotNCA4IC0xIDIgLTMgNiAtNSAxMCAtMSAzIC0zIDYgLTMgNyAwIDEgLTIgNiAtNCAxMSAtMyA0IC01IDkgLTUgMTAgMCAxIC0xIDQKLTMgNiAtMSAzIC0zIDYgLTQgOSAtMSAyIC0yIDYgLTQgOCAtMSAyIC0zIDYgLTQgOSAtMSAyIC0yIDUgLTQgOCAtMSAyIC0zIDcKLTUgMTAgLTEgNCAtMyA5IC00IDExIC0yIDMgLTMgNiAtNCA5IC0xIDIgLTIgNSAtMyA2IC0xIDIgLTMgNSAtNCA5IC0xIDMgLTMKNiAtNCA4IC0xIDEgLTMgNCAtMyA3IC0xIDMgLTMgNyAtNSAxMCAtMSAzIC0zIDcgLTMgOCAtMSAyIC00IDggLTEzIDI3IC0xIDMKLTQgOSAtNSAxMSAwIDIgLTIgNSAtMyA2IC0xIDIgLTIgNSAtMyA4IC0xIDIgLTQgOCAtNiAxMiAtMiA1IC00IDkgLTQgMTAgMCAxCi0xIDMgLTMgNiAtMSAyIC0zIDcgLTUgMTAgLTEgNCAtMyA4IC00IDEwIC0xIDEgLTIgNCAtMyA2IC0xIDMgLTIgNiAtNCA4IC0xCjIgLTMgNiAtNCA5IC0xIDMgLTMgOCAtNCAxMCAtMiAyIC00IDcgLTUgMTEgLTEgMyAtMyA3IC00IDggLTEgMSAtMiA0IC0zIDcKLTEgMiAtMyA2IC00IDEwIC04IDE2IC0yMiA0NSAtMjIgNDcgMCAwIC0yIDMgLTMgNyAtMiA0IC00IDggLTQgOCAwIDEgLTEgNAotMyA2IC0xIDMgLTMgNiAtMyA3IC0xIDEgLTMgNiAtNCAxMCAtMiAzIC02IDExIC05IDE3IC0yIDYgLTYgMTQgLTggMTggLTEgMwotNCA5IC01IDEyIC0xIDMgLTMgNiAtNCA4IC0xIDEgLTIgNCAtMyA2IC0xIDMgLTIgNiAtMyA4IC0yIDIgLTQgNiAtNSA5IC0xIDQKLTMgOCAtNCAxMCAtMiAzIC0zIDYgLTQgOSAtMSAyIC0zIDYgLTUgMTAgLTEgMyAtMyA3IC00IDEwIC0xIDQgLTYgMTEgLTkgMTIKLTEgMSAtNzIgMiAtNzQgMXoiLz4KPHBhdGggZD0iTTQ4NDUgMTEzMyBjLTMxIDAgLTMzIC0xIC0zNSAtMiAtMSAtMiAtMSAtODAgLTEgLTU1OSAwIC01NTYgMCAtNTU3CjIgLTU1OSAyIC0yIDMgLTIgMzMgLTIgMTcgMCAzMyAwIDM2IC0xIDQgMCA1IDAgNyAyIDIgMiAyIDIgMiAxNDYgMCAxMTkgMAoxNDQgMSAxNDYgMiA0IDMgNSAzNCAzNyAxMSAxMSAzMSAzMSA0NCA0NSAxMyAxNCAyOCAyOSAzMyAzMyA0IDUgMTQgMTYgMjMgMjUKMzQgMzUgNjUgNjcgNzYgNzggNiA2IDE3IDE4IDI1IDI1IDcgOCAxMyAxNCAxNCAxNCA0IDEgNiAwIDEwIC01IDMgLTMgMTAgLTEyCjE2IC0xOSAxMSAtMTIgMTYgLTE5IDIzIC0yNiAxIC0yIDcgLTggMTIgLTE0IDUgLTUgMTEgLTEyIDEzIC0xNSAyIC0zIDYgLTcgOAotOSAxMCAtMTEgMzYgLTQxIDQzIC01MCA1IC01IDE1IC0xNyAyMyAtMjcgMTQgLTE1IDM1IC0zOSA0NSAtNTEgNCAtNSA3IC05CjE1IC0xNyA1IC01IDE3IC0xOSAyMCAtMjMgMSAtMiAxMSAtMTMgMjIgLTI1IDEwIC0xMiAyNiAtMzEgMzYgLTQyIDEwIC0xMSAxOQotMjEgMjAgLTIzIDEgLTEgNCAtNSA3IC03IDIgLTMgOSAtMTIgMTYgLTIwIDcgLTggMTUgLTE2IDE3IC0xOCAxIC0zIDEwIC0xMwoxOSAtMjMgOCAtOSAxOCAtMjAgMjEgLTIzIDIgLTQgMTUgLTE4IDI3IC0zMiAxMiAtMTQgMjYgLTMwIDMxIC0zNSA0IC01IDEwCi0xMiAxMyAtMTUgMyAtNCA3IC04IDggLTEwIDIgLTIgNiAtNiA4IC05IDMgLTMgNSAtNiA1IC02IDAgLTEgMiAtMiA0IC0zIDUKLTMgNSAtMyA0OSAtMyAyNCAwIDQ1IDAgNDUgMSAzIDEgMCA1IC0xMiAyMCAtOCA4IC0xMyAxNCAtMjggMzIgLTIgMiAtNSA2IC03CjggLTIgMyAtNiA3IC04IDEwIC0zIDIgLTcgNyAtOSAxMCAtMyA0IC0xMSAxMiAtMTcgMTkgLTYgOCAtMTIgMTUgLTE0IDE3IC0yCjIgLTcgOCAtMTEgMTMgLTUgNSAtMTMgMTUgLTE3IDIwIC01IDYgLTExIDEzIC0xMiAxNCAtMiAyIC01IDYgLTcgOSAtMyAyIC02CjYgLTkgOSAtNiA2IC0xMiAxNCAtMTcgMjAgLTIgMyAtOCA5IC0xMiAxNCAtNSA1IC0xMCAxMSAtMTIgMTQgLTEgMiAtNiA4IC0xMQoxMyAtNCA1IC0xMCAxMSAtMTIgMTQgLTYgOCAtMTMgMTUgLTE3IDIwIC0yIDIgLTUgNiAtNyA4IC0zIDMgLTYgNyAtNyA4IC0yIDIKLTYgNyAtOSAxMSAtNCA0IC0xMyAxNSAtMjEgMjQgLTggMTAgLTE3IDE5IC0xOCAyMiAtMiAyIC02IDYgLTggOSAtMyAyIC03IDcKLTkgMTEgLTMgMyAtMTAgMTEgLTE2IDE4IC03IDcgLTE3IDIwIC0yNCAyOCAtOCA4IC0xNyAxOSAtMjEgMjQgLTUgNSAtMTAgMTEKLTEyIDE0IC0yIDIgLTUgNiAtNiA3IC0yIDIgLTggOSAtMTMgMTYgLTE3IDE5IC0zMiAzNiAtMzYgNDEgLTIgMiAtOCA5IC0xMgoxNSAtNSA1IC0xNSAxNiAtMjEgMjQgLTcgNyAtMTQgMTUgLTE1IDE3IC0yIDIgLTUgNiAtOCA5IC0yIDMgLTcgOCAtOSAxMSAtMgozIC02IDcgLTkgMTAgLTQgNCAtNSA4IC0zIDEyIDEgMSA2IDcgMTMgMTQgNiA2IDI0IDI0IDM4IDQwIDE1IDE1IDMzIDM0IDQxCjQxIDcgNyAxNyAxOCAyMiAyMyA1IDYgMTcgMTggMjYgMjcgOCA5IDI0IDI1IDM1IDM2IDEwIDExIDI0IDI1IDMwIDMyIDYgNiAyMgoyMyAzNiAzNyAxMyAxMyAyNSAyNiAyNyAyOCAyIDIgMTMgMTQgMjUgMjYgMTIgMTIgMjcgMjggMzQgMzUgNyA4IDE0IDE1IDE2CjE3IDkgMTAgNDQgNDYgNTQgNTYgNiA3IDIxIDIxIDMyIDMzIDExIDEyIDI4IDI5IDM2IDM3IDkgOSAxNyAxNyAxNyAxOSAyIDUgNAo1IC00NSA1IC00NSAwIC00NSAwIC00OSAtMyAtMyAtMiAtNiAtNSAtOCAtNiAtMSAtMiAtMTAgLTExIC0xOSAtMjEgLTEwIC0xMAotMjYgLTI3IC0zNyAtMzggLTExIC0xMSAtMjMgLTI0IC0yNyAtMjggLTQgLTQgLTE3IC0xNyAtMjggLTI5IC0xMSAtMTIgLTI2Ci0yNiAtMzIgLTMzIC02IC02IC0yMiAtMjMgLTM1IC0zNiAtMTMgLTEzIC0yNyAtMjggLTMxIC0zMyAtNSAtNCAtMTggLTE4IC0zMAotMzEgLTEzIC0xMiAtMjggLTI4IC0zNCAtMzQgLTYgLTcgLTE1IC0xNiAtMTkgLTIwIC04IC05IC00MyAtNDQgLTU5IC02MSAtNgotNiAtMjIgLTIzIC0zNSAtMzcgLTE0IC0xMyAtMjYgLTI2IC0yOCAtMjggLTIwIC0yMCAtNTIgLTU0IC02OSAtNzIgLTcgLTcKLTE5IC0xOSAtMjYgLTI3IC04IC04IC0yNSAtMjYgLTM5IC0zOSAtMTMgLTE0IC0zMCAtMzIgLTM4IC00MCAtMjAgLTIxIC01MgotNTMgLTcxIC03MyAtMjcgLTI4IC0yNiAtMjggLTI5IC0yOCAtMiAwIC0zIDEgLTMgMiAtMSAwIC0xIDE2MSAtMSAzNTcgMCAzNTQKMCAzNTUgLTIgMzU3IC0xIDEgLTMgMiAtNSAyIC0yIDAgLTE4IC0xIC0zNyAtMXoiLz4KPHBhdGggZD0iTTg5MDcgMTEzMyBjLTEgLTEgLTIgLTIgLTMgLTQgLTEgLTMgLTEgLTExMTEgMCAtMTExNCAxIC0yIDIgLTMgMwotNCAxIDAgMTggMCAzOCAwIDMzIDAgMzUgMSAzNyAyIDEgMiAxIDgwIDEgNTU5IDAgNTU2IDAgNTU3IC0yIDU1OSAtMiAyIC0zIDIKLTM0IDIgLTE3IDAgLTMzIDAgLTM1IDAgLTEgMSAtNCAxIC01IDB6Ii8+CjxwYXRoIGQ9Ik0zMzI3IDExMzIgYy0xIC0xIC0yIC0yIC0zIC0zIDAgLTIgMCAtMTYgMCAtMzMgMCAtMjkgMCAtMzEgMSAtMzMgMgotMSAxOCAtMiAyMTQgLTIgMTE2IDAgMjE2IC0xIDIyMSAtMSA0IC0xIDE1IC0yIDI0IC0yIDggLTEgMTkgLTIgMjQgLTMgNSAwCjE0IC0xIDIwIC0zIDUgLTEgMTQgLTMgMTkgLTMgNSAtMSAxMyAtMyAxNyAtNCA0IC0yIDExIC00IDE1IC00IDQgLTEgOSAtMyAxMAotMyAxIC0xIDcgLTMgMTQgLTUgNiAtMiAxMiAtNCAxNSAtNiAyIC0xIDYgLTIgOCAtMyAzIC0xIDYgLTIgOSAtNCAyIC0yIDYgLTMKOCAtNCAyIC0xIDUgLTIgNyAtMyAxIC0yIDUgLTQgOCAtNSAxMiAtNyAyOCAtMTggMzAgLTIwIDAgLTEgMiAtMiA0IC00IDUgLTMKNyAtNSAyMiAtMTkgMTEgLTExIDEyIC0xMiAyMCAtMjIgNyAtMTAgMTIgLTE2IDE0IC0yMCAxIC0zIDQgLTYgNSAtOCAyIC0yIDMKLTUgNCAtOCAxIC0yIDMgLTYgNCAtNyAxIC0yIDMgLTUgMyAtNyAxIC0yIDMgLTYgNCAtOCAyIC0yIDMgLTYgNCAtOSAxIC0zIDIKLTcgMyAtOSAxIC0yIDQgLTEyIDcgLTIzIDUgLTE5IDcgLTMzIDkgLTUyIDAgLTUgMCAtMTEgMSAtMTIgMyAtMzAgLTEgLTgyIC05Ci0xMTIgLTIgLTggLTQgLTE2IC00IC0xNyAwIC0xIC0xIC00IC0zIC04IC0yIC0zIC0zIC04IC00IC0xMSAtMSAtMyAtMiAtNiAtMwotOCAtMiAtMiAtNCAtNiAtNSAtOSAtMSAtMiAtMiAtNiAtMyAtNyAtMSAtMiAtMyAtNSAtNSAtOCAtMSAtMyAtNCAtOSAtNyAtMTMKLTMgLTQgLTYgLTkgLTcgLTEwIC04IC0xMyAtMzYgLTQzIC00OSAtNTMgLTE0IC0xMCAtMjcgLTE5IC0zMiAtMjEgLTIgLTEgLTUKLTMgLTcgLTQgLTIgLTIgLTUgLTMgLTYgLTQgLTIgMCAtNSAtMiAtNyAtMyAtMyAtMiAtNiAtMyAtOCAtNCAtMyAtMSAtNiAtMgotNyAtMyAtNCAtMyAtMjAgLTkgLTM0IC0xMyAtNSAtMSAtMTIgLTMgLTE2IC00IC00IC0yIC0xMiAtNCAtMTcgLTQgLTYgLTEKLTEzIC0zIC0xNiAtNCAtNyAtMiAtMTYgLTMgLTM0IC01IC03IC0xIC0xOCAtMiAtMjUgLTMgLTEyIC0yIC0xNSAtMiAtMjMyIC0zCi0xMjEgMCAtMjIxIDAgLTIyMyAtMSAtMSAwIC0zIC0xIC00IC0xIC0xIC0xIC0xIC01OCAtMSAtMjE2IDAgLTExOCAwIC0yMTUgMQotMjE2IDEgLTQgNSAtNCA0MCAtNCAzNSAwIDM4IDAgMzkgNCAxIDEgMSA4MiAxIDE4MCAwIDE3OCAwIDE3OCAyIDE4MCAzIDMgMwozIDE3MSAzIDE3MiAwIDE5MyAxIDIxNSAzIDcgMSAxOCAyIDI1IDMgMTUgMiAxNyAxIDIzIC03IDggLTEyIDExIC0xNyAxNSAtMjIKMiAtMyA2IC04IDggLTEyIDMgLTQgNyAtOSA5IC0xMiAyIC0zIDUgLTcgNiAtOCAzIC01IDQgLTYgOSAtMTIgMiAtNCA2IC05IDgKLTEyIDIgLTMgNCAtNyA2IC05IDEgLTEgMyAtNCA0IC02IDEgLTEgNCAtNSA2IC04IDIgLTMgNiAtOCA4IC0xMCAxIC0zIDUgLTkKOCAtMTIgMyAtNCA3IC0xMCA5IC0xMiAxIC0zIDUgLTggNyAtMTEgMiAtMyA2IC04IDggLTEwIDcgLTEyIDE4IC0yNiAyNCAtMzUKMiAtMyA2IC04IDggLTExIDIgLTMgNCAtNiA0IC02IDEgMCAzIC0zIDUgLTcgMiAtMyA2IC04IDggLTExIDIgLTMgNSAtNyA2IC04CjEgLTIgMyAtNSA0IC02IDIgLTIgNCAtNSA1IC03IDEgLTIgNSAtNyA3IC0xMSA1IC02IDcgLTkgMTcgLTIzIDcgLTkgMTAgLTE0CjE1IC0yMiAzIC0zIDcgLTkgMTAgLTEyIDIgLTQgNSAtOCA2IC05IDEgLTIgMyAtNSA0IC02IDEgLTIgNSAtNyA4IC0xMSAxNQotMjIgMTcgLTI0IDIwIC0yNCAyIC0xIDIyIC0xIDQ0IC0xIDQ3IDEgNDUgMCAzOCAxMCAtMiAzIC02IDggLTggMTIgLTMgNCAtNwo5IC05IDEyIC0yIDMgLTYgOCAtOCAxMSAtMiAzIC00IDYgLTUgNyAwIDAgLTIgMyAtMyA1IC0xIDIgLTMgNCAtNCA2IC0xIDEgLTMKMyAtNCA1IC0xIDEgLTMgNCAtNCA3IC02IDcgLTggOSAtMTIgMTUgLTIgMyAtNCA2IC00IDYgMCAwIC0yIDMgLTQgNiAtMiAzIC02CjggLTggMTEgLTMgNCAtMTAgMTMgLTE3IDI1IC00IDQgLTEwIDEzIC0xNiAyMSAtMiAzIC01IDcgLTYgOCAtMSAyIC0zIDUgLTQgNgotMiAyIC00IDUgLTUgNyAtMyA0IC0xMCAxNSAtMTYgMjMgLTIgMyAtNiA4IC05IDEyIC0yIDQgLTYgOSAtOCAxMSAtMSAyIC00IDYKLTYgOSAtMSAyIC00IDYgLTUgNyAtMSAyIC00IDUgLTUgOCAtMiAyIC01IDYgLTcgOSAtMiAzIC02IDggLTggMTEgLTIgMyAtNCA2Ci00IDcgLTIgMSAtOCAxMCAtMTIgMTYgLTEgMSAtMyA0IC00IDUgLTEgMSAtMyA0IC00IDcgLTIgMiAtNSA2IC03IDkgLTIgMyAtNgo4IC05IDEyIC0yIDQgLTYgOSAtOCAxMiAtMiAzIC02IDggLTkgMTIgLTIgNCAtNiA5IC04IDEyIC0yIDMgLTUgNyAtNyAxMCAtMQoyIC00IDUgLTYgNyAtNCA1IC02IDEwIC01IDEzIDAgMiAyIDMgNyA0IDE4IDYgMzMgMTEgMzcgMTQgMiAxIDYgMyA5IDQgMyAwIDYKMiA4IDMgMSAxIDQgMyA3IDQgMyAxIDggMyAxMCA1IDIgMSA2IDMgNyAzIDEgMSA0IDIgNiAzIDEgMiA1IDQgOSA2IDcgNCAxMSA2CjE3IDExIDIgMiA1IDQgNSA0IDEgMCAzIDIgNSAzIDIgMiA0IDQgNSA1IDQgMiAzNCAzMCA0MiA0MCAxMyAxNCAxNyAyMCAyMSAyNwoyIDMgNCA1IDQgNiAxIDAgMiAyIDMgNCAxIDMgMyA2IDUgNyAxIDIgMyA1IDQgNyAxIDMgMyA2IDQgOCAyIDIgMyA2IDQgOCAxIDIKMiA1IDQgNyAxIDIgMyA1IDMgOCAxIDMgMyA3IDQgMTAgMiAzIDQgOCA1IDEzIDEgNCAzIDEwIDUgMTIgMSAyIDIgOCAzIDEyIDEKNCAyIDkgMyAxMiAyIDQgMyA5IDQgMTUgMSA1IDIgMTMgMiAxNiA1IDI0IDUgMjYgNSA3MyAwIDQxIDAgNDUgLTIgNTYgLTEgNgotMyAxOCAtNCAyNSAtMSA4IC0zIDE2IC00IDIwIC0yIDMgLTMgOSAtNCAxMyAtMSAzIC0yIDkgLTQgMTMgLTIgMyAtMyA3IC0zIDgKMCAxIC0yIDUgLTQgMTAgLTIgNSAtNCAxMSAtNiAxNSAtMSA0IC0zIDggLTQgOSAtMSAxIC0yIDUgLTMgNyAtMSAyIC0zIDYgLTUKOSAtMSAyIC0zIDUgLTQgNyAtMSAxIC0yIDMgLTMgNCAwIDEgLTIgMyAtMyA1IC0xIDIgLTQgNiAtNSA4IC0yIDMgLTYgOCAtOAoxMSAtMiA0IC02IDkgLTggMTEgLTMgMyAtNiA2IC03IDggLTExIDEzIC0zNSAzNiAtNDYgNDMgLTMgMyAtNiA1IC02IDUgMCAxCi0yIDIgLTQgMyAtMiAxIC01IDMgLTYgNCAtMSAxIC00IDQgLTYgNSAtNSAzIC0xMSA2IC0xOSAxMiAtMiAxIC02IDMgLTggNCAtMgoxIC01IDIgLTYgNCAtMiAxIC01IDMgLTggNCAtMiAxIC02IDIgLTggNCAtMSAxIC01IDMgLTggNCAtMyAxIC04IDMgLTEwIDQgLTMKMiAtOCAzIC0xMCA0IC0yIDEgLTcgMiAtMTEgNCAtNCAyIC0xMCA0IC0xMyA0IC00IDEgLTkgMyAtMTEgNCAtMiAxIC04IDMgLTEzCjQgLTQgMCAtMTEgMiAtMTMgMyAtMyAxIC0xMyA0IC0yMSA1IC05IDIgLTIxIDQgLTI3IDUgLTEyIDIgLTI3IDQgLTQyIDUgLTUgMAotMTIgMSAtMTUgMSAtOSAyIC00NTIgMiAtNDU1IDF6Ii8+CjxwYXRoIGQ9Ik02MjY4IDExMzIgYy0xIC0yIC0yIC00IC0yIC0zMiAwIC0xNyAwIC0zMiAwIC0zNCAxIC0yIDIgLTMgMyAtNCAxCi0xIDExNiAtMSAzNTkgLTEgMzU3IDAgMzU3IDAgMzYwIDIgMiAyIDIgMiAyIDM0IDAgMzEgMCAzMiAtMiAzNCAtMiAyIC0zIDIKLTM2MCAyIC0zMDcgMCAtMzU4IDAgLTM2MCAtMXoiLz4KPHBhdGggZD0iTTc0ODQgMTEzMSBjLTIgLTIgLTIgLTIgLTMgLTMzIDAgLTE3IDEgLTMxIDEgLTMzIDEgLTEgMiAtMiAzIC0zIDEKLTEgNjAgLTEgMTk4IC0xIDE5NiAwIDE5NiAwIDE5OSAtMyAzIC0yIDMgLTIgMyAtNTIyIDAgLTM4NyAwIC01MjAgMSAtNTIxIDEKLTIgMiAtMyAzIC00IDEgMCAxNyAwIDM2IDAgMzYgMCAzOCAwIDM5IDQgMSAxIDEgMjM1IDEgNTIwIDAgNDYwIDAgNTE4IDIgNTIxCjAgMiAyIDMgMyA0IDEgMSA2NSAxIDE5OCAxIDE5NiAwIDE5NiAwIDE5OCAyIDIgMyAyIDMgMiAzNCAwIDMwIC0xIDMyIC0yIDM0Ci0yIDIgLTIgMiAtNDQxIDIgLTQzMSAwIC00MzkgMCAtNDQxIC0yeiIvPgo8cGF0aCBkPSJNNjI2OCA2MTUgYy0xIDAgLTIgLTIgLTIgLTMgMCAtMSAwIC0xNiAwIC0zMyAwIC0yOSAxIC0zMSAyIC0zMyAyCi0xIDUzIC0xIDM2MCAtMSAzNTcgMCAzNTggMCAzNjAgMiAyIDIgMiAzIDIgMzEgMCAzNyAxIDM1IC0yIDM3IC0xIDEgLTY4IDEKLTM1OSAxIC0xOTcgMCAtMzU5IC0xIC0zNjEgLTF6Ii8+CjxwYXRoIGQ9Ik02MjcyIDgzIGMtMSAwIC0zIC0xIC00IC0yIC0yIC0yIC0yIC0yIC0yIC0zNCAwIC0zMSAwIC0zMiAyIC0zNCAyCi0yIDMgLTIgMzYwIC0yIDM1NyAwIDM1OCAwIDM2MCAyIDIgMiAyIDMgMiAzNCAwIDMyIDAgMzIgLTIgMzQgLTEgMSAtMyAyIC0zCjIgLTgzIDAgLTcxMiAwIC03MTMgMHoiLz4KPC9nPgo8L3N2Zz4=" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/story">Our Story</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/story">Our Story</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/intel">Market Intel</a>
+  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+</div>
+
+
+
+<!-- NAV -->
+<!-- ══ 1. HERO ══ -->
+<section class="results-hero z1">
+  <div class="hero-inner">
+    <div class="fi">
+      <div class="hero-tag">Track Record</div>
+      <h1 class="hero-h1">Real Hosts.<br><em>Real Numbers.</em></h1>
+      <p class="hero-sub">No stock photography. No invented testimonials. <strong>These are documented outcomes</strong> from properties Marketics actively manages: with before metrics, after metrics, and the specific moves that produced the result.</p>
+    </div>
+  </div>
+  <div class="legal-strip fi" style="transition-delay:.1s">
+    <p class="legal-note">Host names anonymized by default per our privacy policy. Markets, property types, and outcome data are accurate. Individual results vary based on property condition, market, and host responsiveness.</p>
+  </div>
+</section>
+
+<!-- ══ 2. STATS BAR ══ -->
+<div class="stats-bar z1" id="statsBar">
+  <div class="stats-inner">
+    <div class="stat-cell fi">
+      <div class="stat-num" data-target="2860" data-prefix="+$" data-suffix="">&nbsp;</div>
+      <div class="stat-lbl">Avg Monthly Gain</div>
+      <div class="stat-sub">Mean across 28+ managed properties, 9 markets</div>
+    </div>
+    <div class="stat-cell fi" style="transition-delay:.06s">
+      <div class="stat-num" data-target="72" data-prefix="" data-suffix=" days">&nbsp;</div>
+      <div class="stat-lbl">Avg Time To Results</div>
+      <div class="stat-sub">Median days from audit completion to first measurable revenue lift</div>
+    </div>
+    <div class="stat-cell fi" style="transition-delay:.12s">
+      <div class="stat-num" data-target="493" data-prefix="" data-suffix="★" data-decimal="2">&nbsp;</div>
+      <div class="stat-lbl">Avg Guest Rating After</div>
+      <div class="stat-sub">Mean post-optimization rating, up from avg 4.3 at intake</div>
+    </div>
+    <div class="stat-cell fi" style="transition-delay:.18s">
+      <div class="stat-num" data-target="68" data-prefix="+" data-suffix="%">&nbsp;</div>
+      <div class="stat-lbl">Avg Rate Increase</div>
+      <div class="stat-sub">Mean nightly rate lift vs. pre-Marketics 90-day baseline</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:11px;color:rgba(180,178,169,.4);max-width:680px;margin:12px auto 0;padding:0 24px;line-height:1.5;font-family:'DM Mono',monospace;">All figures reflect Marketics-managed properties only. Sample: 28+ documented outcomes across 9 North American markets. Measurement window: first 90 days post-audit completion vs. host-reported revenue for the prior 90-day period. Individual results vary.</p>
+</div>
+
+<!-- ══ 3. CASE STUDY CARDS ══ -->
+<section class="cards-section z1" id="casestudies">
+  <div class="inner">
+    <div class="fi">
+      <div class="eyebrow">Case Studies</div>
+      <h2 class="section-title" style="margin-bottom:32px;">The Evidence.<br><em>Property By Property.</em></h2>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar fi" style="transition-delay:.08s" id="filterBar">
+      <span class="filter-label">Market</span>
+      <div class="filter-group" id="fgMarket">
+        <button class="filter-btn active" data-filter="market" data-val="all">All</button>
+        <button class="filter-btn" data-filter="market" data-val="austin">Austin</button>
+        <button class="filter-btn" data-filter="market" data-val="scottsdale">Scottsdale</button>
+        <button class="filter-btn" data-filter="market" data-val="nashville">Nashville</button>
+        <button class="filter-btn" data-filter="market" data-val="miami">Miami</button>
+        <button class="filter-btn" data-filter="market" data-val="cancun">Cancún</button>
+        <button class="filter-btn" data-filter="market" data-val="neworleans">New Orleans</button>
+        <button class="filter-btn" data-filter="market" data-val="tulum">Tulum</button>
+        <button class="filter-btn" data-filter="market" data-val="sanjuan">San Juan</button>
+        <button class="filter-btn" data-filter="market" data-val="sanantonio">San Antonio</button>
+      </div>
+      <span class="filter-label" style="margin-left:4px">Type</span>
+      <div class="filter-group" id="fgType">
+        <button class="filter-btn active" data-filter="type" data-val="all">All</button>
+        <button class="filter-btn" data-filter="type" data-val="condo">Condo</button>
+        <button class="filter-btn" data-filter="type" data-val="sfh">House</button>
+        <button class="filter-btn" data-filter="type" data-val="villa">Villa</button>
+        <button class="filter-btn" data-filter="type" data-val="historic">Historic</button>
+      </div>
+      <span class="filter-label" style="margin-left:4px">Gain</span>
+      <div class="filter-group" id="fgGain">
+        <button class="filter-btn active" data-filter="gain" data-val="all">All</button>
+        <button class="filter-btn" data-filter="gain" data-val="2-3">$2K–$3K</button>
+        <button class="filter-btn" data-filter="gain" data-val="3plus">$3K+</button>
+      </div>
+      <div class="result-count" id="resultCount">Showing <span id="visCount">9</span> of 9 results</div>
+    </div>
+
+    <!-- CARD GRID -->
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- CARD 1: Sarah M. Austin TX -->
+      <div class="cs-card fi" style="transition-delay:.1s" data-market="austin" data-type="sfh" data-gain="2-3">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Austin, TX</div>
+            <div class="ct-badge">Est. Host · 14 mo</div>
+          </div>
+          <div class="ct-name">Sarah M.</div>
+          <div class="ct-prop">3 Bed · 2 Bath · Single-family home</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$138</div><div class="cs-msub">Flat rate, no dynamic pricing</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">47%</div><div class="occ-track"><div class="occ-fill" style="width:47%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.2: below Superhost threshold</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 9</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$224</div><div class="cs-msub">Dynamic · peaks $318 weekends</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">83%</div><div class="occ-track"><div class="occ-fill" style="width:83%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.90: Superhost achieved</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#4 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $3,102 → $5,882</span><span class="rd-val">+$2,780 /mo</span></div>
+        <div class="cb"><div class="cb-icon">▲</div><div class="cb-text"><div class="cb-head">Weekend pricing was the unlock</div><div class="cb-sub">Fri–Sun repriced $138 flat → $224–$318. Midweek filled at $148 to build review velocity.</div></div><div class="timeline-pill">82 days</div></div>
+      </div>
+
+      <!-- CARD 2: Marcus T. Scottsdale AZ -->
+      <div class="cs-card fi" style="transition-delay:.13s" data-market="scottsdale" data-type="condo" data-gain="3plus">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Scottsdale, AZ</div>
+            <div class="ct-badge">New Host · 6 mo</div>
+          </div>
+          <div class="ct-name">Marcus T.</div>
+          <div class="ct-prop">2 Bed · 2 Bath · Luxury condo</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$119</div><div class="cs-msub">Underpriced vs comp set by 43%</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">44%</div><div class="occ-track"><div class="occ-fill" style="width:44%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.5: few reviews, low visibility</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 11</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$208</div><div class="cs-msub">Dynamic · event spikes to $395</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">88%</div><div class="occ-track"><div class="occ-fill" style="width:88%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.95: 34 new reviews in 75 days</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#1 in Category</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,440 → $5,560</span><span class="rd-val">+$3,120 /mo</span></div>
+        <div class="cb"><div class="cb-icon">★</div><div class="cb-text"><div class="cb-head">Review velocity was the compound</div><div class="cb-sub">Midweek at $118 filled gaps fast, 34 reviews in 75 days pushed ranking to #1.</div></div><div class="timeline-pill">75 days</div></div>
+      </div>
+
+      <!-- CARD 3: Elena R. Cancún MX -->
+      <div class="cs-card fi" style="transition-delay:.16s" data-market="cancun" data-type="villa" data-gain="3plus">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Cancún, MX</div>
+            <div class="ct-badge">Portfolio · 3 props</div>
+          </div>
+          <div class="ct-name">Elena R.</div>
+          <div class="ct-prop">4 Bed · 3 Bath · Beachfront villa</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$162</div><div class="cs-msub">Not adjusted for peak season</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">52%</div><div class="occ-track"><div class="occ-fill" style="width:52%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.4: inconsistent guest experience</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 7</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$274</div><div class="cs-msub">Dynamic · holiday peaks $520+</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">87%</div><div class="occ-track"><div class="occ-fill" style="width:87%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.92: guest experience standardized</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#3 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,550 → $7,230</span><span class="rd-val">+$4,680 /mo</span></div>
+        <div class="cb"><div class="cb-icon">↗</div><div class="cb-text"><div class="cb-head">Peak season pricing was untapped</div><div class="cb-sub">Flat $162 rate missed Dec–Jan demand entirely. Dynamic seasonal pricing added $4,680/mo.</div></div><div class="timeline-pill">60 days</div></div>
+      </div>
+
+      <!-- CARD 4: James K. Nashville TN -->
+      <div class="cs-card fi" style="transition-delay:.19s" data-market="nashville" data-type="condo" data-gain="2-3">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Nashville, TN</div>
+            <div class="ct-badge">Est. Host · 22 mo</div>
+          </div>
+          <div class="ct-name">James K.</div>
+          <div class="ct-prop">2 Bed · 1 Bath · Downtown apartment</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$122</div><div class="cs-msub">No event pricing, no weekend lift</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">54%</div><div class="occ-track"><div class="occ-fill" style="width:54%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.3: stale listing, slow reviews</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 8</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$194</div><div class="cs-msub">Dynamic · Broadway wknds $290+</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">81%</div><div class="occ-track"><div class="occ-fill" style="width:81%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.95: Superhost, 27 new reviews</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#5 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,180 → $4,710</span><span class="rd-val">+$2,530 /mo</span></div>
+        <div class="cb"><div class="cb-icon">▲</div><div class="cb-text"><div class="cb-head">Broadway weekend pricing was flat</div><div class="cb-sub">CMA Fest and NYE completely unpriced. Listing refresh drove review burst that rebuilt rank.</div></div><div class="timeline-pill">68 days</div></div>
+      </div>
+
+      <!-- CARD 5: Priya & David M. Miami FL (FEATURED — condensed card) -->
+      <div class="cs-card fi" style="transition-delay:.22s" data-market="miami" data-type="condo" data-gain="3plus">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Miami, FL</div>
+            <div class="ct-badge">New Host · 4 mo</div>
+          </div>
+          <div class="ct-name">Priya &amp; David M.</div>
+          <div class="ct-prop">3 Bed · 2 Bath · Edgewater waterfront condo</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$145</div><div class="cs-msub">Flat rate, Art Basel unpriced</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">38%</div><div class="occ-track"><div class="occ-fill" style="width:38%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.6: only 8 reviews, low rank</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 12</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$248</div><div class="cs-msub">Dynamic · Art Basel peaks $480</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">82%</div><div class="occ-track"><div class="occ-fill" style="width:82%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.93: 29 new reviews, top 10%</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#6 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,061 → $5,594</span><span class="rd-val">+$3,533 /mo</span></div>
+        <div class="cb"><div class="cb-icon">★</div><div class="cb-text"><div class="cb-head">Art Basel was completely unpriced</div><div class="cb-sub">Competitors at $380+ that week. One pricing update paid for an entire year of management.</div></div><div class="timeline-pill">55 days</div></div>
+      </div>
+
+      <!-- CARD 6: Roberto V. Tulum MX -->
+      <div class="cs-card fi" style="transition-delay:.25s" data-market="tulum" data-type="villa" data-gain="2-3">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>Tulum, MX</div>
+            <div class="ct-badge">Est. Host · 18 mo</div>
+          </div>
+          <div class="ct-name">Roberto V.</div>
+          <div class="ct-prop">2 Bed · 2 Bath · Jungle casita (Ruins Zone)</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$98</div><div class="cs-msub">Severely underpriced for zone</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">61%</div><div class="occ-track"><div class="occ-fill" style="width:61%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.6: good ratings, poor rank</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 6</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$172</div><div class="cs-msub">Dynamic · Zamna peaks $340</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">91%</div><div class="occ-track"><div class="occ-fill" style="width:91%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.97 — #2 in category</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#2 in Category</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,208 → $5,002</span><span class="rd-val">+$2,794 /mo</span></div>
+        <div class="cb"><div class="cb-icon">↗</div><div class="cb-text"><div class="cb-head">Festival intelligence was the gap</div><div class="cb-sub">Zamna Festival demand invisible to host. Price lift + zone-specific listing rewrite drove #2 rank.</div></div><div class="timeline-pill">71 days</div></div>
+      </div>
+
+      <!-- CARD 7: Diane L. New Orleans LA -->
+      <div class="cs-card fi" style="transition-delay:.28s" data-market="neworleans" data-type="historic" data-gain="2-3">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>New Orleans, LA</div>
+            <div class="ct-badge">Est. Host · 30 mo</div>
+          </div>
+          <div class="ct-name">Diane L.</div>
+          <div class="ct-prop">2 Bed · 1 Bath · Creole cottage (Marigny)</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$131</div><div class="cs-msub">Flat: Mardi Gras same as Feb 1</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">50%</div><div class="occ-track"><div class="occ-fill" style="width:50%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.4: high review age, rank fell</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 10</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$213</div><div class="cs-msub">Dynamic · Mardi Gras peaks $490</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">85%</div><div class="occ-track"><div class="occ-fill" style="width:85%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.92: 22 reviews relaunched rank</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#3 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,455 → $5,168</span><span class="rd-val">+$2,713 /mo</span></div>
+        <div class="cb"><div class="cb-icon">▲</div><div class="cb-text"><div class="cb-head">Mardi Gras was 3× undermarket</div><div class="cb-sub">Competitors charged $460–$490 that week. Pricing correction alone added $1,800 in one 10-day window.</div></div><div class="timeline-pill">77 days</div></div>
+      </div>
+
+      <!-- CARD 8: Tom & K. W. San Juan PR -->
+      <div class="cs-card fi" style="transition-delay:.31s" data-market="sanjuan" data-type="historic" data-gain="3plus">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>San Juan, PR</div>
+            <div class="ct-badge">New Host · 8 mo</div>
+          </div>
+          <div class="ct-name">Tom &amp; K. W.</div>
+          <div class="ct-prop">3 Bed · 2 Bath · Historic townhouse (Old San Juan)</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$108</div><div class="cs-msub">New listing, conservative pricing</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">42%</div><div class="occ-track"><div class="occ-fill" style="width:42%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.7: 11 reviews, invisible ranking</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 9</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$198</div><div class="cs-msub">Dynamic · Las Navidades peaks $380</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">87%</div><div class="occ-track"><div class="occ-fill" style="width:87%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.96: top-rated Old San Juan</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#4 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $1,850 → $4,960</span><span class="rd-val">+$3,110 /mo</span></div>
+        <div class="cb"><div class="cb-icon">★</div><div class="cb-text"><div class="cb-head">Las Navidades was invisible to the algorithm</div><div class="cb-sub">Puerto Rico's 2-week holiday surge requires 90-day advance pricing. Most hosts miss it entirely.</div></div><div class="timeline-pill">64 days</div></div>
+      </div>
+
+      <!-- CARD 9: Carlos M. San Antonio TX -->
+      <div class="cs-card fi" style="transition-delay:.34s" data-market="sanantonio" data-type="historic" data-gain="2-3">
+        <div class="ct">
+          <div class="ct-row1">
+            <div class="ct-market"><div class="mkt-dot"></div>San Antonio, TX</div>
+            <div class="ct-badge">Portfolio · 5 props</div>
+          </div>
+          <div class="ct-name">Carlos M.</div>
+          <div class="ct-prop">4 Bed · 3 Bath · Historic home (King William)</div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-side before">
+            <div class="cs-side-lbl">Before</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$156</div><div class="cs-msub">Flat across all 5 properties</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">48%</div><div class="occ-track"><div class="occ-fill" style="width:48%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star">☆</span></div><div class="cs-msub">4.3: portfolio avg, no system</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">Page 11</div></div>
+          </div>
+          <div class="cs-rule"></div>
+          <div class="cs-side after">
+            <div class="cs-side-lbl">After</div>
+            <div class="cs-metric"><div class="cs-mk">Nightly Rate</div><div class="cs-mv lg">$228</div><div class="cs-msub">Dynamic · Fiesta peaks $415</div></div>
+            <div class="cs-metric"><div class="cs-mk">Occupancy</div><div class="cs-mv">80%</div><div class="occ-track"><div class="occ-fill" style="width:80%"></div></div></div>
+            <div class="cs-metric"><div class="cs-mk">Guest Rating</div><div class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></div><div class="cs-msub">4.91: standardized across portfolio</div></div>
+            <div class="cs-metric"><div class="cs-mk">Search Position</div><div class="rank-pill">#7 in Market</div></div>
+          </div>
+        </div>
+        <div class="rev-delta"><span class="rd-lbl">Monthly Revenue: $2,700 → $5,193</span><span class="rd-val">+$2,493 /mo</span></div>
+        <div class="cb"><div class="cb-icon">↗</div><div class="cb-text"><div class="cb-head">Fiesta San Antonio was the first unlock</div><div class="cb-sub">10-day festival, competitors at $380–$415. Systematic portfolio review generated 3× the event revenue.</div></div><div class="timeline-pill">88 days</div></div>
+      </div>
+
+    </div><!-- /cards-grid -->
+
+    <!-- No-results message -->
+    <div id="noResults" style="display:none;text-align:center;padding:48px 0;">
+      <p style="font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);">No results match that filter combination.</p>
+      <button onclick="resetFilters()" style="margin-top:16px;font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:transparent;border:1px solid rgba(214,173,96,.25);border-radius:4px;padding:9px 18px;cursor:pointer;">Reset Filters</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 4. FEATURED STORY ══ -->
+<section class="featured-section z1" id="featured">
+  <div class="featured-wrap">
+    <div class="eyebrow fi">Deep Dive</div>
+    <h2 class="section-title fi" style="transition-delay:.06s">One Property.<br><em>90 Days. In Full.</em></h2>
+    <p class="section-sub fi" style="transition-delay:.1s" style="margin-bottom:0">The complete stage-by-stage breakdown: what we found, what we changed, what compounded.</p>
+
+    <div class="featured-grid fi" style="transition-delay:.14s">
+      <!-- LEFT: Narrative -->
+      <div>
+        <div class="feat-host-row">
+          <div class="feat-avatar">P&amp;D</div>
+          <div class="feat-host-info">
+            <div class="feat-host-name">Priya &amp; David M.</div>
+            <div class="feat-host-meta">Miami, FL · Edgewater Waterfront Condo · New Host, 4 months listed</div>
+          </div>
+        </div>
+
+        <div class="feat-before-box">
+          <div class="feat-box-lbl">The Situation</div>
+          <div class="feat-box-text">Priya and David listed their 3BR Edgewater condo two weeks before Art Basel: Miami's single highest-demand week of the year, when competitors in their category charge $380–$480/night. They were charging <strong>$145 flat.</strong> With only 8 reviews and a page 12 search position, the listing was algorithmically invisible. Monthly revenue: $2,061.</div>
+        </div>
+
+        <div class="feat-after-box">
+          <div class="feat-box-lbl">The Outcome</div>
+          <div class="feat-box-text">55 days after audit completion: <strong>$248 dynamic base rate, $480 during Art Basel, 82% occupancy, 4.93★ rating, #6 in market.</strong> Monthly revenue: $5,594. The Art Basel week alone: priced at $480/night for 7 nights: generated $3,360. Marketics' annual management fee for this property: $6,712. The first Art Basel week covered 50% of it.</div>
+        </div>
+
+        <blockquote class="feat-quote">
+          &#8220;We had no idea what we were sitting on. Marketics repriced us from $145 flat to <strong>$480 for Art Basel week</strong>, and we sold out. That one week covered half our first year of management fees. Now we understand why market intelligence actually matters.&#8221;
+ </blockquote>
+        <div class="feat-attribution">— Priya M., Miami, FL · Result documented at day 90</div>
+      </div>
+
+      <!-- RIGHT: Stage timeline + metrics -->
+      <div class="feat-right">
+        <div class="stage-timeline">
+          <div class="stage-item done">
+            <div class="stage-connector">
+              <div class="stage-num">01</div>
+              <div class="stage-line"></div>
+            </div>
+            <div class="stage-body">
+              <div class="stage-label">Audit: Days 1–7</div>
+              <div class="stage-head">Full competitive landscape mapped</div>
+              <div class="stage-desc">Identified 12 comparable listings in Edgewater pricing $380–$480 during Art Basel. Confirmed listing photos were hotel-angled instead of view-first. Title missing "waterfront" and "Edgewater": the two highest-converting keywords in the market.</div>
+              <div class="stage-result">↳ $335 avg price gap identified vs comp set</div>
+            </div>
+          </div>
+          <div class="stage-item done">
+            <div class="stage-connector">
+              <div class="stage-num">02</div>
+              <div class="stage-line"></div>
+            </div>
+            <div class="stage-body">
+              <div class="stage-label">Architecture: Days 8–14</div>
+              <div class="stage-head">Listing rebuilt for search + conversion</div>
+              <div class="stage-desc">Title rewritten: "Edgewater Waterfront · Biscayne Bay Views · Walk to Wynwood." Lead photo switched to skyline-at-dusk shot. Description restructured to front-load Art Basel proximity and Wynwood walkability. House manual created for 5-star operational consistency.</div>
+              <div class="stage-result">↳ Click-through rate increased within 72hrs of relaunch</div>
+            </div>
+          </div>
+          <div class="stage-item done">
+            <div class="stage-connector">
+              <div class="stage-num">03</div>
+              <div class="stage-line"></div>
+            </div>
+            <div class="stage-body">
+              <div class="stage-label">Pricing: Days 14–20</div>
+              <div class="stage-head">Dynamic model activated, Art Basel priced</div>
+              <div class="stage-desc">Base rate lifted to $190 weekdays, $248 weekends. Art Basel window (Dec 4–11): priced at $480/night: matching top-10 comparable listings. Midweek fill floor set at $155 to accelerate review velocity entering the high season.</div>
+              <div class="stage-result">↳ Art Basel 7-night block: $3,360 revenue</div>
+            </div>
+          </div>
+          <div class="stage-item done">
+            <div class="stage-connector">
+              <div class="stage-num">04</div>
+              <div class="stage-line"></div>
+            </div>
+            <div class="stage-body">
+              <div class="stage-label">Reviews: Days 14–45</div>
+              <div class="stage-head">29 new reviews in 45 days</div>
+              <div class="stage-desc">Midweek pricing at $155 filled shoulder nights and generated the review burst needed to move the algorithm. By day 45: 29 new reviews, 4.93★ average, listing moved from page 12 to top-20 in Miami. Ultra Music Festival window priced next.</div>
+              <div class="stage-result">↳ Page 12 → #6 in Market by Day 55</div>
+            </div>
+          </div>
+          <div class="stage-item done">
+            <div class="stage-connector">
+              <div class="stage-num">05</div>
+              <div class="stage-line"></div>
+            </div>
+            <div class="stage-body">
+              <div class="stage-label">Compound: Days 55–90</div>
+              <div class="stage-head">Flywheel locked in, Ultra priced</div>
+              <div class="stage-desc">Ultra Music Festival (March) priced at $390/night. With #6 ranking, organic bookings accelerated. Monthly revenue stabilized at $5,594. 90-day total incremental revenue over pre-Marketics baseline: $10,599.</div>
+              <div class="stage-result">↳ +$10,599 incremental in first 90 days</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feat-metrics">
+          <div class="feat-metric"><div class="feat-mv">$3,533</div><div class="feat-ml">Monthly Gain</div><div class="feat-msub">Sustained after day 55</div></div>
+          <div class="feat-metric"><div class="feat-mv">55 days</div><div class="feat-ml">To Full Result</div><div class="feat-msub">Fastest in Miami cohort</div></div>
+          <div class="feat-metric"><div class="feat-mv">4.93★</div><div class="feat-ml">Guest Rating</div><div class="feat-msub">Up from 4.6</div></div>
+          <div class="feat-metric"><div class="feat-mv">+71%</div><div class="feat-ml">Rate Increase</div><div class="feat-msub">$145 → $248 base</div></div>
+          <div class="feat-metric"><div class="feat-mv">$480</div><div class="feat-ml">Peak Night Rate</div><div class="feat-msub">Art Basel week</div></div>
+          <div class="feat-metric"><div class="feat-mv">$10,599</div><div class="feat-ml">90-Day Total Gain</div><div class="feat-msub">Above pre-Marketics baseline</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. GUARANTEE ══ -->
+<div class="guarantee-bar z1">
+  <div class="guarantee-inner">
+    <div class="guar-left fi">
+      <div class="guar-eyebrow">The Guarantee</div>
+      <p class="guar-text">
+ These are documented results — <strong>not cherry-picked outliers.</strong>
+        Marketics operates on a 90-day guarantee: if your property doesn't show measurable revenue improvement by day 90, your $500 setup fee is refunded in full.
+        We only keep it when the numbers prove it.
+      </p>
+    </div>
+    <div class="guar-cta fi" style="transition-delay:.1s">
+      <a href="/get-started" class="btn-primary">Start With a Free Audit</a>
+      <a href="/pricing#guarantee" class="btn-ghost-link">Read the full guarantee <span class="bgl"></span></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+
+<script>
+/* ══ LOGO INJECT ══ */
+// Logo placeholder replaced by build script
+
+/* ══ FILTER SYSTEM ══ */
+const activeFilters={market:'all',type:'all',gain:'all'};
+
+document.getElementById('filterBar').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn');
+  if(!btn)return;
+  const {filter,val}=btn.dataset;
+  activeFilters[filter]=val;
+  // Update active state within group
+  btn.closest('.filter-group').querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));
+  applyFilters();
+});
+
+function applyFilters(){
+  const cards=[...document.querySelectorAll('.cs-card')];
+  let visible=0;
+  cards.forEach(card=>{
+    const mMatch=activeFilters.market==='all'||card.dataset.market===activeFilters.market;
+    const tMatch=activeFilters.type==='all'||card.dataset.type===activeFilters.type;
+    const gMatch=activeFilters.gain==='all'||card.dataset.gain===activeFilters.gain;
+    const show=mMatch&&tMatch&&gMatch;
+    card.classList.toggle('hidden',!show);
+    if(show)visible++;
+  });
+  document.getElementById('visCount').textContent=visible;
+  document.getElementById('noResults').style.display=visible===0?'block':'none';
+  // Re-apply grid corner radii
+  const shown=cards.filter(c=>!c.classList.contains('hidden'));
+  shown.forEach((c,i)=>{
+    c.style.borderRadius='0';
+    const cols=window.innerWidth>560?3:(window.innerWidth>860?2:1);
+    const rows=Math.ceil(shown.length/cols);
+    const row=Math.floor(i/cols),col=i%cols;
+    const lastRow=Math.ceil(shown.length/cols)-1;
+    const lastCol=Math.min(cols-1,(shown.length-1)%cols);
+    const tl=row===0&&col===0,tr=row===0&&col===cols-1;
+    const bl=row===lastRow&&col===0,br=row===lastRow&&col===lastCol;
+    c.style.borderRadius=`${tl?8:0}px ${tr?8:0}px ${br?8:0}px ${bl?8:0}px`;
+  });
+}
+
+function resetFilters(){
+  Object.keys(activeFilters).forEach(k=>activeFilters[k]='all');
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.val==='all'));
+  applyFilters();
+}
+
+/* ══ ANIMATED STAT COUNTERS ══ */
+function animateCounter(el,target,prefix,suffix,decimal){
+  const dur=1600;const t0=performance.now();
+  (function tick(now){
+    const t=Math.min((now-t0)/dur,1);
+    const e=1-Math.pow(1-t,4);
+    const v=Math.round(e*target);
+    let display;
+    if(decimal){
+      const s=String(v).padStart(3,'0');
+      display=s.slice(0,-decimal)+'.'+s.slice(-decimal);
+    } else {
+      display=v>=1000?'$'+Math.round(v/10)*10:String(v);
+      if(prefix==='+$') display='+$'+(v>=1000?(Math.round(v/10)*10).toLocaleString():v);
+      else display=prefix+v+suffix;
+      el.textContent=display;
+      if(t<1)requestAnimationFrame(tick);
+      else{el.textContent=prefix+(decimal?(String(target).slice(0,-decimal)+'.'+String(target).slice(-decimal)):target>=1000?target.toLocaleString():target)+suffix;el.closest('.stat-cell').classList.add('counted');}
+      return;
+    }
+    el.textContent=prefix+display+suffix;
+    if(t<1)requestAnimationFrame(tick);
+    else{el.textContent=prefix+display+suffix;el.closest('.stat-cell').classList.add('counted');}
+  })(performance.now());
+}
+
+let statsPlayed=false;
+const statsObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!statsPlayed){
+      statsPlayed=true;statsObs.disconnect();
+      document.querySelectorAll('.stat-num[data-target]').forEach(el=>{
+        const target=+el.dataset.target,prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'',dec=+el.dataset.decimal||0;
+        animateCounter(el,target,prefix,suffix,dec);
+      });
+    }
+  });
+},{threshold:0.3});
+statsObs.observe(document.getElementById('statsBar'));
+
+/* ══ FADE-IN ══ */
+(function(){
+  var fallback=setTimeout(function(){
+    document.querySelectorAll('.fi').forEach(function(el){el.classList.add('vis');});
+  },700);
+  try{
+    var t=document.createElement('div');document.body.appendChild(t);
+    var tio=new IntersectionObserver(function(){clearTimeout(fallback);tio.disconnect();document.body.removeChild(t);});
+    tio.observe(t);
+  }catch(e){clearTimeout(fallback);}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){
+      if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*55);io.unobserve(e.target);}
+    });
+  },{threshold:0.05,rootMargin:'0px 0px -10px 0px'});
+  document.querySelectorAll('.fi').forEach(function(el){io.observe(el);});
+})();
+</script>
+
+
+
+<script>
+</script>
+<script></script>
+
+
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">All Intel</a>
+        <a href="/intel/miami">Miami: FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka: Summer 2026</a>
+        <a href="/intel/algorithm">Airbnb Algorithm</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+<script>(function(){var nav=document.querySelector('nav:not(.sf-nav)');if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});})();</script>
+</body>
+</html>

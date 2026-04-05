@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://marketics.io/intel/miami/report">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Miami Market Intelligence — 2026 · Marketics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+<style>
+:root {
+  --gold: #D6AD60;
+  --gold-lo: rgba(214,173,96,.12);
+  --gold-glow: rgba(214,173,96,.07);
+  --gold-dim: rgba(214,173,96,.15);
+  --gold-line: rgba(214,173,96,.25);
+  --night: #0f0f0f;
+  --n2: #141414;
+  --n3: #1a1a1a;
+  --n4: #202020;
+  --n5: #282828;
+  --white: #fff;
+  --stone: #B4B2A9;
+  --dim: #6B6A65;
+  --dim2: #4e4d4a;
+  --ok: #2D7A4F;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--night);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: .4;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:64px;
+  background:rgba(13,13,13,.95);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .3s ease,border-color .3s ease;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;
+  transition:color .15s ease;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a.active{color:var(--white);}
+.nav-cta{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 22px;background:var(--gold);color:#0f0f0f;
+  border:none;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:filter .2s ease,transform .15s ease;
+  white-space:nowrap;
+}
+.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 72px;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(214,173,96,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(214,173,96,.04) 0%, transparent 60%),
+    linear-gradient(180deg, var(--night) 0%, #0f0f0a 100%);
+  z-index: 0;
+}
+
+.hero-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  opacity: .06;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin-top: 52px;
+}
+
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+
+.hero-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 200;
+  line-height: .95;
+  letter-spacing: -.02em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--stone);
+  font-weight: 300;
+  margin-top: 24px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.hero-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 32px;
+}
+
+/* ── SECTION ── */
+section {
+  padding: 100px 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 200;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+/* ── GOLD RULE ── */
+.gold-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .4;
+  margin: 16px 0 40px;
+}
+
+/* ── KPI GRID ── */
+.kpi-section {
+  background: var(--n2);
+  border-top: 1px solid rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.kpi-intro {
+  max-width: 640px;
+  margin-bottom: 64px;
+}
+
+.kpi-intro p {
+  font-size: 16px;
+  color: var(--stone);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.05);
+  margin-bottom: 48px;
+}
+
+.kpi-card {
+  background: var(--n3);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+
+.kpi-card:hover { background: var(--n4); }
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.kpi-card:hover::before { opacity: 1; }
+
+.kpi-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+
+.kpi-value {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 42px;
+  font-weight: 200;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.kpi-delta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kpi-delta.up { color: #5aaa6e; }
+.kpi-delta.down { color: #c0695a; }
+.kpi-delta.neutral { color: var(--dim); }
+
+/* ── SEASONALITY ── */
+.season-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.season-card {
+  background: var(--n3);
+  border: 1px solid rgba(255,255,255,.06);
+  padding: 36px;
+  position: relative;
+}
+
+.season-card.peak {
+  border-color: rgba(214,173,96,.2);
+  background: linear-gradient(135deg, var(--n3) 0%, rgba(214,173,96,.04) 100%);
+}
+
+.season-peak-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(214,173,96,.3);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.season-month {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+
+.season-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.season-body {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.7;
+}
+
+.season-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.season-stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 4px;
+}
+
+.season-stat-val {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+/* ── BEDROOM TABLE ── */
+.bedroom-section { background: var(--night); }
+
+.bedroom-intro {
+  max-width: 600px;
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.8;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.bedroom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bedroom-table thead th {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: left;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.bedroom-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  transition: background .15s;
+}
+
+.bedroom-table tbody tr:hover { background: rgba(255,255,255,.02); }
+
+.bedroom-table tbody tr.highlight {
+  background: rgba(214,173,96,.04);
+  border-color: rgba(214,173,96,.12);
+}
+
+.bedroom-table td {
+  padding: 16px 20px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.bedroom-table td:first-child {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.bedroom-table td.gold {
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+
+.bedroom-table td.listings {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.gap-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gap-bar {
+  height: 3px;
+  background: rgba(214,173,96,.2);
+  border-radius: 2px;
+  flex: 1;
+  max-width: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gap-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.gap-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+}
+
+/* ── DATES ── */
+.dates-section {
+  background: var(--n2);
+}
+
+.dates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.04);
+  margin-top: 48px;
+}
+
+.date-card {
+  background: var(--n3);
+  padding: 32px 28px;
+}
+
+.date-spike {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.date-spike::before {
+  content: '↑';
+  font-size: 11px;
+}
+
+.date-range {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.date-note {
+  font-size: 12px;
+  color: var(--stone);
+  line-height: 1.6;
+}
+
+/* ── MARKET NARRATIVE ── */
+.narrative-section {
+  background: var(--night);
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+
+.narrative-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.narrative-text p {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.9;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.narrative-text p strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.insight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.insight-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--n3);
+  border: 1px solid rgba(255,255,255,.05);
+  border-left: 2px solid var(--gold);
+}
+
+.insight-icon {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold);
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.insight-text {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.7;
+}
+
+.insight-text strong {
+  display: block;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--n2);
+  border-top: 1px solid rgba(255,255,255,.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(214,173,96,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.cta-left .section-title { margin-bottom: 24px; }
+
+.cta-separator {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .4;
+  margin: 28px 0;
+}
+
+.cta-philosophy {
+  font-size: 14px;
+  color: var(--stone);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.cta-philosophy strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.averages-box {
+  background: var(--n4);
+  border: 1px solid rgba(255,255,255,.06);
+  border-left: 2px solid rgba(214,173,96,.4);
+  padding: 24px 28px;
+  margin: 28px 0;
+}
+
+.averages-box p {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.averages-box p strong {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.cta-right {
+  background: var(--n3);
+  border: 1px solid rgba(214,173,96,.15);
+  padding: 48px 40px;
+  position: relative;
+}
+
+.cta-right::before {
+  content: 'FREE AUDIT';
+  position: absolute;
+  top: -1px;
+  left: 40px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .2em;
+  color: var(--night);
+  background: var(--gold);
+  padding: 4px 12px;
+}
+
+.audit-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 20px;
+  margin-top: 16px;
+}
+
+.audit-subtitle {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.audit-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.audit-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--stone);
+}
+
+.audit-feature::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.cta-btn {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--gold);
+  color: #0f0f0f;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: filter .2s ease, transform .15s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+}
+
+.cta-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.cta-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: var(--dim);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ── MARQUEE ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width: 900px) {
+  nav { padding: 16px 24px; }
+  section { padding: 72px 24px; }
+  .hero { padding: 0 24px 56px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .season-grid { grid-template-columns: 1fr; }
+  .dates-grid { grid-template-columns: 1fr 1fr; }
+  .narrative-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cta-inner { grid-template-columns: 1fr; gap: 48px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media(max-width: 600px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .dates-grid { grid-template-columns: 1fr; }
+}
+
+/* ── SITE FOOTER ── */
+.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 56px 28px;}
+.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
+.sf-brand{padding-top:2px;}
+.sf-copy{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);margin-bottom:6px;}
+.sf-location{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim2,#4e4d4a);letter-spacing:.06em;}
+.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.sf-col-label{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;}
+.sf-col a{display:block;font-size:12px;color:var(--stone);text-decoration:none;margin-bottom:10px;transition:color .15s;}
+.sf-col a:hover{color:var(--white);}
+.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.08em;}
+@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+</style>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" style="height:26px;width:auto;display:block;flex-shrink:0;">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel" class="active">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Miami horizon lines -->
+  <svg class="hero-lines" viewBox="0 0 1440 400" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 200 Q360 160 720 200 Q1080 240 1440 200" stroke="#D6AD60" stroke-width="1"/>
+    <path d="M0 240 Q360 200 720 240 Q1080 280 1440 240" stroke="#D6AD60" stroke-width=".5"/>
+    <path d="M0 280 Q360 240 720 280 Q1080 320 1440 280" stroke="#D6AD60" stroke-width=".5"/>
+    <path d="M0 320 Q360 280 720 320 Q1080 360 1440 320" stroke="#D6AD60" stroke-width=".3"/>
+  </svg>
+
+  <!-- MARQUEE TICKER — sits just below the nav bar, inside the hero -->
+  <div style="position:absolute;top:64px;left:0;right:0;background:rgba(20,20,20,.85);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(10px);overflow:hidden;padding:14px 0;z-index:2;">
+    <div style="display:flex;gap:64px;animation:marquee 30s linear infinite;width:max-content;">
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">ADR <strong style="color:var(--gold);font-weight:400;">$208</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">RevPAR <strong style="color:var(--gold);font-weight:400;">$128</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Market Occupancy <strong style="color:var(--gold);font-weight:400;">62%</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Active Listings <strong style="color:var(--gold);font-weight:400;">11,625</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Est. Revenue <strong style="color:var(--gold);font-weight:400;">$39,945</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Avg Booking Window <strong style="color:var(--gold);font-weight:400;">18 days</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Jun 22–25 Spike <strong style="color:var(--gold);font-weight:400;">+11.8% Occ.</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <!-- duplicate for seamless loop -->
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">ADR <strong style="color:var(--gold);font-weight:400;">$208</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">RevPAR <strong style="color:var(--gold);font-weight:400;">$128</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Market Occupancy <strong style="color:var(--gold);font-weight:400;">62%</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Active Listings <strong style="color:var(--gold);font-weight:400;">11,625</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Est. Revenue <strong style="color:var(--gold);font-weight:400;">$39,945</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Avg Booking Window <strong style="color:var(--gold);font-weight:400;">18 days</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Jun 22–25 Spike <strong style="color:var(--gold);font-weight:400;">+11.8% Occ.</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-label">Market Intelligence Report</div>
+    <h1 class="hero-title">
+      Miami.<br>
+      <em>2026.</em>
+    </h1>
+    <p class="hero-subtitle">A deep read on one of North America's most active STR markets — where demand is year-round, the booking window is short, and a World Cup summer is about to change everything.</p>
+    <div class="hero-date">Published March 2026 · Marketics Research</div>
+  </div>
+</section>
+
+<!-- KPI SECTION -->
+<section class="kpi-section">
+  <div class="section-label">Key Performance Indicators</div>
+  <h2 class="section-title">The market, <em>by the numbers</em></h2>
+  <div class="gold-rule"></div>
+
+  <div class="kpi-intro fade-up">
+    <p>Miami's market is accelerating. The numbers below represent the whole-market average across 11,625 active listings — from studio condos in Brickell to 6-bedroom estates in South Beach. What these averages hide matters more than what they show.</p>
+  </div>
+
+  <div class="kpi-grid fade-up">
+    <div class="kpi-card">
+      <div class="kpi-label">Estimated Revenue</div>
+      <div class="kpi-value">$39,945</div>
+      <div class="kpi-delta up">↑ vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Average Daily Rate</div>
+      <div class="kpi-value">$208</div>
+      <div class="kpi-delta up">↑ $9 vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">RevPAR</div>
+      <div class="kpi-value">$128</div>
+      <div class="kpi-delta up">↑ $5 vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Market Occupancy</div>
+      <div class="kpi-value">62%</div>
+      <div class="kpi-delta neutral">— stable year-over-year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Listings</div>
+      <div class="kpi-value">11,625</div>
+      <div class="kpi-delta up">↑ 2,303 vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Bookings</div>
+      <div class="kpi-value">398,750</div>
+      <div class="kpi-delta up">↑ 94,369 vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Booking Window</div>
+      <div class="kpi-value">18 days</div>
+      <div class="kpi-delta up">↑ 2 days vs last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Median Length of Stay</div>
+      <div class="kpi-value">3 nights</div>
+      <div class="kpi-delta neutral">— unchanged</div>
+    </div>
+  </div>
+
+  <div class="season-grid fade-up">
+    <div class="season-card peak">
+      <span class="season-peak-badge">Peak Season</span>
+      <div class="season-month">December — March</div>
+      <div class="season-title">When Miami commands premium rates</div>
+      <div class="season-body">Winter is Miami's highest-ADR window. Snowbirds from Canada and the northeast lock in stays weeks in advance, driving sustained occupancy above 74% and ADR north of $295. The demand is consistent rather than spike-driven — which rewards longer minimum stays and aggressive seasonal rate laddering. Properties without dynamic pricing in this window routinely undercharge their own comp set by 30–40%.</div>
+      <div class="season-stats">
+        <div>
+          <div class="season-stat-label">Peak Occupancy</div>
+          <div class="season-stat-val">74%</div>
+        </div>
+        <div>
+          <div class="season-stat-label">Peak ADR</div>
+          <div class="season-stat-val">$295</div>
+        </div>
+        <div>
+          <div class="season-stat-label">Peak RevPAR</div>
+          <div class="season-stat-val">$218</div>
+        </div>
+      </div>
+    </div>
+    <div class="season-card">
+      <span class="season-peak-badge" style="color:var(--gold);border-color:rgba(214,173,96,.3);">Event Season</span>
+      <div class="season-month">June — July · FIFA World Cup 2026</div>
+      <div class="season-title">The demand surge no host can afford to miss</div>
+      <div class="season-body">June 2026 is structurally different from any prior year. FIFA World Cup matches in Miami will generate the sharpest concentrated demand this market has ever seen. The data already shows a +11.8% occupancy spike for Jun 22–25. International travellers are booking now — and the pricing decisions made in the next 30 days will directly determine the revenue ceiling for those dates.</div>
+      <div class="season-stats">
+        <div>
+          <div class="season-stat-label">Jun 22–25 Spike</div>
+          <div class="season-stat-val">+11.8%</div>
+        </div>
+        <div>
+          <div class="season-stat-label">Peak Jun ADR</div>
+          <div class="season-stat-val">$272</div>
+        </div>
+        <div>
+          <div class="season-stat-label">Booking Horizon</div>
+          <div class="season-stat-val">Now</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEDROOM TABLE -->
+<section class="bedroom-section">
+  <div class="section-label">Performance by Property Type</div>
+  <h2 class="section-title">A $208 market ADR describes <em>no single property</em> accurately.</h2>
+  <div class="gold-rule"></div>
+  <p class="bedroom-intro fade-up">A studio in Wynwood and a 4-bedroom in South Beach both live inside the same $208 average. They compete in entirely different markets, against entirely different comp sets, with entirely different pricing ceilings. This is the breakdown that actually matters for understanding where your property sits.</p>
+  <div class="fade-up" style="overflow-x:auto;">
+    <table class="bedroom-table">
+      <thead>
+        <tr>
+          <th>Property Type</th>
+          <th>Active Listings</th>
+          <th>Median Listed</th>
+          <th>Median Booked</th>
+          <th>Capture Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Studio</td>
+          <td class="listings">972</td>
+          <td class="gold">$162</td>
+          <td>$139</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:86%"></div></div>
+              <span class="gap-pct">86%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="highlight">
+          <td>1 Bedroom</td>
+          <td class="listings">4,044</td>
+          <td class="gold">$194</td>
+          <td>$163</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:84%"></div></div>
+              <span class="gap-pct">84%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2 Bedroom</td>
+          <td class="listings">2,330</td>
+          <td class="gold">$284</td>
+          <td>$239</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:84%"></div></div>
+              <span class="gap-pct">84%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="highlight">
+          <td>3 Bedroom</td>
+          <td class="listings">713</td>
+          <td class="gold">$413</td>
+          <td>$359</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:87%"></div></div>
+              <span class="gap-pct">87%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4 Bedroom</td>
+          <td class="listings">218</td>
+          <td class="gold">$536</td>
+          <td>$468</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:87%"></div></div>
+              <span class="gap-pct">87%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="highlight">
+          <td>5 Bedroom</td>
+          <td class="listings">78</td>
+          <td class="gold">$914</td>
+          <td>$656</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:72%"></div></div>
+              <span class="gap-pct">72%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>6 Bedroom</td>
+          <td class="listings">60</td>
+          <td class="gold">$1,123</td>
+          <td>$797</td>
+          <td>
+            <div class="gap-bar-wrap">
+              <div class="gap-bar"><div class="gap-bar-fill" style="width:71%"></div></div>
+              <span class="gap-pct">71%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--dim);margin-top:16px;">Capture rate = median booked ÷ median listed. Gap between listed and booked price indicates pricing headroom or compression pressure.</p>
+</section>
+
+<!-- KEY DATES -->
+<section class="dates-section">
+  <div class="section-label">Demand Intelligence</div>
+  <h2 class="section-title">High-demand windows <em>already forming</em></h2>
+  <div class="gold-rule"></div>
+
+  <p class="fade-up" style="max-width:560px;font-size:15px;color:var(--stone);line-height:1.8;font-weight:300;">Miami's median booking window is 18 days — but for major events, guests plan much further out. The travellers booking FIFA stays right now are comparing listings today. These are the windows where pricing strategy separates high performers from the rest.</p>
+
+  <div class="dates-grid fade-up">
+    <div class="date-card">
+      <div class="date-spike">+11.8% occupancy spike · FIFA World Cup</div>
+      <div class="date-range">Jun 22–25, 2026</div>
+      <div class="date-note">Miami hosts FIFA World Cup matches this week — the single largest concentrated demand event in this market's history. International travellers are booking now. Properties with dynamic pricing calibrated for these dates and minimum stays optimized for the match schedule will capture 2–3× their typical June nightly rate.</div>
+    </div>
+    <div class="date-card">
+      <div class="date-spike">+6.0% occupancy spike</div>
+      <div class="date-range">Apr 30–May 3, 2026</div>
+      <div class="date-note">Late spring break surge. A 4-day domestic leisure window that rewards flexible minimum stays and strong listing photography. Booking decisions happen 2–3 weeks out — properties with instant-book enabled and competitive pricing win the comparison at the point of decision.</div>
+    </div>
+    <div class="date-card">
+      <div class="date-spike">+4.2% occupancy spike</div>
+      <div class="date-range">May 23–24, 2026</div>
+      <div class="date-note">Memorial Day weekend. A consistent demand driver in every warm-weather market. Last-minute bookers dominate — pricing that holds firm through the midweek before, then steps into a competitive position on Thursday, captures the overflow from sold-out hotels.</div>
+    </div>
+    <div class="date-card">
+      <div class="date-spike">+2.2% occupancy spike</div>
+      <div class="date-range">Dec 3–5, 2026</div>
+      <div class="date-note">Art Basel Miami Beach. One of the world's most prominent art events draws a high-income, design-conscious traveller. Properties in Miami Beach, Wynwood, and Brickell see ADR potential 40–60% above market average for these dates — but only if pricing reflects the demand rather than running on autopilot.</div>
+    </div>
+    <div class="date-card">
+      <div class="date-spike">+1.4% occupancy spike</div>
+      <div class="date-range">Apr 7, 2026</div>
+      <div class="date-note">Single-date midweek spike — consistent with a local conference or event driving short-stay demand. Properties with no minimum-stay floor on weeknights and instant-book enabled capture this cleanly, while properties with inflexible settings leave the night unbooked.</div>
+    </div>
+    <div class="date-card" style="background:var(--n4);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white);margin-bottom:12px;">The world is coming to Miami this summer.</div>
+      <div style="font-size:12px;color:var(--stone);line-height:1.7;">FIFA booking decisions are forming right now. How your listing is priced and positioned today directly determines your June revenue ceiling.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NARRATIVE -->
+<section class="narrative-section">
+  <div class="section-label">Market Context</div>
+  <h2 class="section-title">What the data <em>actually means</em></h2>
+  <div class="gold-rule"></div>
+
+  <div class="narrative-grid fade-up">
+    <div class="narrative-text">
+      <p>Miami's 62% occupancy holds flat while supply grows by 25% year-over-year. That's not a coincidence — it means demand is absorbing nearly 2,300 new listings as fast as they enter the market. The environment is structurally healthy, but it's getting more competitive. <strong>The gap between an optimized listing and a passive one is widening every quarter.</strong></p>
+      <p>The <strong>booking window tells a critical strategy story</strong>. At 18 days — short by most vacation market standards — Miami guests make fast decisions. That compressed timeline rewards listings that convert on first impression: strong photography, an immediately clear value proposition, and pricing that feels right on a quick scan. Properties that require a guest to do the math lose the comparison.</p>
+      <p>The dynamic pricing data is the single most revealing signal in this report: <strong>44% of listings use high dynamic pricing and capture 62% of all bookings</strong>. That 18-point gap isn't coincidence — it's the measurable return on optimization. The 21% of listings with no pricing strategy compete for just 10% of the booking pool. In a market where ADR spans from $139 to $295+ across seasons, flat pricing is a structural disadvantage on every search.</p>
+      <p>And then there's June 2026. FIFA World Cup matches bring a once-in-a-generation demand event to Miami. <strong>The pricing decisions you make in the next 30 days directly determine your FIFA revenue.</strong> The booking window for international travellers is significantly longer than Miami's 18-day median — they're comparing listings right now.</p>
+    </div>
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-icon">01</div>
+        <div class="insight-text">
+          <strong>Dynamic pricing is the highest-leverage variable</strong>
+          Miami's ADR spans from $139 to $295+ across seasons. With 44% of listings running high dynamic pricing and capturing 62% of bookings, the return on optimization is clear. Flat pricing means systematically overpricing in slow periods and undercharging during peak demand — a losing position in both directions.
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">02</div>
+        <div class="insight-text">
+          <strong>Fee structure affects search visibility and conversion</strong>
+          Split-fee listings represent 59% of supply but capture 67% of bookings. Host-only fee structures hold 41% of supply but only 33% of bookings. In a last-minute, price-sensitive market, how total cost appears in search results materially changes whether a guest clicks through or scrolls past.
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">03</div>
+        <div class="insight-text">
+          <strong>Larger properties require an entirely different strategy</strong>
+          4BR and 5BR properties book 31–43 days out vs. 16 days for studios and 1BRs. That longer booking horizon demands different minimum-stay logic, different discount ladder timing, and different cancellation policy positioning. Running a 4BR on the same settings as a 1BR is the most common pricing mistake in this segment.
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">04</div>
+        <div class="insight-text">
+          <strong>Self check-in is the most desired missing amenity</strong>
+          11.9% of Miami guests actively seek self check-in and frequently can't find it. In an 18-day booking window market, frictionless arrival is a conversion differentiator — not a nice-to-have. Smart lock installation typically recovers its cost within 2–3 additional bookings.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <div class="section-label">From Market to Property</div>
+      <h2 class="section-title">The average tells you<br>where the market is.<br>It can't tell you <em>where you are.</em></h2>
+      <div class="cta-separator"></div>
+
+      <p class="cta-philosophy">Market averages are useful for context. They tell you what the typical Miami property earns, charges, and fills. But your property isn't typical — it has a specific bedroom count, a specific neighbourhood, a specific listing quality, and a specific set of problems and opportunities that no market average can identify.</p>
+
+      <div class="averages-box">
+        <p>The market ADR is <strong>$208</strong>. But a 1-bedroom in Wynwood competes differently than a 1-bedroom in South Beach. The market booking window is 18 days — but a listing with instant-book enabled, professional photography, and dynamic pricing properly configured often books 3–4 weeks out consistently. <strong>Averages describe the market. Your audit describes your property.</strong></p>
+      </div>
+
+      <p class="cta-philosophy">This is why Marketics exists. Not to hand you a market report and wish you luck — but to look at your specific listing, run it against the real comp set for your property type and zone, and show you exactly where the revenue gap is and how to close it.</p>
+    </div>
+
+    <div class="cta-right">
+      <div class="audit-title">Get your Miami<br>property audit.</div>
+      <div class="audit-subtitle">Free. No obligation. If there's nothing actionable in your specific situation, Jason will say so directly.</div>
+
+      <div class="audit-features">
+        <div class="audit-feature">Your property benchmarked against your real comp set — by zone and bedroom count</div>
+        <div class="audit-feature">Revenue gap analysis specific to your property type and neighbourhood</div>
+        <div class="audit-feature">FIFA 2026 pricing review — is your June positioning set to capture peak demand?</div>
+        <div class="audit-feature">Dynamic pricing audit — are you capturing the full ADR range this market allows?</div>
+        <div class="audit-feature">Listing quality assessment — copy, photos, amenities, conversion factors</div>
+        <div class="audit-feature">Minimum stay and cancellation policy review by season and date range</div>
+      </div>
+
+      <a href="/get-started" class="cta-btn">Request My Free Property Audit →</a>
+      <div class="cta-note">Usually delivered within 24 hours · 100% specific to your property</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">All Intel</a>
+        <a href="/intel/miami">Miami: FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka: Summer 2026</a>
+        <a href="/intel/montreal">Montréal: F1 2026</a>
+        <a href="/intel/nashville">Nashville: Spring 2026</a>
+        <a href="/intel/algorithm">Airbnb Algorithm</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+
+<script>
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://marketics.io/intel/montreal/report">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Montréal Market Intelligence Report — Spring 2026 · Marketics</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNzUgMzc1Ij48cmVjdCB3aWR0aD0iMzc1IiBoZWlnaHQ9IjM3NSIgZmlsbD0iIzBmMGYwZiIvPjwvc3ZnPg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap">
+<style>
+:root {
+  --gold: #D6AD60;
+  --gold-lo: rgba(214,173,96,.12);
+  --gold-glow: rgba(214,173,96,.07);
+  --gold-dim: rgba(214,173,96,.15);
+  --gold-line: rgba(214,173,96,.25);
+  --night: #0f0f0f;
+  --n2: #141414;
+  --n3: #1a1a1a;
+  --n4: #202020;
+  --n5: #282828;
+  --white: #fff;
+  --stone: #B4B2A9;
+  --dim: #6B6A65;
+  --dim2: #4e4d4a;
+  --ok: #2D7A4F;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--night);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: .4;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 56px;height:64px;
+  background:rgba(13,13,13,.95);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .3s ease,border-color .3s ease;
+}
+nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.12);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;
+  transition:color .15s ease;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:1px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .2s ease;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-cta{
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:10px 22px;background:var(--gold);color:#0f0f0f;
+  border:none;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:filter .2s ease,transform .15s ease;
+  white-space:nowrap;
+}
+.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;padding:10px;
+  background:transparent;border:none;cursor:pointer;
+}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:#B4B2A9;border-radius:2px;transition:transform .28s ease,opacity .28s ease;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
+.nav-mobile-menu{
+  position:fixed;top:64px;left:0;right:0;
+  background:rgba(10,10,10,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(214,173,96,.12);
+  padding:0;max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;
+}
+.nav-mobile-menu.open{max-height:520px;padding-bottom:16px;}
+.nav-mobile-menu a{
+  display:block;padding:14px 24px;
+  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#B4B2A9;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.nav-mobile-menu a:hover{color:var(--white);}
+.nav-mobile-menu .nm-cta{
+  display:block;margin:12px 24px 0;padding:14px;
+  background:var(--gold);color:#0f0f0f!important;
+  text-align:center;border-radius:2px;
+  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}}
+@media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
+
+/* ── TICKER ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  height: 36px;
+  overflow: hidden;
+  background: rgba(214,173,96,.06);
+  border-bottom: 1px solid rgba(214,173,96,.12);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 32s linear infinite;
+}
+.ticker-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0 32px;
+  opacity: .8;
+}
+.ticker-sep {
+  color: var(--dim);
+  opacity: .4;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 72px;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(214,173,96,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(214,173,96,.04) 0%, transparent 60%),
+    linear-gradient(180deg, var(--night) 0%, #0f0f0a 100%);
+  z-index: 0;
+}
+.hero-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  opacity: .06;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin-top: 52px;
+}
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+.hero-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 200;
+  line-height: .95;
+  letter-spacing: -.02em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--stone);
+  font-weight: 300;
+  margin-top: 24px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+.hero-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 32px;
+}
+
+/* ── SECTION ── */
+section {
+  padding: 100px 56px;
+  position: relative;
+  z-index: 1;
+}
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -.01em;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(214,173,96,.15), transparent);
+  margin-bottom: 80px;
+}
+
+/* ── KPI ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.04);
+  margin-bottom: 1px;
+}
+.kpi-card {
+  background: var(--n2);
+  padding: 28px 24px;
+  transition: background .2s;
+}
+.kpi-card:hover { background: var(--n3); }
+.kpi-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+.kpi-value {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 200;
+  color: var(--gold);
+  letter-spacing: .02em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.kpi-delta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.kpi-delta.up { color: #6abf8a; }
+.kpi-delta.down { color: #e07070; }
+.kpi-delta.neutral { color: var(--dim); }
+
+/* Seasonality cards */
+.season-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,.04);
+  margin-top: 1px;
+}
+.season-card {
+  background: var(--n2);
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.season-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.season-dot.peak { background: #e07070; }
+.season-dot.base { background: var(--gold); }
+.season-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.season-detail {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.season-detail strong { color: var(--white); font-weight: 500; }
+
+/* ── BEDROOM TABLE ── */
+.bedroom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.bedroom-table thead th {
+  padding: 12px 20px;
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 400;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: var(--n3);
+}
+.bedroom-table tbody td {
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--stone);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.bedroom-table tbody td:first-child {
+  color: var(--white);
+  font-weight: 500;
+}
+.bedroom-table tbody td.mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+.bedroom-table tbody td.gold {
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+.bedroom-table tbody tr:hover td { background: rgba(255,255,255,.015); }
+.bedroom-table tbody tr.highlight td { background: rgba(214,173,96,.04); }
+.bedroom-table tbody tr:last-child td { border-bottom: none; }
+.bedroom-intro {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 32px;
+  max-width: 680px;
+}
+.bedroom-intro strong { color: var(--white); font-weight: 500; }
+
+/* ── DATE CARDS ── */
+.dates-intro {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 640px;
+}
+.dates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.04);
+}
+.date-card {
+  background: var(--n2);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background .2s;
+}
+.date-card:hover { background: var(--n3); }
+.date-card.closing {
+  background: rgba(214,173,96,.05);
+  border: 1px solid rgba(214,173,96,.15);
+}
+.date-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+}
+.badge-f1 { background: rgba(192,57,43,.15); color: #e07070; border: 1px solid rgba(192,57,43,.2); }
+.badge-peak { background: rgba(200,146,42,.12); color: #d4a84f; border: 1px solid rgba(200,146,42,.2); }
+.badge-high { background: rgba(214,173,96,.1); color: var(--gold); border: 1px solid rgba(214,173,96,.2); }
+.badge-act { background: rgba(45,122,79,.12); color: #6abf8a; border: 1px solid rgba(45,122,79,.2); }
+.date-range {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--stone);
+  letter-spacing: .08em;
+}
+.date-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.date-desc {
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.6;
+}
+.date-stat {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* ── NARRATIVE ── */
+.narrative-wrap {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 64px;
+  align-items: start;
+}
+.narrative-body p {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+.narrative-body p strong { color: var(--white); font-weight: 500; }
+.narrative-body p:last-child { margin-bottom: 0; }
+
+.insights-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(255,255,255,.04);
+}
+.insight-card {
+  background: var(--n2);
+  padding: 24px;
+}
+.insight-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: .14em;
+  margin-bottom: 8px;
+}
+.insight-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.insight-body {
+  font-size: 12px;
+  color: var(--stone);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.insight-body strong { color: var(--white); font-weight: 500; }
+
+/* ── CTA ── */
+.cta-wrap {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 64px;
+  align-items: start;
+}
+.cta-left p {
+  font-size: 15px;
+  color: var(--stone);
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.cta-left p strong { color: var(--white); font-weight: 500; }
+.averages-box {
+  background: var(--n3);
+  border: 1px solid rgba(214,173,96,.15);
+  border-left: 3px solid var(--gold);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.averages-box-text {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.averages-box-text strong { color: var(--white); font-weight: 500; }
+.averages-tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .04em;
+}
+
+.cta-card {
+  background: var(--n2);
+  border: 1px solid rgba(214,173,96,.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cta-card-header {
+  background: rgba(214,173,96,.06);
+  border-bottom: 1px solid rgba(214,173,96,.12);
+  padding: 20px 24px;
+}
+.cta-card-tab {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.cta-card-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+}
+.cta-card-sub {
+  font-size: 12px;
+  color: var(--stone);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.cta-card-body {
+  padding: 24px;
+}
+.cta-feature {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+.cta-feature:last-of-type { margin-bottom: 0; }
+.cta-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.cta-feature-text {
+  font-size: 13px;
+  color: var(--stone);
+  line-height: 1.6;
+}
+.cta-feature-text strong { color: var(--white); font-weight: 500; }
+.cta-divider {
+  height: 1px;
+  background: rgba(255,255,255,.06);
+  margin: 20px 0;
+}
+.cta-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--gold);
+  color: #0f0f0f;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: filter .2s;
+  margin-bottom: 10px;
+}
+.cta-btn:hover { filter: brightness(1.08); }
+.cta-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--dim);
+  letter-spacing: .08em;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  background: var(--n2);
+  border-top: 1px solid rgba(214,173,96,.1);
+  padding: 56px 56px 28px;
+}
+.sf-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 56px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 20px;
+}
+.sf-brand { padding-top: 2px; }
+.sf-copy { font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .1em; color: var(--white); margin-bottom: 8px; }
+.sf-location { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: .08em; line-height: 1.8; }
+.sf-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.sf-col { display: flex; flex-direction: column; gap: 6px; }
+.sf-col-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--dim); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.sf-col a { font-size: 12px; color: var(--stone); text-decoration: none; transition: color .15s; line-height: 1.7; }
+.sf-col a:hover { color: var(--gold); }
+.sf-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: .08em; }
+
+/* ── MOBILE ── */
+@media(max-width: 960px) {
+  .narrative-wrap { grid-template-columns: 1fr; }
+  .cta-wrap { grid-template-columns: 1fr; }
+  .dates-grid { grid-template-columns: 1fr 1fr; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  section { padding: 72px 28px; }
+}
+@media(max-width: 640px) {
+  .dates-grid { grid-template-columns: 1fr; }
+  .season-grid { grid-template-columns: 1fr; }
+  .hero { padding: 0 24px 56px; min-height: auto; padding-top: 64px; }
+  section { padding: 56px 20px; }
+  .site-footer { padding: 40px 20px 24px; }
+  .sf-inner { grid-template-columns: 1fr; gap: 28px; }
+  .sf-nav { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .sf-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home">
+    <img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" style="height:26px;width:auto;display:block;flex-shrink:0;">
+  </a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/story">Our Story</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/intel" class="active">Market Intel</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/story">Our Story</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/intel">Market Intel</a>
+  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- TICKER at top:64px inside hero -->
+  <div style="position:absolute;top:64px;left:0;right:0;background:rgba(20,20,20,.85);border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(10px);overflow:hidden;padding:14px 0;z-index:2;">
+    <div style="display:flex;gap:64px;animation:marquee 32s linear infinite;width:max-content;">
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">ADR <strong style="color:var(--gold);font-weight:400;">$170 CAD</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">RevPAR <strong style="color:var(--gold);font-weight:400;">$110</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Occupancy <strong style="color:var(--gold);font-weight:400;">64%</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Active Listings <strong style="color:var(--gold);font-weight:400;">5,674</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Total Bookings <strong style="color:var(--gold);font-weight:400;">153,909</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Booking Window <strong style="color:var(--gold);font-weight:400;">24 days</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">F1 Grand Prix <strong style="color:var(--gold);font-weight:400;">May 22–24, 2026</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Apr 4–5 Spike <strong style="color:var(--gold);font-weight:400;">+10.9% Occ.</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <!-- duplicate for seamless loop -->
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">ADR <strong style="color:var(--gold);font-weight:400;">$170 CAD</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">RevPAR <strong style="color:var(--gold);font-weight:400;">$110</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">Occupancy <strong style="color:var(--gold);font-weight:400;">64%</strong></span>
+      <span style="color:rgba(255,255,255,.1);">·</span>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);">F1 Grand Prix <strong style="color:var(--gold);font-weight:400;">May 22–24, 2026</strong></span>
+    </div>
+  </div>
+
+  <svg class="hero-lines" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="100" x2="1440" y2="100" stroke="#D6AD60" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="1440" y2="200" stroke="#D6AD60" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="1440" y2="300" stroke="#D6AD60" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="400" stroke="#D6AD60" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="400" stroke="#D6AD60" stroke-width="0.5"/>
+    <line x1="1000" y1="0" x2="1000" y2="400" stroke="#D6AD60" stroke-width="0.5"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-label">Montréal · Airbnb Whole Market · Spring 2026</div>
+    <h1 class="hero-title">
+      Montréal<br>
+      <em>Market Intel</em>
+    </h1>
+    <p class="hero-subtitle">153,909 bookings recorded. The F1 Grand Prix occupancy surge forms in the next 7 weeks. Most hosts won't see it coming until it's already priced by the hosts who did.</p>
+    <div class="hero-date">Data: PriceLabs · Published Apr 02, 2026 · Prepared by Marketics</div>
+  </div>
+</div>
+
+<!-- KPI SECTION -->
+<section style="padding-top:80px;padding-bottom:60px;">
+  <div class="section-label">KPIs — Key Performance Indicators</div>
+  <h2 class="section-title">The Market<br><em>At a Glance</em></h2>
+
+  <p style="font-size:15px;color:var(--stone);font-weight:300;line-height:1.8;max-width:680px;margin-bottom:48px;">Montréal is a deeply active short-term rental market: 153,909 total bookings and a 64% market occupancy rate. Those are strong headline numbers. What they obscure is a widening gap between hosts using dynamic pricing — who capture a disproportionate share of that demand — and those running static calendars who are quietly falling behind. Where does your property sit?</p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Estimated Rental Revenue</div>
+      <div class="kpi-value">$32,226</div>
+      <div class="kpi-delta down">↓ $3,572 vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ADR (Avg Daily Rate)</div>
+      <div class="kpi-value">$170</div>
+      <div class="kpi-delta down">↓ $13 vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">RevPAR</div>
+      <div class="kpi-value">$110</div>
+      <div class="kpi-delta down">↓ $10 vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Estimated Occupancy</div>
+      <div class="kpi-value">64%</div>
+      <div class="kpi-delta down">↓ 2 pts vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Active Listings</div>
+      <div class="kpi-value">5,674</div>
+      <div class="kpi-delta up">↑ 1,503 vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Bookings</div>
+      <div class="kpi-value">153,909</div>
+      <div class="kpi-delta up">↑ 38,444 vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Median Booking Window</div>
+      <div class="kpi-value">24 days</div>
+      <div class="kpi-delta up">↑ 3 days vs same time last year</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Median Length of Stay</div>
+      <div class="kpi-value">3 nights</div>
+      <div class="kpi-delta neutral">— unchanged</div>
+    </div>
+  </div>
+
+  <!-- Seasonality Cards -->
+  <div class="season-grid">
+    <div class="season-card">
+      <div class="season-dot peak"></div>
+      <div>
+        <div class="season-title">Peak Season</div>
+        <div class="season-detail">June through August. <strong>F1 Grand Prix (May 22–24) anchors the calendar</strong>, followed immediately by the Jazz Festival (Jun 24 – Jul 6). Friday–Saturday occupancy runs 67–69%. ADR peaks in summer months at $191+ RevPAR.</div>
+      </div>
+    </div>
+    <div class="season-card">
+      <div class="season-dot base"></div>
+      <div>
+        <div class="season-title">Base Season</div>
+        <div class="season-detail">November through March. Occupancy falls to 38–54%. <strong>Median LOS holds at 3 nights throughout</strong> — guests are shorter-stay year-round. Booking window compresses significantly in winter, dropping to 14–15 days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BEDROOM TABLE -->
+<section>
+  <div class="section-label">Bedroom Breakdown</div>
+  <h2 class="section-title">The Numbers<br><em>By Property Type</em></h2>
+
+  <p class="bedroom-intro">The market ADR of $170 is built from 4,905 active listings spanning studios at $115/night to 10-bedroom properties at $1,376/night. <strong>A 1-bedroom in Plateau-Mont-Royal competes in a completely different tier than a 3-bedroom in Westmount.</strong> This is the breakdown that actually matters.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="bedroom-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Active Listings</th>
+          <th>Median Listed Price</th>
+          <th>Median Booked Nightly</th>
+          <th>Median Booked Weekly</th>
+          <th>Median LOS</th>
+          <th>Booking Window</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>All Properties</td>
+          <td class="mono">4,905</td>
+          <td class="mono">$148</td>
+          <td class="gold">$158</td>
+          <td class="mono">$126/night</td>
+          <td class="mono">3</td>
+          <td class="mono">24 days</td>
+        </tr>
+        <tr>
+          <td>Room</td>
+          <td class="mono">610</td>
+          <td class="mono">$86</td>
+          <td class="gold">$107</td>
+          <td class="mono">$75/night</td>
+          <td class="mono">2</td>
+          <td class="mono">20 days</td>
+        </tr>
+        <tr>
+          <td>Studio</td>
+          <td class="mono">544</td>
+          <td class="mono">$99</td>
+          <td class="gold">$115</td>
+          <td class="mono">$96/night</td>
+          <td class="mono">3</td>
+          <td class="mono">24 days</td>
+        </tr>
+        <tr class="highlight">
+          <td>1 Bedroom</td>
+          <td class="mono">2,040</td>
+          <td class="mono">$129</td>
+          <td class="gold">$133</td>
+          <td class="mono">$118/night</td>
+          <td class="mono">3</td>
+          <td class="mono">21 days</td>
+        </tr>
+        <tr>
+          <td>2 Bedrooms</td>
+          <td class="mono">1,057</td>
+          <td class="mono">$187</td>
+          <td class="gold">$203</td>
+          <td class="mono">$168/night</td>
+          <td class="mono">3</td>
+          <td class="mono">24 days</td>
+        </tr>
+        <tr>
+          <td>3 Bedrooms</td>
+          <td class="mono">419</td>
+          <td class="mono">$278</td>
+          <td class="gold">$258</td>
+          <td class="mono">$229/night</td>
+          <td class="mono">3</td>
+          <td class="mono">32 days</td>
+        </tr>
+        <tr>
+          <td>4 Bedrooms</td>
+          <td class="mono">144</td>
+          <td class="mono">$403</td>
+          <td class="gold">$376</td>
+          <td class="mono">$302/night</td>
+          <td class="mono">3</td>
+          <td class="mono">38 days</td>
+        </tr>
+        <tr>
+          <td>5 Bedrooms</td>
+          <td class="mono">50</td>
+          <td class="mono">$449</td>
+          <td class="gold">$472</td>
+          <td class="mono">$433/night</td>
+          <td class="mono">3</td>
+          <td class="mono">39 days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- KEY DATES -->
+<section>
+  <div class="section-label">Price and Occupancy Trends — Key Future Dates</div>
+  <h2 class="section-title">Demand Windows<br><em>Already Forming</em></h2>
+
+  <p class="dates-intro">Guests who book F1 race weekend at the highest rates make that decision in April — not June. The market data confirms it: the biggest near-term occupancy spike in the dataset is happening this weekend (April 4–5, +10.9%). These are the windows where strategy separates performers from the rest.</p>
+
+  <div class="dates-grid">
+    <div class="date-card">
+      <div class="date-badge badge-f1">F1 Grand Prix</div>
+      <div class="date-range">May 21–25, 2026</div>
+      <div class="date-title">Canadian Grand Prix</div>
+      <div class="date-desc">Circuit Gilles Villeneuve · 370,000+ attendees · Year's largest demand event · 4-night minimum recommended</div>
+      <div class="date-stat">3–5× baseline ADR</div>
+    </div>
+    <div class="date-card">
+      <div class="date-badge badge-peak">High Demand</div>
+      <div class="date-range">Jun 24 – Jul 6, 2026</div>
+      <div class="date-title">Montréal Jazz Festival</div>
+      <div class="date-desc">World's largest jazz festival · 2M+ attendees · Sustained 10-day demand window following F1</div>
+      <div class="date-stat">2–3× baseline ADR</div>
+    </div>
+    <div class="date-card">
+      <div class="date-badge badge-act">Active Now</div>
+      <div class="date-range">Apr 4–5, 2026</div>
+      <div class="date-title">Easter Long Weekend</div>
+      <div class="date-desc">+10.9% occupancy increase vs surrounding dates — the largest near-term spike in current market data</div>
+      <div class="date-stat">+10.9% vs surrounding</div>
+    </div>
+    <div class="date-card">
+      <div class="date-badge badge-high">Summer Peak</div>
+      <div class="date-range">Jul 30 – Aug 2, 2026</div>
+      <div class="date-title">Osheaga Music Festival</div>
+      <div class="date-desc">Parc Jean-Drapeau · 135,000+ attendees · +5.2% occupancy vs surrounding dates · Plateau and Sud-Ouest premium</div>
+      <div class="date-stat">+5.2% vs surrounding</div>
+    </div>
+    <div class="date-card">
+      <div class="date-badge badge-high">August</div>
+      <div class="date-range">Aug 19–22, 2026</div>
+      <div class="date-title">Fierté Montréal (Pride)</div>
+      <div class="date-desc">Village district epicenter · +3.9% occupancy spike · Plateau, Mile End, and Village benefit most</div>
+      <div class="date-stat">+3.9% vs surrounding</div>
+    </div>
+    <div class="date-card closing">
+      <div class="date-badge badge-act">Act Now</div>
+      <div class="date-range">~49 days · Window Closing</div>
+      <div class="date-title">The Premium Tier Books Now</div>
+      <div class="date-desc">F1 guests paying 3–5× rates book 4–6 weeks out. That window is open today and closes in the next two weeks. A strategy set now captures the premium. A strategy set in May captures what's left.</div>
+      <div class="date-stat">Request your free audit →</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- NARRATIVE -->
+<section>
+  <div class="section-label">Market Analysis</div>
+  <h2 class="section-title">What the Data<br><em>Actually Tells You</em></h2>
+
+  <div class="narrative-wrap">
+    <div class="narrative-body">
+      <p>The headline metrics look like a softening market — ADR down $13, RevPAR down $10, occupancy down 2 points year-over-year. The correct interpretation is more precise: <strong>supply grew faster than demand</strong>. Active listings are up 1,503 (+36%) while bookings are up 38,444 (+33%). More competition, same guest pool, marginal pressure on rates and occupancy. That's a positioning story, not a demand story. The total demand is robust.</p>
+
+      <p>The booking window data tells a more specific story for event strategy. The median booking window is 24 days — up 3 days year-over-year, and accelerating for peak summer dates. For F1 specifically, market behavior shows that the highest-rate bookings arrive significantly ahead of the 24-day median. <strong>Hosts who price race weekend correctly in April are competing for a different guest pool than hosts who update their calendars in May.</strong> Both pools exist. They do not overlap.</p>
+
+      <p>The dynamic pricing gap in this market is the clearest data point in the entire dataset. 35% of Montréal Airbnb listings operate with no dynamic pricing whatsoever. Those listings capture 13% of total market bookings. Listings with high dynamic pricing — just 34% of the market — capture 61% of bookings. This is not a marginal advantage. It is the primary structural differentiator in a market where location and property quality alone no longer guarantee a booking.</p>
+
+      <p>The F1 Grand Prix is the accelerant. May 22–24, 2026. 370,000 fans. Every hotel within walking distance of Circuit Gilles Villeneuve at capacity by late April. Guests who want an Airbnb — which is where the real money is — are comparing listings right now. The comparison happens once. The booking happens once. The host who wins that comparison is the host whose pricing, photos, listing copy, and amenity profile are optimized before the guest opens a tab.</p>
+    </div>
+
+    <div class="insights-stack">
+      <div class="insight-card">
+        <div class="insight-num">01</div>
+        <div class="insight-title">Supply Grew, Not Demand</div>
+        <div class="insight-body">ADR is down, but bookings are up 38,444. The market isn't cooling — it's getting more competitive. <strong>The hosts gaining share are the ones with dynamic pricing and optimized listings.</strong> The hosts losing share are the ones who haven't changed their setup in two years.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">02</div>
+        <div class="insight-title">3BR+ Hosts Are Overpricing</div>
+        <div class="insight-body">The data shows 3-bedroom and 4-bedroom listings where the median listed price exceeds the median booked nightly price — meaning <strong>hosts are losing bookings by pricing above market clearing rates</strong>. This is a comp-set calibration issue, not a property quality issue.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">03</div>
+        <div class="insight-title">Weekends Are Not Equal</div>
+        <div class="insight-body">Friday occupancy runs 67.3% and Saturday 69.4% versus 55% mid-week. The price factor on Fridays is 176.5 versus 131–134 on Tuesdays and Wednesdays. <strong>A flat weekly rate leaves significant Friday–Saturday premiums uncaptured.</strong></div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">04</div>
+        <div class="insight-title">Long Stays Drive Volume</div>
+        <div class="insight-body">29+ day stays represent the single largest booking bucket by nights booked (303,100 nights). <strong>The 1-day booking cohort is the smallest.</strong> Minimum stay rules set too short push out longer, higher-value guests in favour of transient single-night bookings.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CTA -->
+<section>
+  <div class="section-label">Get Your Property Audit</div>
+  <h2 class="section-title">Averages Describe<br><em>The Market</em></h2>
+
+  <div class="cta-wrap">
+    <div class="cta-left">
+      <p>This report tells you where Montréal's Airbnb market is. It tells you the ADR, the occupancy, the booking window, the demand spikes. That context is genuinely useful. It tells you what you're competing inside.</p>
+      <p>What it cannot tell you is where <strong>you</strong> are inside it. It doesn't know your bedroom count, your neighbourhood, your listing quality score, your cancellation policy, your current dynamic pricing setup, or how your photos compare to the top performers in your specific comp set.</p>
+
+      <div class="averages-box">
+        <p class="averages-box-text">The market ADR is $170. But a 1-bedroom in Plateau-Mont-Royal at $133/night is not competing against a 2-bedroom in Old Montréal at $203/night. They're different products serving different guest profiles at different price points — and both are losing revenue to their respective top-quartile competitors for different reasons. <strong>Averages describe the market. Your audit describes your property.</strong></p>
+        <div class="averages-tagline">Averages describe the market. Your audit describes your property.</div>
+      </div>
+
+      <p>This is why Marketics exists. Not to hand you a market report and wish you luck — but to look at your specific listing, run it against the real comp set for your property type and neighbourhood, and show you exactly where the revenue gap is and how to close it.</p>
+    </div>
+
+    <div class="cta-card">
+      <div class="cta-card-header">
+        <div class="cta-card-tab">FREE AUDIT</div>
+        <div class="cta-card-title">Get your Montréal<br>property audit.</div>
+        <div class="cta-card-sub">Free. No obligation. If there's nothing actionable in your specific situation, Jason will say so directly.</div>
+      </div>
+      <div class="cta-card-body">
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>Your property benchmarked against your real comp set</strong> — by neighbourhood and bedroom count, not market-wide averages</div>
+        </div>
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>Revenue gap analysis</strong> specific to your property type and Montréal neighbourhood</div>
+        </div>
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>F1 Grand Prix pricing review</strong> — event-window strategy for May 22–24, 2026 — race weekend is 7 weeks away</div>
+        </div>
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>Dynamic pricing audit</strong> — are you capturing the full ADR range this market allows, including weekend and event premiums?</div>
+        </div>
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>Listing quality assessment</strong> — copy, photos, amenities, and conversion factors against top performers in your zone</div>
+        </div>
+        <div class="cta-feature">
+          <div class="cta-dot"></div>
+          <div class="cta-feature-text"><strong>Minimum stay and cancellation policy review</strong> by season, event window, and date range</div>
+        </div>
+        <div class="cta-divider"></div>
+        <a href="/intel/montreal/#audit" class="cta-btn">Request My Free Property Audit →</a>
+        <div class="cta-note">Usually delivered within 24 hours · 100% specific to your property</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <div class="sf-copy">© 2026 Marketics, LLC</div>
+      <div class="sf-location">Miami · Montréal · Nomadic</div>
+    </div>
+    <div class="sf-nav">
+      <div class="sf-col">
+        <div class="sf-col-label">Company</div>
+        <a href="/method">Method</a>
+        <a href="/story">Our Story</a>
+        <a href="/results">Results</a>
+        <a href="/pricing">Pricing</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Tools</div>
+        <a href="/markets">Markets</a>
+        <a href="/calculator">Calculator</a>
+        <a href="/get-started">Free Audit</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Market Intel</div>
+        <a href="/intel">All Intel</a>
+        <a href="/intel/miami">Miami: FIFA 2026</a>
+        <a href="/intel/muskoka">Muskoka: Summer 2026</a>
+        <a href="/intel/montreal">Montréal: F1 2026</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-label">Legal</div>
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms of Service</a>
+        <a href="/media">Media Kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span>Your Market. Mastered.™</span>
+    <span>marketics.io</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.getElementById('mainNav');
+  if(nav){ window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 20); }, {passive:true}); }
+  var btn = document.getElementById('navHamburger');
+  var menu = document.getElementById('navMobileMenu');
+  if(!btn||!menu) return;
+  function cl(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.contains('open') ? cl() : (menu.classList.add('open'), btn.classList.add('open'), btn.setAttribute('aria-expanded','true'), document.body.style.overflow='hidden'); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', cl); });
+  document.addEventListener('click', function(e){ if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) cl(); });
+})();
+</script>
+</body>
+</html>
