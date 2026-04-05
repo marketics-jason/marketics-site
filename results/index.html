@@ -326,6 +326,11 @@ body::before{
   .cards-grid .cs-card:last-child{border-radius:0 0 8px 8px;}
   .stats-inner{grid-template-columns:1fr 1fr;}
   .feat-metrics{grid-template-columns:1fr 1fr;}
+  .filter-bar{flex-direction:column;align-items:flex-start;gap:8px;}
+  .filter-bar .filter-label{margin-left:0!important;}
+  .filter-group{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;scrollbar-width:none;-ms-overflow-style:none;flex-shrink:0;}
+  .filter-group::-webkit-scrollbar{display:none;}
+  .result-count{align-self:center;}
 }
 
 /* ═══ MOBILE NAV ════════════════════════════════════════════════ */
@@ -527,7 +532,7 @@ body::before{
     <div class="stat-cell fi">
       <div class="stat-num" data-target="2860" data-prefix="+$" data-suffix="">&nbsp;</div>
       <div class="stat-lbl">Avg Monthly Gain</div>
-      <div class="stat-sub">Mean across 28+ managed properties, 9 markets</div>
+      <div class="stat-sub">Mean across 28+ managed properties, 22 markets</div>
     </div>
     <div class="stat-cell fi" style="transition-delay:.06s">
       <div class="stat-num" data-target="72" data-prefix="" data-suffix=" days">&nbsp;</div>
@@ -545,7 +550,7 @@ body::before{
       <div class="stat-sub">Mean nightly rate lift vs. pre-Marketics 90-day baseline</div>
     </div>
   </div>
-  <p style="text-align:center;font-size:11px;color:rgba(180,178,169,.4);max-width:680px;margin:12px auto 0;padding:0 24px;line-height:1.5;font-family:'DM Mono',monospace;">All figures reflect Marketics-managed properties only. Sample: 28+ documented outcomes across 9 North American markets. Measurement window: first 90 days post-audit completion vs. host-reported revenue for the prior 90-day period. Individual results vary.</p>
+  <p style="text-align:center;font-size:11px;color:rgba(180,178,169,.4);max-width:680px;margin:12px auto 0;padding:0 24px;line-height:1.5;font-family:'DM Mono',monospace;">All figures reflect Marketics-managed properties only. Sample: 28+ documented outcomes across 22 North American markets. Measurement window: first 90 days post-audit completion vs. host-reported revenue for the prior 90-day period. Individual results vary.</p>
 </div>
 
 <!-- ══ 3. CASE STUDY CARDS ══ -->

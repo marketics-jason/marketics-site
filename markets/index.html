@@ -860,7 +860,7 @@ body::before{
         </div>
         <div class="mc-metrics">
           <div class="mc-metric"><div class="mc-mv">$255</div><div class="mc-ml">Avg Nightly Rate</div></div>
-          <div class="mc-metric"><div class="mc-mv">87%</div><div class="mc-ml">Avg Occupancy</div></div>
+          <div class="mc-metric"><div class="mc-mv">82%</div><div class="mc-ml">Avg Occupancy</div></div>
         </div>
         <div class="mc-events">
           <div class="mc-events-lbl">Top Demand Events</div>
@@ -930,7 +930,7 @@ body::before{
         </div>
         <div class="mc-metrics">
           <div class="mc-metric"><div class="mc-mv">$175</div><div class="mc-ml">Avg Nightly Rate</div></div>
-          <div class="mc-metric"><div class="mc-mv">88%</div><div class="mc-ml">Avg Occupancy</div></div>
+          <div class="mc-metric"><div class="mc-mv">82%</div><div class="mc-ml">Avg Occupancy</div></div>
         </div>
         <div class="mc-events">
           <div class="mc-events-lbl">Top Demand Events</div>
@@ -1023,7 +1023,7 @@ body::before{
         </div>
         <div class="mc-metrics">
           <div class="mc-metric"><div class="mc-mv">$195</div><div class="mc-ml">Avg Nightly Rate</div></div>
-          <div class="mc-metric"><div class="mc-mv">88%</div><div class="mc-ml">Avg Occupancy</div></div>
+          <div class="mc-metric"><div class="mc-mv">86%</div><div class="mc-ml">Avg Occupancy</div></div>
         </div>
         <div class="mc-events">
           <div class="mc-events-lbl">Top Demand Events</div>
@@ -1171,7 +1171,7 @@ body::before{
 
       <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
         <summary style="cursor:pointer;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:#e8e6e1;list-style:none;display:flex;justify-content:space-between;align-items:center;">What markets does Marketics operate in?<span style="color:rgba(214,173,96,.6);font-size:20px;transition:transform .2s;">+</span></summary>
-        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics currently operates across 9 active markets in the United States, Canada, and Mexico — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, and New Orleans. We also serve Muskoka (Ontario) and are expanding to Whistler and additional North American markets through 2026–27. If your market isn't listed, request a free audit — we may already have data on your area.</p>
+        <p style="margin-top:16px;font-size:14px;color:rgba(180,178,169,.8);line-height:1.7;">Marketics currently operates across 22 markets in the United States, Canada, Mexico, and the Caribbean — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, New Orleans, and Muskoka (Ontario), with additional North American markets launching through 2026–27. If your market isn't listed, request a free audit — we may already have data on your area.</p>
       </details>
 
       <details style="border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:20px 24px;background:rgba(255,255,255,.02);">
@@ -1222,7 +1222,7 @@ body::before{
    "name": "What markets does Marketics operate in?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Marketics currently operates across 9 active markets in the United States, Canada, and Mexico — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, and New Orleans. We also serve Muskoka (Ontario) and are expanding to Whistler and additional North American markets through 2026–27."
+    "text": "Marketics currently operates across 22 markets in the United States, Canada, Mexico, and the Caribbean — including Austin, Miami, Nashville, Scottsdale, Cancún, Tulum, San Juan, San Antonio, New Orleans, and Muskoka (Ontario), with additional North American markets launching through 2026–27."
    }
   },
   {
@@ -1289,13 +1289,13 @@ function weekToLabel(w){const mo=Math.floor(w/52*12);const wInMo=Math.round((w/5
 
 const austinEvts=new Array(52).fill(null);
 [{w:8,l:'SXSW',i:3},{w:13,l:'Formula 1 GP',i:3},{w:18,l:'ACL Weekend 1',i:2},{w:20,l:'ACL Weekend 2',i:2},{w:28,l:'Austin City Marathon',i:1},{w:40,l:'F1 Grand Prix',i:3},{w:45,l:'Thanksgiving',i:1},{w:50,l:'NYE',i:2}].forEach(e=>austinEvts[e.w]={label:e.l,intensity:e.i});
-const austinDemand=mkDemand(55,(t)=>22*Math.sin(t*Math.PI*1.8-0.4)+8*Math.sin(t*Math.PI*6)+5*Math.sin(t*Math.PI*12),austinEvts);
-const austinRate=mkRate(189,austinDemand,2.2,austinEvts);const austinOcc=mkOcc(72,austinDemand);
+const austinDemand=mkDemand(58,(t)=>20*Math.sin(t*Math.PI*1.8-0.4)+8*Math.sin(t*Math.PI*6)+5*Math.sin(t*Math.PI*12),austinEvts);
+const austinRate=mkRate(189,austinDemand,2.2,austinEvts);const austinOcc=mkOcc(74,austinDemand);
 
 const scEvts=new Array(52).fill(null);
 [{w:8,l:'Barrett-Jackson Auction',i:3},{w:10,l:'Waste Mgmt Phoenix Open',i:3},{w:12,l:'Spring Training',i:2},{w:20,l:'Spring Break Peak',i:2},{w:35,l:'McDowell Mtn Music',i:1},{w:42,l:'PF Chang Marathon',i:1},{w:50,l:"New Year's Eve",i:2}].forEach(e=>scEvts[e.w]={label:e.l,intensity:e.i});
-const scDemand=mkDemand(58,(t)=>{const winter=18*Math.exp(-Math.pow((t-0.1)*5,2));const spring=22*Math.exp(-Math.pow((t-0.28)*4,2));const summerDip=-18*Math.exp(-Math.pow((t-0.6)*3,2));const fall=12*Math.exp(-Math.pow((t-0.85)*4,2));return winter+spring+summerDip+fall+4*Math.sin(t*Math.PI*12);},scEvts);
-const scRate=mkRate(218,scDemand,2.4,scEvts);const scOcc=mkOcc(74,scDemand);
+const scDemand=mkDemand(52,(t)=>{const winter=20*Math.exp(-Math.pow((t-0.1)*4.5,2));const spring=24*Math.exp(-Math.pow((t-0.28)*4,2));const summerDip=-30*Math.exp(-Math.pow((t-0.6)*4,2));const fall=16*Math.exp(-Math.pow((t-0.85)*4,2));return winter+spring+summerDip+fall+4*Math.sin(t*Math.PI*12);},scEvts);
+const scRate=mkRate(218,scDemand,2.4,scEvts);const scOcc=mkOcc(72,scDemand);
 
 const nashEvts=new Array(52).fill(null);
 [{w:4,l:'CMA Fest Pre-Events',i:1},{w:10,l:'Vanderbilt Grad Week',i:1},{w:18,l:'Bonnaroo Nearby',i:2},{w:23,l:'CMA Music Festival',i:3},{w:28,l:'NFL Draft (when held)',i:2},{w:33,l:'Nashville Pride',i:1},{w:39,l:'Tennessee State Fair',i:1},{w:45,l:'Thanksgiving Travel',i:2},{w:50,l:"New Year's Eve",i:3}].forEach(e=>nashEvts[e.w]={label:e.l,intensity:e.i});
@@ -1304,29 +1304,29 @@ const nashRate=mkRate(176,nashDemand,1.9,nashEvts);const nashOcc=mkOcc(74,nashDe
 
 const miamiEvts=new Array(52).fill(null);
 [{w:2,l:'Art Basel Miami',i:3},{w:6,l:'Miami Open Tennis',i:2},{w:9,l:'Ultra Music Festival',i:3},{w:12,l:'Spring Break Peak',i:2},{w:28,l:'Independence Day Wknd',i:1},{w:36,l:'Miami Swim Week',i:1},{w:42,l:'Miami GP (F1)',i:2},{w:48,l:'Art Week Run-Up',i:2}].forEach(e=>miamiEvts[e.w]={label:e.l,intensity:e.i});
-const miamiDemand=mkDemand(62,(t)=>{const wp=20*Math.exp(-Math.pow((t-0.12)*4,2));const sp=18*Math.exp(-Math.pow((t-0.22)*4.5,2));const sd=-10*Math.exp(-Math.pow((t-0.58)*3,2));const fb=10*(t>0.65?(t-0.65)*3:0);const dp=18*Math.exp(-Math.pow((t-0.97)*5,2));return wp+sp+sd+fb+dp+4*Math.sin(t*Math.PI*10);},miamiEvts);
-const miamiRate=mkRate(201,miamiDemand,2.1,miamiEvts);const miamiOcc=mkOcc(76,miamiDemand);
+const miamiDemand=mkDemand(54,(t)=>{const wp=22*Math.exp(-Math.pow((t-0.12)*4,2));const sp=18*Math.exp(-Math.pow((t-0.22)*4.5,2));const hurricaneDip=-20*Math.exp(-Math.pow((t-0.6)*4,2));const fb=10*(t>0.7?(t-0.7)*3:0);const dp=20*Math.exp(-Math.pow((t-0.97)*5,2));return wp+sp+hurricaneDip+fb+dp+4*Math.sin(t*Math.PI*10);},miamiEvts);
+const miamiRate=mkRate(201,miamiDemand,2.1,miamiEvts);const miamiOcc=mkOcc(72,miamiDemand);
 
 const cancunEvts=new Array(52).fill(null);
 [{w:2,l:'Riviera Maya Jazz Fest',i:1},{w:7,l:'Spring Break US',i:3},{w:9,l:'Spring Break Canada',i:3},{w:11,l:'Semana Santa',i:3},{w:23,l:'Summer Family Peak',i:2},{w:38,l:'Dia de Muertos',i:1},{w:44,l:'Ironman 70.3 CUN',i:1},{w:50,l:'Christmas/NYE',i:3}].forEach(e=>cancunEvts[e.w]={label:e.l,intensity:e.i});
-const cancunDemand=mkDemand(64,(t)=>{const jan=14*Math.exp(-Math.pow((t-0.04)*4,2));const sb=22*Math.exp(-Math.pow((t-0.19)*5,2));const summer=12*Math.sin(t*Math.PI*2-0.2);const dec=20*Math.exp(-Math.pow((t-0.97)*5,2));return jan+sb+summer+dec+3*Math.sin(t*Math.PI*14);},cancunEvts);
-const cancunRate=mkRate(148,cancunDemand,1.7,cancunEvts);const cancunOcc=mkOcc(78,cancunDemand);
+const cancunDemand=mkDemand(52,(t)=>{const jan=16*Math.exp(-Math.pow((t-0.04)*4,2));const sb=24*Math.exp(-Math.pow((t-0.19)*5,2));const rainyDip=-26*Math.exp(-Math.pow((t-0.6)*4.5,2));const dec=20*Math.exp(-Math.pow((t-0.97)*5,2));return jan+sb+rainyDip+dec+3*Math.sin(t*Math.PI*14);},cancunEvts);
+const cancunRate=mkRate(148,cancunDemand,1.7,cancunEvts);const cancunOcc=mkOcc(72,cancunDemand);
 
 /* ── NEW ORLEANS LA ── */
 const nolaEvts=new Array(52).fill(null);
 [{w:4,l:'Mardi Gras',i:3},{w:5,l:'Mardi Gras Peak',i:3},{w:12,l:'French Quarter Fest',i:3},
  {w:21,l:'Essence Fest',i:3},{w:24,l:'Satchmo Summerfest',i:1},{w:36,l:'Southern Decadence',i:2},
  {w:44,l:'Voodoo Fest',i:2},{w:50,l:"New Year's Eve",i:3}].forEach(e=>nolaEvts[e.w]={label:e.l,intensity:e.i});
-const nolaDemand=mkDemand(58,(t)=>{
-  const mardi=26*Math.exp(-Math.pow((t-0.1)*5,2));
+const nolaDemand=mkDemand(52,(t)=>{
+  const mardi=28*Math.exp(-Math.pow((t-0.1)*5,2));
   const french=22*Math.exp(-Math.pow((t-0.24)*5,2));
   const essence=18*Math.exp(-Math.pow((t-0.41)*6,2));
-  const fall=12*Math.sin(t*Math.PI*2-0.8);
+  const heatDip=-18*Math.exp(-Math.pow((t-0.55)*4.5,2));
   const nye=20*Math.exp(-Math.pow((t-0.97)*6,2));
-  return mardi+french+essence+fall+nye+5*Math.sin(t*Math.PI*10);
+  return mardi+french+essence+heatDip+nye+5*Math.sin(t*Math.PI*10);
 },nolaEvts);
 const nolaRate=mkRate(196,nolaDemand,2.0,nolaEvts);
-const nolaOcc=mkOcc(73,nolaDemand);
+const nolaOcc=mkOcc(68,nolaDemand);
 
 /* ── SAN ANTONIO TX ── */
 const satxEvts=new Array(52).fill(null);
@@ -1334,16 +1334,16 @@ const satxEvts=new Array(52).fill(null);
  {w:22,l:'Texas Folklife Fest',i:1},{w:27,l:'Fourth of July Riverwalk',i:2},
  {w:35,l:'Valero Texas Open',i:1},{w:44,l:'Dia de Muertos Fest',i:2},
  {w:49,l:'Holiday Riverwalk Lights',i:2}].forEach(e=>satxEvts[e.w]={label:e.l,intensity:e.i});
-const satxDemand=mkDemand(56,(t)=>{
-  const fiesta=24*Math.exp(-Math.pow((t-0.17)*5,2));
+const satxDemand=mkDemand(50,(t)=>{
+  const fiesta=26*Math.exp(-Math.pow((t-0.17)*5,2));
   const spring=14*Math.exp(-Math.pow((t-0.28)*5,2));
-  const summer=10*Math.sin(t*Math.PI*2-0.3);
-  const fall=14*Math.exp(-Math.pow((t-0.72)*4,2));
-  const holiday=16*Math.exp(-Math.pow((t-0.95)*6,2));
-  return fiesta+spring+summer+fall+holiday+4*Math.sin(t*Math.PI*10);
+  const heatDip=-16*Math.exp(-Math.pow((t-0.6)*4.5,2));
+  const fall=16*Math.exp(-Math.pow((t-0.72)*4,2));
+  const holiday=18*Math.exp(-Math.pow((t-0.95)*6,2));
+  return fiesta+spring+heatDip+fall+holiday+4*Math.sin(t*Math.PI*10);
 },satxEvts);
 const satxRate=mkRate(168,satxDemand,1.8,satxEvts);
-const satxOcc=mkOcc(72,satxDemand);
+const satxOcc=mkOcc(66,satxDemand);
 
 /* ── TULUM MX ── */
 const tulumEvts=new Array(52).fill(null);
@@ -1366,16 +1366,16 @@ const sjEvts=new Array(52).fill(null);
 [{w:4,l:'Puerto Rico Carnival',i:2},{w:10,l:'Semana Santa',i:3},{w:14,l:'Puerto Rico Open Golf',i:1},
  {w:22,l:'Casals Festival',i:2},{w:27,l:'San Sebastián Street Fest',i:1},{w:35,l:'Noche de Gala',i:1},
  {w:48,l:'Las Navidades',i:3},{w:50,l:"New Year's Eve",i:3}].forEach(e=>sjEvts[e.w]={label:e.l,intensity:e.i});
-const sjDemand=mkDemand(65,(t)=>{
+const sjDemand=mkDemand(58,(t)=>{
   const winter=18*Math.exp(-Math.pow((t-0.06)*4,2));
   const semana=22*Math.exp(-Math.pow((t-0.21)*5.5,2));
-  const summer=14*Math.sin(t*Math.PI*2-0.5);
+  const hurricaneDip=-16*Math.exp(-Math.pow((t-0.6)*4,2));
   const xmas=24*Math.exp(-Math.pow((t-0.97)*5,2));
   const nav=20*Math.exp(-Math.pow((t-0.95)*6,2));
-  return winter+semana+summer+xmas+nav+4*Math.sin(t*Math.PI*10);
+  return winter+semana+hurricaneDip+xmas+nav+4*Math.sin(t*Math.PI*10);
 },sjEvts);
 const sjRate=mkRate(195,sjDemand,2.0,sjEvts);
-const sjOcc=mkOcc(78,sjDemand);
+const sjOcc=mkOcc(72,sjDemand);
 
 const MP_MARKETS={
   austin:    {name:'Austin, TX',     demand:austinDemand, rate:austinRate, occ:austinOcc, events:austinEvts,    peakMo:'March',    peakSub:'SXSW + F1 season',              spike:'+38%', spikeSub:'SXSW week vs baseline',        low:'January',   lowSub:'Strategic midweek fill window', managed:'14',managedSub:'Active properties'},
@@ -1393,14 +1393,14 @@ const MP_MARKETS={
 (function buildTicker(){
   const data=[
     {city:'Austin, TX',     flag:'🇺🇸', rate:'$221', occ:'85%'},
-    {city:'Scottsdale, AZ', flag:'🇺🇸', rate:'$255', occ:'87%'},
+    {city:'Scottsdale, AZ', flag:'🇺🇸', rate:'$255', occ:'82%'},
     {city:'Nashville, TN',  flag:'🇺🇸', rate:'$208', occ:'83%'},
     {city:'Miami, FL',      flag:'🇺🇸', rate:'$238', occ:'86%'},
-    {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'88%'},
+    {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'82%'},
     {city:'New Orleans, LA', flag:'🇺🇸', rate:'$196', occ:'84%'},
     {city:'San Antonio, TX', flag:'🇺🇸', rate:'$168', occ:'82%'},
     {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'64%'},
-    {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'88%'},
+    {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'86%'},
   ];
   const ticker=document.getElementById('heroTicker');
   data.forEach(d=>{
