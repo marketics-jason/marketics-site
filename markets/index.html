@@ -229,7 +229,8 @@ body::before{
   border-bottom:1px solid rgba(255,255,255,.06);
   flex-wrap:wrap;gap:12px;
 }
-.mp-tb-left{display:flex;align-items:center;gap:16px;}
+.mp-tb-left{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.mp-tb-divider{width:1px;height:24px;background:rgba(255,255,255,.1);flex-shrink:0;margin:0 4px;}
 .mp-live-dot{
   width:7px;height:7px;border-radius:50%;background:var(--ok);flex-shrink:0;
   animation:livePulse 2s ease-in-out infinite;
@@ -586,7 +587,6 @@ body::before{
   .nl-inner{grid-template-columns:1fr;gap:32px;}
   .intel-grid{grid-template-columns:1fr 1fr;}
   .mp-insights{grid-template-columns:1fr 1fr;}
-  .mp-tb-right{display:none;}
   .sb-inner{justify-content:center;}
 }
 @media(max-width:560px){
@@ -757,6 +757,10 @@ body::before{
           <div class="mp-live-dot"></div>
           <div class="mp-live-lbl">Live Data</div>
           <div class="mp-mkt-name" id="mpMktName">Austin, TX</div>
+          <div class="mp-tb-divider"></div>
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsPeak">$0</div><div class="mp-qs-l">Peak Rate</div></div>
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsAvg">0%</div><div class="mp-qs-l">Avg Occ</div></div>
+          <div class="mp-qs"><div class="mp-qs-v" id="mpQsEvents">0</div><div class="mp-qs-l">Events/Yr</div></div>
         </div>
         <div>
           <div class="mp-mkt-tabs" id="mpMktTabs">
@@ -770,11 +774,6 @@ body::before{
             <button class="mp-mkt-tab" data-mkt="tulum">Tulum</button>
             <button class="mp-mkt-tab" data-mkt="sanjuan">San Juan</button>
           </div>
-        </div>
-        <div class="mp-tb-right">
-          <div class="mp-qs"><div class="mp-qs-v" id="mpQsPeak">$0</div><div class="mp-qs-l">Peak Rate</div></div>
-          <div class="mp-qs"><div class="mp-qs-v" id="mpQsAvg">0%</div><div class="mp-qs-l">Avg Occ</div></div>
-          <div class="mp-qs"><div class="mp-qs-v" id="mpQsEvents">0</div><div class="mp-qs-l">Events/Yr</div></div>
         </div>
       </div>
       <div class="mp-chart-wrap">
@@ -1351,16 +1350,16 @@ const tulumEvts=new Array(52).fill(null);
 [{w:4,l:'Zamna Festival',i:3},{w:7,l:'Spring Break US',i:3},{w:10,l:'Semana Santa',i:3},
  {w:14,l:'Day of the Dead',i:1},{w:24,l:'Summer Solstice',i:2},{w:41,l:'Dia de Muertos',i:2},
  {w:48,l:'Zamna Dec Edition',i:3},{w:50,l:'Christmas/NYE',i:3}].forEach(e=>tulumEvts[e.w]={label:e.l,intensity:e.i});
-const tulumDemand=mkDemand(66,(t)=>{
+const tulumDemand=mkDemand(42,(t)=>{
   const zamna=20*Math.exp(-Math.pow((t-0.08)*5,2));
   const sb=24*Math.exp(-Math.pow((t-0.19)*5.5,2));
-  const sumDip=-8*Math.exp(-Math.pow((t-0.52)*3,2));
+  const sumDip=-22*Math.exp(-Math.pow((t-0.52)*3,2));
   const nov=16*Math.exp(-Math.pow((t-0.8)*5,2));
   const dec=22*Math.exp(-Math.pow((t-0.97)*5,2));
   return zamna+sb+sumDip+nov+dec+4*Math.sin(t*Math.PI*12);
 },tulumEvts);
 const tulumRate=mkRate(212,tulumDemand,2.2,tulumEvts);
-const tulumOcc=mkOcc(80,tulumDemand);
+const tulumOcc=mkOcc(60,tulumDemand);
 
 /* ── SAN JUAN PR ── */
 const sjEvts=new Array(52).fill(null);
@@ -1400,7 +1399,7 @@ const MP_MARKETS={
     {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'88%'},
     {city:'New Orleans, LA', flag:'🇺🇸', rate:'$196', occ:'84%'},
     {city:'San Antonio, TX', flag:'🇺🇸', rate:'$168', occ:'82%'},
-    {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'91%'},
+    {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'64%'},
     {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'88%'},
   ];
   const ticker=document.getElementById('heroTicker');
