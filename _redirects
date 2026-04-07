@@ -1,8 +1,47 @@
 # Marketics — Netlify Redirects
 # Trailing slash handled in netlify.toml
 # Pretty URLs (folder/index.html) handled natively by Netlify
-# Only explicit rules needed here:
 
+# ══ SQUARESPACE MIGRATION REDIRECTS (301 permanent) ══════════════
+# Old Squarespace URLs → closest new equivalent
+# These recover indexed authority from the old site
+
+# Homepage variants
+/home                              /                          301
+/home/                             /                          301
+
+# Service pages → Method (consolidated)
+/digital-expert-services           /method                    301
+/short-term-rental-solutions       /method                    301
+/listing-optimization              /method                    301
+/rankbased-dynamic-pricing         /method                    301
+/guest-communication-automation    /method                    301
+/preinvestment-analysis            /method                    301
+
+# Audience/solution pages → Method or Get Started
+/solutions/first-time-hosts        /get-started               301
+/busy-property-managers            /get-started               301
+/boutique-hotel-investors          /get-started               301
+
+# Pricing & contact
+/performance-based-pricing         /pricing                   301
+/contact                           /get-started               301
+/audit                             /get-started               301
+
+# FAQ pages → Pricing (FAQ section lives there now)
+/faq                               /pricing                   301
+/faq-2                             /pricing                   301
+
+# Legal
+/privacy-policy                    /legal                     301
+
+# Thank you / confirmation
+/thank-you-page                    /join/confirmation         301
+
+# Junk / numeric pages → homepage
+/928758023141                      /                          301
+
+# ══ FUNCTIONAL REDIRECTS ══════════════════════════════════════════
 /call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
 
 # 404 fallback
