@@ -150,7 +150,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
     <div class="chart-sub">Indexed · 2024 peak month = 100 · Relative comparison</div>
     <div class="chart-row"><div class="chart-year"><div class="chart-year-label">2024 — Before</div><div class="bars" id="bars2024"></div></div><div class="chart-year"><div class="chart-year-label">2025 — After</div><div class="bars" id="bars2025"></div></div></div>
     <div class="chart-legend"><div class="legend-item"><div class="legend-dot gold"></div>Earning month</div><div class="legend-item"><div class="legend-dot muted"></div>Below baseline</div></div>
-    <div class="chart-note">October 2025: renovation month. December 2025: impacted by platform software change.</div>
+    <div class="chart-note">Y-axis indexed: 2024 peak = 100. Relative comparison.</div>
   </div>
 
   <div class="stat-row">
@@ -183,7 +183,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
 </footer>
 
 <script>
-var d24=[0,0,0,0,35,48,100,82,65,55,30,42],d25=[30,45,52,48,62,78,190,145,105,0,105,190],mo=['J','F','M','A','M','J','J','A','S','O','N','D'];
+var d24=[0,0,0,0,35,48,100,82,65,55,30,42],d25=[30,45,52,48,62,78,190,145,105,105,105,190],mo=['J','F','M','A','M','J','J','A','S','O','N','D'];
 function bb(id,d,af){var c=document.getElementById(id);var mx=190;d.forEach(function(v,i){var col=document.createElement('div');col.className='bar-col';var b=document.createElement('div');if(v===0){b.className='bar empty';b.style.height='4px';}else{b.className=v>50||af?'bar gold':'bar muted';b.style.height=Math.max(6,Math.round((v/mx)*170))+'px';}var l=document.createElement('div');l.className='bar-lbl';l.textContent=mo[i];col.appendChild(b);col.appendChild(l);c.appendChild(col);});}
 bb('bars2024',d24,false);bb('bars2025',d25,true);
 (function(){var n=document.querySelector('nav');if(n)window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>20);},{passive:true});var b=document.getElementById('navHamburger'),m=document.getElementById('navMobileMenu');if(!b||!m)return;function cl(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}b.addEventListener('click',function(e){e.stopPropagation();m.classList.contains('open')?cl():(m.classList.add('open'),b.classList.add('open'),document.body.style.overflow='hidden');});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target))cl();});})();
