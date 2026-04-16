@@ -86,8 +86,8 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .rev-chart-title{font-family:var(--d);font-size:16px;font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:8px;}
 .rev-chart-sub{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.06em;margin-bottom:32px;line-height:1.6;}
 .rev-bars{display:flex;align-items:flex-end;gap:10px;height:260px;padding-top:36px;position:relative;}
-.rev-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;}
-.rev-bar{width:100%;border-radius:3px 3px 0 0;position:relative;transition:height .8s ease;}
+.rev-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;position:relative;}
+.rev-bar{width:100%;border-radius:3px 3px 0 0;position:relative;transition:height .8s ease;min-height:4px;}
 .rev-bar.actual{background:var(--gold);}
 .rev-bar.booked{background:rgba(214,173,96,.35);border:1px dashed rgba(214,173,96,.5);border-bottom:none;}
 .rev-bar-val{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-family:var(--d);font-size:11px;font-weight:600;color:var(--gold);white-space:nowrap;letter-spacing:.04em;}
@@ -321,37 +321,37 @@ html,body{overflow-x:hidden;max-width:100%;}
       <div class="rev-bars">
         <!-- Jan: $42K -->
         <div class="rev-bar-col">
-          <div class="rev-bar actual" style="height:37%"><span class="rev-bar-val">$42K</span></div>
+          <div class="rev-bar actual" style="height:76px"><span class="rev-bar-val">$42K</span></div>
           <div class="rev-bar-label">Jan</div>
         </div>
         <!-- Feb: $65K, pipe burst -->
         <div class="rev-bar-col">
-          <div class="rev-bar actual" style="height:57%"><span class="rev-bar-val">$65K</span><span class="rev-bar-note">Pipe burst — partial month</span></div>
+          <div class="rev-bar actual" style="height:118px"><span class="rev-bar-val">$65K</span><span class="rev-bar-note">Pipe burst — partial month</span></div>
           <div class="rev-bar-label">Feb</div>
         </div>
         <!-- Mar: $114K -->
         <div class="rev-bar-col">
-          <div class="rev-bar actual" style="height:99%"><span class="rev-bar-val">$114K</span></div>
+          <div class="rev-bar actual" style="height:207px"><span class="rev-bar-val">$114K</span></div>
           <div class="rev-bar-label">Mar</div>
         </div>
         <!-- Apr: $115K, still building -->
         <div class="rev-bar-col">
-          <div class="rev-bar actual" style="height:100%"><span class="rev-bar-val">$115K</span><span class="rev-bar-note gold">Still building</span></div>
+          <div class="rev-bar actual" style="height:210px"><span class="rev-bar-val">$115K</span><span class="rev-bar-note gold">Still building</span></div>
           <div class="rev-bar-label">Apr</div>
         </div>
         <!-- May: booked -->
         <div class="rev-bar-col">
-          <div class="rev-bar booked" style="height:78%"><span class="rev-bar-val muted">Booked</span></div>
+          <div class="rev-bar booked" style="height:160px"><span class="rev-bar-val muted">Booked</span></div>
           <div class="rev-bar-label">May</div>
         </div>
         <!-- Jun: booked -->
         <div class="rev-bar-col">
-          <div class="rev-bar booked" style="height:85%"><span class="rev-bar-val muted">Booked</span></div>
+          <div class="rev-bar booked" style="height:175px"><span class="rev-bar-val muted">Booked</span></div>
           <div class="rev-bar-label">Jun</div>
         </div>
         <!-- Jul: early bookings -->
         <div class="rev-bar-col">
-          <div class="rev-bar booked" style="height:62%"><span class="rev-bar-val muted">Early</span></div>
+          <div class="rev-bar booked" style="height:128px"><span class="rev-bar-val muted">Early</span></div>
           <div class="rev-bar-label">Jul</div>
         </div>
       </div>
