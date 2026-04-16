@@ -40,15 +40,15 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .timeline-wrap{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:48px;margin:48px 0;position:relative;}
 .timeline-title{font-family:var(--d);font-size:18px;font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:8px;}
 .timeline-sub{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.08em;margin-bottom:32px;}
-.timeline-bars{display:flex;align-items:flex-end;gap:6px;height:220px;position:relative;}
+.timeline-bars{display:flex;align-items:flex-end;gap:6px;height:220px;position:relative;padding-top:40px;}
 .timeline-bar{flex:1;border-radius:3px 3px 0 0;position:relative;transition:height .8s ease;}
 .timeline-bar.on{background:var(--gold);}
 .timeline-bar.off{background:rgba(180,80,70,.4);border:1px solid rgba(180,80,70,.3);border-bottom:none;}
 .timeline-bar.future{background:rgba(214,173,96,.5);border:1px dashed rgba(214,173,96,.3);border-bottom:none;}
 .tbar-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:9px;color:var(--stone4);white-space:nowrap;}
-.tbar-annotation{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:8px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:3px 8px;border-radius:2px;pointer-events:none;}
-.tbar-annotation.removed{background:rgba(180,80,70,.15);color:rgba(220,100,90,.9);border:1px solid rgba(180,80,70,.2);}
-.tbar-annotation.restored{background:rgba(214,173,96,.12);color:var(--gold);border:1px solid rgba(214,173,96,.2);}
+.tbar-annotation{position:absolute;left:50%;font-family:var(--m);font-size:8px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:3px 8px;border-radius:2px;pointer-events:none;}
+.tbar-annotation.removed{top:-32px;background:rgba(180,80,70,.15);color:rgba(220,100,90,.9);border:1px solid rgba(180,80,70,.2);transform:translateX(-30%);}
+.tbar-annotation.restored{top:-32px;background:rgba(214,173,96,.12);color:var(--gold);border:1px solid rgba(214,173,96,.2);transform:translateX(-70%);}
 .timeline-peak{position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.12);}
 .timeline-peak-label{position:absolute;right:0;top:-16px;font-family:var(--m);font-size:8px;color:var(--stone4);letter-spacing:.08em;}
 .timeline-legend{display:flex;gap:24px;margin-top:36px;flex-wrap:wrap;}
@@ -72,8 +72,8 @@ html,body{overflow-x:hidden;max-width:100%;}
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
 </head>
 <body>
-<nav><a href="/" class="nav-logo" aria-label="Marketics home"><img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" class="nav-wordmark"></a><div class="nav-links"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/story">Our Story</a><a href="/pricing">Pricing</a><a href="/intel">Market Intel</a><a href="/results#casestudies" class="active">Case Studies</a></div><a href="/get-started" class="nav-cta">Get My Free Audit</a><button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button></nav>
-<div class="nav-mobile-menu" id="navMobileMenu"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/story">Our Story</a><a href="/pricing">Pricing</a><a href="/intel">Market Intel</a><a href="/results#casestudies" class="active">Case Studies</a><a href="/get-started" class="nm-cta">Get My Free Audit</a></div>
+<nav><a href="/" class="nav-logo" aria-label="Marketics home"><img src="https://assets.cdn.filesafe.space/Hdy5evIhEWpOMeRW92XG/media/69c893fc5eea83117c64ee3d.png" alt="Marketics" class="nav-wordmark"></a><div class="nav-links"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/results#casestudies" class="active">Case Studies</a><a href="/pricing">Pricing</a><a href="/story">Our Story</a><a href="/intel">Market Intel</a></div><a href="/get-started" class="nav-cta">Get My Free Audit</a><button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button></nav>
+<div class="nav-mobile-menu" id="navMobileMenu"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/results#casestudies" class="active">Case Studies</a><a href="/pricing">Pricing</a><a href="/story">Our Story</a><a href="/intel">Market Intel</a><a href="/get-started" class="nm-cta">Get My Free Audit</a></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -187,10 +187,6 @@ html,body{overflow-x:hidden;max-width:100%;}
         <div class="timeline-bar on" style="height:100%"><span class="tbar-label">Mar</span></div>
         <!-- Apr: ~$38K, second record month -->
         <div class="timeline-bar on" style="height:91%"><span class="tbar-label">Apr</span></div>
-      </div>
-      <!-- Previous peak line -->
-      <div class="timeline-peak" style="bottom:calc(62% + 48px);">
-        <span class="timeline-peak-label">Previous peak (Sep '25)</span>
       </div>
       <div class="timeline-legend">
         <div class="tlegend"><div class="tlegend-dot on"></div>Marketics active</div>
