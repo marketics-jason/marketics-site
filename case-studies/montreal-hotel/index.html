@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Case Study: From Generic to Unforgettable — Montréal Boutique Hotel | Marketics</title>
-<meta name="description" content="A Montréal boutique hotel went from forgettable interiors and 43% occupancy to fully redesigned rooms, 80% occupancy, and 50% revenue growth — funded entirely by its own earnings.">
+<title>Case Study: From Foreclosure to $114K Months — Montréal Hotel | Marketics</title>
+<meta name="description" content="A 40-room Montréal boutique hotel was heading to foreclosure in 2025. By 2026 it was producing $114K months with no outside capital. Full case study with before/after data.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://marketics.io/case-studies/montreal-hotel">
 <meta name="theme-color" content="#0f0f0f">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Marketics">
-<meta property="og:title" content="From Generic to Unforgettable — Montréal Boutique Hotel | Marketics">
-<meta property="og:description" content="43% to 80% occupancy. 50% revenue growth. Renovation funded by its own earnings. $0 outside capital.">
+<meta property="og:title" content="From Foreclosure to $114K Months — Montréal Hotel | Marketics">
+<meta property="og:description" content="A boutique hotel was heading to foreclosure. By 2026, it was producing back-to-back $100K+ months with no outside capital.">
 <meta property="og:url" content="https://marketics.io/case-studies/montreal-hotel">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
 <meta property="og:image:width" content="1200">
@@ -79,7 +79,34 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .lesson{background:var(--n2);padding:80px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
 
 /* ── CTA ── */
-.cta-section{text-align:center;padding:80px 0;border-top:1px solid rgba(214,173,96,.1);}.cta-section .eyebrow{justify-content:center;margin-bottom:24px;}.cta-section .eyebrow::before{display:none;}.cta-section h2{font-family:var(--d);font-size:clamp(28px,4vw,44px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:.95;margin-bottom:20px;}.cta-section h2 em{color:var(--gold);font-style:normal;}.cta-body{font-size:16px;color:var(--stone);line-height:1.7;max-width:560px;margin:0 auto 32px;}.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 36px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;transition:filter .2s,transform .15s;}.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}.cta-note{font-family:var(--m);font-size:10px;color:var(--stone4);margin-top:16px;letter-spacing:.06em;}
+.cta-section{text-align:center;padding:80px 0;border-top:1px solid rgba(214,173,96,.1);}
+
+/* 2026 REVENUE CHART */
+.rev-chart{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:40px;margin:48px 0;}
+.rev-chart-title{font-family:var(--d);font-size:16px;font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:8px;}
+.rev-chart-sub{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.06em;margin-bottom:32px;line-height:1.6;}
+.rev-bars{display:flex;align-items:flex-end;gap:10px;height:260px;padding-top:36px;position:relative;}
+.rev-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;}
+.rev-bar{width:100%;border-radius:3px 3px 0 0;position:relative;transition:height .8s ease;}
+.rev-bar.actual{background:var(--gold);}
+.rev-bar.booked{background:rgba(214,173,96,.35);border:1px dashed rgba(214,173,96,.5);border-bottom:none;}
+.rev-bar-val{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-family:var(--d);font-size:11px;font-weight:600;color:var(--gold);white-space:nowrap;letter-spacing:.04em;}
+.rev-bar-val.muted{color:var(--stone4);font-weight:400;}
+.rev-bar-label{margin-top:10px;font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.08em;text-transform:uppercase;}
+.rev-bar-note{position:absolute;top:-44px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:8px;color:rgba(220,100,90,.85);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding:2px 6px;background:rgba(180,80,70,.12);border:1px solid rgba(180,80,70,.2);border-radius:2px;}
+.rev-bar-note.gold{color:var(--gold);background:rgba(214,173,96,.12);border-color:rgba(214,173,96,.2);}
+.rev-legend{display:flex;gap:24px;margin-top:32px;flex-wrap:wrap;}
+.rev-legend-item{display:flex;align-items:center;gap:8px;font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.06em;}
+.rev-legend-dot{width:12px;height:12px;border-radius:2px;}
+.rev-legend-dot.actual{background:var(--gold);}
+.rev-legend-dot.booked{background:rgba(214,173,96,.35);border:1px dashed rgba(214,173,96,.5);}
+.rev-footnote{font-family:var(--m);font-size:10px;color:var(--stone4);margin-top:24px;line-height:1.6;font-style:italic;}
+
+/* 2026 SECTION STAT CALLOUTS */
+.big-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:40px 0;}
+.bstat{text-align:center;padding:32px 20px;background:var(--n3);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--gold);border-radius:4px;}
+.bstat-val{font-family:var(--d);font-size:clamp(32px,4.5vw,48px);font-weight:300;color:var(--gold);line-height:1;letter-spacing:-.02em;margin-bottom:10px;}
+.bstat-label{font-family:var(--m);font-size:10px;color:var(--stone);letter-spacing:.08em;line-height:1.6;}.cta-section .eyebrow{justify-content:center;margin-bottom:24px;}.cta-section .eyebrow::before{display:none;}.cta-section h2{font-family:var(--d);font-size:clamp(28px,4vw,44px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:.95;margin-bottom:20px;}.cta-section h2 em{color:var(--gold);font-style:normal;}.cta-body{font-size:16px;color:var(--stone);line-height:1.7;max-width:560px;margin:0 auto 32px;}.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 36px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;transition:filter .2s,transform .15s;}.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}.cta-note{font-family:var(--m);font-size:10px;color:var(--stone4);margin-top:16px;letter-spacing:.06em;}
 
 /* ── FOOTER ── */
 .site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}.sf-brand{padding-top:2px;}.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}.sf-col{display:flex;flex-direction:column;gap:6px;}.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}.sf-col a:hover{color:var(--gold);}.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
@@ -96,6 +123,13 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
   .after-row{grid-template-columns:1fr;}
   .results-stats{gap:32px;}
   .pblock.full{margin:40px 0;padding:28px 24px;}
+  .rev-chart{padding:20px 16px;}
+  .rev-bars{height:220px;gap:4px;padding-top:40px;}
+  .rev-bar-val{font-size:9px;}
+  .rev-bar-label{font-size:8px;}
+  .rev-bar-note{font-size:7px;padding:1px 4px;top:-38px;letter-spacing:.04em;}
+  .big-stats{grid-template-columns:1fr;gap:16px;}
+  .bstat{padding:24px 20px;}
   .section{padding:56px 0;}
   .site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}
 }
@@ -127,10 +161,10 @@ html,body{overflow-x:hidden;max-width:100%;}
   <div class="cs-max">
     <div class="eyebrow fi">Case Study — Montréal, Québec</div>
     <h1 class="fi" style="transition-delay:.05s">From Generic<br>To Unforgettable.<br><em>In One Year.</em></h1>
-    <p class="hero-sub fi" style="transition-delay:.1s">A Montréal boutique hotel went from forgettable interiors and 43% occupancy to fully redesigned rooms, 80% occupancy, and 50% revenue growth — funded entirely by its own earnings.</p>
+    <p class="hero-sub fi" style="transition-delay:.1s">A Montréal boutique hotel facing foreclosure in early 2025 reversed course with Marketics. By 2026 it was producing back-to-back $100K+ months — funded entirely by its own earnings, from the start.</p>
     <div class="hero-stats fi" style="transition-delay:.15s">
       <div class="hstat"><div class="hstat-val">43→80%</div><div class="hstat-label">Occupancy rate</div></div>
-      <div class="hstat"><div class="hstat-val">+50%</div><div class="hstat-label">Revenue growth</div></div>
+      <div class="hstat"><div class="hstat-val">$114K</div><div class="hstat-label">Monthly floor, 2026 (CAD)</div></div>
       <div class="hstat"><div class="hstat-val">$0</div><div class="hstat-label">Outside capital required</div></div>
     </div>
   </div>
@@ -244,6 +278,88 @@ html,body{overflow-x:hidden;max-width:100%;}
     <p class="body-text fi">The occupancy didn't climb because the price dropped. It climbed because the property became something guests wanted to stay in and tell people about. Reviews shifted from transactional to editorial. The calendar filled in months that had previously been empty.</p>
     <p class="body-text fi">The renovation was possible because the revenue growth happened first. Not the other way around. That sequencing matters — it's the difference between a capital bet on a turnaround and a compounding reinvestment in a proven one.</p>
     <p class="body-text fi"><strong>The property is still operating. Still optimized. Still improving.</strong></p>
+  </div>
+</section>
+
+<!-- SECTION 5b: 2026 — COMPOUNDING -->
+<section class="section">
+  <div class="cs-wide">
+    <div class="section-eyebrow fi">2026 — One Year Later</div>
+    <h2 class="fi" style="font-family:var(--d);font-size:clamp(28px,4.5vw,48px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:.95;margin-bottom:24px;transition-delay:.05s">This Is What<br>Compounding<br><em style="color:var(--gold);font-style:normal;">Looks Like.</em></h2>
+  </div>
+  <div class="cs-max">
+    <p class="body-text fi">The occupancy story was 2025. This is 2026.</p>
+    <p class="body-text fi">In the twelve months since Marketics took over the listing, the hotel didn't just recover — it rebuilt its entire revenue architecture. January opened at <strong>$42,000</strong>. February, with a pipe burst forcing the property offline for nearly two weeks, still produced <strong>$65,000</strong>. The algorithm held position through a forced interruption.</p>
+    <p class="body-text fi"><strong>March: $114,000. April: $115,000 and still building.</strong> Summer forward bookings are loaded.</p>
+    <p class="body-text fi">A property that was three months from foreclosure in early 2025 now has a consistent monthly floor above $100,000 CAD — with peak season still ahead.</p>
+    <p class="body-text fi"><strong>That's not a percentage improvement. That's a different business.</strong></p>
+
+    <!-- 3 big stats -->
+    <div class="big-stats fi">
+      <div class="bstat">
+        <div class="bstat-val">$114K</div>
+        <div class="bstat-label">Monthly revenue<br>March 2026 (CAD)</div>
+      </div>
+      <div class="bstat">
+        <div class="bstat-val">$115K</div>
+        <div class="bstat-label">Monthly revenue<br>April 2026 and climbing (CAD)</div>
+      </div>
+      <div class="bstat">
+        <div class="bstat-val">$65K</div>
+        <div class="bstat-label">February 2026 — despite<br>2-week forced closure</div>
+      </div>
+    </div>
+
+    <p class="rev-footnote fi">*All figures in Canadian dollars. February 2026 impacted by pipe burst; property offline approximately 10–14 days.</p>
+  </div>
+
+  <!-- REVENUE CHART -->
+  <div class="cs-wide">
+    <div class="rev-chart fi">
+      <div class="rev-chart-title">Monthly Revenue — 2026 (CAD)</div>
+      <div class="rev-chart-sub">Property was facing foreclosure in early 2025. No outside capital was used at any stage.</div>
+      <div class="rev-bars">
+        <!-- Jan: $42K -->
+        <div class="rev-bar-col">
+          <div class="rev-bar actual" style="height:37%"><span class="rev-bar-val">$42K</span></div>
+          <div class="rev-bar-label">Jan</div>
+        </div>
+        <!-- Feb: $65K, pipe burst -->
+        <div class="rev-bar-col">
+          <div class="rev-bar actual" style="height:57%"><span class="rev-bar-val">$65K</span><span class="rev-bar-note">Pipe burst — partial month</span></div>
+          <div class="rev-bar-label">Feb</div>
+        </div>
+        <!-- Mar: $114K -->
+        <div class="rev-bar-col">
+          <div class="rev-bar actual" style="height:99%"><span class="rev-bar-val">$114K</span></div>
+          <div class="rev-bar-label">Mar</div>
+        </div>
+        <!-- Apr: $115K, still building -->
+        <div class="rev-bar-col">
+          <div class="rev-bar actual" style="height:100%"><span class="rev-bar-val">$115K</span><span class="rev-bar-note gold">Still building</span></div>
+          <div class="rev-bar-label">Apr</div>
+        </div>
+        <!-- May: booked -->
+        <div class="rev-bar-col">
+          <div class="rev-bar booked" style="height:78%"><span class="rev-bar-val muted">Booked</span></div>
+          <div class="rev-bar-label">May</div>
+        </div>
+        <!-- Jun: booked -->
+        <div class="rev-bar-col">
+          <div class="rev-bar booked" style="height:85%"><span class="rev-bar-val muted">Booked</span></div>
+          <div class="rev-bar-label">Jun</div>
+        </div>
+        <!-- Jul: early bookings -->
+        <div class="rev-bar-col">
+          <div class="rev-bar booked" style="height:62%"><span class="rev-bar-val muted">Early</span></div>
+          <div class="rev-bar-label">Jul</div>
+        </div>
+      </div>
+      <div class="rev-legend">
+        <div class="rev-legend-item"><div class="rev-legend-dot actual"></div>Actual revenue</div>
+        <div class="rev-legend-item"><div class="rev-legend-dot booked"></div>Forward bookings</div>
+      </div>
+    </div>
   </div>
 </section>
 
