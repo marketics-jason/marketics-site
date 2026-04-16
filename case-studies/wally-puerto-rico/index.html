@@ -61,7 +61,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
 .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:32px 0;}
 .fgrid-item{background:var(--n3);padding:28px 24px;}
 .fgrid-num{font-family:var(--m);font-size:12px;color:var(--stone4);margin-bottom:8px;}.fgrid-cat{font-family:var(--d);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px;}.fgrid-body{font-size:14px;color:var(--stone3);line-height:1.65;}
-.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:32px 0;}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0;}
 .chart-wrap{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:32px;margin:40px 0;}
 .chart-title{font-family:var(--d);font-size:14px;font-weight:700;color:var(--white);margin-bottom:8px;}
 .chart-sub{font-family:var(--m);font-size:10px;color:var(--dim);margin-bottom:24px;}
@@ -126,7 +126,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
   <div class="eyebrow">Before Marketics</div>
   <h2 class="sec">What the Algorithm <em>Saw</em></h2>
   <div class="ba-grid">
-    <div class="ba-col"><div class="ba-label">Before — Photography</div><img src="/case-studies/wally-puerto-rico/images/before-dining-1.jpg" alt="Before — dining room, old photography" style="width:100%;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/before-room.jpg" alt="Before — bedroom, overhead angle" style="width:100%;border-radius:4px;"></div>
+    <div class="ba-col"><div class="ba-label">Before — Photography</div><img src="/case-studies/wally-puerto-rico/images/before-dining-1.jpg" alt="Before — dining room, old photography" style="width:100%;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/before-dining-2.jpg" alt="Before — dining table, old styling" style="width:100%;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/before-room.jpg" alt="Before — bedroom, overhead angle" style="width:100%;border-radius:4px;"></div>
     <div class="ba-col"><p class="body">Photography taken from above compresses a room. It reads as small. It reads as amateur. To a guest scrolling at speed, it doesn't stop the thumb.</p><p class="body">And on Airbnb, a listing that doesn't stop the thumb doesn't get clicked. A listing that doesn't get clicked doesn't get booked. A listing that doesn't get booked gets deprioritized by the algorithm — which shows it to fewer people — which means fewer clicks — which means fewer bookings.</p><p class="body">This is the visibility spiral most hosts never see happening to them.</p></div>
   </div>
   <div class="chips"><span class="chip">Cover photo click-through: low</span><span class="chip">Winter search visibility: minimal</span><span class="chip">Earning months: 8 of 12</span></div>
@@ -142,7 +142,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
   <div class="gold-rule"></div>
   <div class="eyebrow">The Results</div>
   <h2 class="sec">Twelve Months.<br><em>Every Month.</em></h2>
-  <div class="photo-grid"><img src="/case-studies/wally-puerto-rico/images/after-kitchen.jpg" alt="After — blue kitchen, professional photography" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/after-bedroom.jpg" alt="After — styled green bedroom" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/before-dining-2.jpg" alt="After — editorial dining room" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/listing-hero.jpg" alt="Villa exterior at sunset" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:4px;"></div>
+  <div class="photo-grid"><img src="/case-studies/wally-puerto-rico/images/after-kitchen.jpg" alt="After — blue kitchen, professional photography" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/after-bedroom.jpg" alt="After — styled green bedroom" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"><img src="/case-studies/wally-puerto-rico/images/listing-hero.jpg" alt="Villa exterior at sunset" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:4px;"></div>
   <p class="body">The most significant result wasn't the peak month — though July nearly doubled year-over-year. It was January.</p>
   <p class="body">A property that had earned nothing in the first four months of the prior year opened 2025 with a strong booking month. February, March, April — months that had been zeros — all earning. That's not seasonal improvement. That's algorithmic repositioning. The market had demand in those months all along. The listing just wasn't visible to it.</p>
 
@@ -185,7 +185,7 @@ h2.sec em{color:var(--gold);font-style:normal;}
 
 <script>
 var d24=[0,0,0,0,35,48,100,82,65,55,30,42],d25=[30,45,52,48,62,78,190,145,105,0,85,40],mo=['J','F','M','A','M','J','J','A','S','O','N','D'];
-function bb(id,d,af){var c=document.getElementById(id);var mx=Math.max.apply(null,d.concat(d24).concat(d25));d.forEach(function(v,i){var col=document.createElement('div');col.className='bar-col';var b=document.createElement('div');if(v===0){b.className='bar empty';b.style.height='4px';}else{b.className=v>50||af?'bar gold':'bar muted';b.style.height=Math.max(4,Math.round((v/mx)*100))+'%';}var l=document.createElement('div');l.className='bar-lbl';l.textContent=mo[i];col.appendChild(b);col.appendChild(l);c.appendChild(col);});}
+function bb(id,d,af){var c=document.getElementById(id);var mx=190;d.forEach(function(v,i){var col=document.createElement('div');col.className='bar-col';var b=document.createElement('div');if(v===0){b.className='bar empty';b.style.height='4px';}else{b.className=v>50||af?'bar gold':'bar muted';b.style.height=Math.max(6,Math.round((v/mx)*170))+'px';}var l=document.createElement('div');l.className='bar-lbl';l.textContent=mo[i];col.appendChild(b);col.appendChild(l);c.appendChild(col);});}
 bb('bars2024',d24,false);bb('bars2025',d25,true);
 (function(){var n=document.querySelector('nav');if(n)window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>20);},{passive:true});var b=document.getElementById('navHamburger'),m=document.getElementById('navMobileMenu');if(!b||!m)return;function cl(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}b.addEventListener('click',function(e){e.stopPropagation();m.classList.contains('open')?cl():(m.classList.add('open'),b.classList.add('open'),document.body.style.overflow='hidden');});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target))cl();});})();
 </script>
