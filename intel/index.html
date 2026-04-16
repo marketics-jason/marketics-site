@@ -304,6 +304,10 @@ nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15)
   .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
   .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
 }
+
+/* Hero lift animation */
+.fi{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.fi.vis{opacity:1;transform:none;}
 </style>
 <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
 </head>
@@ -345,9 +349,9 @@ nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15)
 
 <!-- HERO -->
 <section class="intel-hero">
-  <div class="intel-eyebrow">Market Intelligence</div>
-  <h1>The information<br><em>your competitors</em><br>don't have yet.</h1>
-  <p>Demand windows, algorithm mechanics, and host strategy: researched, synthesized, and delivered before the booking wave hits.</p>
+  <div class="intel-eyebrow fi">Market Intelligence</div>
+  <h1 class="fi" style="transition-delay:.05s">The information<br><em>your competitors</em><br>don't have yet.</h1>
+  <p class="fi" style="transition-delay:.1s">Demand windows, algorithm mechanics, and host strategy: researched, synthesized, and delivered before the booking wave hits.</p>
 </section>
 
 <!-- MARKET INTELLIGENCE -->
@@ -658,6 +662,16 @@ nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15)
   btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
   document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
+})();
+// Hero lift animation
+(function(){
+  var fallback=setTimeout(function(){document.querySelectorAll('.fi').forEach(function(el){el.classList.add('vis');});},700);
+  try{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){clearTimeout(fallback);e.target.classList.add('vis');io.unobserve(e.target);}});
+    },{threshold:0.05,rootMargin:'0px 0px -10px 0px'});
+    document.querySelectorAll('.fi').forEach(function(el){io.observe(el);});
+  }catch(e){document.querySelectorAll('.fi').forEach(function(el){el.classList.add('vis');});}
 })();</script>
 </body>
 </html>
