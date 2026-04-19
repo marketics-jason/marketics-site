@@ -209,6 +209,30 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 }
 .hero-sub strong{color:var(--white);font-weight:500}
 
+/* Hero recap bullets */
+.hero-recap{
+  list-style:none;padding:0 0 0 20px;margin:0 0 28px;
+  display:flex;flex-direction:column;gap:10px;
+  max-width:620px;
+  border-left:2px solid rgba(214,173,96,.25);
+  opacity:0;transform:translateY(12px);
+  animation:fadeUp .7s .6s ease forwards;
+}
+.hero-recap li{
+  font-size:14px;color:var(--stone);line-height:1.6;font-weight:300;
+}
+.hero-recap li strong{color:var(--white);font-weight:500;}
+.hero-recap .recap-arrow{
+  color:var(--gold);margin-right:8px;font-family:'DM Mono',monospace;font-size:11px;
+}
+
+/* CTA group */
+.cta-group{
+  display:flex;align-items:center;gap:16px;
+  opacity:0;transform:translateY(12px);
+  animation:fadeUp .7s .72s ease forwards;
+}
+
 /* Stats row */
 .stats-row{
   display:flex;gap:0;
@@ -216,7 +240,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   border-top:1px solid rgba(214,173,96,.15);
   padding-top:20px;
   opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .65s ease forwards;
+  animation:fadeUp .7s .85s ease forwards;
 }
 .stat{
   flex:1;padding-right:28px;
@@ -239,12 +263,6 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   color:var(--dim);
 }
 
-/* CTA group */
-.cta-group{
-  display:flex;align-items:center;gap:16px;
-  opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .8s ease forwards;
-}
 .btn-primary{
   font-family:'Josefin Sans',sans-serif;
   font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -865,6 +883,22 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       We optimize your Airbnb listing, pricing, and guest strategy — and increase your revenue <strong><span style="white-space:nowrap">50–75% within 90&nbsp;days.</span></strong><br>You pay 10% of net bookings. No&nbsp;retainers. No&nbsp;contracts.<br>We only earn when you earn.
     </p>
 
+    <ul class="hero-recap">
+      <li><span class="recap-arrow">→</span> <strong>50–75% revenue increase in 90 days</strong> — based on 28+ documented client outcomes</li>
+      <li><span class="recap-arrow">→</span> <strong>You pay 10% of net bookings.</strong> No retainer. No setup fee. No&nbsp;contract.</li>
+      <li><span class="recap-arrow">→</span> <strong>90-day guarantee</strong> — $500 onboarding refunded if we don't hit your targets</li>
+    </ul>
+
+    <div class="cta-group">
+      <a href="/get-started" class="btn-primary" id="heroAuditBtn">
+        Get My Free Revenue Audit
+      </a>
+      <a href="/method" class="btn-secondary">
+        Watch the Method
+        <span class="btn-secondary-arrow"></span>
+      </a>
+    </div>
+
     <div class="stats-row">
       <div class="stat">
         <div class="stat-num">35&#215;</div>
@@ -880,15 +914,6 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       </div>
     </div>
 
-    <div class="cta-group">
-      <a href="/get-started" class="btn-primary" id="heroAuditBtn">
-        Get My Free Revenue Audit
-      </a>
-      <a href="/method" class="btn-secondary">
-        Watch the Method
-        <span class="btn-secondary-arrow"></span>
-      </a>
-    </div>
     <p style="font-size:9px;color:rgba(180,178,169,.15);max-width:680px;margin:32px 0 0;line-height:1.4;font-family:'DM Mono',monospace;letter-spacing:.01em;text-align:left;">Revenue range based on 28+ documented client outcomes across 22 North American markets, measured as first 90 days post-audit completion vs. the prior 90-day baseline period. Individual results vary by property type, market, and host responsiveness. Airbnb Superhost status earned 35 consecutive quarters, 2017–2025.</p>
 
   </div>
