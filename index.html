@@ -830,18 +830,16 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   <meta name="twitter:title" content="Marketics — Your Market. Mastered.™">
   <meta name="twitter:description" content="Performance-based STR optimization. We increase Airbnb revenue 50–75% in 90 days. 10% of net payout — nothing else. Free revenue audit.">
   <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
-<!-- Fonts: preconnect + high-priority preload (restored) + async swap -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap"></noscript>
-<!-- DNS prefetch: third-party scripts load faster on cold connections -->
-<link rel="dns-prefetch" href="https://www.clarity.ms">
+<!-- Self-hosted fonts: zero external DNS lookup, served from Netlify CDN -->
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<!-- DNS prefetch for remaining 3rd parties -->
 <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
-<link rel="dns-prefetch" href="https://cdn-cookieyes.com">
-<link rel="dns-prefetch" href="https://api.cookieyes.com">
-<!-- Clarity: loads when browser is idle — avoids colliding with GHL/CookieYes on load event -->
-<script>(function(){function l(){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");}if("requestIdleCallback"in window){requestIdleCallback(l,{timeout:4000});}else{setTimeout(l,4000);}})();</script>
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<!-- Marketics consent system: replaces CookieYes, gates analytics on user choice -->
+<script src="/mkx-consent.js" defer></script>
 </head>
 <body>
 <nav id="mainNav">
