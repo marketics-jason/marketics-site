@@ -22,17 +22,22 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/case-studies/*/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/favicon.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/og/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
