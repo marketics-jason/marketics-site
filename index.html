@@ -830,12 +830,18 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   <meta name="twitter:title" content="Marketics — Your Market. Mastered.™">
   <meta name="twitter:description" content="Performance-based STR optimization. We increase Airbnb revenue 50–75% in 90 days. 10% of net payout — nothing else. Free revenue audit.">
   <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+<!-- Fonts: preconnect + single async load (deduped from 2 → 1 request) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&display=swap"></noscript>
-<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");</script>
+<!-- DNS prefetch: third-party scripts load faster on cold connections -->
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://cdn-cookieyes.com">
+<link rel="dns-prefetch" href="https://api.cookieyes.com">
+<!-- Clarity: deferred until page is interactive — no longer blocks FCP -->
+<script>window.addEventListener('load',function(){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");});</script>
 </head>
 <body>
 <nav id="mainNav">
@@ -1041,7 +1047,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
   <div class="founder-photo-wrap">
     <div class="founder-photo">
-      <img src="/images/jason-founder-hero.jpg" alt="Jason Baxter — Marketics Founder" loading="eager" style="width:100%;height:100%;object-fit:cover;object-position:22% 12%;display:block;">
+      <img src="/images/jason-founder-hero.jpg" alt="Jason Baxter — Marketics Founder" loading="eager" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;object-position:22% 12%;display:block;">
       <div class="founder-creds">
         <div class="founder-name">Jason Baxter</div>
         <div class="founder-title">Founder, Marketics · 35&#215; Airbnb Superhost · Montreal</div>
