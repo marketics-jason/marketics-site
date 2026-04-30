@@ -171,14 +171,14 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   font-family:'Josefin Sans',sans-serif;
   font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
   color:var(--gold);
-  display:flex;align-items:center;gap:14px;
   margin-bottom:22px;
   opacity:0;transform:translateY(12px);
   animation:fadeUp .7s .2s ease forwards;
 }
 .eyebrow::before{
-  content:'';display:block;width:28px;height:1px;
+  content:'';display:inline-block;width:28px;height:1px;vertical-align:middle;
   background:linear-gradient(to right,transparent,var(--gold));
+  margin-right:14px;
 }
 
 /* H1 */
