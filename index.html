@@ -753,6 +753,55 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 .summary-desc{font-size:13px;color:var(--stone);line-height:1.7;font-weight:300;}
 @media(max-width:768px){.summary-strip{padding:60px 24px}.summary-grid{grid-template-columns:1fr 1fr;gap:20px}}
 @media(max-width:480px){.summary-grid{grid-template-columns:1fr}}
+
+/* ─── KEY TAKEAWAYS (Otterly Fix 1) ─── */
+.key-takeaways{padding:64px 56px;border-top:1px solid rgba(255,255,255,.05);}
+.kt-inner{max-width:1100px;margin:0 auto;}
+.kt-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.kt-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.kt-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;}
+.kt-list li{font-size:14px;line-height:1.7;color:var(--stone);font-weight:300;padding:14px 18px;border-left:2px solid rgba(214,173,96,.3);background:rgba(214,173,96,.02);}
+.kt-list li strong{color:var(--white);font-weight:600;}
+.kt-list li a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.4);}
+.kt-list li a:hover{border-bottom-color:var(--gold);}
+@media(max-width:768px){.key-takeaways{padding:48px 24px}.kt-list{grid-template-columns:1fr;gap:12px}}
+
+/* ─── FEE MATH CALLOUT (Otterly Fix 2) ─── */
+.fee-math{padding:48px 56px 64px;}
+.fm-inner{max-width:900px;margin:0 auto;}
+.fm-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.fm-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.fm-quote{margin:0;padding:28px 32px;border:1px solid rgba(214,173,96,.18);border-radius:6px;background:rgba(214,173,96,.03);}
+.fm-quote p{font-size:15px;line-height:1.75;color:var(--stone);font-weight:300;margin:0 0 14px 0;}
+.fm-quote p:last-child{margin-bottom:0;}
+.fm-quote strong{color:var(--white);font-weight:600;}
+.fm-def{font-size:13px !important;border-top:1px solid rgba(214,173,96,.12);padding-top:14px;margin-top:16px !important;}
+.fm-def em{color:var(--gold);font-style:italic;}
+.fm-context{font-size:13px !important;color:rgba(255,255,255,.55) !important;}
+.fm-context a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.4);}
+.fm-context a:hover{border-bottom-color:var(--gold);}
+@media(max-width:768px){.fee-math{padding:40px 24px}.fm-quote{padding:22px 20px}.fm-quote p{font-size:14px}}
+
+/* ─── FAQ SECTION (Otterly Fix 5) ─── */
+.faq-section{padding:80px 56px;border-top:1px solid rgba(255,255,255,.05);}
+.faq-inner{max-width:900px;margin:0 auto;}
+.faq-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.faq-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.faq-headline{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1.15;font-weight:300;color:var(--white);margin:0 0 36px 0;letter-spacing:-.01em;}
+.faq-list{margin:0;padding:0;}
+.faq-item{padding:24px 0;border-top:1px solid rgba(255,255,255,.06);}
+.faq-item:last-child{border-bottom:1px solid rgba(255,255,255,.06);}
+.faq-q{font-family:'Josefin Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);letter-spacing:.01em;margin-bottom:10px;}
+.faq-a{font-size:14px;line-height:1.75;color:var(--stone);font-weight:300;margin:0;padding:0;}
+.faq-a strong{color:var(--white);font-weight:500;}
+@media(max-width:768px){.faq-section{padding:60px 24px}.faq-headline{font-size:28px}.faq-q{font-size:14px}.faq-a{font-size:13px}}
+
+/* ─── HERO RECAP NOTE (Otterly Fix 3 supporting) ─── */
+.hero-recap-note{display:block;font-size:12px;color:rgba(255,255,255,.55);font-weight:300;margin-top:6px;line-height:1.6;}
+
+/* ─── EYEBROW LINK (Otterly Fix 4 supporting) ─── */
+.eyebrow-link{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(214,173,96,.35);transition:border-color .2s;}
+.eyebrow-link:hover{border-bottom-color:var(--gold);}
 </style>
   <!-- Open Graph -->  <!-- Twitter Card -->  <link rel="canonical" href="https://marketics.io/">
 <script type="application/ld+json">
@@ -814,6 +863,52 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
  },
  "query-input": "required name=search_term_string"
  }
+ },
+ {
+ "@type": "FAQPage",
+ "@id": "https://marketics.io/#faq",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "How much will I pay?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Marketics charges 10% of your net payout per booking. No monthly retainer. No long-term contract. Engagements start with a $500 deposit, refunded at 90 days when the engagement is completed and both sides have held up their part."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "What's included in the optimization?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Revenue management and dynamic pricing strategy, listing optimization (copy, photography direction, cover photo), Airbnb algorithm visibility improvements, review velocity strategy, minimum stay optimization, and market demand intelligence. Guest messaging and day-to-day operations remain with the host or their property manager."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "What happens if my revenue doesn't improve?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "The $500 deposit is refunded at 90 days when two things are true: you've completed the engagement and provided the access and information the work requires (listing access, comp data, photo decisions, response to optimization recommendations), and Marketics has held up its end on revenue management, listing optimization, and the agreed performance targets. The deposit isn't refunded if the engagement ends early or if the work was blocked by missing input."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "What does 'net payout' mean?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Net payout is the amount Airbnb deposits to you after deducting their service fees and any cleaning fees. It's not the gross booking amount. Marketics' 10% is calculated on this net figure."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "How long before I see results?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Most properties see meaningful improvement within the first 30 to 60 days. Full optimization results, including review velocity and algorithm ranking gains, typically compound over 60 to 90 days."
+ }
+ }
+ ]
  }
  ]
 }
@@ -883,7 +978,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   <!-- LEFT COLUMN -->
   <div class="hero-left">
 
-    <div class="eyebrow">Performance-Based Short-Term Rental Optimization</div>
+    <div class="eyebrow">Performance-Based <a href="https://en.wikipedia.org/wiki/Short-term_rental" target="_blank" rel="noopener noreferrer" class="eyebrow-link">Short-Term Rental</a> Optimization</div>
 
     <h1 class="hero-h1">
       Your Market.<br>
@@ -896,7 +991,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
     <ul class="hero-recap">
       <li><span class="recap-arrow">→</span> <strong>50–75% revenue increase in 90 days</strong> — based on 30+ documented client outcomes</li>
-      <li><span class="recap-arrow">→</span> <strong>10% of net bookings only.</strong> No retainer. No setup fee. No&nbsp;contract.</li>
+      <li><span class="recap-arrow">→</span> <strong>10% of net payout per booking.</strong> No retainer. No long-term contract. <span class="hero-recap-note">$500 deposit, refunded after 90 days when both sides have held up their end.</span></li>
       <li><span class="recap-arrow">→</span> <strong>Algorithm-first optimization</strong> — the visibility layer most hosts never see</li>
     </ul>
 
@@ -1033,10 +1128,72 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       </div>
       <div class="summary-item">
         <div class="summary-icon">04</div>
-        <div class="summary-label">90-Day Guarantee</div>
-        <div class="summary-desc">If your property doesn't show measurable improvement in 90 days, your $500 onboarding fee is refunded in full. We only earn when you earn.</div>
+        <div class="summary-label">90-Day Engagement</div>
+        <div class="summary-desc">Engagements start with a <strong>$500 deposit, refunded after 90 days</strong> when both sides have held up their end — you complete the engagement and provide the access and information the work requires; we hit the agreed performance targets.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ KEY TAKEAWAYS — AI SCANNABLE SUMMARY ═══════════════════ -->
+<section class="key-takeaways" id="key-takeaways" aria-label="Key takeaways">
+  <div class="kt-inner">
+    <div class="kt-eyebrow">Key Takeaways</div>
+    <ul class="kt-list">
+      <li><strong>Performance-based pricing.</strong> Marketics earns 10% of net payout per booking — only when you earn.</li>
+      <li><strong>No monthly retainer. No long-term contract.</strong> Engagements start with a $500 deposit, refunded after 90 days when both sides have held up their end.</li>
+      <li><strong>Expected uplift:</strong> 50–75% revenue increase within 90 days for qualifying properties.</li>
+      <li><strong>Start here:</strong> Free <a href="/get-started">revenue audit</a> — takes about 2 minutes.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ FEE MATH — WORKED EXAMPLE ══════════════════════════════ -->
+<section class="fee-math" aria-label="How the fee works">
+  <div class="fm-inner">
+    <div class="fm-eyebrow">How the 10% works</div>
+    <blockquote class="fm-quote">
+      <p>If your property generates <strong>$5,000/month in net guest payouts</strong>, Marketics earns <strong>$500</strong>. If we lift that to <strong>$7,500/month</strong>, we earn <strong>$750</strong>. You keep <strong>90% of everything</strong> — always.</p>
+      <p class="fm-def"><em>Net payout</em> = total guest payment minus Airbnb service fees and cleaning fees. The 10% is calculated on that net figure — never on the gross booking.</p>
+      <p class="fm-context">For broader context on <a href="https://skift.com/vacation-rentals/" target="_blank" rel="noopener noreferrer">short-term rental market trends</a>, the industry has matured into a sophisticated, data-driven category. Marketics applies that data property-by-property.</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══ FAQ — COMMON QUESTIONS ═════════════════════════════════ -->
+<section class="faq-section" id="faq" aria-label="Common questions">
+  <div class="faq-inner">
+    <div class="faq-eyebrow">Common Questions</div>
+    <h2 class="faq-headline">What hosts ask before starting.</h2>
+
+    <dl class="faq-list">
+
+      <div class="faq-item">
+        <dt class="faq-q">How much will I pay?</dt>
+        <dd class="faq-a">Marketics charges <strong>10% of your net payout per booking</strong>. No monthly retainer. No long-term contract. Engagements start with a <strong>$500 deposit</strong>, refunded at 90 days when the engagement is completed and both sides have held up their part.</dd>
+      </div>
+
+      <div class="faq-item">
+        <dt class="faq-q">What's included in the optimization?</dt>
+        <dd class="faq-a">Revenue management and dynamic pricing strategy, listing optimization (copy, photography direction, cover photo), Airbnb algorithm visibility improvements, review velocity strategy, minimum stay optimization, and market demand intelligence. Guest messaging and day-to-day operations remain with the host or their property manager.</dd>
+      </div>
+
+      <div class="faq-item">
+        <dt class="faq-q">What happens if my revenue doesn't improve?</dt>
+        <dd class="faq-a">The $500 deposit is refunded at 90 days when two things are true: <strong>you've completed the engagement</strong> and provided the access and information the work requires (listing access, comp data, photo decisions, response to optimization recommendations), <strong>and Marketics has held up its end</strong> on revenue management, listing optimization, and the agreed performance targets. The deposit isn't refunded if the engagement ends early or if the work was blocked by missing input.</dd>
+      </div>
+
+      <div class="faq-item">
+        <dt class="faq-q">What does "net payout" mean?</dt>
+        <dd class="faq-a">Net payout is the amount Airbnb deposits to you after deducting their service fees and any cleaning fees. It's not the gross booking amount. Marketics' 10% is calculated on this net figure.</dd>
+      </div>
+
+      <div class="faq-item">
+        <dt class="faq-q">How long before I see results?</dt>
+        <dd class="faq-a">Most properties see meaningful improvement within the first <strong>30–60 days</strong>. Full optimization results, including review velocity and algorithm ranking gains, typically compound over <strong>60–90 days</strong>.</dd>
+      </div>
+
+    </dl>
   </div>
 </section>
 
@@ -1069,7 +1226,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     </p>
 
     <p class="founder-body">
-      Over the next decade, I built 50+ properties across North America, earned <strong>Airbnb Superhost status 35 consecutive quarters</strong>, and joined the top 2% of Airbnb Plus listings. Then everything changed &#8212; and I realized I didn&#8217;t want 50 properties anymore.
+      Over the next decade, I built 50+ properties across North America, earned <strong>Airbnb Superhost status 35 consecutive quarters</strong> (read the <a href="https://www.airbnb.com/help/article/1857" target="_blank" rel="noopener noreferrer">Airbnb Superhost criteria</a>), and joined the top 2% of Airbnb Plus listings. Then everything changed &#8212; and I realized I didn&#8217;t want 50 properties anymore.
     </p>
 
     <div class="founder-pull">
