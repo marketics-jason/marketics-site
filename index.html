@@ -744,8 +744,8 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 /* ══ SUMMARY STRIP ═══════════════════════════════════════════ */
 .summary-strip{padding:80px 56px;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
 .summary-inner{max-width:1100px;margin:0 auto}
-.summary-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:40px;display:flex;align-items:center;gap:12px;}
-.summary-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.summary-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 40px 0;}
+.summary-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
 .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .summary-item{padding:24px;border:1px solid rgba(214,173,96,.1);border-radius:6px;background:rgba(214,173,96,.02);}
 .summary-icon{font-family:'Josefin Sans',sans-serif;font-size:28px;font-weight:200;color:var(--gold);margin-bottom:12px;letter-spacing:.04em;}
@@ -757,8 +757,8 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 /* ─── KEY TAKEAWAYS (Otterly Fix 1) ─── */
 .key-takeaways{padding:64px 56px;border-top:1px solid rgba(255,255,255,.05);}
 .kt-inner{max-width:1100px;margin:0 auto;}
-.kt-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
-.kt-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.kt-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 24px 0;}
+.kt-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
 .kt-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;}
 .kt-list li{font-size:14px;line-height:1.7;color:var(--stone);font-weight:300;padding:14px 18px;border-left:2px solid rgba(214,173,96,.3);background:rgba(214,173,96,.02);}
 .kt-list li strong{color:var(--white);font-weight:600;}
@@ -769,8 +769,8 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 /* ─── FEE MATH CALLOUT (Otterly Fix 2) ─── */
 .fee-math{padding:48px 56px 64px;}
 .fm-inner{max-width:900px;margin:0 auto;}
-.fm-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
-.fm-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.fm-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 20px 0;}
+.fm-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
 .fm-quote{margin:0;padding:28px 32px;border:1px solid rgba(214,173,96,.18);border-radius:6px;background:rgba(214,173,96,.03);}
 .fm-quote p{font-size:15px;line-height:1.75;color:var(--stone);font-weight:300;margin:0 0 14px 0;}
 .fm-quote p:last-child{margin-bottom:0;}
@@ -813,7 +813,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
  "@id": "https://marketics.io/#business",
  "name": "Marketics",
  "alternateName": "Marketics LLC",
- "description": "Performance-based short-term rental optimization. We increase Airbnb revenue 50–75% in 90 days. You pay 10% of net bookings — nothing else.",
+ "description": "Performance-based short-term rental optimization. We increase Airbnb revenue 50–75% in 90 days. You pay 10% of net payout — nothing else.",
  "url": "https://marketics.io",
  "logo": "https://marketics.io/og/default.jpg",
  "image": "https://marketics.io/og/default.jpg",
@@ -986,7 +986,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     </h1>
 
     <p class="hero-sub">
-      We optimize your Airbnb listing, pricing, and guest strategy — and increase your revenue <strong><span style="white-space:nowrap">50–75% within 90&nbsp;days.</span></strong><br>You pay 10% of net bookings. No&nbsp;retainers. No&nbsp;contracts.<br>We only earn when you earn.
+      We optimize your Airbnb listing, pricing, and guest strategy — and increase your revenue <strong><span style="white-space:nowrap">50–75% within 90&nbsp;days.</span></strong><br>You pay 10% of net payout. No&nbsp;retainers. No&nbsp;contracts.<br>We only earn when you earn.
     </p>
 
     <div class="cta-group">
@@ -1103,7 +1103,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 <!-- ═══ SUMMARY BLOCK — AI SCANNABLE ══════════════════════════ -->
 <section class="summary-strip" id="how-it-works">
   <div class="summary-inner">
-    <div class="summary-eyebrow">How Marketics Works</div>
+    <h2 class="summary-eyebrow">How Marketics Works</h2>
     <div class="summary-grid">
       <div class="summary-item">
         <div class="summary-icon">01</div>
@@ -1118,7 +1118,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       <div class="summary-item">
         <div class="summary-icon">03</div>
         <div class="summary-label">You Earn More</div>
-        <div class="summary-desc">Hosts see 50–75% revenue increases within 90 days. You pay 10% of net bookings — nothing upfront, no contracts, no retainers.</div>
+        <div class="summary-desc">Hosts see 50–75% revenue increases within 90 days. You pay 10% of net payout — nothing upfront, no contracts, no retainers.</div>
       </div>
       <div class="summary-item">
         <div class="summary-icon">04</div>
@@ -1132,11 +1132,11 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 <!-- ═══ KEY TAKEAWAYS — AI SCANNABLE SUMMARY ═══════════════════ -->
 <section class="key-takeaways" id="key-takeaways" aria-label="Key takeaways">
   <div class="kt-inner">
-    <div class="kt-eyebrow">Key Takeaways</div>
+    <h2 class="kt-eyebrow">Key Takeaways</h2>
     <ul class="kt-list">
       <li><strong>Performance-based pricing.</strong> Marketics earns 10% of net payout per booking — only when you earn.</li>
       <li><strong>No monthly retainer. No long-term contract.</strong> Engagements start with a $500 deposit, refunded after 90 days when both sides have held up their end.</li>
-      <li><strong>Expected uplift:</strong> 50–75% revenue increase within 90 days for qualifying properties.</li>
+      <li><strong>Expected uplift:</strong> 50–75% revenue increase within 90 days for qualifying properties — based on 30+ documented client outcomes across 22 North American markets.</li>
       <li><strong>Start here:</strong> Free <a href="/get-started">revenue audit</a> — takes about 2 minutes.</li>
     </ul>
   </div>
@@ -1145,7 +1145,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 <!-- ═══ FEE MATH — WORKED EXAMPLE ══════════════════════════════ -->
 <section class="fee-math" aria-label="How the fee works">
   <div class="fm-inner">
-    <div class="fm-eyebrow">How the 10% works</div>
+    <h2 class="fm-eyebrow">How the 10% works</h2>
     <blockquote class="fm-quote">
       <p>If your property generates <strong>$5,000/month in net guest payouts</strong>, Marketics earns <strong>$500</strong>. If we lift that to <strong>$7,500/month</strong>, we earn <strong>$750</strong>. You keep <strong>90% of everything</strong> — always.</p>
       <p class="fm-def"><em>Net payout</em> = total guest payment minus Airbnb service fees and cleaning fees. The 10% is calculated on that net figure — never on the gross booking.</p>
