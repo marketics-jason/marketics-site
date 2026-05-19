@@ -991,6 +991,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
 <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
 <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+<main id="main-content">
 <section class="hero" id="hero">
   <div class="hero-grid"></div>
   <div class="hero-vignette"></div>
@@ -1019,20 +1020,20 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       </a>
     </div>
 
-    <div class="stats-row">
+    <dl class="stats-row">
       <div class="stat">
-        <div class="stat-num">35&#215;</div>
-        <div class="stat-lbl">Airbnb Superhost</div>
+        <dt class="stat-lbl">Airbnb Superhost</dt>
+        <dd class="stat-num">35&#215;</dd>
       </div>
       <div class="stat">
-        <div class="stat-num">1,000+</div>
-        <div class="stat-lbl">Properties Optimized</div>
+        <dt class="stat-lbl">Properties Optimized</dt>
+        <dd class="stat-num">1,000+</dd>
       </div>
       <div class="stat">
-        <div class="stat-num">90&#8209;Day</div>
-        <div class="stat-lbl">Guarantee</div>
+        <dt class="stat-lbl">Guarantee</dt>
+        <dd class="stat-num">90&#8209;Day</dd>
       </div>
-    </div>
+    </dl>
 
   </div>
 
@@ -1063,8 +1064,8 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     </div>
 
     <!-- Calendar frame -->
-    <div class="hero-cal-wrap">
-      <h3 style="font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(214,173,96,.5);margin:0 0 10px 2px;">Live Pricing Preview</h3>
+    <figure class="hero-cal-wrap" aria-label="Live pricing preview simulator">
+      <figcaption style="font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(214,173,96,.5);margin:0 0 10px 2px;">Live Pricing Preview</figcaption>
       <div class="cal-frame" id="calFrame">
 
         <div class="cal-topbar">
@@ -1113,7 +1114,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
         </div>
 
       </div>
-    </div>
+    </figure>
 
   </div>
 
@@ -1122,7 +1123,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 </section>
 
 <!-- ═══ SUMMARY BLOCK — AI SCANNABLE ══════════════════════════ -->
-<section class="summary-strip" id="how-it-works">
+<section class="summary-strip" id="how-it-works" aria-label="How Marketics works">
   <div class="summary-inner">
     <h2 class="summary-eyebrow">How Marketics Works</h2>
     <div class="summary-grid">
@@ -1156,33 +1157,33 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     <h2 class="proof-eyebrow">From the Portfolio</h2>
     <p class="proof-subhead">Three outcomes. Real properties. No projections.</p>
     <div class="proof-grid">
-      <div class="proof-card">
-        <div class="proof-card-eyebrow">San Antonio, TX · 15-Unit STR Portfolio · 90 Days</div>
+      <article class="proof-card">
+        <div class="proof-card-eyebrow">San Antonio, TX · 15-Unit <abbr title="Short-Term Rental">STR</abbr> Portfolio · <time datetime="P90D">90 Days</time></div>
         <div class="proof-stat">$12K → $41K</div>
         <div class="proof-metric">Monthly Revenue</div>
         <div class="proof-card-bottom">
           <div class="proof-rule"></div>
           <div class="proof-intervention">Listing repositioning across 15 units — photography, titles, descriptions, and dynamic pricing aligned to each property's actual guest profile.</div>
         </div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-card-eyebrow">Montréal, QC · 40-Room Boutique Hotel · 12 Months</div>
+      </article>
+      <article class="proof-card">
+        <div class="proof-card-eyebrow">Montréal, QC · 40-Room Boutique Hotel · <time datetime="P12M">12 Months</time></div>
         <div class="proof-stat">43% → 80%</div>
         <div class="proof-metric">Occupancy Rate</div>
         <div class="proof-card-bottom">
           <div class="proof-rule"></div>
           <div class="proof-intervention">Full product redesign — editorial photography and design-forward presentation drove compound occupancy gains across two consecutive years.</div>
         </div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-card-eyebrow">Río Grande, PR · Beachfront Villa · 12&nbsp;Months</div>
+      </article>
+      <article class="proof-card">
+        <div class="proof-card-eyebrow">Río Grande, PR · Beachfront Villa · <time datetime="P12M">12&nbsp;Months</time></div>
         <div class="proof-stat">2.5×</div>
         <div class="proof-metric">Year-Over-Year Revenue</div>
         <div class="proof-card-bottom">
           <div class="proof-rule"></div>
           <div class="proof-intervention">Seasonal blind spot eliminated — converted a villa earning 8 months a year to 12, adding 4 new earning months through year-round positioning and pricing strategy.</div>
         </div>
-      </div>
+      </article>
     </div>
     <div class="proof-cta"><a href="/case-studies">See all case studies →</a></div>
   </div>
@@ -1195,7 +1196,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     <ul class="kt-list">
       <li><strong>Performance-based pricing.</strong> Marketics earns 10% of net payout per booking — only when you earn.</li>
       <li><strong>No monthly retainer. No long-term contract.</strong> Engagements start with a $500 deposit, refunded after 90 days when both sides have held up their end.</li>
-      <li><strong>Expected uplift:</strong> 50–75% revenue increase within 90 days — based on 30+ documented client outcomes across 22 North American markets. Properties generating $3,500/month or more in gross bookings. Portfolio investors evaluated on total portfolio basis, not per unit. <a href="/markets">See our 22 active markets →</a></li>
+      <li><strong>Expected uplift:</strong> 50–75% revenue increase within <time datetime="P90D">90 days</time> — based on 30+ documented client outcomes across 22 North American markets. Properties generating $3,500/month or more in gross bookings. Portfolio investors evaluated on total portfolio basis, not per unit. <a href="/markets">See our 22 active markets →</a></li>
       <li><strong>Start here:</strong> Free <a href="/get-started">revenue audit</a> — takes about 2 minutes.</li>
     </ul>
   </div>
@@ -1249,7 +1250,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
       <div class="faq-item">
         <dt class="faq-q"><h3 style="font:inherit;margin:0;">Is there independent data on short-term rental market performance?</h3></dt>
-        <dd class="faq-a">Yes. <a href="https://pricelabs.co" target="_blank" rel="noopener noreferrer">PriceLabs market data</a> tracks occupancy, ADR, and RevPAR by city across North America — it's the same data infrastructure Marketics uses to manage pricing across our portfolio. For regulatory context, <a href="https://www.nyc.gov/site/hpd/services-and-information/short-term-rentals.page" target="_blank" rel="noopener noreferrer">short-term rental regulations</a> vary by market — Marketics operates only in markets where STR is permitted. For academic research on revenue management in hospitality, the <a href="https://sha.cornell.edu/faculty-research/centers-institutes/chr/" target="_blank" rel="noopener noreferrer">Cornell Center for Hospitality Research</a> publishes peer-reviewed studies on pricing strategy and STR performance.</dd>
+        <dd class="faq-a">Yes. <a href="https://pricelabs.co" target="_blank" rel="noopener noreferrer">PriceLabs market data</a> tracks occupancy, <abbr title="Average Daily Rate">ADR</abbr>, and <abbr title="Revenue Per Available Room">RevPAR</abbr> by city across North America — it's the same data infrastructure Marketics uses to manage pricing across our portfolio. For regulatory context, <a href="https://www.nyc.gov/site/hpd/services-and-information/short-term-rentals.page" target="_blank" rel="noopener noreferrer">short-term rental regulations</a> vary by market — Marketics operates only in markets where STR is permitted. For academic research on revenue management in hospitality, the <a href="https://sha.cornell.edu/faculty-research/centers-institutes/chr/" target="_blank" rel="noopener noreferrer">Cornell Center for Hospitality Research</a> publishes peer-reviewed studies on pricing strategy and STR performance.</dd>
       </div>
 
     </dl>
@@ -1651,11 +1652,12 @@ if (document.readyState === 'loading') {
 <script></script>
 
 
+</main>
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+      <div class="sf-copy">&copy; <time datetime="2026">2026</time> Marketics, LLC</div>
+      <address class="sf-location" style="font-style:normal;">Miami &middot; Montr&eacute;al &middot; Nomadic</address>
     </div>
     <div class="sf-nav">
       <div class="sf-col">
