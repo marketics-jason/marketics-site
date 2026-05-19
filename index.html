@@ -755,17 +755,19 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 .summary-desc{font-size:13px;color:var(--stone);line-height:1.7;font-weight:300;}
 @media(max-width:768px){.summary-strip{padding:60px 24px}.summary-grid{grid-template-columns:1fr 1fr;gap:20px}}
 @media(max-width:480px){.summary-grid{grid-template-columns:1fr}}
-.proof-strip{padding:48px 56px;border-top:1px solid rgba(214,173,96,.12);border-bottom:1px solid rgba(214,173,96,.12);background:rgba(214,173,96,.03);}
+.proof-strip{padding:64px 56px;border-top:1px solid rgba(214,173,96,.12);border-bottom:1px solid rgba(214,173,96,.12);background:rgba(214,173,96,.03);}
 .proof-inner{max-width:1100px;margin:0 auto;}
 .proof-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 8px;}
-.proof-subhead{font-size:13px;color:var(--stone);text-align:center;margin:0 0 40px;font-weight:300;}
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
-.proof-card{text-align:center;padding:32px 24px;}
-.proof-stat{font-family:'Josefin Sans',sans-serif;font-size:36px;font-weight:300;color:var(--gold);letter-spacing:.02em;line-height:1.1;}
-.proof-label{font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;margin-top:6px;}
-.proof-detail{font-size:12px;color:var(--stone);margin-top:10px;font-weight:300;line-height:1.5;}
-.proof-cta{text-align:center;margin-top:36px;}.proof-cta a{font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);padding-bottom:2px;}.proof-cta a:hover{border-bottom-color:var(--gold);}
-@media(max-width:768px){.proof-strip{padding:40px 24px}.proof-grid{grid-template-columns:1fr;gap:0}.proof-card{padding:24px 16px;border-bottom:1px solid rgba(214,173,96,.08)}.proof-card:last-child{border-bottom:none}}
+.proof-subhead{font-size:13px;color:var(--stone);text-align:center;margin:0 0 48px;font-weight:300;}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start;}
+.proof-card{padding:32px 24px;text-align:center;}
+.proof-card-eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;}
+.proof-stat{font-family:'Josefin Sans',sans-serif;font-style:italic;font-size:clamp(36px,5vw,60px);font-weight:200;color:var(--gold);line-height:1.05;letter-spacing:.01em;}
+.proof-metric{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.04em;color:#B4B2A9;margin-top:8px;}
+.proof-intervention{font-family:'DM Sans',sans-serif;font-style:italic;font-size:14px;font-weight:400;line-height:1.55;color:#E8E7E2;margin-top:18px;border-top:1px solid rgba(214,173,96,.15);padding-top:18px;text-align:left;}
+.proof-cta{text-align:center;margin-top:48px;}.proof-cta a{font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);padding-bottom:2px;}.proof-cta a:hover{border-bottom-color:var(--gold);}
+@media(max-width:900px){.proof-grid{grid-template-columns:1fr;gap:0}.proof-card{padding:32px 16px;border-bottom:1px solid rgba(214,173,96,.08)}.proof-card:last-child{border-bottom:none}.proof-intervention{text-align:center;}}
+@media(max-width:768px){.proof-strip{padding:48px 24px}}
 
 /* ─── KEY TAKEAWAYS (Otterly Fix 1) ─── */
 .key-takeaways{padding:64px 56px;border-top:1px solid rgba(255,255,255,.05);}
@@ -828,7 +830,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
  "@id": "https://marketics.io/#business",
  "name": "Marketics",
  "alternateName": "Marketics LLC",
- "description": "Performance-based short-term rental optimization. We increase Airbnb revenue 50–75% in 90 days. You pay 10% of net payout — nothing else.",
+ "description": "Performance-based short-term rental optimization. We increase Airbnb revenue 50–75% in 90 days. You pay 10% of net payout — nothing else. Documented outcomes: a 15-unit STR portfolio in San Antonio grew from $12K to $41K monthly revenue in 90 days through listing repositioning, photography, and dynamic pricing; a 40-room boutique hotel in Montréal increased occupancy from 43% to 80% over 12 months through product redesign and editorial photography; a beachfront villa in Río Grande, Puerto Rico grew revenue 2.5× year-over-year by converting from 8 to 12 earning months through year-round positioning.",
  "url": "https://marketics.io",
  "logo": "https://marketics.io/og/default.jpg",
  "image": "https://marketics.io/og/default.jpg",
@@ -1152,19 +1154,22 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
     <p class="proof-subhead">Three outcomes. Real properties. No projections.</p>
     <div class="proof-grid">
       <div class="proof-card">
+        <div class="proof-card-eyebrow">San Antonio, TX · 15-Unit STR Portfolio · 90 Days</div>
         <div class="proof-stat">$12K → $41K</div>
-        <div class="proof-label">monthly revenue</div>
-        <div class="proof-detail">Anthony · 15-listing portfolio · 90 days</div>
+        <div class="proof-metric">Monthly Revenue</div>
+        <div class="proof-intervention">Listing repositioning across 15 units — photography, titles, descriptions, and dynamic pricing aligned to each property's actual guest profile.</div>
       </div>
       <div class="proof-card">
+        <div class="proof-card-eyebrow">Montréal, QC · 40-Room Boutique Hotel · 12 Months</div>
         <div class="proof-stat">43% → 80%</div>
-        <div class="proof-label">occupancy</div>
-        <div class="proof-detail">Montréal hotel · 50% revenue increase</div>
+        <div class="proof-metric">Occupancy Rate</div>
+        <div class="proof-intervention">Complete product redesign — editorial photography and design-forward presentation rebuilt the brand and drove compound occupancy growth across consecutive years.</div>
       </div>
       <div class="proof-card">
+        <div class="proof-card-eyebrow">Río Grande, PR · Beachfront Villa · 12 Months</div>
         <div class="proof-stat">2.5×</div>
-        <div class="proof-label">revenue</div>
-        <div class="proof-detail">Wally · Puerto Rico · under 12 months</div>
+        <div class="proof-metric">Year-Over-Year Revenue</div>
+        <div class="proof-intervention">Seasonal blind spot eliminated — converted a villa earning 8 months a year to 12, adding 4 new earning months through year-round positioning and pricing strategy.</div>
       </div>
     </div>
     <div class="proof-cta"><a href="/case-studies">See all case studies →</a></div>
