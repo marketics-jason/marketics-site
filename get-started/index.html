@@ -187,6 +187,17 @@ textarea.fi{resize:none;min-height:88px;line-height:1.6;}
 .ci-label{font-size:13px;font-weight:300;color:var(--stone);line-height:1.4;transition:color .2s;}
 .challenge-item.selected .ci-label{color:var(--white);}
 
+/* Account-holder qualifier — single-select tile pattern */
+.acct-list{display:flex;flex-direction:column;gap:8px;}
+.acct-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--n3);border:1.5px solid rgba(255,255,255,.07);border-radius:6px;cursor:pointer;transition:all .22s;user-select:none;}
+.acct-item:hover{border-color:rgba(214,173,96,.22);background:var(--n4);}
+.acct-item.selected{border-color:rgba(214,173,96,.35);background:rgba(214,173,96,.05);}
+.ai-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.acct-item.selected .ai-radio{border-color:var(--gold);}
+.acct-item.selected .ai-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.ai-label{font-size:13px;font-weight:300;color:var(--stone);line-height:1.45;transition:color .2s;}
+.acct-item.selected .ai-label{color:var(--white);}
+
 /* Revenue / Occupancy display */
 .rev-display{font-family:var(--d);font-size:28px;font-weight:200;color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:4px;}
 .range-labels{display:flex;justify-content:space-between;margin-top:5px;}
@@ -576,6 +587,16 @@ input[type=range].slider::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(2
       <div class="fields">
 
         <div class="field-group">
+          <label class="fl">Are you the account holder for this listing?</label>
+          <div class="acct-list" id="accountHolder">
+            <div class="acct-item" data-val="owner"><div class="ai-radio"></div><span class="ai-label">Yes, I'm the account holder</span></div>
+            <div class="acct-item" data-val="authorized_agent"><div class="ai-radio"></div><span class="ai-label">I'm a property manager / authorized agent with the owner's approval</span></div>
+            <div class="acct-item" data-val="no_authorization"><div class="ai-radio"></div><span class="ai-label">I manage this property but the owner hasn't been involved in this request</span></div>
+          </div>
+          <div class="field-err" id="accountHolderErr">Please select one</div>
+        </div>
+
+        <div class="field-group">
           <label class="fl" for="hostingDuration">How long have you been hosting?</label>
           <select class="fi" id="hostingDuration">
             <option value="">Select…</option>
@@ -783,6 +804,7 @@ const state = {
   city: '', country: 'US',
   propType: '', bedrooms: '',
   listingUrl: '', revenue: 2500, occupancy: 50,
+  accountHolder: '',
   hostingDuration: '', challenges: [], hearAbout: '',
   firstName: '', lastName: '', email: '', phone: '', auditQuestion: ''
 };
@@ -855,6 +877,16 @@ document.getElementById('challenges').addEventListener('click', e=>{
   document.getElementById('challengeErr').classList.remove('vis');
 });
 
+/* ══ ACCOUNT HOLDER QUALIFIER (single-select) ══ */
+document.getElementById('accountHolder').addEventListener('click', e=>{
+  const item = e.target.closest('.acct-item');
+  if (!item) return;
+  document.querySelectorAll('#accountHolder .acct-item').forEach(i=>i.classList.remove('selected'));
+  item.classList.add('selected');
+  state.accountHolder = item.dataset.val;
+  document.getElementById('accountHolderErr').classList.remove('vis');
+});
+
 /* ══ FIELD SYNC ══ */
 function syncField(id, key){ const el=document.getElementById(id); el.addEventListener('input',()=>{state[key]=el.value; }); el.addEventListener('change',()=>{state[key]=el.value;}); }
 ['city','country','propType','bedrooms','listingUrl','hostingDuration','hearAbout','firstName','lastName','email','phone','auditQuestion'].forEach(k=>syncField(k,k));
@@ -870,9 +902,12 @@ function validateStep1(){
   return ok;
 }
 function validateStep2(){
-  if (state.challenges.length===0){ showErr('challengeErr',true); return false; }
-  showErr('challengeErr',false);
-  return true;
+  let ok = true;
+  if (!state.accountHolder){ showErr('accountHolderErr',true); ok = false; }
+  else showErr('accountHolderErr',false);
+  if (state.challenges.length===0){ showErr('challengeErr',true); ok = false; }
+  else showErr('challengeErr',false);
+  return ok;
 }
 function validateStep3(){
   let ok=true;
@@ -912,6 +947,7 @@ document.getElementById('submitBtn').addEventListener('click', async ()=>{
     listingUrl: state.listingUrl,
     monthlyRevenue: state.revenue,
     occupancy: state.occupancy,
+    accountHolder: state.accountHolder,
     hostingDuration: state.hostingDuration,
     challenges: state.challenges.join(', '),
     hearAbout: state.hearAbout,
