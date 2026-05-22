@@ -331,6 +331,20 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
 .sf-col a:hover{color:var(--gold,#D6AD60);}
 .sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
 @media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+
+/* ─── POSTSCRIPT — STR INVESTING PODCAST FEATURE ─── */
+.story-podcast{padding:72px 56px 96px;border-top:1px solid rgba(255,255,255,.05);background:linear-gradient(180deg,rgba(214,173,96,.025) 0%,transparent 60%);}
+.sp-inner{max-width:760px;margin:0 auto;text-align:center;}
+.sp-heading{font-family:var(--display);font-size:clamp(24px,3.2vw,36px);font-weight:300;letter-spacing:.02em;color:var(--white);margin:0 0 14px;line-height:1.25;}
+.sp-episode{font-family:var(--serif);font-size:clamp(15px,1.7vw,19px);font-style:italic;color:var(--gold);margin:0 0 22px;line-height:1.4;}
+.sp-context{font-family:var(--serif);font-size:clamp(14px,1.55vw,17px);color:var(--stone);line-height:1.7;margin:0 auto 36px;max-width:640px;}
+.sp-embed{margin:32px 0 24px;border-radius:8px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.45);}
+.sp-embed iframe{display:block;width:100%;aspect-ratio:16/9;border:0;}
+.sp-platforms{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:28px;}
+.sp-platforms a{color:var(--stone);text-decoration:none;transition:color .15s;padding:0 2px;}
+.sp-platforms a:hover{color:var(--gold);}
+.sp-divider{color:var(--dim2);margin:0 8px;}
+@media(max-width:768px){.story-podcast{padding:56px 24px 76px;}}
 </style>
   <!-- Open Graph -->  <!-- Twitter Card --><script type="application/ld+json">
 {
@@ -362,6 +376,38 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
       "name": "Airbnb"
     }
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PodcastEpisode",
+  "name": "STR Lessons From Surviving a Million Dollar COVID Loss",
+  "datePublished": "2026-05-22",
+  "partOfSeries": {
+    "@type": "PodcastSeries",
+    "name": "STR Investing Podcast",
+    "host": {
+      "@type": "Person",
+      "name": "Mark Lumpkin"
+    }
+  },
+  "actor": {
+    "@type": "Person",
+    "name": "Jason Baxter",
+    "jobTitle": "Founder",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Marketics",
+      "url": "https://marketics.io"
+    }
+  },
+  "description": "Jason Baxter shares how he scaled a 50-loft Airbnb portfolio in Montreal, lost over $1M during COVID, and rebuilt through smarter operations, hospitality, and booking strategy. Topics include Airbnb algorithm mechanics, hospitality vs AI, and pricing strategy.",
+  "url": "https://podcasts.apple.com/us/podcast/str-lessons-from-surviving-a-million-dollar-covid-loss/id1735147784?i=1000769076721",
+  "sameAs": [
+    "https://open.spotify.com/episode/65db4hJtHe1yKiikmC0LrR",
+    "https://youtu.be/LOwn9Sn3k9k"
+  ]
 }
 </script>
   <meta property="og:type" content="website">
@@ -686,6 +732,26 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opa
         <a href="/results" class="btn-outline">See the Results</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     POSTSCRIPT — STR INVESTING PODCAST FEATURE
+══════════════════════════════════════════════════════════════════ -->
+<section class="story-podcast" aria-labelledby="podcast-heading">
+  <div class="sp-inner">
+    <h2 id="podcast-heading" class="sp-heading">As featured on the STR Investing Podcast</h2>
+    <p class="sp-episode">STR Lessons From Surviving a Million Dollar COVID Loss</p>
+    <p class="sp-context">Jason joins Mark Lumpkin to walk through the rise, collapse, and rebuild of a 50-loft Airbnb portfolio &mdash; and what came out the other side.</p>
+    <div class="sp-embed">
+      <iframe src="https://www.youtube.com/embed/LOwn9Sn3k9k" title="STR Lessons From Surviving a Million Dollar COVID Loss — Jason Baxter on the STR Investing Podcast" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+    </div>
+    <p class="sp-platforms">
+      Also available on:
+      <a href="https://podcasts.apple.com/us/podcast/str-lessons-from-surviving-a-million-dollar-covid-loss/id1735147784?i=1000769076721" target="_blank" rel="noopener">Apple Podcasts</a>
+      <span class="sp-divider">&middot;</span>
+      <a href="https://open.spotify.com/episode/65db4hJtHe1yKiikmC0LrR" target="_blank" rel="noopener">Spotify</a>
+    </p>
   </div>
 </section>
 

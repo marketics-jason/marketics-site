@@ -790,6 +790,20 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 @media(max-width:900px){.proof-grid{grid-template-columns:1fr;gap:0}.proof-card{padding:32px 16px;border-bottom:1px solid rgba(214,173,96,.08)}.proof-card:last-child{border-bottom:none}.proof-intervention{text-align:center;}}
 @media(max-width:768px){.proof-strip{padding:48px 24px}}
 
+/* ─── AS FEATURED ON (Podcast Authority Signal) ─── */
+.as-featured{padding:48px 56px 56px;border-top:1px solid rgba(255,255,255,.05);}
+.af-inner{max-width:1100px;margin:0 auto;text-align:center;}
+.af-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0 0 28px 0;}
+.af-eyebrow::before,.af-eyebrow::after{content:'';display:inline-block;width:32px;height:1px;vertical-align:middle;background:rgba(214,173,96,.4);}
+.af-eyebrow::before{margin-right:14px;}
+.af-eyebrow::after{margin-left:14px;}
+.af-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:32px;}
+.af-logo-link{display:inline-flex;align-items:center;transition:transform .25s,box-shadow .25s;}
+.af-logo-link:hover{transform:translateY(-1px);}
+.af-logo-link:hover img{box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.af-logo-link img{display:block;height:80px;width:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:box-shadow .25s;}
+@media(max-width:768px){.as-featured{padding:36px 24px 44px}.af-logos{gap:24px}.af-logo-link img{height:64px}}
+
 /* ─── KEY TAKEAWAYS (Otterly Fix 1) ─── */
 .key-takeaways{padding:64px 56px;border-top:1px solid rgba(255,255,255,.05);}
 .kt-inner{max-width:1100px;margin:0 auto;}
@@ -948,6 +962,38 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
  }
  ]
  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "PodcastEpisode",
+ "name": "STR Lessons From Surviving a Million Dollar COVID Loss",
+ "datePublished": "2026-05-22",
+ "partOfSeries": {
+ "@type": "PodcastSeries",
+ "name": "STR Investing Podcast",
+ "host": {
+ "@type": "Person",
+ "name": "Mark Lumpkin"
+ }
+ },
+ "actor": {
+ "@type": "Person",
+ "name": "Jason Baxter",
+ "jobTitle": "Founder",
+ "worksFor": {
+ "@type": "Organization",
+ "name": "Marketics",
+ "url": "https://marketics.io"
+ }
+ },
+ "description": "Jason Baxter shares how he scaled a 50-loft Airbnb portfolio in Montreal, lost over $1M during COVID, and rebuilt through smarter operations, hospitality, and booking strategy. Topics include Airbnb algorithm mechanics, hospitality vs AI, and pricing strategy.",
+ "url": "https://podcasts.apple.com/us/podcast/str-lessons-from-surviving-a-million-dollar-covid-loss/id1735147784?i=1000769076721",
+ "sameAs": [
+ "https://open.spotify.com/episode/65db4hJtHe1yKiikmC0LrR",
+ "https://youtu.be/LOwn9Sn3k9k"
  ]
 }
 </script>
@@ -1168,6 +1214,18 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
         <div class="summary-label">90-Day Engagement</div>
         <div class="summary-desc">Engagements start with a <strong>$500 deposit, refunded after 90 days</strong> when both sides have held up their end — you complete the engagement and provide the access and information the work requires; we hit the agreed performance targets.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AS FEATURED ON — PODCAST AUTHORITY ═══════════════════ -->
+<section class="as-featured" aria-label="As featured on">
+  <div class="af-inner">
+    <h2 class="af-eyebrow">As Featured On</h2>
+    <div class="af-logos">
+      <a class="af-logo-link" href="https://podcasts.apple.com/us/podcast/str-lessons-from-surviving-a-million-dollar-covid-loss/id1735147784?i=1000769076721" target="_blank" rel="noopener" aria-label="Listen to Jason on the STR Investing Podcast (Apple Podcasts)">
+        <img src="/images/podcast/str-investing-podcast.jpg" alt="STR Investing Podcast" width="114" height="80" loading="lazy">
+      </a>
     </div>
   </div>
 </section>
