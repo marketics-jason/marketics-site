@@ -146,6 +146,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .step-hed{font-family:var(--d);font-size:clamp(24px,3.2vw,38px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin-bottom:10px;}
 .step-hed em{color:var(--gold);font-style:normal;}
 .step-sub{font-size:14px;font-weight:300;color:var(--stone);line-height:1.65;margin-bottom:36px;max-width:380px;}
+.sample-preamble{margin-bottom:18px;}
+.sample-preamble a{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.sample-preamble a:hover{color:var(--gold);border-color:var(--gold);}
 
 /* ── FORM FIELDS ── */
 .fields{display:flex;flex-direction:column;gap:20px;flex:1;}
@@ -467,6 +470,7 @@ input[type=range].slider::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(2
 
     <!-- ─── STEP 1 ─── -->
     <div id="step1" class="step-wrap">
+      <p class="sample-preamble"><a href="/sample-audit">Curious what you'll receive? See a sample audit &rarr;</a></p>
       <h1 class="step-hed">Tell Us About<br><em>Your Property.</em></h1>
       <p class="step-sub">No tricks. We need this to build your audit. Every field helps us give you a better analysis.</p>
 

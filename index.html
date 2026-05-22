@@ -297,6 +297,24 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 }
 .btn-secondary:hover .btn-secondary-arrow{width:28px}
 
+.hero-sample-link{
+  display:inline-block;margin-top:14px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;
+  color:var(--stone);text-decoration:none;letter-spacing:.01em;
+  border-bottom:1px solid rgba(214,173,96,.25);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.hero-sample-link:hover{color:var(--gold);border-color:var(--gold);}
+
+.summary-sample-link{
+  display:inline-block;margin-top:14px;
+  font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;
+  transition:opacity .2s;
+}
+.summary-sample-link:hover{opacity:.7;}
+
 /* Right column — visual */
 .hero-right{
   position:relative;z-index:2;
@@ -1020,6 +1038,8 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
       </a>
     </div>
 
+    <a href="/sample-audit" class="hero-sample-link">See what a Marketics audit looks like &rarr;</a>
+
     <dl class="stats-row">
       <div class="stat">
         <dd class="stat-num">35&#215;</dd>
@@ -1131,6 +1151,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
         <div class="summary-icon">01</div>
         <div class="summary-label">Free Revenue Audit</div>
         <div class="summary-desc">We analyze your listing, pricing, and market position — and show you exactly where revenue is being left on the table.</div>
+        <a href="/sample-audit" class="summary-sample-link">See a sample &rarr;</a>
       </div>
       <div class="summary-item">
         <div class="summary-icon">02</div>
@@ -1679,6 +1700,7 @@ if (document.readyState === 'loading') {
         <a href="/intel">Browse All</a>
         <a href="/intel#reports">Market Reports</a>
         <a href="/intel#playbook">Playbooks</a>
+        <a href="/sample-audit">Sample Audit</a>
       </div>
       <div class="sf-col">
         <div class="sf-col-label">Legal</div>
