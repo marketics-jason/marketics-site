@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Airbnb Audit — What Marketics Delivers | Marketics</title>
+<meta name="description" content="See a real anonymized Marketics audit — a 10-section, four-specialist breakdown of revenue opportunity on a short-term rental property. No gate, no opt-in.">
+<link rel="canonical" href="https://marketics.io/sample-audit">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0f0f0f">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sample Airbnb Audit — What Marketics Delivers">
+<meta property="og:description" content="A real anonymized Marketics audit — 10 sections, four specialists, 12–16 hours of work per audit. See exactly what you receive.">
+<meta property="og:url" content="https://marketics.io/sample-audit">
+<meta property="og:site_name" content="Marketics">
+<meta property="og:image" content="https://marketics.io/og/sample-audit.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sample Airbnb Audit — What Marketics Delivers">
+<meta name="twitter:description" content="A real anonymized Marketics audit — 10 sections, four specialists. See exactly what you receive.">
+<meta name="twitter:image" content="https://marketics.io/og/sample-audit.png">
+
+<!-- JSON-LD: CreativeWork -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Marketics Airbnb Revenue Audit — Sample",
+  "description": "A real anonymized audit produced by Marketics for a short-term rental property in the Southeast US. Demonstrates the depth, specificity, and structure of every Marketics engagement.",
+  "creator": {
+    "@type": "Organization",
+    "name": "Marketics",
+    "url": "https://marketics.io"
+  },
+  "datePublished": "2026-05-21",
+  "inLanguage": "en-US",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marketics",
+    "url": "https://marketics.io"
+  },
+  "about": {
+    "@type": "Service",
+    "name": "Marketics Short-Term Rental Optimization",
+    "provider": {
+      "@type": "Organization",
+      "name": "Marketics"
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === Live marketics.io brand tokens (canonical source of truth) === */
+  --gold:#D6AD60;
+  --gold-soft:#B89249;
+  --gold-lo:rgba(214,173,96,.10);
+  --gold-glow:rgba(214,173,96,.07);
+
+  /* Live 5-tier black system (replaces audit's #171717-based blacks) */
+  --night:#0f0f0f;
+  --night2:#141414;   /* = live --n2 */
+  --night3:#1a1a1a;   /* = live --n3 */
+  --night4:#202020;   /* = live --n4 */
+  --night5:#282828;   /* = live --n5, new */
+
+  /* Live stone/dim system */
+  --stone:#B4B2A9;
+  --dim:#6B6A65;
+  --dim2:#4e4d4a;
+
+  /* Audit's stone-tier scale kept for internal CSS, mapped to live values */
+  --stone1:#F5F4F0;
+  --stone2:#E8E7E2;
+  --stone3:#B4B2A9;   /* = live --stone */
+  --stone4:#6B6A65;   /* = live --dim */
+  --stone5:#2C2C2A;
+
+  /* Status colors (preserved from audit) */
+  --white:#FFF;
+  --ok:#2D7A4F;
+  --err:#C0392B;
+  --warn:#C49A3F;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--night)}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--white);font-size:16px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--night)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+img{max-width:100%;display:block}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;background:rgba(23,23,23,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(214,173,96,0.12)}
+.nav-logo{height:22px;width:auto;display:block}
+.nav-meta{display:flex;align-items:center;gap:24px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone4)}
+.nav-meta span{display:flex;align-items:center;gap:8px}
+.nav-meta span::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 80px 80px;position:relative;overflow:hidden;background:var(--night)}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,23,23,.45) 0%,rgba(23,23,23,.65) 55%,rgba(23,23,23,.95) 100%)}
+.hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(214,173,96,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.04) 1px,transparent 1px);background-size:80px 80px;mix-blend-mode:overlay}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.hero-prop{font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:300;letter-spacing:.32em;text-transform:uppercase;color:var(--stone3);margin-bottom:14px}
+.hero-title{font-family:'Josefin Sans',sans-serif;font-size:clamp(40px,6.5vw,92px);font-weight:200;letter-spacing:.06em;text-transform:uppercase;line-height:.95;color:var(--white);margin-bottom:36px;max-width:980px}
+.hero-title em{color:var(--gold);font-style:italic;font-weight:300}
+.hero-sub{font-size:17px;color:var(--stone2);max-width:560px;line-height:1.65;margin-bottom:64px;font-weight:300}
+.hero-stats{display:flex;gap:64px;border-top:1px solid rgba(214,173,96,.22);padding-top:36px;width:100%;max-width:920px;flex-wrap:wrap}
+.hstat{display:flex;flex-direction:column;gap:6px}
+.hstat-n{font-family:'Josefin Sans',sans-serif;font-size:38px;font-weight:200;letter-spacing:.04em;color:var(--gold);line-height:1}
+.hstat-n.big{font-size:54px;font-style:italic;font-weight:300}
+.hstat-l{font-size:10px;color:var(--stone3);text-transform:uppercase;letter-spacing:.16em;font-weight:600}
+.hero-prepared{margin-top:48px;padding-top:32px;border-top:1px solid rgba(214,173,96,.12);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+.hp-block{display:flex;flex-direction:column;gap:4px}
+.hp-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone4);font-weight:600}
+.hp-val{font-size:14px;color:var(--white);font-weight:400}
+.hp-val em{font-style:normal;color:var(--gold)}
+
+/* SECTIONS */
+section{padding:120px 80px;position:relative}
+.si{max-width:1200px;margin:0 auto;width:100%}
+.section-alt{background:var(--night2)}
+.sec-head{margin-bottom:64px}
+.sec-eyebrow{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.sec-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.sec-num{font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:200;letter-spacing:.2em;color:var(--stone4)}
+h2.st{font-family:'Josefin Sans',sans-serif;font-size:clamp(32px,4.5vw,56px);font-weight:200;letter-spacing:.04em;line-height:1.05;color:var(--white);margin-bottom:24px;max-width:880px}
+h2.st em{color:var(--gold);font-style:italic;font-weight:300}
+.sec-intro{font-size:17px;color:var(--stone2);max-width:720px;line-height:1.7;font-weight:300}
+.sec-intro strong{color:var(--white);font-weight:500}
+.spec-attrib{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:8px 16px;background:rgba(214,173,96,.06);border-left:2px solid var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone2);font-weight:500}
+.spec-attrib em{color:var(--gold);font-style:normal;font-weight:600}
+
+/* KPI TILES */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:48px}
+.kpi{background:var(--night3);padding:32px 28px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(.3);transform-origin:left;opacity:.5}
+.kpi-l{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--stone4);margin-bottom:14px}
+.kpi-n{font-family:'Josefin Sans',sans-serif;font-size:34px;font-weight:200;letter-spacing:.03em;color:var(--gold);line-height:1;margin-bottom:8px}
+.kpi-n.italic{font-style:italic;font-weight:300}
+.kpi-sub{font-size:11px;color:var(--stone3);line-height:1.45;font-weight:400}
+.kpi-bar{height:3px;background:var(--night4);margin-top:14px;position:relative;overflow:hidden}
+.kpi-bar-fill{position:absolute;top:0;left:0;bottom:0;background:var(--gold)}
+
+/* GAPS RANKING */
+.gaps{display:flex;flex-direction:column;gap:2px;margin-top:32px}
+.gap{display:grid;grid-template-columns:80px 1fr 200px;background:var(--night3);transition:background.3s}
+.gap:hover{background:var(--night4)}
+.gap-num{padding:32px 28px;border-right:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.gap-num span{font-family:'Josefin Sans',sans-serif;font-size:40px;font-weight:200;color:var(--gold);line-height:1;font-style:italic}
+.gap-body{padding:32px 36px;border-right:1px solid rgba(255,255,255,.04)}
+.gap-body h4{font-size:17px;font-weight:600;color:var(--white);margin-bottom:10px;letter-spacing:.01em}
+.gap-body p{font-size:14px;color:var(--stone3);line-height:1.7}
+.gap-impact{padding:32px 28px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.gap-impact-l{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone4);font-weight:600}
+.gap-impact-v{font-family:'Josefin Sans',sans-serif;font-size:22px;font-weight:300;color:var(--gold);font-style:italic;letter-spacing:.02em}
+
+/* PROJECTION BANNER */
+.proj{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;border-top:1px solid rgba(214,173,96,.15);padding-top:48px}
+.pjc{background:var(--night3);padding:36px 32px;text-align:left;position:relative}
+.pjc.target{background:linear-gradient(180deg,var(--night3) 0%,rgba(214,173,96,.06) 100%);border-top:2px solid var(--gold)}
+.pjc-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone4);font-weight:600;margin-bottom:14px}
+.pjc.target.pjc-l{color:var(--gold)}
+.pjc-v{font-family:'Josefin Sans',sans-serif;font-size:46px;font-weight:200;color:var(--white);line-height:1;letter-spacing:.02em}
+.pjc.target.pjc-v{color:var(--gold);font-style:italic;font-weight:300}
+.pjc-delta{font-size:12px;color:var(--stone3);margin-top:10px;font-weight:400}
+.pjc-delta em{color:var(--gold);font-style:normal;font-weight:600}
+
+/* CTA BUTTON */
+.cta-btn{display:inline-flex;align-items:center;gap:14px;padding:18px 36px;background:var(--gold);color:var(--night);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:all.3s;border:1px solid var(--gold);font-family:'DM Sans',sans-serif}
+.cta-btn:hover{background:transparent;color:var(--gold)}
+.cta-btn.arr{transition:transform.3s}
+.cta-btn:hover.arr{transform:translateX(4px)}
+.cta-secondary{background:transparent;color:var(--gold)}
+.cta-secondary:hover{background:var(--gold);color:var(--night)}
+
+/* SEO TITLE BLOCK */
+.title-card{background:var(--night3);padding:48px;margin-top:32px;position:relative;overflow:hidden;border-left:3px solid var(--err)}
+.title-card.good{border-left-color:var(--ok)}
+.tc-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone4);font-weight:700;margin-bottom:14px}
+.tc-title{font-family:'Josefin Sans',sans-serif;font-size:clamp(20px,2.4vw,28px);font-weight:300;color:var(--white);line-height:1.3;margin-bottom:16px;letter-spacing:.01em}
+.tc-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:16px}
+.tc-meta span{font-size:11px;color:var(--stone4);letter-spacing:.1em;text-transform:uppercase}
+.tc-meta span em{color:var(--gold);font-style:normal;font-weight:600;margin-right:4px}
+.tc-rewrite{display:grid;grid-template-columns:1fr 32px 1fr;margin-top:32px;gap:0}
+.tc-arr{background:var(--night3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px}
+
+/* TERMS GRID */
+.terms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:24px}
+.term{background:var(--night3);padding:22px 24px;display:flex;flex-direction:column;gap:8px;border-left:2px solid var(--gold)}
+.term-w{font-size:14px;font-weight:600;color:var(--white)}
+.term-w::before{content:'+';color:var(--gold);margin-right:8px;font-weight:700}
+.term-d{font-size:12px;color:var(--stone3);line-height:1.55}
+.term.missing{border-left-color:var(--err)}
+.term.missing.term-w::before{content:'—';color:var(--err)}
+
+/* LEVERS */
+.levers{display:flex;flex-direction:column;gap:2px;margin-top:32px}
+.lever{display:grid;grid-template-columns:64px 1fr 1fr;background:var(--night3);transition:background.3s}
+.lever:hover{background:var(--night4)}
+.lever-i{padding:28px 24px;border-right:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center}
+.lever-i span{font-family:'Josefin Sans',sans-serif;font-size:24px;font-weight:200;color:var(--gold);font-style:italic}
+.lever-fix{padding:24px 28px;border-right:1px solid rgba(255,255,255,.04)}
+.lever-fix h5{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone4);font-weight:700;margin-bottom:10px}
+.lever-fix p{font-size:14px;color:var(--white);line-height:1.65;font-weight:400}
+.lever-impact{padding:24px 28px}
+.lever-impact h5{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.lever-impact p{font-size:13px;color:var(--stone3);line-height:1.65}
+
+/* DEMAND CALENDAR */
+.demand{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:24px}
+.dcard{background:var(--night3);padding:22px 20px}
+.dcard-d{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:300;color:var(--white);letter-spacing:.04em;margin-bottom:6px}
+.dcard-v{font-family:'Josefin Sans',sans-serif;font-size:24px;font-weight:200;color:var(--gold);font-style:italic;line-height:1;margin-bottom:10px}
+.dcard-l{font-size:11px;color:var(--stone3);line-height:1.45}
+
+/* PHOTO CRITIQUE */
+.photo-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;margin-top:32px;align-items:start}
+.photo-main{position:relative;overflow:hidden}
+.photo-main img{width:100%;height:auto;display:block}
+.photo-main-label{position:absolute;top:16px;left:16px;background:var(--night);padding:8px 14px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;border:1px solid rgba(214,173,96,.3)}
+.photo-side{display:flex;flex-direction:column;gap:2px}
+.psc{background:var(--night3);padding:24px 28px}
+.psc h5{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.psc p{font-size:13.5px;color:var(--stone3);line-height:1.65}
+.psc.score{display:flex;align-items:center;gap:10px;margin-top:8px}
+.psc.score-n{font-family:'Josefin Sans',sans-serif;font-size:22px;font-weight:200;color:var(--gold);font-style:italic}
+.psc.score-bar{flex:1;height:3px;background:var(--night4);position:relative;overflow:hidden}
+.psc.score-fill{position:absolute;top:0;left:0;bottom:0;background:var(--gold)}
+
+/* COMPETITIVE PHOTO COMPARE */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.compare-card{display:flex;flex-direction:column;gap:14px}
+.compare-card img{width:100%;height:380px;object-fit:cover;display:block}
+.compare-meta{padding:18px 22px;background:var(--night3);display:flex;flex-direction:column;gap:6px}
+.compare-meta.cm-l{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone4);font-weight:600}
+.compare-meta.cm-t{font-size:14px;font-weight:600;color:var(--white)}
+.compare-meta.cm-d{font-size:12px;color:var(--stone3);line-height:1.55}
+
+/* PHOTO SEQUENCING */
+.seq-block{margin-top:64px;background:var(--night3);padding:48px}
+.seq-block h3{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.seq-block.sb-intro{font-size:15px;color:var(--stone2);line-height:1.7;margin-bottom:36px;max-width:680px}
+.seq-img{margin-bottom:36px;border:1px solid rgba(214,173,96,.15)}
+.seq-img img{width:100%;display:block}
+.seq-cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:24px}
+.seq-col h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:18px}
+.seq-col.current h4{color:var(--err)}
+.seq-col.recommended h4{color:var(--ok)}
+.seq-list{list-style:none;display:flex;flex-direction:column;gap:10px;counter-reset:seq}
+.seq-list li{counter-increment:seq;display:flex;gap:14px;font-size:13.5px;color:var(--stone2);line-height:1.55;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.seq-list li::before{content:counter(seq);font-family:'Josefin Sans',sans-serif;font-size:18px;font-weight:200;color:var(--gold);font-style:italic;min-width:24px}
+.seq-list li em{color:var(--stone4);font-style:italic;font-weight:400;font-size:12px;display:block;margin-top:2px}
+
+/* RESHOOT PLAN */
+.reshoot{margin-top:64px}
+.reshoot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:24px}
+.rshot{background:var(--night3);padding:28px 32px;position:relative;display:flex;flex-direction:column;gap:8px}
+.rshot::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.3}
+.rshot-n{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:300;letter-spacing:.2em;color:var(--gold);font-style:italic;text-transform:uppercase}
+.rshot h4{font-size:16px;font-weight:600;color:var(--white);letter-spacing:.01em}
+.rshot p{font-size:13px;color:var(--stone3);line-height:1.65}
+.rshot.rmeta{display:flex;gap:18px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05)}
+.rshot.rmeta span{font-size:10px;color:var(--stone4);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.rshot.rmeta span em{color:var(--gold);font-style:normal;margin-right:4px}
+
+/* COPY DIFF */
+.copy-diff{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:24px}
+.cdcol{background:var(--night3);padding:36px 40px}
+.cdcol.bad{border-left:2px solid var(--err)}
+.cdcol.good{border-left:2px solid var(--ok)}
+.cdcol h5{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px}
+.cdcol.bad h5{color:var(--err)}
+.cdcol.good h5{color:var(--ok)}
+.cdcol p{font-size:14px;color:var(--stone2);line-height:1.75;font-weight:300}
+.cdcol p em{color:var(--gold);font-style:italic}
+.cdcol blockquote{font-size:14px;color:var(--stone3);line-height:1.7;font-style:italic;font-weight:300;padding-left:20px;border-left:1px solid rgba(214,173,96,.2)}
+
+/* VOICE SCORECARD */
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:32px}
+.scard{background:var(--night3);padding:24px 28px}
+.scard h5{font-size:13px;font-weight:600;color:var(--white);margin-bottom:12px}
+.scard-row{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.scard-row.sl{font-size:11px;color:var(--stone4);letter-spacing:.1em;text-transform:uppercase;font-weight:600;min-width:60px}
+.scard-row.sbar{flex:1;height:6px;background:var(--night4);position:relative;overflow:hidden;border-radius:3px}
+.scard-row.sfill{position:absolute;top:0;left:0;bottom:0;background:var(--gold)}
+.scard-row.sfill.before{background:var(--stone4)}
+.scard-row.sv{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:300;color:var(--gold);min-width:30px;text-align:right;font-style:italic}
+
+/* COMP GRID */
+.comp-table{margin-top:32px;background:var(--night3);overflow:hidden}
+.ctbl-h{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr 1fr;background:var(--night);padding:0}
+.ctbl-h div{padding:18px 16px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--stone4);border-right:1px solid rgba(255,255,255,.04)}
+.ctbl-h div:last-child{border-right:none}
+.ctbl-r{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.05);transition:background.3s}
+.ctbl-r:last-child{border-bottom:none}
+.ctbl-r:hover{background:var(--night4)}
+.ctbl-r.host{background:rgba(214,173,96,.06)}
+.ctbl-r.host:hover{background:rgba(214,173,96,.1)}
+.ctbl-r > div{padding:22px 16px;font-size:13.5px;color:var(--stone2);border-right:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;justify-content:center}
+.ctbl-r > div:last-child{border-right:none}
+.ctbl-r.cn{font-weight:600;color:var(--white);font-size:14px}
+.ctbl-r.cn em{display:block;font-size:11px;font-weight:400;font-style:normal;color:var(--stone4);margin-top:4px;letter-spacing:.05em}
+.ctbl-r.host.cn{color:var(--gold)}
+.ctbl-r.cv-big{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:300;color:var(--white);font-style:italic;letter-spacing:.02em;line-height:1}
+.ctbl-r.host.cv-big{color:var(--gold)}
+
+/* INSIGHT CALLOUT */
+.insight{margin-top:48px;background:var(--night3);border-left:3px solid var(--gold);padding:40px 48px;position:relative}
+.insight-l{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.insight-l::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.insight p{font-size:18px;color:var(--white);line-height:1.65;font-weight:300}
+.insight p em{color:var(--gold);font-style:italic;font-weight:400}
+.insight-sub{margin-top:18px;font-size:14px!important;color:var(--stone3)!important}
+
+/* REVENUE CHART */
+.rev-chart{margin-top:48px}
+.rev-bars{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;height:280px;align-items:end;margin-top:24px;padding-bottom:32px;border-bottom:1px solid rgba(214,173,96,.15);position:relative}
+.rev-bar{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;height:100%;justify-content:flex-end}
+.rb-stack{width:100%;display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.rb-target{width:100%;background:rgba(214,173,96,.25);border-top:1px dashed var(--gold)}
+.rb-current{width:100%;background:linear-gradient(180deg,var(--gold) 0%,var(--gold-soft) 100%)}
+.rb-label{font-size:10px;color:var(--stone4);letter-spacing:.08em;text-transform:uppercase;font-weight:600;position:absolute;bottom:-22px;left:50%;transform:translateX(-50%)}
+.rev-legend{display:flex;gap:28px;margin-top:48px;flex-wrap:wrap}
+.rl-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--stone3);letter-spacing:.05em}
+.rl-sw{width:16px;height:10px}
+.rl-sw.current{background:var(--gold)}
+.rl-sw.target{background:rgba(214,173,96,.25);border:1px dashed var(--gold)}
+
+/* TEAM GRID */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:32px}
+.member{background:var(--night3);padding:36px 30px;display:flex;flex-direction:column;gap:14px;border-top:2px solid transparent;transition:border-color.3s}
+.member:hover{border-top-color:var(--gold)}
+.member-role{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.member-name{font-family:'Josefin Sans',sans-serif;font-size:24px;font-weight:200;color:var(--white);letter-spacing:.04em;line-height:1.1}
+.member-bio{font-size:13px;color:var(--stone3);line-height:1.7}
+.member-credentials{margin-top:8px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--stone4);letter-spacing:.04em;line-height:1.6}
+
+/* ROADMAP */
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:32px}
+.phase{background:var(--night3);padding:36px 28px;position:relative}
+.phase::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform.4s ease}
+.phase:hover::after{transform:scaleX(1)}
+.phase-n{font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:300;letter-spacing:.2em;color:var(--stone4);margin-bottom:8px;text-transform:uppercase}
+.phase-d{font-family:'Josefin Sans',sans-serif;font-size:30px;font-weight:200;color:var(--gold);font-style:italic;margin-bottom:20px;letter-spacing:.02em;line-height:1}
+.phase h4{font-size:15px;font-weight:600;color:var(--white);margin-bottom:12px}
+.phase p{font-size:13px;color:var(--stone3);line-height:1.7}
+
+/* SOCIAL PROOF */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.proof{background:var(--night3);padding:32px 30px;display:flex;flex-direction:column;gap:10px}
+.proof-l{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.proof-h{font-family:'Josefin Sans',sans-serif;font-size:24px;font-weight:200;color:var(--white);line-height:1.15;font-style:italic;letter-spacing:.02em}
+.proof p{font-size:13px;color:var(--stone3);line-height:1.7}
+
+/* CTA SECTION */
+.cta-block{padding:120px 80px;background:linear-gradient(180deg,var(--night2) 0%,var(--night) 100%);text-align:center;position:relative;overflow:hidden}
+.cta-block::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(214,173,96,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.04) 1px,transparent 1px);background-size:80px 80px;opacity:.5}
+.cta-inner{position:relative;z-index:2;max-width:780px;margin:0 auto}
+.cta-eye{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.cta-h{font-family:'Josefin Sans',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:200;letter-spacing:.04em;line-height:1.1;color:var(--white);margin-bottom:28px}
+.cta-h em{color:var(--gold);font-style:italic;font-weight:300}
+.cta-sub{font-size:17px;color:var(--stone2);line-height:1.65;margin-bottom:40px;font-weight:300}
+.cta-personal{margin:48px 0;padding:32px 36px;background:var(--night3);border-left:3px solid var(--gold);text-align:left;font-size:15px;color:var(--stone2);line-height:1.75;font-style:italic;font-weight:300}
+.cta-personal::before{content:'A NOTE FROM THE TEAM';display:block;font-style:normal;font-size:10px;letter-spacing:.22em;color:var(--gold);font-weight:700;margin-bottom:14px}
+.cta-personal::after{content:'— The Marketics Team';display:block;font-style:normal;font-size:11px;letter-spacing:.12em;color:var(--stone4);font-weight:600;margin-top:18px;text-transform:uppercase}
+.cta-draft{position:absolute;top:14px;right:14px;font-size:9px;color:var(--warn);letter-spacing:.16em;text-transform:uppercase;font-weight:700;font-style:normal;padding:4px 10px;border:1px solid var(--warn);background:rgba(196,154,63,.08)}
+.urgency{margin-top:36px;display:inline-flex;align-items:center;gap:12px;padding:10px 20px;border:1px solid rgba(214,173,96,.3);background:rgba(214,173,96,.05);font-size:11px;color:var(--stone2);letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.urgency::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite}
+.urgency em{color:var(--gold);font-style:normal;font-weight:600;margin:0 4px}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+/* TRUST STRIP */
+.trust{margin-top:80px;padding-top:48px;border-top:1px solid rgba(214,173,96,.15);display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.trust-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.trust-n{font-family:'Josefin Sans',sans-serif;font-size:34px;font-weight:200;color:var(--gold);font-style:italic;letter-spacing:.02em;line-height:1}
+.trust-l{font-size:10px;color:var(--stone4);letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+
+/* FOOTER */
+footer{padding:72px 80px;background:var(--night);border-top:1px solid rgba(214,173,96,.15);display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.foot-l img{height:32px;width:auto}
+.foot-tag{font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:200;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:10px}
+.foot-r{text-align:right;font-size:12px;color:var(--stone4);line-height:1.8}
+.foot-r a{color:var(--gold);text-decoration:none}
+.foot-r a:hover{text-decoration:underline}
+
+/* MOBILE */
+@media (max-width:900px){
+ nav{padding:0 20px;height:52px}.nav-meta{display:none}.nav-logo{height:18px}
+.hero{padding:90px 24px 60px}
+.hero-title{font-size:38px}
+.hero-stats{gap:24px}
+.hstat-n{font-size:28px}.hstat-n.big{font-size:40px}
+ section{padding:72px 24px}
+.sec-head{margin-bottom:40px}
+.kpi-grid{grid-template-columns:1fr 1fr}
+.gap{grid-template-columns:1fr}
+.gap-num{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:20px 24px}
+.gap-body{border-right:none;padding:24px}
+.gap-impact{padding:20px 24px}
+.proj{grid-template-columns:1fr}
+.terms-grid{grid-template-columns:1fr}
+.photo-grid{grid-template-columns:1fr}
+.compare{grid-template-columns:1fr}
+.compare-card img{height:280px}
+.seq-cols{grid-template-columns:1fr;gap:32px}
+.seq-block{padding:32px 24px}
+.reshoot-grid{grid-template-columns:1fr}
+.copy-diff{grid-template-columns:1fr}
+.score-grid{grid-template-columns:1fr}
+.ctbl-h{display:none}
+.ctbl-r{grid-template-columns:1fr;padding:16px 0}
+.ctbl-r > div{border-right:none;padding:8px 20px;display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+.ctbl-r > div::before{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--stone4)}
+.ctbl-r > div:nth-child(1)::before{display:none}
+.ctbl-r > div:nth-child(2)::before{content:'Reviews'}
+.ctbl-r > div:nth-child(3)::before{content:'Tenure'}
+.ctbl-r > div:nth-child(4)::before{content:'Rating'}
+.ctbl-r > div:nth-child(5)::before{content:'Revenue'}
+.ctbl-r > div:nth-child(6)::before{content:'Category'}
+.ctbl-r > div:nth-child(7)::before{content:'Title'}
+.team-grid{grid-template-columns:1fr 1fr}
+.roadmap{grid-template-columns:1fr 1fr}
+.proof-grid{grid-template-columns:1fr}
+.demand{grid-template-columns:1fr 1fr}
+.levers{}.lever{grid-template-columns:1fr}
+.lever-i{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);padding:16px}
+.lever-fix{border-right:none;padding:20px 24px}
+.lever-impact{padding:20px 24px;border-top:1px solid rgba(255,255,255,.04)}
+.cta-block{padding:72px 24px}
+.trust{grid-template-columns:1fr 1fr;gap:32px 20px}
+ footer{padding:48px 24px;flex-direction:column;text-align:center}.foot-r{text-align:center}
+.rev-bars{height:200px}
+.rb-label{font-size:8px}
+.reshoot-grid{grid-template-columns:1fr}
+.hero-prepared{flex-direction:column;align-items:flex-start}
+}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(20px);transition:opacity.65s ease,transform.65s ease}
+.fi.vis{opacity:1;transform:none}
+
+
+/* === SAMPLE-AUDIT page additions (intro + closing CTA + footer) === */
+
+.sample-intro{
+  padding:140px 80px 64px;
+  background:var(--night);
+  border-bottom:1px solid rgba(214,173,96,.08);
+}
+.sample-intro-inner{
+  max-width:920px;
+  margin:0 auto;
+}
+.sample-intro .sample-eye{
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px;
+}
+.sample-intro .sample-eye::before{
+  content:'';display:block;width:32px;height:1px;background:var(--gold);
+}
+.sample-intro h1{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(34px,5vw,64px);
+  font-weight:200;letter-spacing:.04em;line-height:1.05;
+  color:var(--white);margin-bottom:28px;max-width:780px;
+}
+.sample-intro h1 em{color:var(--gold);font-style:italic;font-weight:300;}
+.sample-intro p{
+  font-size:17px;color:var(--stone2);max-width:680px;
+  line-height:1.7;font-weight:300;
+}
+.sample-intro p strong{color:var(--white);font-weight:500;}
+.sample-intro .anon-note{
+  margin-top:28px;display:inline-flex;align-items:center;gap:10px;
+  padding:10px 18px;background:var(--gold-lo);border-left:2px solid var(--gold);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--stone2);font-weight:500;
+}
+.sample-intro .anon-note em{color:var(--gold);font-style:normal;font-weight:600;}
+
+/* CLOSING CTA — replaces the audit's personal CTA */
+.sample-cta{
+  padding:140px 80px;
+  background:var(--night2);
+  border-top:1px solid rgba(214,173,96,.12);
+}
+.sample-cta-inner{
+  max-width:920px;margin:0 auto;text-align:left;
+}
+.sample-cta .cta-eye{
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px;
+}
+.sample-cta .cta-eye::before{
+  content:'';display:block;width:32px;height:1px;background:var(--gold);
+}
+.sample-cta h2{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:clamp(34px,5vw,64px);
+  font-weight:200;letter-spacing:.04em;line-height:1.05;
+  color:var(--white);margin-bottom:28px;max-width:780px;
+}
+.sample-cta h2 em{color:var(--gold);font-style:italic;font-weight:300;}
+.sample-cta-body{
+  font-size:17px;color:var(--stone2);max-width:640px;
+  line-height:1.7;font-weight:300;margin-bottom:48px;
+}
+.sample-cta-actions{
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:64px;
+}
+.sample-cta-actions .cta-btn{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:18px 36px;background:var(--gold);color:var(--night);
+  text-decoration:none;font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  border:1px solid var(--gold);transition:all .3s;
+  font-family:'DM Sans',sans-serif;
+}
+.sample-cta-actions .cta-btn:hover{background:transparent;color:var(--gold);}
+.sample-cta-actions .cta-secondary{
+  color:var(--stone);text-decoration:none;font-size:13px;
+  border-bottom:1px solid rgba(180,178,169,.3);padding-bottom:2px;
+  transition:color .3s,border-color .3s;
+}
+.sample-cta-actions .cta-secondary:hover{color:var(--gold);border-color:var(--gold);}
+.sample-trust{
+  padding-top:36px;border-top:1px solid rgba(214,173,96,.12);
+  font-size:13.5px;color:var(--dim);line-height:1.7;max-width:720px;
+  font-weight:400;
+}
+.sample-trust strong{color:var(--white);font-weight:500;}
+.sample-trust .no-ai{
+  display:block;margin-top:14px;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);font-weight:600;
+}
+
+/* SITE NAV — replaces the audit's property-specific nav */
+nav.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:60px;
+  background:rgba(15,15,15,0.94);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,0.12);
+}
+nav.site-nav .nav-logo{height:22px;width:auto;display:block;}
+nav.site-nav .nav-logo svg{height:22px;width:auto;display:block;}
+nav.site-nav .nav-links{
+  display:flex;align-items:center;gap:32px;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+}
+nav.site-nav .nav-links a{
+  color:var(--stone);text-decoration:none;transition:color .3s;
+}
+nav.site-nav .nav-links a:hover{color:var(--gold);}
+nav.site-nav .nav-cta{
+  color:var(--night);background:var(--gold);
+  padding:9px 18px;border:1px solid var(--gold);transition:all .3s;
+}
+nav.site-nav .nav-cta:hover{background:transparent;color:var(--gold);}
+
+/* SITE FOOTER — brand-level only per dev brief */
+footer.site-footer{
+  background:var(--night);
+  padding:80px 80px 48px;
+  border-top:1px solid rgba(214,173,96,.12);
+}
+.site-footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px;
+  align-items:start;
+}
+.site-footer-brand .footer-logo{height:22px;display:block;margin-bottom:18px;}
+.site-footer-brand .footer-logo svg{height:22px;width:auto;display:block;}
+.site-footer-brand .footer-tag{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+}
+.site-footer-col h4{
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--stone4);font-weight:700;margin-bottom:18px;
+}
+.site-footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.site-footer-col a{
+  color:var(--stone3);text-decoration:none;font-size:13px;
+  transition:color .3s;
+}
+.site-footer-col a:hover{color:var(--gold);}
+.site-footer-bottom{
+  max-width:1200px;margin:64px auto 0;padding-top:32px;
+  border-top:1px solid rgba(255,255,255,.05);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone4);font-weight:600;
+}
+.site-footer-bottom .sample-tag{color:var(--gold);}
+
+@media (max-width:760px){
+  nav.site-nav{padding:0 20px;}
+  nav.site-nav .nav-links{gap:16px;}
+  .sample-intro,.sample-cta{padding:100px 24px 56px;}
+  .site-footer-inner{grid-template-columns:1fr;gap:36px;}
+  footer.site-footer{padding:56px 24px 32px;}
+}
+
+
+/* v3: also target <img> in nav/footer logos (Strategy's PNG bundle) */
+nav.site-nav .nav-logo img{height:22px;width:auto;display:block;}
+.site-footer-brand .footer-logo img{height:22px;width:auto;display:block;}
+
+</style>
+</head>
+<body>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <a href="https://marketics.io" class="nav-logo" aria-label="Marketics — home">
+    <img src="/images/sample-audit/nav-logo.png" alt="Marketics" height="22">
+  </a>
+  <div class="nav-links">
+    <a href="https://marketics.io/method">Method</a>
+    <a href="https://marketics.io/get-started" class="nav-cta">Get Your Free Audit</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- SAMPLE-AUDIT INTRO -->
+<section class="sample-intro">
+  <div class="sample-intro-inner">
+    <div class="sample-eye">Sample Audit · Public Viewing</div>
+    <h1>What you <em>actually</em> receive.</h1>
+    <p>This is a real Marketics audit. Property name, host details, and identifying geographic references have been anonymized to protect client privacy — everything else is verbatim. Every Marketics audit follows the same <strong>10-section, four-specialist structure</strong>, produced within 5–7 days of the strategy call. The work below represents approximately <strong>12–16 hours of specialist time</strong>.</p>
+    <div class="anon-note"><em>Note:</em> Names, exact figures, and geography anonymized · structure and analysis intact</div>
+  </div>
+</section>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+ <div class="hero-bg"><picture>
+      <source srcset="/images/sample-audit/property-exterior.webp" type="image/webp">
+      <img src="/images/sample-audit/property-exterior.jpg" fetchpriority="high" decoding="async" alt="Mountain A-Frame, this market SC">
+    </picture></div>
+ <div class="hero-grid"></div>
+ <div class="hero-inner">
+ <div class="eyebrow">Marketics Market Audit</div>
+ <div class="hero-prop">Mountain A-Frame · the Southeast US mountain region</div>
+ <h2 class="hero-title">A revenue gap of<br><em>+$24,000/yr</em><br>hiding in plain sight.</h2>
+ <p class="hero-sub">A 4.99-rated A-frame, one year in, sitting in the top tier of this market — and still leaving meaningful revenue on the table. Three specific levers, ranked by impact, inside.</p>
+ <div class="hero-stats">
+ <div class="hstat"><div class="hstat-n">~$50K</div><div class="hstat-l">Current Annual Revenue</div></div>
+ <div class="hstat"><div class="hstat-n big">$78K</div><div class="hstat-l">12-Month Target</div></div>
+ <div class="hstat"><div class="hstat-n">4.99 ★</div><div class="hstat-l">Rating · 73 Reviews</div></div>
+ <div class="hstat"><div class="hstat-n">Top 10%</div><div class="hstat-l">Eligible Listings, Market</div></div>
+ </div>
+ <div class="hero-prepared">
+ <div class="hp-block">
+ <div class="hp-lbl">Prepared For</div>
+ <div class="hp-val">the property owners</div>
+ </div>
+ <div class="hp-block">
+ <div class="hp-lbl">Property</div>
+ <div class="hp-val">Mountain A-Frame · <em>[Listing ID anonymized]</em></div>
+ </div>
+ <div class="hp-block">
+ <div class="hp-lbl">Audit Date</div>
+ <div class="hp-val">May 15, 2026</div>
+ </div>
+ </div>
+ </div>
+</header>
+
+<!-- 2. EXECUTIVE SUMMARY -->
+<section id="executive">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">02 / 10</span><span>Executive Summary</span></div>
+ <h2 class="st fi">The headline read on <em>Mountain A-Frame</em>.</h2>
+ <p class="sec-intro fi">A well-built listing in the top tier of this market, with three specific gaps that the algorithm reads as caution flags — and the comp set proves are recoverable. The numbers below frame the gap. The sections that follow show the work.</p>
+ </div>
+
+ <div class="kpi-grid fi">
+ <div class="kpi">
+ <div class="kpi-l">Rating</div>
+ <div class="kpi-n italic">4.99</div>
+ <div class="kpi-sub">73 reviews · Top 10% of homes · Guest Favorite</div>
+ <div class="kpi-bar"><div class="kpi-bar-fill" style="width:99%"></div></div>
+ </div>
+ <div class="kpi">
+ <div class="kpi-l">Tenure</div>
+ <div class="kpi-n italic">1 yr</div>
+ <div class="kpi-sub">Hosted by the host team · Superhost in first year</div>
+ <div class="kpi-bar"><div class="kpi-bar-fill" style="width:18%"></div></div>
+ </div>
+ <div class="kpi">
+ <div class="kpi-l">Annual Revenue</div>
+ <div class="kpi-n italic">~$50K</div>
+ <div class="kpi-sub">3.5× this market average of ~$15,000</div>
+ <div class="kpi-bar"><div class="kpi-bar-fill" style="width:55%"></div></div>
+ </div>
+ <div class="kpi">
+ <div class="kpi-l">Visibility Score</div>
+ <div class="kpi-n italic">6.5</div>
+ <div class="kpi-sub">Title authority, photo sequencing, amenity tag coverage</div>
+ <div class="kpi-bar"><div class="kpi-bar-fill" style="width:65%"></div></div>
+ </div>
+ <div class="kpi">
+ <div class="kpi-l">Opportunity Score</div>
+ <div class="kpi-n italic">8.5</div>
+ <div class="kpi-sub">Specific, recoverable gaps with comp-set proof</div>
+ <div class="kpi-bar"><div class="kpi-bar-fill" style="width:85%"></div></div>
+ </div>
+ </div>
+
+ <h3 class="sub-eye fi" style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:64px;margin-bottom:8px">The three biggest gaps · ranked by revenue impact</h3>
+
+ <div class="gaps fi">
+ <div class="gap">
+ <div class="gap-num"><span>01</span></div>
+ <div class="gap-body">
+ <h4>Title authority is leaving the highest-converting search terms unclaimed.</h4>
+ <p>The current title — <em style="color:var(--stone2)">"Romantic A-Frame Retreat in the Woods – Reset &amp; Unwind"</em> — uses 53 characters and surfaces zero of the four highest-volume amenity terms in this category: Hot Tub, Cold Plunge, Creek, Treehouse. Competitor A, the ~$90K comp in this set, leads with social proof inside the title itself. Title is the single most leverageable signal Airbnb reads, and the easiest to fix.</p>
+ </div>
+ <div class="gap-impact">
+ <div class="gap-impact-l">Revenue Impact</div>
+ <div class="gap-impact-v">+$8K–$12K</div>
+ </div>
+ </div>
+ <div class="gap">
+ <div class="gap-num"><span>02</span></div>
+ <div class="gap-body">
+ <h4>Photo sequencing buries the strongest assets at positions four and five.</h4>
+ <p>The current cover is a tight crop of the front entrance — readable, but it doesn't tell the gallery scroller this is an A-frame. The full twilight exterior, the most distinctive shot in the set, sits at position four. The hot tub teaser sits at position five. Cover and second-position photos drive click-through, and the current order is fighting the listing's own product.</p>
+ </div>
+ <div class="gap-impact">
+ <div class="gap-impact-l">Revenue Impact</div>
+ <div class="gap-impact-v">+$6K–$10K</div>
+ </div>
+ </div>
+ <div class="gap">
+ <div class="gap-num"><span>03</span></div>
+ <div class="gap-body">
+ <h4>Review velocity gap reads to the algorithm as listing immaturity.</h4>
+ <p>73 reviews at one year is strong on a per-month basis, but two of three comparison properties sit at 148 and 240+ reviews. Airbnb's ranking model rewards review depth as a stand-in for risk reduction — particularly in low-density markets like this market. There are specific operational levers to compress the next 100-review window from twelve months to seven.</p>
+ </div>
+ <div class="gap-impact">
+ <div class="gap-impact-l">Revenue Impact</div>
+ <div class="gap-impact-v">+$4K–$8K</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="proj fi">
+ <div class="pjc">
+ <div class="pjc-l">Current · Trailing 12 Months</div>
+ <div class="pjc-v">~$50,000</div>
+ <div class="pjc-delta">Already 3.5× this market average</div>
+ </div>
+ <div class="pjc">
+ <div class="pjc-l">Conservative 12-Month Target</div>
+ <div class="pjc-v">$66,000</div>
+ <div class="pjc-delta"><em>+$15,000</em> · 29% lift · Title + sequencing only</div>
+ </div>
+ <div class="pjc target">
+ <div class="pjc-l">Aggressive 12-Month Target</div>
+ <div class="pjc-v">$78,000</div>
+ <div class="pjc-delta"><em>+$27,000</em> · 53% lift · Full optimization roadmap</div>
+ </div>
+ </div>
+
+ <div style="margin-top:48px;text-align:left" class="fi">
+ <a href="#cta" class="cta-btn">Book a 15-min strategy call <span class="arr">→</span></a>
+ </div>
+ </div>
+</section>
+
+<!-- 3. VISIBILITY & SEO -->
+<section id="seo" class="section-alt">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">03 / 10</span><span>Visibility &amp; SEO</span></div>
+ <h2 class="st fi">The title is doing<br><em>40% of the work it should.</em></h2>
+ <p class="sec-intro fi">Airbnb's search ranking weights the title above almost every other text signal on the page. The current Mountain A-Frame title surfaces two strong tokens — <strong>A-Frame</strong> and <strong>Romantic</strong> — and then spends thirty characters on language the algorithm doesn't index for conversion.</p>
+ <div class="spec-attrib"><em>Priya Nair</em> · Listing SEO &amp; Hospitality Copywriting</div>
+ </div>
+
+ <div class="title-card fi">
+ <div class="tc-l">Current Title · 53 Characters</div>
+ <div class="tc-title">Romantic A-Frame Retreat in the Woods – Reset &amp; Unwind</div>
+ <div class="tc-meta">
+ <span><em>Working:</em> A-Frame · Romantic</span>
+ <span><em>Filler:</em> Retreat · in the Woods · Reset &amp; Unwind</span>
+ <span><em>Missing:</em> Treehouse · Hot Tub · Cold Plunge · Creek</span>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:48px;margin-bottom:8px" class="fi">High-volume search terms the listing should be claiming</h3>
+
+ <div class="terms-grid fi">
+ <div class="term">
+ <div class="term-w">Hot Tub</div>
+ <div class="term-d">14.2% of regional guests filter for hot tub — the single most-filtered amenity in the comp set. The Mountain A-Frame has one. The title doesn't say so.</div>
+ </div>
+ <div class="term">
+ <div class="term-w">Cold Plunge</div>
+ <div class="term-d">A wellness differentiator that none of the three comps in this set offer. Unique amenity terms compound across both keyword search and the "unique-stay" sort.</div>
+ </div>
+ <div class="term">
+ <div class="term-w">A-Frame Treehouse</div>
+ <div class="term-d">"Treehouse" is the Airbnb category assigned to this listing. Compounding category + property type in-title strengthens the ranking signal on both feeds.</div>
+ </div>
+ <div class="term">
+ <div class="term-w">this market · Creek</div>
+ <div class="term-d">Geo-anchor + a natural feature unique to the property. Both improve discovery for travelers searching by region or destination, not category.</div>
+ </div>
+ </div>
+
+ <div class="title-card good fi" style="margin-top:48px">
+ <div class="tc-l" style="color:var(--ok)">Recommended Title · 56 Characters</div>
+ <div class="tc-title">A-Frame Treehouse · Hot Tub &amp; Cold Plunge · the on-property creek</div>
+ <div class="tc-meta">
+ <span><em>Loaded keywords:</em> 4</span>
+ <span><em>Geo-anchor:</em> Yes</span>
+ <span><em>Differentiator:</em> Cold Plunge + Creek</span>
+ </div>
+ </div>
+
+ <div class="insight fi" style="margin-top:48px">
+ <div class="insight-l">Marcus &amp; Priya · Cross-Read</div>
+ <p>The cleanest proof of title impact in this comp set isn't the ~$90K property — it's the $25K one. <em>Competitor B</em>, in [same county], has been live for ten years, holds 470+ reviews, and a 4.98 rating. The title is four words long. The listing is invisible in search.</p>
+ <p class="insight-sub">Tenure and review velocity matter, but they're floor signals — they qualify a listing to compete. Title is the lever that decides whether it gets shown.</p>
+ </div>
+ </div>
+</section>
+
+<!-- 4. ALGORITHM POSITIONING -->
+<section id="algorithm">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">04 / 10</span><span>Algorithm Positioning</span></div>
+ <h2 class="st fi">The market's<br><em>buying weekends.</em><br>The pricing isn't.</h2>
+ <p class="sec-intro fi">this market is a weekend-skewed market with sharp event-driven demand spikes and soft mid-week occupancy. The data we pulled for the next six months shows specific dates where the Mountain A-Frame is leaving pricing power on the table — and three structural levers that compound across every booking window.</p>
+ <div class="spec-attrib"><em>Daniel Marsh</em> · Revenue Strategy &amp; Algorithm Positioning</div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:24px;margin-bottom:8px" class="fi">Three algorithm levers · ranked by ease of fix × revenue impact</h3>
+
+ <div class="levers fi">
+ <div class="lever">
+ <div class="lever-i"><span>L1</span></div>
+ <div class="lever-fix">
+ <h5>The Fix</h5>
+ <p>Surface Cold Plunge and Outdoor Shower as discrete amenity tags. Both exist on the property and read in the description, but Airbnb's amenity-filter logic only credits structured tags — not free-text mentions.</p>
+ </div>
+ <div class="lever-impact">
+ <h5>The Impact</h5>
+ <p>Wellness-traveler segment is the fastest-growing filter in this category. Two missing tags = the listing is invisible to a discrete segment willing to pay 18–24% above market.</p>
+ </div>
+ </div>
+ <div class="lever">
+ <div class="lever-i"><span>L2</span></div>
+ <div class="lever-fix">
+ <h5>The Fix</h5>
+ <p>Tighten day-of-week pricing differentiation. Market data shows Friday and Saturday demand at 57% occupancy; Tuesday at 39%. The standard 110/116 weekday/weekend multiplier in this market is undershooting on Friday-Saturday and overshooting on Tuesday-Wednesday.</p>
+ </div>
+ <div class="lever-impact">
+ <h5>The Impact</h5>
+ <p>Recapture margin on the dates that book first. Reduce friction on the dates that book last. Compounding effect across every booking month.</p>
+ </div>
+ </div>
+ <div class="lever">
+ <div class="lever-i"><span>L3</span></div>
+ <div class="lever-fix">
+ <h5>The Fix</h5>
+ <p>Position pricing against the demand calendar. The next six months show five specific occupancy spikes — three of them appear to be regional event-driven. Static pricing reads these as ordinary dates; the comp set books out at 18–34% premium.</p>
+ </div>
+ <div class="lever-impact">
+ <h5>The Impact</h5>
+ <p>The five spikes below represent roughly 22 booked nights. At the market-aware premium, those nights alone represent $1,800–$2,400 of recoverable revenue.</p>
+ </div>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:64px;margin-bottom:8px" class="fi">Five high-demand windows · next six months</h3>
+
+ <div class="demand fi">
+ <div class="dcard">
+ <div class="dcard-d">Jun 26–27</div>
+ <div class="dcard-v">+14.3%</div>
+ <div class="dcard-l">Occupancy spike vs surrounding dates · likely event-driven</div>
+ </div>
+ <div class="dcard">
+ <div class="dcard-d">Jun 23–24</div>
+ <div class="dcard-v">+6.2%</div>
+ <div class="dcard-l">Mid-week summer demand pickup</div>
+ </div>
+ <div class="dcard">
+ <div class="dcard-d">Jul 20–22</div>
+ <div class="dcard-v">+5.1%</div>
+ <div class="dcard-l">Three-night summer window</div>
+ </div>
+ <div class="dcard">
+ <div class="dcard-d">Sep 6–8</div>
+ <div class="dcard-v">+5.0%</div>
+ <div class="dcard-l">Labor Day weekend extension</div>
+ </div>
+ <div class="dcard">
+ <div class="dcard-d">Oct 17</div>
+ <div class="dcard-v">+5.0%</div>
+ <div class="dcard-l">Likely Clemson home-game window (60 mins north)</div>
+ </div>
+ </div>
+
+ <div class="insight fi" style="margin-top:48px">
+ <div class="insight-l">Daniel · Market Note</div>
+ <p>The whole-market average revenue is <em>~$15,000</em>. Mountain A-Frame already books <em>3.5× the market</em>. The opportunity here isn't recovery — it's compounding what's already working. Three pricing-level fixes plus two amenity tags is a four-hour scope of work that touches every future booking.</p>
+ </div>
+ </div>
+</section>
+
+<!-- 5. PHOTO ASSESSMENT -->
+<section id="photos" class="section-alt">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">05 / 10</span><span>Visual &amp; Photo Assessment</span></div>
+ <h2 class="st fi">The hero image is good.<br><em>It just isn't first.</em></h2>
+ <p class="sec-intro fi">The Mountain A-Frame gallery is genuinely strong work. The interior shots are designer-grade. The outdoor amenities are well-lit and clean. The issue isn't the photography — it's the sequencing and the cover decision. Both are recoverable inside a week.</p>
+ <div class="spec-attrib"><em>Evan Cole</em> · Photography &amp; Interior Design</div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:32px;margin-bottom:16px" class="fi">Hero photo · four-axis read</h3>
+
+ <div class="photo-grid fi">
+ <div class="photo-main">
+ <picture>
+      <source srcset="/images/sample-audit/property-exterior.webp" type="image/webp">
+      <img src="/images/sample-audit/property-exterior.jpg" loading="lazy" decoding="async" alt="Current hero photo">
+    </picture>
+ <div class="photo-main-label">Current Cover · Position 01</div>
+ </div>
+ <div class="photo-side">
+ <div class="psc">
+ <h5>Composition</h5>
+ <p>Tight crop on the entrance — the cedar-bracket awning and the deck stairs are well-framed, but the A-frame silhouette is cropped out. Mobile-feed scrollers can't tell at a glance that this is an A-frame. Read time on the mobile feed is roughly 1.2 seconds — the architectural form needs to land in that window.</p>
+ <div class="score"><div class="score-n">6.0</div><div class="score-bar"><div class="score-fill" style="width:60%"></div></div></div>
+ </div>
+ <div class="psc">
+ <h5>Technical</h5>
+ <p>Exposure is even across the frame. White balance reads natural — the green leaves are accurate, the wood tones haven't drifted warm. Sharpness is clean. Sun-flare is intentional and reads as warmth rather than artifact. This is competent work.</p>
+ <div class="score"><div class="score-n">8.5</div><div class="score-bar"><div class="score-fill" style="width:85%"></div></div></div>
+ </div>
+ <div class="psc">
+ <h5>Staging</h5>
+ <p>Sparse. There's a small potted shrub on the deck — beyond that, no styling. No string lights, no welcome detail, no throw pillows, no glassware. The entrance reads ready-to-rent rather than ready-to-stay. Five small props add an entire emotional tier without crowding the frame.</p>
+ <div class="score"><div class="score-n">5.5</div><div class="score-bar"><div class="score-fill" style="width:55%"></div></div></div>
+ </div>
+ <div class="psc">
+ <h5>Competitive</h5>
+ <p>Comp #1 leads with their interior money shot — chandelier, salvaged French doors, the visual story they own. Mountain A-Frame leads with a partial exterior. The covers tell two different stories about what each property is for. The comp's reads "luxury escape." Mountain A-Frame's reads "cabin in the woods." </p>
+ <div class="score"><div class="score-n">5.0</div><div class="score-bar"><div class="score-fill" style="width:50%"></div></div></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="compare fi">
+ <div class="compare-card">
+ <picture>
+      <source srcset="/images/sample-audit/property-exterior.webp" type="image/webp">
+      <img src="/images/sample-audit/property-exterior.jpg" loading="lazy" decoding="async" alt="Mountain A-Frame hero">
+    </picture>
+ <div class="compare-meta">
+ <div class="cm-l">Mountain A-Frame · Current Cover</div>
+ <div class="cm-t">Front entrance, mid-day</div>
+ <div class="cm-d">Architectural silhouette cropped out. Sparse staging. Reads as cabin photo, not A-frame photo.</div>
+ </div>
+ </div>
+ <div class="compare-card">
+ <picture>
+      <source srcset="/images/sample-audit/comp-interior.webp" type="image/webp">
+      <img src="/images/sample-audit/comp-interior.jpg" loading="lazy" decoding="async" alt="Competitor A hero">
+    </picture>
+ <div class="compare-meta">
+ <div class="cm-l">Comp #1 · Competitor A · Current Cover</div>
+ <div class="cm-t">Interior money shot · chandelier &amp; French doors</div>
+ <div class="cm-d">Leads with the differentiator. The first frame is the reason to book.</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- PHOTO SEQUENCING -->
+ <div class="seq-block fi">
+ <h3>Photo Sequencing · The five-shot problem</h3>
+ <p class="sb-intro">Gallery sequencing is invisible work — most hosts never audit it. Airbnb's mobile gallery shows five photos before the scroll-to-see-all moment. Those five frames decide whether the listing earns the second look.</p>
+
+ <div class="seq-img">
+ <picture>
+      <source srcset="/images/sample-audit/gallery-grid.webp" type="image/webp">
+      <img src="/images/sample-audit/gallery-grid.jpg" loading="lazy" decoding="async" alt="Current photo gallery layout">
+    </picture>
+ </div>
+
+ <div class="seq-cols">
+ <div class="seq-col current">
+ <h4>Current Sequence</h4>
+ <ul class="seq-list">
+ <li>Front entrance, tight crop<em>Cover · architectural form cropped</em></li>
+ <li>Interior wide · spiral stair + kitchen + loft<em>Strong shot, wrong slot</em></li>
+ <li>Loft bedroom · A-frame window<em>The signature interior frame</em></li>
+ <li>Full A-frame twilight exterior<em>The actual hero — buried at position four</em></li>
+ <li>Hot tub teaser path<em>The most-filtered amenity — buried at position five</em></li>
+ </ul>
+ </div>
+ <div class="seq-col recommended">
+ <h4>Recommended Sequence</h4>
+ <ul class="seq-list">
+ <li>Full A-frame twilight exterior<em>Lead with the architectural silhouette</em></li>
+ <li>Interior wide · spiral stair + kitchen + loft<em>Show the layout drama in frame two</em></li>
+ <li>Hot tub on the deck, steam rising<em>Most-filtered amenity in top three</em></li>
+ <li>Loft bedroom under the A-frame window<em>Sleep aspiration · the booking-trigger frame</em></li>
+ <li>Living room · designer green velvet sofa<em>Tier-up the perceived quality</em></li>
+ </ul>
+ </div>
+ </div>
+ </div>
+
+ <!-- RESHOOT PLAN -->
+ <div class="reshoot fi">
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Eight-shot reshoot plan · One-day shoot, golden hour AM + PM</h3>
+ <p class="sec-intro" style="margin-bottom:0">Half the shots already exist in the gallery and need re-cropping or a single retake. The new shots are the cold plunge, the swing bed, the creek, and a proper twilight exterior — the four amenities the listing currently fails to monetize.</p>
+
+ <div class="reshoot-grid">
+ <div class="rshot">
+ <div class="rshot-n">Shot 01 · Cover</div>
+ <h4>Twilight A-Frame Exterior, Wide</h4>
+ <p>Blue hour, roughly 8:30–9:00pm in summer. Low angle from the gravel drive looking up at the silhouette. Interior lights on, deck lit, swing bed string lights visible. 24–35mm lens to compress the trees against the form.</p>
+ <div class="rmeta"><span><em>Time:</em> 30 min</span><span><em>Lens:</em> 24–35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 02 · Amenity Hero</div>
+ <h4>Hot Tub at Golden Hour</h4>
+ <p>Late afternoon, water clear and lit from below if possible. Steam adds depth — wait for an evening with a 15°+ ambient-to-water differential. Two glasses on the edge, throw nearby. Frame wide enough to show woods.</p>
+ <div class="rmeta"><span><em>Time:</em> 30 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 03 · Differentiator</div>
+ <h4>Cold Plunge Tub Feature</h4>
+ <p>Currently invisible in the gallery. Shoot at dawn for ambient mist if conditions allow. Wider frame including the outdoor shower in soft focus. This is the shot that justifies the keyword in the title.</p>
+ <div class="rmeta"><span><em>Time:</em> 20 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 04 · Aspiration</div>
+ <h4>Swing Bed Under String Lights</h4>
+ <p>Blue hour. String lights warm-tone. Linen throw, hardcover book, single drink. Wide enough to show the under-house framing — that's the unique-to-Mountain A-Frame architectural moment.</p>
+ <div class="rmeta"><span><em>Time:</em> 30 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 05 · Sleep</div>
+ <h4>Loft Bed · Morning Light</h4>
+ <p>9–10am soft window light. Bed made tight, linen throw, hardcover and ceramic mug on the side table. Frame to include the A-frame triangle window — that geometry is the booking trigger.</p>
+ <div class="rmeta"><span><em>Time:</em> 20 min</span><span><em>Lens:</em> 35–50mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 06 · Daily Life</div>
+ <h4>Kitchen at AM</h4>
+ <p>Coffee on the counter, croissants on a board, fresh stone fruit. Soft window light, sliding door open. The Keurig + Frame TV stay in frame — these are the modern-comforts cues.</p>
+ <div class="rmeta"><span><em>Time:</em> 20 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 07 · Natural Asset</div>
+ <h4>Creek Detail · Dappled Light</h4>
+ <p>Mid-morning when the canopy dapples. 1/8s shutter on a tripod to silk the water. Frame includes the stump-seat fire pit as foreground. The creek is the property's quietest asset and the gallery doesn't acknowledge it.</p>
+ <div class="rmeta"><span><em>Time:</em> 30 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ <div class="rshot">
+ <div class="rshot-n">Shot 08 · Closer</div>
+ <h4>Fire Pit at Dusk</h4>
+ <p>Lit fire, two Adirondacks, woods darkening behind. The stump seats stay in frame for the rustic counterpoint. This is the gallery's last-position frame — the one that anchors "this is the night I'd have here."</p>
+ <div class="rmeta"><span><em>Time:</em> 30 min</span><span><em>Lens:</em> 35mm</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="insight fi" style="margin-top:64px">
+ <div class="insight-l">Evan · Property Read</div>
+ <p>Most hosts at this price point need a photo overhaul. Mountain A-Frame doesn't — the existing work is good. <em>Re-sequence the gallery, recover the four missing amenities, retake the cover</em>. Half-day shoot, ten-day turnaround on edits. The lift from this alone is what funds the rest of the optimization.</p>
+ </div>
+ </div>
+</section>
+
+<!-- 6. COPY & GUEST EXPERIENCE -->
+<section id="copy">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">06 / 10</span><span>Guest Experience &amp; Copy</span></div>
+ <h2 class="st fi">Two paragraphs of work<br><em>worth $4,000 a year.</em></h2>
+ <p class="sec-intro fi">The current description is comprehensive and accurate — the problem is that it reads like a furnished-apartment inventory rather than a reason to book. Specificity is the brand voice this property earns, and the rewrite below leans into the three things only Mountain A-Frame has.</p>
+ <div class="spec-attrib"><em>Priya Nair</em> · Listing SEO &amp; Hospitality Copywriting</div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px" class="fi">Opening hook · the first 280 characters</h3>
+
+ <div class="copy-diff fi">
+ <div class="cdcol bad">
+ <h5>Current</h5>
+ <blockquote>Wake up surrounded by nature and the sounds of birdsong, enjoy coffee on the porch. Soak in the hot tub, the cold plunge tub, or curl up with a book on the swing bed. Later, roast s'mores by the fire under string lights.</blockquote>
+ </div>
+ <div class="cdcol good">
+ <h5>Rewrite</h5>
+ <blockquote>Black A-frame, 550 square feet, three water rituals: hot tub, cold plunge, creek. Spiral stair up to a loft bedroom under glass. Swing bed under the house with string lights for the second drink. Coffee on the back deck while the birds wake up the woods.</blockquote>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:48px;margin-bottom:8px" class="fi">Unique-features paragraph · the lead differentiator</h3>
+
+ <div class="copy-diff fi">
+ <div class="cdcol bad">
+ <h5>Current</h5>
+ <blockquote>OUTDOOR LIVING: The back deck features a gas grill and a dining table for four. Down the spiral staircase is another porch with a hot tub, a cold plunge tub, a double egg chair, an outdoor shower, and a basket with workout equipment...</blockquote>
+ </div>
+ <div class="cdcol good">
+ <h5>Rewrite</h5>
+ <blockquote>What you won't find at the lake-front comps: a designed cold-water ritual. Hot tub up, cold plunge two steps over, creek down the hill. The wellness traveler who used to book a larger mountain town now books here — because here, the ritual is the room, not a side activity.</blockquote>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:48px;margin-bottom:8px" class="fi">Brand-voice alignment · before vs after</h3>
+
+ <div class="score-grid fi">
+ <div class="scard">
+ <h5>Current Copy</h5>
+ <div class="scard-row"><span class="sl">Specific</span><div class="sbar"><div class="sfill before" style="width:50%"></div></div><span class="sv">5.0</span></div>
+ <div class="scard-row"><span class="sl">Confident</span><div class="sbar"><div class="sfill before" style="width:70%"></div></div><span class="sv">7.0</span></div>
+ <div class="scard-row"><span class="sl">Un-hype</span><div class="sbar"><div class="sfill before" style="width:60%"></div></div><span class="sv">6.0</span></div>
+ <div class="scard-row"><span class="sl">Different</span><div class="sbar"><div class="sfill before" style="width:40%"></div></div><span class="sv">4.0</span></div>
+ </div>
+ <div class="scard">
+ <h5>Rewrite</h5>
+ <div class="scard-row"><span class="sl">Specific</span><div class="sbar"><div class="sfill" style="width:90%"></div></div><span class="sv">9.0</span></div>
+ <div class="scard-row"><span class="sl">Confident</span><div class="sbar"><div class="sfill" style="width:90%"></div></div><span class="sv">9.0</span></div>
+ <div class="scard-row"><span class="sl">Un-hype</span><div class="sbar"><div class="sfill" style="width:95%"></div></div><span class="sv">9.5</span></div>
+ <div class="scard-row"><span class="sl">Different</span><div class="sbar"><div class="sfill" style="width:90%"></div></div><span class="sv">9.0</span></div>
+ </div>
+ </div>
+
+ <div class="insight fi" style="margin-top:48px">
+ <div class="insight-l">Priya · Voice Note</div>
+ <p>The phrase that earns the booking on this property is not <em>"surrounded by nature."</em> It's <em>"three water rituals: hot tub, cold plunge, creek."</em> The first describes any cabin in any forest. The second describes one specific A-frame in this market with one specific operator behind it.</p>
+ </div>
+ </div>
+</section>
+
+<!-- 7. COMPETITIVE POSITIONING -->
+<section id="competitive" class="section-alt">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">07 / 10</span><span>Competitive Positioning</span></div>
+ <h2 class="st fi">Three comparable properties.<br><em>Three different stories.</em></h2>
+ <p class="sec-intro fi">We pulled three direct comps from the regional comp set — chosen for property uniqueness, similar guest count, and overlap in the unique-stay traveler segment. The revenue range across the four properties is $25K to ~$90K, and the story isn't tenure or rating. It's listing-level decisions.</p>
+ <div class="spec-attrib"><em>Marcus Reid</em> · Market Research &amp; Competitive Positioning</div>
+ </div>
+
+ <div class="comp-table fi">
+ <div class="ctbl-h">
+ <div>Property</div>
+ <div>Reviews</div>
+ <div>Tenure</div>
+ <div>Rating</div>
+ <div>Revenue</div>
+ <div>Category</div>
+ <div>Title Strength</div>
+ </div>
+ <div class="ctbl-r host">
+ <div class="cn">Mountain A-Frame<em>[Region] · The Audit</em></div>
+ <div>73</div>
+ <div>1 yr</div>
+ <div>4.99 ★</div>
+ <div class="cv-big">~$50K</div>
+ <div>Treehouse</div>
+ <div>Moderate</div>
+ </div>
+ <div class="ctbl-r">
+ <div class="cn">Competitor A<em>[adjacent town] · [regional lake]</em></div>
+ <div>241</div>
+ <div>5 yr</div>
+ <div>4.99 ★</div>
+ <div class="cv-big">~$90K</div>
+ <div>Treehouse</div>
+ <div>Strong</div>
+ </div>
+ <div class="ctbl-r">
+ <div class="cn">Competitor C<em>[same county] · Open Field</em></div>
+ <div>148</div>
+ <div>2 yr</div>
+ <div>4.99 ★</div>
+ <div class="cv-big">$42K</div>
+ <div>Train</div>
+ <div>Moderate</div>
+ </div>
+ <div class="ctbl-r">
+ <div class="cn">Competitor B<em>[same county] · 60-acre farm</em></div>
+ <div>472</div>
+ <div>10 yr</div>
+ <div>4.98 ★</div>
+ <div class="cv-big">$25K</div>
+ <div>Cabin</div>
+ <div>Weak</div>
+ </div>
+ </div>
+
+ <div class="insight fi" style="margin-top:48px">
+ <div class="insight-l">Marcus · The Read</div>
+ <p>The smoking gun in this comp set is the <em>$25K cabin with 470+ reviews and a decade of tenure</em>. That is a Superhost, a Guest Favorite, a property with more social proof than the rest of the comp set combined — earning the lowest revenue. The title is <em>"Competitor B."</em> Four words. Zero keywords. The algorithm reads it and moves on.</p>
+ <p class="insight-sub">Competitor A, at the top of this set, leads with social proof in the title: <em>"#1 most loved AirBnB in [region]!"</em>. Competitor C loads the category and amenity early: <em>"Competitor C – generic title format."</em> Both titles are doing work the Mountain A-Frame title isn't. The takeaway: review volume and tenure are necessary but not sufficient. Title authority is the lever that converts trust into bookings.</p>
+ </div>
+
+ <div style="margin-top:48px;padding:32px 36px;background:var(--night3);border-left:3px solid var(--gold)" class="fi">
+ <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px">Realistic Ceiling Read</div>
+ <p style="font-size:15px;color:var(--stone2);line-height:1.7">Competitor A books at <em style="color:var(--gold);font-style:normal;font-weight:600">~$90K</em> on the strength of five years of tenure, 240+ reviews, and [regional lake] waterfront. Two of those three are not replicable — Mountain A-Frame is creekside, not lakefront. The realistic 24-month ceiling for the Mountain A-Frame, holding product constant, is <em style="color:var(--gold);font-style:normal;font-weight:600">$78–82K</em>. The path there runs through every section of this audit.</p>
+ </div>
+ </div>
+</section>
+
+<!-- 8. REVENUE OPPORTUNITY -->
+<section id="revenue">
+ <div class="si">
+ <div class="sec-head">
+ <div class="sec-eyebrow"><span class="sec-num">08 / 10</span><span>Revenue Opportunity</span></div>
+ <h2 class="st fi">The 12-month gap is<br><em>$15K conservative, $27K aggressive.</em></h2>
+ <p class="sec-intro fi">The conservative case captures only the title rewrite and the photo re-sequencing — two changes inside a one-week sprint. The aggressive case adds the algorithm-tag work, the pricing calibration, the copy rewrite, and the review-velocity playbook. Both ranges are defensible against the comp set.</p>
+ <div class="spec-attrib"><em>Daniel Marsh</em> · Revenue Strategy &amp; Algorithm Positioning</div>
+ </div>
+
+ <div class="proj fi" style="margin-top:32px">
+ <div class="pjc">
+ <div class="pjc-l">Trailing 12 Months</div>
+ <div class="pjc-v">~$50,000</div>
+ <div class="pjc-delta">Current annual revenue</div>
+ </div>
+ <div class="pjc">
+ <div class="pjc-l">Conservative 12-Month Target</div>
+ <div class="pjc-v">$66,000</div>
+ <div class="pjc-delta"><em>+$15,000 · +29%</em></div>
+ </div>
+ <div class="pjc target">
+ <div class="pjc-l">Aggressive 12-Month Target</div>
+ <div class="pjc-v">$78,000</div>
+ <div class="pjc-delta"><em>+$27,000 · +53%</em></div>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:64px;margin-bottom:24px" class="fi">Month-by-month opportunity · base vs aggressive target</h3>
+
+ <div class="rev-chart fi">
+ <div class="rev-bars" id="revBars">
+ <!-- Bars will be styled inline. Each bar has 2 components: current (gold) + target gap (gold-soft) -->
+
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:21.7%" title="Target gap"></div>
+ <div class="rb-current" style="height:41.3%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Jun</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:23.9%" title="Target gap"></div>
+ <div class="rb-current" style="height:45.7%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Jul</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:22.8%" title="Target gap"></div>
+ <div class="rb-current" style="height:43.5%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Aug</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:29.3%" title="Target gap"></div>
+ <div class="rb-current" style="height:56.5%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Sep</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:34.8%" title="Target gap"></div>
+ <div class="rb-current" style="height:65.2%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Oct</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:25.0%" title="Target gap"></div>
+ <div class="rb-current" style="height:47.8%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Nov</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:26.1%" title="Target gap"></div>
+ <div class="rb-current" style="height:50.0%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Dec</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:16.3%" title="Target gap"></div>
+ <div class="rb-current" style="height:30.4%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Jan</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:17.4%" title="Target gap"></div>
+ <div class="rb-current" style="height:32.6%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Feb</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:26.1%" title="Target gap"></div>
+ <div class="rb-current" style="height:50.0%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Mar</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:25.0%" title="Target gap"></div>
+ <div class="rb-current" style="height:47.8%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">Apr</div>
+ </div>
+ <div class="rev-bar">
+ <div class="rb-stack">
+ <div class="rb-target" style="height:22.8%" title="Target gap"></div>
+ <div class="rb-current" style="height:43.5%" title="Current revenue"></div>
+ </div>
+ <div class="rb-label">May</div>
+ </div>
+ </div>
+ <div class="rev-legend">
+ <div class="rl-item"><div class="rl-sw current"></div><span>Current run-rate · ~$50K trailing 12-month</span></div>
+ <div class="rl-item"><div class="rl-sw target"></div><span>Aggressive target · $78K · the full optimization roadmap</span></div>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:64px;margin-bottom:18px" class="fi">How Marketics gets paid</h3>
+
+ <div class="insight fi">
+ <div class="insight-l">Performance-Aligned</div>
+ <p>Marketics works on a base + performance-share model. There is no upfront optimization fee. The team gets paid when the revenue lift shows up on the host's payout. Quarterly true-up, no long-term lock-in beyond the optimization sprint.</p>
+ <p class="insight-sub">If Mountain A-Frame lands at the conservative target ($15K lift), Marketics earns a fraction of that lift. If it lands at the aggressive target, the same arithmetic. Aligned incentives by design — the team is paid only when the work works.</p>
+ </div>
+
+ <div style="margin-top:24px;padding:24px 28px;background:var(--night3);font-size:13px;color:var(--stone3);line-height:1.7;border-left:2px solid var(--stone4)" class="fi">
+ <strong style="color:var(--stone2);font-weight:600">Monthly performance granularity:</strong> The numbers above are modeled against market RevPAR, day-of-week distribution, and the comp set. If you can share the trailing-12-month monthly breakdown from the Airbnb dashboard, the team can tighten these projections to ±3% and identify the two months where the gap is widest — typically the highest-impact place to start the optimization.
+ </div>
+ </div>
+</section>
+
+<!-- 9. MARKETICS ADVANTAGE -->
+<section id="marketics" class="section-alt">
+ <div class="si">
+ <div class="sec-head" style="text-align:center;display:flex;flex-direction:column;align-items:center">
+ <img src="/images/sample-audit/section-logo.png" loading="lazy" decoding="async" alt="Marketics" style="height:80px;width:auto;margin-bottom:32px">
+ <div class="sec-eyebrow fi" style="justify-content:center"><span class="sec-num">09 / 10</span><span>The Marketics Advantage</span></div>
+ <h2 class="st fi" style="text-align:center">Four specialists.<br><em>One revenue floor.</em></h2>
+ <p class="sec-intro fi" style="text-align:center;margin:0 auto">Most short-term-rental optimization shops are a single generalist doing everything passably. Marketics is four specialists, each owning their domain, working the same listing simultaneously. The work above is what one weekly cycle looks like.</p>
+ </div>
+
+ <div class="team-grid fi">
+ <div class="member">
+ <div class="member-role">Market &amp; Comp Research</div>
+ <div class="member-name">Marcus Reid</div>
+ <div class="member-bio">Pulls the comp set, reads the market dynamics, surfaces the demand windows. Marcus's read sits behind every revenue projection in a Marketics audit.</div>
+ <div class="member-credentials">Hospitality data &amp; revenue intelligence · Six years short-term rental analytics</div>
+ </div>
+ <div class="member">
+ <div class="member-role">Listing SEO &amp; Copy</div>
+ <div class="member-name">Priya Nair</div>
+ <div class="member-bio">Owns the title, description, and brand-voice work. Priya's rewrites have moved listings up 40+ positions in Airbnb's category sort inside a month.</div>
+ <div class="member-credentials">Hospitality copywriting · former editorial at a national lifestyle title</div>
+ </div>
+ <div class="member">
+ <div class="member-role">Photography &amp; Staging</div>
+ <div class="member-name">Evan Cole</div>
+ <div class="member-bio">Directs reshoots, audits sequencing, recommends interior styling tied to the keyword and amenity strategy. Evan reads photos the way the algorithm does.</div>
+ <div class="member-credentials">Hospitality &amp; architectural photography · 200+ properties shot</div>
+ </div>
+ <div class="member">
+ <div class="member-role">Revenue &amp; Algorithm</div>
+ <div class="member-name">Daniel Marsh</div>
+ <div class="member-bio">Runs the pricing model, the day-of-week calibration, and the amenity-tag audit. Daniel writes the playbook the rest of the team executes against.</div>
+ <div class="member-credentials">Revenue management · hotel-side background, STR-side execution</div>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:80px;margin-bottom:24px;text-align:center" class="fi">The 90-day engagement · what the first quarter looks like</h3>
+
+ <div class="roadmap fi">
+ <div class="phase">
+ <div class="phase-n">Phase 01</div>
+ <div class="phase-d">D1–14</div>
+ <h4>Research</h4>
+ <p>Marcus pulls the market and comp data. Priya audits title, description, amenity tags. Evan scores the photo set. Daniel models current pricing against demand. The output is a written plan signed off by the host.</p>
+ </div>
+ <div class="phase">
+ <div class="phase-n">Phase 02</div>
+ <div class="phase-d">D15–35</div>
+ <h4>Build</h4>
+ <p>Title rewrite shipped. Description rewrite shipped. Amenity tags updated. Pricing rules deployed. Reshoot plan executed if scoped. End of phase: every text and structural change is live on the listing.</p>
+ </div>
+ <div class="phase">
+ <div class="phase-n">Phase 03</div>
+ <div class="phase-d">D36–60</div>
+ <h4>Launch</h4>
+ <p>Photo gallery re-sequenced. New shots delivered and uploaded. Cold-plunge and outdoor-shower tags surfaced. Initial pricing calibration against booking pickup. First measurable lift visible.</p>
+ </div>
+ <div class="phase">
+ <div class="phase-n">Phase 04</div>
+ <div class="phase-d">D61–90</div>
+ <h4>Optimize</h4>
+ <p>Daily pricing optimization. Weekly review-velocity push. Monthly performance read against projection. Quarterly true-up of the engagement against the lift achieved. By Day 90, the run-rate change is locked in.</p>
+ </div>
+ </div>
+
+ <h3 style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:80px;margin-bottom:8px;text-align:center" class="fi">Recent engagements</h3>
+
+ <div class="proof-grid fi">
+ <div class="proof">
+ <div class="proof-l">Wally · Puerto Rico</div>
+ <div class="proof-h">Beachfront unit, soft season recovery</div>
+ <p>Re-positioned against the wellness-traveler segment. Shoulder-season occupancy recovery inside the first booking-window cycle. Specifics under engagement NDA.</p>
+ </div>
+ <div class="proof">
+ <div class="proof-l">Boutique Hotel · Montréal</div>
+ <div class="proof-h">Multi-unit migration to direct booking</div>
+ <p>Listing-level optimization across the property's Airbnb portfolio, paired with direct-channel groundwork. Engagement ongoing.</p>
+ </div>
+ <div class="proof">
+ <div class="proof-l">Ramiro · Portfolio</div>
+ <div class="proof-h">Six-property optimization cycle</div>
+ <p>Title and pricing reset across six listings inside a single quarter. The framework Mountain A-Frame would enter into is a single-property compression of this engagement.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SAMPLE-AUDIT CLOSING CTA -->
+<section class="sample-cta" id="cta">
+  <div class="sample-cta-inner">
+    <div class="cta-eye">Your Move</div>
+    <h2>Want one of these for <em>your property?</em></h2>
+    <p class="sample-cta-body">Marketics audits are free to qualified hosts. Engagements start with a <strong>$500 refundable deposit</strong>, run on a 90-day performance window, and are billed at <strong>10% of net payout</strong>. No retainers. No upfront fees. You earn first.</p>
+    <div class="sample-cta-actions">
+      <a href="https://marketics.io/get-started" class="cta-btn">Get My Free Audit <span class="arr">→</span></a>
+      <a href="https://marketics.io" class="cta-secondary">Questions first? Visit marketics.io →</a>
+    </div>
+    <div class="sample-trust">
+      Audits are produced by Marketics' four-specialist team — <strong>market research, listing strategy, photography and design, and revenue strategy</strong>. Each audit takes 12–16 hours to produce.
+      <span class="no-ai">No AI-generated reports.</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- SITE FOOTER -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-brand">
+      <a href="https://marketics.io" class="footer-logo" aria-label="Marketics — home">
+        <img src="/images/sample-audit/nav-logo.png" alt="Marketics" height="22">
+      </a>
+      <div class="footer-tag">Visibility · Velocity · Revenue</div>
+    </div>
+    <div class="site-footer-col">
+      <h4>Marketics</h4>
+      <ul>
+        <li><a href="https://marketics.io">Home</a></li>
+        <li><a href="https://marketics.io/method">Method</a></li>
+        <li><a href="https://marketics.io/get-started">Get Your Free Audit</a></li>
+      </ul>
+    </div>
+    <div class="site-footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://marketics.io/sample-audit">Sample Audit</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer-bottom">
+    <div>© 2026 Marketics · Performance-Based STR Optimization</div>
+    <div class="sample-tag">Sample Audit · Identifying Details Anonymized</div>
+  </div>
+</footer>
+
+<script>
+// IntersectionObserver fade-in
+const obs = new IntersectionObserver((entries) => {
+ entries.forEach(e => {
+ if (e.isIntersecting) {
+ e.target.classList.add('vis');
+ obs.unobserve(e.target);
+ }
+ });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
