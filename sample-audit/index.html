@@ -560,12 +560,12 @@ footer{padding:72px 80px;background:var(--night);border-top:1px solid rgba(214,1
 nav.site-nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;height:60px;
+  padding:0 56px;height:64px;
   background:rgba(15,15,15,0.94);backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(214,173,96,0.12);
 }
-nav.site-nav .nav-logo{height:22px;width:auto;display:block;text-decoration:none;}
-nav.site-nav .nav-logo svg{height:22px;width:auto;display:block;}
+nav.site-nav .nav-logo{display:flex;align-items:center;height:26px;text-decoration:none;flex-shrink:0;}
+nav.site-nav .nav-logo svg{height:26px;width:auto;display:block;}
 nav.site-nav .nav-links{
   display:flex;align-items:center;gap:32px;
   margin-left:auto;margin-right:32px;
@@ -579,10 +579,12 @@ nav.site-nav .nav-cta{
   font-family:'Josefin Sans',sans-serif;
   font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--night);background:var(--gold);
-  padding:9px 18px;border:1px solid var(--gold);border-radius:2px;
-  transition:all .3s;
+  padding:10px 22px;border:none;border-radius:2px;
+  text-decoration:none;flex-shrink:0;white-space:nowrap;cursor:pointer;
+  transition:filter .2s ease,transform .15s ease;
 }
-nav.site-nav .nav-cta:hover{background:transparent;color:var(--gold);}
+nav.site-nav .nav-cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
 
 /* SITE FOOTER — brand-level only per dev brief */
 footer.site-footer{
@@ -629,7 +631,7 @@ footer.site-footer{
 
 
 /* v3: also target <img> in nav/footer logos (Strategy's PNG bundle) */
-nav.site-nav .nav-logo img{height:22px;width:auto;display:block;}
+nav.site-nav .nav-logo img{height:26px;width:auto;display:block;}
 .site-footer-brand .footer-logo img{height:22px;width:auto;display:block;}
 
 </style>
@@ -639,7 +641,7 @@ nav.site-nav .nav-logo img{height:22px;width:auto;display:block;}
 <!-- SITE NAV -->
 <nav class="site-nav">
   <a href="https://marketics.io" class="nav-logo" aria-label="Marketics — home">
-    <img src="/images/sample-audit/nav-logo.png" alt="Marketics" height="22">
+    <img src="/images/sample-audit/nav-logo.png" alt="Marketics" height="26">
   </a>
   <div class="nav-links">
     <a href="https://marketics.io/method">Method</a>
