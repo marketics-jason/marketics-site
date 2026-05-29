@@ -383,7 +383,7 @@ input[type=range].slider::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(2
 .sf-col-label{font-family:var(--m,'DM Mono',monospace);font-size:9px;color:var(--dim,#6B6A65);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
 .sf-col a{font-size:12px;color:var(--stone,#B4B2A9);text-decoration:none;transition:color .15s;line-height:1.7;}
 .sf-col a:hover{color:var(--gold,#D6AD60);}
-.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
+.sf-bottom{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}.sf-bottom>span:last-child{text-align:right;}
 @media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
 </style>
   <!-- Open Graph -->  <!-- Twitter Card -->  <meta property="og:type" content="website">
@@ -1027,7 +1027,7 @@ document.addEventListener('keydown', e=>{
   </div>
   <div class="sf-bottom">
     <span>Your Market. Mastered.&trade;</span>
-    <a href="https://pricelabs-rmpartners.directoryup.com/pricelabs-rm-partners/1-access-marketics?from=badge" title="PriceLabs Verified RM Partner Directory" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;"><img src="https://pricelabs-rmpartners.directoryup.com/images/PriceLabs-PM-Partner-Badge.png" alt="PriceLabs Verified Revenue Management Partner" style="height:22px;width:auto;border:none;display:block;"></a>
+    <a href="https://pricelabs-rmpartners.directoryup.com/pricelabs-rm-partners/1-access-marketics?from=badge" title="PriceLabs Verified RM Partner Directory" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;"><img src="https://pricelabs-rmpartners.directoryup.com/images/PriceLabs-PM-Partner-Badge.png" alt="PriceLabs Verified Revenue Management Partner" style="height:28px;width:auto;border:none;display:block;"></a>
     <span>marketics.io</span>
   </div>
 </footer>
