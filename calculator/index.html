@@ -751,14 +751,31 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
         <div class="mc-head">What Powers the Benchmarks</div>
         <div class="mc-body">
           <p>Market benchmark rates and occupancy figures are derived from <strong>Marketics' active managed property data</strong> across 22 markets, cross-referenced with booking channel API data and wholesale industry data sources and STR market reports updated quarterly.</p>
+          <p style="margin-top:10px">The "With Marketics" column reflects the actual average performance of Marketics-managed properties in each market, not a theoretical ceiling. These numbers come from properties that went through the full Method.</p>
+        </div>
+      </div>
+      <div class="method-col">
+        <div class="mc-label">Assumptions &amp; Limits</div>
+        <div class="mc-head">What This Calculator Assumes</div>
+        <div class="mc-body">
+          <div class="assumptions-list">
+            <div class="al-item"><div class="al-dot"></div><span>Monthly revenue uses a <strong>30.4-night month</strong> average (365 ÷ 12)</span></div>
+            <div class="al-item"><div class="al-dot"></div><span>Benchmark data reflects <strong>same property category</strong> performance: rates vary meaningfully by bedroom count and location within a market</span></div>
+            <div class="al-item"><div class="al-dot"></div><span>Canadian rates displayed in <strong>CAD at ~1.36 exchange rate</strong>; Mexican rates in <strong>MXN at ~17.5 rate</strong> — actual rates fluctuate</span></div>
+            <div class="al-item"><div class="al-dot"></div><span>The calculator does not account for platform fees, cleaning fees, or operating costs. It measures gross booking revenue only</span></div>
+            <div class="al-item"><div class="al-dot"></div><span>Marketics figures assume full Method implementation. Results vary by property condition, host responsiveness, and market timing</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
 <!-- ══ STATIC USD-NORMALIZED BENCHMARK TABLE — crawlable mirror of the MARKETS dataset ══ -->
-<section class="mkx-benchmark" aria-labelledby="mkx-benchmark-heading">
+<section class="mkx-benchmark fi" aria-labelledby="mkx-benchmark-heading" style="transition-delay:.14s">
   <style>
-    .mkx-benchmark{max-width:980px;margin:24px 0 4px;font-family:'DM Sans',sans-serif;}
-    .mkx-benchmark__title{font-family:'Josefin Sans',sans-serif;font-size:clamp(15px,2vw,20px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:#f8f6f2;margin:0 0 10px;}
+    .mkx-benchmark{margin:40px 0 0;font-family:'DM Sans',sans-serif;}
+    .mkx-benchmark__title{font-family:'Josefin Sans',sans-serif;font-size:clamp(18px,2.6vw,26px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:#f8f6f2;margin:0 0 10px;}
     .mkx-benchmark__note{font-size:12px;font-weight:300;color:#6B6A65;line-height:1.6;margin:0 0 16px;max-width:760px;}
-    .mkx-benchmark__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(255,255,255,.06);border-radius:8px;}
-    .mkx-benchmark__table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
+    .mkx-benchmark__scroll{border:1px solid rgba(255,255,255,.06);border-radius:8px;}
+    .mkx-benchmark__table{width:100%;border-collapse:collapse;font-size:13px;}
     .mkx-benchmark__table caption{caption-side:bottom;text-align:left;font-size:11px;font-weight:300;font-style:italic;color:#5a5956;padding:12px 16px 0;line-height:1.5;}
     .mkx-benchmark__table thead th{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#D6AD60;text-align:right;padding:14px 16px;background:rgba(214,173,96,.05);border-bottom:1px solid rgba(214,173,96,.14);white-space:nowrap;}
     .mkx-benchmark__table thead th:first-child{text-align:left;}
@@ -767,8 +784,13 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
     .mkx-benchmark__table tbody tr{border-bottom:1px solid rgba(255,255,255,.04);}
     .mkx-benchmark__table tbody tr:last-child{border-bottom:none;}
     .mkx-benchmark__table tbody tr:nth-child(even){background:rgba(255,255,255,.015);}
+    /* Mobile fallback: only narrow viewports need to scroll the table sideways */
+    @media(max-width:640px){
+      .mkx-benchmark__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+      .mkx-benchmark__table{min-width:560px;}
+    }
   </style>
-  <h3 id="mkx-benchmark-heading" class="mkx-benchmark__title">16-Market STR Benchmark Data (USD-Normalized)</h3>
+  <h2 id="mkx-benchmark-heading" class="mkx-benchmark__title">16-Market STR Benchmark Data (USD-Normalized)</h2>
   <p class="mkx-benchmark__note">Average nightly rate (ADR) and occupancy by market, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. The <strong>Benchmark</strong> columns reflect the market average; the <strong>Top Performer</strong> columns reflect the average of Marketics-managed properties in that market. Figures updated quarterly.</p>
   <div class="mkx-benchmark__scroll">
     <table class="mkx-benchmark__table">
@@ -803,23 +825,6 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
     </table>
   </div>
 </section>
-          <p style="margin-top:10px">The "With Marketics" column reflects the actual average performance of Marketics-managed properties in each market, not a theoretical ceiling. These numbers come from properties that went through the full Method.</p>
-        </div>
-      </div>
-      <div class="method-col">
-        <div class="mc-label">Assumptions &amp; Limits</div>
-        <div class="mc-head">What This Calculator Assumes</div>
-        <div class="mc-body">
-          <div class="assumptions-list">
-            <div class="al-item"><div class="al-dot"></div><span>Monthly revenue uses a <strong>30.4-night month</strong> average (365 ÷ 12)</span></div>
-            <div class="al-item"><div class="al-dot"></div><span>Benchmark data reflects <strong>same property category</strong> performance: rates vary meaningfully by bedroom count and location within a market</span></div>
-            <div class="al-item"><div class="al-dot"></div><span>Canadian rates displayed in <strong>CAD at ~1.36 exchange rate</strong>; Mexican rates in <strong>MXN at ~17.5 rate</strong> — actual rates fluctuate</span></div>
-            <div class="al-item"><div class="al-dot"></div><span>The calculator does not account for platform fees, cleaning fees, or operating costs. It measures gross booking revenue only</span></div>
-            <div class="al-item"><div class="al-dot"></div><span>Marketics figures assume full Method implementation. Results vary by property condition, host responsiveness, and market timing</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="disclaimer fi" style="transition-delay:.16s">
  This tool is provided for estimation purposes only. Individual property performance depends on factors including but not limited to: specific location within a market, property condition and photography quality, listing history and existing review count, host response time, and seasonal timing of onboarding. The revenue gap shown is a statistical estimate based on market averages, not a guarantee of outcome. Marketics' 90-day guarantee uses actual documented metrics, not calculator projections.
  </div>
