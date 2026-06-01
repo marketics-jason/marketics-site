@@ -419,6 +419,58 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
   "provider": {"@id": "https://marketics.io/#business"}
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Marketics 16-Market Short-Term Rental Benchmark Data (USD-Normalized)",
+  "description": "Average nightly rate (ADR) and occupancy benchmarks for 16 short-term rental markets across the United States, Canada, and Mexico, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. Each market includes a market-average benchmark and a top-performer figure reflecting the average performance of Marketics-managed properties. Figures are updated quarterly.",
+  "url": "https://marketics.io/calculator",
+  "isAccessibleForFree": true,
+  "license": "https://marketics.io/legal",
+  "creator": {"@id": "https://marketics.io/#business"},
+  "keywords": ["short-term rental","Airbnb","vacation rental","average daily rate","ADR","occupancy rate","STR benchmark","revenue"],
+  "spatialCoverage": ["Austin, TX","Scottsdale, AZ","Nashville, TN","Miami, FL","New Orleans, LA","San Diego, CA","Chicago, IL","Seattle, WA","Phoenix, AZ","Denver, CO","Toronto, ON","Vancouver, BC","Montréal, QC","Cancún, MX","Mexico City, MX","Puerto Vallarta, MX"],
+  "variableMeasured": [
+    {"@type": "PropertyValue","name": "Benchmark Average Daily Rate (ADR)","unitText": "USD"},
+    {"@type": "PropertyValue","name": "Benchmark Occupancy Rate","unitText": "PERCENT"},
+    {"@type": "PropertyValue","name": "Top-Performer Average Daily Rate (ADR)","unitText": "USD"},
+    {"@type": "PropertyValue","name": "Top-Performer Occupancy Rate","unitText": "PERCENT"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is an Airbnb revenue calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's a market-level estimate, not a property-specific guarantee. This calculator is built on city-average benchmarks across 16 markets, so it shows roughly where a typical listing in your market stands — not what your specific address, photos, or review history will earn. Every figure is gross booking revenue, shown before platform fees, cleaning fees, and operating costs. The honesty is the point: treat it as a directional gut-check, and because the rate and occupancy sliders are fully adjustable, you can replace the defaults with your own real numbers to model your own property."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is short-term rental revenue calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The core formula is straightforward: average nightly rate × ~30.4 nights per month × occupancy rate = monthly gross booking revenue. The 30.4 figure is simply an average month (365 days ÷ 12). For example, a $200 nightly rate at 75% occupancy works out to 200 × 30.4 × 0.75 ≈ $4,560 per month. This calculator runs that same formula three ways — for your current numbers, the market average, and an optimized scenario — and the revenue gap is the optimized figure minus your own. All of it is gross booking revenue, before platform fees, cleaning fees, and operating costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's a good occupancy rate for an Airbnb?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Across the 16 markets in the benchmark table above, market-average occupancy runs roughly 69% to 81%, with top performers reaching higher still. What counts as 'good' depends heavily on your market and the season — a beach market like Cancún benchmarks near 81%, while a colder-weather city like Montréal sits closer to 69%. Rather than chasing a single universal number, use the benchmark table above to find a realistic target for your specific market."
+      }
+    }
+  ]
+}
+</script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Marketics">
   <meta property="og:title" content="Airbnb Revenue Calculator — What Is Your Property Actually Worth?">
@@ -748,9 +800,98 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
         </div>
       </div>
     </div>
+<!-- ══ STATIC USD-NORMALIZED BENCHMARK TABLE — crawlable mirror of the MARKETS dataset ══ -->
+<section class="mkx-benchmark fi" aria-labelledby="mkx-benchmark-heading" style="transition-delay:.14s">
+  <style>
+    .mkx-benchmark{margin:40px 0 0;font-family:'DM Sans',sans-serif;}
+    .mkx-benchmark__title{font-family:'Josefin Sans',sans-serif;font-size:clamp(18px,2.6vw,26px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:#f8f6f2;margin:0 0 10px;}
+    .mkx-benchmark__note{font-size:12px;font-weight:300;color:#6B6A65;line-height:1.6;margin:0 0 16px;max-width:760px;}
+    .mkx-benchmark__scroll{border:1px solid rgba(255,255,255,.06);border-radius:8px;}
+    .mkx-benchmark__table{width:100%;border-collapse:collapse;font-size:13px;}
+    .mkx-benchmark__table caption{caption-side:bottom;text-align:left;font-size:11px;font-weight:300;font-style:italic;color:#5a5956;padding:12px 16px 0;line-height:1.5;}
+    .mkx-benchmark__table thead th{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#D6AD60;text-align:right;padding:14px 16px;background:rgba(214,173,96,.05);border-bottom:1px solid rgba(214,173,96,.14);white-space:nowrap;}
+    .mkx-benchmark__table thead th:first-child{text-align:left;}
+    .mkx-benchmark__table tbody th{font-weight:500;color:#f8f6f2;text-align:left;padding:12px 16px;white-space:nowrap;}
+    .mkx-benchmark__table tbody td{color:#B4B2A9;text-align:right;padding:12px 16px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+    .mkx-benchmark__table tbody tr{border-bottom:1px solid rgba(255,255,255,.04);}
+    .mkx-benchmark__table tbody tr:last-child{border-bottom:none;}
+    .mkx-benchmark__table tbody tr:nth-child(even){background:rgba(255,255,255,.015);}
+    /* Mobile fallback: only narrow viewports need to scroll the table sideways */
+    @media(max-width:640px){
+      .mkx-benchmark__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+      .mkx-benchmark__table{min-width:560px;}
+    }
+  </style>
+  <h2 id="mkx-benchmark-heading" class="mkx-benchmark__title">16-Market STR Benchmark Data (USD-Normalized)</h2>
+  <p class="mkx-benchmark__note">Average nightly rate (ADR) and occupancy by market, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. The <strong>Benchmark</strong> columns reflect the market average; the <strong>Top Performer</strong> columns reflect the average of Marketics-managed properties in that market. Figures updated quarterly.</p>
+  <div class="mkx-benchmark__scroll">
+    <table class="mkx-benchmark__table">
+      <thead>
+        <tr>
+          <th scope="col">Market</th>
+          <th scope="col">Benchmark ADR (USD)</th>
+          <th scope="col">Benchmark Occupancy</th>
+          <th scope="col">Top Performer ADR (USD)</th>
+          <th scope="col">Top Performer Occupancy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Austin, TX</th><td>$189</td><td>76%</td><td>$221</td><td>85%</td></tr>
+        <tr><th scope="row">Scottsdale, AZ</th><td>$218</td><td>79%</td><td>$255</td><td>87%</td></tr>
+        <tr><th scope="row">Nashville, TN</th><td>$176</td><td>74%</td><td>$208</td><td>83%</td></tr>
+        <tr><th scope="row">Miami, FL</th><td>$201</td><td>78%</td><td>$238</td><td>86%</td></tr>
+        <tr><th scope="row">New Orleans, LA</th><td>$180</td><td>75%</td><td>$212</td><td>83%</td></tr>
+        <tr><th scope="row">San Diego, CA</th><td>$228</td><td>80%</td><td>$264</td><td>87%</td></tr>
+        <tr><th scope="row">Chicago, IL</th><td>$165</td><td>72%</td><td>$196</td><td>81%</td></tr>
+        <tr><th scope="row">Seattle, WA</th><td>$191</td><td>74%</td><td>$225</td><td>83%</td></tr>
+        <tr><th scope="row">Phoenix, AZ</th><td>$144</td><td>75%</td><td>$172</td><td>84%</td></tr>
+        <tr><th scope="row">Denver, CO</th><td>$162</td><td>73%</td><td>$192</td><td>82%</td></tr>
+        <tr><th scope="row">Toronto, ON</th><td>$174</td><td>71%</td><td>$205</td><td>80%</td></tr>
+        <tr><th scope="row">Vancouver, BC</th><td>$190</td><td>73%</td><td>$223</td><td>82%</td></tr>
+        <tr><th scope="row">Montréal, QC</th><td>$156</td><td>69%</td><td>$186</td><td>79%</td></tr>
+        <tr><th scope="row">Cancún, MX</th><td>$148</td><td>81%</td><td>$175</td><td>88%</td></tr>
+        <tr><th scope="row">Mexico City, MX</th><td>$132</td><td>74%</td><td>$158</td><td>83%</td></tr>
+        <tr><th scope="row">Puerto Vallarta, MX</th><td>$162</td><td>79%</td><td>$192</td><td>87%</td></tr>
+      </tbody>
+      <caption>USD-normalized averages derived from Marketics managed-property data, cross-referenced with booking-channel and STR market sources. ADR rounded to the nearest dollar. Local-currency rates converted at ~1.36 CAD and ~17.5 MXN per USD.</caption>
+    </table>
+  </div>
+</section>
     <div class="disclaimer fi" style="transition-delay:.16s">
  This tool is provided for estimation purposes only. Individual property performance depends on factors including but not limited to: specific location within a market, property condition and photography quality, listing history and existing review count, host response time, and seasonal timing of onboarding. The revenue gap shown is a statistical estimate based on market averages, not a guarantee of outcome. Marketics' 90-day guarantee uses actual documented metrics, not calculator projections.
  </div>
+  </div>
+</section>
+
+<!-- ══ 4b. FAQ ═══════════════════════════════════════════════ -->
+<section class="faq-section z1" aria-labelledby="faq-heading">
+  <style>
+    .faq-section{padding:56px 0;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);}
+    .faq-inner{max-width:860px;margin:0 auto;padding:0 56px;}
+    .faq-list{margin-top:28px;display:flex;flex-direction:column;}
+    .faq-item{border-top:1px solid rgba(255,255,255,.05);padding:22px 0;}
+    .faq-item:first-child{border-top:none;}
+    .faq-q{font-family:var(--display);font-size:clamp(15px,2vw,19px);font-weight:400;letter-spacing:.02em;color:var(--white);margin:0 0 10px;}
+    .faq-a{font-size:14px;font-weight:300;color:var(--stone);line-height:1.7;margin:0;}
+    @media(max-width:1024px){.faq-inner{padding-left:24px;padding-right:24px;}}
+  </style>
+  <div class="faq-inner">
+    <div class="eyebrow fi">Common Questions</div>
+    <h2 id="faq-heading" class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s">Calculator<br><em style="color:var(--gold);font-style:normal;">FAQ.</em></h2>
+    <div class="faq-list fi" style="transition-delay:.12s">
+      <div class="faq-item">
+        <h3 class="faq-q">How accurate is an Airbnb revenue calculator?</h3>
+        <p class="faq-a">It's a market-level estimate, not a property-specific guarantee. This calculator is built on city-average benchmarks across 16 markets, so it shows roughly where a typical listing in your market stands — not what your specific address, photos, or review history will earn. Every figure is gross booking revenue, shown before platform fees, cleaning fees, and operating costs. The honesty is the point: treat it as a directional gut-check, and because the rate and occupancy sliders are fully adjustable, you can replace the defaults with your own real numbers to model your own property.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How is short-term rental revenue calculated?</h3>
+        <p class="faq-a">The core formula is straightforward: average nightly rate × ~30.4 nights per month × occupancy rate = monthly gross booking revenue. The 30.4 figure is simply an average month (365 days ÷ 12). For example, a $200 nightly rate at 75% occupancy works out to 200 × 30.4 × 0.75 ≈ $4,560 per month. This calculator runs that same formula three ways — for your current numbers, the market average, and an optimized scenario — and the revenue gap is the optimized figure minus your own. All of it is gross booking revenue, before platform fees, cleaning fees, and operating costs.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What's a good occupancy rate for an Airbnb?</h3>
+        <p class="faq-a">Across the 16 markets in the benchmark table above, market-average occupancy runs roughly 69% to 81%, with top performers reaching higher still. What counts as 'good' depends heavily on your market and the season — a beach market like Cancún benchmarks near 81%, while a colder-weather city like Montréal sits closer to 69%. Rather than chasing a single universal number, use the benchmark table above to find a realistic target for your specific market.</p>
+      </div>
+    </div>
   </div>
 </section>
 
