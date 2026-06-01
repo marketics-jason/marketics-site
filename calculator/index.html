@@ -419,6 +419,26 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
   "provider": {"@id": "https://marketics.io/#business"}
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Marketics 16-Market Short-Term Rental Benchmark Data (USD-Normalized)",
+  "description": "Average nightly rate (ADR) and occupancy benchmarks for 16 short-term rental markets across the United States, Canada, and Mexico, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. Each market includes a market-average benchmark and a top-performer figure reflecting the average performance of Marketics-managed properties. Figures are updated quarterly.",
+  "url": "https://marketics.io/calculator",
+  "isAccessibleForFree": true,
+  "license": "https://marketics.io/legal",
+  "creator": {"@id": "https://marketics.io/#business"},
+  "keywords": ["short-term rental","Airbnb","vacation rental","average daily rate","ADR","occupancy rate","STR benchmark","revenue"],
+  "spatialCoverage": ["Austin, TX","Scottsdale, AZ","Nashville, TN","Miami, FL","New Orleans, LA","San Diego, CA","Chicago, IL","Seattle, WA","Phoenix, AZ","Denver, CO","Toronto, ON","Vancouver, BC","Montréal, QC","Cancún, MX","Mexico City, MX","Puerto Vallarta, MX"],
+  "variableMeasured": [
+    {"@type": "PropertyValue","name": "Benchmark Average Daily Rate (ADR)","unitText": "USD"},
+    {"@type": "PropertyValue","name": "Benchmark Occupancy Rate","unitText": "PERCENT"},
+    {"@type": "PropertyValue","name": "Top-Performer Average Daily Rate (ADR)","unitText": "USD"},
+    {"@type": "PropertyValue","name": "Top-Performer Occupancy Rate","unitText": "PERCENT"}
+  ]
+}
+</script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Marketics">
   <meta property="og:title" content="Airbnb Revenue Calculator — What Is Your Property Actually Worth?">
@@ -731,6 +751,58 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
         <div class="mc-head">What Powers the Benchmarks</div>
         <div class="mc-body">
           <p>Market benchmark rates and occupancy figures are derived from <strong>Marketics' active managed property data</strong> across 22 markets, cross-referenced with booking channel API data and wholesale industry data sources and STR market reports updated quarterly.</p>
+<!-- ══ STATIC USD-NORMALIZED BENCHMARK TABLE — crawlable mirror of the MARKETS dataset ══ -->
+<section class="mkx-benchmark" aria-labelledby="mkx-benchmark-heading">
+  <style>
+    .mkx-benchmark{max-width:980px;margin:24px 0 4px;font-family:'DM Sans',sans-serif;}
+    .mkx-benchmark__title{font-family:'Josefin Sans',sans-serif;font-size:clamp(15px,2vw,20px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:#f8f6f2;margin:0 0 10px;}
+    .mkx-benchmark__note{font-size:12px;font-weight:300;color:#6B6A65;line-height:1.6;margin:0 0 16px;max-width:760px;}
+    .mkx-benchmark__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(255,255,255,.06);border-radius:8px;}
+    .mkx-benchmark__table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px;}
+    .mkx-benchmark__table caption{caption-side:bottom;text-align:left;font-size:11px;font-weight:300;font-style:italic;color:#5a5956;padding:12px 16px 0;line-height:1.5;}
+    .mkx-benchmark__table thead th{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#D6AD60;text-align:right;padding:14px 16px;background:rgba(214,173,96,.05);border-bottom:1px solid rgba(214,173,96,.14);white-space:nowrap;}
+    .mkx-benchmark__table thead th:first-child{text-align:left;}
+    .mkx-benchmark__table tbody th{font-weight:500;color:#f8f6f2;text-align:left;padding:12px 16px;white-space:nowrap;}
+    .mkx-benchmark__table tbody td{color:#B4B2A9;text-align:right;padding:12px 16px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+    .mkx-benchmark__table tbody tr{border-bottom:1px solid rgba(255,255,255,.04);}
+    .mkx-benchmark__table tbody tr:last-child{border-bottom:none;}
+    .mkx-benchmark__table tbody tr:nth-child(even){background:rgba(255,255,255,.015);}
+  </style>
+  <h3 id="mkx-benchmark-heading" class="mkx-benchmark__title">16-Market STR Benchmark Data (USD-Normalized)</h3>
+  <p class="mkx-benchmark__note">Average nightly rate (ADR) and occupancy by market, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. The <strong>Benchmark</strong> columns reflect the market average; the <strong>Top Performer</strong> columns reflect the average of Marketics-managed properties in that market. Figures updated quarterly.</p>
+  <div class="mkx-benchmark__scroll">
+    <table class="mkx-benchmark__table">
+      <thead>
+        <tr>
+          <th scope="col">Market</th>
+          <th scope="col">Benchmark ADR (USD)</th>
+          <th scope="col">Benchmark Occupancy</th>
+          <th scope="col">Top Performer ADR (USD)</th>
+          <th scope="col">Top Performer Occupancy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Austin, TX</th><td>$189</td><td>76%</td><td>$221</td><td>85%</td></tr>
+        <tr><th scope="row">Scottsdale, AZ</th><td>$218</td><td>79%</td><td>$255</td><td>87%</td></tr>
+        <tr><th scope="row">Nashville, TN</th><td>$176</td><td>74%</td><td>$208</td><td>83%</td></tr>
+        <tr><th scope="row">Miami, FL</th><td>$201</td><td>78%</td><td>$238</td><td>86%</td></tr>
+        <tr><th scope="row">New Orleans, LA</th><td>$180</td><td>75%</td><td>$212</td><td>83%</td></tr>
+        <tr><th scope="row">San Diego, CA</th><td>$228</td><td>80%</td><td>$264</td><td>87%</td></tr>
+        <tr><th scope="row">Chicago, IL</th><td>$165</td><td>72%</td><td>$196</td><td>81%</td></tr>
+        <tr><th scope="row">Seattle, WA</th><td>$191</td><td>74%</td><td>$225</td><td>83%</td></tr>
+        <tr><th scope="row">Phoenix, AZ</th><td>$144</td><td>75%</td><td>$172</td><td>84%</td></tr>
+        <tr><th scope="row">Denver, CO</th><td>$162</td><td>73%</td><td>$192</td><td>82%</td></tr>
+        <tr><th scope="row">Toronto, ON</th><td>$174</td><td>71%</td><td>$205</td><td>80%</td></tr>
+        <tr><th scope="row">Vancouver, BC</th><td>$190</td><td>73%</td><td>$223</td><td>82%</td></tr>
+        <tr><th scope="row">Montréal, QC</th><td>$156</td><td>69%</td><td>$186</td><td>79%</td></tr>
+        <tr><th scope="row">Cancún, MX</th><td>$148</td><td>81%</td><td>$175</td><td>88%</td></tr>
+        <tr><th scope="row">Mexico City, MX</th><td>$132</td><td>74%</td><td>$158</td><td>83%</td></tr>
+        <tr><th scope="row">Puerto Vallarta, MX</th><td>$162</td><td>79%</td><td>$192</td><td>87%</td></tr>
+      </tbody>
+      <caption>USD-normalized averages derived from Marketics managed-property data, cross-referenced with booking-channel and STR market sources. ADR rounded to the nearest dollar. Local-currency rates converted at ~1.36 CAD and ~17.5 MXN per USD.</caption>
+    </table>
+  </div>
+</section>
           <p style="margin-top:10px">The "With Marketics" column reflects the actual average performance of Marketics-managed properties in each market, not a theoretical ceiling. These numbers come from properties that went through the full Method.</p>
         </div>
       </div>
