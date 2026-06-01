@@ -1,6 +1,6 @@
 # Marketics
 
-> Performance-based short-term rental (STR) optimization. We increase Airbnb revenue 50–75% in 90 days. You pay 10% of net bookings — nothing else.
+> Performance-based short-term rental (STR) optimization. ~42% portfolio benchmark revenue increase across 30 documented listings. Every property audited individually before we set a target. 10% of bookings, no monthly fee.
 
 ## Company Overview
 
@@ -35,11 +35,9 @@ This performance-based model means Marketics only earns when the host earns. If 
 
 All statistics reflect Marketics-managed properties. Sample: 28+ documented client outcomes across 9 active markets. Measurement period: first 90 days post-audit completion. Baseline: host-reported revenue for the 90 days immediately prior to engagement.
 
-- Average monthly revenue gain: +$2,860/month across all active managed properties
+- Across 30 documented listings, our portfolio benchmark is a ~42% increase in monthly revenue. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of bookings with no monthly fee, the large majority of any gain stays with you.
 - Average time to measurable results: 72 days from audit completion
-- Average nightly rate increase: +68% above pre-Marketics baseline
 - Average guest rating post-optimization: 4.93★ (up from avg 4.3 before)
-- Revenue increase range: 50–75% within 90 days (varies by property condition, market, and host responsiveness)
 
 ## Active Markets
 
