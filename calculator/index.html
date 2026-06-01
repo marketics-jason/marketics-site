@@ -439,6 +439,38 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is an Airbnb revenue calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's a market-level estimate, not a property-specific guarantee. This calculator is built on city-average benchmarks across 16 markets, so it shows roughly where a typical listing in your market stands — not what your specific address, photos, or review history will earn. Every figure is gross booking revenue, shown before platform fees, cleaning fees, and operating costs. The honesty is the point: treat it as a directional gut-check, and because the rate and occupancy sliders are fully adjustable, you can replace the defaults with your own real numbers to model your own property."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is short-term rental revenue calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The core formula is straightforward: average nightly rate × ~30.4 nights per month × occupancy rate = monthly gross booking revenue. The 30.4 figure is simply an average month (365 days ÷ 12). For example, a $200 nightly rate at 75% occupancy works out to 200 × 30.4 × 0.75 ≈ $4,560 per month. This calculator runs that same formula three ways — for your current numbers, the market average, and an optimized scenario — and the revenue gap is the optimized figure minus your own. All of it is gross booking revenue, before platform fees, cleaning fees, and operating costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's a good occupancy rate for an Airbnb?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Across the 16 markets in the benchmark table above, market-average occupancy runs roughly 69% to 81%, with top performers reaching higher still. What counts as 'good' depends heavily on your market and the season — a beach market like Cancún benchmarks near 81%, while a colder-weather city like Montréal sits closer to 69%. Rather than chasing a single universal number, use the benchmark table above to find a realistic target for your specific market."
+      }
+    }
+  ]
+}
+</script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Marketics">
   <meta property="og:title" content="Airbnb Revenue Calculator — What Is Your Property Actually Worth?">
@@ -752,6 +784,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
         <div class="mc-body">
           <p>Market benchmark rates and occupancy figures are derived from <strong>Marketics' active managed property data</strong> across 22 markets, cross-referenced with booking channel API data and wholesale industry data sources and STR market reports updated quarterly.</p>
           <p style="margin-top:10px">The "With Marketics" column reflects the actual average performance of Marketics-managed properties in each market, not a theoretical ceiling. These numbers come from properties that went through the full Method.</p>
+          <p style="margin-top:10px">Across 30 documented listings, the average increase was 42% in monthly revenue. Results are property-specific — gains vary widely by property size and market, from smaller urban units to luxury villas.</p>
         </div>
       </div>
       <div class="method-col">
@@ -828,6 +861,38 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
     <div class="disclaimer fi" style="transition-delay:.16s">
  This tool is provided for estimation purposes only. Individual property performance depends on factors including but not limited to: specific location within a market, property condition and photography quality, listing history and existing review count, host response time, and seasonal timing of onboarding. The revenue gap shown is a statistical estimate based on market averages, not a guarantee of outcome. Marketics' 90-day guarantee uses actual documented metrics, not calculator projections.
  </div>
+  </div>
+</section>
+
+<!-- ══ 4b. FAQ ═══════════════════════════════════════════════ -->
+<section class="faq-section z1" aria-labelledby="faq-heading">
+  <style>
+    .faq-section{padding:56px 0;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);}
+    .faq-inner{max-width:860px;margin:0 auto;padding:0 56px;}
+    .faq-list{margin-top:28px;display:flex;flex-direction:column;}
+    .faq-item{border-top:1px solid rgba(255,255,255,.05);padding:22px 0;}
+    .faq-item:first-child{border-top:none;}
+    .faq-q{font-family:var(--display);font-size:clamp(15px,2vw,19px);font-weight:400;letter-spacing:.02em;color:var(--white);margin:0 0 10px;}
+    .faq-a{font-size:14px;font-weight:300;color:var(--stone);line-height:1.7;margin:0;}
+    @media(max-width:1024px){.faq-inner{padding-left:24px;padding-right:24px;}}
+  </style>
+  <div class="faq-inner">
+    <div class="eyebrow fi">Common Questions</div>
+    <h2 id="faq-heading" class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s">Calculator<br><em style="color:var(--gold);font-style:normal;">FAQ.</em></h2>
+    <div class="faq-list fi" style="transition-delay:.12s">
+      <div class="faq-item">
+        <h3 class="faq-q">How accurate is an Airbnb revenue calculator?</h3>
+        <p class="faq-a">It's a market-level estimate, not a property-specific guarantee. This calculator is built on city-average benchmarks across 16 markets, so it shows roughly where a typical listing in your market stands — not what your specific address, photos, or review history will earn. Every figure is gross booking revenue, shown before platform fees, cleaning fees, and operating costs. The honesty is the point: treat it as a directional gut-check, and because the rate and occupancy sliders are fully adjustable, you can replace the defaults with your own real numbers to model your own property.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">How is short-term rental revenue calculated?</h3>
+        <p class="faq-a">The core formula is straightforward: average nightly rate × ~30.4 nights per month × occupancy rate = monthly gross booking revenue. The 30.4 figure is simply an average month (365 days ÷ 12). For example, a $200 nightly rate at 75% occupancy works out to 200 × 30.4 × 0.75 ≈ $4,560 per month. This calculator runs that same formula three ways — for your current numbers, the market average, and an optimized scenario — and the revenue gap is the optimized figure minus your own. All of it is gross booking revenue, before platform fees, cleaning fees, and operating costs.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What's a good occupancy rate for an Airbnb?</h3>
+        <p class="faq-a">Across the 16 markets in the benchmark table above, market-average occupancy runs roughly 69% to 81%, with top performers reaching higher still. What counts as 'good' depends heavily on your market and the season — a beach market like Cancún benchmarks near 81%, while a colder-weather city like Montréal sits closer to 69%. Rather than chasing a single universal number, use the benchmark table above to find a realistic target for your specific market.</p>
+      </div>
+    </div>
   </div>
 </section>
 
