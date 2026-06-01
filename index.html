@@ -1114,11 +1114,11 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
               <div class="cm-l">Avg / Night</div>
             </div>
             <div class="cm">
-              <div class="cm-v" id="cmOcc">42%</div>
+              <div class="cm-v" id="cmOcc">73%</div>
               <div class="cm-l">Occupancy</div>
             </div>
             <div class="cm">
-              <div class="cm-v" id="cmRev">$2,940</div>
+              <div class="cm-v" id="cmRev">$2,620</div>
               <div class="cm-l">Monthly Rev</div>
             </div>
           </div>
@@ -1362,19 +1362,23 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   window.START_DAY  = new Date(year, month, 1).getDay(); // 0=Sun
   window.TOTAL_DAYS = new Date(year, month + 1, 0).getDate();
 
-  // Build BEFORE: weekends booked at underpriced flat rates, midweek empty
+  // Build BEFORE: booked but UNDERPRICED — weekends and midweek filled at flat low rates
   const before = [];
-  for (let d = 1; d <= TOTAL_DAYS; d++) {
-    const dw = (START_DAY + d - 1) % 7;
-    if (dw === 5) { // Friday — start Fri-Sun block
-      const end = Math.min(d + 2, TOTAL_DAYS);
-      before.push({s: d, e: end, r: 108 + Math.round(Math.random() * 12 - 6)});
+  let bd = 1;
+  while (bd <= TOTAL_DAYS) {
+    const dw = (START_DAY + bd - 1) % 7;
+    if (dw === 5) { // Friday — Fri–Sun weekend block
+      const end = Math.min(bd + 2, TOTAL_DAYS);
+      before.push({s: bd, e: end, r: 108 + Math.round(Math.random() * 12 - 6)});
+      bd = end + 1;
+    } else if (dw === 2) { // Tuesday — Tue–Wed midweek block (underpriced)
+      const end = Math.min(bd + 1, TOTAL_DAYS);
+      before.push({s: bd, e: end, r: 95 + Math.round(Math.random() * 6 - 3)});
+      bd = end + 1;
+    } else {
+      bd++;
     }
   }
-  // Add one stray midweek booking (Wed around mid-month)
-  const midWed = Array.from({length: TOTAL_DAYS}, (_,i)=>i+1)
-    .find(d => { const dw=(START_DAY+d-1)%7; return dw===3 && d>=12 && d<=20; });
-  if (midWed) before.push({s: midWed, e: midWed, r: 95});
   before.sort((a, b) => a.s - b.s);
   window.BEFORE = before;
 
