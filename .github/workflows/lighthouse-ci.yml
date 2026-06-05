@@ -1,0 +1,45 @@
+name: Lighthouse CI (mobile)
+
+# Runs a mobile Lighthouse audit on every PR to main so perf regressions
+# (render-blocking, LCP, TBT, CLS, oversized images) get caught before merge.
+# Serves the static site locally and tests the homepage + /calculator.
+#
+# Note: this audits the built static files, not the Netlify edge layer, so it
+# does NOT exercise netlify.toml headers (CSP, cache) or the trailing-slash
+# redirects. Treat Best-Practices/cache deltas vs production PageSpeed as
+# expected; the core perf metrics (FCP/LCP/TBT/CLS/image sizing) are the signal.
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Don't pile up runs on rapid pushes to the same PR.
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Mobile performance audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+
+      - name: Run Lighthouse CI (mobile)
+        run: lhci autorun
+        # Reads lighthouserc.json. Median of 3 runs; uploads the full report to
+        # temporary public storage and prints the link in the job log. The job
+        # fails (red check) only if the "error"-level budgets are breached.
