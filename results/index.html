@@ -537,9 +537,12 @@ body::before{
   <meta name="twitter:title" content="Marketics Results — Real Hosts. Real Numbers.">
   <meta name="twitter:description" content="Documented outcomes from Marketics-managed properties. ~42% portfolio benchmark revenue increase across 30 documented listings. Every property audited individually before we set a target. 10% of bookings, no monthly fee.">
   <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
-<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Preload only above-the-fold faces: hero H1 (Josefin 200 = LCP text) + primary body (DM Sans 400) -->
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css">
+<!-- Self-hosted fonts loaded non-render-blocking (font-display:swap renders text immediately) -->
+<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <script>(function(){function l(){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vx9dwjri01");}if("requestIdleCallback"in window){requestIdleCallback(l,{timeout:4000});}else{setTimeout(l,4000);}})();</script>
 </head>
 <body>
