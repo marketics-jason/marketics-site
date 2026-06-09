@@ -1,0 +1,39 @@
+name: Validate intel schema
+
+# Holds new/changed /intel/ pages to the Article schema standard
+# (valid datePublished/dateModified with timezone, image, author url).
+# Only checks files changed in the PR, so it never retroactively fails
+# older pages that were left untouched.
+
+on:
+  pull_request:
+    paths:
+      - 'intel/**/index.html'
+      - 'scripts/validate-intel-schema.py'
+      - '.github/workflows/validate-schema.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine changed intel pages
+        id: changed
+        run: |
+          base="origin/${{ github.base_ref }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD \
+            | grep -E '^intel/.+/index\.html$' || true)
+          echo "Changed intel pages:"
+          echo "${files:-(none)}"
+          # Pass through as a space-separated list
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Validate Article schema
+        run: |
+          files=$(printf '%s' "${{ steps.changed.outputs.files }}" | tr '\n' ' ')
+          python3 scripts/validate-intel-schema.py $files
