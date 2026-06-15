@@ -1117,7 +1117,11 @@ async function initiatePayment() {
 document.addEventListener('DOMContentLoaded', function() {
   ['firstName','lastName','email','phone','propertyAddress','airbnbUrl'].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input', () => el.classList.remove('error'));
+    if (el) el.addEventListener('input', () => {
+      el.classList.remove('error');
+      const err = document.getElementById('err-' + id);
+      if (err) err.classList.remove('vis');
+    });
   });
 });
 </script>
