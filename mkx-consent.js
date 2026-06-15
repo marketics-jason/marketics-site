@@ -42,16 +42,33 @@
     } catch (e) { /* localStorage blocked — proceed without storing */ }
   }
 
+  /* ── Idle delivery (avoid main-thread congestion / TBT) ── */
+  function idle(fn) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(fn, { timeout: 4000 });
+    } else {
+      setTimeout(fn, 4000);
+    }
+  }
+
   /* ── Fire analytics (only after acceptance) ──────── */
   function loadAnalytics() {
-    // Clarity — loaded idle to avoid main-thread congestion
-    (function (fn) {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(fn, { timeout: 4000 });
-      } else {
-        setTimeout(fn, 4000);
-      }
-    })(function () {
+    // Google Analytics 4 — loaded idle, only after consent.
+    // The inline <head> stub has already queued gtag('js') + gtag('config', ID)
+    // into dataLayer; loading gtag.js here flushes the queue and starts measurement.
+    idle(function () {
+      if (window.__mkxGA4) return;
+      window.__mkxGA4 = true;
+      var g = document.createElement('script');
+      g.async = 1;
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=G-51HW9TQFTJ';
+      document.head.appendChild(g);
+    });
+
+    // Microsoft Clarity — loaded idle to avoid main-thread congestion
+    idle(function () {
+      if (window.__mkxClarity) return;
+      window.__mkxClarity = true;
       (function (c, l, a, r, i, t, y) {
         c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
         t = l.createElement(r); t.async = 1;
