@@ -962,8 +962,6 @@ document.getElementById('submitBtn').addEventListener('click', async ()=>{
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload)
     });
-    /* GA4 conversion — fires only after a successful webhook POST (not on click); transmits post-consent */
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'get-started' });
   } catch(e) {
     console.warn('GHL webhook non-critical error:', e);
   }
@@ -976,6 +974,9 @@ document.getElementById('submitBtn').addEventListener('click', async ()=>{
   document.getElementById('progressFill').style.width='100%';
   const confirm=document.getElementById('confirmPage');
   confirm.classList.add('active');
+  /* GA4 conversion — fires when the success ("In Queue") state renders, independent of the
+     webhook's CORS/network outcome; transmits once consent-gated gtag.js has loaded */
+  if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'get-started' });
   window.scrollTo({top:0,behavior:'smooth'});
 });
 
