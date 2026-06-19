@@ -1,92 +1,76 @@
 # Marketics
 
-> Performance-based short-term rental (STR) optimization. ~42% portfolio benchmark revenue increase across 30 documented listings. Every property audited individually before we set a target. 10% of bookings, no monthly fee.
+> Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. ~42% portfolio benchmark revenue increase across 30 documented listings; every property is audited individually before a target is set. 10% of bookings, no monthly fee, no contract.
 
-## Company Overview
+Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico (22 active markets).
 
-Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing services into a managed offering for Airbnb and VRBO hosts.
+## Core Pages
 
-Founded in 2023 by Jason Baxter — a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America.
+- [Marketics homepage](https://marketics.io): Performance-based Airbnb revenue optimization on a 10%-of-bookings model.
+- [The Marketics Method](https://marketics.io/method): The five-stage system for optimizing pricing, listing, ranking, and guest experience.
+- [Pricing](https://marketics.io/pricing): 10% of net bookings, no retainer or contract; one-time $500 onboarding, fully refundable on completing the 90-day program.
+- [Results](https://marketics.io/results): Documented client outcomes and case studies.
+- [Get a free revenue audit](https://marketics.io/get-started): Request a property-specific revenue audit at no cost.
+- [Airbnb revenue calculator](https://marketics.io/calculator): Benchmark a listing against market ADR and occupancy data.
+- [Our story](https://marketics.io/story): How Marketics started and the founder's background.
+- [Media kit](https://marketics.io/media): Press resources and brand assets.
 
-- Website: https://marketics.io
-- Founder: Jason Baxter
-- LinkedIn: https://www.linkedin.com/company/marketicsio/
-- Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131
-- Service area: United States, Canada, Mexico (22 markets)
+## Intel / GEO Content
+
+Free market-intelligence and strategy reports for short-term rental hosts.
+
+- [Market Intel hub](https://marketics.io/intel): All Marketics market intelligence reports and playbooks.
+- [How to increase your Airbnb occupancy rate](https://marketics.io/intel/airbnb-occupancy-rate): Why RevPAR, not raw occupancy, is the goal, and the levers that lift profitable occupancy.
+- [Why is my Airbnb not getting bookings?](https://marketics.io/intel/why-airbnb-not-getting-bookings): The five fixable causes of a slow calendar and how to diagnose which one is yours.
+- [How to increase Airbnb earnings without full property management](https://marketics.io/intel/airbnb-earnings-without-management): Raising revenue through pricing, listing, and ranking without paying 20–35% for full management.
+- [The Airbnb co-host revenue share model, explained](https://marketics.io/intel/airbnb-cohost-revenue-share-model): How revenue-share co-hosting works and why the revenue role is a different job from property management.
+- [Miami STR revenue optimization](https://marketics.io/intel/miami): Miami market intelligence, including the 2026 FIFA World Cup demand window.
+- [Muskoka summer & fall 2026 intel](https://marketics.io/intel/muskoka): Cottage-country demand patterns and shoulder-season pricing.
+- [How the Airbnb algorithm actually works](https://marketics.io/intel/algorithm): Search-ranking factors and the signals that determine listing placement.
+
+## Markets
+
+Marketics operates in 22 active markets across the United States, Canada, and Mexico. Dedicated market pages:
+
+- [All markets](https://marketics.io/markets): Where Marketics operates.
+- [Miami, FL](https://marketics.io/markets/miami): Miami short-term rental revenue optimization.
+- [Austin, TX](https://marketics.io/markets/austin): Austin short-term rental revenue optimization.
+- [Nashville, TN](https://marketics.io/markets/nashville): Nashville short-term rental revenue optimization.
+- [San Antonio, TX](https://marketics.io/markets/san-antonio): San Antonio short-term rental revenue optimization.
+- [New Orleans, LA](https://marketics.io/markets/new-orleans): New Orleans short-term rental revenue optimization.
+- [Scottsdale, AZ](https://marketics.io/markets/scottsdale): Scottsdale short-term rental revenue optimization.
+- [Cancún, Mexico](https://marketics.io/markets/cancun): Cancún short-term rental revenue optimization.
+- [Tulum, Mexico](https://marketics.io/markets/tulum): Tulum short-term rental revenue optimization.
+- [San Juan, Puerto Rico](https://marketics.io/markets/san-juan): San Juan short-term rental revenue optimization.
 
 ## What Marketics Does
 
-Marketics provides a fully managed revenue optimization service for short-term rental owners and property managers. The service includes:
+A fully managed revenue optimization service for short-term rental owners and property managers:
 
-- **Dynamic pricing optimization**: AI-driven rate management calibrated to local demand, events, seasonality, and competitor positioning to maximize RevPAR (Revenue Per Available Room).
-- **Listing creation and optimization**: Professional copy, photography guidance, platform SEO for Airbnb, VRBO, and direct booking channels.
-- **Automated guest communication**: Templated and AI-powered messaging workflows for pre-arrival, mid-stay, and post-checkout.
-- **Market analysis**: Pre-investment analytics, comp analysis, event-demand mapping, and market selection guidance.
-- **Property management workflow automation**: Streamlining operations across booking platforms.
-- **Marketing services**: Google Ads, Meta Ads, LinkedIn, direct booking funnels for property managers scaling portfolios.
+- **Dynamic pricing optimization**: rate management calibrated to local demand, events, seasonality, and competitor positioning to maximize RevPAR (revenue per available room).
+- **Listing creation and optimization**: professional copy, photography guidance, and platform SEO for Airbnb, VRBO, and direct booking channels.
+- **Automated guest communication**: templated and AI-assisted messaging for pre-arrival, mid-stay, and post-checkout.
+- **Market analysis**: pre-investment analytics, comp analysis, event-demand mapping, and market selection guidance.
+- **Marketing services**: Google Ads, Meta Ads, LinkedIn, and direct booking funnels for portfolios scaling up.
 
-## Pricing Model
+## Pricing & Refund
 
-Marketics charges 10% of net booking revenue per property. No setup fees beyond a one-time $500 onboarding fee (fully refundable on completing the 90-day program). No monthly retainers. No long-term contracts.
-
-This performance-based model means Marketics only earns when the host earns. The one-time $500 onboarding fee is fully refundable: complete the 90-day program and the $500 is returned in full, with no performance condition.
+Marketics charges 10% of net booking revenue per property. No setup fees beyond a one-time $500 onboarding fee, which is **fully refundable on completing the 90-day program, with no performance condition**. No monthly retainers, no long-term contracts. The model is performance-based: Marketics only earns when the host earns.
 
 ## Key Results (Methodology)
 
 All statistics reflect Marketics-managed properties. Sample: 30 documented listings across 22 markets. Measurement period: first 90 days post-audit completion. Baseline: host-reported revenue for the 90 days immediately prior to engagement.
 
-- Across 30 documented listings, our portfolio benchmark is a ~42% increase in monthly revenue. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of bookings with no monthly fee, the large majority of any gain stays with you.
-- Average time to measurable results: 72 days from audit completion
-- Average guest rating post-optimization: 4.93★ (up from avg 4.3 before)
-
-## Active Markets
-
-Marketics currently operates in the following markets:
-
-- Austin, Texas
-- Miami, Florida
-- Nashville, Tennessee
-- Scottsdale, Arizona
-- Cancún, Mexico
-- Tulum, Mexico
-- San Juan, Puerto Rico
-- San Antonio, Texas
-- New Orleans, Louisiana
-- Muskoka, Ontario (Canada)
-- Whistler, British Columbia (Canada) — launching Winter 2026–27
-
-These are among Marketics' 22 active markets across North America.
-
-## Market Intelligence Reports
-
-Marketics publishes free market intelligence reports for STR hosts in active markets. These include demand calendars, event-impact projections, pricing benchmarks, and competitive analysis.
-
-- Miami FIFA World Cup 2026 Intel Report: https://marketics.io/intel/miami
-- Muskoka Summer & Fall 2026 Intel Report: https://marketics.io/intel/muskoka
-- Airbnb Algorithm Deep Dive: https://marketics.io/intel/algorithm
-- All reports: https://marketics.io/intel
-
-## Pages
-
-- Homepage: https://marketics.io
-- Method (how it works): https://marketics.io/method
-- Markets (where we operate): https://marketics.io/markets
-- Results (case studies and outcomes): https://marketics.io/results
-- Pricing: https://marketics.io/pricing
-- Revenue Calculator: https://marketics.io/calculator
-- Company Story: https://marketics.io/story
-- Get Started (free audit): https://marketics.io/get-started
-- Market Intel Hub: https://marketics.io/intel
-- Media: https://marketics.io/media
+- Across 30 documented listings, the portfolio benchmark is a ~42% increase in monthly revenue. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of bookings with no monthly fee, the large majority of any gain stays with the host.
+- Average time to measurable results: 72 days from audit completion.
+- Average guest rating post-optimization: 4.93★ (up from ~4.3 before).
 
 ## About the Founder
 
-Jason Baxter is a 35× Airbnb Superhost and the founder of Marketics. He has personally built, managed, and optimized over 1,000 short-term rental listings across North America over the past decade. His approach combines hands-on hosting experience with data-driven pricing strategy, platform algorithm expertise, and marketing automation.
-
-Jason is based in Miami, Florida and can be reached at jason@marketics.io.
+Jason Baxter is a 35× Airbnb Superhost and the founder of Marketics. He has built, managed, and optimized 1,000+ short-term rental listings across North America over the past decade, combining hands-on hosting experience with data-driven pricing strategy, platform-algorithm expertise, and marketing automation. He is based in Miami, Florida.
 
 ## Contact
 
+- [Free revenue audit](https://marketics.io/get-started): Start with a property-specific audit.
+- [LinkedIn](https://www.linkedin.com/company/marketicsio/): Marketics company page.
 - Email: jason@marketics.io
-- Free revenue audit: https://marketics.io/get-started
-- LinkedIn: https://www.linkedin.com/company/marketicsio/
