@@ -78,3 +78,9 @@
   for = "/intel/*/report/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Audit deliverables — noindex (confidential client pages; meta-robots also set)
+[[headers]]
+  for = "/audits/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
