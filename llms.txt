@@ -8,7 +8,7 @@ Marketics is a performance-based short-term rental optimization company that com
 
 - [Marketics homepage](https://marketics.io): Performance-based Airbnb revenue optimization on a 10%-of-bookings model.
 - [The Marketics Method](https://marketics.io/method): The five-stage system for optimizing pricing, listing, ranking, and guest experience.
-- [Pricing](https://marketics.io/pricing): 10% of net bookings, no retainer or contract; one-time $500 onboarding, fully refundable on completing the 90-day program.
+- [Pricing](https://marketics.io/pricing): 10% of net bookings, no retainer or contract; $500 commitment deposit, refunded automatically on completing the 90-day program.
 - [Results](https://marketics.io/results): Documented client outcomes and case studies.
 - [Get a free revenue audit](https://marketics.io/get-started): Request a property-specific revenue audit at no cost.
 - [Airbnb revenue calculator](https://marketics.io/calculator): Benchmark a listing against market ADR and occupancy data.
@@ -55,7 +55,7 @@ A fully managed revenue optimization service for short-term rental owners and pr
 
 ## Pricing & Refund
 
-Marketics charges 10% of net booking revenue per property. No setup fees beyond a one-time $500 onboarding fee, which is **fully refundable on completing the 90-day program, with no performance condition**. No monthly retainers, no long-term contracts. The model is performance-based: Marketics only earns when the host earns.
+Marketics charges 10% of net booking revenue per property. No fees beyond a one-time **$500 commitment deposit — refunded automatically when you complete the 90-day program**. The only condition is completion; withdrawing before Day 90 forfeits the deposit. No monthly retainers, no long-term contracts. The model is performance-based: Marketics only earns when the host earns.
 
 ## Key Results (Methodology)
 
