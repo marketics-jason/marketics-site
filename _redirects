@@ -34,6 +34,8 @@
 
 # Legal
 /privacy-policy                    /legal                     301
+/privacy                           /legal                     301
+/terms                             /legal?tab=terms           301
 
 # Thank you / confirmation
 /thank-you-page                    /join/confirmation         301
@@ -43,6 +45,10 @@
 
 # ══ FUNCTIONAL REDIRECTS ══════════════════════════════════════════
 /call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
+
+# Internal docs — never serve publicly (force-shadow the static files)
+/marketics-site-audit-2026-07      /404.html                  404!
+/marketics-site-audit-2026-07.md   /404.html                  404!
 
 # 404 fallback
 /* /404.html 404
