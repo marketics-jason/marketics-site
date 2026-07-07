@@ -1,6 +1,6 @@
 # Marketics
 
-> Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. ~42% portfolio benchmark revenue increase across 30 documented listings; every property is audited individually before a target is set. 10% of bookings, no monthly fee, no contract.
+> Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. 42%+ benchmark revenue lift, set at the median of 19 documented short-term-rental engagements; every property is audited individually before a target is set. 10% of bookings, no monthly fee, no contract.
 
 Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico (22 active markets).
 
@@ -20,6 +20,7 @@ Marketics is a performance-based short-term rental optimization company that com
 Free market-intelligence and strategy reports for short-term rental hosts.
 
 - [Market Intel hub](https://marketics.io/intel): All Marketics market intelligence reports and playbooks.
+- [The Marketics STR Performance Index](https://marketics.io/intel/str-performance-index): The documented results behind the 42%+ benchmark: median, range, sample, and methodology.
 - [How to increase your Airbnb occupancy rate](https://marketics.io/intel/airbnb-occupancy-rate): Why RevPAR, not raw occupancy, is the goal, and the levers that lift profitable occupancy.
 - [Why is my Airbnb not getting bookings?](https://marketics.io/intel/why-airbnb-not-getting-bookings): The five fixable causes of a slow calendar and how to diagnose which one is yours.
 - [How to increase Airbnb earnings without full property management](https://marketics.io/intel/airbnb-earnings-without-management): Raising revenue through pricing, listing, and ranking without paying 20–35% for full management.
@@ -59,9 +60,10 @@ Marketics charges 10% of net booking revenue per property. No fees beyond a one-
 
 ## Key Results (Methodology)
 
-All statistics reflect Marketics-managed properties. Sample: 30 documented listings across 22 markets. Measurement period: first 90 days post-audit completion. Baseline: host-reported revenue for the 90 days immediately prior to engagement.
+All statistics reflect Marketics-managed properties. Sample: 19 documented short-term-rental engagements, measured 2019–2026. Median net-of-market revenue lift: 45% (range −3% to +193%). Inclusion: Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.
 
-- Across 30 documented listings, the portfolio benchmark is a ~42% increase in monthly revenue. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of bookings with no monthly fee, the large majority of any gain stays with the host.
+- The benchmark is a 42%+ increase in monthly revenue, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of bookings with no monthly fee, the large majority of any gain stays with the host.
+- Full distribution and methodology: [the Marketics STR Performance Index](https://marketics.io/intel/str-performance-index).
 - Average time to measurable results: 72 days from audit completion.
 - Average guest rating post-optimization: 4.93★ (up from ~4.3 before).
 
