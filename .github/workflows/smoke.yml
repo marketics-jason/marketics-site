@@ -1,0 +1,28 @@
+name: Post-deploy smoke test
+
+# Verifies live response headers, redirect behavior, and shipped canon against a
+# real deployment — the blind spot Lighthouse-on-a-local-server can't cover.
+#
+# Manual: Actions tab -> "Post-deploy smoke test" -> Run workflow -> paste a
+# Netlify deploy-preview URL (they don't bot-block; production may 403 curl).
+# Scheduled: a daily run against production as a live-regression tripwire.
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Base URL to smoke-test (e.g. a deploy-preview URL)'
+        required: true
+        default: 'https://marketics.io'
+  schedule:
+    - cron: '17 13 * * *'   # 13:17 UTC daily — off the :00 mark
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run smoke test
+        run: |
+          base="${{ github.event.inputs.base_url || 'https://marketics.io' }}"
+          bash scripts/smoke.sh "$base"
