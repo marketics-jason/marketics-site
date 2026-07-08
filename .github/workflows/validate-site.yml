@@ -1,0 +1,23 @@
+name: Validate site invariants
+
+# Site-wide drift gate: placeholders, retired canon tokens, broken/trailing-slash
+# internal links, consent gating, canonical correctness, and JSON-LD completeness.
+# Runs the full site on every PR that touches HTML or the validator — the check is
+# cheap and the whole point is catching drift anywhere, not just in changed files.
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - '_redirects'
+      - 'sitemap.xml'
+      - 'scripts/validate-site.py'
+      - '.github/workflows/validate-site.yml'
+
+jobs:
+  validate-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run site invariant gate
+        run: python3 scripts/validate-site.py
