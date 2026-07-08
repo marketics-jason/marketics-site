@@ -666,6 +666,18 @@ body::before{
 .sf-col a:hover{color:var(--gold,#D6AD60);}
 .sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
 @media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+
+/* Market profiles (consolidated per-city sections) */
+.market-profiles{max-width:820px;margin:0 auto;padding:0 24px 24px;}
+.market-profiles-head{text-align:center;margin-bottom:24px;}
+.mprofile{scroll-margin-top:88px;padding:28px 0;border-top:1px solid rgba(255,255,255,.08);}
+.mprofile h3{font-family:'Josefin Sans',sans-serif;font-size:23px;font-weight:300;color:#f8f6f2;margin:0 0 10px;}
+.mprofile h3 span{color:rgba(180,178,169,.55);font-size:13px;letter-spacing:.02em;}
+.mprofile .mp-body{color:rgba(180,178,169,.85);font-size:15px;line-height:1.75;margin:0 0 14px;}
+.mprofile .mp-events{font-family:'DM Mono',monospace;font-size:12.5px;color:rgba(180,178,169,.7);line-height:1.7;margin-bottom:14px;}
+.mprofile .mp-events strong{color:#D6AD60;font-weight:400;}
+.mprofile .mp-cta{font-size:13px;color:#D6AD60;text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
+.mprofile .mp-cta:hover{border-bottom-color:#D6AD60;}
 </style>
   <!-- Open Graph -->  <!-- Twitter Card -->  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Marketics">
@@ -849,7 +861,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>14</strong> active properties managed</span>
-          <a href="/markets/austin" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-austin" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -872,7 +884,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>9</strong> active properties managed</span>
-          <a href="/markets/scottsdale" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-scottsdale" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -895,7 +907,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>11</strong> active properties managed</span>
-          <a href="/markets/nashville" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-nashville" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -919,7 +931,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>18</strong> active properties managed</span>
-          <a href="/markets/miami" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-miami" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -942,7 +954,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>7</strong> active properties managed</span>
-          <a href="/markets/cancun" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-cancun" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -965,7 +977,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>8</strong> active properties managed</span>
-          <a href="/markets/new-orleans" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-new-orleans" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -1012,7 +1024,7 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
-          <a href="/markets/tulum" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-tulum" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
@@ -1035,11 +1047,70 @@ body::before{
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
-          <a href="/markets/san-juan" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
+          <a href="#market-san-juan" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
       </div>
 
     </div><!-- /market-cards-3x3 -->
+  </div>
+</section>
+
+
+<!-- ══ MARKET PROFILES (consolidated from former per-city pages) ══ -->
+<section class="page-section" id="market-profiles">
+  <div class="market-profiles">
+    <div class="market-profiles-head">
+      <h2 class="section-title">Market <em>Profiles.</em></h2>
+      <p class="section-sub">A closer look at each active market — demand rhythm, peak events, and where the revenue is won or lost.</p>
+    </div>
+    <div class="mprofile" id="market-austin">
+      <h3>🇺🇸 Austin <span>· Texas · Live Music Capital</span></h3>
+      <p class="mp-body">Austin's STR market runs on events. SXSW alone generates a 3× demand multiplier across the metro, and the addition of Formula 1 in October created a second peak that didn't exist five years ago. The challenge most hosts face isn't low demand — it's leaving money on the table during spikes while underpricing shoulder weeks. Marketics manages 14 properties across Austin, using dynamic pricing calibrated to the city's unique event calendar and neighborhood-level demand patterns.</p>
+      <div class="mp-events"><strong>Peak events:</strong> SXSW (March) · F1 Grand Prix (Oct–Nov) · ACL Music Festival (October)</div>
+      <a href="/get-started" class="mp-cta">Get a free Austin revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-scottsdale">
+      <h3>🇺🇸 Scottsdale <span>· Arizona · Desert Luxury</span></h3>
+      <p class="mp-body">Scottsdale commands some of the highest ADRs in the Sun Belt, driven by a concentrated luxury-travel season from January through April. Barrett-Jackson, the Waste Management Phoenix Open, and MLB Spring Training create a triple-peak window that many hosts underprice. Summer is the strategic challenge — 110°F heat drops demand sharply, and hosts who don't adjust lose occupancy. Marketics manages 9 properties in Scottsdale with pricing strategies built around the desert's extreme seasonality.</p>
+      <div class="mp-events"><strong>Peak events:</strong> Barrett-Jackson Auction (January) · WM Phoenix Open (February) · MLB Spring Training (March)</div>
+      <a href="/get-started" class="mp-cta">Get a free Scottsdale revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-nashville">
+      <h3>🇺🇸 Nashville <span>· Tennessee · Music Row</span></h3>
+      <p class="mp-body">Nashville is one of the most competitive STR markets in the US, with rapid supply growth and increasing regulatory pressure. What separates top performers from average hosts is event pricing precision and listing visibility. CMA Fest and New Year's Eve are obvious peaks, but Nashville's real revenue opportunity is in the 40+ smaller events — NFL games, SEC tournaments, bachelorette weekends — that create rolling demand spikes most hosts miss. Marketics manages 11 Nashville properties with pricing that captures every micro-event.</p>
+      <div class="mp-events"><strong>Peak events:</strong> CMA Music Festival (June) · New Year's Eve (December) · Bonnaroo (June)</div>
+      <a href="/get-started" class="mp-cta">Get a free Nashville revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-miami">
+      <h3>🇺🇸 Miami <span>· Florida · Art Basel &amp; Ultra Capital</span></h3>
+      <p class="mp-body">Miami is Marketics' largest market with 18 managed properties. The city's STR demand is driven by a year-round event calendar that peaks during Art Basel in December — the single highest-ADR week for Miami hosts — and stays elevated through Ultra in March, the Miami Open, and Formula 1 in May. Summer brings a different kind of demand: Latin American travelers and domestic families. Marketics' Miami strategy is zone-specific, with different pricing models for South Beach, Wynwood, Brickell, and Edgewater.</p>
+      <div class="mp-events"><strong>Peak events:</strong> Art Basel (December) · Ultra Music Festival (March) · Miami Open &amp; F1 (March–May)</div>
+      <a href="/get-started" class="mp-cta">Get a free Miami revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-cancun">
+      <h3>🇲🇽 Cancún <span>· Mexico · Riviera Maya Gateway</span></h3>
+      <p class="mp-body">Cancún delivers some of the highest occupancy rates in Marketics' portfolio at 82%, driven by consistent international demand and three major seasonal peaks. Spring Break, Semana Santa, and the Christmas/New Year window create a revenue concentration that rewards hosts who price aggressively during peaks and maintain competitive rates during the shoulder season. Marketics manages 7 Cancún properties with bilingual listing optimization and pricing strategies calibrated to both US and Mexican holiday calendars.</p>
+      <div class="mp-events"><strong>Peak events:</strong> US Spring Break (March) · Semana Santa (March–April) · Christmas &amp; New Year (Dec–Jan)</div>
+      <a href="/get-started" class="mp-cta">Get a free Cancún revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-new-orleans">
+      <h3>🇺🇸 New Orleans <span>· Louisiana · Mardi Gras Capital</span></h3>
+      <p class="mp-body">New Orleans has one of the most event-driven STR calendars in the country. Mardi Gras is the obvious peak, but French Quarter Fest, Essence Fest, Jazz Fest, and a steady stream of conventions create year-round demand that most hosts underestimate. The regulatory environment is strict — permit compliance is mandatory — but hosts who operate legally and price dynamically consistently outperform. Marketics manages 8 New Orleans properties with a focus on event-aware pricing and regulatory compliance.</p>
+      <div class="mp-events"><strong>Peak events:</strong> Mardi Gras (February) · French Quarter Fest (April) · Essence Fest (July)</div>
+      <a href="/get-started" class="mp-cta">Get a free New Orleans revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-tulum">
+      <h3>🇲🇽 Tulum <span>· Mexico · Riviera Maya</span></h3>
+      <p class="mp-body">Tulum operates at 64% average occupancy — strong peak seasons offset by a pronounced summer rainy-season dip. Travelers pay for the experience, not just the bed, which means listing presentation and positioning matter more here than in any other market. Zamna Festival in January and December creates electronic music tourism peaks, while the wellness traveler segment maintains strong midweek demand during high season. Marketics manages 5 Tulum properties with a focus on premium positioning and experience-driven listing optimization.</p>
+      <div class="mp-events"><strong>Peak events:</strong> Zamna Festival (Jan &amp; Dec) · Spring Break / Semana Santa (March–April) · Christmas &amp; New Year (Dec–Jan)</div>
+      <a href="/get-started" class="mp-cta">Get a free Tulum revenue audit →</a>
+    </div>
+    <div class="mprofile" id="market-san-juan">
+      <h3>🇵🇷 San Juan <span>· Puerto Rico · Old San Juan &amp; Condado</span></h3>
+      <p class="mp-body">San Juan combines Caribbean appeal with no-passport-required access for US travelers, creating a unique demand profile. Las Navidades — the extended Christmas/New Year season — is the city's biggest revenue window, but Act 60 tax incentive migration has also created a growing long-stay segment. Old San Juan and Condado are the premium zones, with walkability and beach access driving the highest ADRs. Marketics manages 5 San Juan properties with pricing strategies that balance short-stay tourism peaks with the emerging extended-stay market. One Puerto Rico villa Marketics optimized went from eight earning months to twelve and roughly 2.5× its former peak month.</p>
+      <div class="mp-events"><strong>Peak events:</strong> Las Navidades (Dec–Jan) · Semana Santa (March–April) · Casals Music Festival (June)</div>
+      <a href="/get-started" class="mp-cta">Get a free San Juan revenue audit →</a>
+    </div>
   </div>
 </section>
 
