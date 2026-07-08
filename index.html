@@ -1097,7 +1097,7 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
             <div class="live-dot"></div>
             <span class="live-lbl">Live Preview</span>
           </div>
-          <div class="cal-month-lbl" id="calMonthLbl">May 2026</div>
+          <div class="cal-month-lbl" id="calMonthLbl">July 2026</div>
           <div class="cal-status-chip before" id="calChip">Before</div>
         </div>
 
@@ -1114,22 +1114,22 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
           <div class="cal-metrics">
             <div class="cm">
-              <div class="cm-v" id="cmRate">$118</div>
+              <div class="cm-v" id="cmRate">$116</div>
               <div class="cm-l">Avg / Night</div>
             </div>
             <div class="cm">
-              <div class="cm-v" id="cmOcc">73%</div>
+              <div class="cm-v" id="cmOcc">57%</div>
               <div class="cm-l">Occupancy</div>
             </div>
             <div class="cm">
-              <div class="cm-v" id="cmRev">$2,620</div>
+              <div class="cm-v" id="cmRev">$1,980</div>
               <div class="cm-l">Monthly Rev</div>
             </div>
           </div>
 
           <div class="cal-delta" id="calDelta">
             <span class="cal-delta-lbl">Monthly gain with Marketics</span>
-            <span class="cal-delta-val">+$2,750 / mo</span>
+            <span class="cal-delta-val">+$860 / mo</span>
           </div>
 
           <button class="cal-replay" id="calReplayBtn" style="display:none" onclick="initCal()">
@@ -1366,44 +1366,71 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
   window.START_DAY  = new Date(year, month, 1).getDay(); // 0=Sun
   window.TOTAL_DAYS = new Date(year, month + 1, 0).getDate();
 
-  // Build BEFORE: booked but UNDERPRICED — weekends and midweek filled at flat low rates
-  const before = [];
-  let bd = 1;
-  while (bd <= TOTAL_DAYS) {
-    const dw = (START_DAY + bd - 1) % 7;
-    if (dw === 5) { // Friday — Fri–Sun weekend block
-      const end = Math.min(bd + 2, TOTAL_DAYS);
-      before.push({s: bd, e: end, r: 108 + Math.round(Math.random() * 12 - 6)});
-      bd = end + 1;
-    } else if (dw === 2) { // Tuesday — Tue–Wed midweek block (underpriced)
-      const end = Math.min(bd + 1, TOTAL_DAYS);
-      before.push({s: bd, e: end, r: 95 + Math.round(Math.random() * 6 - 3)});
-      bd = end + 1;
-    } else {
-      bd++;
-    }
-  }
-  before.sort((a, b) => a.s - b.s);
-  window.BEFORE = before;
+  // Deterministic PRNG seeded from the month — the same month always renders the
+  // same plausible calendar (stable across page loads; changes only when the month
+  // rolls). No Math.random(): random would move bookings on every refresh (reads as
+  // fake), flicker layout, and make Lighthouse non-reproducible.
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  const rng = mulberry32((((year*12+month)*2654435761)>>>0) || 1);
+  const rint = (lo,hi) => lo + Math.floor(rng()*(hi-lo+1));
+  const chance = p => rng() < p;
 
-  // Build AFTER: all weekends at premium + midweek filled strategically
-  const after = [];
-  let d = 2;
-  while (d <= TOTAL_DAYS) {
-    const dw = (START_DAY + d - 1) % 7;
-    if (dw === 5) { // Friday — weekend block
-      const end = Math.min(d + 2, TOTAL_DAYS);
-      after.push({s: d, e: end, r: 195 + Math.round(Math.random() * 20 - 5), wk: true});
-      d = end + 1;
-    } else if (dw === 1) { // Monday — midweek block Mon–Thu
-      const end = Math.min(d + 3, TOTAL_DAYS);
-      after.push({s: d, e: end, r: 93 + Math.round(Math.random() * 8 - 4), wk: false});
-      d = end + 1;
-    } else {
-      d++;
+  const D = TOTAL_DAYS;
+  const dowOf = day => (START_DAY + day - 1) % 7; // 0=Sun..6=Sat
+
+  // Build one state at a CONTROLLED occupancy so the "after" number is always
+  // market-real (never a 90%+ fantasy fill) regardless of how the month's weekdays
+  // land. Weekends anchor the calendar (one deliberately left open as a gap); a
+  // deterministically-shuffled subset of midweek nights fills up to the target, so
+  // the booked/open mix is staggered and distributed, not a clean block.
+  function buildState(targetOcc, wkRate, midRate) {
+    const target = Math.round(targetOcc * D);
+    const stays = [], booked = new Set();
+    let nights = 0;
+    const take = (s, e, r, wk) => { stays.push({s, e, r, wk}); for (let d=s; d<=e; d++) booked.add(d); nights += e-s+1; };
+    // Weekends (Fri–Sun), all but one deterministically skipped for a visible gap
+    const weekends = [];
+    for (let day=1; day<=D; day++) if (dowOf(day)===5) weekends.push([day, Math.min(day+2, D)]);
+    const skip = weekends.length > 2 ? rint(0, weekends.length-1) : -1;
+    weekends.forEach(([s,e], i) => { if (i!==skip) take(s, e, rint(wkRate[0], wkRate[1]), true); });
+    // Midweek candidates (Mon–Tue blocks + lone Wed), shuffled by a seeded key so the
+    // fill is spread across the whole month; add until the occupancy target is met.
+    const mids = [];
+    for (let day=1; day<=D; day++) {
+      const w = dowOf(day);
+      if (w===1) mids.push({s:day, e:Math.min(day+1, D)});
+      else if (w===3) mids.push({s:day, e:day});
     }
+    mids.forEach(m => m.k = rng());
+    mids.sort((a,b) => a.k - b.k);
+    for (const m of mids) {
+      if (nights >= target) break;
+      let clash = false; for (let d=m.s; d<=m.e; d++) if (booked.has(d)) clash = true;
+      if (!clash) take(m.s, m.e, rint(midRate[0], midRate[1]), false);
+    }
+    stays.sort((a,b) => a.s - b.s);
+    return stays;
   }
-  window.AFTER = after;
+
+  // BEFORE: under-priced + under-booked (~54% occ, flat low rates).
+  const before = buildState(0.54, [106,122], [96,110]);
+  // AFTER: optimized — higher occupancy (~64%, market-real) + premium weekend pricing.
+  const after  = buildState(0.64, [170,205], [120,140]);
+
+  // Reconcile the two states so the demonstrated monthly lift lands at ~1.43×
+  // (≈ the published 42%+ benchmark), never silently above it. Occupancy is fixed by
+  // the patterns above; only the AFTER rate scale is tuned — each state stays
+  // internally consistent (rate × booked nights = revenue), so a numerate visitor's
+  // back-of-napkin check holds in both states and the after rate stays above the before.
+  const revOf = arr => arr.reduce((t,b) => t + b.r*(b.e-b.s+1), 0);
+  const beforeRev = revOf(before), afterRawRev = revOf(after);
+  if (afterRawRev > 0) {
+    const k = (beforeRev * 1.435) / afterRawRev;
+    after.forEach(b => { b.r = Math.round(b.r * k); });
+  }
+
+  window.BEFORE = before;
+  window.AFTER  = after;
 })();
 
 const DOW = ['Su','Mo','Tu','We','Th','Fr','Sa'];
@@ -1647,6 +1674,11 @@ function initCal() {
   buildDow();
   buildGrid();
   updateMetrics(BEFORE, false);
+
+  // Delta is derived from the reconciled revenues, never hardcoded — it always
+  // equals AFTER − BEFORE for the month actually rendered.
+  document.querySelector('.cal-delta-val').textContent =
+    '+$' + (calcRev(AFTER) - calcRev(BEFORE)).toLocaleString() + ' / mo';
 
   document.getElementById('calChip').className = 'cal-status-chip before';
   document.getElementById('calChip').textContent = 'Before';
