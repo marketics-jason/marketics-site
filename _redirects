@@ -40,8 +40,21 @@
 # Thank you / confirmation
 /thank-you-page                    /join/confirmation         301
 
-# Junk / numeric pages → homepage
+# Old French-locale Squarespace URLs (GSC 404s, 2026-07) → English equivalents
+# Netlify does not chain redirects, so each maps directly to its final target.
+/fr/home                           /                          301
+/fr/contact                        /get-started               301
+/fr/digital-expert-services        /method                    301
+/fr/privacy-policy                 /legal                     301
+/fr/faq                            /pricing                   301
+/fr                                /                          301
+/fr/*                              /                          301
+
+# Junk / numeric / stale paths → homepage (GSC 404s)
 /928758023141                      /                          301
+/mo                                /                          301
+/cart                              /                          301
+/cdn-cgi/l/email-protection        /                          301
 
 # ══ FUNCTIONAL REDIRECTS ══════════════════════════════════════════
 /call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
