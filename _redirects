@@ -50,6 +50,9 @@
 /fr                                /                          301
 /fr/*                              /                          301
 
+# Consolidated duplicate: trust-architecture folded into /intel/trust (2026-07)
+/intel/trust-architecture          /intel/trust               301
+
 # Junk / numeric / stale paths → homepage (GSC 404s)
 /928758023141                      /                          301
 /mo                                /                          301
