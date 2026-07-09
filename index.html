@@ -318,9 +318,14 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 /* Right column — visual */
 .hero-right{
   position:relative;z-index:2;
-  display:flex;align-items:flex-start;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   align-self:start;
   padding-top:120px;
+}
+.hero-cal-note{
+  max-width:340px;margin:12px auto 0;
+  font-family:'DM Sans',sans-serif;font-size:11px;line-height:1.55;
+  color:rgba(180,178,169,.55);text-align:center;
 }
 
 /* Abstract gold architecture lines */
@@ -1139,6 +1144,10 @@ h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
 
       </div>
     </figure>
+
+    <!-- Server-rendered gate (plain HTML, NOT injected by the widget JS) so any
+         crawler parsing the page sees the numbers WITH their disclaimer. -->
+    <p class="hero-cal-note">Illustrative example, not a quote. Every property is audited individually before any target is set.</p>
 
   </div>
 
