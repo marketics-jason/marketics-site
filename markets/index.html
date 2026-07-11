@@ -424,6 +424,68 @@ body::before{
 .mc-learn:hover{color:var(--gold);}
 .mc-learn-arrow{font-size:10px;}
 
+/* Card market-report bar (last row of each card) */
+.mc-report-bar{
+  padding:11px 18px;border-top:1px solid rgba(255,255,255,.05);
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:7px;
+}
+a.mc-report-bar{
+  color:var(--gold);text-decoration:none;background:rgba(214,173,96,.05);
+  transition:background .2s,color .2s;
+}
+a.mc-report-bar:hover{background:rgba(214,173,96,.1);color:#e8c47c;}
+.mc-report-arrow{font-size:11px;transition:transform .2s;}
+a.mc-report-bar:hover .mc-report-arrow{transform:translateX(3px);}
+.mc-report-bar.no-report{color:var(--dim2);background:rgba(255,255,255,.012);cursor:default;}
+.mc-report-bar.no-report::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--dim2);opacity:.7;flex-shrink:0;
+}
+
+/* ══ MARKET INTELLIGENCE REPORTS ══════════════════════ */
+.reports-section{background:var(--night);}
+.reports-inner{max-width:1100px;margin:0 auto;padding:0 56px;}
+.reports-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;}
+.rpt-card{
+  background:var(--n2);border:1px solid rgba(255,255,255,.06);
+  padding:24px 22px;display:flex;flex-direction:column;
+  text-decoration:none;position:relative;
+  transition:border-color .3s,transform .3s,background .3s;
+}
+a.rpt-card:hover{border-color:rgba(214,173,96,.22);background:var(--n3);transform:translateY(-2px);z-index:2;}
+.rpt-badge{
+  align-self:flex-start;
+  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 8px;border-radius:3px;margin-bottom:16px;
+  display:flex;align-items:center;gap:5px;
+}
+.rpt-badge.live{background:var(--ok-lo);border:1px solid rgba(45,122,79,.2);color:var(--ok);}
+.rpt-badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ok);}
+.rpt-badge.soon{background:rgba(107,106,101,.1);border:1px solid rgba(107,106,101,.25);color:var(--dim);}
+.rpt-market{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:8px;
+}
+.rpt-title{
+  font-family:'Josefin Sans',sans-serif;font-size:19px;font-weight:200;
+  letter-spacing:.02em;color:var(--white);margin-bottom:10px;line-height:1.15;
+}
+.rpt-hook{font-size:13px;font-weight:300;color:var(--stone);line-height:1.6;margin-bottom:18px;flex:1;}
+.rpt-stats{display:flex;gap:28px;margin-bottom:18px;}
+.rpt-stat-val{font-family:'Josefin Sans',sans-serif;font-size:20px;font-weight:200;color:var(--gold);line-height:1;margin-bottom:4px;}
+.rpt-stat-lbl{font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.rpt-cta{
+  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:7px;
+}
+.rpt-card.coming .rpt-cta{color:var(--dim);}
+.rpt-arrow{font-size:11px;transition:transform .2s;}
+a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
+
 /* ══ 4. NOT LISTED ════════════════════════════════════ */
 .not-listed-section{background:var(--n2);}
 .nl-inner{
@@ -577,7 +639,7 @@ body::before{
 
 /* ══ RESPONSIVE ══════════════════════════════════════ */
 @media(max-width:1024px){
-  nav,.hero-inner,.inner,.pulse-wrap,.signal-bar,.pulse-footer,.nl-inner,.mc-inner,.page-footer{padding-left:24px;padding-right:24px;}
+  nav,.hero-inner,.inner,.pulse-wrap,.signal-bar,.pulse-footer,.nl-inner,.mc-inner,.reports-inner,.page-footer{padding-left:24px;padding-right:24px;}
 }
 @media(max-width:860px){
   nav 
@@ -586,6 +648,7 @@ body::before{
   .market-cards-3x3 .market-card:nth-child(n){border-radius:0;}
   .market-cards-3x3 .market-card:nth-child(1){border-radius:8px 0 0 0;}
   .market-cards-3x3 .market-card:nth-child(2){border-radius:0 8px 0 0;}
+  .reports-grid{grid-template-columns:1fr 1fr;}
   .nl-inner{grid-template-columns:1fr;gap:32px;}
   .intel-grid{grid-template-columns:1fr 1fr;}
   .mp-insights{grid-template-columns:1fr 1fr;}
@@ -597,6 +660,7 @@ body::before{
   .market-cards-3x3 .market-card:nth-child(n){border-radius:0;}
   .market-cards-3x3 .market-card:first-child{border-radius:8px 8px 0 0;}
   .market-cards-3x3 .market-card:last-child{border-radius:0 0 8px 8px;}
+  .reports-grid{grid-template-columns:1fr;}
   .intel-grid{grid-template-columns:1fr;}
   .mc-metrics{grid-template-columns:1fr 1fr;}
 }
@@ -865,6 +929,7 @@ body::before{
           <span class="mc-managed"><strong>14</strong> active properties managed</span>
           <a href="#market-austin" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- Scottsdale -->
@@ -888,6 +953,7 @@ body::before{
           <span class="mc-managed"><strong>9</strong> active properties managed</span>
           <a href="#market-scottsdale" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- Nashville -->
@@ -911,6 +977,7 @@ body::before{
           <span class="mc-managed"><strong>11</strong> active properties managed</span>
           <a href="#market-nashville" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <a href="/intel/nashville" class="mc-report-bar has-report">Nashville market report <span class="mc-report-arrow">→</span></a>
       </div>
 
       <!-- ROW 2 -->
@@ -935,6 +1002,7 @@ body::before{
           <span class="mc-managed"><strong>18</strong> active properties managed</span>
           <a href="#market-miami" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <a href="/intel/miami" class="mc-report-bar has-report">Miami market report <span class="mc-report-arrow">→</span></a>
       </div>
 
       <!-- Cancún -->
@@ -958,6 +1026,7 @@ body::before{
           <span class="mc-managed"><strong>7</strong> active properties managed</span>
           <a href="#market-cancun" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- New Orleans -->
@@ -981,6 +1050,7 @@ body::before{
           <span class="mc-managed"><strong>8</strong> active properties managed</span>
           <a href="#market-new-orleans" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- ROW 3 -->
@@ -1005,6 +1075,7 @@ body::before{
           <span class="mc-managed"><strong>6</strong> active properties managed</span>
           <a href="/markets/san-antonio" class="mc-learn">Learn More <span class="mc-learn-arrow">→</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- Tulum -->
@@ -1028,6 +1099,7 @@ body::before{
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
           <a href="#market-tulum" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
       <!-- San Juan -->
@@ -1051,9 +1123,94 @@ body::before{
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
           <a href="#market-san-juan" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
         </div>
+        <div class="mc-report-bar no-report">Market report coming</div>
       </div>
 
     </div><!-- /market-cards-3x3 -->
+  </div>
+</section>
+
+
+<!-- ══ MARKET INTELLIGENCE REPORTS ══ -->
+<section class="reports-section page-section" id="market-reports">
+  <div class="reports-inner">
+    <div class="eyebrow fi">Market Intelligence</div>
+    <h2 class="section-title fi" style="transition-delay:.08s">
+      Published Market<br><em>Reports.</em>
+    </h2>
+    <p class="section-sub fi" style="transition-delay:.12s">
+      Free, data-backed intelligence for markets timed to a demand event — read the market before you price it.
+      Each report is delivered on request.
+    </p>
+
+    <div class="reports-grid fi" style="transition-delay:.16s">
+
+      <!-- Miami -->
+      <a href="/intel/miami" class="rpt-card">
+        <span class="rpt-badge live">Live</span>
+        <div class="rpt-market">Miami, Florida</div>
+        <div class="rpt-title">FIFA World Cup 2026</div>
+        <div class="rpt-hook">6 matches. 65,000 fans per game. A 3–5× ADR window that opens once in a generation.</div>
+        <div class="rpt-stats">
+          <div><div class="rpt-stat-val">3–5×</div><div class="rpt-stat-lbl">ADR Multiplier</div></div>
+          <div><div class="rpt-stat-val">Jun–Jul</div><div class="rpt-stat-lbl">Peak Window</div></div>
+        </div>
+        <div class="rpt-cta">Read the report <span class="rpt-arrow">→</span></div>
+      </a>
+
+      <!-- Nashville -->
+      <a href="/intel/nashville" class="rpt-card">
+        <span class="rpt-badge live">Live</span>
+        <div class="rpt-market">Nashville, Tennessee</div>
+        <div class="rpt-title">Spring &amp; Summer 2026</div>
+        <div class="rpt-hook">72% of hosts already use dynamic pricing. Calibration — not adoption — is where the money is.</div>
+        <div class="rpt-stats">
+          <div><div class="rpt-stat-val">$306</div><div class="rpt-stat-lbl">Market ADR</div></div>
+          <div><div class="rpt-stat-val">+25.1%</div><div class="rpt-stat-lbl">Jun 25–28 Spike</div></div>
+        </div>
+        <div class="rpt-cta">Read the report <span class="rpt-arrow">→</span></div>
+      </a>
+
+      <!-- Montréal -->
+      <a href="/intel/montreal" class="rpt-card">
+        <span class="rpt-badge live">Live</span>
+        <div class="rpt-market">Montréal, Québec</div>
+        <div class="rpt-title">F1 Grand Prix 2026</div>
+        <div class="rpt-hook">Race weekend is May 22–24. Premium guests book 4–6 weeks out — the window is closing now.</div>
+        <div class="rpt-stats">
+          <div><div class="rpt-stat-val">3–5×</div><div class="rpt-stat-lbl">Race Weekend ADR</div></div>
+          <div><div class="rpt-stat-val">May 22</div><div class="rpt-stat-lbl">Window Closing</div></div>
+        </div>
+        <div class="rpt-cta">Read the report <span class="rpt-arrow">→</span></div>
+      </a>
+
+      <!-- Muskoka -->
+      <a href="/intel/muskoka" class="rpt-card">
+        <span class="rpt-badge live">Live</span>
+        <div class="rpt-market">Muskoka, Ontario</div>
+        <div class="rpt-title">Summer &amp; Fall 2026</div>
+        <div class="rpt-hook">Premium guests book in March. The fall colour window is underpriced and underserved.</div>
+        <div class="rpt-stats">
+          <div><div class="rpt-stat-val">+40%</div><div class="rpt-stat-lbl">Fall Colour Premium</div></div>
+          <div><div class="rpt-stat-val">Sept–Oct</div><div class="rpt-stat-lbl">Underpriced Window</div></div>
+        </div>
+        <div class="rpt-cta">Read the report <span class="rpt-arrow">→</span></div>
+      </a>
+
+      <!-- Whistler coming soon -->
+      <div class="rpt-card coming">
+        <span class="rpt-badge soon">Coming Soon</span>
+        <div class="rpt-market">Whistler, BC</div>
+        <div class="rpt-title">Winter 2026–27</div>
+        <div class="rpt-hook">Ski season demand, early booking patterns, and the shoulder season gap most hosts leave on the table.</div>
+        <div class="rpt-stats">
+          <div><div class="rpt-stat-val">Nov–Apr</div><div class="rpt-stat-lbl">Core Season</div></div>
+          <div><div class="rpt-stat-val">Soon</div><div class="rpt-stat-lbl">Publishing</div></div>
+        </div>
+        <div class="rpt-cta">Coming soon</div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1082,12 +1239,14 @@ body::before{
       <p class="mp-body">Nashville is one of the most competitive STR markets in the US, with rapid supply growth and increasing regulatory pressure. What separates top performers from average hosts is event pricing precision and listing visibility. CMA Fest and New Year's Eve are obvious peaks, but Nashville's real revenue opportunity is in the 40+ smaller events — NFL games, SEC tournaments, bachelorette weekends — that create rolling demand spikes most hosts miss. Marketics manages 11 Nashville properties with pricing that captures every micro-event.</p>
       <div class="mp-events"><strong>Peak events:</strong> CMA Music Festival (June) · New Year's Eve (December) · Bonnaroo (June)</div>
       <a href="/get-started" class="mp-cta">Get a free Nashville revenue audit →</a>
+      <a href="/intel/nashville" class="mp-cta" style="margin-left:22px;">Read the Nashville market report →</a>
     </div>
     <div class="mprofile" id="market-miami">
       <h3>🇺🇸 Miami <span>· Florida · Art Basel &amp; Ultra Capital</span></h3>
       <p class="mp-body">Miami is Marketics' largest market with 18 managed properties. The city's STR demand is driven by a year-round event calendar that peaks during Art Basel in December — the single highest-ADR week for Miami hosts — and stays elevated through Ultra in March, the Miami Open, and Formula 1 in May. Summer brings a different kind of demand: Latin American travelers and domestic families. Marketics' Miami strategy is zone-specific, with different pricing models for South Beach, Wynwood, Brickell, and Edgewater.</p>
       <div class="mp-events"><strong>Peak events:</strong> Art Basel (December) · Ultra Music Festival (March) · Miami Open &amp; F1 (March–May)</div>
       <a href="/get-started" class="mp-cta">Get a free Miami revenue audit →</a>
+      <a href="/intel/miami" class="mp-cta" style="margin-left:22px;">Read the Miami market report →</a>
     </div>
     <div class="mprofile" id="market-cancun">
       <h3>🇲🇽 Cancún <span>· Mexico · Riviera Maya Gateway</span></h3>
