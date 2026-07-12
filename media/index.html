@@ -219,10 +219,15 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .ep-desc{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;color:var(--body);margin:22px 0 0;max-width:900px;}
 
 /* player: real embed, framed like the mockup player card */
-.ep-embed{margin-top:32px;border:1px solid var(--line-3);background:#161615;overflow:hidden;}
-.ep-embed-yt{aspect-ratio:16/9;}
-.ep-embed-yt iframe{display:block;width:100%;height:100%;border:0;}
-.ep-embed-spotify iframe{display:block;width:100%;height:351px;border:0;}
+.ep-embed{margin-top:32px;border:1px solid var(--line-3);background:linear-gradient(135deg,#1c1c1a,#161615);
+  display:flex;align-items:center;gap:20px;padding:26px 28px;text-decoration:none;transition:border-color .2s,background .2s;}
+.ep-embed:hover{border-color:rgba(214,173,96,.4);}
+.ep-play-btn{flex-shrink:0;width:46px;height:46px;border:1px solid rgba(214,173,96,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.ep-embed:hover .ep-play-btn{background:rgba(214,173,96,.08);}
+.ep-play-btn::before{content:"";width:0;height:0;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent var(--gold);margin-left:3px;}
+.ep-play-txt{display:flex;flex-direction:column;gap:3px;}
+.ep-play-txt b{font-family:var(--display);font-weight:300;font-size:16px;color:var(--white);letter-spacing:.5px;}
+.ep-play-txt span{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
 
 /* placeholder player card (used only when no real media exists) */
 .ep-card{margin-top:32px;border:1px solid var(--line-3);background:linear-gradient(135deg,#1c1c1a 0%,#161615 100%);position:relative;overflow:hidden;display:flex;align-items:center;gap:32px;padding:34px 40px;min-height:150px;}
@@ -335,9 +340,10 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     <h2 class="ep-title">High-Demand Event Pricing: FIFA World Cup 2026 Playbook</h2>
     <span class="ep-meta">Host: Kyle Driskell · S2 E84 · 1h06 · Panel</span>
     <p class="ep-desc">A multi-guest panel breaking down how STR operators should prepare for the 2026 FIFA World Cup — uneven demand patterns, minimum-stay strategy, booking windows, ADR vs. occupancy pivot points. With Soumyadeep Paul (PriceLabs), Tim Speicher (Speicher Consulting), and Adrienn Janics (Angel Host).</p>
-    <div class="ep-embed ep-embed-spotify">
-      <iframe data-testid="embed-iframe" title="Spotify podcast episode player — High-Demand Event Pricing: FIFA World Cup 2026 Playbook" src="https://open.spotify.com/embed/episode/6X8o7SE0z1AmSAeMDPYoNg?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    <a class="ep-embed" href="https://open.spotify.com/episode/6X8o7SE0z1AmSAeMDPYoNg" target="_blank" rel="noopener" aria-label="Play “High-Demand Event Pricing: FIFA World Cup 2026 Playbook” on Spotify">
+      <span class="ep-play-btn" aria-hidden="true"></span>
+      <span class="ep-play-txt"><b>Play the episode</b><span>RevLabs by PriceLabs · 1h06</span></span>
+    </a>
     <div class="ep-listen">
       <span class="lbl">Listen on</span>
       <a href="https://podcasts.apple.com/ca/podcast/high-demand-event-pricing-fifa-world-cup-2026-playbook/id1763201303?i=1000750650950" target="_blank" rel="noopener">Apple Podcasts</a>
@@ -355,9 +361,10 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     <h2 class="ep-title">Guest Experience Can Become Your Strongest Pricing Lever</h2>
     <span class="ep-meta">Host: Kyle Driskell · S2 E88 · 35 min</span>
     <p class="ep-desc">How guest experience directly impacts pricing power — including the F1 Montréal A/B test that demonstrates the principle in production.</p>
-    <div class="ep-embed ep-embed-spotify">
-      <iframe data-testid="embed-iframe" title="Spotify podcast episode player — Guest Experience Can Become Your Strongest Pricing Lever" src="https://open.spotify.com/embed/episode/1bLTW0iLif2r5FtJbGLlN1?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    <a class="ep-embed" href="https://open.spotify.com/episode/1bLTW0iLif2r5FtJbGLlN1" target="_blank" rel="noopener" aria-label="Play “Guest Experience Can Become Your Strongest Pricing Lever” on Spotify">
+      <span class="ep-play-btn" aria-hidden="true"></span>
+      <span class="ep-play-txt"><b>Play the episode</b><span>RevLabs by PriceLabs · 35 min</span></span>
+    </a>
     <div class="ep-listen">
       <span class="lbl">Listen on</span>
       <a href="https://podcasts.apple.com/ca/podcast/guest-experience-can-become-your-strongest-pricing/id1763201303?i=1000756318861" target="_blank" rel="noopener">Apple Podcasts</a>
@@ -375,9 +382,10 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     <h2 class="ep-title">STR Lessons From Surviving a Million-Dollar COVID Loss</h2>
     <span class="ep-meta">Host: Mark Lumpkin · ~45 min</span>
     <p class="ep-desc">Jason joins Mark Lumpkin to walk through the rise, collapse, and rebuild of a 50-loft Airbnb portfolio — and what came out the other side.</p>
-    <div class="ep-embed ep-embed-yt">
-      <iframe src="https://www.youtube.com/embed/LOwn9Sn3k9k" title="STR Lessons From Surviving a Million-Dollar COVID Loss" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" loading="lazy" allowfullscreen></iframe>
-    </div>
+    <a class="ep-embed" href="https://youtu.be/LOwn9Sn3k9k" target="_blank" rel="noopener" aria-label="Watch “STR Lessons From Surviving a Million-Dollar COVID Loss” on YouTube">
+      <span class="ep-play-btn" aria-hidden="true"></span>
+      <span class="ep-play-txt"><b>Watch the episode</b><span>STR Investing · ~45 min</span></span>
+    </a>
     <div class="ep-listen">
       <span class="lbl">Listen on</span>
       <a href="https://podcasts.apple.com/us/podcast/str-lessons-from-surviving-a-million-dollar-covid-loss/id1735147784?i=1000769076721" target="_blank" rel="noopener">Apple Podcasts</a>
