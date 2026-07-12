@@ -2,38 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>The Airbnb Co-Host Revenue Share Model, Explained | Marketics</title>
 <meta name="description" content="How co-host revenue share works on Airbnb, and why the revenue role (pricing, ranking) is a different job from property management.">
+<link rel="canonical" href="https://marketics.io/intel/airbnb-cohost-revenue-share-model">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Marketics">
 <meta property="og:title" content="The Airbnb Co-Host Revenue Share Model, Explained — Marketics">
 <meta property="og:description" content="How co-host revenue share works on Airbnb, and why the revenue role (pricing, ranking) is a different job from property management.">
 <meta property="og:url" content="https://marketics.io/intel/airbnb-cohost-revenue-share-model">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
-<meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Airbnb Co-Host Revenue Share Model, Explained — Marketics">
 <meta name="twitter:description" content="How co-host revenue share works on Airbnb, and why the revenue role (pricing, ranking) is a different job from property management.">
 <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
-<link rel="canonical" href="https://marketics.io/intel/airbnb-cohost-revenue-share-model">
-<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "Article",
  "headline": "The Airbnb Co-Host Revenue Share Model, Explained",
  "description": "How co-host revenue share works on Airbnb, and why the revenue role (pricing, ranking, listing conversion) is a different discipline from property management (cleaning, guests, maintenance).",
- "image": "https://marketics.io/og/default.jpg",
  "author": {"@type": "Person", "name": "Jason Baxter", "url": "https://marketics.io/story"},
  "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io"},
+ "image": "https://marketics.io/og/default.jpg",
  "datePublished": "2026-06-15T09:00:00-04:00",
- "dateModified": "2026-06-15T09:00:00-04:00",
+ "dateModified": "2026-07-12T09:00:00-04:00",
  "url": "https://marketics.io/intel/airbnb-cohost-revenue-share-model"
 }
 </script>
@@ -58,7 +59,7 @@
    "name": "Is a co-host the same as a property manager?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "No. A property manager runs the operations of your rental: cleaning, guest communication, maintenance, supplies, and turnovers. A revenue-share co-host does a different job: growing what the property earns through pricing, search ranking, and listing conversion. Both can be called a co-host on Airbnb, but they are two distinct disciplines. One keeps the property running; the other makes it earn more. You can have one, the other, or both."
+    "text": "No. A property manager runs the operations of your rental — cleaning, guest communication, maintenance, supplies, and turnovers. A revenue-share co-host does a different job: growing what the property earns through pricing, search ranking, and listing conversion. Both can be called a co-host on Airbnb, but they are two distinct disciplines. One keeps the property running; the other makes it earn more. You can have one, the other, or both."
    }
   },
   {
@@ -74,7 +75,7 @@
    "name": "What does a revenue-share co-host actually do?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "The revenue job is pricing that moves with demand, search ranking and visibility, and listing conversion (photos, title, description, reviews). It is ongoing, data-driven optimization work done on the listing itself, not the day-to-day operation of the property."
+    "text": "The revenue job is pricing that moves with demand, search ranking and visibility, and listing conversion (photos, title, description, reviews). It is ongoing, data-driven optimization work done on the listing itself — not the day-to-day operation of the property."
    }
   },
   {
@@ -88,283 +89,388 @@
  ]
 }
 </script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
 <style>
 :root{
-  --gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;
-  --white:#f8f6f2;--stone:#B4B2A9;--dim:#6B6A65;
-  --d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;}
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);transition:border-color .3s,background .3s;}
-nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15);box-shadow:0 1px 24px rgba(0,0,0,.4);}
-.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
-.nav-wordmark{height:26px;width:auto;display:block;transition:opacity .2s;}
-.nav-logo:hover .nav-wordmark{opacity:.8;}
-.nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
 .nav-links a:hover{color:var(--white);}
-.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}
-.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}
-.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
-.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
-.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}
-.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}
-.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .15s,background .15s;}
-.nav-mobile-menu a:hover{color:var(--white);background:rgba(255,255,255,.02);}
-.nav-mobile-menu .nm-sub{padding-left:36px;font-size:10px;color:var(--dim);}
-.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s;}
-.nav-mobile-menu .nm-cta:hover{filter:brightness(1.08);}
-.article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 24px;}
-.article-wrap > *{grid-column:2;}
-.article-wrap .full-bleed{grid-column:1/-1;}
-.breadcrumb{padding:28px 0 0;font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px;}
-.breadcrumb a{color:var(--dim);text-decoration:none;transition:color .15s;}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ ARTICLE ══ */
+.article{max-width:1440px;margin:0 auto;padding:0 var(--gutter);display:flex;justify-content:center;}
+.col{width:100%;max-width:720px;padding:130px 0 40px;}
+
+.breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:40px;}
+.breadcrumb a,.breadcrumb span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
+.breadcrumb a{color:var(--dim);transition:color .15s;}
 .breadcrumb a:hover{color:var(--gold);}
-.breadcrumb-sep{opacity:.4;}
-.article-header{padding:40px 0 48px;border-bottom:1px solid rgba(255,255,255,.06);}
-.ah-category{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
-.ah-category::before{content:'';width:20px;height:1px;background:var(--gold);}
-.article-header h1{font-family:var(--d);font-size:clamp(30px,4.5vw,52px);font-weight:200;letter-spacing:-.02em;line-height:1.1;color:var(--white);margin-bottom:20px;}
-.article-header h1 em{font-style:normal;color:var(--gold);}
-.ah-deck{font-size:18px;color:var(--stone);line-height:1.65;margin-bottom:28px;}
-.ah-meta{display:flex;align-items:center;gap:20px;font-family:var(--m);font-size:10px;letter-spacing:.1em;color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:20px;}
-.ah-meta-divider{width:1px;height:12px;background:rgba(255,255,255,.12);}
-.article-body{padding:48px 0;}
-.article-body p{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
-.article-body p strong{color:var(--white);font-weight:500;}
-.article-body h2{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin:48px 0 16px;}
-.article-body h3{font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:36px 0 12px;}
-.article-body a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
-.article-body a:hover{border-bottom-color:var(--gold);}
-.article-body a.btn-primary{color:var(--night);border-bottom:none;}
-.article-body ul,.article-body ol{padding-left:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
-.article-body li{font-size:16px;line-height:1.7;color:var(--stone);}
-.article-body li strong{color:var(--white);}
-.faq-q{font-size:16px;line-height:1.6;color:var(--white);font-weight:500;margin:32px 0 8px;}
-.faq-a{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
-.callout{background:var(--n3);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:24px 28px;margin:32px 0;}
-.callout-label{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.callout p{font-size:15px;line-height:1.65;color:var(--stone);margin:0;}
-.callout p strong{color:var(--white);}
-.article-cta{margin:56px 0 0;padding:40px;background:var(--n3);border:1px solid rgba(214,173,96,.12);border-radius:4px;text-align:center;}
-.article-cta h3{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin-bottom:10px;}
-.article-cta h3 em{font-style:normal;color:var(--gold);}
-.article-cta p{font-size:14px;color:var(--stone);margin-bottom:24px;line-height:1.6;}
-.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;display:inline-block;}
-.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
-.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
-.sf-brand{padding-top:2px;}
-.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}
-.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}
-.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-.sf-col{display:flex;flex-direction:column;gap:6px;}
-.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
-.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}
-.sf-col a:hover{color:var(--gold);}
-.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .nav-links{display:none!important;}
-  .nav-cta{display:none!important;}
-  .nav-hamburger{display:flex!important;}
-  .article-wrap{display:block;padding:0 20px;}
-  .ah-deck{font-size:16px;}
-  .site-footer{padding:40px 20px 24px;}
-  .sf-inner{grid-template-columns:1fr;gap:28px;}
-  .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
-  .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
+.breadcrumb .sep{color:var(--faint);letter-spacing:0;}
+.breadcrumb .here{color:var(--gold);}
+
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+
+.art-h1{font-family:var(--display);font-weight:200;font-size:clamp(38px,5.4vw,56px);line-height:1.08;letter-spacing:1px;color:var(--white);margin:0;}
+.art-h1 em{font-style:italic;font-weight:300;color:var(--gold);}
+.deck{font-family:var(--sans);font-weight:300;font-size:19px;line-height:1.65;color:var(--body);margin:30px 0 0;}
+.deck em{font-style:normal;color:var(--bright);}
+
+.byline{display:flex;align-items:center;gap:16px;margin:36px 0 0;padding:22px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.byline .avatar{width:46px;height:46px;overflow:hidden;border:1px solid var(--line-3);flex-shrink:0;}
+.byline .avatar img{width:100%;height:100%;object-fit:cover;object-position:15% center;}
+.byline .who{display:flex;flex-direction:column;gap:3px;}
+.byline .name{font-family:var(--sans);font-size:14px;color:var(--bright);}
+.byline .cred{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);}
+
+.body{margin-top:44px;}
+.body p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.8;color:var(--body);margin:0 0 26px;}
+.body p strong{color:var(--bright);font-weight:500;}
+.body p em{font-style:normal;color:var(--bright);}
+.body a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
+.body a:hover{border-bottom-color:var(--gold);}
+.body h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;color:var(--white);margin:46px 0 22px;}
+
+.twojobs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 26px;}
+.job{border:1px solid var(--line-3);background:var(--panel);padding:28px 30px;display:flex;flex-direction:column;gap:12px;}
+.job.rev{border-color:rgba(214,173,96,.4);background:rgba(214,173,96,.04);}
+.job .tag{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.job.rev .tag{color:var(--gold);}
+.job .jt{font-family:var(--display);font-weight:300;font-size:24px;color:var(--white);}
+.job p{font-family:var(--sans);font-weight:300;font-size:14px;line-height:1.65;color:var(--muted);margin:0;}
+.job.rev p{color:var(--body);}
+
+.cta-box{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.04);padding:40px;margin-top:48px;
+  display:flex;flex-direction:column;gap:16px;align-items:flex-start;}
+.cta-box .ct-h{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:.5px;color:var(--white);}
+.cta-box .ct-h em{font-style:italic;color:var(--gold);}
+.cta-box p{font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.7;color:var(--body);margin:0;}
+.cta-box .btn-fill{margin-top:6px;}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:15px 32px;border:none;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
+
+.faq{margin-top:48px;}
+.faq .faq-label{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.faq .faq-list{display:flex;flex-direction:column;margin-top:20px;border-top:1px solid var(--line);}
+.faq .faq-item{padding:26px 0;border-bottom:1px solid var(--line-2);display:flex;flex-direction:column;gap:12px;}
+.faq .faq-q{font-family:var(--sans);font-weight:500;font-size:17px;color:var(--white);}
+.faq .faq-a{font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.75;color:var(--body);margin:0;}
+.faq .faq-a a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.3);}
+.faq .faq-a a:hover{border-bottom-color:var(--gold);}
+
+.next{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  border-top:1px solid var(--line);margin-top:40px;padding:28px 0;}
+.next .nx-meta{display:flex;flex-direction:column;gap:6px;}
+.next .nx-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.next .nx-title{font-family:var(--display);font-weight:300;font-size:21px;color:var(--white);}
+.next .nx-arrow{color:var(--gold);font-size:22px;flex-shrink:0;}
+.next:hover .nx-title{color:var(--gold-hi);}
+
+/* ══ FOOTER ══ */
+.foot{max-width:1440px;margin:64px auto 0;border-top:1px solid rgba(214,173,96,.15);padding:72px var(--gutter) 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin:0 auto;border-top:1px solid var(--raised);padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .col{padding-top:112px;}
+  .twojobs{grid-template-columns:1fr;}
+  .foot{grid-template-columns:1fr 1fr;gap:36px 28px;padding:56px 40px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
 }
-@media(min-width:769px){
-  .nav-hamburger{display:none!important;}
-  .nav-mobile-menu{display:none!important;}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .article{padding:0 24px;}
+  .col{padding-top:96px;}
+  .deck{font-size:17px;}
+  .body p{font-size:16px;}
+  .body h2{font-size:26px;}
+  .cta-box{padding:28px 24px;}
+  .next{flex-wrap:wrap;}
+  .foot{grid-template-columns:1fr;gap:28px;padding:44px 24px;}
+  .foot-legal{padding:20px 24px;}
 }
-/* Bug 4: prevent horizontal overflow on mobile */
-html,body{overflow-x:hidden;max-width:100%;}
-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-img,iframe,video{max-width:100%;height:auto;}
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo" aria-label="Marketics home">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark">
-  </a>
+<!-- ══ NAV ══ -->
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
+<div class="nav-mobile" id="navMobileMenu">
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel" class="active">Market Intel</a>
-  <a href="/intel/miami" class="nm-sub">↳ Miami: FIFA 2026</a>
-  <a href="/intel/muskoka" class="nm-sub">↳ Muskoka: Summer 2026</a>
-  <a href="/intel/money" class="nm-sub">↳ The Money</a>
-  <a href="/intel/trust" class="nm-sub">↳ Trust Architecture</a>
-  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<!-- ARTICLE -->
-<main class="article-wrap">
+<!-- ══ ARTICLE ══ -->
+<main class="article">
+  <article class="col">
 
-  <div class="breadcrumb">
-    <a href="/intel">Market Intel</a>
-    <span class="breadcrumb-sep">/</span>
-    <span style="color:var(--stone)">The Co-Host Revenue Share Model</span>
-  </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/intel">Market Intel</a>
+      <span class="sep">/</span>
+      <a href="/intel#playbook">The Playbook</a>
+      <span class="sep">/</span>
+      <span class="here">Co-Host Revenue Share</span>
+    </nav>
 
-  <header class="article-header">
-    <div class="ah-category">The Co-Host Model</div>
-    <h1>The Airbnb Co-Host Revenue Share Model, <em>Explained</em></h1>
-    <p class="ah-deck">A co-host revenue share model is simple: instead of a flat fee or retainer, your co-host earns a percentage of what your Airbnb actually books, so they only make money when you make more. But the part most owners miss is what kind of co-host they're hiring. Running a property (cleaning, guests, maintenance) and growing what it earns (pricing, ranking, listing conversion) are two different jobs. A revenue-share co-host is paid to do the second one.</p>
-    <div class="ah-meta">
-      <span>Jason Baxter</span>
-      <div class="ah-meta-divider"></div>
-      <span>35× Superhost · 1,000+ Listings Optimized</span>
-      <div class="ah-meta-divider"></div>
-      <span>June 2026</span>
-    </div>
-  </header>
+    <div class="kicker"><div class="bar"></div><span>The Playbook · The co-host model</span></div>
 
-  <div class="article-body">
+    <h1 class="art-h1">The Airbnb Co-Host Revenue Share Model, <em>Explained</em></h1>
 
-    <p>That distinction is the whole point of this page. The word "co-host" gets used for two completely different roles, and which one you hire decides what you're actually paying for. Here's how the revenue share model works, and where the line sits between operating a property and growing what it earns.</p>
+    <p class="deck">A co-host revenue share model is simple: instead of a flat fee or retainer, your co-host earns a percentage of what your Airbnb actually books — so they only make money when you make more. But the part most owners miss is <em>what kind</em> of co-host they're hiring. Running a property and growing what it earns are two different jobs.</p>
 
-    <h2>What is a co-host revenue share model?</h2>
-
-    <p>In a revenue share arrangement, your co-host is paid a percentage of the bookings they help produce rather than a fixed monthly fee, a retainer, or an hourly rate. The logic is incentive alignment: when the pay is a share of what the listing books, the co-host earns more only when you do, and earns nothing extra by simply being on the account.</p>
-
-    <p>We won't restate the full economics here, because they have their own home. The exact mechanics of the Marketics model, how the co-host split is collected and why a share of bookings beats a flat fee, live on the <a href="/pricing">pricing page</a> and in <a href="/intel/performance-based-management">why a pricing tool alone isn't enough</a>. This page is about something those pages assume: <em>what kind of co-host</em> a revenue share buys you.</p>
-
-    <h2>Is a co-host the same as a property manager?</h2>
-
-    <p>No, and conflating them is where most of the confusion starts. Airbnb's platform uses one label, "co-host," for two jobs that require different skills and get paid in different ways.</p>
-
-    <p><strong>Property management is an operations job.</strong> It runs the physical side of the rental: cleaning and turnovers, guest check-in and communication, maintenance, supplies, and on-the-ground logistics. It's typically priced as a percentage of revenue or a flat fee, and it's valuable work, especially for owners who don't want to handle the day to day.</p>
-
-    <p><strong>Revenue optimization is a different discipline.</strong> Its job is to grow what the property earns: pricing that moves with demand, search ranking and visibility, and listing conversion (photos, title, description, reviews). It's done on the listing itself, largely remotely, and it asks nothing of the operational setup you may already have running well.</p>
-
-    <div class="callout">
-      <div class="callout-label">Two different jobs</div>
-      <p><strong>Operations</strong> keeps your property running: cleaning, guests, maintenance. <strong>Revenue</strong> grows what it earns: pricing, ranking, listing conversion. A revenue-share co-host is hired for the second job and is paid as a share of the bookings it helps create. You can have one role covered, the other, or both.</p>
+    <div class="byline">
+      <div class="avatar"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter"></div>
+      <div class="who">
+        <span class="name">Jason Baxter</span>
+        <span class="cred">35× SUPERHOST · 1,000+ LISTINGS OPTIMIZED · JUNE 2026</span>
+      </div>
     </div>
 
-    <p>This isn't a knock on property managers. A good operator is essential, and many owners are well served by full management. The point is narrower and more useful: revenue is its own discipline, and bundling it into an operations fee often means it gets treated as a side task rather than the specialized, daily work it actually is. If your turnovers already run smoothly, what you may be missing isn't another operator, it's the revenue role. There's <a href="/intel/airbnb-earnings-without-management">more on raising earnings without full management</a> if that's the gap you're feeling.</p>
+    <div class="body">
+      <p>The word "co-host" gets used for two completely different roles, and which one you hire decides what you're actually paying for. Here's how the revenue share model works — and where the line sits between operating a property and growing what it earns.</p>
 
-    <h2>Why is revenue its own discipline?</h2>
+      <h2>What is a co-host revenue share model?</h2>
+      <p>Your co-host is paid a percentage of the bookings they help produce, rather than a fixed monthly fee, a retainer, or an hourly rate. The logic is incentive alignment: <strong>when the pay is a share of what the listing books, the co-host earns more only when you do</strong> — and earns nothing extra by simply being on the account. We won't restate the full economics here: the exact mechanics of how the split is collected, and why a share of bookings beats a flat fee, live on the <a href="/pricing">pricing page</a> and in <a href="/intel/performance-based-management">why a pricing tool alone isn't enough</a>. This page is about something those pages assume: <em>what kind</em> of co-host a revenue share buys you.</p>
 
-    <p>Because the inputs change constantly and the decisions compound. Demand shifts daily with events, seasonality, and competitor availability, so pricing is a moving target, not a number you set once. Search ranking rewards listings that perform, and that performance has to be earned and maintained. Listing conversion is the difference between getting the views and getting the booking. None of that is operational labor, and none of it happens on its own as a byproduct of clean turnovers.</p>
+      <h2>Is a co-host the same as a property manager?</h2>
+      <p>No — and conflating them is where most of the confusion starts. Airbnb uses one label, "co-host," for two jobs that require different skills and get paid in different ways.</p>
 
-    <p>That's why the revenue role pairs naturally with a revenue share: the work is measurable in bookings, so the pay can be too. The co-host is accountable to the same number the owner cares about.</p>
+      <div class="twojobs">
+        <div class="job">
+          <span class="tag">Operations job</span>
+          <span class="jt">Property management</span>
+          <p>Runs the physical side: cleaning and turnovers, guest check-in and communication, maintenance, supplies, on-the-ground logistics. Priced as a % of revenue or a flat fee. Valuable — especially for owners who don't want the day-to-day.</p>
+        </div>
+        <div class="job rev">
+          <span class="tag">Revenue job</span>
+          <span class="jt">Revenue optimization</span>
+          <p>Grows what the property earns: pricing that moves with demand, search ranking and visibility, listing conversion (photos, title, description, reviews). Done on the listing itself, largely remotely — asks nothing of an operational setup already running well.</p>
+        </div>
+      </div>
 
-    <h2>Which role do you actually need?</h2>
+      <p>This isn't a knock on property managers — a good operator is essential. The point is narrower: <strong>revenue is its own discipline, and bundling it into an operations fee often means it gets treated as a side task</strong> rather than the specialized, daily work it is. If your turnovers already run smoothly, what you may be missing isn't another operator — it's the revenue role. There's <a href="/intel/airbnb-earnings-without-management">more on raising earnings without full management</a> if that's the gap you're feeling.</p>
 
-    <p>Start by asking which job is currently underserved. If guest logistics and cleaning are handled and the property still feels like it's leaving money somewhere you can't quite see, that gap is almost always the revenue role, not the operations one. A revenue-share co-host fills it without touching your existing setup, and because the pay is a share of bookings, you're buying growth rather than overhead.</p>
+      <h2>Why is revenue its own discipline?</h2>
+      <p>Because the inputs change constantly and the decisions compound. Demand shifts daily with events, seasonality, and competitor availability — so pricing is a moving target, not a number you set once. Search ranking rewards listings that perform, and that performance has to be earned and maintained. Listing conversion is the difference between getting the views and getting the booking. None of that is operational labor, and none of it happens on its own as a byproduct of clean turnovers. <strong>That's why the revenue role pairs naturally with a revenue share: the work is measurable in bookings, so the pay can be too.</strong> The co-host is accountable to the same number the owner cares about.</p>
 
-    <p>The fastest way to find out is to look at the numbers on your specific listing. <a href="/sample-audit">A free revenue audit</a> will show you where pricing, ranking, and conversion stand today, before you change anything or hire anyone.</p>
-
-    <h2>Common questions</h2>
-
-    <p class="faq-q">Is a co-host the same as a property manager?</p>
-    <p class="faq-a">No. A property manager runs the operations of your rental: cleaning, guest communication, maintenance, supplies, and turnovers. A revenue-share co-host does a different job: growing what the property earns through pricing, search ranking, and listing conversion. Both can be called a co-host on Airbnb, but they are two distinct disciplines. One keeps the property running; the other makes it earn more. You can have one, the other, or both.</p>
-
-    <p class="faq-q">How does a co-host get paid in a revenue share model?</p>
-    <p class="faq-a">The co-host earns an agreed percentage of what the listing books, rather than a flat monthly fee or retainer. Because the pay is a share of bookings, the co-host only earns more when you do. The full mechanics of how the split is collected and why it aligns incentives live on the <a href="/pricing">Marketics pricing page</a>.</p>
-
-    <p class="faq-q">What does a revenue-share co-host actually do?</p>
-    <p class="faq-a">The revenue job is pricing that moves with demand, search ranking and visibility, and listing conversion (photos, title, description, reviews). It is ongoing, data-driven optimization work done on the listing itself, not the day-to-day operation of the property.</p>
-
-    <p class="faq-q">Do I give up control of my listing with a co-host?</p>
-    <p class="faq-a">No. A co-host is added to your Airbnb account with access to listing, pricing, and calendar functions. You keep ownership of the listing and account, and a revenue-focused co-host does not need your banking or payout credentials. You can keep your existing cleaning and operations exactly as they are.</p>
-
-    <div class="article-cta">
-      <h3>Not sure which role your listing is missing?</h3>
-      <p>We'll audit your pricing, ranking, and listing conversion, and show you exactly where the revenue gap is, before you change anything. No monthly fee, no contract.</p>
-      <a href="/sample-audit" class="btn-primary">Get My Free Revenue Audit</a>
+      <h2>Which role do you actually need?</h2>
+      <p>Start by asking which job is currently underserved. If guest logistics and cleaning are handled and the property still feels like it's leaving money somewhere you can't quite see, <strong>that gap is almost always the revenue role, not the operations one.</strong> A revenue-share co-host fills it without touching your existing setup — and because the pay is a share of bookings, you're buying growth rather than overhead. The fastest way to find out is to look at the numbers on your specific listing: <a href="/sample-audit">a free revenue audit</a> will show you where pricing, ranking, and conversion stand today, before you change anything or hire anyone.</p>
     </div>
 
-  </div>
+    <!-- inline CTA -->
+    <div class="cta-box">
+      <span class="ct-h">Not sure which role your listing is <em>missing?</em></span>
+      <p>We'll audit your pricing, ranking, and listing conversion, and show you exactly where the revenue gap is — before you change anything. No monthly fee, no contract.</p>
+      <a href="/sample-audit" class="btn-fill">Get My Free Revenue Audit</a>
+    </div>
 
+    <!-- FAQ -->
+    <section class="faq">
+      <span class="faq-label">Common questions</span>
+      <div class="faq-list">
+        <div class="faq-item">
+          <span class="faq-q">Is a co-host the same as a property manager?</span>
+          <p class="faq-a">No. A property manager runs the operations of your rental — cleaning, guest communication, maintenance, supplies, and turnovers. A revenue-share co-host does a different job: growing what the property earns through pricing, search ranking, and listing conversion. Both can be called a co-host on Airbnb, but they are two distinct disciplines. One keeps the property running; the other makes it earn more. You can have one, the other, or both.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">How does a co-host get paid in a revenue share model?</span>
+          <p class="faq-a">The co-host earns an agreed percentage of what the listing books, rather than a flat monthly fee or retainer. Because the pay is a share of bookings, the co-host only earns more when you do. The full mechanics of how the split is collected and why it aligns incentives live on the <a href="/pricing">Marketics pricing page</a>.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">What does a revenue-share co-host actually do?</span>
+          <p class="faq-a">The revenue job is pricing that moves with demand, search ranking and visibility, and listing conversion (photos, title, description, reviews). It is ongoing, data-driven optimization work done on the listing itself — not the day-to-day operation of the property.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">Do I give up control of my listing with a co-host?</span>
+          <p class="faq-a">No. A co-host is added to your Airbnb account with access to listing, pricing, and calendar functions. You keep ownership of the listing and account, and a revenue-focused co-host does not need your banking or payout credentials. You can keep your existing cleaning and operations exactly as they are.</p>
+        </div>
+      </div>
+    </section>
+
+    <a href="/intel/money" class="next">
+      <div class="nx-meta">
+        <span class="nx-label">More in The Playbook</span>
+        <span class="nx-title">The Money Behind the Booking: the economic signals that move your demand</span>
+      </div>
+      <span class="nx-arrow">→</span>
+    </a>
+
+  </article>
 </main>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>Performance-based STR optimization</span>
   </div>
 </footer>
 
-<script>(function(){
-  var nav=document.querySelector('nav');
-  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}
-  var btn=document.getElementById('navHamburger');
-  var menu=document.getElementById('navMobileMenu');
-  if(!btn||!menu)return;
-  function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
-  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
-})();</script>
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>

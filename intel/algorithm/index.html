@@ -2,35 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>How the Airbnb Algorithm Actually Works: Marketics</title>
 <meta name="description" content="Most hosts believe all listings get equal visibility on Airbnb. They're wrong. Here's exactly how the algorithm decides who gets shown — and who gets buried.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Marketics">
 <meta property="og:title" content="How the Airbnb Algorithm Actually Works — Marketics">
 <meta property="og:description" content="The visibility myth most hosts believe, what actually drives search placement, and the F1 Montréal A/B test that proves it.">
 <meta property="og:url" content="https://marketics.io/intel/algorithm">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
-<meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How the Airbnb Algorithm Actually Works — Marketics">
+<meta name="twitter:description" content="The visibility myth, what actually drives search placement, and the F1 Montréal A/B test that proves it.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
 <link rel="canonical" href="https://marketics.io/intel/algorithm">
-<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "Article",
  "headline": "How the Airbnb Algorithm Actually Works",
  "description": "Most hosts believe all listings get equal visibility on Airbnb. They're wrong. Here's exactly how the algorithm decides who gets shown, and who gets buried.",
- "image": "https://marketics.io/og/default.jpg",
  "author": {"@type": "Person", "name": "Jason Baxter", "url": "https://marketics.io/story"},
  "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io"},
+ "image": "https://marketics.io/og/default.jpg",
  "datePublished": "2026-03-23T09:00:00-04:00",
- "dateModified": "2026-03-23T09:00:00-04:00",
+ "dateModified": "2026-07-12T09:00:00-04:00",
  "url": "https://marketics.io/intel/algorithm"
 }
 </script>
@@ -45,703 +49,500 @@
  ]
 }
 </script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
 <style>
 :root{
-  --gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;
-  --white:#f8f6f2;--stone:#B4B2A9;--dim:#6B6A65;
-  --d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;--red:#C0453B;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
 
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);transition:border-color .3s,background .3s;}
-nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15);box-shadow:0 1px 24px rgba(0,0,0,.4);}
-.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
-.nav-wordmark{height:26px;width:auto;display:block;transition:opacity .2s;}
-.nav-logo:hover .nav-wordmark{opacity:.8;}
-.nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
 .nav-links a:hover{color:var(--white);}
-.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}
-.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}
-.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
-.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
-.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}
-.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}
-.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .15s,background .15s;}
-.nav-mobile-menu a:hover{color:var(--white);background:rgba(255,255,255,.02);}
-.nav-mobile-menu .nm-sub{padding-left:36px;font-size:10px;color:var(--dim);}
-.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s;}
-.nav-mobile-menu .nm-cta:hover{filter:brightness(1.08);}
-@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}}
-@media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.active{color:var(--gold);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
 
-/* ── ARTICLE LAYOUT ── */
-.article-wrap{
-  display:grid;
-  grid-template-columns:1fr min(680px,100%) 1fr;
-  padding:0 24px;
-}
-.article-wrap > *{grid-column:2;}
-.article-wrap .full-bleed{grid-column:1/-1;}
+/* ══ shared bits ══ */
+.kicker{display:flex;align-items:center;gap:14px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:16px 34px;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
 
-/* ── BREADCRUMB ── */
-.breadcrumb{
-  padding:28px 0 0;
-  font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);
-  display:flex;align-items:center;gap:8px;
-}
-.breadcrumb a{color:var(--dim);text-decoration:none;transition:color .15s;}
-.breadcrumb a:hover{color:var(--gold);}
-.breadcrumb-sep{opacity:.4;}
+/* ══ ARTICLE SHELL ══ */
+.article-shell{padding:130px var(--gutter) 0;}
+.reading{max-width:720px;margin:0 auto;}
 
-/* ── ARTICLE HEADER ── */
-.article-header{padding:40px 0 48px;border-bottom:1px solid rgba(255,255,255,.06);}
-.ah-category{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:20px;
-}
-.ah-category::before{content:'';width:20px;height:1px;background:var(--gold);}
-.article-header h1{
-  font-family:var(--d);font-size:clamp(30px,4.5vw,52px);
-  font-weight:200;letter-spacing:-.02em;line-height:1.1;
-  color:var(--white);margin-bottom:20px;
-}
-.article-header h1 em{font-style:normal;color:var(--gold);}
-.ah-deck{
-  font-size:18px;color:var(--stone);line-height:1.65;
-  margin-bottom:28px;
-}
-.ah-meta{
-  display:flex;align-items:center;gap:20px;
-  font-family:var(--m);font-size:10px;letter-spacing:.1em;
-  color:var(--dim);
-  border-top:1px solid rgba(255,255,255,.06);
-  padding-top:20px;
-}
-.ah-meta-divider{width:1px;height:12px;background:rgba(255,255,255,.12);}
+/* breadcrumb */
+.crumb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+.crumb a,.crumb span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);}
+.crumb a:hover{color:var(--gold);}
+.crumb .sep{color:var(--faint);}
+.crumb .here{color:var(--gold);}
 
-/* ── BODY TEXT ── */
-.article-body{padding:48px 0;}
-.article-body p{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
-.article-body p strong{color:var(--white);font-weight:500;}
-.article-body h2{
-  font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;
-  color:var(--white);margin:48px 0 16px;
-}
-.article-body h3{
-  font-family:var(--d);font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-  color:var(--gold);margin:36px 0 12px;font-size:11px;letter-spacing:.14em;
-}
-.article-body ul,
-.article-body ol{
-  padding-left:20px;margin-bottom:24px;
-  display:flex;flex-direction:column;gap:8px;
-}
-.article-body li{font-size:16px;line-height:1.7;color:var(--stone);}
-.article-body li strong{color:var(--white);}
+/* header */
+.art-kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.art-kicker .bar{width:32px;height:1px;background:var(--gold);}
+.art-kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.art-h1{font-family:var(--display);font-weight:200;font-size:clamp(38px,6vw,56px);line-height:1.08;
+  letter-spacing:1px;color:var(--white);margin:0;}
+.art-h1 em{font-style:italic;font-weight:300;color:var(--gold);}
+.art-deck{font-size:19px;line-height:1.65;color:var(--body);margin:30px 0 0;}
+.byline{display:flex;align-items:center;gap:16px;margin:36px 0 0;padding:22px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.byline-av{width:46px;height:46px;overflow:hidden;border:1px solid var(--line-3);flex-shrink:0;}
+.byline-av img{width:100%;height:100%;object-fit:cover;object-position:15% center;}
+.byline-meta{display:flex;flex-direction:column;gap:4px;}
+.byline-name{font-size:14px;color:var(--bright);}
+.byline-cred{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;}
 
-/* ── CALLOUT BOXES ── */
-.callout{
-  background:var(--n3);
-  border:1px solid rgba(255,255,255,.07);
-  border-left:3px solid var(--gold);
-  border-radius:0 4px 4px 0;
-  padding:24px 28px;
-  margin:32px 0;
-}
-.callout-label{
-  font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:10px;
-}
-.callout p{font-size:15px;line-height:1.65;color:var(--stone);margin:0;}
-.callout p strong{color:var(--white);}
+/* body */
+.art-body{margin-top:44px;display:flex;flex-direction:column;gap:26px;}
+.art-body p{font-size:17px;line-height:1.8;color:var(--body);margin:0;}
+.art-body p.lead{color:var(--bright);}
+.art-body p strong{color:var(--white);font-weight:500;}
+.art-body p em{color:var(--bright);font-style:italic;}
+.art-body h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;
+  color:var(--white);margin:26px 0 0;}
 
-/* ── CASE STUDY ── */
-.case-study{
-  background:var(--n3);
-  border:1px solid rgba(214,173,96,.12);
-  border-radius:4px;
-  margin:40px 0;
-  overflow:hidden;
-}
-.cs-header{
-  background:rgba(214,173,96,.06);
-  border-bottom:1px solid rgba(214,173,96,.12);
-  padding:20px 28px;
-  display:flex;align-items:center;gap:12px;
-}
-.cs-badge{
-  font-family:var(--m);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
-  background:rgba(214,173,96,.15);color:var(--gold);
-  padding:4px 10px;border-radius:2px;
-  border:1px solid rgba(214,173,96,.2);
-  flex-shrink:0;
-}
-.cs-title{
-  font-family:var(--d);font-size:14px;font-weight:700;letter-spacing:.04em;
-  color:var(--white);
-}
-.cs-body{padding:24px 28px;}
-.cs-body p{font-size:15px;line-height:1.7;color:var(--stone);margin-bottom:16px;}
-.cs-body p:last-child{margin-bottom:0;}
-.cs-body p strong{color:var(--white);}
-.cs-result{
-  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
-  background:rgba(255,255,255,.05);
-  border-top:1px solid rgba(255,255,255,.06);
-}
-.cs-stat{
-  background:var(--n3);
-  padding:16px 20px;
-  text-align:center;
-}
-.cs-stat-val{
-  font-family:var(--d);font-size:20px;font-weight:600;
-  color:var(--gold);letter-spacing:-.02em;margin-bottom:3px;
-}
-.cs-stat-label{font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+/* callout */
+.callout{border:1px solid var(--line-3);background:var(--panel);padding:30px 32px;
+  display:flex;flex-direction:column;gap:12px;}
+.callout .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.callout p{font-size:16px;line-height:1.75;color:var(--body);margin:0;}
+.callout p strong{color:var(--bright);font-weight:500;}
+.callout.rule{border:none;border-left:2px solid var(--gold);background:none;padding:4px 0 4px 24px;}
 
-/* ── FUNNEL DIAGRAM ── */
-.funnel-diagram{
-  margin:32px 0;
-  display:flex;flex-direction:column;gap:0;
-}
-.funnel-step{
-  display:flex;align-items:center;gap:16px;
-  padding:16px 20px;
-  background:var(--n3);
-  border:1px solid rgba(255,255,255,.06);
-  position:relative;
-}
-.funnel-step:first-child{border-radius:4px 4px 0 0;}
-.funnel-step:last-child{border-radius:0 0 4px 4px;}
-.funnel-step + .funnel-step{border-top:none;}
-.funnel-step:not(:last-child)::after{
-  content:'↓';
-  position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
-  color:var(--dim);font-size:12px;z-index:1;
-  background:var(--night);padding:0 6px;
-}
-.fs-num{
-  font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.1em;
-  color:var(--gold);flex-shrink:0;width:24px;
-}
-.fs-content{flex:1;}
-.fs-title{font-family:var(--d);font-size:14px;font-weight:700;color:var(--white);margin-bottom:2px;letter-spacing:.02em;}
-.fs-desc{font-size:12px;color:var(--dim);font-family:var(--m);}
-.fs-control{
-  font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--dim);text-align:right;flex-shrink:0;
-}
-.fs-control.yours{color:var(--gold);}
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);}
+.f-step{background:var(--panel);padding:22px 28px;display:grid;grid-template-columns:40px 1fr auto;gap:22px;align-items:center;}
+.f-n{font-family:var(--display);font-weight:200;font-size:30px;color:var(--gold);line-height:1;}
+.f-c{display:flex;flex-direction:column;gap:4px;}
+.f-t{font-family:var(--sans);font-weight:500;font-size:16px;color:var(--white);}
+.f-d{font-size:13px;color:var(--muted);}
+.f-ctrl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-align:right;text-transform:uppercase;color:var(--muted);}
+.f-ctrl.you{color:var(--gold);}
+.f-ctrl.sig{color:var(--body);}
 
-/* ── SIGNAL TABLE ── */
-.signal-table{
-  width:100%;border-collapse:collapse;margin:24px 0;
-  font-size:14px;
-}
-.signal-table th{
-  font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--dim);text-align:left;padding:10px 16px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  background:var(--n3);
-}
-.signal-table td{
-  padding:12px 16px;color:var(--stone);
-  border-bottom:1px solid rgba(255,255,255,.04);
-  line-height:1.5;
-}
-.signal-table tr:last-child td{border-bottom:none;}
-.signal-table td:first-child{color:var(--white);font-weight:500;}
-.signal-table td.impact-high{color:var(--gold);}
-.signal-table td.impact-med{color:var(--stone);}
-.signal-table td.impact-low{color:var(--dim);}
-.signal-table tr:hover td{background:rgba(255,255,255,.02);}
+/* signal table */
+.sigtable{border:1px solid var(--line);display:flex;flex-direction:column;}
+.sig-head{display:grid;grid-template-columns:1fr 1.5fr .9fr;background:#0d0d0c;border-bottom:1px solid var(--line);}
+.sig-head span{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:13px 18px;}
+.sig-row{display:grid;grid-template-columns:1fr 1.5fr .9fr;border-bottom:1px solid #1c1c1a;}
+.sig-row:last-child{border-bottom:none;}
+.sig-sig{font-size:13px;line-height:1.45;color:var(--bright);padding:14px 18px;font-weight:400;}
+.sig-mea{font-size:13px;line-height:1.45;color:var(--muted);padding:14px 18px;}
+.sig-imp{font-family:var(--mono);font-size:11px;line-height:1.4;padding:14px 18px;color:var(--muted);}
+.sig-imp.vhigh{color:var(--gold);}
+.sig-imp.high{color:var(--body);}
+.sig-imp.pen{color:var(--red);}
 
-/* ── SERIES NAV ── */
-.series-nav{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:24px 28px;
-  background:var(--n3);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:4px;
-  margin:48px 0 0;
-}
-.series-label{
-  font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:6px;
-}
-.series-title{
-  font-family:var(--d);font-size:14px;font-weight:600;color:var(--white);
-}
-.series-link{
-  font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gold);text-decoration:none;white-space:nowrap;
-  padding:10px 20px;border:1px solid rgba(214,173,96,.3);border-radius:3px;
-  transition:background .15s,border-color .15s;flex-shrink:0;
-}
-.series-link:hover{background:rgba(214,173,96,.08);border-color:rgba(214,173,96,.6);}
-@media(max-width:768px){.series-nav{flex-direction:column;align-items:flex-start;}}
+/* case card */
+.case{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.04);padding:36px;display:flex;flex-direction:column;gap:18px;}
+.case-badge{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.case p{font-size:15px;line-height:1.75;color:var(--body);margin:0;}
+.case p strong{color:var(--bright);font-weight:500;}
+.case p em{color:var(--bright);font-style:italic;}
+.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-3);border:1px solid var(--line-3);margin-top:6px;}
+.case-stat{background:#141413;padding:22px 20px;display:flex;flex-direction:column;gap:5px;align-items:center;text-align:center;}
+.case-stat .v{font-family:var(--display);font-weight:300;font-size:30px;}
+.case-stat .v.gold{color:var(--gold);}
+.case-stat .v.white{color:var(--white);}
+.case-stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;}
 
-.article-cta{
-  margin:56px 0 0;
-  padding:40px;
-  background:var(--n3);
-  border:1px solid rgba(214,173,96,.12);
-  border-radius:4px;
-  text-align:center;
-}
-.article-cta h3{
-  font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;
-  color:var(--white);margin-bottom:10px;
-}
-.article-cta h3 em{font-style:normal;color:var(--gold);}
-.article-cta p{font-size:14px;color:var(--stone);margin-bottom:24px;line-height:1.6;}
-.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;display:inline-block;}
-.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
+/* levers */
+.levers{display:flex;flex-direction:column;border:1px solid var(--line);}
+.lever{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 24px;border-bottom:1px solid #1c1c1a;}
+.lever:last-child{border-bottom:none;}
+.lever .n{font-family:var(--display);font-weight:200;font-size:26px;color:var(--gold);line-height:1;}
+.lever .c{display:flex;flex-direction:column;gap:5px;}
+.lever .t{font-family:var(--sans);font-weight:500;font-size:15px;color:var(--white);}
+.lever .b{font-size:13.5px;line-height:1.6;color:var(--muted);}
 
-/* ── FOOTER ── */
-.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
-.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
-.sf-brand{padding-top:2px;}
-.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}
-.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}
-.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-.sf-col{display:flex;flex-direction:column;gap:6px;}
-.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
-.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}
-.sf-col a:hover{color:var(--gold);}
-.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
-@media(max-width:768px){
-  .article-wrap{display:block;padding:0 20px;}
-  .ah-deck{font-size:16px;}
-  .cs-result{grid-template-columns:1fr;}
-  .site-footer{padding:40px 20px 24px;}
-  .sf-inner{grid-template-columns:1fr;gap:28px;}
-  .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
-  .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
+/* inline CTA */
+.inline-cta{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.04);padding:40px;
+  margin-top:48px;display:flex;flex-direction:column;gap:16px;align-items:flex-start;}
+.inline-cta h3{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:.5px;color:var(--white);margin:0;}
+.inline-cta h3 em{font-style:italic;color:var(--gold);}
+.inline-cta p{font-size:15px;line-height:1.7;color:var(--body);margin:0;}
+.inline-cta .btn-fill{margin-top:6px;}
+
+/* read next */
+.readnext{display:flex;align-items:center;justify-content:space-between;gap:24px;
+  border-top:1px solid var(--line);margin-top:48px;padding:28px 0;}
+.readnext .rn-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:6px;}
+.readnext .rn-title{font-family:var(--display);font-weight:300;font-size:21px;color:var(--white);}
+.readnext:hover .rn-title{color:var(--gold-hi);}
+.readnext .rn-arrow{color:var(--gold);font-size:22px;flex-shrink:0;}
+
+/* ══ FOOTER ══ */
+.foot{max-width:1440px;margin-left:auto;margin-right:auto;
+  border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;margin-top:96px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;
+  border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  nav{padding:0 40px;}
+  .article-shell{padding-left:40px;padding-right:40px;}
+  .foot{padding-left:40px;padding-right:40px;}
+  .foot-legal{padding-left:40px;padding-right:40px;}
 }
-/* Bug 4: prevent horizontal overflow on mobile */
-html,body{overflow-x:hidden;max-width:100%;}
-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-img,iframe,video{max-width:100%;height:auto;}
-.next-article{margin:32px 0 0;padding:24px 28px;background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:24px;text-decoration:none;transition:border-color .2s,background .2s;}
-.next-article:hover{border-color:rgba(214,173,96,.2);background:var(--n4);}
-.na-label{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
-.na-title{font-family:var(--d);font-size:16px;font-weight:600;color:var(--white);}
-.na-arrow{font-size:20px;color:var(--gold);flex-shrink:0;}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .art-h1{font-size:40px;}
+}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .article-shell{padding:104px 24px 0;}
+  .art-h1{font-size:34px;letter-spacing:.5px;}
+  .art-deck{font-size:16px;}
+  .art-body p{font-size:16px;}
+  .art-body h2{font-size:25px;}
+  .f-step{grid-template-columns:32px 1fr;gap:14px;}
+  .f-ctrl{grid-column:2;text-align:left;}
+  .sig-head,.sig-row{grid-template-columns:1fr 1fr .8fr;}
+  .sig-head span,.sig-sig,.sig-mea,.sig-imp{padding:11px 12px;font-size:12px;}
+  .case{padding:26px 22px;}
+  .case-stats{grid-template-columns:1fr;}
+  .inline-cta{padding:28px 22px;}
+  .readnext{flex-direction:column;align-items:flex-start;gap:12px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding:20px 24px;}
+}
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;" width="607" height="120">
-  </a>
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
+<div class="nav-mobile" id="navMobileMenu">
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel" class="active">Market Intel</a>
-  <a href="/intel/miami" class="nm-sub">↳ Miami: FIFA 2026</a>
-  <a href="/intel/muskoka" class="nm-sub">↳ Muskoka: Summer 2026</a>
-  <a href="/intel/money" class="nm-sub">↳ The Money Behind the Booking</a>
-  <a href="/intel/trust" class="nm-sub">↳ The Trust Architecture</a>
-  <a href="/intel/algorithm" class="nm-sub">↳ The Algorithm</a>
-  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel" class="active">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<!-- ARTICLE -->
-<main class="article-wrap">
+<main class="article-shell">
+  <article class="reading">
 
-  <div class="breadcrumb">
-    <a href="/intel">Market Intel</a>
-    <span class="breadcrumb-sep">/</span>
-    <a href="/intel#playbook">The Playbook</a>
-    <span class="breadcrumb-sep">/</span>
-    <span style="color:var(--stone)">Algorithm</span>
-  </div>
-
-  <header class="article-header">
-    <div class="ah-category">The Playbook</div>
-    <h1>How the Airbnb Algorithm <em>Actually</em> Works</h1>
-    <p class="ah-deck">Most hosts believe all listings get equal visibility on Airbnb. That belief is costing them bookings every single day. Here's what's really happening, and what you can actually control.</p>
-    <div class="ah-meta">
-      <span>Jason Baxter</span>
-      <div class="ah-meta-divider"></div>
-      <span>35× Superhost · 1,000+ Listings Optimized</span>
-      <div class="ah-meta-divider"></div>
-      <span>March 2026</span>
-    </div>
-  </header>
-
-  <div class="article-body">
-
-    <p>I've hosted conversations about the Airbnb algorithm on two episodes of RevLabs, and the single question that always comes up first is some variation of: <strong>"Why isn't my listing getting views?"</strong></p>
-
-    <p>The answer, almost universally, starts with the same misunderstanding: the belief that Airbnb works like a bulletin board where every listing is tacked up equally and guests scroll through until something catches their eye. Airbnb is nothing like that. It is a sophisticated search and recommendation engine that makes hundreds of decisions before a single guest ever sees your property.</p>
-
-    <p>Understanding the difference, and more importantly, understanding where you have leverage: is what separates hosts who run at 85% occupancy from hosts who run at 55%.</p>
-
-    <h2>The Myth: Equal Visibility</h2>
-
-    <p>Here's what most hosts picture when a guest searches Airbnb: every listing in the area appears, sorted maybe by price or distance, and guests scroll through. Your listing is somewhere in that list. Better photos help. Good reviews help. Everything else is roughly equal.</p>
-
-    <p>This model is wrong in almost every dimension.</p>
-
-    <p>Airbnb processes a search query through multiple filtering and ranking layers before any results appear on screen. By the time a guest sees the first 20 listings, the platform has already made thousands of decisions to surface those 20 and suppress thousands of others. Most listings in any market are effectively invisible to most searches, not because they're bad, but because they haven't cleared the filters and signals that determine eligibility for display.</p>
-
-    <div class="callout">
-      <div class="callout-label">The Real Picture</div>
-      <p>In a competitive market with 800 active listings, a typical search might surface 40–60 results. <strong>The other 740+ listings didn't appear, not because guests rejected them, but because the algorithm never showed them at all.</strong> Visibility is the prerequisite. Everything else comes after.</p>
+    <div class="crumb">
+      <a href="/intel">Market Intel</a>
+      <span class="sep">/</span>
+      <a href="/intel#playbook">The Playbook</a>
+      <span class="sep">/</span>
+      <span class="here">Algorithm</span>
     </div>
 
-    <h2>Two Different Games: The Layer Above</h2>
+    <div class="art-kicker"><div class="bar"></div><span>The Playbook</span></div>
+    <h1 class="art-h1">How the Airbnb Algorithm <em>Actually</em> Works</h1>
+    <p class="art-deck">Most hosts believe all listings get equal visibility on Airbnb. That belief is costing them bookings every single day. Here's what's really happening — and what you can actually control.</p>
 
-    <p>Most optimization advice focuses on conversion: how to get guests who see your listing to book it. Better photos. Better descriptions. Competitive pricing. That advice isn't wrong: conversion matters enormously.</p>
-
-    <p>But there's a layer above conversion that most hosts never address: <strong>search display</strong>. Getting your listing shown in the results at all. And above that, there's another layer: <strong>click-through</strong>. Getting the guest to actually tap on your listing when it appears.</p>
-
-    <p>The funnel looks like this:</p>
-
-    <div class="funnel-diagram">
-      <div class="funnel-step">
-        <div class="fs-num">1</div>
-        <div class="fs-content">
-          <div class="fs-title">Guest Searches</div>
-          <div class="fs-desc">Dates, location, guest count entered</div>
-        </div>
-        <div class="fs-control">External</div>
-      </div>
-      <div class="funnel-step">
-        <div class="fs-num">2</div>
-        <div class="fs-content">
-          <div class="fs-title">Eligibility Filter</div>
-          <div class="fs-desc">Availability, minimum stay, instant book, response rate</div>
-        </div>
-        <div class="fs-control yours">Your control</div>
-      </div>
-      <div class="funnel-step">
-        <div class="fs-num">3</div>
-        <div class="fs-content">
-          <div class="fs-title">Ranking Algorithm</div>
-          <div class="fs-desc">Quality signals determine position in results</div>
-        </div>
-        <div class="fs-control yours">Significant control</div>
-      </div>
-      <div class="funnel-step">
-        <div class="fs-num">4</div>
-        <div class="fs-content">
-          <div class="fs-title">Click-Through</div>
-          <div class="fs-desc">Cover photo, price, review count drive the tap</div>
-        </div>
-        <div class="fs-control yours">Your control</div>
-      </div>
-      <div class="funnel-step">
-        <div class="fs-num">5</div>
-        <div class="fs-content">
-          <div class="fs-title">Conversion</div>
-          <div class="fs-desc">Full listing page, photos, description, reviews</div>
-        </div>
-        <div class="fs-control yours">Your control</div>
+    <div class="byline">
+      <div class="byline-av"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter"></div>
+      <div class="byline-meta">
+        <span class="byline-name">Jason Baxter</span>
+        <span class="byline-cred">35× Superhost · 1,000+ Listings Optimized · March 2026</span>
       </div>
     </div>
 
-    <p>Most hosts invest everything in steps 4 and 5. The highest-leverage work is in steps 2 and 3, and most of it is invisible to guests entirely.</p>
+    <div class="art-body">
+      <p>I've hosted conversations about the Airbnb algorithm on two episodes of RevLabs, and the single question that always comes up first is some variation of: <em>"Why isn't my listing getting views?"</em></p>
 
-    <h2>What the Algorithm Actually Measures</h2>
+      <p>The answer, almost universally, starts with the same misunderstanding: the belief that Airbnb works like a bulletin board where every listing is tacked up equally and guests scroll until something catches their eye. Airbnb is nothing like that. It's a sophisticated search and recommendation engine that makes hundreds of decisions before a single guest ever sees your property.</p>
 
-    <p>Airbnb's ranking algorithm is not public, and it evolves continuously. But from optimizing 1,000+ listings across 22 markets, and from deliberately testing specific variables: the signals that matter most consistently fall into a few categories:</p>
+      <p class="lead">Understanding where you have leverage is <strong>what separates hosts who run at 85% occupancy from hosts who run at 55%.</strong></p>
 
-    <h3>Listing Quality Signals</h3>
+      <h2>The myth: equal visibility</h2>
+      <p>Here's what most hosts picture: every listing in the area appears, sorted maybe by price or distance, and guests scroll through. Your listing is somewhere in that list. Better photos help, good reviews help, everything else is roughly equal. This model is wrong in almost every dimension. Airbnb processes a search through multiple filtering and ranking layers before any results appear. By the time a guest sees the first 20 listings, the platform has already made thousands of decisions to surface those 20 and suppress thousands of others.</p>
 
-    <p>These are the signals Airbnb can score directly from your listing content and history:</p>
-
-    <table class="signal-table">
-      <thead>
-        <tr>
-          <th>Signal</th>
-          <th>What It Measures</th>
-          <th>Impact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Review score</td>
-          <td>Overall rating, recency-weighted</td>
-          <td class="impact-high">Very High</td>
-        </tr>
-        <tr>
-          <td>Review velocity</td>
-          <td>How recently you've received reviews</td>
-          <td class="impact-high">High</td>
-        </tr>
-        <tr>
-          <td>Response rate</td>
-          <td>% of inquiries answered within 24h</td>
-          <td class="impact-high">High</td>
-        </tr>
-        <tr>
-          <td>Acceptance rate</td>
-          <td>% of booking requests accepted</td>
-          <td class="impact-high">High</td>
-        </tr>
-        <tr>
-          <td>Listing completeness</td>
-          <td>Amenities, description, photo count</td>
-          <td class="impact-med">Medium</td>
-        </tr>
-        <tr>
-          <td>Instant Book enabled</td>
-          <td>Frictionless booking option available</td>
-          <td class="impact-med">Medium</td>
-        </tr>
-        <tr>
-          <td>Cancellation rate</td>
-          <td>Host-initiated cancellations</td>
-          <td class="impact-high">High (penalized)</td>
-        </tr>
-        <tr>
-          <td>Calendar availability</td>
-          <td>Days open vs. blocked</td>
-          <td class="impact-med">Medium</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>Behavioral & Conversion Signals</h3>
-
-    <p>These are signals Airbnb collects from how guests interact with your listing: data you never see but which heavily influences your ranking:</p>
-
-    <table class="signal-table">
-      <thead>
-        <tr>
-          <th>Signal</th>
-          <th>What It Measures</th>
-          <th>Impact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Click-through rate</td>
-          <td>How often guests click your listing when shown</td>
-          <td class="impact-high">Very High</td>
-        </tr>
-        <tr>
-          <td>Wishlisting rate</td>
-          <td>How often guests save your listing</td>
-          <td class="impact-high">High</td>
-        </tr>
-        <tr>
-          <td>Booking conversion</td>
-          <td>Visits to listing page that result in bookings</td>
-          <td class="impact-high">High</td>
-        </tr>
-        <tr>
-          <td>Time on listing page</td>
-          <td>How long guests spend reading your listing</td>
-          <td class="impact-med">Medium</td>
-        </tr>
-        <tr>
-          <td>Inquiry-to-booking rate</td>
-          <td>Inquiries that convert to confirmed stays</td>
-          <td class="impact-med">Medium</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <p>This second category is what separates surface-level optimization from real algorithm work. Airbnb is watching what guests do when your listing appears, and feeding that behavior back into your ranking. A listing with a low click-through rate will be shown less, regardless of its review score. A listing that gets lots of saves but few bookings is a mixed signal.</p>
-
-    <div class="callout">
-      <div class="callout-label">The Feedback Loop</div>
-      <p>Poor click-through → fewer impressions → fewer bookings → lower review velocity → lower ranking → even fewer impressions. <strong>The algorithm compounds in both directions.</strong> A listing in decline tends to keep declining. A listing gaining momentum tends to accelerate.</p>
-    </div>
-
-    <h2>The F1 Montréal Test: What Cover Photos Actually Do</h2>
-
-    <p>I manage several properties in Montréal. During the Formula 1 Grand Prix period: one of the highest-demand weekends of the year in that market: I ran a deliberate A/B test across two comparable properties to understand the relationship between cover photo, click-through rate, and eventual booking pace.</p>
-
-    <div class="case-study">
-      <div class="cs-header">
-        <span class="cs-badge">Case Study</span>
-        <div class="cs-title">F1 Grand Prix Montréal: Cover Photo A/B Test</div>
+      <div class="callout">
+        <span class="lbl">The real picture</span>
+        <p>In a competitive market with 800 active listings, a typical search might surface 40–60 results. <strong>The other 740+ listings didn't appear — not because guests rejected them, but because the algorithm never showed them at all.</strong> Visibility is the prerequisite. Everything else comes after.</p>
       </div>
-      <div class="cs-body">
-        <p><strong>Setup:</strong> Two comparable Montréal properties, similar size, location, price point, and review scores. Both targeting the F1 Grand Prix weekend. I updated the cover photo on Property A to a wide-angle living room shot with strong natural light and a contemporary feel. Property B kept its existing cover photo: a bedroom shot that was technically well-composed but less immediately striking at thumbnail size.</p>
-        <p><strong>What I tracked:</strong> Airbnb does not provide click-through rate data directly, so I tracked a proxy: inquiry and booking pace in the two weeks leading up to the event. Both properties were set to identical pricing for the F1 weekend. The only variable changed was the cover photo on Property A.</p>
-        <p><strong>What happened:</strong> Property A received its first booking 6 days earlier than Property B. Over the two weeks, Property A received 3× as many inquiries and booked its F1 weekend 11 days before Property B did. Both ended up fully booked, but Property A booked at a higher rate earlier in the window, allowing for a price increase as the event approached. Property B filled at the original price.</p>
-        <p><strong>The implication:</strong> Cover photo doesn't just affect whether a guest books you. It affects when they see you in search results, because click-through rate is a ranking signal. A listing that gets clicked more gets shown more. Property A created a virtuous cycle. Property B got the same outcome eventually, but left revenue on the table in the window where demand was rising.</p>
-      </div>
-      <div class="cs-result">
-        <div class="cs-stat">
-          <div class="cs-stat-val">3×</div>
-          <div class="cs-stat-label">More Inquiries</div>
+
+      <h2>The funnel most hosts never see</h2>
+      <p>Most optimization advice focuses on conversion — getting guests who see your listing to book it. But there are two layers above conversion that most hosts never address: <strong>search display</strong> (being shown at all) and <strong>click-through</strong> (getting the tap when you appear).</p>
+
+      <div class="funnel">
+        <div class="f-step">
+          <span class="f-n">1</span>
+          <div class="f-c"><span class="f-t">Guest searches</span><span class="f-d">Dates, location, guest count entered</span></div>
+          <span class="f-ctrl">External</span>
         </div>
-        <div class="cs-stat">
-          <div class="cs-stat-val">11 Days</div>
-          <div class="cs-stat-label">Earlier Booking</div>
+        <div class="f-step">
+          <span class="f-n">2</span>
+          <div class="f-c"><span class="f-t">Eligibility filter</span><span class="f-d">Availability, minimum stay, Instant Book, response rate</span></div>
+          <span class="f-ctrl you">Your control</span>
         </div>
-        <div class="cs-stat">
-          <div class="cs-stat-val">+ADR</div>
-          <div class="cs-stat-label">Revenue Captured</div>
+        <div class="f-step">
+          <span class="f-n">3</span>
+          <div class="f-c"><span class="f-t">Ranking algorithm</span><span class="f-d">Quality signals determine position in results</span></div>
+          <span class="f-ctrl sig">Significant control</span>
+        </div>
+        <div class="f-step">
+          <span class="f-n">4</span>
+          <div class="f-c"><span class="f-t">Click-through</span><span class="f-d">Cover photo, price, review count drive the tap</span></div>
+          <span class="f-ctrl you">Your control</span>
+        </div>
+        <div class="f-step">
+          <span class="f-n">5</span>
+          <div class="f-c"><span class="f-t">Conversion</span><span class="f-d">Full listing page, photos, description, reviews</span></div>
+          <span class="f-ctrl you">Your control</span>
         </div>
       </div>
-    </div>
+      <p>Most hosts invest everything in steps 4 and 5. <strong>The highest-leverage work is in steps 2 and 3</strong> — and most of it is invisible to guests entirely.</p>
 
-    <h2>The Minimum Stay Problem Most Hosts Create for Themselves</h2>
+      <h2>What the algorithm actually measures</h2>
+      <p>The ranking algorithm isn't public and evolves continuously. But from optimizing 1,000+ listings across 22 markets — and deliberately testing specific variables — the signals that matter most consistently fall into two categories. First, the quality signals Airbnb scores directly from your listing:</p>
 
-    <p>One of the most consistent algorithmic disadvantages I see hosts create for themselves is rigid minimum stay rules. A 3-night minimum sounds reasonable until you understand what it does to your eligibility across Airbnb's search index.</p>
-
-    <p>Every time a guest searches for 1-night or 2-night stays in your market, your listing is invisible. It doesn't appear at position 50. It doesn't appear at all. You're not losing to competitors at that point; you're opting out of the search entirely.</p>
-
-    <p>Beyond the direct eligibility issue, Airbnb's algorithm considers your overall booking rate relative to available nights. A listing with rigid minimums will inevitably have more gaps: unbookable nights between stays, which depresses the signal that the algorithm uses to assess demand for your property. The algorithm can't easily distinguish "nobody wanted these nights" from "these nights were ineligible due to minimum stay rules." Both look like low demand.</p>
-
-    <p>The fix isn't to remove minimums entirely: minimum stay management is a genuine yield strategy, especially around high-demand events. The fix is to manage them dynamically: longer minimums for peak periods where you want higher-value stays, shorter or no minimums for shoulder periods where you need to fill gaps and maintain booking velocity.</p>
-
-    <h2>Pricing and the Algorithm: Not What You Think</h2>
-
-    <p>Many hosts believe that lower prices improve algorithmic ranking. This is partially true but significantly misunderstood.</p>
-
-    <p>Airbnb does surface "value" listings in some contexts: particularly when it identifies that a listing is priced competitively relative to comparable properties. But Airbnb's primary interest is not in helping you discount. It's in maximizing platform revenue (a percentage of your total booking value) while maintaining guest satisfaction.</p>
-
-    <p>The actual pricing signal the algorithm cares most about is <strong>competitive positioning</strong>, not being the cheapest, but being priced appropriately for what you're offering. A listing priced 30% below market will be shown to budget-focused searches. A listing priced 15% above market with strong reviews, a high click-through rate, and a consistent booking history will rank better than the discounted alternative in most search contexts.</p>
-
-    <p>What pricing does most directly affect is your <strong>conversion rate</strong> — which, as we've established, feeds back into your ranking. Priced too high, you get impressions but no bookings. That's a bad signal. Priced appropriately, you get impressions that convert, which tells the algorithm your listing performs well for the guests it's shown to.</p>
-
-    <h2>What You Can Actually Do</h2>
-
-    <p>Given all of this, here's where effort has the highest return:</p>
-
-    <ol>
-      <li><strong>Cover photo first, always.</strong> This is your click-through driver. It needs to be striking at thumbnail size, well-lit, and show the most compelling space in your property. Test it. The F1 Montréal result wasn't a fluke: I've replicated similar dynamics across multiple properties.</li>
-      <li><strong>Response rate is non-negotiable.</strong> 100% response rate, sub-1-hour response time. Not because it looks good to guests: because it directly affects your eligibility for search display. Airbnb filters out slow-response listings for guests who have imminent travel dates.</li>
-      <li><strong>Instant Book on.</strong> This removes friction and signals to the algorithm that your listing is available. The objection most hosts have — "but what if I get a bad guest?" — is addressable through your house rules and guest requirements. The booking velocity cost of keeping Instant Book off is real.</li>
-      <li><strong>Review velocity over review count.</strong> A listing with 200 reviews from 3 years ago will rank below a listing with 20 reviews from the last 90 days. The algorithm weights recency heavily. Consistency of bookings sustains review velocity.</li>
-      <li><strong>Dynamic minimum stays.</strong> Use longer minimums for peak demand. Use shorter minimums (including 1-night) for shoulder periods to maintain booking cadence and prevent algorithmic decay from booking gaps.</li>
-      <li><strong>Calendar availability.</strong> Keep your calendar open further out than you think you need to. Blocked dates don't just lose those specific bookings. They signal to the algorithm that your property has constrained availability, which can reduce display in longer-horizon searches.</li>
-    </ol>
-
-    <div class="callout">
-      <div class="callout-label">The Compound Effect</div>
-      <p>None of these levers is transformative in isolation. The power is in the combination: a high-click-through cover photo drives more views, which drives more bookings, which drives more reviews, which increases review velocity, which improves ranking, which drives more views. <strong>Optimization isn't a one-time task. It's building a flywheel.</strong></p>
-    </div>
-
-    <h2>The Honest Reality</h2>
-
-    <p>Airbnb's algorithm will never be fully transparent, and it will continue to change. What worked in 2022 doesn't map identically to 2026. The platform has added new surfaces: Rooms, different filter options, changed how reviews are weighted, and will continue to evolve.</p>
-
-    <p>What doesn't change is the fundamental dynamic: Airbnb is a marketplace with limited inventory space on any given search page, and it uses guest behavior to decide who gets that space. Your job as a host is to give the algorithm as many positive signals as possible, and to understand that those signals start before a guest ever reaches your listing page.</p>
-
-    <p>The visibility myth is expensive. The hosts who've let it go, who understand that search display and click-through are the beginning of the funnel, not an afterthought: are the ones who run at full occupancy in markets where their neighbors are wondering where all the bookings went.</p>
-
-    <div class="series-nav">
-      <div>
-        <div class="series-label">Previous in The Playbook</div>
-        <div class="series-title">The Trust Architecture: How Every Signal in Your Listing Works Together</div>
+      <div class="sigtable">
+        <div class="sig-head"><span>Signal</span><span>What it measures</span><span>Impact</span></div>
+        <div class="sig-row"><span class="sig-sig">Review score</span><span class="sig-mea">Overall rating, recency-weighted</span><span class="sig-imp vhigh">Very High</span></div>
+        <div class="sig-row"><span class="sig-sig">Review velocity</span><span class="sig-mea">How recently you've received reviews</span><span class="sig-imp high">High</span></div>
+        <div class="sig-row"><span class="sig-sig">Response rate</span><span class="sig-mea">% of inquiries answered within 24h</span><span class="sig-imp high">High</span></div>
+        <div class="sig-row"><span class="sig-sig">Acceptance rate</span><span class="sig-mea">% of booking requests accepted</span><span class="sig-imp high">High</span></div>
+        <div class="sig-row"><span class="sig-sig">Listing completeness</span><span class="sig-mea">Amenities, description, photo count</span><span class="sig-imp">Medium</span></div>
+        <div class="sig-row"><span class="sig-sig">Instant Book enabled</span><span class="sig-mea">Frictionless booking available</span><span class="sig-imp">Medium</span></div>
+        <div class="sig-row"><span class="sig-sig">Cancellation rate</span><span class="sig-mea">Host-initiated cancellations</span><span class="sig-imp pen">High · penalized</span></div>
+        <div class="sig-row"><span class="sig-sig">Calendar availability</span><span class="sig-mea">Days open vs. blocked</span><span class="sig-imp">Medium</span></div>
       </div>
-      <a href="/intel/trust" class="series-link">← Read Part 2</a>
+      <p>The second category is what separates surface-level optimization from real algorithm work — the behavioral signals Airbnb collects from how guests interact with your listing, which you never see but which heavily influence your ranking:</p>
+
+      <div class="sigtable">
+        <div class="sig-head"><span>Signal</span><span>What it measures</span><span>Impact</span></div>
+        <div class="sig-row"><span class="sig-sig">Click-through rate</span><span class="sig-mea">How often guests click when shown</span><span class="sig-imp vhigh">Very High</span></div>
+        <div class="sig-row"><span class="sig-sig">Wishlisting rate</span><span class="sig-mea">How often guests save your listing</span><span class="sig-imp high">High</span></div>
+        <div class="sig-row"><span class="sig-sig">Booking conversion</span><span class="sig-mea">Listing visits that result in bookings</span><span class="sig-imp high">High</span></div>
+        <div class="sig-row"><span class="sig-sig">Time on listing page</span><span class="sig-mea">How long guests spend reading</span><span class="sig-imp">Medium</span></div>
+        <div class="sig-row"><span class="sig-sig">Inquiry-to-booking</span><span class="sig-mea">Inquiries that confirm stays</span><span class="sig-imp">Medium</span></div>
+      </div>
+
+      <div class="callout rule">
+        <span class="lbl">The feedback loop</span>
+        <p>Poor click-through → fewer impressions → fewer bookings → lower review velocity → lower ranking → even fewer impressions. <strong>The algorithm compounds in both directions.</strong> A listing in decline tends to keep declining. A listing gaining momentum tends to accelerate.</p>
+      </div>
+
+      <h2>The F1 Montréal test: what cover photos actually do</h2>
+      <p>During the Formula 1 Grand Prix — one of the highest-demand weekends of the year in Montréal — I ran a deliberate A/B test across two comparable properties to understand the relationship between cover photo, click-through, and booking pace.</p>
+
+      <div class="case">
+        <span class="case-badge">Case study · F1 Grand Prix Montréal · cover photo A/B test</span>
+        <p><strong>Setup:</strong> two comparable Montréal properties — similar size, location, price, review scores — both targeting F1 weekend at identical pricing. The only variable changed: Property A's cover photo became a wide-angle, naturally-lit living-room shot. Property B kept a well-composed but less striking bedroom shot.</p>
+        <p><strong>Result:</strong> Property A booked earlier and pulled 3× the inquiries — allowing a price increase as the event approached. Property B filled eventually, at the original price. Cover photo doesn't just affect whether a guest books you; it affects <em>when they see you</em>, because click-through is itself a ranking signal.</p>
+        <div class="case-stats">
+          <div class="case-stat"><span class="v gold">3×</span><span class="l">More inquiries</span></div>
+          <div class="case-stat"><span class="v white">11 days</span><span class="l">Earlier booking</span></div>
+          <div class="case-stat"><span class="v white">+ADR</span><span class="l">Revenue captured</span></div>
+        </div>
+      </div>
+
+      <h2>The minimum-stay problem hosts create for themselves</h2>
+      <p>A 3-night minimum sounds reasonable until you understand what it does to eligibility. Every time a guest searches for 1- or 2-night stays in your market, your listing is invisible — not at position 50, but not at all. You're not losing to competitors; you're opting out of the search entirely. And the algorithm can't distinguish "nobody wanted these nights" from "these nights were ineligible" — both look like low demand. The fix isn't removing minimums; it's managing them dynamically: longer for peak periods, shorter or none for shoulder periods where you need to fill gaps and hold booking velocity.</p>
+
+      <h2>Pricing and the algorithm: not what you think</h2>
+      <p>Many hosts believe lower prices improve ranking. Partially true, badly misunderstood. Airbnb's interest is maximizing platform revenue while maintaining guest satisfaction — not helping you discount. The signal it cares about is <strong>competitive positioning</strong>: priced appropriately for what you offer, not cheapest. A listing 15% above market with strong reviews and high click-through outranks a discounted alternative in most contexts. What pricing most directly affects is your conversion rate — which feeds back into ranking. Priced too high, you get impressions but no bookings: a bad signal. Priced right, impressions convert, telling the algorithm your listing performs.</p>
+
+      <h2>Where effort has the highest return</h2>
+      <div class="levers">
+        <div class="lever"><span class="n">1</span><div class="c"><span class="t">Cover photo first, always</span><span class="b">Your click-through driver — striking at thumbnail size, well-lit, the most compelling space, matched to your tier. Test it. The F1 result was not a fluke.</span></div></div>
+        <div class="lever"><span class="n">2</span><div class="c"><span class="t">Response rate is non-negotiable</span><span class="b">100% response, sub-1-hour. Not for looks — it directly affects eligibility. Airbnb filters slow-response listings out for guests with imminent dates.</span></div></div>
+        <div class="lever"><span class="n">3</span><div class="c"><span class="t">Instant Book on</span><span class="b">Removes friction and signals availability. The "bad guest" objection is handled through house rules and guest requirements; the velocity cost of keeping it off is real.</span></div></div>
+        <div class="lever"><span class="n">4</span><div class="c"><span class="t">Review velocity over count</span><span class="b">20 reviews from the last 90 days outrank 200 from three years ago. The algorithm weights recency heavily; consistent bookings sustain velocity.</span></div></div>
+        <div class="lever"><span class="n">5</span><div class="c"><span class="t">Dynamic minimum stays</span><span class="b">Longer minimums for peak demand; shorter (including 1-night) for shoulder periods to hold cadence and prevent algorithmic decay from booking gaps.</span></div></div>
+        <div class="lever"><span class="n">6</span><div class="c"><span class="t">Calendar availability</span><span class="b">Keep it open further out than feels necessary. Blocked dates signal constrained availability, reducing display in longer-horizon searches.</span></div></div>
+      </div>
+
+      <div class="callout">
+        <span class="lbl">The compound effect</span>
+        <p>No lever is transformative in isolation. The power is the combination: a high-click-through cover photo drives more views → more bookings → more reviews → higher review velocity → better ranking → more views. <strong>Optimization isn't a one-time task. It's building a flywheel.</strong></p>
+      </div>
+
+      <p class="lead">Airbnb's algorithm will never be fully transparent, and it keeps changing. What doesn't change: it's a marketplace with limited space on any search page, and it uses guest behavior to decide who gets that space. <strong>Your job is to give it as many positive signals as possible — and to understand those signals start before a guest ever reaches your listing page.</strong></p>
     </div>
 
-    <div class="article-cta">
+    <div class="inline-cta">
       <h3>Want us to audit your <em>specific</em> listing?</h3>
-      <p>We'll review your current ranking signals, click-through drivers, and pricing strategy, and tell you exactly what we'd change and why.</p>
-      <a href="/get-started" class="btn-primary">Get My Free Audit</a>
+      <p>We'll review your current ranking signals, click-through drivers, and pricing strategy — and tell you exactly what we'd change and why.</p>
+      <a href="/get-started" class="btn-fill">Get My Free Audit</a>
     </div>
 
-    <a href="/intel/performance-based-management" class="next-article">
+    <a href="/intel/performance-based-management" class="readnext">
       <div>
-        <div class="na-label">Read Next in The Playbook</div>
-        <div class="na-title">Why a Pricing Tool Alone Isn't Enough</div>
+        <div class="rn-label">Read next in The Playbook</div>
+        <div class="rn-title">Why a pricing tool alone isn't enough: what performance-based management actually does</div>
       </div>
-      <div class="na-arrow">→</div>
+      <span class="rn-arrow">→</span>
     </a>
 
-  </div>
-
+  </article>
 </main>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>Performance-based STR optimization</span>
   </div>
 </footer>
 
-<script>(function(){
-  var nav=document.querySelector('nav');
-  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}
-  var btn=document.getElementById('navHamburger');
-  var menu=document.getElementById('navMobileMenu');
-  if(!btn||!menu)return;
-  function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
-  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
-})();</script>
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>

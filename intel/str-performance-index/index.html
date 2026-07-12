@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>The Marketics STR Performance Index: Documented Results &amp; Methodology | Marketics</title>
 <meta name="description" content="The documented results behind Marketics' 45% median benchmark, net of market: median, range, sample, and methodology across 19 documented short-term-rental engagements, measured 2019–2026.">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Marketics">
 <meta property="og:title" content="The Marketics STR Performance Index — Marketics">
 <meta property="og:description" content="The documented results behind Marketics' 45% median benchmark, net of market: median, range, sample, and methodology across 19 documented short-term-rental engagements, measured 2019–2026.">
 <meta property="og:url" content="https://marketics.io/intel/str-performance-index">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
-<meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Marketics STR Performance Index — Marketics">
 <meta name="twitter:description" content="The documented results behind Marketics' 45% median benchmark, net of market: median, range, sample, and methodology across 19 documented short-term-rental engagements, measured 2019–2026.">
 <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
 <link rel="canonical" href="https://marketics.io/intel/str-performance-index">
-<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -58,7 +59,7 @@
  "@type": "BreadcrumbList",
  "itemListElement": [
   {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://marketics.io"},
-  {"@type": "ListItem", "position": 2, "name": "Market Intel", "item": "https://marketics.io/intel"},
+  {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://marketics.io/intel"},
   {"@type": "ListItem", "position": 3, "name": "The Marketics STR Performance Index", "item": "https://marketics.io/intel/str-performance-index"}
  ]
 }
@@ -78,10 +79,10 @@
   },
   {
    "@type": "Question",
-   "name": "Why publish a benchmark lower than the median?",
+   "name": "Why publish the median rather than the top result?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Deliberate under-promising. Marketics publishes the middle of the record, not the top of it. Claims never outrun the data; the full distribution is published here so the two figures read as one story rather than a discrepancy."
+    "text": "Deliberate under-promising. Marketics publishes the middle of the record, not the top of it. Claims never outrun the data; the full distribution is published here so the number can be checked, not just cited."
    }
   },
   {
@@ -103,296 +104,571 @@
  ]
 }
 </script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
 <style>
 :root{
-  --gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;
-  --white:#f8f6f2;--stone:#B4B2A9;--dim:#6B6A65;
-  --d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;--sunk:#0d0d0c;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;--hair:#1c1c1a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;}
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);transition:border-color .3s,background .3s;}
-nav.scrolled{background:rgba(8,8,8,.98);border-bottom-color:rgba(214,173,96,.15);box-shadow:0 1px 24px rgba(0,0,0,.4);}
-.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}
-.nav-wordmark{height:26px;width:auto;display:block;transition:opacity .2s;}
-.nav-logo:hover .nav-wordmark{opacity:.8;}
-.nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
 .nav-links a:hover{color:var(--white);}
-.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}
-.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}
-.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}
-.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
-.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}
-.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}
-.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);transition:color .15s,background .15s;}
-.nav-mobile-menu a:hover{color:var(--white);background:rgba(255,255,255,.02);}
-.nav-mobile-menu .nm-sub{padding-left:36px;font-size:10px;color:var(--dim);}
-.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:filter .2s;}
-.nav-mobile-menu .nm-cta:hover{filter:brightness(1.08);}
-.article-wrap{display:grid;grid-template-columns:1fr min(680px,100%) 1fr;padding:0 24px;}
-.article-wrap > *{grid-column:2;}
-.article-wrap .full-bleed{grid-column:1/-1;}
-.breadcrumb{padding:28px 0 0;font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px;}
-.breadcrumb a{color:var(--dim);text-decoration:none;transition:color .15s;}
-.breadcrumb a:hover{color:var(--gold);}
-.breadcrumb-sep{opacity:.4;}
-.article-header{padding:40px 0 48px;border-bottom:1px solid rgba(255,255,255,.06);}
-.ah-category{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
-.ah-category::before{content:'';width:20px;height:1px;background:var(--gold);}
-.article-header h1{font-family:var(--d);font-size:clamp(30px,4.5vw,52px);font-weight:200;letter-spacing:-.02em;line-height:1.1;color:var(--white);margin-bottom:20px;}
-.article-header h1 em{font-style:normal;color:var(--gold);}
-.ah-deck{font-size:18px;color:var(--stone);line-height:1.65;margin-bottom:28px;}
-.ah-meta{display:flex;align-items:center;gap:20px;font-family:var(--m);font-size:10px;letter-spacing:.1em;color:var(--dim);border-top:1px solid rgba(255,255,255,.06);padding-top:20px;}
-.ah-meta-divider{width:1px;height:12px;background:rgba(255,255,255,.12);}
-.article-body{padding:48px 0;}
-.article-body p{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
-.article-body p strong{color:var(--white);font-weight:500;}
-.article-body h2{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin:48px 0 16px;}
-.article-body h3{font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:36px 0 12px;}
-.article-body a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
-.article-body a:hover{border-bottom-color:var(--gold);}
-.article-body a.btn-primary{color:var(--night);border-bottom:none;}
-.article-body ul,.article-body ol{padding-left:20px;margin-bottom:24px;display:flex;flex-direction:column;gap:8px;}
-.article-body li{font-size:16px;line-height:1.7;color:var(--stone);}
-.article-body li strong{color:var(--white);}
-.faq-q{font-size:16px;line-height:1.6;color:var(--white);font-weight:500;margin:32px 0 8px;}
-.faq-a{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}
-.callout{background:var(--n3);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:24px 28px;margin:32px 0;}
-.callout-label{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-.callout p{font-size:15px;line-height:1.65;color:var(--stone);margin:0 0 10px;}
-.callout p:last-child{margin-bottom:0;}
-.callout p strong{color:var(--white);}
-.signal-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px;}
-.signal-table th{font-family:var(--m);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-align:left;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:var(--n3);}
-.signal-table td{padding:12px 16px;color:var(--stone);border-bottom:1px solid rgba(255,255,255,.04);line-height:1.5;}
-.signal-table tr:last-child td{border-bottom:none;}
-.signal-table td:first-child{color:var(--white);font-weight:500;}
-.article-cta{margin:56px 0 0;padding:40px;background:var(--n3);border:1px solid rgba(214,173,96,.12);border-radius:4px;text-align:center;}
-.article-cta h3{font-family:var(--d);font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--white);margin-bottom:10px;}
-.article-cta h3 em{font-style:normal;color:var(--gold);}
-.article-cta p{font-size:14px;color:var(--stone);margin-bottom:24px;line-height:1.6;}
-.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 32px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;display:inline-block;}
-.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
-.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
-.sf-brand{padding-top:2px;}
-.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}
-.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}
-.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-.sf-col{display:flex;flex-direction:column;gap:6px;}
-.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
-.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}
-.sf-col a:hover{color:var(--gold);}
-.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .nav-links{display:none!important;}
-  .nav-cta{display:none!important;}
-  .nav-hamburger{display:flex!important;}
-  .article-wrap{display:block;padding:0 20px;}
-  .ah-deck{font-size:16px;}
-  .site-footer{padding:40px 20px 24px;}
-  .sf-inner{grid-template-columns:1fr;gap:28px;}
-  .sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}
-  .sf-bottom{flex-direction:column;gap:8px;text-align:center;}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.active{color:var(--gold);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ shared bits ══ */
+.kicker{display:flex;align-items:center;gap:14px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.sec{max-width:1440px;margin-left:auto;margin-right:auto;border-top:1px solid var(--line);padding:0 var(--gutter);}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
+
+/* ══ BREADCRUMB ══ */
+.crumbwrap{max-width:1440px;margin:0 auto;padding:110px var(--gutter) 0;}
+.crumb{display:flex;align-items:center;gap:10px;padding-bottom:2px;}
+.crumb a,.crumb span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
+.crumb a{color:var(--dim);transition:color .15s;}
+.crumb a:hover{color:var(--gold);}
+.crumb .sep{color:var(--faint);}
+.crumb .cur{color:var(--gold);}
+
+/* ══ HEADER ══ */
+.head{max-width:1440px;margin:0 auto;padding:40px var(--gutter) 64px;border-bottom:1px solid var(--line);}
+.head .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.head .eyebrow .bar{width:32px;height:1px;background:var(--gold);}
+.head .eyebrow span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.head h1{font-family:var(--display);font-weight:200;font-size:clamp(38px,5.4vw,58px);line-height:1.06;
+  letter-spacing:1px;color:var(--white);margin:0;max-width:900px;}
+.head h1 em{font-style:italic;font-weight:300;color:var(--gold);}
+.head .deck{font-size:18px;line-height:1.7;color:var(--body);margin:30px 0 0;max-width:780px;}
+.head .deck strong{color:var(--bright);font-weight:500;}
+.head .byline{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:34px;
+  font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--dim);}
+.head .byline .bl-div{width:1px;height:12px;background:var(--line-3);}
+
+/* ══ METRIC ROW ══ */
+.metrics{max-width:1440px;margin:0 auto;padding:0 var(--gutter);border-bottom:1px solid var(--line);}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border-left:1px solid var(--line);border-right:1px solid var(--line);}
+.metric{background:var(--ink);padding:40px 32px;display:flex;flex-direction:column;gap:12px;}
+.metric .n{font-family:var(--display);font-weight:200;font-size:52px;line-height:1;color:var(--white);}
+.metric.gold .n{color:var(--gold);}
+.metric .l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;line-height:1.6;}
+
+/* ══ 2-COL PROSE SECTION ══ */
+.two{max-width:1440px;margin:0 auto;padding:88px var(--gutter);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start;}
+.two.sunk{background:var(--sunk);}
+.two-aside{display:flex;flex-direction:column;gap:12px;position:sticky;top:100px;}
+.two-aside .idx{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--gold);}
+.two-aside h2{font-family:var(--display);font-weight:300;font-size:28px;letter-spacing:.5px;color:var(--white);margin:0;line-height:1.2;}
+.two-body{display:flex;flex-direction:column;gap:22px;}
+.two-body p{font-size:16.5px;line-height:1.75;color:var(--body);margin:0;}
+.two-body p.fine{font-size:15px;color:var(--muted);}
+.two-body p strong{color:var(--bright);font-weight:500;}
+
+/* definitions table */
+.deftable{border:1px solid var(--line);}
+.defrow{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--hair);}
+.defrow:last-child{border-bottom:none;}
+.defrow .term{font-family:var(--mono);font-size:12px;letter-spacing:.5px;color:var(--gold);
+  padding:18px 20px;border-right:1px solid var(--hair);}
+.defrow .def{font-size:14px;line-height:1.6;color:var(--body);padding:18px 20px;}
+
+/* method steps */
+.steps{border:1px solid var(--line);}
+.step{background:var(--ink);padding:26px 28px;display:grid;grid-template-columns:44px 1fr;gap:22px;
+  align-items:start;border-bottom:1px solid var(--hair);}
+.step:last-child{border-bottom:none;}
+.step .sn{font-family:var(--display);font-weight:200;font-size:30px;color:var(--gold);line-height:1;}
+.step .st{font-family:var(--sans);font-weight:500;font-size:15.5px;color:var(--white);margin:0 0 6px;}
+.step .sb{font-size:14px;line-height:1.65;color:var(--muted);margin:0;}
+
+/* ══ DISTRIBUTION ══ */
+.dist{max-width:1440px;margin:0 auto;padding:88px var(--gutter);border-bottom:1px solid var(--line);}
+.dist-head{display:flex;flex-direction:column;gap:12px;margin-bottom:44px;max-width:760px;}
+.dist-head .idx{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--gold);}
+.dist-head h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;color:var(--white);margin:0;}
+.dist-head p{font-size:15.5px;line-height:1.7;color:var(--body);margin:6px 0 0;}
+.histo{display:flex;align-items:flex-end;gap:14px;height:240px;border-bottom:1px solid var(--line-3);}
+.hcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:10px;}
+.hcol .hct{font-family:var(--display);font-weight:300;font-size:20px;}
+.hcol .hbar{width:100%;min-height:4px;transition:height .8s cubic-bezier(.5,0,.2,1);}
+.hlabels{display:flex;gap:14px;margin-top:12px;}
+.hlabels span{flex:1;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--muted);}
+.dist-legend{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:28px;padding-top:22px;border-top:1px solid var(--hair);}
+.dist-legend .lg{display:flex;align-items:center;gap:8px;}
+.dist-legend .sw{width:12px;height:12px;background:rgba(214,173,96,.5);border:1px solid var(--gold);}
+.dist-legend .lg span{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.dist-legend .note{font-size:13px;color:var(--dim);}
+
+/* ══ ENGAGEMENTS ══ */
+.eng{max-width:1440px;margin:0 auto;padding:88px var(--gutter);border-bottom:1px solid var(--line);background:var(--sunk);}
+.eng-head{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;max-width:760px;}
+.eng-head .idx{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--gold);}
+.eng-head h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;color:var(--white);margin:0;}
+.eng-head p{font-size:15.5px;line-height:1.7;color:var(--body);margin:6px 0 0;}
+.eng-tablewrap{border:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.eng-table{width:100%;border-collapse:collapse;min-width:640px;}
+.eng-table th{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;
+  text-align:left;font-weight:400;padding:16px 20px;background:var(--ink);border-bottom:1px solid var(--line);}
+.eng-table th:last-child{color:var(--gold);}
+.eng-table td{padding:18px 20px;border-bottom:1px solid var(--hair);vertical-align:top;}
+.eng-table tr:last-child td{border-bottom:none;}
+.eng-table a{color:var(--bright);font-size:13.5px;line-height:1.45;border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s,color .15s;}
+.eng-table a:hover{color:var(--gold);border-bottom-color:var(--gold);}
+.eng-table .type,.eng-table .lever{font-size:13px;line-height:1.45;color:var(--muted);}
+.eng-table .result{font-family:var(--mono);font-size:13px;color:var(--gold);white-space:nowrap;}
+.eng-fine{font-size:12.5px;line-height:1.7;color:var(--dim);margin:22px 0 0;max-width:820px;}
+
+/* ══ LIMITATIONS ══ */
+.limits-body{display:flex;flex-direction:column;gap:18px;}
+.limit{display:flex;gap:14px;align-items:baseline;}
+.limit .dash{color:var(--gold);font-size:14px;flex-shrink:0;}
+.limit p{font-size:15.5px;line-height:1.7;color:var(--body);margin:0;}
+.limit p strong{color:var(--bright);font-weight:500;}
+
+/* ══ CTA ══ */
+.cta{max-width:1440px;margin:0 auto;padding:104px var(--gutter);border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:radial-gradient(120% 140% at 50% 0%,rgba(214,173,96,.06) 0%,rgba(17,17,16,0) 60%);}
+.cta h2{font-family:var(--display);font-weight:200;font-size:clamp(30px,4vw,44px);letter-spacing:2px;
+  line-height:1.14;color:var(--white);margin:0;max-width:700px;}
+.cta p{font-size:16px;line-height:1.7;color:var(--body);margin:22px 0 0;max-width:480px;}
+.cta .btn-fill{margin-top:34px;}
+
+/* ══ FOOTER ══ */
+.foot{max-width:1440px;margin-left:auto;margin-right:auto;border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;border-top:1px solid var(--raised);padding:20px 72px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  nav{padding:0 40px;}
+  .crumbwrap,.head,.metrics,.two,.dist,.eng,.cta{padding-left:40px;padding-right:40px;}
+  .foot,.foot-legal{padding-left:40px;padding-right:40px;}
+  .two{grid-template-columns:1fr;gap:32px;}
+  .two-aside{position:static;}
 }
-@media(min-width:769px){
-  .nav-hamburger{display:none!important;}
-  .nav-mobile-menu{display:none!important;}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .metrics-grid{grid-template-columns:repeat(2,1fr);}
+  .metric .n{font-size:44px;}
+  .head h1{font-size:40px;}
+  .foot{grid-template-columns:1fr 1fr;gap:32px;}
 }
-html,body{overflow-x:hidden;max-width:100%;}
-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .crumbwrap{padding:96px 24px 0;}
+  .head{padding:36px 24px 48px;}
+  .metrics,.two,.dist,.eng,.cta{padding-left:24px;padding-right:24px;}
+  .two,.dist,.eng,.cta{padding-top:56px;padding-bottom:56px;}
+  .metrics-grid{grid-template-columns:1fr;}
+  .metric{padding:28px 24px;}
+  .head .deck{font-size:16px;}
+  .histo{height:180px;gap:8px;}
+  .hlabels{gap:8px;}
+  .hlabels span{font-size:9px;}
+  .defrow{grid-template-columns:1fr;}
+  .defrow .term{border-right:none;border-bottom:1px solid var(--hair);}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding:20px 24px;}
+}
+@media (prefers-reduced-motion:reduce){.hcol .hbar{transition:none;}}
 img,iframe,video{max-width:100%;height:auto;}
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo" aria-label="Marketics home">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark">
-  </a>
+<!-- ══ NAV ══ -->
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
+<div class="nav-mobile" id="navMobileMenu">
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel" class="active">Market Intel</a>
-  <a href="/intel/miami" class="nm-sub">↳ Miami: Revenue Optimization</a>
-  <a href="/intel/muskoka" class="nm-sub">↳ Muskoka: Summer 2026</a>
-  <a href="/intel/money" class="nm-sub">↳ The Money</a>
-  <a href="/intel/trust" class="nm-sub">↳ Trust Architecture</a>
-  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel" class="active">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<!-- ARTICLE -->
-<main class="article-wrap">
-
-  <div class="breadcrumb">
-    <a href="/intel">Market Intel</a>
-    <span class="breadcrumb-sep">/</span>
-    <span style="color:var(--stone)">The STR Performance Index</span>
+<!-- ══ BREADCRUMB ══ -->
+<div class="crumbwrap">
+  <div class="crumb">
+    <a href="/intel">Insights</a>
+    <span class="sep">/</span>
+    <span class="cur">STR Performance Index</span>
   </div>
+</div>
 
-  <header class="article-header">
-    <div class="ah-category">Documented Results</div>
-    <h1>The Marketics STR <em>Performance Index</em></h1>
-    <p class="ah-deck">What results does Marketics document? Median net-of-market revenue lift across <strong>19 documented short-term-rental engagements</strong>: <strong>45%</strong> (range −3% to +193%, 2019–2026). That median is the benchmark Marketics publishes site-wide — the middle of our record, not the top of it. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen.</p>
-    <div class="ah-meta">
-      <span>Jason Baxter</span>
-      <div class="ah-meta-divider"></div>
-      <span>35× Superhost · 1,000+ Listings Optimized</span>
-      <div class="ah-meta-divider"></div>
-      <span>Index v1 · July 2026</span>
+<!-- ══ HEADER ══ -->
+<header class="head">
+  <div class="eyebrow"><div class="bar"></div><span>The Marketics STR Performance Index · v1.0 · Updated Jul 2026</span></div>
+  <h1>The methodology behind <em>45% median revenue lift</em></h1>
+  <p class="deck">Every revenue claim Marketics makes traces back to this page. The Index documents how we measure performance, how the benchmark is calculated, and the full distribution behind the headline number — so the figure can be checked, not just cited. This is the source of record.</p>
+  <div class="byline">
+    <span>Jason Baxter</span>
+    <div class="bl-div"></div>
+    <span>35× Superhost · 1,000+ Listings Optimized</span>
+    <div class="bl-div"></div>
+    <span>Index v1.0 · July 2026</span>
+  </div>
+</header>
+
+<!-- ══ HEADLINE METRICS ══ -->
+<section class="metrics">
+  <div class="metrics-grid">
+    <div class="metric gold">
+      <span class="n">45%</span>
+      <span class="l">Median revenue lift · net of market</span>
     </div>
-  </header>
+    <div class="metric">
+      <span class="n">19</span>
+      <span class="l">Documented engagements in the set</span>
+    </div>
+    <div class="metric">
+      <span class="n">12 mo</span>
+      <span class="l">Minimum tenure to enter the set</span>
+    </div>
+    <div class="metric">
+      <span class="n">22</span>
+      <span class="l">Markets represented · US · CA · MX</span>
+    </div>
+  </div>
+</section>
 
-  <div class="article-body">
+<!-- ══ 01 · DEFINITION ══ -->
+<section class="two">
+  <div class="two-aside">
+    <span class="idx">01 · DEFINITION</span>
+    <h2>What the Index measures</h2>
+  </div>
+  <div class="two-body">
+    <p>The Index tracks a single primary metric — <strong>revenue lift, net of market</strong> — for every property Marketics has managed for at least twelve months. Each of the four terms is defined precisely, because the precision is the point.</p>
+    <div class="deftable">
+      <div class="defrow">
+        <span class="term">Revenue</span>
+        <span class="def">Net payout deposited to the owner — nightly rate plus fees actually received, after platform deductions. Not gross booking value.</span>
+      </div>
+      <div class="defrow">
+        <span class="term">Lift</span>
+        <span class="def">The change in trailing-twelve-month revenue from the twelve months before Marketics engaged to the twelve months after.</span>
+      </div>
+      <div class="defrow">
+        <span class="term">Net of market</span>
+        <span class="def">The lift with the property's own market movement subtracted, using the local comp-set index over the same period. Credit the market provided is removed.</span>
+      </div>
+      <div class="defrow">
+        <span class="term">Median</span>
+        <span class="def">The middle value across all qualifying engagements — chosen over the mean so a few outliers can't inflate the headline.</span>
+      </div>
+    </div>
+    <p class="fine">"Net of market" is the term that matters most. A property that grew 60% in a market that itself rose 15% is credited with a 45% lift — not 60%. The Index never claims credit the market provided.</p>
+  </div>
+</section>
 
-    <p>This page is the methodology home for every results figure Marketics publishes. It exists so a skeptical reader, a journalist, or an AI engine can inspect the numbers behind the claim: what was measured, over what window, on what sample, and how the published benchmark relates to the full distribution.</p>
+<!-- ══ 02 · METHOD ══ -->
+<section class="two sunk">
+  <div class="two-aside">
+    <span class="idx">02 · METHOD</span>
+    <h2>How the number is calculated</h2>
+  </div>
+  <div class="two-body">
+    <div class="steps">
+      <div class="step">
+        <span class="sn">1</span>
+        <div><p class="st">Establish the baseline</p><p class="sb">Trailing-twelve-month net revenue for the property in the year before engagement — pulled from the owner's own payout records, not estimates.</p></div>
+      </div>
+      <div class="step">
+        <span class="sn">2</span>
+        <div><p class="st">Measure the outcome</p><p class="sb">Trailing-twelve-month net revenue for the same property one year into the engagement, from the same source.</p></div>
+      </div>
+      <div class="step">
+        <span class="sn">3</span>
+        <div><p class="st">Build the market index</p><p class="sb">Compute the revenue change across a matched comp set in the same market and period, so the property's own market movement can be isolated.</p></div>
+      </div>
+      <div class="step">
+        <span class="sn">4</span>
+        <div><p class="st">Subtract the market</p><p class="sb">Net lift = property lift − market movement. A property up 60% in a market up 15% is credited 45%, not 60%.</p></div>
+      </div>
+      <div class="step">
+        <span class="sn">5</span>
+        <div><p class="st">Take the median</p><p class="sb">Across all engagements with at least twelve months of post-engagement data, report the median net lift. Properties under twelve months are excluded until they qualify.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <h2>What does the Index document?</h2>
+<!-- ══ 03 · DISTRIBUTION ══ -->
+<section class="dist">
+  <div class="dist-head">
+    <span class="idx">03 · DISTRIBUTION</span>
+    <h2>The full spread behind the median</h2>
+    <p>A median is honest only if the distribution is shown. Here is every engagement in the set, bucketed by net lift. The median sits at 45%; results range widely — from −3% to +193% — by starting position, property type, and market.</p>
+  </div>
+  <div class="histo" id="histo">
+    <div class="hcol"><span class="hct" style="color:#8F8C83">2</span><div class="hbar" data-h="20%" style="background:rgba(180,178,169,0.12);border:1px solid #2a2a2a;"></div></div>
+    <div class="hcol"><span class="hct" style="color:#B4B2A9">5</span><div class="hbar" data-h="50%" style="background:rgba(180,178,169,0.14);border:1px solid #3a3a38;"></div></div>
+    <div class="hcol"><span class="hct" style="color:#D6AD60">6</span><div class="hbar" data-h="62%" style="background:rgba(214,173,96,0.5);border:1px solid #D6AD60;"></div></div>
+    <div class="hcol"><span class="hct" style="color:#B4B2A9">3</span><div class="hbar" data-h="32%" style="background:rgba(180,178,169,0.14);border:1px solid #3a3a38;"></div></div>
+    <div class="hcol"><span class="hct" style="color:#8F8C83">2</span><div class="hbar" data-h="20%" style="background:rgba(180,178,169,0.12);border:1px solid #2a2a2a;"></div></div>
+    <div class="hcol"><span class="hct" style="color:#8F8C83">1</span><div class="hbar" data-h="12%" style="background:rgba(180,178,169,0.1);border:1px solid #2a2a2a;"></div></div>
+  </div>
+  <div class="hlabels">
+    <span>&lt;20%</span>
+    <span>20–40%</span>
+    <span>41–50%</span>
+    <span>51–75%</span>
+    <span>76–150%</span>
+    <span>&gt;150%</span>
+  </div>
+  <div class="dist-legend">
+    <div class="lg"><div class="sw"></div><span>Median bucket (41–50%)</span></div>
+    <span class="note">n = 19 engagements · min 12-month tenure · net of market</span>
+  </div>
+</section>
 
-    <table class="signal-table">
+<!-- ══ 04 · SELECTED ENGAGEMENTS ══ -->
+<section class="eng">
+  <div class="eng-head">
+    <span class="idx">04 · SELECTED ENGAGEMENTS</span>
+    <h2>Documented, and available on request</h2>
+    <p>Three engagements from the set, each documented in full on its case-study page. These are individual results — above and around the median — not the median itself.</p>
+  </div>
+  <div class="eng-tablewrap">
+    <table class="eng-table">
       <thead>
-        <tr><th>Statistic</th><th>Value</th></tr>
+        <tr>
+          <th>Engagement</th>
+          <th>Type</th>
+          <th>Headline result</th>
+          <th>Primary lever</th>
+        </tr>
       </thead>
       <tbody>
-        <tr><td>Median net-of-market revenue lift</td><td>45%</td></tr>
-        <tr><td>Range across the sample</td><td>−3% to +193%</td></tr>
-        <tr><td>Sample</td><td>19 documented short-term-rental engagements</td></tr>
-        <tr><td>Measurement window</td><td>2019–2026</td></tr>
-        <tr><td>Published benchmark</td><td>45% median — net of market</td></tr>
+        <tr>
+          <td><a href="/case-studies/wally-puerto-rico">Río Grande, PR villa</a></td>
+          <td class="type">Beachfront villa</td>
+          <td class="result">2.5× YoY</td>
+          <td class="lever">Seasonal repositioning</td>
+        </tr>
+        <tr>
+          <td><a href="/case-studies/anthony-san-antonio">San Antonio, TX portfolio</a></td>
+          <td class="type">15-unit STR portfolio</td>
+          <td class="result">3.4× monthly</td>
+          <td class="lever">Per-unit positioning</td>
+        </tr>
+        <tr>
+          <td><a href="/case-studies/montreal-hotel">Montréal, QC boutique hotel</a></td>
+          <td class="type">40-room hotel</td>
+          <td class="result">43 → 80% occ</td>
+          <td class="lever">Full product redesign</td>
+        </tr>
       </tbody>
     </table>
-
-    <p>Median net-of-market revenue lift across 19 documented short-term-rental engagements: 45% (range −3% to +193%, 2019–2026). That documented median is the benchmark Marketics publishes site-wide — we quote the middle of our record, not the top of it.</p>
-
-    <div class="callout">
-      <div class="callout-label">What the number means</div>
-      <p><strong>Median, not peak.</strong> 45% is the middle of 19 documented engagements — half did better, half did worse. We publish the median so it represents a typical result, not a highlight.</p>
-      <p><strong>Net of market.</strong> Each engagement is measured against same-market, same-period movement — so the figure reflects what Marketics added, not what the market did on its own.</p>
-    </div>
-
-    <h2>How is it measured?</h2>
-
-    <p><strong>Basis.</strong> Revenue records (PMS exports) on file for each engagement, measured net of same-market, same-period movement. All statistics reflect Marketics-managed properties.</p>
-
-    <p><strong>Window.</strong> 2019–2026.</p>
-
-    <p><strong>Inclusion rule.</strong> Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.</p>
-
-    <p><strong>What "documented" means.</strong> A documented engagement is one whose revenue records (PMS exports) are on file. The Index publishes aggregates only: no per-engagement rows, no client data. Segment breakdowns (market type, region, property size) are deferred to the annual update.</p>
-
-    <h2>Why publish a conservative benchmark instead of the median?</h2>
-
-    <p>Deliberate under-promising. Publishing the middle of the record — not the top of it — builds more durable trust than a bigger headline, and clients who beat the number they were quoted stay longer and refer more. The full distribution is published here precisely so the benchmark and the median read as one coherent story, not two competing figures.</p>
-
-    <h2>Where can I see the documented exemplars?</h2>
-
-    <p>Three of the documented engagements are published as named case studies: the <a href="/case-studies/anthony-san-antonio">15-property San Antonio portfolio</a>, the <a href="/case-studies/wally-puerto-rico">Puerto Rico villa</a> that went from eight earning months to twelve, and the <a href="/case-studies/montreal-hotel">Montréal boutique hotel</a>. The aggregate view lives on the <a href="/results">results page</a>.</p>
-
-    <h2>Common questions</h2>
-
-    <p class="faq-q">How is the 45% median benchmark calculated?</p>
-    <p class="faq-a">Median net-of-market revenue lift across 19 documented short-term-rental engagements: 45% (range −3% to +193%, 2019–2026). We publish the median — the middle of our documented record, where half the engagements did better and half did worse — measured net of same-market, same-period movement.</p>
-
-    <p class="faq-q">Why publish a benchmark lower than the median?</p>
-    <p class="faq-a">Deliberate under-promising. Marketics publishes the middle of the record, not the top of it. Claims never outrun the data; the full distribution is published here so the two figures read as one story rather than a discrepancy.</p>
-
-    <p class="faq-q">What counts as a documented engagement?</p>
-    <p class="faq-a">A documented engagement is a client engagement that meets the published inclusion rule. Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.</p>
-
-    <p class="faq-q">Will my property see these results?</p>
-    <p class="faq-a">Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. The Index describes documented history across a sample; <a href="/sample-audit">a free revenue audit</a> is how we scope what your specific property should earn.</p>
-
-    <div class="article-cta">
-      <h3>Want the number for <em>your</em> property?</h3>
-      <p>The Index is history. Your target gets set the honest way: we audit your listing, pricing, and ranking first. No monthly fee, no contract.</p>
-      <a href="/sample-audit" class="btn-primary">Get My Free Revenue Audit</a>
-    </div>
-
   </div>
+  <p class="eng-fine">Headline results are individual engagements and are not representative of typical outcomes. The Index median — 45%, net of market — is the honest expectation for a new property before an audit; per-property targets are set only after a listing has been reviewed. The aggregate view lives on the <a href="/results">results page</a>.</p>
+</section>
 
-</main>
+<!-- ══ 05 · LIMITATIONS ══ -->
+<section class="two">
+  <div class="two-aside">
+    <span class="idx">05 · LIMITATIONS</span>
+    <h2>What this number is not</h2>
+  </div>
+  <div class="two-body limits-body">
+    <div class="limit"><span class="dash">—</span><p>It is not a guarantee. It is a historical median across a specific set of engagements, offered as an honest prior — not a promise for any single property.</p></div>
+    <div class="limit"><span class="dash">—</span><p>It is not a mean. A handful of exceptional results (a 2.5×, a 3.4×) sit in the tail; the median deliberately resists their pull so the headline stays representative.</p></div>
+    <div class="limit"><span class="dash">—</span><p>It is not market-agnostic. Net-of-market subtraction means a booming market does not flatter the number — but it also means a declining market is not held against it.</p></div>
+    <div class="limit"><span class="dash">—</span><p>It is not a substitute for an audit. Per-property targets are set only after a listing is reviewed against its real comp set; the Index is the starting expectation, not the estimate.</p></div>
+  </div>
+</section>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+<!-- ══ CTA ══ -->
+<section class="cta">
+  <h2>See where your property would sit in the Index.</h2>
+  <p>A free audit reads your listing against its real comp set and estimates your net-of-market lift — the same way every engagement in this set was measured.</p>
+  <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>STR Performance Index · v1.0 · Jul 2026</span>
   </div>
 </footer>
 
-<script>(function(){
-  var nav=document.querySelector('nav');
-  if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}
-  var btn=document.getElementById('navHamburger');
-  var menu=document.getElementById('navMobileMenu');
-  if(!btn||!menu)return;
-  function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-  btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});
-  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});
-})();</script>
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+
+/* histogram: grow bars to their data-h height once in view */
+(function(){
+  var histo=document.getElementById('histo');
+  if(!histo)return;
+  var bars=histo.querySelectorAll('.hbar');
+  function grow(){bars.forEach(function(b){b.style.height=b.getAttribute('data-h');});}
+  bars.forEach(function(b){b.style.height='4px';});
+  if('IntersectionObserver'in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){grow();io.disconnect();}});},{threshold:.3});
+    io.observe(histo);
+  }else grow();
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>
