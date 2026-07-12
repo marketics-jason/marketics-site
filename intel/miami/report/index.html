@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=DM+Mono:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap">
 <style>
 :root {
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
   --gold: #D6AD60;
   --gold-lo: rgba(214,173,96,.12);
   --gold-glow: rgba(214,173,96,.07);
@@ -59,7 +60,7 @@ body::before {
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:64px;
+  padding:0 var(--gutter);height:74px;
   background:rgba(13,13,13,.95);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
@@ -821,7 +822,8 @@ section {
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
     <a href="/pricing">Pricing</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/story">Our Story</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
 </nav>
