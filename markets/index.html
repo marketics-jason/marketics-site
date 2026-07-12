@@ -18,7 +18,7 @@
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:64px;
+  padding:0 var(--gutter);height:74px;
   background:rgba(13,13,13,.95);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
@@ -70,7 +70,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}
 .nav-mobile-menu{
-  position:fixed;top:64px;left:0;right:0;
+  position:fixed;top:74px;left:0;right:0;
   background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(214,173,96,.12);
   padding:0;max-height:0;overflow:hidden;
@@ -97,7 +97,9 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 }
 .nav-mobile-menu .nm-cta:hover{filter:brightness(1.1);}
 @media(max-width:768px){
-  nav{padding:0 20px;}
+  nav{padding:0 24px;height:64px;}
+  body{padding-top:64px;}
+  .nav-mobile-menu{top:64px;}
   .nav-links{display:none!important;}
   .nav-cta{display:none!important;}
   .nav-hamburger{display:flex!important;}
@@ -109,6 +111,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 
 /* ══ ROOT ══════════════════════════════════════════════ */
 :root{
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
   --gold:#D6AD60;--gold-lo:rgba(214,173,96,.1);
   --night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;--n4:#202020;--n5:#282828;
   --stone:#B4B2A9;--dim:#6B6A65;--dim2:#4e4d4a;--white:#fff;
@@ -116,8 +119,8 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-html{scroll-padding-top:64px;}
-body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--white);line-height:1.6;;padding-top:64px;}
+html{scroll-padding-top:74px;}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--white);line-height:1.6;padding-top:74px;}
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:linear-gradient(rgba(214,173,96,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.016) 1px,transparent 1px);
@@ -190,14 +193,16 @@ body::before{
 /* Hero right: market ticker */
 .hero-ticker{display:flex;flex-direction:column;gap:2px;}
 .ht-row{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;
   padding:14px 18px;background:var(--n2);
   border:1px solid rgba(255,255,255,.05);
-  transition:border-color .25s;
+  transition:border-color .25s,background .25s;
+  font-family:inherit;color:inherit;text-align:left;cursor:pointer;
 }
 .ht-row:first-child{border-radius:8px 8px 0 0;}
 .ht-row:last-child{border-radius:0 0 8px 8px;}
-.ht-row:hover{border-color:rgba(214,173,96,.18);}
+.ht-row:hover{border-color:rgba(214,173,96,.28);background:var(--n3);}
+.ht-row:focus-visible{outline:2px solid var(--gold);outline-offset:-1px;}
 .ht-city{
   font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:600;
   letter-spacing:.04em;color:var(--white);
@@ -635,6 +640,34 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .fi{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
 .fi.vis{opacity:1;transform:none;}
+
+/* ══ REACH STRIP ══ */
+.reach-strip{max-width:1440px;margin:0 auto;border-top:1px solid #202020;border-bottom:1px solid #202020;}
+.reach-inner{display:grid;grid-template-columns:repeat(4,1fr);}
+.reach-cell{padding:40px 48px;border-right:1px solid #202020;display:flex;flex-direction:column;gap:6px;}
+.reach-cell:last-child{border-right:none;}
+.reach-n{font-family:'Josefin Sans',sans-serif;font-weight:300;font-size:42px;line-height:1;color:#fff;}
+.reach-l{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;color:#8F8C83;text-transform:uppercase;}
+@media(max-width:768px){
+  .reach-inner{grid-template-columns:1fr 1fr;}
+  .reach-cell{padding:26px 24px;}
+  .reach-cell:nth-child(1),.reach-cell:nth-child(2){border-bottom:1px solid #202020;}
+  .reach-cell:nth-child(2){border-right:none;}
+  .reach-n{font-size:32px;}
+}
+
+/* ══ PORTABILITY MANIFESTO ══ */
+.manifesto{max-width:1440px;margin:0 auto;padding:100px 72px;border-bottom:1px solid #202020;display:flex;justify-content:center;}
+.manifesto-inner{max-width:940px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.manifesto-kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.28em;color:#6B6A65;text-transform:uppercase;margin-bottom:36px;}
+.manifesto-lead{font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:40px;line-height:1.3;letter-spacing:.02em;color:#fff;margin:0;}
+.manifesto-lead span{color:var(--gold);}
+.manifesto-sub{font-family:'DM Sans',sans-serif;font-weight:300;font-size:15.5px;line-height:1.75;color:#8F8C83;margin:40px 0 0;max-width:560px;}
+@media(max-width:768px){
+  .manifesto{padding:56px 24px;}
+  .manifesto-lead{font-size:25px;line-height:1.32;}
+  .manifesto-kicker{margin-bottom:22px;}
+}
 .fi.animate{animation:fadeUp .65s ease forwards;}
 
 /* ══ RESPONSIVE ══════════════════════════════════════ */
@@ -773,10 +806,9 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel">Market Intel</a>
+    <a href="/intel">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
@@ -787,10 +819,9 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-  <a href="/intel">Market Intel</a>
+  <a href="/intel">Insights</a>
   <a href="/get-started" class="nm-cta">Get My Free Audit</a>
 </div>
 
@@ -808,13 +839,44 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
       </h1>
       <p class="hero-sub">
  52 weeks of demand data, event intelligence, and competitor rate tracking: per city, <strong>updated continuously.</strong>
-        This is why Marketics-managed properties outperform the market average by 22–44%.
+        This is why Marketics-managed properties post a 45% median revenue lift, net of market.
       </p>
       <a href="#pulse" class="btn-primary">Explore Market Data ↓</a>
     </div>
     <div class="hero-ticker fi" style="transition-delay:.1s" id="heroTicker">
       <!-- Populated by JS -->
     </div>
+  </div>
+</section>
+
+<!-- ══ 1b. REACH STRIP ══ -->
+<section class="reach-strip">
+  <div class="reach-inner">
+    <div class="reach-cell fi">
+      <span class="reach-n">22</span>
+      <span class="reach-l">Markets run</span>
+    </div>
+    <div class="reach-cell fi" style="transition-delay:.06s">
+      <span class="reach-n">3</span>
+      <span class="reach-l">Countries · US · CA · MX</span>
+    </div>
+    <div class="reach-cell fi" style="transition-delay:.12s">
+      <span class="reach-n">1,000+</span>
+      <span class="reach-l">Listings optimized</span>
+    </div>
+    <div class="reach-cell fi" style="transition-delay:.18s">
+      <span class="reach-n">45%</span>
+      <span class="reach-l">Median lift · net of market</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 1c. PORTABILITY MANIFESTO ══ -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-kicker fi">Why location isn't the limit</div>
+    <p class="manifesto-lead fi" style="transition-delay:.06s">A market is just a set of variables to read — supply, seasonality, the guest, the comp set. <span>Reading them is the skill.</span> It doesn't stop at a state line.</p>
+    <p class="manifesto-sub fi" style="transition-delay:.12s">The markets below are where we've done it, not where we can. A new one is a first week of study, not a different kind of work.</p>
   </div>
 </section>
 
@@ -927,7 +989,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>14</strong> active properties managed</span>
-          <a href="#market-austin" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -951,7 +1013,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>9</strong> active properties managed</span>
-          <a href="#market-scottsdale" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -975,7 +1037,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>11</strong> active properties managed</span>
-          <a href="#market-nashville" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <a href="/intel/nashville" class="mc-report-bar has-report">Nashville market report <span class="mc-report-arrow">→</span></a>
       </div>
@@ -1000,7 +1062,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>18</strong> active properties managed</span>
-          <a href="#market-miami" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <a href="/intel/miami" class="mc-report-bar has-report">Miami market report <span class="mc-report-arrow">→</span></a>
       </div>
@@ -1024,7 +1086,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>7</strong> active properties managed</span>
-          <a href="#market-cancun" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -1048,7 +1110,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>8</strong> active properties managed</span>
-          <a href="#market-new-orleans" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -1097,7 +1159,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
-          <a href="#market-tulum" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -1121,7 +1183,7 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
         </div>
         <div class="mc-footer">
           <span class="mc-managed"><strong>5</strong> active properties managed</span>
-          <a href="#market-san-juan" class="mc-learn">Details <span class="mc-learn-arrow">↓</span></a>
+          <a href="#market-reports" class="mc-learn">Reports <span class="mc-learn-arrow">↓</span></a>
         </div>
         <div class="mc-report-bar no-report">Market report coming</div>
       </div>
@@ -1214,66 +1276,6 @@ a.rpt-card:hover .rpt-arrow{transform:translateX(3px);}
   </div>
 </section>
 
-
-<!-- ══ MARKET PROFILES (consolidated from former per-city pages) ══ -->
-<section class="page-section" id="market-profiles">
-  <div class="market-profiles">
-    <div class="market-profiles-head">
-      <h2 class="section-title">Market <em>Profiles.</em></h2>
-      <p class="section-sub">A closer look at each active market — demand rhythm, peak events, and where the revenue is won or lost.</p>
-    </div>
-    <div class="mprofile" id="market-austin">
-      <h3>🇺🇸 Austin <span>· Texas · Live Music Capital</span></h3>
-      <p class="mp-body">Austin's STR market runs on events. SXSW alone generates a 3× demand multiplier across the metro, and the addition of Formula 1 in October created a second peak that didn't exist five years ago. The challenge most hosts face isn't low demand — it's leaving money on the table during spikes while underpricing shoulder weeks. Marketics manages 14 properties across Austin, using dynamic pricing calibrated to the city's unique event calendar and neighborhood-level demand patterns.</p>
-      <div class="mp-events"><strong>Peak events:</strong> SXSW (March) · F1 Grand Prix (Oct–Nov) · ACL Music Festival (October)</div>
-      <a href="/get-started" class="mp-cta">Get a free Austin revenue audit →</a>
-    </div>
-    <div class="mprofile" id="market-scottsdale">
-      <h3>🇺🇸 Scottsdale <span>· Arizona · Desert Luxury</span></h3>
-      <p class="mp-body">Scottsdale commands some of the highest ADRs in the Sun Belt, driven by a concentrated luxury-travel season from January through April. Barrett-Jackson, the Waste Management Phoenix Open, and MLB Spring Training create a triple-peak window that many hosts underprice. Summer is the strategic challenge — 110°F heat drops demand sharply, and hosts who don't adjust lose occupancy. Marketics manages 9 properties in Scottsdale with pricing strategies built around the desert's extreme seasonality.</p>
-      <div class="mp-events"><strong>Peak events:</strong> Barrett-Jackson Auction (January) · WM Phoenix Open (February) · MLB Spring Training (March)</div>
-      <a href="/get-started" class="mp-cta">Get a free Scottsdale revenue audit →</a>
-    </div>
-    <div class="mprofile" id="market-nashville">
-      <h3>🇺🇸 Nashville <span>· Tennessee · Music Row</span></h3>
-      <p class="mp-body">Nashville is one of the most competitive STR markets in the US, with rapid supply growth and increasing regulatory pressure. What separates top performers from average hosts is event pricing precision and listing visibility. CMA Fest and New Year's Eve are obvious peaks, but Nashville's real revenue opportunity is in the 40+ smaller events — NFL games, SEC tournaments, bachelorette weekends — that create rolling demand spikes most hosts miss. Marketics manages 11 Nashville properties with pricing that captures every micro-event.</p>
-      <div class="mp-events"><strong>Peak events:</strong> CMA Music Festival (June) · New Year's Eve (December) · Bonnaroo (June)</div>
-      <a href="/get-started" class="mp-cta">Get a free Nashville revenue audit →</a>
-      <a href="/intel/nashville" class="mp-cta" style="margin-left:22px;">Read the Nashville market report →</a>
-    </div>
-    <div class="mprofile" id="market-miami">
-      <h3>🇺🇸 Miami <span>· Florida · Art Basel &amp; Ultra Capital</span></h3>
-      <p class="mp-body">Miami is Marketics' largest market with 18 managed properties. The city's STR demand is driven by a year-round event calendar that peaks during Art Basel in December — the single highest-ADR week for Miami hosts — and stays elevated through Ultra in March, the Miami Open, and Formula 1 in May. Summer brings a different kind of demand: Latin American travelers and domestic families. Marketics' Miami strategy is zone-specific, with different pricing models for South Beach, Wynwood, Brickell, and Edgewater.</p>
-      <div class="mp-events"><strong>Peak events:</strong> Art Basel (December) · Ultra Music Festival (March) · Miami Open &amp; F1 (March–May)</div>
-      <a href="/get-started" class="mp-cta">Get a free Miami revenue audit →</a>
-      <a href="/intel/miami" class="mp-cta" style="margin-left:22px;">Read the Miami market report →</a>
-    </div>
-    <div class="mprofile" id="market-cancun">
-      <h3>🇲🇽 Cancún <span>· Mexico · Riviera Maya Gateway</span></h3>
-      <p class="mp-body">Cancún delivers some of the highest occupancy rates in Marketics' portfolio at 82%, driven by consistent international demand and three major seasonal peaks. Spring Break, Semana Santa, and the Christmas/New Year window create a revenue concentration that rewards hosts who price aggressively during peaks and maintain competitive rates during the shoulder season. Marketics manages 7 Cancún properties with bilingual listing optimization and pricing strategies calibrated to both US and Mexican holiday calendars.</p>
-      <div class="mp-events"><strong>Peak events:</strong> US Spring Break (March) · Semana Santa (March–April) · Christmas &amp; New Year (Dec–Jan)</div>
-      <a href="/get-started" class="mp-cta">Get a free Cancún revenue audit →</a>
-    </div>
-    <div class="mprofile" id="market-new-orleans">
-      <h3>🇺🇸 New Orleans <span>· Louisiana · Mardi Gras Capital</span></h3>
-      <p class="mp-body">New Orleans has one of the most event-driven STR calendars in the country. Mardi Gras is the obvious peak, but French Quarter Fest, Essence Fest, Jazz Fest, and a steady stream of conventions create year-round demand that most hosts underestimate. The regulatory environment is strict — permit compliance is mandatory — but hosts who operate legally and price dynamically consistently outperform. Marketics manages 8 New Orleans properties with a focus on event-aware pricing and regulatory compliance.</p>
-      <div class="mp-events"><strong>Peak events:</strong> Mardi Gras (February) · French Quarter Fest (April) · Essence Fest (July)</div>
-      <a href="/get-started" class="mp-cta">Get a free New Orleans revenue audit →</a>
-    </div>
-    <div class="mprofile" id="market-tulum">
-      <h3>🇲🇽 Tulum <span>· Mexico · Riviera Maya</span></h3>
-      <p class="mp-body">Tulum operates at 64% average occupancy — strong peak seasons offset by a pronounced summer rainy-season dip. Travelers pay for the experience, not just the bed, which means listing presentation and positioning matter more here than in any other market. Zamna Festival in January and December creates electronic music tourism peaks, while the wellness traveler segment maintains strong midweek demand during high season. Marketics manages 5 Tulum properties with a focus on premium positioning and experience-driven listing optimization.</p>
-      <div class="mp-events"><strong>Peak events:</strong> Zamna Festival (Jan &amp; Dec) · Spring Break / Semana Santa (March–April) · Christmas &amp; New Year (Dec–Jan)</div>
-      <a href="/get-started" class="mp-cta">Get a free Tulum revenue audit →</a>
-    </div>
-    <div class="mprofile" id="market-san-juan">
-      <h3>🇵🇷 San Juan <span>· Puerto Rico · Old San Juan &amp; Condado</span></h3>
-      <p class="mp-body">San Juan combines Caribbean appeal with no-passport-required access for US travelers, creating a unique demand profile. Las Navidades — the extended Christmas/New Year season — is the city's biggest revenue window, but Act 60 tax incentive migration has also created a growing long-stay segment. Old San Juan and Condado are the premium zones, with walkability and beach access driving the highest ADRs. Marketics manages 5 San Juan properties with pricing strategies that balance short-stay tourism peaks with the emerging extended-stay market. One Puerto Rico villa Marketics optimized went from eight earning months to twelve and roughly 2.5× its former peak month.</p>
-      <div class="mp-events"><strong>Peak events:</strong> Las Navidades (Dec–Jan) · Semana Santa (March–April) · Casals Music Festival (June)</div>
-      <a href="/get-started" class="mp-cta">Get a free San Juan revenue audit →</a>
-    </div>
-  </div>
-</section>
 
 <!-- ══ 4. NOT LISTED ══ -->
 <section class="not-listed-section page-section" id="not-listed">
@@ -1626,27 +1628,37 @@ const MP_MARKETS={
 /* ══ HERO TICKER ══════════════════════════════════════════ */
 (function buildTicker(){
   const data=[
-    {city:'Austin, TX',     flag:'🇺🇸', rate:'$221', occ:'85%'},
-    {city:'Scottsdale, AZ', flag:'🇺🇸', rate:'$255', occ:'82%'},
-    {city:'Nashville, TN',  flag:'🇺🇸', rate:'$208', occ:'83%'},
-    {city:'Miami, FL',      flag:'🇺🇸', rate:'$238', occ:'86%'},
-    {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'82%'},
-    {city:'New Orleans, LA', flag:'🇺🇸', rate:'$196', occ:'84%'},
-    {city:'San Antonio, TX', flag:'🇺🇸', rate:'$168', occ:'82%'},
-    {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'64%'},
-    {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'86%'},
+    {city:'Austin, TX',     flag:'🇺🇸', rate:'$221', occ:'85%', mkt:'austin'},
+    {city:'Scottsdale, AZ', flag:'🇺🇸', rate:'$255', occ:'82%', mkt:'scottsdale'},
+    {city:'Nashville, TN',  flag:'🇺🇸', rate:'$208', occ:'83%', mkt:'nashville'},
+    {city:'Miami, FL',      flag:'🇺🇸', rate:'$238', occ:'86%', mkt:'miami'},
+    {city:'Cancún, MX',     flag:'🇲🇽', rate:'$175', occ:'82%', mkt:'cancun'},
+    {city:'New Orleans, LA', flag:'🇺🇸', rate:'$196', occ:'84%', mkt:'neworleans'},
+    {city:'San Antonio, TX', flag:'🇺🇸', rate:'$168', occ:'82%', mkt:'sanantonio'},
+    {city:'Tulum, MX',       flag:'🇲🇽', rate:'$212', occ:'64%', mkt:'tulum'},
+    {city:'San Juan, PR',    flag:'🇵🇷', rate:'$195', occ:'86%', mkt:'sanjuan'},
   ];
   const ticker=document.getElementById('heroTicker');
+  if(!ticker)return;
   data.forEach(d=>{
     ticker.innerHTML+=`
-    <div class="ht-row">
+    <button type="button" class="ht-row" data-mkt="${d.mkt}" aria-label="View the 52-week chart for ${d.city}">
       <div class="ht-city"><span class="ht-flag">${d.flag}</span>${d.city}</div>
       <div class="ht-metrics">
         <div class="ht-m"><div class="ht-mv">${d.rate}</div><div class="ht-ml">Avg Rate</div></div>
         <div class="ht-m"><div class="ht-mv">${d.occ}</div><div class="ht-ml">Avg Occ</div></div>
       </div>
       <div class="ht-pulse"></div>
-    </div>`;
+    </button>`;
+  });
+  // Quick-chart rows drive the full 52-week pulse chart, then scroll to it
+  ticker.querySelectorAll('.ht-row').forEach(row=>{
+    row.addEventListener('click',()=>{
+      const tab=document.querySelector('.mp-mkt-tab[data-mkt="'+row.dataset.mkt+'"]');
+      if(tab)tab.click();
+      const pulse=document.getElementById('pulse');
+      if(pulse)pulse.scrollIntoView({behavior:'smooth',block:'start'});
+    });
   });
 })();
 
