@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -11,7 +13,7 @@
 <meta name="description" content="San Antonio short-term rental revenue optimization: how the River Walk market's steady demand, three-year permits, and Type 2 density caps shape what an optimized listing actually earns.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://marketics.io/markets/san-antonio">
-<meta name="theme-color" content="#0f0f0f">
+
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Marketics">
 <meta property="og:title" content="Short-Term Rental Optimization in San Antonio — Marketics">
@@ -19,10 +21,10 @@
 <meta property="og:url" content="https://marketics.io/markets/san-antonio">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+<meta name="twitter:title" content="Short-Term Rental Optimization in San Antonio — Marketics">
+<meta name="twitter:description" content="A durable, permissive-but-capped Texas market. How San Antonio's demand rhythm and Type 2 density rules shape what an optimized listing earns.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -77,178 +79,420 @@
  ]
 }
 </script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
 <style>
-:root{--gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--dim:rgba(180,178,169,.55);--txt:#e8e6e1;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--night);color:var(--txt);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
-nav{display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;position:sticky;top:0;z-index:100;background:rgba(15,15,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.04);}
-.nav-wordmark{height:26px;width:auto;display:block;}
-.nav-links{display:flex;gap:28px;}
-.nav-links a{color:var(--dim);text-decoration:none;font-size:13px;letter-spacing:.02em;transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);}
-.nav-cta{background:var(--gold);color:#0f0f0f;padding:8px 20px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.03em;}
-.nav-hamburger{display:none;}
-.hero{padding:100px 32px 80px;max-width:900px;margin:0 auto;text-align:center;}
-.hero-flag{font-size:48px;margin-bottom:16px;}
-.hero-city{font-family:'Josefin Sans',sans-serif;font-size:clamp(36px,6vw,56px);font-weight:200;letter-spacing:-.02em;line-height:1.1;}
-.hero-city em{color:var(--gold);font-style:italic;}
-.hero-region{color:var(--dim);font-size:15px;margin-top:8px;letter-spacing:.04em;text-transform:uppercase;font-family:'DM Mono',monospace;}
-.stats-row{display:flex;justify-content:center;gap:48px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.06);}
-.stat-num{font-family:'Josefin Sans',sans-serif;font-size:40px;font-weight:300;color:var(--gold);}
-.stat-lbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;}
-.content{max-width:720px;margin:0 auto;padding:0 32px 80px;}
-.section-label{font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:12px;}
-.section-title{font-family:'Josefin Sans',sans-serif;font-size:28px;font-weight:300;line-height:1.3;margin-bottom:24px;}
-.section-title em{color:var(--gold);font-style:italic;}
-.body-text{color:rgba(180,178,169,.8);font-size:15px;line-height:1.8;margin-bottom:32px;}
-.insight-box{background:var(--n3);border-left:3px solid var(--gold);padding:20px 24px;border-radius:0 6px 6px 0;margin-bottom:48px;}
-.insight-box p{color:rgba(180,178,169,.85);font-size:14px;line-height:1.7;}
-.events-section{margin-bottom:48px;}
-.ev-row{display:flex;gap:12px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.04);}
-.ev-dot{width:8px;height:8px;border-radius:50%;background:rgba(180,178,169,.3);margin-top:6px;flex-shrink:0;}
-.ev-dot.high{background:var(--gold);box-shadow:0 0 6px rgba(214,173,96,.3);}
-.ev-info{font-size:14px;line-height:1.6;}
-.ev-info strong{color:var(--txt);}
-.ev-desc{color:var(--dim);font-size:13px;}
-.cta-section{text-align:center;padding:64px 32px;border-top:1px solid rgba(255,255,255,.04);}
-.cta-section h2{font-family:'Josefin Sans',sans-serif;font-size:32px;font-weight:200;margin-bottom:12px;}
-.cta-section h2 em{color:var(--gold);font-style:italic;}
-.cta-section p{color:var(--dim);font-size:14px;margin-bottom:24px;}
-.btn-primary{display:inline-block;background:var(--gold);color:#0f0f0f;padding:14px 32px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:.03em;}
-.btn-outline{display:inline-block;border:1px solid rgba(214,173,96,.3);color:var(--gold);padding:10px 24px;border-radius:4px;font-size:13px;text-decoration:none;letter-spacing:.02em;transition:border-color .2s;}
-.btn-outline:hover{border-color:var(--gold);}
-footer{padding:48px 32px;border-top:1px solid rgba(255,255,255,.04);}
-.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:48px;}
-.sf-copy{font-size:12px;color:var(--dim);}
-.sf-location{font-size:11px;color:rgba(180,178,169,.3);margin-top:4px;}
-.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-.sf-col-label{font-family:'Josefin Sans',sans-serif;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
-.sf-col a{display:block;color:rgba(180,178,169,.4);font-size:12px;text-decoration:none;margin-bottom:8px;}
-.sf-col a:hover{color:var(--gold);}
-@media(max-width:768px){
-  nav .nav-links,.nav-cta{display:none;}
-  .nav-hamburger{display:block;background:none;border:none;cursor:pointer;padding:8px;}
-  .nav-hamburger span{display:block;width:20px;height:2px;background:var(--dim);margin:4px 0;}
-  .hero{padding:60px 20px 48px;}
-  .stats-row{gap:24px;}
-  .stat-num{font-size:28px;}
-  .content{padding:0 20px 48px;}
-  .sf-inner{grid-template-columns:1fr;}
-  .sf-nav{grid-template-columns:repeat(2,1fr);}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
+<style>
+:root{
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;--panel-2:#0d0d0c;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  /* horizontal gutter: content sits in a centered 1440 column on wide screens, 72px otherwise */
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+/* every top-level section shares a centered 1440 column so edges align */
+.sec,.foot,.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;}
+.sec{border-top:1px solid var(--line);}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ shared bits ══ */
+.kicker{display:flex;align-items:center;gap:14px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
+.arrowlink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.arrowlink:hover{color:var(--gold);}
+.arrowlink span{color:var(--gold);}
+
+/* ══ MARKET HERO ══ */
+.mhero{padding:138px 0 0;max-width:1440px;margin:0 auto;}
+.mhero-inner{padding:0 var(--gutter) 64px;}
+.crumb{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
+.crumb a,.crumb .cur,.crumb .sep{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;}
+.crumb a{color:var(--dim);text-transform:uppercase;}
+.crumb a:hover{color:var(--gold);}
+.crumb .sep{color:var(--faint);}
+.crumb .cur{color:var(--gold);text-transform:uppercase;}
+.mkick{margin-bottom:24px;}
+.mh1{font-family:var(--display);font-weight:200;font-size:60px;line-height:1.06;letter-spacing:1px;
+  color:var(--white);margin:0;max-width:900px;}
+.mh1 em{font-style:italic;font-weight:300;color:var(--gold);}
+.mlead{font-size:18px;line-height:1.7;color:var(--body);margin:30px 0 0;max-width:760px;}
+
+/* ══ SNAPSHOT ══ */
+.snapshot{display:grid;grid-template-columns:repeat(4,1fr);}
+.snap{padding:36px var(--gutter-snap,40px);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;}
+.snapshot{padding:0;}
+.snap:first-child{padding-left:var(--gutter);}
+.snap:last-child{border-right:none;padding-right:var(--gutter);}
+.snap-v{font-family:var(--display);font-weight:300;font-size:34px;color:var(--white);}
+.snap-l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;line-height:1.5;}
+
+/* ══ DEMAND DRIVERS ══ */
+.block{padding:72px var(--gutter);}
+.block-h{font-family:var(--display);font-weight:300;font-size:32px;letter-spacing:.5px;color:var(--white);margin:16px 0 36px;}
+.drivers{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.driver{background:var(--panel);padding:30px;display:flex;flex-direction:column;gap:10px;}
+.driver .d-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);}
+.driver .d-t{font-family:var(--display);font-weight:300;font-size:21px;color:var(--white);}
+.driver .d-b{font-size:13.5px;line-height:1.65;color:var(--muted);margin:0;}
+
+/* ══ SAMENESS TRAP ══ */
+.sameness{background:var(--panel-2);}
+.sameness-grid{padding:72px var(--gutter);display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.sameness-copy{display:flex;flex-direction:column;gap:16px;}
+.sameness-copy h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;color:var(--white);margin:0;}
+.sameness-copy p{font-size:15.5px;line-height:1.75;color:var(--body);margin:0;}
+.sameness-quote{border-left:2px solid var(--gold);padding:8px 0 8px 26px;display:flex;flex-direction:column;gap:10px;}
+.sameness-quote q{font-family:var(--display);font-weight:300;font-style:italic;font-size:21px;line-height:1.5;color:var(--bright);quotes:"“" "”";}
+.sameness-quote cite{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--dim);font-style:normal;text-transform:uppercase;}
+
+/* ══ LOCAL PROOF ══ */
+.proof-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;}
+.proof-img{border:1px solid var(--line-3);}
+.proof-img img{width:100%;height:340px;object-fit:cover;}
+.proof-copy{display:flex;flex-direction:column;gap:22px;}
+.proof-copy p{font-size:16px;line-height:1.75;color:var(--body);margin:0;}
+.proof-stats{display:flex;gap:40px;}
+.proof-stat{display:flex;flex-direction:column;gap:4px;}
+.proof-stat .ps-v{font-family:var(--display);font-weight:300;font-size:34px;}
+.proof-stat .ps-v.gold{color:var(--gold);}
+.proof-stat .ps-v.white{color:var(--white);}
+.proof-stat .ps-l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;}
+
+/* ══ CLOSING CTA ══ */
+.closing{padding:104px var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:radial-gradient(120% 140% at 50% 0%,rgba(214,173,96,.06) 0%,rgba(17,17,16,0) 60%);}
+.closing-h{font-family:var(--display);font-weight:200;font-size:44px;line-height:1.12;letter-spacing:2px;color:var(--white);margin:0;max-width:640px;}
+.closing-p{font-size:16px;line-height:1.7;color:var(--body);margin:22px 0 0;max-width:500px;}
+.closing-actions{display:flex;align-items:center;gap:30px;margin-top:34px;flex-wrap:wrap;justify-content:center;}
+
+/* ══ FOOTER ══ */
+.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  nav{padding:0 40px;}
+  .mhero-inner,.block,.sameness-grid,.closing{padding-left:40px;padding-right:40px;}
+  .snap:first-child{padding-left:40px;}
+  .snap:last-child{padding-right:40px;}
+  .foot{padding-left:40px;padding-right:40px;}
+  .foot-legal{padding-left:40px;padding-right:40px;}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .mh1{font-size:46px;}
+  .drivers{grid-template-columns:1fr;}
+  .sameness-grid{grid-template-columns:1fr;gap:36px;}
+  .proof-grid{grid-template-columns:1fr;gap:28px;}
+  .proof-img img{height:300px;}
+}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .mhero{padding-top:104px;}
+  .mhero-inner,.block,.sameness-grid,.closing{padding-left:24px;padding-right:24px;}
+  .block,.closing{padding-top:56px;padding-bottom:56px;}
+  .mh1{font-size:34px;letter-spacing:0;}
+  .mlead{font-size:16px;}
+  .snapshot{grid-template-columns:1fr 1fr;}
+  .snap{padding:26px 24px;}
+  .snap:nth-child(1),.snap:nth-child(3){padding-left:24px;}
+  .snap:nth-child(2),.snap:nth-child(4){border-right:none;padding-right:24px;}
+  .snap:nth-child(1),.snap:nth-child(2){border-bottom:1px solid var(--line);}
+  .snap-v{font-size:28px;}
+  .block-h{font-size:26px;}
+  .sameness-copy h2{font-size:24px;}
+  .sameness-quote q{font-size:18px;}
+  .proof-stats{gap:28px;}
+  .proof-stat .ps-v{font-size:28px;}
+  .closing-h{font-size:30px;letter-spacing:1px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding:20px 24px;}
 }
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 </head>
 <body>
 
-<nav>
-  <a href="/" aria-label="Marketics home">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;" width="607" height="120">
-  </a>
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets" class="active">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel">Market Intel</a>
+    <a href="/intel">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-
-<section class="hero">
-  <div class="hero-flag">🇺🇸</div>
-  <h1 class="hero-city">San Antonio,<br><em>Texas.</em></h1>
-  <div class="hero-region">The River Walk City · Texas</div>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-num">30M+</div><div class="stat-lbl">Annual Visitors</div></div>
-    <div class="stat"><div class="stat-num">3-Yr</div><div class="stat-lbl">STR Permit Term</div></div>
-    <div class="stat"><div class="stat-num">100+</div><div class="stat-lbl">New Permits / Month</div></div>
-  </div>
-</section>
-
-<div class="content">
-  <div class="section-label">Market Overview</div>
-  <h2 class="section-title">A Market That <em>Compounds.</em></h2>
-  <p class="body-text">San Antonio is one of the most durable short-term rental markets in Texas — and one of the most misunderstood. It doesn't spike the way event-driven markets do. It compounds. A steady stream of new residents, 30+ million annual visitors, and a tourism core anchored by the River Walk, the Pearl, and the Alamo give it a demand floor that most markets envy. But that same stability is why so many listings underperform: owners assume a good location does the work, and the numbers quietly drift.</p>
-
-  <div class="section-label">The Opportunity</div>
-  <h2 class="section-title">Why San Antonio Rewards <em>Optimization.</em></h2>
-  <p class="body-text">The market has grown fast enough to get competitive. The city has been issuing well over a hundred new short-term rental permits a month, which means supply is climbing even as demand stays strong. In a market like that, being listed is no longer enough — the listings that win are the ones structured to surface in search, priced to the actual shape of local demand, and positioned to convert the click.</p>
-  <p class="body-text">San Antonio's demand has a distinct rhythm worth pricing around. Peak season runs March through July, with April the strongest month of the year on the back of Fiesta San Antonio. Conventions, Spurs games, and festivals create sharp mid-week and event-driven spikes that flat pricing leaves on the table. The low season — roughly November through January — is where undifferentiated listings feel the softness most. Across the market, average daily rates sit in the high-$100s and have been trending up, with occupancy in the high-50s to low-60s percent. Those are market averages, not ceilings — the gap between an average listing and an optimized one is precisely where revenue is won or lost.</p>
-
-  <div class="section-label">Regulation</div>
-  <h2 class="section-title">Read This <em>Before You Buy.</em></h2>
-  <p class="body-text">San Antonio is genuinely one of the more permissive major Texas markets — it explicitly permits short-term rentals citywide, with manageable permitting fees and clear tax and safety rules. Permits are valid for three years, which makes the market stable to operate in once you're in.</p>
-  <div class="insight-box">
-    <p><strong>The caveat that catches first-time buyers:</strong> <strong>Type 2 short-term rentals</strong> — non-owner-occupied properties, which is what most investors buy — face <strong>density caps</strong>. The city limits Type 2 STRs to a percentage of units per block face and enforces minimum separation distances between them. In practice, a property that looks perfect on paper can be blocked simply because the block has already hit its cap. Confirm Type 2 eligibility for the specific address <strong>before</strong> purchase, not after — it's the single most common avoidable mistake in this market.</p>
-  </div>
-
-  <div class="section-label">Execution</div>
-  <h2 class="section-title">What "Optimized" Looks Like <em>Here.</em></h2>
-  <p class="body-text">Optimization in San Antonio is rarely one lever. It's the sequence: making sure the listing surfaces in search at all, earning the click with the first photo and the first two lines, converting that click with honest positioning, and then pricing dynamically against the right comparable set — Fiesta and convention weeks priced differently than a soft January Tuesday. Miss any one of those and the property underperforms a market that should carry it.</p>
-
-  <div class="section-label">Documented Result</div>
-  <h2 class="section-title">What the Work <em>Can Do.</em></h2>
-  <p class="body-text">In San Antonio, Marketics took one operator's portfolio of 15 listings from roughly $12,000 to $41,000 per month. That result is specific to that portfolio; every property is audited before any target is set, because results are property-specific. San Antonio's fundamentals — steady demand, a permissive-but-capped regulatory frame, and enough competition that execution separates winners from the rest — make it a market where disciplined optimization tends to pay for itself.</p>
-  <p class="body-text">The benchmark Marketics works against, and the methodology behind it, live in <a href="/intel/str-performance-index" style="color:#D6AD60;">the Marketics STR Performance Index</a> — every claim traces back there rather than being restated market by market.</p>
-
-  <div class="section-label">The Role</div>
-  <h2 class="section-title">Working in <em>San Antonio.</em></h2>
-  <p class="body-text">Marketics is the revenue and optimization seat — pricing, positioning, and search strategy — not the property manager running the day-to-day. If your San Antonio listing is beautiful and still underperforming, the problem usually isn't the property. It's that no one built it to be found, priced, and positioned for how this specific market actually behaves.</p>
-
+<div class="nav-mobile" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<section class="cta-section">
-  <h2>Is Your San Antonio Property <em>a Fit?</em></h2>
-  <p>We audit your listing, pricing, and search position first — then tell you honestly whether there's revenue worth going after.</p>
-  <a href="/get-started" class="btn-primary">See If Your Property Is a Fit</a>
+<!-- ══ HERO ══ -->
+<header class="mhero">
+  <div class="mhero-inner">
+    <div class="crumb">
+      <a href="/markets">Markets</a>
+      <span class="sep">/</span>
+      <span class="cur">San Antonio, TX</span>
+    </div>
+    <div class="kicker mkick"><div class="bar"></div><span>San Antonio · Urban value market</span></div>
+    <h1 class="mh1">In San Antonio, the winners <em>refuse to compete on rate</em></h1>
+    <p class="mlead">A tourism-and-events city where thousands of listings look interchangeable — same downtown, same price bracket, same photos. That sameness is the whole opportunity. The listings that break out don't drop their rate; they give the market a reason to pick them.</p>
+  </div>
+</header>
+
+<!-- ══ SNAPSHOT ══ -->
+<section class="sec">
+  <div class="snapshot">
+    <div class="snap"><span class="snap-v">30M+</span><span class="snap-l">Annual visitors</span></div>
+    <div class="snap"><span class="snap-v">3-yr</span><span class="snap-l">STR permit term</span></div>
+    <div class="snap"><span class="snap-v">100+</span><span class="snap-l">New permits / month</span></div>
+    <div class="snap"><span class="snap-v">3.4×</span><span class="snap-l">Local portfolio result</span></div>
+  </div>
 </section>
 
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
-    </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
+<!-- ══ DEMAND DRIVERS ══ -->
+<section class="sec">
+  <div class="block">
+    <span class="eyebrow">What drives demand here</span>
+    <h2 class="block-h">A steady base, punctuated by events</h2>
+    <div class="drivers">
+      <div class="driver">
+        <span class="d-tag">THE BASE</span>
+        <span class="d-t">River Walk &amp; the Alamo</span>
+        <p class="d-b">A perennial leisure-tourism draw keeps a demand floor under downtown listings that most markets don't have — the calendar rarely goes truly quiet.</p>
       </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
+      <div class="driver">
+        <span class="d-tag">THE SPIKES</span>
+        <span class="d-t">Fiesta &amp; conventions</span>
+        <p class="d-b">Fiesta San Antonio, the convention calendar, and sports weekends create predictable compression windows — the moments where event pricing separates the winners from the flat-rate field.</p>
       </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
+      <div class="driver">
+        <span class="d-tag">THE BODY</span>
+        <span class="d-t">Medical &amp; business travel</span>
+        <p class="d-b">The South Texas Medical Center and steady business travel feed midweek and extended-stay demand — the segment flat-rate leisure listings routinely leave on the table.</p>
       </div>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+</section>
+
+<!-- ══ THE SAMENESS TRAP ══ -->
+<section class="sec sameness">
+  <div class="sameness-grid">
+    <div class="sameness-copy">
+      <span class="eyebrow">The sameness trap</span>
+      <h2>When every listing looks the same, the only lever left looks like price</h2>
+      <p>It's the most common San Antonio mistake: a complex of near-identical units, each priced against the one next door, all racing the rate downward. Every dollar off is permanent margin gone — and it never actually wins the guest, because the guest still can't tell the units apart.</p>
+    </div>
+    <div class="sameness-quote">
+      <q>The fix isn't a lower price. It's giving each unit its own guest — and a reason that guest picks it over the identical door next to it.</q>
+      <cite>— The Marketics Method, applied to San Antonio</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOCAL PROOF ══ -->
+<section class="sec">
+  <div class="block">
+    <span class="eyebrow">Proof · from this market</span>
+    <h2 class="block-h">A 15-unit San Antonio portfolio, right-fitted</h2>
+    <div class="proof-grid">
+      <div class="proof-img">
+        <img src="/case-studies/anthony-san-antonio/images/pool-mural.webp" alt="A San Antonio portfolio unit after repositioning" loading="lazy" width="1200" height="800">
+      </div>
+      <div class="proof-copy">
+        <p>Fifteen units run on one generic template — interchangeable photos, near-identical titles, one flat rate. We separated them: each unit got its own photography, positioning, and dynamic pricing tuned to its real guest.</p>
+        <div class="proof-stats">
+          <div class="proof-stat">
+            <span class="ps-v gold">3.4×</span>
+            <span class="ps-l">Peak month vs. baseline</span>
+          </div>
+          <div class="proof-stat">
+            <span class="ps-v white">15 units</span>
+            <span class="ps-l">Repositioned</span>
+          </div>
+        </div>
+        <a href="/case-studies/anthony-san-antonio" class="arrowlink">read the full case study <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSING CTA ══ -->
+<section class="sec">
+  <div class="closing">
+    <h2 class="closing-h">Own a San Antonio listing?</h2>
+    <p class="closing-p">A free audit reads your listing against its real San Antonio comp set — and shows the gap between competing on rate and competing on value.</p>
+    <div class="closing-actions">
+      <a href="/get-started" class="btn-fill">Get My Free Audit</a>
+      <a href="/markets" class="arrowlink">explore all markets <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>San Antonio Airbnb revenue optimization</span>
   </div>
 </footer>
 
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>

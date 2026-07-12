@@ -2,113 +2,248 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="canonical" href="https://marketics.io/legal">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Marketics Legal: Privacy Policy & Terms of Service</title>
+<meta name="description" content="Marketics, LLC privacy policy and terms of service — what we collect, how we use it, the $500 Commitment Deposit and its completion-based refund, and the 10% performance fee.">
+<link rel="canonical" href="https://marketics.io/legal">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Marketics">
+<meta property="og:title" content="Privacy Policy & Terms of Service — Marketics">
+<meta property="og:description" content="Marketics, LLC privacy policy and terms of service.">
+<meta property="og:url" content="https://marketics.io/legal">
+<meta property="og:image" content="https://marketics.io/og/default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy & Terms of Service — Marketics">
+<meta name="twitter:description" content="Marketics, LLC privacy policy and terms of service.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy & Terms of Service",
+  "description": "Marketics, LLC privacy policy and terms of service.",
+  "url": "https://marketics.io/legal",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Marketics",
+    "url": "https://marketics.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marketics, LLC",
+    "url": "https://marketics.io",
+    "logo": "https://marketics.io/assets/logo.svg"
+  }
+}
+</script>
+
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
 <style>
 :root{
-  --gold:#D6AD60;--night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;
-  --stone:#B4B2A9;--dim:#6B6A65;--white:#f8f6f2;
-  --d:'Josefin Sans',sans-serif;--s:'DM Sans',sans-serif;--m:'DM Mono',monospace;
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;--red:#c85050;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  /* horizontal gutter: content sits in a centered 1440 column on wide screens, 72px otherwise */
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--s);background:var(--night);color:var(--white);line-height:1.75;overflow-x:hidden;font-size:15px;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(rgba(214,173,96,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.012) 1px,transparent 1px);
-  background-size:64px 64px;}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;line-height:1.75;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;}
 a{color:var(--gold);text-decoration:none;}
-a:hover{text-decoration:underline;}
+a:hover{color:var(--gold-hi);}
+img{display:block;max-width:100%;}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,15,15,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;}
-.nav-brand{font-family:var(--d);font-size:14px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-decoration:none;}
-.nav-links{display:flex;gap:6px;}
-.nav-link{font-family:var(--d);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;padding:8px 14px;border-radius:3px;transition:color .2s;}
-.nav-link:hover,.nav-link.active{color:var(--gold);text-decoration:none;}
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);color:var(--gold);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
 
-/* ── DOC LAYOUT ── */
-.doc-wrap{max-width:800px;margin:0 auto;padding:88px 48px 80px;position:relative;z-index:1;}
+/* ══ DOC LAYOUT ══ */
+.doc-wrap{max-width:840px;margin:0 auto;padding:150px 72px 96px;position:relative;z-index:1;}
 
-/* Tab switcher */
-.tab-bar{display:flex;gap:3px;background:var(--n3);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:4px;margin-bottom:52px;width:100%;}
-.tab-btn{flex:1;font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:none;color:var(--dim);border-radius:4px;padding:10px 16px;cursor:pointer;transition:all .2s;text-align:center;}
-.tab-btn.active{background:rgba(214,173,96,.1);color:var(--gold);}
+.doc-kicker{display:flex;align-items:center;gap:14px;margin-bottom:34px;}
+.doc-kicker .bar{width:32px;height:1px;background:var(--gold);}
+.doc-kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+
+/* Tabs */
+.tab-bar{display:flex;gap:8px;margin-bottom:56px;}
+.tab-btn{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 30px;cursor:pointer;background:transparent;border:1px solid var(--line-2);
+  color:var(--dim);transition:color .2s,border-color .2s,background .2s;}
+.tab-btn:hover{color:var(--body);}
+.tab-btn.active{border-color:rgba(214,173,96,.5);background:rgba(214,173,96,.06);color:var(--gold);}
 .tab-content{display:none;}
 .tab-content.active{display:block;}
 
-/* ── DOC HEADER ── */
-.doc-header{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.07);}
-.doc-eyebrow{font-family:var(--d);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-.doc-title{font-family:var(--d);font-size:clamp(28px,4vw,44px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin-bottom:16px;}
-.doc-meta{font-size:12px;color:var(--dim);font-weight:300;line-height:1.8;}
-.doc-meta strong{color:var(--stone);font-weight:500;}
+/* Doc header */
+.doc-header{margin-bottom:56px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+.doc-eyebrow{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:18px;}
+.doc-title{font-family:var(--display);font-size:clamp(36px,5vw,52px);font-weight:200;letter-spacing:1px;color:var(--white);line-height:1.05;margin:0 0 22px;}
+.doc-meta{font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:400;line-height:1.9;letter-spacing:.5px;}
+.doc-meta strong{color:var(--body);font-weight:500;}
 
-/* ── SECTION ── */
-.doc-section{margin-bottom:44px;}
+/* Sections */
+.doc-section{margin-bottom:52px;}
 .doc-section:last-child{margin-bottom:0;}
-.section-num{font-family:var(--m);font-size:10px;color:rgba(214,173,96,.5);display:block;margin-bottom:4px;letter-spacing:.06em;}
-h2.sec{font-family:var(--d);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(214,173,96,.12);}
-h3.subsec{font-size:14px;font-weight:600;color:var(--white);margin:20px 0 8px;}
-p{color:var(--stone);font-weight:300;margin-bottom:12px;line-height:1.8;}
-p strong{color:var(--white);font-weight:500;}
-p em{color:rgba(214,173,96,.8);font-style:italic;}
-ul,ol{color:var(--stone);font-weight:300;padding-left:20px;margin-bottom:14px;line-height:1.9;}
-li{margin-bottom:4px;}
-li strong{color:var(--white);font-weight:500;}
+.section-num{font-family:var(--mono);font-size:12px;color:var(--gold);display:block;margin-bottom:10px;letter-spacing:1px;}
+h2.sec{font-family:var(--display);font-size:26px;font-weight:300;letter-spacing:.5px;color:var(--white);
+  margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--line);}
+h3.subsec{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--white);margin:26px 0 10px;letter-spacing:.3px;}
+.doc-section p{color:var(--body);font-weight:300;margin:0 0 14px;line-height:1.85;font-size:15.5px;}
+.doc-section p:last-child{margin-bottom:0;}
+.doc-section p strong{color:var(--white);font-weight:500;}
+.doc-section p em{color:var(--gold);font-style:italic;}
+.doc-section ul,.doc-section ol{color:var(--body);font-weight:300;padding-left:22px;margin:0 0 16px;line-height:1.9;font-size:15.5px;}
+.doc-section li{margin-bottom:7px;}
+.doc-section li strong{color:var(--white);font-weight:500;}
 
-/* Highlight boxes */
-.notice{background:var(--n2);border:1px solid rgba(214,173,96,.14);border-left:3px solid var(--gold);padding:16px 20px;margin:16px 0;border-radius:0 4px 4px 0;}
-.notice.red{border-left-color:rgba(200,80,80,.6);border-color:rgba(200,80,80,.15);}
-.notice p{margin-bottom:0;font-size:13px;line-height:1.7;}
+/* Notice boxes */
+.notice{background:var(--panel);border:1px solid var(--line-3);border-left:2px solid var(--gold);padding:20px 24px;margin:20px 0;}
+.notice.red{border-left-color:var(--red);}
+.notice p{margin:0;font-size:14.5px;line-height:1.8;color:var(--body);}
+.notice p strong{color:var(--white);}
 
 /* Contact block */
-.contact-block{background:var(--n2);border:1px solid rgba(255,255,255,.07);padding:20px 24px;border-radius:6px;margin-top:16px;}
-.contact-block p{margin:0;font-size:13px;color:var(--stone);}
+.contact-block{background:var(--panel);border:1px solid var(--line-3);padding:24px 28px;margin-top:18px;}
+.contact-block p{margin:0;font-size:14.5px;color:var(--body);line-height:1.8;}
 .contact-block p+p{margin-top:6px;}
+.contact-block p strong{color:var(--white);}
 
-/* Footer */
-.doc-footer{margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--dim);font-weight:300;line-height:1.8;text-align:center;}
+/* Inline doc footer */
+.doc-footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;color:var(--dim);font-weight:400;line-height:1.9;text-align:center;letter-spacing:.5px;}
+.doc-footer a{color:var(--muted);}
+.doc-footer a:hover{color:var(--gold);}
 
-@media(max-width:680px){nav,.doc-wrap{padding-left:20px;padding-right:20px;}}
-.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}.nav-wordmark{height:26px;width:auto;display:block;}.nav-links{display:flex;align-items:center;gap:28px;}.nav-links a{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6B6A65;text-decoration:none;transition:color .15s;}.nav-links a:hover{color:#f8f6f2;}.nav-cta{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:#D6AD60;color:#0f0f0f;border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s;flex-shrink:0;}.nav-cta:hover{filter:brightness(1.08);}@media(max-width:768px){.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;}.nav-hamburger span{display:block;width:22px;height:1.5px;background:#B4B2A9;border-radius:2px;transition:transform .28s ease,opacity .28s ease;transform-origin:center;}.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#D6AD60;}.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}.nav-mobile-menu.open{max-height:540px;padding-bottom:20px;}.nav-mobile-menu a{display:block;padding:14px 24px;font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#B4B2A9;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);}.nav-mobile-menu a:hover{color:#f8f6f2;}.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:#D6AD60;color:#0f0f0f!important;text-align:center;border-radius:3px;font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}}@media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}.site-footer{position:relative;z-index:1;background:#111;border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}.sf-brand{padding-top:2px;}.sf-copy{font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;color:#f8f6f2;margin-bottom:8px;}.sf-location{font-family:'DM Mono',monospace;font-size:10px;color:#6B6A65;letter-spacing:.08em;line-height:1.8;}.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}.sf-col{display:flex;flex-direction:column;gap:6px;}.sf-col-label{font-family:'DM Mono',monospace;font-size:9px;color:#6B6A65;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}.sf-col a{font-size:12px;color:#B4B2A9;text-decoration:none;transition:color .15s;line-height:1.7;}.sf-col a:hover{color:#D6AD60;}.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;color:#6B6A65;letter-spacing:.08em;}@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
+/* ══ FOOTER ══ */
+.foot{max-width:1440px;margin:0 auto;border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin:0 auto;border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  nav{padding:0 40px;}
+  .foot{padding-left:40px;padding-right:40px;}
+  .foot-legal{padding-left:40px;padding-right:40px;}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .doc-wrap{padding-left:40px;padding-right:40px;}
+}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .doc-wrap{padding:110px 24px 64px;}
+  .tab-btn{padding:13px 20px;flex:1;text-align:center;letter-spacing:1px;}
+  h2.sec{font-size:22px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding:20px 24px;}
+}
 </style>
-
-  <meta property="og:type" content="website"><meta property="og:site_name" content="Marketics"><meta property="og:title" content="Privacy Policy &amp; Terms of Service — Marketics"><meta property="og:description" content="Marketics privacy policy and terms of service."><meta property="og:url" content="https://marketics.io/legal"><meta property="og:image" content="https://marketics.io/og/default.jpg"><meta name="twitter:card" content="summary_large_image">
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 </head>
 <body>
 
-<nav>
-  <a href="/" class="nav-logo" aria-label="Marketics home">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;" width="607" height="120">
-  </a>
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
-    <a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/story">Our Story</a><a href="/pricing">Pricing</a><a href="/intel">Market Intel</a>
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Our Story</a>
+    <a href="/intel">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
-  <a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-  <a href="/story">Our Story</a><a href="/pricing">Pricing</a><a href="/intel">Market Intel</a>
-  <a href="/intel/miami">Miami: FIFA 2026</a><a href="/intel/muskoka">Muskoka: Summer 2026</a>
-  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+<div class="nav-mobile" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
 <div class="doc-wrap">
+
+  <div class="doc-kicker"><div class="bar"></div><span>Legal</span></div>
 
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('privacy',this)">Privacy Policy</button>
@@ -615,7 +750,7 @@ li strong{color:var(--white);font-weight:500;}
 
   <div class="doc-footer">
     &copy; 2026 Marketics, LLC · 1000 Brickell Avenue, Suite 715, Miami, Florida 33131<br>
-    <a href="/privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms of Service</a> &nbsp;·&nbsp; <a href="/">marketics.io</a>
+    <a href="/legal">Privacy Policy</a> &nbsp;·&nbsp; <a href="/legal?tab=terms">Terms of Service</a> &nbsp;·&nbsp; <a href="/">marketics.io</a>
   </div>
 
 </div><!-- /doc-wrap -->
@@ -630,48 +765,81 @@ function switchTab(id, btn) {
 }
 (function(){var p=new URLSearchParams(window.location.search);if(p.get('tab')==='terms')switchTab('terms',document.querySelector('.tab-btn:last-child'));})();
 </script>
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal?tab=terms">Terms</a>
+    </div>
+    <span>Performance-based STR optimization</span>
   </div>
 </footer>
 
-<script>(function(){var b=document.getElementById("navHamburger"),m=document.getElementById("navMobileMenu");if(!b||!m)return;function cl(){m.classList.remove("open");b.classList.remove("open");document.body.style.overflow="";}b.addEventListener("click",function(e){e.stopPropagation();m.classList.contains("open")?cl():(m.classList.add("open"),b.classList.add("open"),document.body.style.overflow="hidden");});m.querySelectorAll("a").forEach(function(a){a.addEventListener("click",cl);});document.addEventListener("click",function(e){if(m.classList.contains("open")&&!m.contains(e.target)&&!b.contains(e.target))cl();});})();</script>
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>
