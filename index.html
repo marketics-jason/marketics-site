@@ -2,1771 +2,692 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <!-- Favicon -->
-  <meta name="theme-color" content="#0f0f0f">
-<meta name="msvalidate.01" content="82fa576c51d24a748644e9ffb41a3af5">
-  <meta name="msapplication-TileColor" content="#D6AD60">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Marketics: Your Market. Mastered.™</title>
-<meta name="description" content="Launching your first short-term rental — or own one that should earn more? 42%+ benchmark revenue lift on optimization engagements, set at the median of 19 documented cases. 10% of bookings, no monthly fee — we only earn when you earn.">
-<style>
-/* ══ NAV — STANDARD ══════════════════════════════════════════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:64px;
-  background:rgba(13,13,13,.95);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  transition:background .25s ease,border-color .25s ease;
-}
-nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.12);}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+<meta name="description" content="Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together. A documented 45% median lift, net of market, across 1,000+ listings in 22 markets. 10% of revenue, no monthly fee.">
+<link rel="canonical" href="https://marketics.io/">
 
-.nav-wordmark{height:20px;width:auto;display:block;flex-shrink:0;}
-.nav-links{display:flex;align-items:center;gap:24px;}
-.nav-links a{
-  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:#6B6A65;text-decoration:none;
-  transition:color .15s ease;position:relative;padding-bottom:2px;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-1px;left:0;right:0;
-  height:1px;background:#D6AD60;
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .2s ease;
-}
-.nav-links a:hover{color:#f8f6f2;}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
-.nav-links a.active{color:#f8f6f2;}
-.nav-cta{
-  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  padding:10px 22px;background:#D6AD60;color:#0f0f0f;
-  border:none;border-radius:2px;cursor:pointer;text-decoration:none;
-  transition:filter .2s ease,transform .15s ease;
-  flex-shrink:0;white-space:nowrap;
-}
-.nav-cta:hover{filter:brightness(1.1);transform:translateY(-1px);}
-.nav-hamburger{
-  display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:44px;height:44px;padding:10px;
-  background:transparent;border:none;cursor:pointer;flex-shrink:0;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-  user-select:none;-webkit-user-select:none;
-}
-.nav-hamburger span{
-  display:block;width:22px;height:1.5px;background:#B4B2A9;
-  border-radius:2px;transition:transform .28s ease,opacity .28s ease;
-  transform-origin:center;
-}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#D6AD60;}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}
-.nav-mobile-menu{
-  position:fixed;top:64px;left:0;right:0;
-  background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(214,173,96,.12);
-  padding:0;max-height:0;overflow:hidden;
-  transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;
-}
-.nav-mobile-menu.open{max-height:520px;padding-bottom:16px;}
-.nav-mobile-menu a{
-  display:block;padding:14px 24px;
-  font-family:'Josefin Sans',sans-serif;font-size:12px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:#B4B2A9;text-decoration:none;
-  border-bottom:1px solid rgba(255,255,255,.04);
-  transition:color .15s,background .15s;
-}
-.nav-mobile-menu a:hover{color:#f8f6f2;background:rgba(255,255,255,.02);}
-.nav-mobile-menu a.active{color:#D6AD60;}
-.nav-mobile-menu .nm-cta{
-  display:block;margin:12px 24px 0;padding:14px;
-  background:#D6AD60;color:#0f0f0f!important;
-  text-align:center;border-radius:2px;
-  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  transition:filter .2s;
-}
-.nav-mobile-menu .nm-cta:hover{filter:brightness(1.1);}
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .nav-links{display:none!important;}
-  .nav-cta{display:none!important;}
-  .nav-hamburger{display:flex!important;}
-}
-@media(min-width:769px){
-  .nav-hamburger{display:none!important;}
-  .nav-mobile-menu{display:none!important;}
-}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Marketics">
+<meta property="og:title" content="Marketics — Your Market. Mastered.™">
+<meta property="og:description" content="Full-stack STR revenue. A documented 45% median lift, net of market, across 1,000+ listings in 22 markets. 10% of revenue, no monthly fee. Free revenue audit.">
+<meta property="og:url" content="https://marketics.io/">
+<meta property="og:image" content="https://marketics.io/og/marketics-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Marketics — Your Market. Mastered.™">
+<meta name="twitter:description" content="Full-stack STR revenue. A documented 45% median lift, net of market. 10% of revenue, no monthly fee. Free revenue audit.">
+<meta name="twitter:image" content="https://marketics.io/og/marketics-og.png">
 
-/* ── RESET + ROOT ──────────────────────────────────────────── */
-:root{
-  --gold:#D6AD60;--gold-lo:rgba(214,173,96,.12);--gold-glow:rgba(214,173,96,.07);
-  --night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;--n4:#202020;--n5:#282828;
-  --stone:#B4B2A9;--dim:#6B6A65;--dim2:#4e4d4a;--white:#fff;
-  --ok:#2D7A4F;--ok-lo:rgba(45,122,79,.12);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-html{scroll-padding-top:64px;}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--night);color:var(--white);
-  overflow-x:hidden;line-height:1.6;
-;padding-top:64px;}
-
-/* ── TYPOGRAPHY ────────────────────────────────────────────── */
-h1,h2,h3,.display{font-family:'Josefin Sans',sans-serif}
-
-/* ── SCROLLBAR ─────────────────────────────────────────────── */
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--night)}
-::-webkit-scrollbar-thumb{background:rgba(214,173,96,.4);border-radius:2px}
-
-/* ══════════════════════════════════════════════════════════════
-   HERO
-══════════════════════════════════════════════════════════════ */
-.hero{
-  position:relative;min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;
-  padding:0 56px;
-  overflow:hidden;
-}
-
-/* Fine grid */
-.hero-grid{
-  position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(214,173,96,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(214,173,96,.025) 1px,transparent 1px);
-  background-size:64px 64px;
-  animation:gridDrift 80s linear infinite;
-}
-@keyframes gridDrift{to{background-position:64px 64px}}
-
-/* Radial vignette over grid */
-.hero-vignette{
-  position:absolute;inset:0;z-index:1;
-  background:radial-gradient(ellipse 80% 90% at 50% 50%,transparent 30%,var(--night) 100%);
-}
-
-/* Left column */
-.hero-left{
-  position:relative;z-index:2;
-  padding-top:32px;
-  display:flex;flex-direction:column;
-  justify-content:center;
-  padding-right:48px;
-}
-
-/* Eyebrow */
-.eyebrow{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:22px;
-  opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .2s ease forwards;
-}
-.eyebrow::before{
-  content:'';display:inline-block;width:28px;height:1px;vertical-align:middle;
-  background:linear-gradient(to right,transparent,var(--gold));
-  margin-right:14px;
-}
-
-/* H1 */
-.hero-h1{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:clamp(52px,6.5vw,98px);
-  font-weight:200;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  line-height:.94;
-  color:var(--white);
-  margin-bottom:28px;
-  opacity:0;transform:translateY(16px);
-  animation:fadeUp .7s .35s ease forwards;
-}
-.hero-h1 .gold{color:var(--gold)}
-
-/* Subhead */
-.hero-sub{
-  font-size:clamp(15px,1.35vw,17px);
-  font-weight:300;
-  color:var(--stone);
-  line-height:1.72;
-  max-width:480px;
-  margin-bottom:28px;
-  opacity:0;transform:translateY(14px);
-  animation:fadeUp .7s .5s ease forwards;
-}
-.hero-sub strong{color:var(--white);font-weight:500}
-
-/* Hero recap bullets */
-.hero-recap{
-  list-style:none;padding:0 0 0 20px;margin:0 0 28px;
-  display:flex;flex-direction:column;gap:10px;
-  max-width:620px;
-  border-left:2px solid rgba(214,173,96,.25);
-  opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .6s ease forwards;
-}
-.hero-recap li{
-  font-size:14px;color:var(--stone);line-height:1.6;font-weight:300;
-}
-.hero-recap li strong{color:var(--white);font-weight:500;}
-.hero-recap .recap-arrow{
-  color:var(--gold);margin-right:8px;font-family:'DM Mono',monospace;font-size:11px;
-}
-
-/* CTA group */
-.cta-group{
-  display:flex;align-items:center;gap:16px;
-  opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .72s ease forwards;
-}
-
-/* Stats row */
-.stats-row{
-  display:flex;gap:0;
-  margin-bottom:32px;
-  border-top:1px solid rgba(214,173,96,.15);
-  padding-top:20px;
-  opacity:0;transform:translateY(12px);
-  animation:fadeUp .7s .85s ease forwards;
-}
-.stat{
-  flex:1;padding-right:28px;
-  position:relative;
-}
-.stat:not(:last-child)::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:1px;
-  background:rgba(214,173,96,.12);
-}
-.stat:not(:first-child){padding-left:28px}
-.stat-num{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:clamp(22px,2.4vw,32px);
-  font-weight:200;letter-spacing:.03em;
-  color:var(--gold);line-height:1;margin-bottom:5px;
-}
-.stat-lbl{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--dim);
-}
-
-.btn-primary{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--night);background:var(--gold);border:none;
-  border-radius:4px;padding:17px 36px;cursor:pointer;
-  transition:filter .2s,transform .1s;position:relative;overflow:hidden;
-}
-.btn-primary:hover{filter:brightness(1.08)}
-.btn-primary:active{transform:scale(.98)}
-@keyframes ctaPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(214,173,96,0)}
-  50%{box-shadow:0 0 0 10px rgba(214,173,96,.13)}
-}
-/* ctaPulse is applied via JS after the fadeUp completes — see initCal() */
-.btn-secondary{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--stone);background:transparent;border:none;
-  cursor:pointer;transition:color .2s;
-  display:flex;align-items:center;gap:7px;
-  text-decoration:none;
-}
-.btn-secondary:hover{color:var(--gold)}
-.btn-secondary-arrow{
-  width:20px;height:1px;background:currentColor;position:relative;
-  transition:width .2s;
-}
-.btn-secondary-arrow::after{
-  content:'';position:absolute;right:0;top:-3px;
-  width:6px;height:6px;border-right:1px solid currentColor;border-top:1px solid currentColor;
-  transform:rotate(45deg);
-}
-.btn-secondary:hover .btn-secondary-arrow{width:28px}
-
-.hero-sample-link{
-  display:inline-block;margin-top:14px;
-  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;
-  color:var(--stone);text-decoration:none;letter-spacing:.01em;
-  border-bottom:1px solid rgba(214,173,96,.25);padding-bottom:2px;
-  transition:color .2s,border-color .2s;
-}
-.hero-sample-link:hover{color:var(--gold);border-color:var(--gold);}
-
-.summary-sample-link{
-  display:inline-block;margin-top:14px;
-  font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);text-decoration:none;
-  transition:opacity .2s;
-}
-.summary-sample-link:hover{opacity:.7;}
-
-/* Right column — visual */
-.hero-right{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  align-self:start;
-  padding-top:120px;
-}
-.hero-cal-note{
-  max-width:340px;margin:12px auto 0;
-  font-family:'DM Sans',sans-serif;font-size:11px;line-height:1.55;
-  color:rgba(180,178,169,.55);text-align:center;
-}
-
-/* Abstract gold architecture lines */
-.hero-geo{
-  position:absolute;
-  inset:0;z-index:1;
-  overflow:hidden;
-}
-.hero-geo svg{
-  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
-  width:min(55vw,620px);height:auto;
-  opacity:.22;
-}
-
-/* Live calendar preview */
-.hero-cal-wrap{
-  position:relative;z-index:2;
-  width:100%;max-width:420px;
-}
-
-/* Animations */
-@keyframes fadeUp{
-  to{opacity:1;transform:none}
-}
-
-/* Scroll indicator */
-.scroll-ind{
-  position:absolute;bottom:28px;left:56px;z-index:10;
-  display:flex;flex-direction:column;align-items:flex-start;gap:9px;
-  opacity:0;animation:fadeUp .6s 1.1s ease forwards;
-}
-.scroll-ind-line{
-  width:1px;height:44px;
-  background:linear-gradient(to bottom,var(--gold),transparent);
-  animation:scrollPulse 2.2s ease-in-out infinite;
-}
-@keyframes scrollPulse{0%,100%{opacity:.25}50%{opacity:.8}}
-.scroll-ind-lbl{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--dim);
-  writing-mode:vertical-rl;transform:rotate(180deg);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   MINI CALENDAR WIDGET (Hero right panel)
-══════════════════════════════════════════════════════════════ */
-.cal-frame{
-  background:var(--n2);
-  border:1px solid rgba(214,173,96,.14);
-  border-radius:10px;overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 0 1px rgba(214,173,96,.06);
-}
-
-/* Cal top bar */
-.cal-topbar{
-  padding:14px 18px 12px;
-  background:var(--n3);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.cal-live{
-  display:flex;align-items:center;gap:7px;
-}
-.live-dot{
-  width:6px;height:6px;border-radius:50%;background:var(--ok);
-  animation:livePulse 2s ease-in-out infinite;
-}
-@keyframes livePulse{
-  0%{box-shadow:0 0 0 0 rgba(45,122,79,.4)}
-  50%{box-shadow:0 0 0 4px rgba(45,122,79,0)}
-  100%{box-shadow:0 0 0 0 rgba(45,122,79,0)}
-}
-.live-lbl{
-  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:rgba(45,122,79,.9);
-}
-.cal-month-lbl{
-  font-family:'Josefin Sans',sans-serif;font-size:11px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--stone);
-}
-.cal-status-chip{
-  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:4px 10px;border-radius:3px;
-  transition:all .5s;
-}
-.cal-status-chip.before{
-  background:rgba(180,178,169,.1);border:1px solid rgba(180,178,169,.15);
-  color:var(--dim);
-}
-.cal-status-chip.after{
-  background:rgba(214,173,96,.1);border:1px solid rgba(214,173,96,.25);
-  color:var(--gold);
-}
-
-/* Cal body */
-.cal-/* removed */
-
-/* Sweep */
-.cal-sweep{
-  position:absolute;top:0;left:-3px;width:3px;height:100%;
-  background:linear-gradient(to bottom,
-    transparent 0%,rgba(214,173,96,0) 5%,
-    rgba(214,173,96,.9) 45%,rgba(255,235,180,1) 50%,
-    rgba(214,173,96,.9) 55%,rgba(214,173,96,0) 95%,transparent 100%);
-  pointer-events:none;z-index:20;
-  box-shadow:0 0 12px 2px rgba(214,173,96,.3);
-}
-
-/* DOW */
-.cal-dow{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  margin-bottom:6px;
-}
-.cal-dw{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--dim2);text-align:center;padding:2px 0;
-}
-.cal-dw.wk{color:rgba(214,173,96,.5)}
-
-/* Grid */
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-d{
-  aspect-ratio:1;border-radius:3px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  position:relative;min-height:0;cursor:default;
-  transition:background .2s;
-}
-.cal-d.today-marker::after{
-  content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);
-  width:3px;height:3px;border-radius:50%;background:var(--gold);
-}
-.cal-d-n{
-  font-size:10px;font-weight:400;color:var(--dim);
-  line-height:1;transition:color .3s,font-weight .3s;
-}
-.cal-d-r{
-  font-family:'DM Mono',monospace;
-  font-size:6.5px;font-weight:500;
-  color:transparent;line-height:1;margin-top:1px;
-  transition:color .3s;
-}
-/* Before state */
-.cal-d.bb{background:rgba(180,178,169,.12)}
-.cal-d.bb .cal-d-n{color:rgba(180,178,169,.75)}
-.cal-d.bb .cal-d-r{color:var(--dim)}
-/* After weekend */
-.cal-d.aw{background:rgba(214,173,96,.22)}
-.cal-d.aw .cal-d-n{color:var(--gold);font-weight:600}
-.cal-d.aw .cal-d-r{color:var(--gold)}
-/* After midweek strategic */
-.cal-d.am{background:rgba(214,173,96,.09)}
-.cal-d.am .cal-d-n{color:rgba(214,173,96,.7);font-weight:500}
-.cal-d.am .cal-d-r{color:rgba(214,173,96,.55)}
-/* Connectors */
-.cal-d.bb.bs,.cal-d.aw.bs,.cal-d.am.bs{border-radius:3px 0 0 3px}
-.cal-d.bb.bm,.cal-d.aw.bm,.cal-d.am.bm{border-radius:0}
-.cal-d.bb.be,.cal-d.aw.be,.cal-d.am.be{border-radius:0 3px 3px 0}
-
-@keyframes dayPop{
-  0%{transform:scale(.55);opacity:0}
-  60%{transform:scale(1.08)}
-  100%{transform:scale(1);opacity:1}
-}
-.cal-d.popping{animation:dayPop .26s cubic-bezier(.34,1.56,.64,1) forwards}
-
-/* Cal footer metrics */
-.cal-metrics{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  margin-top:12px;
-  border-top:1px solid rgba(255,255,255,.05);
-  padding-top:12px;
-}
-.cm{text-align:center}
-.cm-v{
-  font-family:'Josefin Sans',sans-serif;font-size:15px;font-weight:200;
-  color:var(--stone);line-height:1;letter-spacing:.04em;
-  transition:color .5s;
-}
-.cm-v.gold{color:var(--gold)}
-.cm-l{
-  font-family:'Josefin Sans',sans-serif;font-size:7.5px;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:3px;
-}
-
-/* Delta badge */
-.cal-delta{
-  margin-top:10px;padding:9px 14px;
-  background:rgba(45,122,79,.08);border:1px solid rgba(45,122,79,.18);
-  border-radius:5px;
-  display:flex;align-items:center;justify-content:space-between;
-  opacity:0;transition:opacity .6s;
-}
-.cal-delta.vis{opacity:1}
-.cal-delta-lbl{font-size:10px;color:rgba(45,122,79,.8);font-weight:400}
-.cal-delta-val{
-  font-family:'Josefin Sans',sans-serif;font-size:14px;font-weight:600;
-  color:var(--ok);letter-spacing:.04em;
-}
-
-/* Small replay button */
-.cal-replay{
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  margin-top:10px;
-  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:var(--dim);cursor:pointer;transition:color .2s;
-  background:transparent;border:none;width:100%;
-}
-.cal-replay:hover{color:var(--gold)}
-
-/* ══════════════════════════════════════════════════════════════
-   SECTION BELOW FOLD — JASON + INTRO
-══════════════════════════════════════════════════════════════ */
-.founder-section{
-  padding:120px 56px;
-  display:grid;grid-template-columns:380px 1fr;
-  gap:80px;align-items:center;
-  border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* Photo */
-.founder-photo-wrap{
-  position:relative;
-}
-.founder-photo{
-  width:100%;aspect-ratio:.75;
-  border-radius:6px;
-  background:var(--n3);
-  overflow:hidden;
-  border:1px solid rgba(214,173,96,.1);
-  position:relative;
-}
-.founder-photo img{
-  width:100%;height:100%;object-fit:cover;object-position:26% 20%;
-  filter:grayscale(15%) contrast(1.05);
-  transition:filter .4s;
-}
-.founder-photo:hover img{filter:grayscale(0%) contrast(1.08)}
-/* Gold corner accent */
-.founder-photo::before{
-  content:'';position:absolute;top:-1px;left:-1px;
-  width:48px;height:48px;z-index:1;
-  border-top:2px solid var(--gold);border-left:2px solid var(--gold);
-  border-radius:6px 0 0 0;
-}
-.founder-photo::after{
-  content:'';position:absolute;bottom:-1px;right:-1px;
-  width:48px;height:48px;z-index:1;
-  border-bottom:2px solid rgba(214,173,96,.4);border-right:2px solid rgba(214,173,96,.4);
-  border-radius:0 0 6px 0;
-}
-/* Placeholder when no image */
-.photo-placeholder{
-  width:100%;height:100%;
-  background:linear-gradient(145deg,var(--n4),var(--n3));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;
-}
-.photo-placeholder svg{opacity:.2}
-.photo-placeholder span{
-  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
-}
-
-/* Founder credentials strip */
-.founder-creds{
-  position:absolute;bottom:0;left:0;right:0;z-index:2;
-  padding:16px 18px;
-  background:linear-gradient(to top,rgba(15,15,15,.95) 60%,transparent);
-}
-.founder-name{
-  font-family:'Josefin Sans',sans-serif;font-size:15px;font-weight:600;
-  color:var(--white);letter-spacing:.04em;margin-bottom:3px;
-}
-.founder-title{font-size:11px;color:var(--stone);font-weight:300}
-
-/* Founder text column */
-.founder-text{}
-.section-eyebrow{
-  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:18px;display:flex;align-items:center;gap:12px;
-}
-.section-eyebrow::before{
-  content:'';width:24px;height:1px;
-  background:linear-gradient(to right,transparent,var(--gold));
-}
-.founder-headline{
-  font-family:'Josefin Sans',sans-serif;
-  font-size:clamp(28px,3.2vw,44px);font-weight:200;
-  letter-spacing:.04em;text-transform:uppercase;
-  color:var(--white);line-height:1.1;margin-bottom:24px;
-}
-.founder-headline em{color:var(--gold);font-style:normal}
-.founder-/* removed */
-.founder-body strong{color:var(--white);font-weight:500}
-.founder-body a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.4);transition:border-color .2s;}
-.founder-body a:hover{border-bottom-color:var(--gold);}
-.founder-pull{
-  padding:20px 24px;
-  border-left:2px solid var(--gold);
-  margin-bottom:28px;
-  background:rgba(214,173,96,.04);
-  border-radius:0 6px 6px 0;
-}
-.founder-pull p{
-  font-size:16px;font-weight:300;font-style:italic;
-  color:var(--stone);line-height:1.7;
-}
-.founder-pull p strong{color:var(--gold);font-style:normal;font-weight:500}
-.founder-stats{
-  display:flex;gap:0;
-  border-top:1px solid rgba(214,173,96,.12);
-  padding-top:20px;
-}
-.fs{flex:1;padding-right:24px;position:relative}
-.fs:not(:last-child)::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:1px;
-  background:rgba(214,173,96,.1);
-}
-.fs:not(:first-child){padding-left:24px}
-.fs-n{
-  font-family:'Josefin Sans',sans-serif;font-size:22px;font-weight:200;
-  color:var(--gold);letter-spacing:.04em;line-height:1;margin-bottom:5px;
-}
-.fs-l{
-  font-family:'Josefin Sans',sans-serif;font-size:8px;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
-}
-.founder-link{
-  display:inline-flex;align-items:center;gap:10px;margin-top:24px;
-  font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);text-decoration:none;transition:gap .2s;
-}
-.founder-link:hover{gap:16px}
-.founder-link-line{width:28px;height:1px;background:currentColor;position:relative}
-.founder-link-line::after{
-  content:'';position:absolute;right:0;top:-3px;
-  width:7px;height:7px;border-right:1px solid currentColor;border-top:1px solid currentColor;
-  transform:rotate(45deg);
-}
-
-/* ══════════════════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════════════════ */
-@media(max-width:1024px){
-  
-  .hero{grid-template-columns:1fr;padding:0 24px;padding-top:100px;padding-bottom:60px}
-  .hero-left{padding-right:0;padding-top:0}
-  .hero-right{display:none}
-  .scroll-ind{left:24px}
-  .founder-section{grid-template-columns:1fr;padding:80px 24px;gap:48px}
-  .founder-photo-wrap{max-width:320px;margin:0 auto}
-}
-@media(max-width:600px){
-  .hero{padding-top:72px;padding-bottom:40px}
-  .hero-h1{font-size:38px;margin-bottom:16px}
-  .hero-sub{font-size:14px;margin-bottom:20px}
-  .hero-recap{margin-bottom:20px;gap:8px;padding-left:16px}
-  .hero-recap li{font-size:13px}
-  .cta-group{margin-bottom:24px}
-  .stats-row{flex-direction:column;gap:16px}
-  .stat::after{display:none}
-  .stat{padding:0 0 16px;border-bottom:1px solid rgba(214,173,96,.08)}
-  .stat:last-child{border-bottom:none;padding-bottom:0}
-  .stat:not(:first-child){padding-left:0}
-  .cta-group{flex-direction:column;align-items:flex-start}
-}
-
-/* ═══ MOBILE NAV ════════════════════════════════════════════════ */
-
-/* ══ MOBILE NAV ══════════════════════════════════════════════ */
-@media(max-width:768px){
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-}
-@media(min-width:769px){
-  
-  
-}
-/* ══ END MOBILE NAV ══════════════════════════════════════════ */
-
-/* ══ SITE FOOTER — STANDARD ══════════════════════════════════════ */
-.site-footer{
-  border-top:1px solid rgba(255,255,255,.06);
-  padding:32px 56px;
-  background:rgba(10,10,10,.6);
-}
-.sf-inner{
-  max-width:1100px;margin:0 auto;
-  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
-}
-.sf-logo{text-decoration:none;flex-shrink:0;opacity:.6;transition:opacity .15s;}
-.sf-logo:hover{opacity:1;}
-.sf-links{
-  display:flex;flex-wrap:wrap;gap:4px 20px;flex:1;
-}
-.sf-links a{
-  font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:#6B6A65;text-decoration:none;
-  transition:color .15s;
-}
-.sf-links a:hover{color:#D6AD60;}
-.sf-right{margin-left:auto;text-align:right;}
-.sf-copy{font-family:'DM Mono','Courier New',monospace;font-size:10px;color:#6B6A65;letter-spacing:.06em;}
-.sf-tagline{font-family:'Josefin Sans',sans-serif;font-size:9px;color:rgba(214,173,96,.4);letter-spacing:.16em;text-transform:uppercase;margin-top:3px;}
-@media(max-width:768px){
-  .site-footer{padding:24px 20px;}
-  .sf-inner{gap:20px;}
-  .sf-right{margin-left:0;text-align:left;}
-}
-
-/* ── SITE FOOTER ── */
-.site-footer{position:relative;z-index:1;background:var(--n2,#111);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}
-.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}
-.sf-brand{padding-top:2px;}
-.sf-copy{font-family:var(--d,'Josefin Sans',sans-serif);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white,#f8f6f2);margin-bottom:8px;}
-.sf-location{font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;line-height:1.8;}
-.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
-.sf-col{display:flex;flex-direction:column;gap:6px;}
-.sf-col-label{font-family:var(--m,'DM Mono',monospace);font-size:9px;color:var(--dim,#6B6A65);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
-.sf-col a{font-size:12px;color:var(--stone,#B4B2A9);text-decoration:none;transition:color .15s;line-height:1.7;}
-.sf-col a:hover{color:var(--gold,#D6AD60);}
-.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m,'DM Mono',monospace);font-size:10px;color:var(--dim,#6B6A65);letter-spacing:.08em;}
-@media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
-/* ══ SUMMARY STRIP ═══════════════════════════════════════════ */
-.summary-strip{padding:80px 56px;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
-.summary-inner{max-width:1100px;margin:0 auto}
-.summary-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 40px 0;}
-.summary-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
-.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
-.summary-item{padding:24px;border:1px solid rgba(214,173,96,.1);border-radius:6px;background:rgba(214,173,96,.02);}
-.summary-icon{font-family:'Josefin Sans',sans-serif;font-size:28px;font-weight:200;color:var(--gold);margin-bottom:12px;letter-spacing:.04em;}
-.summary-label{font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:600;color:var(--white);letter-spacing:.04em;margin-bottom:8px;}
-.summary-desc{font-size:13px;color:var(--stone);line-height:1.7;font-weight:300;}
-@media(max-width:768px){.summary-strip{padding:60px 24px}.summary-grid{grid-template-columns:1fr 1fr;gap:20px}}
-@media(max-width:480px){.summary-grid{grid-template-columns:1fr}}
-.proof-strip{padding:64px 56px;border-top:1px solid rgba(214,173,96,.12);border-bottom:1px solid rgba(214,173,96,.12);background:rgba(214,173,96,.03);}
-.proof-inner{max-width:1100px;margin:0 auto;}
-.proof-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-align:left;margin:0 0 8px;}
-.proof-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
-.proof-subhead{font-size:13px;color:var(--stone);text-align:left;margin:0 0 48px;font-weight:300;}
-.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
-.proof-card{padding:32px 24px;text-align:center;display:grid;grid-template-rows:auto auto auto 1fr;}
-.proof-card-eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;}
-.proof-stat{font-family:'Josefin Sans',sans-serif;font-style:italic;font-size:clamp(36px,5vw,60px);font-weight:200;color:var(--gold);line-height:1.05;letter-spacing:.01em;min-height:2.2em;display:flex;align-items:center;justify-content:center;}
-.proof-metric{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.04em;color:#B4B2A9;margin-top:8px;}
-.proof-card-bottom{align-self:end;}
-.proof-rule{height:1px;background:rgba(214,173,96,.15);margin-bottom:18px;}
-.proof-intervention{font-family:'DM Sans',sans-serif;font-style:italic;font-size:14px;font-weight:400;line-height:1.55;color:#E8E7E2;text-align:left;min-height:calc(4 * 14px * 1.55);}
-.proof-cta{text-align:center;margin-top:48px;}.proof-cta a{font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);padding-bottom:2px;}.proof-cta a:hover{border-bottom-color:var(--gold);}
-@media(max-width:900px){.proof-grid{grid-template-columns:1fr;gap:0}.proof-card{padding:32px 16px;border-bottom:1px solid rgba(214,173,96,.08)}.proof-card:last-child{border-bottom:none}.proof-intervention{text-align:center;}}
-@media(max-width:768px){.proof-strip{padding:48px 24px}}
-
-/* ─── KEY TAKEAWAYS (Otterly Fix 1) ─── */
-.key-takeaways{padding:64px 56px;border-top:1px solid rgba(255,255,255,.05);}
-.kt-inner{max-width:1100px;margin:0 auto;}
-.kt-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 24px 0;}
-.kt-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
-.kt-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;}
-.kt-list li{font-size:14px;line-height:1.7;color:var(--stone);font-weight:300;padding:14px 18px;border-left:2px solid rgba(214,173,96,.3);background:rgba(214,173,96,.02);}
-.kt-list li strong{color:var(--white);font-weight:600;}
-.kt-list li a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.4);}
-.kt-list li a:hover{border-bottom-color:var(--gold);}
-@media(max-width:768px){.key-takeaways{padding:48px 24px}.kt-list{grid-template-columns:1fr;gap:12px}}
-
-/* ─── FEE MATH CALLOUT (Otterly Fix 2) ─── */
-.fee-math{padding:48px 56px 64px;}
-.fm-inner{max-width:900px;margin:0 auto;}
-.fm-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 20px 0;}
-.fm-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;vertical-align:middle;background:linear-gradient(to right,transparent,var(--gold));margin-right:12px;}
-.fm-quote{margin:0;padding:28px 32px;border:1px solid rgba(214,173,96,.18);border-radius:6px;background:rgba(214,173,96,.03);}
-.fm-quote p{font-size:15px;line-height:1.75;color:var(--stone);font-weight:300;margin:0 0 14px 0;}
-.fm-quote p:last-child{margin-bottom:0;}
-.fm-quote strong{color:var(--white);font-weight:600;}
-.fm-def{font-size:13px !important;border-top:1px solid rgba(214,173,96,.12);padding-top:14px;margin-top:16px !important;}
-.fm-def em{color:var(--gold);font-style:italic;}
-.fm-context{font-size:13px !important;color:rgba(255,255,255,.55) !important;}
-.fm-context a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.4);}
-.fm-context a:hover{border-bottom-color:var(--gold);}
-@media(max-width:768px){.fee-math{padding:40px 24px}.fm-quote{padding:22px 20px}.fm-quote p{font-size:14px}}
-
-/* ─── FAQ SECTION (Otterly Fix 5) ─── */
-.faq-section{padding:80px 56px;border-top:1px solid rgba(255,255,255,.05);}
-.faq-inner{max-width:900px;margin:0 auto;}
-.faq-eyebrow{font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
-.faq-eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
-.faq-headline{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:1.15;font-weight:300;color:var(--white);margin:0 0 36px 0;letter-spacing:-.01em;}
-.faq-list{margin:0;padding:0;}
-.faq-item{padding:24px 0;border-top:1px solid rgba(255,255,255,.06);}
-.faq-item:last-child{border-bottom:1px solid rgba(255,255,255,.06);}
-.faq-q{font-family:'Josefin Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);letter-spacing:.01em;margin-bottom:10px;}
-.faq-a{font-size:14px;line-height:1.75;color:var(--stone);font-weight:300;margin:0;padding:0;}
-.faq-a strong{color:var(--white);font-weight:500;}
-.faq-a a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
-.faq-a a:hover{border-bottom-color:var(--gold);}
-@media(max-width:768px){.faq-section{padding:60px 24px}.faq-headline{font-size:28px}.faq-q{font-size:14px}.faq-a{font-size:13px}}
-
-/* ─── HERO RECAP NOTE (Otterly Fix 3 supporting) ─── */
-.hero-recap-note{display:block;font-size:12px;color:rgba(255,255,255,.55);font-weight:300;margin-top:6px;line-height:1.6;}
-
-/* ─── EYEBROW LINK (Otterly Fix 4 supporting) ─── */
-.eyebrow-link{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(214,173,96,.35);transition:border-color .2s;}
-.eyebrow-link:hover{border-bottom-color:var(--gold);}
-</style>
-  <!-- Open Graph -->  <!-- Twitter Card -->  <link rel="canonical" href="https://marketics.io/">
 <script type="application/ld+json">
 {
- "@context": "https://schema.org",
- "@graph": [
- {
- "@type": "ProfessionalService",
- "@id": "https://marketics.io/#business",
- "name": "Marketics",
- "alternateName": "Marketics LLC",
- "description": "Performance-based short-term rental optimization. Our benchmark is a 42%+ increase in monthly revenue, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of bookings with no monthly fee, the large majority of any gain stays with you.",
- "url": "https://marketics.io",
- "logo": "https://marketics.io/og/default.jpg",
- "image": "https://marketics.io/og/default.jpg",
- 
- "email": "jason@marketics.io",
- "address": {
- "@type": "PostalAddress",
- "streetAddress": "1000 Brickell Avenue, Suite 715",
- "addressLocality": "Miami",
- "addressRegion": "FL",
- "postalCode": "33131",
- "addressCountry": "US"
- },
- "geo": {
- "@type": "GeoCoordinates",
- "latitude": 25.7617,
- "longitude": -80.1918
- },
- "areaServed": [
- "United States", "Canada", "Mexico"
- ],
- "foundingDate": "2023",
- "serviceType": "Short-Term Rental Revenue Optimization",
- "priceRange": "10% of net booking revenue",
- "founder": {
- "@type": "Person",
- "@id": "https://marketics.io/story#jason",
- "name": "Jason Baxter",
- "sameAs": "https://www.linkedin.com/in/jasonbaxter1"
- },
- "sameAs": [
- "https://www.linkedin.com/company/marketicsio/"
- ]
- },
- {
- "@type": "WebSite",
- "@id": "https://marketics.io/#website",
- "url": "https://marketics.io",
- "name": "Marketics",
- "description": "Performance-based STR optimization: Your Market. Mastered.",
- "publisher": {"@id": "https://marketics.io/#business"},
- "potentialAction": {
- "@type": "SearchAction",
- "target": {
- "@type": "EntryPoint",
- "urlTemplate": "https://marketics.io/calculator?market={search_term_string}"
- },
- "query-input": "required name=search_term_string"
- }
- },
- {
- "@type": "FAQPage",
- "@id": "https://marketics.io/#faq",
- "mainEntity": [
- {
- "@type": "Question",
- "name": "How much will I pay?",
- "acceptedAnswer": {
- "@type": "Answer",
- "text": "Marketics charges 10% of your net payout per booking. No monthly retainer. No long-term contract. Engagements start with a $500 commitment deposit — refunded automatically when you complete the 90-day program."
- }
- },
- {
- "@type": "Question",
- "name": "What's included in the optimization?",
- "acceptedAnswer": {
- "@type": "Answer",
- "text": "Revenue management and dynamic pricing strategy, listing optimization (copy, photography direction, cover photo), improved search ranking on Airbnb, faster guest review collection, minimum stay optimization, and market demand intelligence. Guest messaging and day-to-day operations remain with the host or their property manager."
- }
- },
- {
- "@type": "Question",
- "name": "What happens if my revenue doesn't improve?",
- "acceptedAnswer": {
- "@type": "Answer",
- "text": "The deposit doesn't ride on results. A $500 commitment deposit is charged at onboarding and refunded automatically when you complete the 90-day program — the only condition is completion. Withdrawing before Day 90 forfeits the deposit. Our compensation is what rides on results: at 10% of bookings, we only earn more when you earn more."
- }
- },
- {
- "@type": "Question",
- "name": "What does 'net payout' mean?",
- "acceptedAnswer": {
- "@type": "Answer",
- "text": "Net payout is the amount Airbnb deposits to you after deducting their service fees and any cleaning fees. It's not the gross booking amount. Marketics' 10% is calculated on this net figure."
- }
- },
- {
- "@type": "Question",
- "name": "How long before I see results?",
- "acceptedAnswer": {
- "@type": "Answer",
- "text": "Most properties see meaningful improvement within the first 30 to 60 days. Full optimization results, including review velocity and algorithm ranking gains, typically compound over 60 to 90 days."
- }
- }
- ]
- }
- ]
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Marketics",
+  "url": "https://marketics.io",
+  "logo": "https://marketics.io/assets/logo.svg",
+  "description": "Performance-based full-stack short-term rental revenue optimization. A documented 45% median revenue lift, net of market, across 1,000+ listings in 22 markets. Marketics is paid 10% of revenue with no monthly fee.",
+  "areaServed": ["United States", "Canada", "Mexico"],
+  "founder": { "@type": "Person", "name": "Jason Baxter" },
+  "slogan": "Your Market. Mastered."
 }
 </script>
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Marketics">
-  <meta property="og:title" content="Marketics — Your Market. Mastered.™">
-  <meta property="og:description" content="Performance-based STR optimization. 42%+ benchmark revenue lift, set at the median of 19 documented short-term-rental engagements. Every property audited individually before we set a target. 10% of bookings, no monthly fee. Free revenue audit.">
-  <meta property="og:url" content="https://marketics.io/">
-  <meta property="og:image" content="https://marketics.io/og/default.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Marketics — Your Market. Mastered.™">
-  <meta name="twitter:description" content="Performance-based STR optimization. 42%+ benchmark revenue lift, set at the median of 19 documented short-term-rental engagements. Every property audited individually before we set a target. 10% of bookings, no monthly fee. Free revenue audit.">
-  <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
-<!-- Self-hosted fonts: zero external DNS lookup, served from Netlify CDN -->
-<!-- Preload only above-the-fold faces: hero H1 (Josefin 200 = LCP text) + primary body (DM Sans 400) -->
+
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<!-- Self-hosted fonts loaded non-render-blocking (font-display:swap renders text immediately) -->
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<!-- DNS prefetch for remaining 3rd parties -->
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Homepage fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
 <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
 <link rel="dns-prefetch" href="https://www.clarity.ms">
-<!-- Marketics consent system: replaces CookieYes, gates analytics on user choice -->
 <script src="/mkx-consent.js" defer></script>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
+<style>
+:root{
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 72px;}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 72px;height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ shared bits ══ */
+.kicker{display:flex;align-items:center;gap:14px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.sec{border-top:1px solid var(--line);}
+.btn-outline{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:400;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:17px 36px;transition:border-color .2s,background .2s;}
+.btn-outline:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
+.samplelink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.samplelink:hover{color:var(--gold);}
+.samplelink span{color:var(--gold);}
+
+/* ══ HERO ══ */
+.hero{padding:150px 0 76px;}
+.hero-grid{display:grid;grid-template-columns:1fr 560px;gap:72px;align-items:center;}
+.h1{font-family:var(--display);font-weight:200;font-size:84px;line-height:1.06;letter-spacing:13px;color:var(--white);margin:28px 0 0;}
+.h1 .gold{color:var(--gold);}
+.h1 sup{font-family:var(--sans);font-size:15px;color:var(--dim);letter-spacing:0;vertical-align:top;margin-left:-6px;}
+.hero-lead{font-size:19px;line-height:1.65;color:var(--bright);margin:32px 0 0;max-width:540px;}
+.hero-sub{font-size:14px;line-height:1.7;color:var(--muted);margin:14px 0 0;max-width:540px;}
+.hero-actions{display:flex;align-items:center;gap:30px;margin-top:36px;flex-wrap:wrap;}
+.stats{display:flex;margin-top:52px;}
+.stat{display:flex;flex-direction:column;gap:6px;padding:0 40px;border-right:1px solid var(--line-2);}
+.stat:first-child{padding-left:0;}
+.stat:last-child{border-right:none;}
+.stat .n{font-family:var(--display);font-weight:300;font-size:32px;color:var(--white);}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;line-height:1.6;}
+
+/* ══ CHART ══ */
+.chart{display:flex;flex-direction:column;gap:24px;}
+.ch-tabs{display:flex;gap:26px;flex-wrap:wrap;}
+.ch-tab{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;cursor:pointer;color:var(--faint);
+  padding-bottom:7px;border-bottom:1px solid transparent;background:none;border-left:none;border-right:none;border-top:none;text-transform:uppercase;transition:color .3s;}
+.ch-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.ch-headline{font-family:var(--display);font-weight:300;font-size:24px;line-height:1.4;color:var(--white);max-width:520px;min-height:68px;}
+.ch-plot{position:relative;height:330px;border-left:1px solid var(--line-3);border-bottom:1px solid var(--line-3);}
+.ch-y{position:absolute;left:10px;font-family:var(--mono);font-size:10px;color:var(--faint);}
+.ch-ceiling{position:absolute;left:0;right:0;border-top:1px dashed rgba(214,173,96,.5);transition:opacity .4s,top .6s;}
+.ch-ceiling-lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--gold);background:var(--ink);
+  padding:3px 0 3px 10px;position:absolute;top:-9px;right:0;white-space:nowrap;}
+.ch-fill{position:absolute;bottom:0;transform:translateX(-50%);width:58px;
+  background:linear-gradient(180deg,rgba(214,173,96,.4),rgba(214,173,96,.04));
+  transition:left 1s cubic-bezier(.5,0,.2,1),height .1s,opacity .5s;}
+.ch-house{position:absolute;bottom:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;
+  transition:left 1s cubic-bezier(.5,0,.2,1),bottom .1s;}
+.ch-rev{font-family:var(--display);font-weight:300;font-size:21px;color:#F5F4F0;white-space:nowrap;transition:color .4s;}
+.ch-mark{position:relative;width:46px;height:42px;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+.ch-ring{position:absolute;top:50%;left:50%;width:44px;height:44px;border:1px solid rgba(214,173,96,.35);border-radius:50%;animation:mkt-ring 2.4s ease-out infinite;}
+.ch-mark img{width:34px;height:auto;position:relative;filter:drop-shadow(0 0 10px rgba(214,173,96,.55));}
+@keyframes mkt-ring{0%{transform:translate(-50%,-50%) scale(.55);opacity:.85;}100%{transform:translate(-50%,-50%) scale(1.6);opacity:0;}}
+@media (prefers-reduced-motion:reduce){.ch-ring{animation:none;opacity:.4;}}
+.ch-tiers{display:flex;margin-top:12px;}
+.ch-tier{flex:1;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);transition:color .5s;}
+.ch-tier.active{color:var(--gold);}
+.ch-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ch-status{font-family:var(--mono);font-size:11.5px;letter-spacing:1px;color:var(--muted);transition:color .4s;}
+.ch-actions{display:flex;align-items:center;gap:18px;}
+.ch-reset{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);cursor:pointer;background:none;border:none;transition:color .2s;text-transform:uppercase;}
+.ch-reset:hover{color:var(--muted);}
+.ch-cal{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:2px;color:var(--gold);
+  border:1px solid rgba(214,173,96,.4);padding:11px 24px;cursor:pointer;background:none;transition:border-color .2s,background .2s;}
+.ch-cal:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.ch-note{font-size:10.5px;line-height:1.6;color:var(--faint);max-width:520px;}
+
+/* ══ WEDGE ══ */
+.wedge{display:grid;grid-template-columns:1fr 1fr;}
+.wedge>div{padding:34px 72px;display:flex;flex-direction:column;gap:8px;}
+.wedge .w-left{border-right:1px solid var(--line);}
+.wedge .w-right{background:rgba(214,173,96,.03);}
+.wedge .w-kick{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;}
+.wedge .w-left .w-kick{color:var(--dim);}
+.wedge .w-right .w-kick{color:var(--gold);}
+.wedge .w-title{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:2px;}
+.wedge .w-left .w-title{color:var(--muted);}
+.wedge .w-right .w-title{color:var(--white);}
+.wedge .w-body{font-size:13.5px;line-height:1.6;}
+.wedge .w-left .w-body{color:var(--muted);}
+.wedge .w-right .w-body{color:var(--body);}
+.wedge .w-body .nw{color:var(--gold);white-space:nowrap;}
+
+/* ══ PHILOSOPHY ══ */
+.philo{padding:130px 72px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.philo-kick{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:40px;}
+.philo-big{font-family:var(--display);font-weight:200;font-size:52px;line-height:1.28;letter-spacing:2px;color:var(--white);margin:0;max-width:1040px;text-wrap:balance;}
+.philo-big em{color:var(--gold);font-style:italic;}
+.philo-sub{font-size:15.5px;line-height:1.75;color:var(--muted);margin:44px 0 0;max-width:560px;}
+.asym{width:100%;max-width:940px;margin-top:88px;border-top:1px solid var(--line);padding-top:56px;}
+.asym-lead{font-size:17px;line-height:1.7;color:var(--body);margin:0 auto;max-width:620px;}
+.asym-lead .hl{color:var(--white);}
+.asym-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px;text-align:left;}
+.move{padding:30px 32px;display:flex;flex-direction:column;gap:12px;border:1px solid var(--line-2);}
+.move.gold{border-color:rgba(214,173,96,.4);background:rgba(214,173,96,.03);}
+.move .m-k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);}
+.move.gold .m-k{color:var(--gold);}
+.move .m-t{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:1px;color:var(--muted);}
+.move.gold .m-t{color:var(--white);}
+.move .m-b{font-size:14px;line-height:1.7;color:var(--dim);}
+.move.gold .m-b{color:var(--body);}
+.asym-foot{font-size:15px;line-height:1.7;color:var(--muted);margin:36px auto 0;max-width:560px;}
+.asym-foot .nw{color:var(--gold);white-space:nowrap;}
+
+/* ══ METHOD / FAQ shared 2-col ══ */
+.split{padding:96px 72px;display:grid;grid-template-columns:380px 1fr;gap:80px;align-items:start;}
+.split-aside{display:flex;flex-direction:column;position:sticky;top:100px;}
+.split-h{font-family:var(--display);font-weight:200;font-size:46px;line-height:1.15;letter-spacing:3px;color:var(--white);margin-top:26px;}
+.split-p{font-size:15px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:320px;}
+.rows{display:flex;flex-direction:column;}
+.mrow{display:grid;grid-template-columns:68px 1fr;gap:32px;padding:30px 0;border-top:1px solid var(--line);align-items:start;}
+.mrow .num{font-family:var(--display);font-weight:200;font-size:34px;color:var(--gold);}
+.mrow .mt{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:1.5px;color:var(--white);}
+.mrow .mb{font-size:14.5px;line-height:1.7;color:var(--body);margin:8px 0 0;max-width:560px;}
+.rows .cap{border-top:1px solid var(--line);}
+.faqrow{display:flex;flex-direction:column;gap:12px;padding:30px 0;border-top:1px solid var(--line);}
+.faqrow .fq{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:1px;color:var(--white);}
+.faqrow .fa{font-size:15px;line-height:1.75;color:var(--body);margin:0;max-width:620px;}
+
+/* ══ RESULTS ══ */
+.results{padding:96px 72px;}
+.results-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:32px;}
+.results-head .rh-t{font-family:var(--display);font-weight:200;font-size:46px;line-height:1.15;letter-spacing:3px;color:var(--white);margin-top:22px;}
+.results-head .rh-note{font-size:13.5px;line-height:1.7;color:var(--muted);max-width:300px;text-align:right;}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.rcard{display:flex;flex-direction:column;border:1px solid var(--line-2);}
+.rcard .rimg{position:relative;height:340px;overflow:hidden;background:#1e1e1e center/cover no-repeat;}
+.rcard .rimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,23,23,0) 40%,rgba(23,23,23,.85) 100%);}
+.rcard .rtier{position:absolute;top:18px;left:18px;z-index:1;font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);background:rgba(23,23,23,.7);padding:6px 12px;}
+.rcard .rcap{position:absolute;bottom:18px;left:18px;right:18px;z-index:1;display:flex;flex-direction:column;gap:4px;}
+.rcard .rmkt{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--body);text-transform:uppercase;}
+.rcard .rttl{font-family:var(--display);font-weight:300;font-size:20px;letter-spacing:1px;color:var(--white);}
+.rcard .rfoot{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-top:1px solid var(--line-2);}
+.rcard .rol{font-size:13px;color:var(--muted);}
+.rcard .rov{font-family:var(--display);font-weight:300;font-size:22px;color:var(--gold);}
+.results-cta{display:flex;justify-content:center;margin-top:48px;}
+
+/* ══ OUR STORY ══ */
+.story{display:grid;grid-template-columns:620px 1fr;align-items:stretch;}
+.story-img{position:relative;min-height:620px;overflow:hidden;border-right:1px solid var(--line);}
+.story-img img{width:100%;height:100%;object-fit:cover;object-position:15% center;}
+.story-body{padding:96px 72px;display:flex;flex-direction:column;justify-content:center;}
+.story-h{font-family:var(--display);font-weight:200;font-size:46px;line-height:1.15;letter-spacing:3px;color:var(--white);margin-top:26px;}
+.story-p{font-size:15.5px;line-height:1.75;color:var(--body);margin:26px 0 0;max-width:520px;}
+.luxe{border-left:2px solid var(--gold);padding:4px 0 4px 22px;margin:40px 0 0;display:flex;flex-direction:column;gap:6px;}
+.luxe .lx-n{font-family:var(--display);font-weight:200;font-size:40px;color:var(--white);}
+.luxe .lx-n small{font-size:18px;color:var(--body);}
+.luxe .lx-a{font-size:14px;line-height:1.6;color:var(--muted);}
+.luxe .lx-b{font-size:13.5px;line-height:1.6;color:var(--body);margin-top:4px;}
+.story-quote{font-family:var(--display);font-weight:300;font-size:20px;line-height:1.55;letter-spacing:.5px;color:var(--bright);margin:36px 0 0;max-width:540px;}
+
+/* ══ CLOSING ══ */
+.closing{padding:110px 72px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  background:radial-gradient(120% 140% at 50% 0%,rgba(214,173,96,.06) 0%,rgba(17,17,16,0) 60%);}
+.closing-kick{display:flex;align-items:center;gap:14px;margin-bottom:30px;}
+.closing-kick .bar{width:32px;height:1px;background:var(--gold);}
+.closing-kick span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.closing-h{font-family:var(--display);font-weight:200;font-size:60px;line-height:1.1;letter-spacing:6px;color:var(--white);max-width:900px;margin:0;text-wrap:balance;}
+.closing-p{font-size:17px;line-height:1.7;color:var(--body);margin:28px 0 0;max-width:520px;}
+.closing-actions{display:flex;align-items:center;gap:30px;margin-top:40px;flex-wrap:wrap;justify-content:center;}
+
+/* ══ FOOTER ══ */
+.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  .wrap{padding:0 40px;}
+  nav{padding:0 40px;}
+  .hero-grid{grid-template-columns:1fr 480px;gap:48px;}
+  .philo,.split,.results,.closing,.wedge>div{padding-left:40px;padding-right:40px;}
+  .story-body,.foot{padding-left:40px;padding-right:40px;}
+  .foot-legal{padding-left:40px;padding-right:40px;}
+  .story{grid-template-columns:1fr;}
+  .story-img{min-height:340px;border-right:none;border-bottom:1px solid var(--line);}
+  .story-img img{object-position:center 25%;}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero-grid{grid-template-columns:1fr;gap:44px;}
+  .h1{font-size:56px;letter-spacing:8px;}
+  .split{grid-template-columns:1fr;gap:36px;}
+  .split-aside{position:static;}
+  .rgrid{grid-template-columns:1fr;}
+  .results-head{flex-direction:column;align-items:flex-start;}
+  .results-head .rh-note{text-align:left;max-width:none;}
+  .philo-big{font-size:34px;}
+  .closing-h{font-size:38px;letter-spacing:3px;}
+}
+@media (max-width:600px){
+  .wrap{padding:0 24px;}
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .hero{padding:110px 0 56px;}
+  .h1{font-size:44px;letter-spacing:5px;}
+  .hero-lead{font-size:16px;}
+  .stats{flex-wrap:wrap;gap:20px 0;}
+  .stat{padding:0 16px 0 0;border-right:none;flex:0 0 33%;}
+  .philo,.split,.results,.closing{padding-left:24px;padding-right:24px;padding-top:56px;padding-bottom:56px;}
+  .wedge{grid-template-columns:1fr;}
+  .wedge>div{padding:28px 24px;}
+  .wedge .w-left{border-right:none;border-bottom:1px solid var(--line);}
+  .asym-grid{grid-template-columns:1fr;}
+  .philo-big{font-size:27px;letter-spacing:1px;}
+  .ch-plot{height:250px;}
+  .ch-fill{width:42px;}
+  .story-body{padding:40px 24px;}
+  .story-h,.split-h,.results-head .rh-t{font-size:32px;letter-spacing:2px;}
+  .closing-h{font-size:30px;letter-spacing:2px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding:20px 24px;}
+}
+</style>
 </head>
 <body>
-<nav id="mainNav">
-  <a href="/" class="nav-logo" aria-label="Marketics home">
-    <img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark" style="height:26px;width:auto;display:block;flex-shrink:0;" width="607" height="120">
-  </a>
+
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel">Market Intel</a>
+    <a href="/intel">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </nav>
-<div class="nav-mobile-menu" id="navMobileMenu">
+<div class="nav-mobile" id="navMobileMenu">
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel">Market Intel</a>
-  <a href="/get-started" class="nm-cta">Get My Free Audit</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-
-<script>if("scrollRestoration"in history)history.scrollRestoration="manual";window.scrollTo(0,0);</script>
-
-<!-- ═══ NAV ═══════════════════════════════════════════════════ -->
-<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
-<main id="main-content">
-<section class="hero" id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-vignette"></div>
-
-  <!-- LEFT COLUMN -->
-  <div class="hero-left">
-
-    <div class="eyebrow">Performance-Based <a href="https://en.wikipedia.org/wiki/Short-term_rental" target="_blank" rel="noopener noreferrer" class="eyebrow-link">Short-Term Rental</a> Optimization</div>
-
-    <h1 class="hero-h1">
-      Your Market.<br>
-      <span class="gold">Mastered.<sup style="font-size:0.35em;vertical-align:top;letter-spacing:0;line-height:1;">™</sup></span>
-    </h1>
-
-    <p class="hero-sub">
-      <strong>Launching your first short-term rental — or own one that should earn more?</strong> Marketics launches listings optimized from day one — a decade of trial-and-error already paid for — and keeps them earning after. <strong>42%+ benchmark revenue lift on optimization engagements, set at the median of 19 documented cases, not the top. Every property audited individually before we set a target. 10% of bookings, no monthly fee.</strong><br>No&nbsp;retainers. No&nbsp;contracts. We only earn when you earn.
-    </p>
-
-    <div class="cta-group">
-      <a href="/get-started" class="btn-primary" id="heroAuditBtn">
-        Get My Free Revenue Audit
-      </a>
-      <a href="/method" class="btn-secondary">
-        Watch the Method
-        <span class="btn-secondary-arrow"></span>
-      </a>
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker"><div class="bar"></div><span>Performance-based STR optimization</span></div>
+      <h1 class="h1">YOUR<br>MARKET.<br><span class="gold">MASTERED.</span><sup>™</sup></h1>
+      <p class="hero-lead">You already know your property can earn more. The question is who you trust to run its revenue.</p>
+      <p class="hero-sub">A decade building value into properties, then letting the market pay for it — 1,000+ listings across 22 markets.</p>
+      <div class="hero-actions">
+        <a href="/get-started" class="btn-outline">Get My Free Revenue Audit</a>
+        <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="n">35×</span><span class="l">Airbnb<br>Superhost</span></div>
+        <div class="stat"><span class="n">1,000+</span><span class="l">Listings<br>22 markets</span></div>
+        <div class="stat"><span class="n">45%</span><span class="l">Median lift<br>net of market</span></div>
+      </div>
     </div>
 
-    <a href="/sample-audit" class="hero-sample-link">See what a Marketics audit looks like &rarr;</a>
-
-    <dl class="stats-row">
-      <div class="stat">
-        <dd class="stat-num">35&#215;</dd>
-        <dt class="stat-lbl">Airbnb Superhost</dt>
-      </div>
-      <div class="stat">
-        <dd class="stat-num">1,000+</dd>
-        <dt class="stat-lbl">Properties Optimized</dt>
-      </div>
-      <div class="stat">
-        <dd class="stat-num">$500</dd>
-        <dt class="stat-lbl">Commitment Deposit</dt>
-      </div>
-    </dl>
-
-  </div>
-
-  <!-- RIGHT COLUMN — mini calendar preview -->
-  <div class="hero-right">
-
-    <!-- Abstract geo lines (SVG background) -->
-    <div class="hero-geo">
-      <svg viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Architectural grid lines — sparse, precise -->
-        <line x1="0" y1="100" x2="600" y2="100" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".3"/>
-        <line x1="0" y1="250" x2="600" y2="250" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".2"/>
-        <line x1="0" y1="400" x2="600" y2="400" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".15"/>
-        <line x1="100" y1="0" x2="100" y2="500" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".2"/>
-        <line x1="300" y1="0" x2="300" y2="500" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".15"/>
-        <line x1="500" y1="0" x2="500" y2="500" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".1"/>
-        <!-- Diagonal accent -->
-        <line x1="0" y1="500" x2="600" y2="0" stroke="#D6AD60" stroke-width=".5" stroke-opacity=".12"/>
-        <line x1="150" y1="500" x2="600" y2="125" stroke="#D6AD60" stroke-width=".3" stroke-opacity=".08"/>
-        <!-- Corner marks -->
-        <path d="M 490 10 L 590 10 L 590 110" stroke="#D6AD60" stroke-width=".8" stroke-opacity=".35" fill="none"/>
-        <path d="M 10 390 L 10 490 L 110 490" stroke="#D6AD60" stroke-width=".8" stroke-opacity=".25" fill="none"/>
-        <!-- Small squares -->
-        <rect x="295" y="245" width="10" height="10" stroke="#D6AD60" stroke-width=".6" fill="none" stroke-opacity=".3"/>
-        <rect x="95" y="95" width="10" height="10" stroke="#D6AD60" stroke-width=".6" fill="none" stroke-opacity=".2"/>
-        <rect x="495" y="395" width="10" height="10" stroke="#D6AD60" stroke-width=".6" fill="none" stroke-opacity=".15"/>
-      </svg>
-    </div>
-
-    <!-- Calendar frame -->
-    <figure class="hero-cal-wrap" aria-label="Live pricing preview simulator">
-      <figcaption style="font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(214,173,96,.5);margin:0 0 10px 2px;">Live Pricing Preview</figcaption>
-      <div class="cal-frame" id="calFrame">
-
-        <div class="cal-topbar">
-          <div class="cal-live">
-            <div class="live-dot"></div>
-            <span class="live-lbl">Live Preview</span>
-          </div>
-          <div class="cal-month-lbl" id="calMonthLbl">July 2026</div>
-          <div class="cal-status-chip before" id="calChip">Before</div>
-        </div>
-
-        <div class="cal-body">
-          <div class="cal-sweep" id="calSweep"></div>
-
-          <div class="cal-dow" id="calDow">
-            <!-- Injected by JS -->
-          </div>
-
-          <div class="cal-grid" id="calGrid">
-            <!-- Injected by JS -->
-          </div>
-
-          <div class="cal-metrics">
-            <div class="cm">
-              <div class="cm-v" id="cmRate">$116</div>
-              <div class="cm-l">Avg / Night</div>
-            </div>
-            <div class="cm">
-              <div class="cm-v" id="cmOcc">57%</div>
-              <div class="cm-l">Occupancy</div>
-            </div>
-            <div class="cm">
-              <div class="cm-v" id="cmRev">$1,980</div>
-              <div class="cm-l">Monthly Rev</div>
+    <!-- POSITIONING CHART -->
+    <div class="chart" id="chart">
+      <div class="ch-tabs" id="chTabs"></div>
+      <span class="ch-headline" id="chHeadline"></span>
+      <div>
+        <div class="ch-plot">
+          <span class="ch-y" style="top:6%">$12k /mo</span>
+          <span class="ch-y" style="top:37%">$8k</span>
+          <span class="ch-y" style="top:68%">$4k</span>
+          <div class="ch-ceiling" id="chCeiling"><span class="ch-ceiling-lbl" id="chCeilingLbl"></span></div>
+          <div class="ch-fill" id="chFill"></div>
+          <div class="ch-house" id="chHouse">
+            <span class="ch-rev" id="chRev"></span>
+            <div class="ch-mark" id="chMark">
+              <div class="ch-ring"></div>
+              <img src="/assets/logo-mark-square.svg" alt="property position">
             </div>
           </div>
-
-          <div class="cal-delta" id="calDelta">
-            <span class="cal-delta-lbl">Monthly gain with Marketics</span>
-            <span class="cal-delta-val">+$860 / mo</span>
-          </div>
-
-          <button class="cal-replay" id="calReplayBtn" style="display:none" onclick="initCal()">
-            &#8635; &nbsp;Replay
-          </button>
         </div>
-
-      </div>
-    </figure>
-
-    <!-- Server-rendered gate (plain HTML, NOT injected by the widget JS) so any
-         crawler parsing the page sees the numbers WITH their disclaimer. -->
-    <p class="hero-cal-note">Illustrative example, not a quote. Every property is audited individually before any target is set.</p>
-
-  </div>
-
-  <!-- Scroll indicator hidden — CTA visible in viewport -->
-
-</section>
-
-<!-- ═══ SUMMARY BLOCK — AI SCANNABLE ══════════════════════════ -->
-<section class="summary-strip" id="how-it-works" aria-label="How Marketics works">
-  <div class="summary-inner">
-    <h2 class="summary-eyebrow">How Marketics Works</h2>
-    <div class="summary-grid">
-      <div class="summary-item">
-        <div class="summary-icon">01</div>
-        <div class="summary-label">Free Revenue Audit</div>
-        <div class="summary-desc">We analyze your listing, pricing, and market position — and show you exactly where revenue is being left on the table.</div>
-        <a href="/sample-audit" class="summary-sample-link">See a sample &rarr;</a>
-      </div>
-      <div class="summary-item">
-        <div class="summary-icon">02</div>
-        <div class="summary-label">We Optimize Everything</div>
-        <div class="summary-desc">Pricing, photos, listing copy, search ranking, guest communication, and minimum stay strategy — managed daily by our team.</div>
-      </div>
-      <div class="summary-item">
-        <div class="summary-icon">03</div>
-        <div class="summary-label">You Earn More</div>
-        <div class="summary-desc">Our benchmark is a 42%+ increase in monthly revenue, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of bookings with no monthly fee, the large majority of any gain stays with you. Full methodology and distribution: <a href="/intel/str-performance-index" style="color:#D6AD60;text-decoration:underline;">the Marketics STR Performance Index</a>.</div>
-      </div>
-      <div class="summary-item">
-        <div class="summary-icon">04</div>
-        <div class="summary-label">90-Day Engagement</div>
-        <div class="summary-desc">Engagements start with a <strong>$500 commitment deposit — refunded automatically when you complete the 90-day program.</strong> The deposit isn't a fee — it's how we make sure we're both serious. Complete the 90 days, it comes back automatically.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PROOF STRIP — SPECIFIC CASE OUTCOMES ══════════════════ -->
-<section class="proof-strip" aria-label="Client results">
-  <div class="proof-inner">
-    <h2 class="proof-eyebrow">From the Portfolio</h2>
-    <p class="proof-subhead">Three outcomes. Real properties. No projections.</p>
-    <div class="proof-grid">
-      <article class="proof-card">
-        <div class="proof-card-eyebrow">San Antonio, TX · 15-Unit <abbr title="Short-Term Rental">STR</abbr> Portfolio · <time datetime="P90D">90 Days</time></div>
-        <div class="proof-stat">3.4×</div>
-        <div class="proof-metric">Monthly Revenue</div>
-        <div class="proof-card-bottom">
-          <div class="proof-rule"></div>
-          <div class="proof-intervention">Listing repositioning across 15 units — photography, titles, descriptions, and dynamic pricing aligned to each property's actual guest profile.</div>
+        <div class="ch-tiers">
+          <span class="ch-tier" data-tier="eco">ECONOMY</span>
+          <span class="ch-tier" data-tier="std">STANDARD</span>
+          <span class="ch-tier" data-tier="prem">PREMIUM</span>
+          <span class="ch-tier" data-tier="lux">LUXURY</span>
         </div>
-      </article>
-      <article class="proof-card">
-        <div class="proof-card-eyebrow">Montréal, QC · 40-Room Boutique Hotel · <time datetime="P12M">12 Months</time></div>
-        <div class="proof-stat">43% → 80%</div>
-        <div class="proof-metric">Occupancy Rate</div>
-        <div class="proof-card-bottom">
-          <div class="proof-rule"></div>
-          <div class="proof-intervention">Full product redesign — editorial photography and design-forward presentation drove compound occupancy gains across two consecutive years.</div>
+      </div>
+      <div class="ch-foot">
+        <span class="ch-status" id="chStatus"></span>
+        <div class="ch-actions">
+          <button class="ch-reset" id="chReset">RESET</button>
+          <button class="ch-cal" id="chCal">CALIBRATE →</button>
         </div>
-      </article>
-      <article class="proof-card">
-        <div class="proof-card-eyebrow">Río Grande, PR · Beachfront Villa · <time datetime="P12M">12&nbsp;Months</time></div>
-        <div class="proof-stat">2.5×</div>
-        <div class="proof-metric">Year-Over-Year Revenue</div>
-        <div class="proof-card-bottom">
-          <div class="proof-rule"></div>
-          <div class="proof-intervention">Seasonal blind spot eliminated — converted a villa earning 8 months a year to 12, adding 4 new earning months through year-round positioning and pricing strategy.</div>
-        </div>
-      </article>
+      </div>
+      <span class="ch-note">Illustrative of the calibration principle — each example shows the documented 45% median lift, net of market. Not a promise of a specific tier; every property is audited individually before any target is set.</span>
     </div>
-    <div class="proof-cta"><a href="/case-studies">See all case studies →</a></div>
+  </div>
+</header>
+
+<!-- ══ WEDGE ══ -->
+<section class="wedge sec">
+  <div class="w-left">
+    <span class="w-kick">A PROPERTY MANAGER</span>
+    <span class="w-title">Runs the house.</span>
+    <span class="w-body">Keys, cleaning, guest experience — paid the same whether your revenue grows or not.</span>
+  </div>
+  <div class="w-right">
+    <span class="w-kick">FULL-STACK STR REVENUE</span>
+    <span class="w-title">Runs the market.</span>
+    <span class="w-body">Market positioning, storytelling, distribution, ranking — and the price the market gives back. Paid only when your revenue grows. <a href="/method" class="nw">See the Method →</a></span>
   </div>
 </section>
 
-<!-- ═══ KEY TAKEAWAYS — AI SCANNABLE SUMMARY ═══════════════════ -->
-<section class="key-takeaways" id="key-takeaways" aria-label="Key takeaways">
-  <div class="kt-inner">
-    <h2 class="kt-eyebrow">Key Takeaways</h2>
-    <ul class="kt-list">
-      <li><strong>Performance-based pricing.</strong> Marketics earns 10% of net payout per booking — only when you earn.</li>
-      <li><strong>No monthly retainer. No long-term contract.</strong> Engagements start with a $500 commitment deposit — refunded automatically when you complete the 90-day program.</li>
-      <li><strong>Expected uplift:</strong> Our benchmark is a 42%+ increase in monthly revenue, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of bookings with no monthly fee, the large majority of any gain stays with you. Properties generating $3,500/month or more in gross bookings. Portfolio investors evaluated on total portfolio basis, not per unit. <a href="/markets">See our 22 active markets →</a></li>
-      <li><strong>Start here:</strong> Free <a href="/get-started">revenue audit</a> — takes about 2 minutes.</li>
-    </ul>
+<!-- ══ PHILOSOPHY ══ -->
+<section class="philo sec">
+  <div class="philo-kick">The idea underneath all of it</div>
+  <p class="philo-big">I don't price the market.<br>The market prices <em>me</em> — based on what they see.</p>
+  <p class="philo-sub">Nobody prices the market. We build the value; they choose what it's worth. Price isn't something we set — it's the verdict the market returns.</p>
+  <div class="asym">
+    <p class="asym-lead">A booking means the value was <span class="hl">well perceived</span>. No booking means it wasn't. From there, exactly two moves — and they are not equal.</p>
+    <div class="asym-grid">
+      <div class="move"><span class="m-k">MOVE 1</span><span class="m-t">Cut the price.</span><span class="m-b">A compounding, permanent loss. Every future night anchored lower.</span></div>
+      <div class="move gold"><span class="m-k">MOVE 2</span><span class="m-t">Raise the value.</span><span class="m-b">A one-time investment that pays forward, night after night.</span></div>
+    </div>
+    <p class="asym-foot">Most operators reflexively choose the move that compounds against them.<br><span class="nw">We don't.</span></p>
   </div>
 </section>
 
-<!-- ═══ FEE MATH — WORKED EXAMPLE ══════════════════════════════ -->
-<section class="fee-math" aria-label="How the fee works">
-  <div class="fm-inner">
-    <h2 class="fm-eyebrow">How the 10% works</h2>
-    <blockquote class="fm-quote">
-      <p>If your property generates <strong>$5,000/month in net guest payouts</strong>, Marketics earns <strong>$500</strong>. If we lift that to <strong>$7,500/month</strong>, we earn <strong>$750</strong>. You keep <strong>90% of everything</strong> — always.</p>
-      <p class="fm-def"><em>Net payout</em> = total guest payment minus Airbnb service fees and cleaning fees. The 10% is calculated on that net figure — never on the gross booking.</p>
-      <p class="fm-def">Example: A 2-bedroom condo in Montréal went from $1,700/month to $4,450/month in net payouts within 31 days of optimization — September to October 2025. 1 bedroom on St-Laurent in Le Plateau. Same property. Same location. Different positioning.</p>
-      <p class="fm-context">For broader context on <a href="https://skift.com/vacation-rentals/" target="_blank" rel="noopener noreferrer">short-term rental market trends</a>, the industry has matured into a sophisticated, data-driven category. Marketics applies that data property-by-property.</p>
-    </blockquote>
+<!-- ══ METHOD ══ -->
+<section class="split sec">
+  <div class="split-aside">
+    <div class="kicker"><div class="bar"></div><span>The Method</span></div>
+    <span class="split-h">We realign the<br>whole listing.</span>
+    <p class="split-p">Most operators start with price. We touch it last. Value comes first — what your property is, how it's seen, where it belongs. The market sets the number from there.</p>
+    <p class="split-p">Both rate and occupancy move. That is what lifts RevPAR into a higher tier.</p>
+  </div>
+  <div class="rows">
+    <div class="mrow"><span class="num">01</span><div><span class="mt">Market positioning</span><p class="mb">We read the real comp set and place the property in the tier it can actually win — the diagnosis every other lever is built on.</p></div></div>
+    <div class="mrow"><span class="num">02</span><div><span class="mt">Storytelling</span><p class="mb">Photography direction, amenities, design cues, and the sequence a guest scrolls — the listing tells the story of the tier it belongs in.</p></div></div>
+    <div class="mrow"><span class="num">03</span><div><span class="mt">Distribution</span><p class="mb">The right channels, syndicated and kept in sync, so the property is seen by the guests who pay for that tier.</p></div></div>
+    <div class="mrow"><span class="num">04</span><div><span class="mt">Ranking</span><p class="mb">Search position against the comp set, defended daily — visibility is worthless if a competitor sits above you.</p></div></div>
+    <div class="mrow"><span class="num">05</span><div><span class="mt">Pricing</span><p class="mb">Dynamic rates that read demand, events, and the tier ceiling — the last lever, not the first, and never the only one.</p></div></div>
+    <div class="cap"></div>
   </div>
 </section>
 
-<!-- ═══ FAQ — COMMON QUESTIONS ═════════════════════════════════ -->
-<section class="faq-section" id="faq" aria-label="Common questions">
-  <div class="faq-inner">
-    <div class="faq-eyebrow">Common Questions</div>
-    <h2 class="faq-headline">What hosts ask before starting.</h2>
-
-    <dl class="faq-list">
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">How much will I pay?</h3></dt>
-        <dd class="faq-a">Marketics charges <strong>10% of your net payout per booking</strong>. No monthly retainer. No long-term contract. Engagements start with a <strong>$500 commitment deposit</strong> — refunded automatically when you complete the 90-day program.</dd>
-      </div>
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">What's included in the optimization?</h3></dt>
-        <dd class="faq-a">Revenue management and dynamic pricing strategy, listing optimization (copy, photography direction, cover photo), improved search ranking on Airbnb, faster guest review collection, minimum stay optimization, and market demand intelligence. Guest messaging and day-to-day operations remain with the host or their property manager.</dd>
-      </div>
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">What happens if my revenue doesn't improve?</h3></dt>
-        <dd class="faq-a">The deposit doesn't ride on results. A <strong>$500 commitment deposit</strong> is charged at onboarding and <strong>refunded automatically when you complete the 90-day program</strong> — the only condition is completion. Withdrawing before Day 90 forfeits the deposit. Our compensation is what rides on results: at 10% of bookings, we only earn more when you earn more.</dd>
-      </div>
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">What does "net payout" mean?</h3></dt>
-        <dd class="faq-a">Net payout is the amount Airbnb deposits to you after deducting their service fees and any cleaning fees. It's not the gross booking amount. Marketics' 10% is calculated on this net figure.</dd>
-      </div>
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">How long before I see results?</h3></dt>
-        <dd class="faq-a">Most properties see meaningful improvement within the first <strong>30–60 days</strong>. Full optimization results, including faster guest review collection and search ranking gains, typically compound over <strong>60–90 days</strong>.</dd>
-      </div>
-
-      <div class="faq-item">
-        <dt class="faq-q"><h3 style="font:inherit;margin:0;">Is there independent data on short-term rental market performance?</h3></dt>
-        <dd class="faq-a">Yes. <a href="https://pricelabs.co" target="_blank" rel="noopener noreferrer">PriceLabs market data</a> tracks occupancy, <abbr title="Average Daily Rate">ADR</abbr>, and <abbr title="Revenue Per Available Room">RevPAR</abbr> by city across North America — it's the same data infrastructure Marketics uses to manage pricing across our portfolio. For regulatory context, <a href="https://www.nyc.gov/site/hpd/services-and-information/short-term-rentals.page" target="_blank" rel="noopener noreferrer">short-term rental regulations</a> vary by market — Marketics operates only in markets where STR is permitted. For academic research on revenue management in hospitality, the <a href="https://sha.cornell.edu/faculty-research/centers-institutes/chr/" target="_blank" rel="noopener noreferrer">Cornell Center for Hospitality Research</a> publishes peer-reviewed studies on pricing strategy and STR performance.</dd>
-      </div>
-
-    </dl>
+<!-- ══ RESULTS ══ -->
+<section class="results sec">
+  <div class="results-head">
+    <div>
+      <div class="kicker"><div class="bar"></div><span>Selected work</span></div>
+      <span class="rh-t">Right-fitted, across 22 markets.</span>
+    </div>
+    <span class="rh-note">A median 45% lift, net of market, across 19 documented engagements. A few, quietly.</span>
   </div>
-</section>
-
-<!-- ═══ JASON FOUNDER SECTION ══════════════════════════════════ -->
-<section class="founder-section" id="founder">
-
-  <div class="founder-photo-wrap">
-    <div class="founder-photo">
-      <picture>
-          <source type="image/webp" srcset="/images/jason-founder-hero-1115.webp 1115w, /images/jason-founder-hero.webp 2000w" sizes="(min-width:1025px) 1115px, 100vw">
-          <img src="/images/jason-founder-hero.jpg" alt="Jason Baxter — Marketics Founder" loading="eager" fetchpriority="high" width="1115" height="743" style="width:100%;height:100%;object-fit:cover;object-position:22% 12%;display:block;">
-        </picture>
-      <div class="founder-creds">
-        <div class="founder-name">Jason Baxter</div>
-        <div class="founder-title">Founder, Marketics · 35&#215; Airbnb Superhost · Montreal</div>
+  <div class="rgrid">
+    <a class="rcard" href="/case-studies/anthony-san-antonio">
+      <div class="rimg" style="background-image:url(/case-studies/anthony-san-antonio/images/pool-mural.webp)">
+        <span class="rtier">STANDARD → PREMIUM</span>
+        <div class="rcap"><span class="rmkt">San Antonio, TX</span><span class="rttl">Just a place to stay, made a destination</span></div>
       </div>
-    </div>
-  </div>
-
-  <div class="founder-text">
-    <div class="section-eyebrow">The Founder</div>
-
-    <h2 class="founder-headline">
-      Built 50 Properties.<br>
-      Then Chose To <em>Help You</em> Build Yours.
-    </h2>
-
-    <p class="founder-body">
-      I started with one condo in Montr&#233;al&#8217;s Old Port. I didn&#8217;t know what I was doing &#8212; I just tried it. One booking paid for my vacation. When I got back, half my summer was already booked.
-    </p>
-
-    <p class="founder-body">
-      Over the next decade, I built 50+ properties across North America, earned <strong>Airbnb Superhost status 35 consecutive quarters</strong> (read the <a href="https://www.airbnb.com/help/article/1857" target="_blank" rel="noopener noreferrer">Airbnb Superhost criteria</a>), and joined the top 2% of Airbnb Plus listings. Then everything changed &#8212; and I realized I didn&#8217;t want 50 properties anymore.
-    </p>
-
-    <div class="founder-pull">
-      <p>
-        &#8220;I wanted to help hosts like you get the freedom I found &#8212;
-        <strong>without spending a decade building the system yourself.</strong>&#8221;
-      </p>
-    </div>
-
-    <div class="founder-stats">
-      <div class="fs">
-        <div class="fs-n">50+</div>
-        <div class="fs-l">Properties Built</div>
+      <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+45%</span></div>
+    </a>
+    <a class="rcard" href="/case-studies/montreal-hotel">
+      <div class="rimg" style="background-image:url(/case-studies/montreal-hotel/images/heron-suite.webp)">
+        <span class="rtier">REPOSITIONED</span>
+        <div class="rcap"><span class="rmkt">Montréal, QC</span><span class="rttl">A 40-room boutique stay</span></div>
       </div>
-      <div class="fs">
-        <div class="fs-n">10 yrs</div>
-        <div class="fs-l">In the Industry</div>
+      <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+65%</span></div>
+    </a>
+    <a class="rcard" href="/case-studies/wally-puerto-rico">
+      <div class="rimg" style="background-image:url(/case-studies/wally-puerto-rico/images/after-bedroom.webp)">
+        <span class="rtier">PREMIUM → LUXURY</span>
+        <div class="rcap"><span class="rmkt">Río Grande, PR</span><span class="rttl">An ocean-and-jungle villa</span></div>
       </div>
-      <div class="fs">
-        <div class="fs-n">1,000+</div>
-        <div class="fs-l">Listings Optimized</div>
-      </div>
-    </div>
-
-    <a href="/story" class="founder-link">
-      Why I Stopped Building &#8212; And Started Helping
-      <span class="founder-link-line"></span>
+      <div class="rfoot"><span class="rol">Tier reached</span><span class="rov">Luxury</span></div>
     </a>
   </div>
-
+  <div class="results-cta"><a href="/sample-audit" class="samplelink" style="letter-spacing:2px;color:var(--gold)">SEE A SAMPLE AUDIT <span>→</span></a></div>
 </section>
 
-<!-- AUDIT ANCHOR (placeholder for below-fold sections) -->
-<div id="audit" style="height:1px"></div>
-<div id="calendar" style="height:1px"></div>
+<!-- ══ OUR STORY ══ -->
+<section class="story sec">
+  <div class="story-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter, founder of Marketics" loading="lazy"></div>
+  <div class="story-body">
+    <div class="kicker"><div class="bar"></div><span>Our Story</span></div>
+    <span class="story-h">Founder-led.<br>A decade in one lane.</span>
+    <p class="story-p">Marketics does one thing — short-term rental revenue. Five years operating a 50+ listing portfolio of my own, then building the specialist practice that runs revenue for owners. A decade in the same lane: the comp set, the ranking, the craft of the listing.</p>
+    <div class="luxe">
+      <span class="lx-n">1 <small>property</small></span>
+      <span class="lx-a">converted to the Airbnb Luxe collection <span style="color:var(--gold)">· documented</span></span>
+      <span class="lx-b">They invited us back.</span>
+    </div>
+    <p class="story-quote">"Airbnb's Luxe team kept our photos, title, and copy — a handful of subtle edits where a typical home gets a full rewrite."</p>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="split sec">
+  <div class="split-aside">
+    <div class="kicker"><div class="bar"></div><span>Questions</span></div>
+    <span class="split-h">Straight<br>answers.</span>
+    <p class="split-p">The ones every owner asks before the first call.</p>
+  </div>
+  <div class="rows">
+    <div class="faqrow"><span class="fq">What does Marketics actually do?</span><p class="fa">Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together, not a pricing dial turned once. It is the only thing we do.</p></div>
+    <div class="faqrow"><span class="fq">How is this different from my property manager?</span><p class="fa">A property manager runs the house — keys, cleaning, calendars — with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it.</p></div>
+    <div class="faqrow"><span class="fq">How do you charge?</span><p class="fa">On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations — the running of the house — is a fixed fee, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows.</p></div>
+    <div class="faqrow"><span class="fq">Do you guarantee a specific tier or an Airbnb Luxe placement?</span><p class="fa">No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market — a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell.</p></div>
+    <div class="faqrow"><span class="fq">What is the free revenue audit?</span><p class="fa">A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together.</p></div>
+    <div class="faqrow"><span class="fq">What markets do you work in?</span><p class="fa">A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly.</p></div>
+    <div class="cap"></div>
+  </div>
+</section>
+
+<!-- ══ CLOSING ══ -->
+<section class="closing sec">
+  <div class="closing-kick"><div class="bar"></div><span>Your market is waiting</span><div class="bar"></div></div>
+  <h2 class="closing-h">Let's find the tier your property was built to win.</h2>
+  <p class="closing-p">One audit of your real comp set. No obligation, and yours to keep.</p>
+  <div class="closing-actions">
+    <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
+    <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>Performance-based STR optimization</span>
+  </div>
+</footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════════
-   CALENDAR ENGINE — auto-updates to current month at runtime
-═══════════════════════════════════════════════════════════ */
-
-(function() {
-  const now   = new Date();
-  const year  = now.getFullYear();
-  const month = now.getMonth(); // 0-indexed
-
-  const MONTH_NAMES = ['January','February','March','April','May','June',
-                       'July','August','September','October','November','December'];
-
-  window.TODAY_DAY  = now.getDate();
-  window.MONTH_NAME = MONTH_NAMES[month] + ' ' + year;
-  window.START_DAY  = new Date(year, month, 1).getDay(); // 0=Sun
-  window.TOTAL_DAYS = new Date(year, month + 1, 0).getDate();
-
-  // Deterministic PRNG seeded from the month — the same month always renders the
-  // same plausible calendar (stable across page loads; changes only when the month
-  // rolls). No Math.random(): random would move bookings on every refresh (reads as
-  // fake), flicker layout, and make Lighthouse non-reproducible.
-  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-  const rng = mulberry32((((year*12+month)*2654435761)>>>0) || 1);
-  const rint = (lo,hi) => lo + Math.floor(rng()*(hi-lo+1));
-  const chance = p => rng() < p;
-
-  const D = TOTAL_DAYS;
-  const dowOf = day => (START_DAY + day - 1) % 7; // 0=Sun..6=Sat
-
-  // Build one state at a CONTROLLED occupancy so the "after" number is always
-  // market-real (never a 90%+ fantasy fill) regardless of how the month's weekdays
-  // land. Weekends anchor the calendar (one deliberately left open as a gap); a
-  // deterministically-shuffled subset of midweek nights fills up to the target, so
-  // the booked/open mix is staggered and distributed, not a clean block.
-  function buildState(targetOcc, wkRate, midRate) {
-    const target = Math.round(targetOcc * D);
-    const stays = [], booked = new Set();
-    let nights = 0;
-    const take = (s, e, r, wk) => { stays.push({s, e, r, wk}); for (let d=s; d<=e; d++) booked.add(d); nights += e-s+1; };
-    // Weekends (Fri–Sun), all but one deterministically skipped for a visible gap
-    const weekends = [];
-    for (let day=1; day<=D; day++) if (dowOf(day)===5) weekends.push([day, Math.min(day+2, D)]);
-    const skip = weekends.length > 2 ? rint(0, weekends.length-1) : -1;
-    weekends.forEach(([s,e], i) => { if (i!==skip) take(s, e, rint(wkRate[0], wkRate[1]), true); });
-    // Midweek candidates (Mon–Tue blocks + lone Wed), shuffled by a seeded key so the
-    // fill is spread across the whole month; add until the occupancy target is met.
-    const mids = [];
-    for (let day=1; day<=D; day++) {
-      const w = dowOf(day);
-      if (w===1) mids.push({s:day, e:Math.min(day+1, D)});
-      else if (w===3) mids.push({s:day, e:day});
-    }
-    mids.forEach(m => m.k = rng());
-    mids.sort((a,b) => a.k - b.k);
-    for (const m of mids) {
-      if (nights >= target) break;
-      let clash = false; for (let d=m.s; d<=m.e; d++) if (booked.has(d)) clash = true;
-      if (!clash) take(m.s, m.e, rint(midRate[0], midRate[1]), false);
-    }
-    stays.sort((a,b) => a.s - b.s);
-    return stays;
-  }
-
-  // BEFORE: under-priced + under-booked (~54% occ, flat low rates).
-  const before = buildState(0.54, [106,122], [96,110]);
-  // AFTER: optimized — higher occupancy (~64%, market-real) + premium weekend pricing.
-  const after  = buildState(0.64, [170,205], [120,140]);
-
-  // Reconcile the two states so the demonstrated monthly lift lands at ~1.43×
-  // (≈ the published 42%+ benchmark), never silently above it. Occupancy is fixed by
-  // the patterns above; only the AFTER rate scale is tuned — each state stays
-  // internally consistent (rate × booked nights = revenue), so a numerate visitor's
-  // back-of-napkin check holds in both states and the after rate stays above the before.
-  const revOf = arr => arr.reduce((t,b) => t + b.r*(b.e-b.s+1), 0);
-  const beforeRev = revOf(before), afterRawRev = revOf(after);
-  if (afterRawRev > 0) {
-    const k = (beforeRev * 1.435) / afterRawRev;
-    after.forEach(b => { b.r = Math.round(b.r * k); });
-  }
-
-  window.BEFORE = before;
-  window.AFTER  = after;
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
 })();
 
-const DOW = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+/* Positioning chart — vanilla port of the design logic class */
+(function(){
+  var MAX_REV=12500;
+  var TIERS=['eco','std','prem','lux'];
+  var SCENARIOS={
+    lux:{label:'PREMIUM → LUXURY',headline:"Your premium property has a luxury ceiling it isn't reaching.",
+      startTier:'prem',endTier:'lux',startRev:7300,endRev:10585,
+      wiggles:[{tier:'prem',dx:8,status:'reading the comp set…'},{tier:'lux',dx:-5,status:'testing the luxury tier…'}],
+      foundStatus:'position found — luxury',endStatus:'position maximized · +45%',ceilingLabel:'$10,585 /mo ceiling'},
+    under:{label:'UNDERPOSITIONED',headline:"Your property is worth more than it's showing.",
+      startTier:'std',endTier:'prem',startRev:3200,endRev:4640,
+      wiggles:[{tier:'std',dx:8,status:'rebuilding the listing…'},{tier:'prem',dx:-5,status:'re-shooting, repositioning…'}],
+      foundStatus:'position found — premium',endStatus:'position maximized · +45%',ceilingLabel:'$4,640 /mo right-fit'},
+    reset:{label:'HONEST RESET',headline:"Sometimes the honest answer is you're over-reaching.",
+      startTier:'lux',endTier:'prem',startRev:5000,endRev:7250,
+      wiggles:[{tier:'lux',dx:-8,status:'reading the real comp set…'},{tier:'prem',dx:5,status:'right-sizing the position…'}],
+      foundStatus:'position found — premium',endStatus:'position maximized · +45%',ceilingLabel:'$7,250 /mo right-fit'}
+  };
+  function tierX(k){var i=TIERS.indexOf(k);return ((i+0.5)/TIERS.length)*100;}
+  function pct(r){return (r/MAX_REV)*100;}
 
-// Day-of-week for a given day number (1-indexed)
-function dow(day) {
-  return (START_DAY + day - 1) % 7;
-}
-function isWeekend(day) {
-  const d = dow(day);
-  return d === 0 || d === 5 || d === 6;
-}
-function isFriSat(day) {
-  const d = dow(day);
-  return d === 5 || d === 6;
-}
+  var el={tabs:document.getElementById('chTabs'),headline:document.getElementById('chHeadline'),
+    ceiling:document.getElementById('chCeiling'),ceilingLbl:document.getElementById('chCeilingLbl'),
+    fill:document.getElementById('chFill'),house:document.getElementById('chHouse'),
+    rev:document.getElementById('chRev'),mark:document.getElementById('chMark'),
+    status:document.getElementById('chStatus'),cal:document.getElementById('chCal'),reset:document.getElementById('chReset'),
+    tiers:{}};
+  document.querySelectorAll('.ch-tier').forEach(function(t){el.tiers[t.getAttribute('data-tier')]=t;});
 
-function getInfo(bookings, day) {
-  for (const b of bookings) {
-    if (day >= b.s && day <= b.e) {
-      return {
-        ok: true, r: b.r,
-        wk: b.wk !== undefined ? b.wk : false,
-        first: day === b.s,
-        last: day === b.e,
-        single: b.s === b.e
-      };
-    }
-  }
-  return {ok: false};
-}
+  var st={scenario:'lux',phase:'idle',x:tierX('prem'),rev:7300,status:'your position today',curTier:'prem'};
+  var timers=[],counter=null;
+  function clearAll(){timers.forEach(clearTimeout);timers=[];if(counter){clearInterval(counter);counter=null;}}
 
-function bkClass(inf) {
-  if (!inf.ok || inf.single) return '';
-  if (inf.first) return ' bs';
-  if (inf.last)  return ' be';
-  return ' bm';
-}
-
-function calcOcc(bookings) {
-  let n = 0;
-  bookings.forEach(b => n += b.e - b.s + 1);
-  return Math.round((n / TOTAL_DAYS) * 100);
-}
-
-function calcAvgRate(bookings) {
-  let total = 0, nights = 0;
-  bookings.forEach(b => {
-    const n = b.e - b.s + 1;
-    total += b.r * n;
-    nights += n;
+  Object.keys(SCENARIOS).forEach(function(key){
+    var b=document.createElement('button');b.className='ch-tab';b.textContent=SCENARIOS[key].label;
+    b.addEventListener('click',function(){pick(key);});el.tabs.appendChild(b);b._key=key;
   });
-  return nights > 0 ? Math.round(total / nights) : 0;
-}
 
-function calcRev(bookings) {
-  let total = 0;
-  bookings.forEach(b => total += b.r * (b.e - b.s + 1));
-  return total;
-}
-
-/* Build the DOW header */
-function buildDow() {
-  const dowEl = document.getElementById('calDow');
-  dowEl.innerHTML = '';
-  DOW.forEach((d, i) => {
-    const el = document.createElement('div');
-    el.className = 'cal-dw' + (i===0||i===5||i===6?' wk':'');
-    el.textContent = d;
-    dowEl.appendChild(el);
-  });
-}
-
-/* Build the calendar grid with BEFORE state */
-function buildGrid() {
-  const grid = document.getElementById('calGrid');
-  grid.innerHTML = '';
-
-  // Offset cells
-  for (let i = 0; i < START_DAY; i++) {
-    const e = document.createElement('div');
-    e.className = 'cal-d';
-    grid.appendChild(e);
+  function render(){
+    var sc=SCENARIOS[st.scenario];
+    var done=st.phase==='done',maximizing=st.phase==='maximizing',running=st.phase==='running'||maximizing;
+    Array.prototype.forEach.call(el.tabs.children,function(b){b.classList.toggle('active',b._key===st.scenario);});
+    el.headline.textContent=sc.headline;
+    TIERS.forEach(function(k){el.tiers[k].classList.toggle('active',k===st.curTier);});
+    el.fill.style.left=st.x+'%';el.fill.style.height=pct(st.rev)+'%';el.fill.style.opacity=(maximizing||done)?1:0;
+    el.house.style.left=st.x+'%';el.house.style.bottom=pct(st.rev)+'%';
+    var prog=Math.max(0,Math.min(1,(st.rev-sc.startRev)/Math.max(1,sc.endRev-sc.startRev)));
+    el.mark.style.transform='scale('+(1+0.16*prog)+')';
+    el.rev.textContent='$'+st.rev.toLocaleString()+' /mo';el.rev.style.color=done?'#3f9e6b':'#F5F4F0';
+    el.ceiling.style.top=(100-pct(sc.endRev))+'%';el.ceiling.style.opacity=done?0:1;el.ceilingLbl.textContent=sc.ceilingLabel;
+    el.status.textContent=st.status;el.status.style.color=running?'#D6AD60':(done?'#3f9e6b':'#8F8C83');
   }
+  function set(o){for(var k in o)st[k]=o[k];render();}
 
-  for (let day = 1; day <= TOTAL_DAYS; day++) {
-    const bi = getInfo(BEFORE, day);
-    const ai = getInfo(AFTER, day);
-    const cell = document.createElement('div');
-
-    let cls = 'cal-d';
-    if (bi.ok) cls += ' bb' + bkClass(bi);
-    if (day === TODAY_DAY) cls += ' today-marker';
-
-    cell.className = cls;
-    cell.id = 'cd-' + day;
-    cell.dataset.br = bi.ok ? bi.r : '';
-    cell.dataset.ar = ai.ok ? ai.r : '';
-    cell.dataset.ab = ai.ok ? '1' : '0';
-    cell.dataset.awk = ai.ok && ai.wk ? '1' : '0';
-    cell.dataset.af = ai.ok && ai.first ? '1' : '0';
-    cell.dataset.al = ai.ok && ai.last ? '1' : '0';
-    cell.dataset.as = ai.ok && ai.single ? '1' : '0';
-
-    const dn = document.createElement('div');
-    dn.className = 'cal-d-n';
-    dn.textContent = day;
-
-    const dr = document.createElement('div');
-    dr.className = 'cal-d-r';
-    if (bi.ok) dr.textContent = '$' + bi.r;
-
-    cell.appendChild(dn);
-    cell.appendChild(dr);
-    grid.appendChild(cell);
+  function calibrate(){
+    if(st.phase==='running'||st.phase==='maximizing')return;
+    var sc=SCENARIOS[st.scenario];clearAll();
+    set({phase:'running',x:tierX(sc.startTier),rev:sc.startRev,curTier:sc.startTier});
+    sc.wiggles.forEach(function(w,i){timers.push(setTimeout(function(){
+      set({x:tierX(w.tier)+w.dx,status:w.status,curTier:w.tier});},350+i*1000));});
+    var tFound=350+sc.wiggles.length*1000;
+    timers.push(setTimeout(function(){set({x:tierX(sc.endTier),status:sc.foundStatus,curTier:sc.endTier});},tFound));
+    timers.push(setTimeout(function(){
+      set({status:'maximizing the position…',phase:'maximizing'});
+      var t0=Date.now(),dur=1700;
+      counter=setInterval(function(){
+        var p=Math.min(1,(Date.now()-t0)/dur),eased=1-Math.pow(1-p,3);
+        var rev=Math.round(sc.startRev+(sc.endRev-sc.startRev)*eased);
+        if(p>=1){clearInterval(counter);counter=null;set({rev:sc.endRev,phase:'done',status:sc.endStatus});}
+        else set({rev:rev});
+      },40);
+    },tFound+1300));
   }
-}
+  function reset(){clearAll();var sc=SCENARIOS[st.scenario];
+    set({phase:'idle',x:tierX(sc.startTier),rev:sc.startRev,status:'your position today',curTier:sc.startTier});}
+  function pick(key){clearAll();var sc=SCENARIOS[key];
+    set({scenario:key,phase:'idle',x:tierX(sc.startTier),rev:sc.startRev,status:'your position today',curTier:sc.startTier});}
 
-/* Update footer metrics */
-function updateMetrics(bookings, animate) {
-  const rate = calcAvgRate(bookings);
-  const occ  = calcOcc(bookings);
-  const rev  = calcRev(bookings);
-
-  function count(el, from, to, fmt, dur) {
-    el.classList.toggle('gold', to > from);
-    const t0 = Date.now();
-    (function tick() {
-      const t = Math.min((Date.now()-t0)/dur, 1);
-      const e = 1-Math.pow(1-t,3);
-      el.textContent = fmt(Math.round(from + (to-from)*e));
-      if (t < 1) requestAnimationFrame(tick);
-    })();
-  }
-
-  if (animate) {
-    const prevRate = calcAvgRate(BEFORE);
-    const prevOcc  = calcOcc(BEFORE);
-    const prevRev  = calcRev(BEFORE);
-    count(document.getElementById('cmRate'), prevRate, rate, v=>'$'+v, 1200);
-    count(document.getElementById('cmOcc'),  prevOcc,  occ,  v=>v+'%', 1200);
-    count(document.getElementById('cmRev'),  prevRev,  rev,  v=>'$'+v.toLocaleString(), 1300);
-  } else {
-    document.getElementById('cmRate').textContent = '$' + rate;
-    document.getElementById('cmOcc').textContent  = occ + '%';
-    document.getElementById('cmRev').textContent  = '$' + rev.toLocaleString();
-  }
-}
-
-/* Animate sweep */
-function runSweep() {
-  if (sweepRunning) return;
-  sweepRunning = true;
-  const sweep = document.getElementById('calSweep');
-  const chip  = document.getElementById('calChip');
-  const delta = document.getElementById('calDelta');
-  const replay = document.getElementById('calReplayBtn');
-
-  sweep.style.transition = 'none';
-  sweep.style.left = '-3px';
-
-  chip.className = 'cal-status-chip before';
-  chip.textContent = 'Before';
-  delta.classList.remove('vis');
-  replay.style.display = 'none';
-
-  const DURATION = 1800; // ms for full sweep
-  let start = null;
-
-  requestAnimationFrame(function animate(ts) {
-    if (!start) start = ts;
-    const progress = Math.min((ts - start) / DURATION, 1);
-
-    // Move sweep line
-    sweep.style.left = `calc(${progress * 100}% + 3px)`;
-
-    // Transform cells as sweep passes
-    const passedDay = Math.round(progress * TOTAL_DAYS);
-    for (let day = 1; day <= Math.min(passedDay, TOTAL_DAYS); day++) {
-      const cell = document.getElementById('cd-' + day);
-      if (!cell || cell.dataset.transformed === '1') continue;
-      cell.dataset.transformed = '1';
-
-      const isAfter = cell.dataset.ab === '1';
-      const isWk   = cell.dataset.awk === '1';
-      const wasBef = cell.dataset.br !== '';
-
-      if (isAfter) {
-        // Remove before classes
-        cell.classList.remove('bb','bs','bm','be');
-        // Build class list as an array — classList.add cannot accept space-separated strings
-        const classes = [isWk ? 'aw' : 'am'];
-        if (cell.dataset.as !== '1') {
-          if      (cell.dataset.af === '1') classes.push('bs');
-          else if (cell.dataset.al === '1') classes.push('be');
-          else                               classes.push('bm');
-        }
-        classes.push('popping');
-        cell.classList.add(...classes);
-        cell.querySelector('.cal-d-r').textContent = '$' + cell.dataset.ar;
-        setTimeout(() => cell.classList.remove('popping'), 320);
-      } else if (wasBef) {
-        cell.classList.remove('bb','bs','bm','be');
-        cell.querySelector('.cal-d-r').textContent = '';
-      }
-    }
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      // Sweep complete
-      sweepRunning = false;
-      sweep.style.left = 'calc(100% + 3px)';
-      chip.className = 'cal-status-chip after';
-      chip.textContent = 'After';
-      updateMetrics(AFTER, true);
-
-      setTimeout(() => {
-        delta.classList.add('vis');
-        replay.style.display = 'flex';
-      }, 900);
-    }
-  });
-}
-
-/* Reset and init */
-let sweepRunning = false;
-
-function initCal() {
-  sweepRunning = false;
-
-  // Set dynamic month label
-  document.getElementById('calMonthLbl').textContent = MONTH_NAME;
-
-  // Reset cell transformation flags
-  for (let day = 1; day <= TOTAL_DAYS; day++) {
-    const c = document.getElementById('cd-' + day);
-    if (c) delete c.dataset.transformed;
-  }
-
-  buildDow();
-  buildGrid();
-  updateMetrics(BEFORE, false);
-
-  // Delta is derived from the reconciled revenues, never hardcoded — it always
-  // equals AFTER − BEFORE for the month actually rendered.
-  document.querySelector('.cal-delta-val').textContent =
-    '+$' + (calcRev(AFTER) - calcRev(BEFORE)).toLocaleString() + ' / mo';
-
-  document.getElementById('calChip').className = 'cal-status-chip before';
-  document.getElementById('calChip').textContent = 'Before';
-  document.getElementById('calDelta').classList.remove('vis');
-  document.getElementById('calReplayBtn').style.display = 'none';
-
-  // Apply ctaPulse to CTA button after the fadeUp animation completes (800ms delay + 700ms duration)
-  setTimeout(() => {
-    const btn = document.getElementById('heroAuditBtn');
-    if (btn) btn.style.animation = 'ctaPulse 2.8s ease-in-out infinite';
-  }, 1600);
-
-  // Auto-play after short delay
-  setTimeout(runSweep, 1600);
-}
-
-// Safe init — handles both "DOM not yet ready" and "already ready" cases
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initCal);
-} else {
-  // DOMContentLoaded already fired (common in iframe renderers)
-  initCal();
-}
+  el.cal.addEventListener('click',calibrate);el.reset.addEventListener('click',reset);
+  render();
+  var ran=false;function autorun(){if(ran)return;ran=true;setTimeout(calibrate,1400);}
+  if('IntersectionObserver'in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){autorun();io.disconnect();}});},{threshold:.4});
+    io.observe(document.getElementById('chart'));
+  }else autorun();
+})();
 </script>
 
 <script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
 
-
-
-<script>
-</script>
-<script></script>
-
-
-</main>
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; <time datetime="2026">2026</time> Marketics, LLC</div>
-      <address class="sf-location" style="font-style:normal;">Miami &middot; Montr&eacute;al &middot; Nomadic</address>
-    </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-        <a href="/sample-audit">Sample Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
-    </div>
-  </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
-  </div>
-</footer>
-<script>(function(){var nav=document.querySelector('nav:not(.sf-nav)');if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});})();</script>
 <!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
 <script>
 (function(){
@@ -1781,12 +702,10 @@ if (document.readyState === 'loading') {
     s.async = true;
     document.body.appendChild(s);
   }
-  // Load on first user interaction — scroll, click, touch, or mouse move
   var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
   events.forEach(function(e) {
     window.addEventListener(e, loadWidget, {once: true, passive: true});
   });
-  // Fallback: load after 5 seconds regardless
   setTimeout(loadWidget, 5000);
 })();
 </script>
