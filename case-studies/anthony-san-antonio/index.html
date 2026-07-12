@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -11,7 +13,7 @@
 <meta name="description" content="A 15-property San Antonio portfolio proved — twice — that optimization isn't optional. When it stopped, revenue fell. When it came back, records broke.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://marketics.io/case-studies/anthony-san-antonio">
-<meta name="theme-color" content="#0f0f0f">
+
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Marketics">
 <meta property="og:title" content="The Experiment Nobody Planned to Run — Anthony, San Antonio | Marketics">
@@ -21,298 +23,615 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+<meta name="twitter:title" content="The Experiment Nobody Planned to Run — Anthony, San Antonio | Marketics">
+<meta name="twitter:description" content="A 15-property portfolio proved — twice — that optimization isn't optional. When it stopped, revenue fell. Records broke when it came back.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"The Experiment Nobody Planned to Run — Anthony, San Antonio","description":"A 15-property San Antonio portfolio proved twice that optimization isn't optional.","image":"https://marketics.io/case-studies/anthony-san-antonio/images/listing-after.jpg","author":{"@type":"Person","name":"Jason Baxter","url":"https://marketics.io/story"},"publisher":{"@type":"Organization","name":"Marketics","url":"https://marketics.io"},"datePublished":"2026-04-15T09:00:00-04:00","dateModified":"2026-04-15T09:00:00-04:00","url":"https://marketics.io/case-studies/anthony-san-antonio"}
 </script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
 <style>
-:root{--gold:#D6AD60;--night:#0f0f0f;--n2:#111;--n3:#161616;--n4:#1a1a1a;--white:#f8f6f2;--stone:#B4B2A9;--stone3:#9a9890;--stone4:#6B6A65;--dim:#6B6A65;--red-muted:rgba(180,80,70,.35);--d:'Josefin Sans',sans-serif;--b:'DM Sans',sans-serif;--m:'DM Mono',monospace;}
-*{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;scroll-padding-top:64px;}body{background:var(--night);color:var(--white);font-family:var(--b);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:64px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(214,173,96,.1);}.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0;}.nav-wordmark{height:26px;width:auto;display:block;}.nav-links{display:flex;align-items:center;gap:28px;}.nav-links a{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}.nav-links a:hover{color:var(--white);}.nav-links a.active{color:var(--gold);border-bottom-color:rgba(214,173,96,.4);}.nav-cta{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:filter .2s,transform .15s;flex-shrink:0;}.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px);}.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:none;cursor:pointer;flex-shrink:0;}.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--stone);border-radius:2px;transition:transform .28s,opacity .28s;}.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--gold);}.nav-hamburger.open span:nth-child(2){opacity:0;}.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}.nav-mobile-menu{position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(24px);border-bottom:1px solid rgba(214,173,96,.12);padding:0;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.4,0,.2,1);z-index:99;}.nav-mobile-menu.open{max-height:560px;padding-bottom:20px;}.nav-mobile-menu a{display:block;padding:14px 24px;font-family:var(--d);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.04);}.nav-mobile-menu .nm-cta{display:block;margin:16px 24px 0;padding:14px;background:var(--gold);color:var(--night)!important;text-align:center;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
-.cs-max{max-width:860px;margin:0 auto;padding:0 48px;}.cs-wide{max-width:1100px;margin:0 auto;padding:0 48px;}.section{padding:80px 0;}.section+.section{padding-top:0;}
-.hero{position:relative;min-height:520px;display:flex;align-items:flex-end;padding:80px 0 64px;overflow:hidden;}.hero-bg{position:absolute;inset:0;background:var(--n3);display:flex;align-items:center;justify-content:center;}.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--night) 0%,rgba(10,10,10,.72) 40%,rgba(10,10,10,.58) 70%,rgba(10,10,10,.45) 100%);}
-/* Picture element must fill the hero-bg container, same as img did before */
-.hero-bg picture{display:block;width:100%;height:100%;}.photo-placeholder{background:var(--n3);border:1px dashed rgba(214,173,96,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-family:var(--m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:16px;min-height:200px;line-height:1.5;}.hero-content{position:relative;z-index:1;}.eyebrow{font-family:var(--m);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px;}.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}.hero h1{font-family:var(--d);font-size:clamp(36px,6vw,64px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:.95;color:var(--white);margin-bottom:20px;}.hero h1 em{color:var(--gold);font-style:normal;}.hero-sub{font-size:17px;color:var(--stone);font-weight:300;line-height:1.7;max-width:600px;margin-bottom:36px;}.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}.hstat{display:flex;flex-direction:column;}.hstat-val{font-family:var(--d);font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--gold);line-height:1;letter-spacing:-.02em;}.hstat-label{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.1em;margin-top:6px;}
-.section-eyebrow{font-family:var(--m);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px;}.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}.body-text{font-size:16px;line-height:1.75;color:var(--stone);margin-bottom:24px;}.body-text strong{color:var(--white);font-weight:500;}
-.pblock{background:var(--n3);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:28px 32px;margin:40px 0;}.pblock p{font-size:17px;line-height:1.65;color:var(--stone);font-style:italic;margin:0;}.pblock cite{display:block;margin-top:12px;font-size:12px;font-style:normal;color:var(--stone4);font-family:var(--m);letter-spacing:.06em;}.pblock.large{padding:36px 40px;}.pblock.large p{font-size:22px;font-family:var(--d);font-weight:300;line-height:1.4;}
-.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:32px 0;}.fgrid.four{grid-template-columns:repeat(2,1fr);}.fgrid-item{background:var(--n3);padding:32px 28px;}.fgrid-num{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.1em;margin-bottom:12px;}.fgrid-cat{font-family:var(--d);font-size:14px;font-weight:700;color:var(--gold);letter-spacing:.04em;margin-bottom:14px;}.fgrid-body{font-size:14px;color:var(--stone);line-height:1.65;}
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0;}.ba-label{font-family:var(--m);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;}.ba-label.before{color:var(--stone4);}.ba-label.after{color:var(--gold);}
-.after-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:40px 0;border-radius:6px;overflow:hidden;}.after-photos .photo-placeholder{min-height:240px;border:none;border-radius:0;}
-.results-stats{display:flex;justify-content:center;gap:64px;flex-wrap:wrap;padding:48px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);margin:40px 0;}.rstat{text-align:center;}.rstat-val{font-family:var(--d);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--gold);line-height:1;letter-spacing:-.02em;}.rstat-label{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.1em;margin-top:8px;max-width:180px;}
-
-/* ── TIMELINE CHART ── */
-.timeline-wrap{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:48px;margin:48px 0;position:relative;}
-.timeline-title{font-family:var(--d);font-size:18px;font-weight:700;color:var(--white);letter-spacing:.04em;margin-bottom:8px;}
-.timeline-sub{font-family:var(--m);font-size:10px;color:var(--stone4);letter-spacing:.08em;margin-bottom:32px;}
-.timeline-bars{display:flex;align-items:flex-end;gap:6px;height:220px;position:relative;padding-top:40px;}
-.timeline-bar{flex:1;border-radius:3px 3px 0 0;position:relative;transition:height .8s ease;}
-.timeline-bar.on{background:var(--gold);}
-.timeline-bar.off{background:rgba(180,80,70,.4);border:1px solid rgba(180,80,70,.3);border-bottom:none;}
-.timeline-bar.future{background:rgba(214,173,96,.5);border:1px dashed rgba(214,173,96,.3);border-bottom:none;}
-.tbar-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-family:var(--m);font-size:9px;color:var(--stone4);white-space:nowrap;}
-.tbar-annotation{position:absolute;left:50%;font-family:var(--m);font-size:8px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding:3px 8px;border-radius:2px;pointer-events:none;}
-.tbar-annotation.removed{top:-32px;background:rgba(180,80,70,.15);color:rgba(220,100,90,.9);border:1px solid rgba(180,80,70,.2);transform:translateX(-30%);}
-.tbar-annotation.restored{top:-32px;background:rgba(214,173,96,.12);color:var(--gold);border:1px solid rgba(214,173,96,.2);transform:translateX(-70%);}
-.timeline-peak{position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.12);}
-.timeline-peak-label{position:absolute;right:0;top:-16px;font-family:var(--m);font-size:8px;color:var(--stone4);letter-spacing:.08em;}
-.timeline-legend{display:flex;gap:24px;margin-top:36px;flex-wrap:wrap;}
-.tlegend{display:flex;align-items:center;gap:8px;font-family:var(--m);font-size:9px;color:var(--stone4);letter-spacing:.06em;}
-.tlegend-dot{width:12px;height:12px;border-radius:2px;}
-.tlegend-dot.on{background:var(--gold);}
-.tlegend-dot.off{background:rgba(180,80,70,.4);}
-.tlegend-dot.future{background:rgba(214,173,96,.5);border:1px dashed rgba(214,173,96,.3);}
-
-/* ── LESSON SECTION (light) ── */
-.lesson{background:var(--n2);padding:80px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
-
-.cta-section{text-align:center;padding:80px 0;border-top:1px solid rgba(214,173,96,.1);}.cta-section .eyebrow{justify-content:center;margin-bottom:24px;}.cta-section .eyebrow::before{display:none;}.cta-section h2{font-family:var(--d);font-size:clamp(28px,4vw,44px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:.95;margin-bottom:20px;}.cta-section h2 em{color:var(--gold);font-style:normal;}.cta-body{font-size:16px;color:var(--stone);line-height:1.7;max-width:560px;margin:0 auto 32px;}.btn-primary{font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 36px;background:var(--gold);color:var(--night);border:none;border-radius:3px;cursor:pointer;text-decoration:none;display:inline-block;transition:filter .2s,transform .15s;}.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);}.cta-note{font-family:var(--m);font-size:10px;color:var(--stone4);margin-top:16px;letter-spacing:.06em;}
-
-.site-footer{position:relative;z-index:1;background:var(--n2);border-top:1px solid rgba(214,173,96,.1);padding:56px 48px 28px;}.sf-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:180px 1fr;gap:56px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:20px;}.sf-brand{padding-top:2px;}.sf-copy{font-family:var(--d);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--white);margin-bottom:8px;}.sf-location{font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;line-height:1.8;}.sf-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}.sf-col{display:flex;flex-direction:column;gap:6px;}.sf-col-label{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}.sf-col a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .15s;line-height:1.7;}.sf-col a:hover{color:var(--gold);}.sf-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--m);font-size:10px;color:var(--dim);letter-spacing:.08em;}
-@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}.cs-max,.cs-wide{padding:0 20px;}.hero{min-height:auto;padding:64px 0 48px;}.hero-bg picture img{object-position:20% 30%;}.hero-stats{gap:24px;}.fgrid,.fgrid.four{grid-template-columns:1fr;}.ba-grid{grid-template-columns:1fr;}.after-photos{grid-template-columns:1fr 1fr;}.results-stats{gap:32px;}.timeline-wrap{padding:20px 16px;}.timeline-bars{height:180px;gap:3px;padding-top:48px;}.tbar-annotation{font-size:7px;letter-spacing:.06em;padding:2px 5px;top:-24px;}.tbar-annotation.removed{left:0;transform:none;}.tbar-annotation.restored{left:auto;right:0;transform:none;}.tbar-label{font-size:7px;}.section{padding:56px 0;}.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
-@media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
-.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}.fi.vis{opacity:1;transform:none;}
-html,body{overflow-x:hidden;max-width:100%;}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
+<style>
+:root{
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#161615;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2a2a28;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#6B6A65;--faint:#55534E;--red:#c46459;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:74px;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:74px;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+main{display:block;}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ SHARED ══ */
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);flex-shrink:0;}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;display:block;}
+.sec-title{font-family:var(--display);font-weight:300;font-size:28px;letter-spacing:1px;color:var(--white);margin:0;}
+
+/* ══ BREADCRUMB ══ */
+.breadcrumb{padding:22px var(--gutter);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.breadcrumb a,.breadcrumb span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
+.breadcrumb a{color:var(--dim);}
+.breadcrumb a:hover{color:var(--body);}
+.breadcrumb .sep{color:var(--faint);}
+.breadcrumb .here{color:var(--gold);}
+
+/* ══ HERO ══ */
+.cs-hero{padding:84px var(--gutter) 64px;border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 480px;gap:72px;align-items:end;}
+.cs-h1{font-family:var(--display);font-weight:200;font-size:60px;line-height:1.07;letter-spacing:2px;color:var(--white);margin:0;}
+.cs-h1 em{color:var(--gold);font-style:normal;}
+.cs-lead{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;color:var(--body);margin:28px 0 0;max-width:560px;}
+.cs-lead strong{color:var(--white);font-weight:400;}
+.spec{display:flex;flex-direction:column;gap:18px;border-left:1px solid var(--line-2);padding-left:40px;}
+.spec-item{display:flex;flex-direction:column;gap:4px;}
+.spec-item .k{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
+.spec-item .v{font-family:var(--sans);font-size:14px;color:var(--bright);}
+.spec-item .v.gold{color:var(--gold);}
+
+/* ══ HERO PHOTO ══ */
+.hero-photo{border-bottom:1px solid var(--line);}
+.hero-photo img{width:100%;height:560px;object-fit:cover;object-position:center 30%;display:block;}
+
+/* ══ SECTION SHELL ══ */
+.cs-section{padding:80px var(--gutter);border-bottom:1px solid var(--line);}
+.situation{display:grid;grid-template-columns:300px 1fr;gap:56px;}
+.situation .sec-head{display:flex;flex-direction:column;gap:12px;}
+.prose{display:flex;flex-direction:column;gap:20px;}
+.prose p{font-family:var(--sans);font-weight:300;font-size:16.5px;line-height:1.75;color:var(--body);margin:0;max-width:820px;}
+.prose p strong{color:var(--white);font-weight:400;}
+
+/* ══ PULL QUOTE ══ */
+.quote{border-left:2px solid var(--gold);padding:6px 0 6px 26px;margin:36px 0 0;max-width:820px;}
+.quote p{font-family:var(--display);font-weight:300;font-size:22px;line-height:1.45;color:var(--bright);margin:0;font-style:italic;}
+.quote cite{display:block;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--dim);font-style:normal;}
+.quote.large p{font-size:26px;}
+
+/* ══ WHAT WE CHANGED (levers) ══ */
+.sec-head-block{display:flex;flex-direction:column;gap:12px;margin-bottom:48px;}
+.levers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.lever{background:var(--panel);padding:36px 34px;display:flex;flex-direction:column;gap:16px;}
+.lever .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);}
+.lever .lt{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:.5px;color:var(--white);}
+.lever .lb{font-family:var(--sans);font-weight:300;font-size:14px;line-height:1.7;color:var(--muted);margin:0;}
+
+/* ══ BEFORE / AFTER ══ */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;}
+.ba-col{display:flex;flex-direction:column;gap:12px;}
+.ba-label{font-family:var(--mono);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;}
+.ba-label.before{color:var(--dim);}
+.ba-label.after{color:var(--gold);}
+.ba-frame{border:1px solid var(--line-3);aspect-ratio:4/3;overflow:hidden;}
+.ba-frame img{width:100%;height:100%;object-fit:cover;}
+
+/* ══ TIMELINE ══ */
+.timeline-wrap{background:var(--panel);border:1px solid var(--line);padding:48px;margin-top:48px;max-width:900px;}
+.timeline-title{font-family:var(--display);font-weight:300;font-size:19px;letter-spacing:.5px;color:var(--white);margin-bottom:8px;}
+.timeline-sub{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);margin-bottom:34px;}
+.timeline-bars{display:flex;align-items:flex-end;gap:6px;height:220px;padding-top:44px;}
+.timeline-bar{flex:1;position:relative;}
+.timeline-bar.on{background:var(--gold);}
+.timeline-bar.off{background:rgba(196,100,89,.35);border:1px solid rgba(196,100,89,.3);border-bottom:none;}
+.tbar-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--dim);}
+.tbar-annotation{position:absolute;top:-34px;font-family:var(--mono);font-size:8px;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;padding:3px 8px;pointer-events:none;}
+.tbar-annotation.removed{background:rgba(196,100,89,.14);color:var(--red);border:1px solid rgba(196,100,89,.25);left:50%;transform:translateX(-30%);}
+.tbar-annotation.restored{background:rgba(214,173,96,.12);color:var(--gold);border:1px solid rgba(214,173,96,.25);left:50%;transform:translateX(-70%);}
+.timeline-legend{display:flex;gap:24px;margin-top:36px;flex-wrap:wrap;}
+.tlegend{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:.6px;color:var(--dim);}
+.tlegend-dot{width:12px;height:12px;flex-shrink:0;}
+.tlegend-dot.on{background:var(--gold);}
+.tlegend-dot.off{background:rgba(196,100,89,.35);}
+
+/* ══ OUTCOME ══ */
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.stat-card{border:1px solid var(--line-3);padding:36px 34px;display:flex;flex-direction:column;gap:8px;}
+.stat-card.gold{border-color:rgba(214,173,96,.4);background:rgba(214,173,96,.04);}
+.stat-card .n{font-family:var(--display);font-weight:300;font-size:38px;line-height:1;color:var(--white);}
+.stat-card.gold .n{color:var(--gold);}
+.stat-card .l{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;line-height:1.5;}
+.disclaimer{font-family:var(--sans);font-weight:300;font-size:13px;line-height:1.7;color:var(--dim);margin:24px 0 0;max-width:820px;}
+
+/* ══ GALLERY ══ */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:44px;}
+.gallery .g-cell{aspect-ratio:1/1;overflow:hidden;}
+.gallery img{width:100%;height:100%;object-fit:cover;}
+
+/* ══ MORE CASE STUDIES ══ */
+.more-title{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:1px;color:var(--white);display:block;margin-bottom:32px;}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.more-card{border:1px solid var(--line-3);padding:32px 34px;display:flex;flex-direction:column;gap:8px;background:var(--panel);transition:border-color .2s;}
+.more-card:hover{border-color:rgba(214,173,96,.4);}
+.more-card .tag{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.more-card .mt{font-family:var(--display);font-weight:300;font-size:22px;color:var(--white);}
+.more-card .read{font-family:var(--sans);font-weight:300;font-size:13px;color:var(--muted);margin-top:4px;}
+
+/* ══ CTA ══ */
+.cta{padding:100px var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid rgba(214,173,96,.15);}
+.cta h2{font-family:var(--display);font-weight:200;font-size:46px;line-height:1.12;letter-spacing:3px;color:var(--white);max-width:760px;margin:0;}
+.cta p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;color:var(--body);margin:22px 0 0;max-width:480px;}
+.cta-actions{display:flex;align-items:center;gap:30px;margin-top:36px;flex-wrap:wrap;justify-content:center;}
+.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
+.btn-fill:hover{filter:brightness(1.08);}
+.samplelink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.samplelink:hover{color:var(--gold);}
+.samplelink span{color:var(--gold);}
+.cta-note{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dim);margin-top:20px;}
+
+/* ══ FOOTER ══ */
+.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px var(--gutter) 56px;
+  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{border-top:1px solid var(--raised);padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  .cs-hero{grid-template-columns:1fr 400px;gap:48px;}
+  .cs-h1{font-size:50px;}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .cs-hero{grid-template-columns:1fr;gap:44px;padding-top:56px;padding-bottom:48px;}
+  .spec{border-left:none;padding-left:0;border-top:1px solid var(--line-2);padding-top:28px;}
+  .cs-h1{font-size:44px;letter-spacing:1px;}
+  .hero-photo img{height:340px;object-position:20% 30%;}
+  .situation{grid-template-columns:1fr;gap:24px;}
+  .levers-grid{grid-template-columns:1fr;}
+  .ba-grid{grid-template-columns:1fr;}
+  .outcome-grid{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:1fr 1fr;}
+  .more-grid{grid-template-columns:1fr;}
+  .cta h2{font-size:34px;letter-spacing:2px;}
+}
+@media (max-width:600px){
+  html{scroll-padding-top:64px;}
+  body{padding-top:64px;}
+  nav{height:64px;padding:0 24px;}
+  .nav-mobile{top:64px;}
+  .breadcrumb{padding:16px 24px;}
+  .cs-hero{padding-left:24px;padding-right:24px;}
+  .cs-h1{font-size:36px;}
+  .cs-section{padding:56px 24px;}
+  .cta{padding:64px 24px;}
+  .hero-photo img{height:260px;}
+  .timeline-wrap{padding:24px 18px;}
+  .timeline-bars{height:180px;gap:3px;padding-top:52px;}
+  .tbar-annotation{font-size:7px;letter-spacing:.4px;padding:2px 5px;top:-26px;}
+  .tbar-annotation.removed{left:0;transform:none;}
+  .tbar-annotation.restored{left:auto;right:0;transform:none;}
+  .tbar-label{font-size:7px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .cta-actions{flex-direction:column;gap:20px;}
+}
+
+/* ══ FADE-IN ══ */
+.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+.fi.vis{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none;}}
+html,body{max-width:100%;}
+</style>
 </head>
 <body>
-<nav><a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" class="nav-wordmark"></a><div class="nav-links"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/case-studies" class="active">Case Studies</a><a href="/pricing">Pricing</a><a href="/story">Our Story</a><a href="/intel">Market Intel</a></div><a href="/get-started" class="nav-cta">Get My Free Audit</a><button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button></nav>
-<div class="nav-mobile-menu" id="navMobileMenu"><a href="/method">Method</a><a href="/markets">Markets</a><a href="/results">Results</a><a href="/case-studies" class="active">Case Studies</a><a href="/pricing">Pricing</a><a href="/story">Our Story</a><a href="/intel">Market Intel</a><a href="/get-started" class="nm-cta">Get My Free Audit</a></div>
+
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results" class="active">Results</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Our Story</a>
+    <a href="/intel">Insights</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
+</div>
+
+<main>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/results">Results</a>
+  <span class="sep">/</span>
+  <a href="/case-studies">Case Studies</a>
+  <span class="sep">/</span>
+  <span class="here">San Antonio, TX</span>
+</nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <picture>
-          <source srcset="/case-studies/anthony-san-antonio/images/pool-mural.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/pool-mural.jpg" alt="Luxury apartment pool with Día de los Muertos mural, San Antonio" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
-        </picture>
+<header class="cs-hero">
+  <div>
+    <div class="kicker fi"><div class="bar"></div><span>Case study · San Antonio, Texas</span></div>
+    <h1 class="cs-h1 fi" style="transition-delay:.05s">The Experiment<br>Nobody Planned<br><em>To Run.</em></h1>
+    <p class="cs-lead fi" style="transition-delay:.1s">A 15-property San Antonio portfolio proved — <strong>twice</strong> — that optimization isn't a nice-to-have. When it stopped, revenue fell. When it came back, records broke.</p>
   </div>
-  <div class="hero-content cs-max">
-    <div class="eyebrow fi">Case Study — San Antonio, Texas</div>
-    <h1 class="fi" style="transition-delay:.05s">The Experiment<br>Nobody Planned<br><em>To Run.</em></h1>
-    <p class="hero-sub fi" style="transition-delay:.1s">A 15-property San Antonio portfolio proved — twice — that optimization isn't a nice-to-have. When it stopped, revenue fell. When it came back, records broke.</p>
-    <div class="hero-stats fi" style="transition-delay:.15s">
-      <div class="hstat"><div class="hstat-val">3.4×</div><div class="hstat-label">Peak month vs. pre-Marketics baseline</div></div>
-      <div class="hstat"><div class="hstat-val">15</div><div class="hstat-label">Properties optimized</div></div>
-      <div class="hstat"><div class="hstat-val">2</div><div class="hstat-label">Times the data proved the same thing</div></div>
-    </div>
+  <div class="spec fi" style="transition-delay:.15s">
+    <div class="spec-item"><span class="k">Property</span><span class="v">15-unit STR portfolio</span></div>
+    <div class="spec-item"><span class="k">Configuration</span><span class="v">14 luxury apartments · 1 three-bedroom house</span></div>
+    <div class="spec-item"><span class="k">Timeframe</span><span class="v gold">Aug 2025 – Apr 2026</span></div>
+    <div class="spec-item"><span class="k">Levers</span><span class="v">Photography · Copy · Pricing · PMS</span></div>
   </div>
-</section>
+</header>
 
-<!-- SECTION 2: THE SITUATION -->
-<section class="section">
-  <div class="cs-max">
-    <div class="section-eyebrow fi">August 2025</div>
-    <p class="body-text fi">Anthony's portfolio looked like a management problem on paper. Fifteen properties — fourteen luxury apartments in a single building, plus a three-bedroom house — all running through Hostaway, all underperforming relative to the asset quality.</p>
-    <p class="body-text fi">The photography was inconsistent. Listing descriptions were copy-pasted across units with different floor plans, different views, different guest profiles. The pricing wasn't dynamic. And the combined monthly revenue across all fifteen properties was roughly what a single well-optimized luxury unit in the right market can produce.</p>
-    <p class="body-text fi"><strong>The properties weren't the problem. The presentation was.</strong></p>
-    <div class="pblock fi">
+<!-- HERO IMAGE -->
+<div class="hero-photo">
+  <picture>
+    <source srcset="/case-studies/anthony-san-antonio/images/pool-mural.webp" type="image/webp">
+    <img src="/case-studies/anthony-san-antonio/images/pool-mural.jpg" alt="Luxury apartment pool with Día de los Muertos mural, San Antonio" width="1440" height="560">
+  </picture>
+</div>
+
+<!-- 01 · THE SITUATION -->
+<section class="cs-section situation">
+  <div class="sec-head fi">
+    <span class="sec-label">01 · The Situation</span>
+    <h2 class="sec-title">Fifteen units, all treated the same</h2>
+  </div>
+  <div class="prose">
+    <p class="fi">Anthony's portfolio looked like a management problem on paper. Fifteen properties — fourteen luxury apartments in a single building, plus a three-bedroom house — all running through Hostaway, all underperforming relative to the asset quality.</p>
+    <p class="fi">The photography was inconsistent. Listing descriptions were copy-pasted across units with different floor plans, different views, different guest profiles. The pricing wasn't dynamic. And the combined monthly revenue across all fifteen properties was roughly what a single well-optimized luxury unit in the right market can produce.</p>
+    <p class="fi"><strong>The properties weren't the problem. The presentation was.</strong></p>
+    <div class="quote fi">
       <p>"The building had everything guests want. The listings weren't telling them that."</p>
       <cite>— Jason Baxter, Founder, Marketics</cite>
     </div>
   </div>
 </section>
 
-<!-- SECTION 3: WHAT CHANGED -->
-<section class="section" style="background:var(--n2);">
-  <div class="cs-wide">
-    <div class="section-eyebrow fi">The Marketics Method™</div>
+<!-- 02 · WHAT WE CHANGED -->
+<section class="cs-section">
+  <div class="sec-head-block fi">
+    <span class="sec-label">02 · What We Changed</span>
+    <h2 class="sec-title">We tuned each unit to its own guest</h2>
+  </div>
+  <div class="levers-grid fi" style="transition-delay:.05s">
+    <div class="lever">
+      <span class="tag">01 · PHOTOGRAPHY</span>
+      <span class="lt">Photography rebuild</span>
+      <p class="lb">Every listing was reshot. Hero images were selected not for aesthetics but for click-through — the image that stops a guest mid-scroll at the price point these units command. Each unit got a distinct cover based on its strongest visual asset.</p>
+    </div>
+    <div class="lever">
+      <span class="tag">02 · STORYTELLING</span>
+      <span class="lt">Listing descriptions — per unit</span>
+      <p class="lb">Review data tells you who is actually booking a property and why. Anthony's units attracted different guest profiles — some business, some leisure, some groups. Marketics rebuilt each description around the booking pattern the reviews revealed.</p>
+    </div>
+    <div class="lever">
+      <span class="tag">03 · PRICING</span>
+      <span class="lt">Dynamic pricing strategy</span>
+      <p class="lb">San Antonio has a specific demand calendar — events, seasonality, compression nights, weekday vs. weekend patterns. Static pricing leaves money on the table during high-demand windows and costs occupancy during shoulder periods.</p>
+    </div>
+    <div class="lever">
+      <span class="tag">04 · PLATFORM</span>
+      <span class="lt">PMS transition</span>
+      <p class="lb">Hostaway was replaced. Anthony now runs the entire portfolio through Marketics directly — a single system, single point of optimization, no translation layer between the strategy and the execution.</p>
+    </div>
+  </div>
 
-    <!-- BEFORE / AFTER COVERS -->
-    <div class="ba-grid fi" style="transition-delay:.05s">
-      <div>
-        <div class="ba-label before">Cover Photo — Before</div>
+  <!-- BEFORE / AFTER -->
+  <div class="ba-grid fi" style="transition-delay:.1s">
+    <div class="ba-col">
+      <span class="ba-label before">Cover Photo — Before</span>
+      <div class="ba-frame">
         <picture>
           <source srcset="/case-studies/anthony-san-antonio/images/listing-before.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/listing-before.jpg" alt="Before Marketics — generic listing with dated interiors" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+          <img src="/case-studies/anthony-san-antonio/images/listing-before.jpg" alt="Before Marketics — generic listing with dated interiors" width="800" height="600" loading="lazy">
         </picture>
       </div>
-      <div>
-        <div class="ba-label after">Cover Photo — After</div>
+    </div>
+    <div class="ba-col">
+      <span class="ba-label after">Cover Photo — After</span>
+      <div class="ba-frame">
         <picture>
           <source srcset="/case-studies/anthony-san-antonio/images/listing-after.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/listing-after.jpg" alt="After Marketics — styled kitchen hero, professional photography" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+          <img src="/case-studies/anthony-san-antonio/images/listing-after.jpg" alt="After Marketics — styled kitchen hero, professional photography" width="800" height="600" loading="lazy">
         </picture>
-      </div>
-    </div>
-
-    <div class="fgrid four fi" style="transition-delay:.1s">
-      <div class="fgrid-item">
-        <div class="fgrid-num">01</div>
-        <div class="fgrid-cat">Photography Rebuild</div>
-        <div class="fgrid-body">Every listing was reshot. Hero images were selected not for aesthetics but for click-through — the image that stops a guest mid-scroll at the price point these units command. Each unit got a distinct cover based on its strongest visual asset.</div>
-      </div>
-      <div class="fgrid-item">
-        <div class="fgrid-num">02</div>
-        <div class="fgrid-cat">Listing Descriptions — Per Unit</div>
-        <div class="fgrid-body">Review data tells you who is actually booking a property and why. Anthony's units attracted different guest profiles — some business, some leisure, some groups. Marketics rebuilt each description around the booking pattern the reviews revealed.</div>
-      </div>
-      <div class="fgrid-item">
-        <div class="fgrid-num">03</div>
-        <div class="fgrid-cat">Dynamic Pricing Strategy</div>
-        <div class="fgrid-body">San Antonio has a specific demand calendar — events, seasonality, compression nights, weekday vs. weekend patterns. Static pricing leaves money on the table during high-demand windows and costs occupancy during shoulder periods.</div>
-      </div>
-      <div class="fgrid-item">
-        <div class="fgrid-num">04</div>
-        <div class="fgrid-cat">PMS Transition</div>
-        <div class="fgrid-body">Hostaway was replaced. Anthony now runs the entire portfolio through Marketics directly — a single system, single point of optimization, no translation layer between the strategy and the execution.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 4: THE EXPERIMENT (Timeline Chart) -->
-<section class="section">
-  <div class="cs-wide">
-    <div class="section-eyebrow fi">What the Data Showed</div>
-    <h2 class="fi" style="font-family:var(--d);font-size:clamp(24px,3.5vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:1;margin-bottom:8px;">Optimization Off.<br>Revenue Fell. Ratings Fell.</h2>
-    <h2 class="fi" style="font-family:var(--d);font-size:clamp(24px,3.5vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;line-height:1;margin-bottom:24px;"><em style="color:var(--gold);font-style:normal;">Optimization On. Records Broke.</em></h2>
+<!-- 03 · WHAT THE DATA SHOWED -->
+<section class="cs-section">
+  <div class="sec-head-block fi">
+    <span class="sec-label">03 · What The Data Showed</span>
+    <h2 class="sec-title">Optimization off, revenue fell.<br>Optimization on, records broke.</h2>
   </div>
-  <div class="cs-max">
-    <p class="body-text fi">In October 2025, Anthony decided to manage the portfolio himself. No notice, no transition — he simply stopped working with Marketics and took the reins.</p>
-    <p class="body-text fi">What happened over the next four months was not a coincidence. Revenue dropped. Guest ratings dropped. Both moved together, in the same direction, at the same time. Not because the market changed. Not because the properties changed. <strong>Because the optimization layer was removed.</strong></p>
-    <p class="body-text fi">In December, Jason sent a message. Not a pitch. A genuine check-in. No ask attached.</p>
-    <p class="body-text fi">In February 2026, Anthony came back.</p>
-    <p class="body-text fi"><strong>March 2026: his highest month on the platform. Ever.</strong> April is tracking just behind it — two consecutive months that dwarf anything the portfolio had produced before.</p>
-    <p class="body-text fi">The same properties. The same market. The same operator. Two data points showing the same result. When Marketics is active, revenue and ratings rise. When it isn't, they fall.</p>
-    <p class="body-text fi"><strong>That's not a testimonial. That's a controlled experiment.</strong></p>
+  <div class="prose">
+    <p class="fi">In October 2025, Anthony decided to manage the portfolio himself. No notice, no transition — he simply stopped working with Marketics and took the reins.</p>
+    <p class="fi">What happened over the next four months was not a coincidence. Revenue dropped. Guest ratings dropped. Both moved together, in the same direction, at the same time. Not because the market changed. Not because the properties changed. <strong>Because the optimization layer was removed.</strong></p>
+    <p class="fi">In December, Jason sent a message. Not a pitch. A genuine check-in. No ask attached. In February 2026, Anthony came back.</p>
+    <p class="fi"><strong>March 2026: his highest month on the platform. Ever.</strong> April is tracking just behind it — two consecutive months that dwarf anything the portfolio had produced before.</p>
+    <p class="fi">The same properties. The same market. The same operator. Two data points showing the same result. When Marketics is active, revenue and ratings rise. When it isn't, they fall. <strong>That's not a testimonial. That's a controlled experiment.</strong></p>
+  </div>
 
-    <!-- TIMELINE CHART -->
-    <div class="timeline-wrap fi">
-      <div class="timeline-title">Portfolio Revenue — Aug 2025 to Apr 2026</div>
-      <div class="timeline-sub">Indexed: 100 = pre-Marketics baseline (Aug 2025). No dollar figures.</div>
-      <div class="timeline-bars" id="timelineBars">
-        <!-- Aug: baseline ~$12K -->
-        <div class="timeline-bar on" style="height:29%"><span class="tbar-label">Aug</span></div>
-        <!-- Sep: jump after rebuild ~$18K -->
-        <div class="timeline-bar on" style="height:43%"><span class="tbar-label">Sep</span></div>
-        <!-- Oct: Anthony leaves, drops -->
-        <div class="timeline-bar off" style="height:26%"><span class="tbar-label">Oct</span><span class="tbar-annotation removed">Optimization removed</span></div>
-        <!-- Nov: declining -->
-        <div class="timeline-bar off" style="height:21%"><span class="tbar-label">Nov</span></div>
-        <!-- Dec: near bottom -->
-        <div class="timeline-bar off" style="height:17%"><span class="tbar-label">Dec</span></div>
-        <!-- Jan: still low -->
-        <div class="timeline-bar off" style="height:24%"><span class="tbar-label">Jan</span></div>
-        <!-- Feb: back with Marketics, climbing -->
-        <div class="timeline-bar on" style="height:38%"><span class="tbar-label">Feb</span><span class="tbar-annotation restored">Optimization restored</span></div>
-        <!-- Mar: RECORD $42K -->
-        <div class="timeline-bar on" style="height:100%"><span class="tbar-label">Mar</span></div>
-        <!-- Apr: ~$38K, second record month -->
-        <div class="timeline-bar on" style="height:91%"><span class="tbar-label">Apr</span></div>
-      </div>
-      <div class="timeline-legend">
-        <div class="tlegend"><div class="tlegend-dot on"></div>Marketics active</div>
-        <div class="tlegend"><div class="tlegend-dot off"></div>Self-managed</div>
-      </div>
+  <!-- TIMELINE -->
+  <div class="timeline-wrap fi">
+    <div class="timeline-title">Portfolio revenue — Aug 2025 to Apr 2026</div>
+    <div class="timeline-sub">Indexed: 100 = pre-Marketics baseline (Aug 2025). No dollar figures.</div>
+    <div class="timeline-bars">
+      <div class="timeline-bar on" style="height:29%"><span class="tbar-label">Aug</span></div>
+      <div class="timeline-bar on" style="height:43%"><span class="tbar-label">Sep</span></div>
+      <div class="timeline-bar off" style="height:26%"><span class="tbar-label">Oct</span><span class="tbar-annotation removed">Optimization removed</span></div>
+      <div class="timeline-bar off" style="height:21%"><span class="tbar-label">Nov</span></div>
+      <div class="timeline-bar off" style="height:17%"><span class="tbar-label">Dec</span></div>
+      <div class="timeline-bar off" style="height:24%"><span class="tbar-label">Jan</span></div>
+      <div class="timeline-bar on" style="height:38%"><span class="tbar-label">Feb</span><span class="tbar-annotation restored">Optimization restored</span></div>
+      <div class="timeline-bar on" style="height:100%"><span class="tbar-label">Mar</span></div>
+      <div class="timeline-bar on" style="height:91%"><span class="tbar-label">Apr</span></div>
+    </div>
+    <div class="timeline-legend">
+      <div class="tlegend"><div class="tlegend-dot on"></div>Marketics active</div>
+      <div class="tlegend"><div class="tlegend-dot off"></div>Self-managed</div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: RESULTS -->
-<section class="section">
-  <div class="cs-wide">
-    <div class="section-eyebrow fi">March 2026 — Record Month</div>
-    <div class="after-photos fi" style="transition-delay:.05s">
-      <picture>
-          <source srcset="/case-studies/anthony-san-antonio/images/living-room.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/living-room.jpg" alt="Wood ceiling living room — luxury apartment" style="width:100%;height:100%;object-fit:cover;">
-        </picture>
-      <picture>
-          <source srcset="/case-studies/anthony-san-antonio/images/kitchen-bar.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/kitchen-bar.jpg" alt="Styled kitchen with bar stools" style="width:100%;height:100%;object-fit:cover;">
-        </picture>
-      <picture>
-          <source srcset="/case-studies/anthony-san-antonio/images/balcony.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/balcony.jpg" alt="Balcony with hanging chairs and city views" style="width:100%;height:100%;object-fit:cover;">
-        </picture>
-      <picture>
-          <source srcset="/case-studies/anthony-san-antonio/images/bathroom.webp" type="image/webp">
-          <img src="/case-studies/anthony-san-antonio/images/bathroom.jpg" alt="Subway tile bathroom" style="width:100%;height:100%;object-fit:cover;">
-        </picture>
+<!-- 04 · THE OUTCOME -->
+<section class="cs-section">
+  <div class="sec-head-block fi">
+    <span class="sec-label">04 · The Outcome</span>
+    <h2 class="sec-title">Right-fitted into the tier it earned</h2>
+  </div>
+  <div class="outcome-grid fi" style="transition-delay:.05s">
+    <div class="stat-card gold">
+      <span class="n">3.4×</span>
+      <span class="l">Peak month vs. pre-Marketics baseline</span>
     </div>
-    <div class="results-stats fi">
-      <div class="rstat"><div class="rstat-val">3.4×</div><div class="rstat-label">Peak month vs. pre-Marketics baseline</div></div>
-      <div class="rstat"><div class="rstat-val">15</div><div class="rstat-label">Properties running through one optimized system</div></div>
-      <div class="rstat"><div class="rstat-val">2</div><div class="rstat-label">Consecutive record-breaking months</div></div>
+    <div class="stat-card">
+      <span class="n">15</span>
+      <span class="l">Properties running through one optimized system</span>
+    </div>
+    <div class="stat-card">
+      <span class="n">2</span>
+      <span class="l">Consecutive record-breaking months</span>
     </div>
   </div>
-  <div class="cs-max">
-    <div class="pblock large fi">
-      <p>"Make me more money this month."</p>
-      <cite>— Anthony, portfolio operator, San Antonio</cite>
+
+  <!-- GALLERY -->
+  <div class="gallery fi" style="transition-delay:.08s">
+    <div class="g-cell">
+      <picture>
+        <source srcset="/case-studies/anthony-san-antonio/images/living-room.webp" type="image/webp">
+        <img src="/case-studies/anthony-san-antonio/images/living-room.jpg" alt="Wood ceiling living room — luxury apartment" width="600" height="600" loading="lazy">
+      </picture>
     </div>
-    <p class="body-text fi" style="color:var(--stone3);">Two consecutive record months later, that's exactly what happened. The ask was direct. So was the answer.</p>
+    <div class="g-cell">
+      <picture>
+        <source srcset="/case-studies/anthony-san-antonio/images/kitchen-bar.webp" type="image/webp">
+        <img src="/case-studies/anthony-san-antonio/images/kitchen-bar.jpg" alt="Styled kitchen with bar stools" width="600" height="600" loading="lazy">
+      </picture>
+    </div>
+    <div class="g-cell">
+      <picture>
+        <source srcset="/case-studies/anthony-san-antonio/images/balcony.webp" type="image/webp">
+        <img src="/case-studies/anthony-san-antonio/images/balcony.jpg" alt="Balcony with hanging chairs and city views" width="600" height="600" loading="lazy">
+      </picture>
+    </div>
+    <div class="g-cell">
+      <picture>
+        <source srcset="/case-studies/anthony-san-antonio/images/bathroom.webp" type="image/webp">
+        <img src="/case-studies/anthony-san-antonio/images/bathroom.jpg" alt="Subway tile bathroom" width="600" height="600" loading="lazy">
+      </picture>
+    </div>
+  </div>
+
+  <div class="quote large fi" style="margin-top:48px;">
+    <p>"Make me more money this month."</p>
+    <cite>— Anthony, portfolio operator, San Antonio</cite>
+  </div>
+
+  <p class="disclaimer fi">This portfolio's peak month reached 3.4× its pre-Marketics baseline after all fifteen units were repositioned to their own guest profiles. Across the Marketics portfolio, the result is a 45% median lift, net of market; results vary with starting position, market, and season. This engagement is documented and available on request.</p>
+</section>
+
+<!-- FOR PORTFOLIO OPERATORS -->
+<section class="cs-section situation">
+  <div class="sec-head fi">
+    <span class="sec-label">05 · The Lesson</span>
+    <h2 class="sec-title">For portfolio operators</h2>
+  </div>
+  <div class="prose">
+    <p class="fi">Most STR operators underestimate how much optimization degrades when it stops being actively managed. Airbnb's algorithm doesn't hold your position — it continuously re-evaluates. Review velocity, response rates, listing freshness, pricing competitiveness — these are live signals, not set-and-forget configurations.</p>
+    <p class="fi">What Anthony's portfolio demonstrated is that the gap between an optimized listing and an unmanaged one widens faster than most operators expect. And it closes faster than most expect too — when the right system is reapplied.</p>
+    <p class="fi"><strong>If you're running multiple properties and wondering whether professional optimization is worth the 10%, the math on this portfolio answers that question.</strong></p>
   </div>
 </section>
 
-<!-- SECTION 6: THE LESSON -->
-<section class="lesson">
-  <div class="cs-max">
-    <div class="section-eyebrow fi">For Portfolio Operators</div>
-    <p class="body-text fi">Most STR operators underestimate how much optimization degrades when it stops being actively managed. Airbnb's algorithm doesn't hold your position — it continuously re-evaluates. Review velocity, response rates, listing freshness, pricing competitiveness — these are live signals, not set-and-forget configurations.</p>
-    <p class="body-text fi">What Anthony's portfolio demonstrated is that the gap between an optimized listing and an unmanaged one widens faster than most operators expect. And it closes faster than most expect too — when the right system is reapplied.</p>
-    <p class="body-text fi"><strong>If you're running multiple properties and wondering whether professional optimization is worth the 10%, the math on this portfolio answers that question.</strong></p>
+<!-- MORE CASE STUDIES -->
+<section class="cs-section">
+  <span class="more-title fi">More case studies</span>
+  <div class="more-grid fi" style="transition-delay:.05s">
+    <a class="more-card" href="/case-studies/wally-puerto-rico">
+      <span class="tag">Río Grande, PR · Beachfront villa · 12 months</span>
+      <span class="mt">2.5× year-over-year revenue</span>
+      <span class="read">Read the case →</span>
+    </a>
+    <a class="more-card" href="/case-studies/montreal-hotel">
+      <span class="tag">Montréal, QC · 40-room boutique hotel</span>
+      <span class="mt">43% → 80% occupancy</span>
+      <span class="read">Read the case →</span>
+    </a>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <div class="cs-max">
-    <div class="eyebrow fi">Your Portfolio. Your Market.</div>
-    <h2 class="fi" style="transition-delay:.05s">How Much Is<br>Unmanaged<br><em>Costing You?</em></h2>
-    <p class="cta-body fi" style="transition-delay:.1s">If you're running a portfolio and managing optimization yourself, there's a number attached to that decision. A free revenue audit tells you what that number is — for your specific properties, in your specific market — before you commit to anything.</p>
-    <a href="/get-started" class="btn-primary fi" style="transition-delay:.15s">Get My Free Revenue Audit →</a>
-    <div class="cta-note fi" style="transition-delay:.18s">No retainer. No contract. We earn when you earn.</div>
+<section class="cta">
+  <h2 class="fi">What tier is your property in?</h2>
+  <p class="fi" style="transition-delay:.05s">A free audit reads your real comp set and shows the tier you can win — and the gap to it.</p>
+  <div class="cta-actions fi" style="transition-delay:.1s">
+    <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
+    <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
   </div>
+  <div class="cta-note fi" style="transition-delay:.12s">No retainer. No contract. We earn when you earn.</div>
 </section>
 
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies" class="gold">Case Studies</a>
+      <a href="/intel">Insights</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal?tab=terms">Terms</a>
+    </div>
+    <span>Performance-based STR optimization</span>
   </div>
 </footer>
 
-<script>(function(){var nav=document.querySelector('nav');if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.fi').forEach(function(el){obs.observe(el);});})();</script>
-<script src="/mkx-consent.js" defer></script>
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+
+/* fade-in on scroll */
+(function(){
+  var els=document.querySelectorAll('.fi');
+  if(!('IntersectionObserver'in window)){els.forEach(function(el){el.classList.add('vis');});return;}
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});
+  els.forEach(function(el){obs.observe(el);});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
 </body>
 </html>
