@@ -50,7 +50,7 @@
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:64px;
+  padding:0 var(--gutter);height:74px;
   background:rgba(13,13,13,.95);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
@@ -100,7 +100,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#D6AD60;}
 .nav-mobile-menu{
-  position:fixed;top:64px;left:0;right:0;
+  position:fixed;top:74px;left:0;right:0;
   background:rgba(10,10,10,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(214,173,96,.12);
   padding:0;max-height:0;overflow:hidden;
@@ -127,7 +127,9 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 }
 .nav-mobile-menu .nm-cta:hover{filter:brightness(1.1);}
 @media(max-width:768px){
-  nav{padding:0 20px;}
+  nav{padding:0 24px;height:64px;}
+  body{padding-top:64px;}
+  .nav-mobile-menu{top:64px;}
   .nav-links{display:none!important;}
   .nav-cta{display:none!important;}
   .nav-hamburger{display:flex!important;}
@@ -138,6 +140,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 }
 
 :root{
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
   --gold:#D6AD60;--gold2:rgba(214,173,96,.15);--gold3:rgba(214,173,96,.06);
   --night:#0f0f0f;--n2:#111;--n3:#181818;--n4:#202020;--n5:#282828;
   --stone:#B4B2A9;--dim:#6B6A65;--white:#f8f6f2;
@@ -147,8 +150,8 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
   --max:860px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:64px;}
-body{font-family:var(--s);background:var(--night);color:var(--white);font-size:15px;line-height:1.7;overflow-x:hidden;padding-top:64px;}
+html{scroll-behavior:smooth;scroll-padding-top:74px;}
+body{font-family:var(--s);background:var(--night);color:var(--white);font-size:15px;line-height:1.7;overflow-x:hidden;padding-top:74px;}
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(214,173,96,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(214,173,96,.025) 1px,transparent 1px);background-size:80px 80px;}
 
 .breadcrumb{position:relative;z-index:1;padding:16px 48px;border-bottom:1px solid rgba(255,255,255,.05);}
@@ -317,10 +320,9 @@ img,iframe,video{max-width:100%;height:auto;}
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
@@ -331,10 +333,9 @@ img,iframe,video{max-width:100%;height:auto;}
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel" class="active">Market Intel</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel" class="active">Insights</a>
   <a href="/get-started" class="nm-cta">Get My Free Audit</a>
 </div>
 

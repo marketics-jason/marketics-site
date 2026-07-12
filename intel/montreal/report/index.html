@@ -16,6 +16,7 @@
 <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <style>
 :root {
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
   --gold: #D6AD60;
   --gold-lo: rgba(214,173,96,.12);
   --gold-glow: rgba(214,173,96,.07);
@@ -57,7 +58,7 @@ body::before {
 nav {
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;height:64px;
+  padding:0 var(--gutter);height:74px;
   background:rgba(13,13,13,.95);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,.06);
@@ -99,7 +100,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--gold);}
 .nav-mobile-menu{
-  position:fixed;top:64px;left:0;right:0;
+  position:fixed;top:74px;left:0;right:0;
   background:rgba(10,10,10,.98);backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(214,173,96,.12);
   padding:0;max-height:0;overflow:hidden;
@@ -121,7 +122,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
   font-family:'Josefin Sans',sans-serif;font-size:10px;font-weight:700;
   letter-spacing:.14em;text-transform:uppercase;
 }
-@media(max-width:768px){nav{padding:0 20px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}}
+@media(max-width:768px){nav{padding:0 24px;height:64px;}.nav-links{display:none!important;}.nav-cta{display:none!important;}.nav-hamburger{display:flex!important;}.nav-mobile-menu{top:64px;}}
 @media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
 
 /* ── TICKER ── */
@@ -718,10 +719,9 @@ section {
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
     <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
-    <a href="/intel" class="active">Market Intel</a>
+    <a href="/intel" class="active">Insights</a>
   </div>
   <a href="/get-started" class="nav-cta">Get My Free Audit</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
@@ -732,10 +732,9 @@ section {
   <a href="/method">Method</a>
   <a href="/markets">Markets</a>
   <a href="/results">Results</a>
-    <a href="/case-studies">Case Studies</a>
-    <a href="/pricing">Pricing</a>
-    <a href="/story">Our Story</a>
-  <a href="/intel">Market Intel</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
   <a href="/get-started" class="nm-cta">Get My Free Audit</a>
 </div>
 
