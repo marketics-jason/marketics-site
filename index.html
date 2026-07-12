@@ -39,9 +39,20 @@
 </script>
 
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Homepage fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
 
 <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
 <link rel="dns-prefetch" href="https://www.clarity.ms">
@@ -555,7 +566,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
       <span class="fh">Company</span>
       <a href="/pricing">Pricing</a>
       <a href="/story">Our Story</a>
-      <a href="/media-kit">Media Kit</a>
+      <a href="/media">Media</a>
       <a href="mailto:marketing@marketics.io">Contact</a>
     </div>
     <div class="foot-tag">
