@@ -63,14 +63,14 @@
 /cdn-cgi/l/email-protection        /                          301
 
 # Consolidated thin market pages into /markets sections (2026-07)
-/markets/austin                        /markets#market-austin        301
-/markets/scottsdale                    /markets#market-scottsdale        301
-/markets/nashville                     /markets#market-nashville        301
-/markets/miami                         /markets#market-miami        301
-/markets/cancun                        /markets#market-cancun        301
-/markets/new-orleans                   /markets#market-new-orleans        301
-/markets/tulum                         /markets#market-tulum        301
-/markets/san-juan                      /markets#market-san-juan        301
+/markets/austin                        /markets        301
+/markets/scottsdale                    /markets        301
+/markets/nashville                     /intel/nashville        301
+/markets/miami                         /intel/miami        301
+/markets/cancun                        /markets        301
+/markets/new-orleans                   /markets        301
+/markets/tulum                         /markets        301
+/markets/san-juan                      /markets        301
 
 # ══ FUNCTIONAL REDIRECTS ══════════════════════════════════════════
 /call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
