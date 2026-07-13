@@ -358,6 +358,15 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .rhero h1{margin-top:0 !important;margin-left:-6px !important;}
 .rhero .lead{margin-left:-6px !important;}
 </style>
+<style>
+/* GEO semantic tags — preserve exact spacing, no visual change */
+dl.rstats{margin:0;}
+dd.n,dt.l{margin:0;}
+h3.rcase-title,h2.rh-t{margin:0;}
+.rc-art{display:contents;}
+blockquote.rocard-q{margin:0;}
+cite.name{font-style:normal;}
+</style>
 </head>
 <body>
 
@@ -392,24 +401,24 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 </header>
 
 <!-- ══ STAT BAND ══ -->
-<section class="rstats">
-  <div class="rstat"><span class="n">1,000+</span><span class="l">Listings optimized</span></div>
-  <div class="rstat"><span class="n">22</span><span class="l">Markets</span></div>
-  <div class="rstat"><span class="n gold">45%</span><span class="l">Median lift · net of market</span></div>
-  <div class="rstat"><span class="n">19</span><span class="l">Documented engagements</span></div>
-</section>
+<dl class="rstats">
+  <div class="rstat"><dd class="n">1,000+</dd><dt class="l">Listings optimized</dt></div>
+  <div class="rstat"><dd class="n">22</dd><dt class="l">Markets</dt></div>
+  <div class="rstat"><dd class="n gold">45%</dd><dt class="l">Median lift · net of market</dt></div>
+  <div class="rstat"><dd class="n">19</dd><dt class="l">Documented engagements</dt></div>
+</dl>
 
 <!-- ══ CASES ══ -->
 <section class="rcases">
 
-  <a class="rcase" href="/case-studies/anthony-san-antonio">
+  <article class="rc-art"><a class="rcase" href="/case-studies/anthony-san-antonio">
     <div class="rcase-img" style="background-image:url(/case-studies/anthony-san-antonio/images/pool-mural.webp)"></div>
     <div class="rcase-body">
       <div class="rcase-meta">
         <span class="rcase-tier">15-UNIT STR PORTFOLIO · 90 DAYS</span>
         <span class="rcase-mkt">San Antonio, TX</span>
       </div>
-      <span class="rcase-title">Aligned to each property&rsquo;s guest profile</span>
+      <h3 class="rcase-title">Aligned to each property&rsquo;s guest profile</h3>
       <p class="rcase-sit">Listing repositioning across 15 units — photography, titles, descriptions, and dynamic pricing aligned to each property&rsquo;s actual guest profile.</p>
       <div class="rcase-levers">
         <span class="rcase-lever">Positioning</span>
@@ -421,16 +430,16 @@ nav.scrolled{background:rgba(13,13,12,.97);}
         <div class="rcase-stat"><span class="sv">15 units</span><span class="sl">Repositioned</span></div>
       </div>
     </div>
-  </a>
+  </a></article>
 
-  <a class="rcase rev" href="/case-studies/montreal-hotel">
+  <article class="rc-art"><a class="rcase rev" href="/case-studies/montreal-hotel">
     <div class="rcase-img" style="background-image:url(/case-studies/montreal-hotel/images/heron-suite.webp)"></div>
     <div class="rcase-body">
       <div class="rcase-meta">
         <span class="rcase-tier">40-ROOM BOUTIQUE HOTEL · 12 MONTHS</span>
         <span class="rcase-mkt">Montréal, QC</span>
       </div>
-      <span class="rcase-title">A full product redesign</span>
+      <h3 class="rcase-title">A full product redesign</h3>
       <p class="rcase-sit">Full product redesign — editorial photography and design-forward presentation drove compound occupancy gains across two straight years.</p>
       <div class="rcase-levers">
         <span class="rcase-lever">Positioning</span>
@@ -442,16 +451,16 @@ nav.scrolled{background:rgba(13,13,12,.97);}
         <div class="rcase-stat"><span class="sv">2 years</span><span class="sl">Compound gains</span></div>
       </div>
     </div>
-  </a>
+  </a></article>
 
-  <a class="rcase" href="/case-studies/wally-puerto-rico">
+  <article class="rc-art"><a class="rcase" href="/case-studies/wally-puerto-rico">
     <div class="rcase-img" style="background-image:url(/case-studies/wally-puerto-rico/images/after-bedroom.webp)"></div>
     <div class="rcase-body">
       <div class="rcase-meta">
         <span class="rcase-tier">BEACHFRONT VILLA · 12 MONTHS</span>
         <span class="rcase-mkt">Río Grande, PR</span>
       </div>
-      <span class="rcase-title">A seasonal blind spot, eliminated</span>
+      <h3 class="rcase-title">A seasonal blind spot, eliminated</h3>
       <p class="rcase-sit">Converted a villa earning 8 months a year to 12 — adding 4 new earning months through year-round positioning and pricing strategy.</p>
       <div class="rcase-levers">
         <span class="rcase-lever">Positioning</span>
@@ -463,7 +472,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
         <div class="rcase-stat"><span class="sv">8 → 12</span><span class="sl">Earning months</span></div>
       </div>
     </div>
-  </a>
+  </a></article>
 
 </section>
 
@@ -475,7 +484,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ IN OWNERS' WORDS ══ -->
 <section class="rowords">
   <div class="rowords-head">
-    <span class="rh-t">In owners' words</span>
+    <h2 class="rh-t">In owners' words</h2>
     <div class="rowords-rating">
       <span class="stars">★★★★★</span>
       <span class="lbl">5.0 ON TRUSTPILOT · VERIFIED REVIEWS</span>
@@ -485,20 +494,20 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     <div class="rocard">
       <div class="rocard-top"><span class="stars">★★★★★</span><span class="date">Apr 2026</span></div>
       <span class="rocard-h">A partner, not an advisor</span>
-      <p class="rocard-q">"Jason has managed my Airbnb in Tulum for three years. He treats my business personally — I can always count on him, and he positions himself in my place, looking for my best interest."</p>
-      <div class="rocard-by"><span class="name">Camila</span><span class="meta">US · Tulum, MX · 3 years</span></div>
+      <blockquote class="rocard-q">"Jason has managed my Airbnb in Tulum for three years. He treats my business personally — I can always count on him, and he positions himself in my place, looking for my best interest."</blockquote>
+      <div class="rocard-by"><cite class="name">Camila</cite><span class="meta">US · Tulum, MX · 3 years</span></div>
     </div>
     <div class="rocard">
       <div class="rocard-top"><span class="stars">★★★★★</span><span class="date">Apr 2026</span></div>
       <span class="rocard-h">Superhost level, and it stays there</span>
-      <p class="rocard-q">"Jason has managed my Airbnb since the beginning, five years ago. His guidance built it into a Superhost-level listing and it has remained there. He values relationships — I feel supported even through unexpected challenges."</p>
-      <div class="rocard-by"><span class="name">Ginger</span><span class="meta">US · 5-year owner</span></div>
+      <blockquote class="rocard-q">"Jason has managed my Airbnb since the beginning, five years ago. His guidance built it into a Superhost-level listing and it has remained there. He values relationships — I feel supported even through unexpected challenges."</blockquote>
+      <div class="rocard-by"><cite class="name">Ginger</cite><span class="meta">US · 5-year owner</span></div>
     </div>
     <div class="rocard">
       <div class="rocard-top"><span class="stars">★★★★★</span><span class="date">Apr 2026</span></div>
       <span class="rocard-h">Rented even in low season</span>
-      <p class="rocard-q">"This company has made sure our condo in Mexico is always rented, even in low season. Would recommend."</p>
-      <div class="rocard-by"><span class="name">Jayson Paquette</span><span class="meta">CA · Mexico condo owner</span></div>
+      <blockquote class="rocard-q">"This company has made sure our condo in Mexico is always rented, even in low season. Would recommend."</blockquote>
+      <div class="rocard-by"><cite class="name">Jayson Paquette</cite><span class="meta">CA · Mexico condo owner</span></div>
     </div>
   </div>
 </section>
@@ -506,7 +515,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ CTA ══ -->
 <section class="rcta">
   <h2>The next one could be your market.</h2>
-  <p>A free audit reads your real comp set and shows the tier you can win — and the gap to it.</p>
+  <p>A free audit reads your real comp set — the comparable listings you're priced against — and shows the tier you can win, and the gap to it.</p>
   <div class="rcta-actions">
     <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
     <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>

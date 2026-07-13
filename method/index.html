@@ -305,6 +305,19 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .mhero h1{margin-top:0 !important;margin-left:-6px !important;}
 .mhero .lead{margin-left:-6px !important;}
 </style>
+<style>
+/* GEO semantic tags (h2/h3/ol/ul/li) — preserve exact spacing, no visual change */
+h2.philo-kick{margin:0 0 40px;}
+h2.ah,h2.dh{margin:12px 0 0;}
+h3.dname,h3.rt,h3.ac-h{margin:0;}
+ol.disc-rows{margin:52px 0 0;padding:0;list-style:none;}
+ol.runs-grid{margin:0;padding:0;list-style:none;}
+ul.aud-list{margin:0;padding:0;list-style:none;}
+li.drow,li.rcol,ul.aud-list li{list-style:none;}
+.aud-list li{font-size:15px;line-height:1.6;color:var(--dim);}
+.aud-card.gold .aud-list li{color:var(--body);}
+.kicker h2{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:400;margin:0;}
+</style>
 </head>
 <body>
 
@@ -340,7 +353,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 
 <!-- ══ THE PRINCIPLE ══ -->
 <section class="philo sec">
-  <div class="philo-kick">The idea underneath all of it</div>
+  <h2 class="philo-kick">The idea underneath all of it</h2>
   <p class="philo-big">You don't price the market.<br>The market prices <em>you</em> — on what it sees.</p>
   <p class="philo-sub">Nobody prices the market. We build the value; the market chooses what it's worth. Price isn't something we set — it's the verdict the market returns.</p>
 </section>
@@ -348,7 +361,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ THE ASYMMETRY ══ -->
 <section class="asym-sec sec">
   <div class="kicker"><div class="bar"></div><span>Why discounting loses</span></div>
-  <span class="ah">Two moves. They are not equal.</span>
+  <h2 class="ah">Two moves. They are not equal.</h2>
   <p class="alead">A booking means the value was <span class="hl">well perceived</span>. No booking means it wasn't. From there, exactly two moves.</p>
   <div class="asym-grid">
     <div class="move">
@@ -368,92 +381,92 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ THE FIVE DISCIPLINES ══ -->
 <section class="disc sec">
   <div class="kicker"><div class="bar"></div><span>The five disciplines</span></div>
-  <span class="dh">Value first. Price is the last lever.</span>
-  <div class="disc-rows">
-    <div class="drow" id="positioning">
+  <h2 class="dh">Value first. Price is the last lever.</h2>
+  <ol class="disc-rows">
+    <li class="drow" id="positioning">
       <span class="dn">01</span>
       <div class="dbody">
-        <span class="dname">Market positioning</span>
-        <span class="dwhat">We read the real comp set and place the property in the tier it can actually win.</span>
+        <h3 class="dname">Market positioning</h3>
+        <span class="dwhat">We read the real comp set — the comparable listings you’re priced against — and place the property in the tier it can actually win.</span>
       </div>
       <span class="dwhy">The diagnosis every other lever is built on. Get the tier wrong and everything downstream optimizes toward the wrong ceiling.</span>
-    </div>
-    <div class="drow" id="storytelling">
+    </li>
+    <li class="drow" id="storytelling">
       <span class="dn">02</span>
       <div class="dbody">
-        <span class="dname">Storytelling</span>
+        <h3 class="dname">Storytelling</h3>
         <span class="dwhat">Photography direction, amenities, design cues, and the sequence a guest scrolls.</span>
       </div>
       <span class="dwhy">The listing has to tell the story of the tier it belongs in — before a guest reads a word of the description.</span>
-    </div>
-    <div class="drow" id="distribution">
+    </li>
+    <li class="drow" id="distribution">
       <span class="dn">03</span>
       <div class="dbody">
-        <span class="dname">Distribution</span>
+        <h3 class="dname">Distribution</h3>
         <span class="dwhat">The right channels, syndicated and kept in sync.</span>
       </div>
       <span class="dwhy">Value the market can't see isn't value. The property has to be in front of the guests who pay for that tier.</span>
-    </div>
-    <div class="drow" id="ranking">
+    </li>
+    <li class="drow" id="ranking">
       <span class="dn">04</span>
       <div class="dbody">
-        <span class="dname">Ranking</span>
+        <h3 class="dname">Ranking</h3>
         <span class="dwhat">Search position against the comp set, defended daily.</span>
       </div>
       <span class="dwhy">Visibility is worthless if a competitor sits above you. Rank is a maintained position, not a one-time win.</span>
-    </div>
-    <div class="drow" id="pricing">
+    </li>
+    <li class="drow" id="pricing">
       <span class="dn">05</span>
       <div class="dbody">
-        <span class="dname">Pricing</span>
+        <h3 class="dname">Pricing</h3>
         <span class="dwhat">Dynamic rates that read demand, events, and the tier ceiling.</span>
       </div>
       <span class="dwhy">The last lever, not the first. Price set before the value is built only anchors the listing to the tier it's trying to leave.</span>
-    </div>
-  </div>
+    </li>
+  </ol>
 </section>
 
 <!-- ══ HOW IT RUNS ══ -->
 <section class="runs sec">
-  <div class="kicker runs-kick"><div class="bar"></div><span>The shape of an engagement</span></div>
-  <div class="runs-grid">
-    <div class="rcol">
+  <div class="kicker runs-kick"><div class="bar"></div><h2>The shape of an engagement</h2></div>
+  <ol class="runs-grid">
+    <li class="rcol">
       <span class="rn">01</span>
-      <span class="rt">Diagnose</span>
+      <h3 class="rt">Diagnose</h3>
       <span class="rb">Read the comp set, find the tier the property can win, and measure the gap to it. This is the audit.</span>
-    </div>
-    <div class="rcol">
+    </li>
+    <li class="rcol">
       <span class="rn">02</span>
-      <span class="rt">Build</span>
+      <h3 class="rt">Build</h3>
       <span class="rb">Positioning, storytelling, distribution, ranking — the four levers of value, run together, before price is ever touched.</span>
-    </div>
-    <div class="rcol last">
+    </li>
+    <li class="rcol last">
       <span class="rn">03</span>
-      <span class="rt">Re-rate</span>
+      <h3 class="rt">Re-rate</h3>
       <span class="rb">The market sees the property at its true tier and prices it there. Pricing calibrates last — reading demand against the new ceiling.</span>
-    </div>
-  </div>
+    </li>
+  </ol>
 </section>
 
 <!-- ══ WHO IT'S FOR ══ -->
 <section class="audience sec">
-  <div class="kicker aud-kick"><div class="bar"></div><span>Who the Method is for</span></div>
+  <div class="kicker aud-kick"><div class="bar"></div><h2>Who the Method is for</h2></div>
   <div class="aud-grid">
     <div class="aud-card gold">
-      <span class="ac-h">It fits owners who —</span>
-      <div class="aud-list">
-        <span>already suspect the property can earn more, and want to know its ceiling.</span>
-        <span>would rather build value than win a race to the bottom on price.</span>
-        <span>want one specialist accountable for revenue — not another manager.</span>
-      </div>
+      <h3 class="ac-h">It fits owners who —</h3>
+      <ul class="aud-list">
+        <li>already suspect the property can earn more, and want to know its ceiling.</li>
+        <li>would rather build value than win a race to the bottom on price.</li>
+        <li>want one specialist accountable for revenue — not another manager.</li>
+      </ul>
     </div>
     <div class="aud-card">
-      <span class="ac-h">It isn't for owners who —</span>
-      <div class="aud-list">
-        <span>need someone to run cleaning, keys, and guest messaging. That's a manager.</span>
-        <span>are shopping for the lowest fee, not the highest net.</span>
-        <span>want to set a price once and never touch the listing again.</span>
-      </div>
+      <h3 class="ac-h">It isn't for owners who —</h3>
+      <ul class="aud-list">
+        <li>need someone to run cleaning, keys, and guest messaging. That's a manager.</li>
+        <li>are shopping for the lowest fee, not the highest net.</li>
+        <li>want to set a price once and never touch the listing again.</li>
+      </ul>
     </div>
   </div>
 </section>
