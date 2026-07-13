@@ -9,18 +9,18 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>Pricing — Ten Percent of a Bigger Number | Marketics</title>
-<meta name="description" content="No retainer, no upfront fee, no invoice. Marketics is paid 10% of your revenue — while growing that revenue by a documented 45% median lift, net of market, across 1,000+ listings in 22 markets. A $500 deposit, refunded on completion.">
+<title>Pricing — You Keep 90% of a Bigger Number | Marketics</title>
+<meta name="description" content="You keep 90%. Marketics is paid 10% of your revenue — earning only when it grows, a documented 45% median lift, net of market, across 1,000+ listings in 22 markets. No retainer, no upfront fee, no invoice. A $500 deposit, refunded on completion.">
 <link rel="canonical" href="https://marketics.io/pricing">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Marketics">
-<meta property="og:title" content="Marketics Pricing — Ten Percent. Of a Bigger Number.">
-<meta property="og:description" content="No retainer, no upfront fee, no invoice. 10% of revenue, split automatically per booking — while we grow that revenue by a median 45%, net of market.">
+<meta property="og:title" content="Marketics Pricing — You Keep 90% of a Bigger Number.">
+<meta property="og:description" content="10% of revenue, split automatically per booking — no retainer, no upfront fee, no invoice. We only earn when your revenue grows, a median 45%, net of market.">
 <meta property="og:url" content="https://marketics.io/pricing">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Marketics Pricing — Ten Percent. Of a Bigger Number.">
+<meta name="twitter:title" content="Marketics Pricing — You Keep 90% of a Bigger Number.">
 <meta name="twitter:description" content="10% of revenue, no retainer, no upfront fee, no invoice — while we grow that revenue by a median 45%, net of market.">
 <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
 
@@ -71,7 +71,6 @@
 <link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<!-- Homepage fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
 <style>
 @font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
 @font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
@@ -89,165 +88,158 @@
 
 <style>
 :root{
-  --gold:#D6AD60;--gold-hi:#e8c47c;
-  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --gold:#D6AD60;--gold-hi:#e8c47c;--gold-dk:#A8895A;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;--sink:#0d0d0c;
   --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
   --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
-  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;--red:#C0392B;
+  --dim:#6B6A65;--faint:#55534E;--green:#3f9e6b;
   --mono:'DM Mono',ui-monospace,Menlo,monospace;
   --sans:'DM Sans',-apple-system,system-ui,sans-serif;
   --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
-  /* horizontal gutter: content sits in a centered 1440 column on wide screens, 72px otherwise */
   --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
-/* every top-level section shares a centered 1440 column so edges align with the homepage */
-.pr-hero,.pr-contrast,.pr-principle,.pr-pay,.pr-flow,.pr-math,.pr-closing,.foot,.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;}
+section{max-width:1440px;margin-left:auto;margin-right:auto;}
 
 /* ══ NAV ══ */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
 nav.scrolled{background:rgba(13,13,12,.97);}
 .nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
 .nav-logo img{height:30px;width:auto;}
 .nav-links{display:flex;align-items:center;gap:34px;}
-.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--body);font-weight:400;transition:color .15s;}
 .nav-links a:hover{color:var(--white);}
 .nav-links a.active{color:var(--gold);}
-.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
 .nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
-  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px;background:none;border:none;cursor:pointer;}
 .nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
 .nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
 .nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
-.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
-  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
-  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;transform:translateY(-140%);transition:transform .3s ease;}
 .nav-mobile.open{transform:translateY(0);}
-.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
 .nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
 
-/* ══ shared bits ══ */
-.kicker{display:flex;align-items:center;gap:14px;}
+/* ══ shared ══ */
+main{padding-top:74px;}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
 .kicker .bar{width:32px;height:1px;background:var(--gold);}
 .kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
-.sec{border-top:1px solid var(--line);}
-.btn-outline{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:400;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:17px 36px;transition:border-color .2s,background .2s;}
-.btn-outline:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
-.btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
-.btn-fill:hover{filter:brightness(1.08);}
-.samplelink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
-.samplelink:hover{color:var(--gold);}
-.samplelink span{color:var(--gold);}
+.sec{padding:88px var(--gutter);border-bottom:1px solid var(--line);}
+.h2{font-family:var(--display);font-weight:200;letter-spacing:2px;color:var(--white);margin:0;}
 
 /* ══ HERO ══ */
-.pr-hero{padding:150px 72px 90px;display:grid;grid-template-columns:minmax(0,1fr) 480px;gap:80px;align-items:center;}
-.pr-h1{font-family:var(--display);font-weight:200;font-size:76px;line-height:1.04;letter-spacing:6px;color:var(--white);margin:28px 0 0;}
-.pr-h1 .gold{color:var(--gold);}
-.pr-lead{font-size:18px;line-height:1.65;color:var(--bright);margin:34px 0 0;max-width:540px;}
-.fee-box{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.03);padding:44px 48px;display:flex;flex-direction:column;gap:8px;}
-.fee-box .fb-k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);}
-.fee-box .fb-n{font-family:var(--display);font-weight:200;font-size:88px;line-height:1;color:var(--white);}
-.fee-box .fb-n span{font-size:40px;}
-.fee-box .fb-d{font-size:15px;line-height:1.6;color:var(--body);}
-.fee-box .fb-d .w{color:var(--white);}
+.p-hero{padding:96px var(--gutter) 80px;display:grid;grid-template-columns:1fr 480px;gap:80px;align-items:center;border-bottom:1px solid var(--line);}
+.p-hero-h{font-family:var(--display);font-weight:200;font-size:68px;line-height:1.05;letter-spacing:5px;color:var(--white);}
+.p-hero-h span{color:var(--gold);}
+.p-hero-lead{font-size:18px;line-height:1.65;color:var(--bright);margin:34px 0 0;max-width:560px;}
+.fee-card{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.03);padding:44px 48px;display:flex;flex-direction:column;gap:8px;}
+.fee-card .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);}
+.fee-card .big{font-family:var(--display);font-weight:200;font-size:88px;line-height:1;color:var(--white);}
+.fee-card .big sup{font-size:40px;top:-.4em;}
+.fee-card .desc{font-size:15px;line-height:1.6;color:var(--body);}
+.fee-card .desc strong{color:var(--white);font-weight:400;}
 
-/* ══ THE CONTRAST ══ */
-.pr-contrast{padding:88px 72px;}
-.pr-h2{font-family:var(--display);font-weight:200;font-size:42px;letter-spacing:2px;color:var(--white);margin:12px 0 0;}
-.cx-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px;}
-.cx-card{border:1px solid var(--line-2);padding:44px 48px;display:flex;flex-direction:column;gap:26px;}
-.cx-card.gold{border-color:rgba(214,173,96,.4);background:rgba(214,173,96,.03);}
-.cx-k{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--dim);}
-.cx-card.gold .cx-k{color:var(--gold);}
-.cx-rate{display:flex;align-items:baseline;gap:12px;}
-.cx-rate .n{font-family:var(--display);font-weight:200;font-size:62px;line-height:1;color:var(--muted);}
-.cx-card.gold .cx-rate .n{color:var(--white);}
-.cx-rate .n span{font-size:30px;}
-.cx-rate .u{font-size:14px;color:var(--muted);}
-.cx-card.gold .cx-rate .u{color:var(--gold);}
-.cx-body{display:flex;flex-direction:column;gap:14px;}
-.cx-body p{font-size:14.5px;line-height:1.6;color:var(--muted);margin:0;}
-.cx-card.gold .cx-body p{color:var(--body);}
-.cx-body .w{color:var(--white);}
-.cx-body .b2{color:var(--body);}
+/* ══ WEDGE ══ */
+.wedge-lead{font-size:16px;line-height:1.75;color:var(--body);margin:30px 0 0;max-width:900px;}
+.wedge-lead strong{color:var(--bright);font-weight:400;}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;align-items:start;}
+.wcard{border:1px solid var(--line-2);padding:32px 30px;display:flex;flex-direction:column;gap:18px;}
+.wcard.on{border-color:rgba(214,173,96,.45);background:rgba(214,173,96,.04);}
+.wcard .tag{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--body);}
+.wcard.on .tag{color:var(--gold);}
+.wcard .rows{display:flex;flex-direction:column;gap:12px;}
+.wcard .rows span{font-size:13.5px;line-height:1.6;color:var(--body);}
+.wcard .rows span b{color:var(--dim);font-weight:400;}
+.wcard .win{font-size:13.5px;line-height:1.6;color:var(--bright);border-top:1px solid var(--line);padding-top:16px;}
+.wcard.on .win{border-top-color:rgba(214,173,96,.18);}
+.wcard .win b{color:var(--dim);font-weight:400;}
+.wcard.on .win b{color:var(--gold-dk);}
+.footnote{font-size:11.5px;line-height:1.6;color:var(--faint);margin:40px 0 0;max-width:780px;}
 
-/* ══ THE PRINCIPLE ══ */
-.pr-principle{padding:88px 72px;display:grid;grid-template-columns:420px 1fr;gap:80px;align-items:start;}
-.pp-h{font-family:var(--display);font-weight:200;font-size:40px;line-height:1.15;letter-spacing:2px;color:var(--white);margin:26px 0 0;}
-.pp-rows{display:flex;flex-direction:column;}
-.pp-row{display:grid;grid-template-columns:180px 1fr;gap:32px;padding:30px 0;border-top:1px solid var(--line);}
-.pp-row:last-child{border-bottom:1px solid var(--line);}
-.pp-row .t{font-family:var(--display);font-weight:400;font-size:21px;letter-spacing:1px;}
-.pp-row .b{font-size:15px;line-height:1.7;color:var(--body);}
-.pp-row.rev .t{color:var(--gold);}
-.pp-row.ops .t{color:var(--white);}
-.pp-row.inv .t{color:var(--muted);}
-.pp-row.inv .b{color:var(--muted);}
+/* ══ COMPARISON CHART ══ */
+.legend{display:flex;align-items:center;gap:24px;margin-top:40px;max-width:780px;flex-wrap:wrap;}
+.legend .li{display:flex;align-items:center;gap:9px;}
+.legend .sw{width:22px;height:12px;}
+.legend span{font-size:12px;color:var(--body);}
+.legend .axis-lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--faint);margin-left:auto;}
+.chart{margin-top:24px;max-width:780px;display:flex;gap:0;}
+.chart .yax{width:46px;position:relative;height:320px;flex-shrink:0;}
+.chart .yax span{position:absolute;right:12px;font-family:var(--mono);font-size:10px;color:var(--faint);}
+.chart .plot{position:relative;height:320px;border-left:1px solid var(--line-3);flex:1;}
+.chart .grid{position:absolute;left:0;right:0;height:1px;background:var(--line);}
+.chart .pivot{position:absolute;left:0;right:0;bottom:160px;border-top:1px dashed rgba(214,173,96,.5);}
+.chart .pivot-lbl{position:absolute;right:8px;bottom:166px;font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--gold-dk);}
+.chart .bars{position:absolute;inset:0;display:flex;align-items:flex-end;padding-left:52px;gap:120px;}
+.barcol{display:flex;flex-direction:column;align-items:center;}
+.barcol .cap{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;margin-bottom:10px;}
+.barcol .stack{display:flex;flex-direction:column;width:130px;}
+.seg-host{height:80px;background:rgba(214,173,96,.32);border:1px solid rgba(214,173,96,.45);border-top:1px dashed rgba(214,173,96,.7);border-bottom:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;padding:0 10px;}
+.seg-host .t{font-weight:500;font-size:12.5px;color:#F0E4C8;}
+.seg-host .s{font-size:10.5px;color:#D6C9A8;}
+.seg-fee{height:80px;background:var(--gold);display:flex;align-items:center;justify-content:center;}
+.seg-fee span{font-weight:700;font-size:17px;color:#171717;}
+.seg-up{height:130px;background:linear-gradient(to top,rgba(214,173,96,.12),rgba(214,173,96,0));display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
+.seg-up span{font-size:11px;color:#7C7A72;}
+.seg-pm{height:160px;background:rgba(214,173,96,.12);border:1px solid rgba(214,173,96,.28);border-top:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}
+.seg-pm .big{font-weight:600;font-size:18px;color:var(--gold-dk);}
+.seg-pm .s{font-size:11px;color:#7C7A72;}
+.chart-cats{display:flex;padding-left:98px;gap:120px;margin-top:14px;max-width:780px;}
+.chart-cats .c{width:130px;text-align:center;}
+.chart-cats .c .h{font-family:var(--mono);font-size:11px;letter-spacing:2px;}
+.chart-cats .c .s{font-size:12.5px;color:var(--muted);margin-top:6px;}
+.chart-note{font-size:16px;line-height:1.7;color:var(--body);margin:40px 0 0;max-width:620px;}
+.chart-note strong{color:var(--white);font-weight:400;}
 
 /* ══ WHAT YOU PAY ══ */
-.pr-pay{padding:88px 72px;}
-.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px;}
 .pay-card{border:1px solid var(--line-2);padding:36px 34px;display:flex;flex-direction:column;gap:14px;}
-.pay-k{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);}
-.pay-t{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:1px;color:var(--white);}
-.pay-b{font-size:14px;line-height:1.65;color:var(--muted);}
-.pay-b .w{color:var(--body);}
-
-/* ══ HOW THE MONEY MOVES ══ */
-.pr-flow{padding:88px 72px;}
-.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;}
-.flow-cell{padding:0 34px;border-right:1px solid var(--line-2);display:flex;flex-direction:column;gap:12px;}
-.flow-cell:first-child{padding-left:0;}
-.flow-cell:last-child{border-right:none;padding-right:0;}
-.flow-n{font-family:var(--display);font-weight:200;font-size:34px;color:var(--gold);}
-.flow-cell.last .flow-n{color:var(--white);}
-.flow-b{font-size:14px;line-height:1.65;color:var(--muted);}
-.flow-cell.last .flow-b{color:var(--body);}
+.pay-card .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);}
+.pay-card .big{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:1px;color:var(--white);}
+.pay-card p{font-size:14px;line-height:1.65;color:var(--muted);margin:0;}
+.pay-card p strong{color:var(--body);font-weight:400;}
+.hiw{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:44px;border-top:1px solid var(--line);padding-top:36px;}
+.hiw .col span:first-child{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold);display:block;margin-bottom:8px;}
+.hiw .col p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;}
+.hiw .col.hl span:first-child{color:var(--body);}
+.hiw .col.hl p{color:var(--body);}
 
 /* ══ WORKED EXAMPLE ══ */
-.pr-math{padding:88px 72px;background:radial-gradient(120% 140% at 50% 0%,rgba(214,173,96,.05) 0%,rgba(17,17,16,0) 65%);}
-.math-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:52px;}
-.math-card{border:1px solid var(--line-2);padding:34px 36px;display:flex;flex-direction:column;gap:10px;}
-.math-card.gold{border-color:rgba(214,173,96,.4);background:rgba(214,173,96,.04);}
-.math-k{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);}
-.math-card.gold .math-k{color:var(--gold);}
-.math-n{font-family:var(--display);font-weight:200;font-size:44px;color:var(--white);line-height:1;}
-.math-card.gold .math-n{color:var(--gold);}
-.math-n.red{color:var(--red);}
-.math-n .u{font-size:18px;color:var(--muted);}
-.math-b{font-size:13.5px;line-height:1.6;color:var(--muted);}
-.math-card.gold .math-b{color:var(--body);}
-.math-b .w{color:var(--white);}
-.math-lead{font-family:var(--display);font-weight:300;font-size:21px;line-height:1.5;letter-spacing:.5px;color:var(--bright);margin:48px 0 0;max-width:780px;}
-.math-lead .red{color:var(--red);}
-.math-lead .gold{color:var(--gold);}
-.math-fine{font-size:11.5px;line-height:1.6;color:var(--faint);margin:22px 0 0;max-width:780px;}
+.worked{background:radial-gradient(120% 140% at 50% 0%, rgba(214,173,96,.05) 0%, rgba(17,17,16,0) 65%);}
+.money-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px;border:1px solid var(--line-2);}
+.mcell{padding:32px 30px;border-right:1px solid var(--line-2);display:flex;flex-direction:column;gap:10px;}
+.mcell:last-child{border-right:none;background:rgba(214,173,96,.06);}
+.mcell .lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);}
+.mcell .lbl.g{color:var(--gold);}
+.mcell .num{font-family:var(--display);font-weight:200;font-size:44px;line-height:1;color:var(--white);}
+.mcell .num.g{color:var(--gold);}
+.mcell .num.m{color:var(--muted);}
+.mcell .note{font-size:13px;line-height:1.55;color:var(--muted);}
+.mcell .note strong{color:var(--bright);font-weight:400;}
+.mcell .note .g{color:var(--gold);}
+.worked-quote{font-family:var(--display);font-weight:300;font-size:24px;line-height:1.45;letter-spacing:.5px;color:var(--bright);margin:30px 0 0;max-width:820px;}
+.worked-quote span{color:var(--gold);}
 
 /* ══ CLOSING ══ */
-.pr-closing{padding:110px 72px;display:flex;flex-direction:column;align-items:center;text-align:center;}
-.pr-closing-h{font-family:var(--display);font-weight:200;font-size:52px;line-height:1.12;letter-spacing:4px;color:var(--white);max-width:860px;margin:0;text-wrap:balance;}
-.pr-closing-p{font-size:17px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:520px;}
-.pr-closing-actions{display:flex;align-items:center;gap:30px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
-.pr-closing-fine{font-size:12px;letter-spacing:1px;color:var(--dim);margin-top:22px;}
+.closing{padding:100px var(--gutter);display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid var(--line);}
+.closing-h{font-family:var(--display);font-weight:200;font-size:50px;line-height:1.12;letter-spacing:4px;color:var(--white);max-width:860px;margin:0;}
+.closing p{font-size:17px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:520px;}
+.closing-cta{display:flex;align-items:center;gap:30px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
+.btn-gold{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#171717;background:var(--gold);padding:18px 40px;transition:filter .15s;}
+.btn-gold:hover{filter:brightness(1.06);}
+.link-sample{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.link-sample:hover{color:var(--white);}
+.link-sample .arw{color:var(--gold);font-size:15px;}
+.closing-fine{font-size:12px;letter-spacing:1px;color:var(--dim);margin-top:22px;}
 
 /* ══ FOOTER ══ */
-.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;
-  display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px var(--gutter) 56px;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
 .foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
 .foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
 .foot-col{display:flex;flex-direction:column;gap:14px;}
@@ -258,48 +250,45 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
 .foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
 .foot-tag .ft-u{font-size:12px;color:var(--dim);}
-.foot-legal{border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal{max-width:1440px;margin:0 auto;border-top:1px solid var(--raised);padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
 .foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
 .foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
 .foot-legal a:hover{color:var(--muted);}
 
 /* ══ RESPONSIVE ══ */
-@media (max-width:1080px){
-  nav{padding:0 40px;}
-  .pr-hero,.pr-contrast,.pr-principle,.pr-pay,.pr-flow,.pr-math,.pr-closing{padding-left:40px;padding-right:40px;}
-  .foot,.foot-legal{padding-left:40px;padding-right:40px;}
-  .pr-hero{grid-template-columns:minmax(0,1fr) 420px;gap:48px;}
+@media (max-width:1080px){ nav{padding:0 40px;} }
+@media (max-width:960px){
+  .p-hero{grid-template-columns:1fr;gap:40px;}
+  .cards3{grid-template-columns:1fr;}
+  .hiw{grid-template-columns:1fr 1fr;gap:28px;}
+  .money-grid{grid-template-columns:1fr 1fr;}
+  .mcell:nth-child(2){border-right:none;}
+  .mcell:nth-child(1),.mcell:nth-child(2){border-bottom:1px solid var(--line-2);}
 }
 @media (max-width:900px){
   .nav-links,.nav-cta{display:none;}
   .nav-hamburger{display:flex;}
-  .pr-hero{grid-template-columns:1fr;gap:44px;}
-  .pr-h1{font-size:56px;letter-spacing:3px;}
-  .pr-principle{grid-template-columns:1fr;gap:36px;}
-  .cx-grid,.pay-grid,.math-grid{grid-template-columns:1fr;}
-  .flow-grid{grid-template-columns:1fr 1fr;gap:32px 24px;}
-  .flow-cell{padding:0;border-right:none;}
-  .pr-closing-h{font-size:38px;letter-spacing:2px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
 }
-@media (max-width:600px){
+@media (max-width:640px){
   nav{padding:0 24px;height:64px;}
   .nav-mobile{top:64px;}
-  .pr-hero{padding:110px 24px 56px;}
-  .pr-h1{font-size:44px;letter-spacing:2px;}
-  .pr-contrast,.pr-principle,.pr-pay,.pr-flow,.pr-math,.pr-closing{padding-left:24px;padding-right:24px;padding-top:56px;padding-bottom:56px;}
-  .pr-h2,.pp-h{font-size:30px;letter-spacing:1px;}
-  .cx-card{padding:28px 24px;}
-  .fee-box{padding:28px;}
-  .fee-box .fb-n{font-size:60px;}
-  .flow-grid{grid-template-columns:1fr;gap:0;}
-  .flow-cell{padding:20px 0;border-top:1px solid var(--line);}
-  .flow-cell:first-child{border-top:none;padding-top:0;}
-  .pp-row{grid-template-columns:1fr;gap:6px;}
-  .math-lead{font-size:18px;}
-  .pr-closing-h{font-size:30px;letter-spacing:2px;}
-  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
-  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
-  .foot-legal{padding:20px 24px;}
+  main{padding-top:64px;}
+  .p-hero,.sec,.closing{padding-left:24px;padding-right:24px;}
+  .p-hero{padding-top:56px;padding-bottom:56px;}
+  .sec{padding-top:56px;padding-bottom:56px;}
+  .p-hero-h{font-size:42px;letter-spacing:2px;}
+  .fee-card .big{font-size:60px;}
+  .h2{font-size:28px!important;}
+  .money-grid{grid-template-columns:1fr;}
+  .mcell{border-right:none;border-bottom:1px solid var(--line-2);}
+  .hiw{grid-template-columns:1fr;}
+  .chart .bars{gap:40px;padding-left:28px;}
+  .barcol .stack{width:84px;}
+  .chart-cats{padding-left:74px;gap:40px;}
+  .chart-cats .c{width:84px;}
+  .closing-h{font-size:32px;letter-spacing:2px;}
 }
 </style>
 </head>
@@ -328,148 +317,185 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<!-- ══ HERO ══ -->
-<header class="pr-hero">
-  <div>
-    <div class="kicker"><div class="bar"></div><span>Pricing</span></div>
-    <h1 class="pr-h1">TEN PERCENT.<br>OF A BIGGER <span class="gold">NUMBER.</span></h1>
-    <p class="pr-lead">No retainer, no upfront fee, no invoice to pay. We're paid 10% of your revenue — and we grow that revenue by a median 45%, net of market.</p>
-  </div>
-  <div class="fee-box">
-    <span class="fb-k">OUR FEE</span>
-    <span class="fb-n">10<span>%</span></span>
-    <span class="fb-d">of your <span class="w">revenue</span> — while we grow that revenue by a median 45%, net of market.</span>
-  </div>
-</header>
+<main>
 
-<!-- ══ THE CONTRAST ══ -->
-<section class="pr-contrast sec">
-  <div class="kicker"><div class="bar"></div><span>The difference</span></div>
-  <h2 class="pr-h2">Two ways to charge. Only one is aligned.</h2>
-  <div class="cx-grid">
-    <div class="cx-card">
-      <span class="cx-k">A GENERALIST MANAGER</span>
-      <div class="cx-rate"><span class="n">30<span>%</span></span><span class="u">of gross</span></div>
-      <div class="cx-body">
-        <p>A cut of <span class="b2">every dollar</span> — including the revenue you'd have earned with no help at all.</p>
-        <p>Operations and "marketing" bundled into one commission, so revenue is nobody's dedicated job.</p>
+  <!-- HERO -->
+  <section class="p-hero">
+    <div>
+      <div class="kicker"><div class="bar"></div><span>Pricing</span></div>
+      <h1 class="p-hero-h">YOU KEEP 90%.<br>OF A MUCH BIGGER <span>NUMBER.</span></h1>
+      <p class="p-hero-lead">When we partner — your property, my expertise — you do less and keep more. I'm paid 10% of your revenue, so I only earn when it grows. Across the portfolio that's been a median 45% lift, net of market — but every property is different, and the audit shows yours.</p>
+    </div>
+    <div class="fee-card">
+      <span class="lbl">MY FEE</span>
+      <div class="big">10<sup>%</sup></div>
+      <span class="desc">of your <strong>revenue</strong> — I only earn when it grows. No retainer, no upfront fee, no invoice.</span>
+    </div>
+  </section>
+
+  <!-- THE WEDGE -->
+  <section class="sec">
+    <div class="kicker"><div class="bar"></div><span>The three-way choice</span></div>
+    <h2 class="h2" style="font-size:46px;">Three ways to run your rental.</h2>
+    <p class="wedge-lead">The full-service fee isn't broken because it's expensive — it charges a revenue-linked percentage for work that has nothing to do with revenue. <strong>Pay a percentage for what grows the number — positioning, ranking, pricing. Pay a flat or per-task cost for what doesn't — cleaning, turnovers, maintenance.</strong> Both jobs still get done; each is priced for what it is.</p>
+
+    <div class="cards3">
+      <div class="wcard">
+        <span class="tag">DO IT MYSELF</span>
+        <div class="rows">
+          <span><b>Cash cost</b> — lowest out of pocket: software and your own hours.</span>
+          <span><b>Your time</b> — all of it, every week.</span>
+          <span><b>Pay a % for</b> — nothing; nobody is paid to grow the number.</span>
+          <span><b>Alignment</b> — perfect, but alone.</span>
+        </div>
+        <span class="win"><b>Wins when</b> — small portfolio, time to spare, and you enjoy the craft.</span>
+      </div>
+      <div class="wcard on">
+        <span class="tag">MARKETICS</span>
+        <div class="rows">
+          <span><b>Cash cost</b> — 10% of revenue, plus operations paid by the task.</span>
+          <span><b>Your time</b> — oversight. I run the market; your operator runs the house.</span>
+          <span><b>Pay a % for</b> — only the work that grows revenue: positioning, ranking, pricing.</span>
+          <span><b>Alignment</b> — I earn only when your revenue grows.</span>
+        </div>
+        <span class="win"><b>Wins when</b> — you want expert revenue work priced correctly, operations handled separately.</span>
+      </div>
+      <div class="wcard">
+        <span class="tag">FULL-SERVICE PM</span>
+        <div class="rows">
+          <span><b>Cash cost</b> — 20–35% of gross, everything bundled.*</span>
+          <span><b>Your time</b> — near zero. That's what the bundle buys.</span>
+          <span><b>Pay a % for</b> — everything, cleaning and key handoffs included.</span>
+          <span><b>Alignment</b> — paid the same whether it grows or not.</span>
+        </div>
+        <span class="win"><b>Wins when</b> — you want zero involvement, or you're remote and need boots on the ground.</span>
       </div>
     </div>
-    <div class="cx-card gold">
-      <span class="cx-k">MARKETICS</span>
-      <div class="cx-rate"><span class="n">10<span>%</span></span><span class="u">of revenue</span></div>
-      <div class="cx-body">
-        <p><span class="w">A third</span> of a generalist's share — on revenue we grow by a median 45%, net of market.</p>
-        <p>Revenue is the entire job — and our slice only grows by growing yours.</p>
+    <p class="footnote">* Full-service short-term rental management typically runs 20–35% of gross revenue (SkyRun, Apr 2026; PriceLabs industry guide, May 2026); premium and luxury portfolios trend 25–40% (Weekender Management, May 2026). Actual terms vary by market and operator.</p>
+  </section>
+
+  <!-- THE COMPARISON -->
+  <section class="sec">
+    <div class="kicker"><div class="bar"></div><span>The comparison</span></div>
+    <h2 class="h2" style="font-size:40px;line-height:1.15;">Your all-in cost, side by side.</h2>
+
+    <div class="legend">
+      <div class="li"><div class="sw" style="background:var(--gold);"></div><span>My fee — 10%</span></div>
+      <div class="li"><div class="sw" style="background:rgba(214,173,96,.34);border:1px solid rgba(214,173,96,.45);"></div><span>Hosting costs — up to ~10%</span></div>
+      <div class="li"><div class="sw" style="background:rgba(214,173,96,.12);border:1px solid rgba(214,173,96,.28);"></div><span>Full-service manager</span></div>
+      <span class="axis-lbl">ALL-IN COST, % OF REVENUE</span>
+    </div>
+
+    <div class="chart">
+      <div class="yax">
+        <span style="bottom:234px;">30%</span><span style="bottom:154px;">20%</span><span style="bottom:74px;">10%</span><span style="bottom:-6px;">0</span>
+      </div>
+      <div class="plot">
+        <div class="grid" style="bottom:240px;"></div>
+        <div class="grid" style="bottom:160px;"></div>
+        <div class="grid" style="bottom:80px;"></div>
+        <div class="grid" style="bottom:0;background:var(--line-3);"></div>
+        <div class="pivot"></div>
+        <span class="pivot-lbl">FULL-SERVICE STARTS HERE</span>
+        <div class="bars">
+          <div class="barcol">
+            <span class="cap" style="color:var(--gold);">YOUR ALL-IN</span>
+            <div class="stack">
+              <div class="seg-host"><span class="t">hosting costs</span><span class="s">up to ~10%, varies</span></div>
+              <div class="seg-fee"><span>10%</span></div>
+            </div>
+          </div>
+          <div class="barcol">
+            <span class="cap" style="color:#7C7A72;">FULL-SERVICE</span>
+            <div class="stack">
+              <div class="seg-up"><span>…and up</span></div>
+              <div class="seg-pm"><span class="big">20%+</span><span class="s">of gross</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="chart-cats">
+      <div class="c"><div class="h" style="color:var(--gold);">MARKETICS</div><div class="s">10% fee + hosting costs</div></div>
+      <div class="c"><div class="h" style="color:#7C7A72;">FULL-SERVICE PM</div><div class="s">20%+ of gross</div></div>
+    </div>
 
-<!-- ══ THE PRINCIPLE ══ -->
-<section class="pr-principle sec">
-  <div>
-    <div class="kicker"><div class="bar"></div><span>The principle</span></div>
-    <h2 class="pp-h">Commission what scales.<br>Fix-fee what's operational.</h2>
-  </div>
-  <div class="pp-rows">
-    <div class="pp-row rev">
-      <span class="t">Revenue</span>
-      <span class="b">Earns a commission — because it scales with performance, and a commission keeps our incentive identical to yours. This is the part that should be paid for results.</span>
-    </div>
-    <div class="pp-row ops">
-      <span class="t">Operations</span>
-      <span class="b">The running of the house — a fixed fee, per month or per reservation. It's real work, but it doesn't scale your revenue, so it shouldn't take a cut of it.</span>
-    </div>
-    <div class="pp-row inv">
-      <span class="t">The inversion</span>
-      <span class="b">Most managers charge a revenue-style commission for operational work. We think that's backwards — and it's the reason a generalist's 20–30% quietly costs you far more than a specialist's 10%.</span>
-    </div>
-  </div>
-</section>
+    <p class="chart-note">Your all-in cost is my 10% fee plus your hosting costs — cleaning, turnovers, supplies. Those vary by market, but tend to stay within roughly ten percent of revenue. Full-service managers generally begin around 20% of gross and climb from there. <strong>The exact numbers differ by market and operator — the shape is the point: a fee tied to your growth, and hosting costs that stay under control.</strong></p>
+  </section>
 
-<!-- ══ WHAT YOU PAY ══ -->
-<section class="pr-pay sec">
-  <div class="kicker"><div class="bar"></div><span>What you pay — and what you don't</span></div>
-  <div class="pay-grid">
-    <div class="pay-card">
-      <span class="pay-k">OUR FEE</span>
-      <span class="pay-t">10% of revenue</span>
-      <span class="pay-b">Split automatically per booking — 90% to you, 10% to us — at channel payout. No retainer, no upfront fee, no invoice. Cancel anytime.</span>
+  <!-- WHAT YOU PAY -->
+  <section class="sec">
+    <div class="kicker"><div class="bar"></div><span>What you pay — and how it works</span></div>
+    <div class="cards3" style="margin-top:0;">
+      <div class="pay-card">
+        <span class="lbl">MY FEE</span>
+        <span class="big">10% of revenue</span>
+        <p>Split automatically per booking — 90% to you, 10% to me — at channel payout. No retainer, no upfront fee, no invoice. Cancel anytime.</p>
+      </div>
+      <div class="pay-card">
+        <span class="lbl">TRADES · OWNER-PAID</span>
+        <span class="big">Directed, never marked up</span>
+        <p>When a shoot or a design refresh is worth it, I write the brief and direct the work — you engage and pay the photographer or designer <strong>directly, at their rate</strong>. I take no margin on vendors.</p>
+      </div>
+      <div class="pay-card">
+        <span class="lbl">COMMITMENT</span>
+        <span class="big">$500, refundable</span>
+        <p>A commitment deposit that filters for serious owners — refunded in full when you complete the 90-day program. It's a handshake, not a cost.</p>
+      </div>
     </div>
-    <div class="pay-card">
-      <span class="pay-k">TRADES · OWNER-PAID</span>
-      <span class="pay-t">Directed, never marked up</span>
-      <span class="pay-b">When a shoot or a design refresh is worth it, we write the brief and direct the work — you engage and pay the photographer or designer <span class="w">directly, at their rate</span>. We take no margin on vendors.</span>
-    </div>
-    <div class="pay-card">
-      <span class="pay-k">COMMITMENT</span>
-      <span class="pay-t">$500, refundable</span>
-      <span class="pay-b">A commitment deposit that filters for serious owners — refunded in full when you complete the 90-day program. It's a handshake, not a cost.</span>
-    </div>
-  </div>
-</section>
 
-<!-- ══ HOW THE MONEY MOVES ══ -->
-<section class="pr-flow sec">
-  <div class="kicker"><div class="bar"></div><span>How the money moves</span></div>
-  <div class="flow-grid">
-    <div class="flow-cell">
-      <span class="flow-n">Per booking</span>
-      <span class="flow-b">The 90/10 split is calculated on each reservation — not tallied and invoiced at month-end.</span>
+    <div class="hiw">
+      <div class="col"><span>PER BOOKING</span><p>The 90/10 split is calculated on every reservation — never tallied and invoiced at month-end.</p></div>
+      <div class="col"><span>AT PAYOUT</span><p>Settled at channel payout, about 24 hours after the guest checks in — at the source.</p></div>
+      <div class="col"><span>SEPARATE ACCOUNTS</span><p>Your 90% and my 10% land in our own accounts. I never hold, touch, or route your money.</p></div>
+      <div class="col hl"><span>NOTHING TO SEND</span><p>No invoice, no chasing, no retainer — nothing you could ever fall behind on.</p></div>
     </div>
-    <div class="flow-cell">
-      <span class="flow-n">At payout</span>
-      <span class="flow-b">Airbnb releases the payout about 24 hours after the guest checks in. The split happens there, at the source.</span>
-    </div>
-    <div class="flow-cell">
-      <span class="flow-n">Separate accounts</span>
-      <span class="flow-b">Your 90% and our 10% land in each of our own accounts. We never hold, touch, or route your money.</span>
-    </div>
-    <div class="flow-cell last">
-      <span class="flow-n">Nothing to pay</span>
-      <span class="flow-b">No invoice, no chasing, no retainer. You can't fall behind on a fee you never have to send.</span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ WORKED EXAMPLE ══ -->
-<section class="pr-math sec">
-  <div class="kicker"><div class="bar"></div><span>The math, on a real lift</span></div>
-  <h2 class="pr-h2">You keep 90% of your revenue.</h2>
-  <div class="math-grid">
-    <div class="math-card">
-      <span class="math-k">THE LIFT WE CREATE</span>
-      <span class="math-n">+$1,710<span class="u"> /mo</span></span>
-      <span class="math-b">$3,690 → $5,400 / mo, net of market — the sample-audit property.</span>
-    </div>
-    <div class="math-card gold">
-      <span class="math-k">OUR 10% OF REVENUE</span>
-      <span class="math-n">$540<span class="u"> /mo</span></span>
-      <span class="math-b">You keep <span class="w">$4,860 / mo</span> — up $1,170 net of our fee.</span>
-    </div>
-    <div class="math-card">
-      <span class="math-k">A 30%-OF-GROSS MANAGER</span>
-      <span class="math-n red">$1,620<span class="u"> /mo</span></span>
-      <span class="math-b">On the same $5,400 — grown or not. About 3× our fee.</span>
-    </div>
-  </div>
-  <p class="math-lead">A 30%-of-gross manager takes <span class="red">$1,620</span> a month on the same revenue. We take <span class="gold">$540</span> — a third of that — on a number we grew by nearly half.</p>
-  <p class="math-fine">Illustrative, using the sample-audit property. Comparison figure is the category-typical 20–30% of gross; actual manager terms vary. Marketics' fee is 10% of revenue, split automatically per booking at channel payout. <a href="/sample-audit">See a sample audit →</a></p>
-</section>
+  <!-- WORKED EXAMPLE -->
+  <section class="sec worked">
+    <div class="kicker"><div class="bar"></div><span>The math, from a real audit</span></div>
+    <h2 class="h2" style="font-size:42px;">One audit, line by line.</h2>
 
-<!-- ══ CLOSING ══ -->
-<section class="pr-closing sec">
-  <h2 class="pr-closing-h">The only fee that goes up when yours does.</h2>
-  <p class="pr-closing-p">Start with a free audit of your real comp set. You'll see the lift before you owe a thing.</p>
-  <div class="pr-closing-actions">
-    <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
-    <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
-  </div>
-  <span class="pr-closing-fine">The audit is free. No lock-in after — cancel anytime.</span>
-</section>
+    <div class="money-grid">
+      <div class="mcell">
+        <span class="lbl">REVENUE BEFORE</span>
+        <span class="num">$3,690</span>
+        <span class="note">Untouched — <strong>100% yours.</strong></span>
+      </div>
+      <div class="mcell">
+        <span class="lbl g">+ THE MARKET ADDED</span>
+        <span class="num g">+$1,710</span>
+        <span class="note">New demand we captured together, <strong>net of market.</strong></span>
+      </div>
+      <div class="mcell">
+        <span class="lbl">− MY TEN PERCENT</span>
+        <span class="num m">−$540</span>
+        <span class="note">10% of revenue — a <strong>third of the raise</strong> I created.</span>
+      </div>
+      <div class="mcell">
+        <span class="lbl g">= YOU KEPT</span>
+        <span class="num">$4,860</span>
+        <span class="note"><span class="g">+$1,170 more</span> in your pocket every month — after my fee.</span>
+      </div>
+    </div>
+    <p class="worked-quote">The raise paid for me three times over — my fee came out of money that didn't exist before. <span>Yours will look different; the audit shows your number, not an average.</span></p>
+    <p class="footnote">Illustrative, using the sample-audit property. Your numbers come from your own comp set — the free audit shows them before you owe a thing. Marketics' fee is 10% of revenue, split automatically per booking at channel payout.</p>
+  </section>
 
-<!-- ══ FOOTER ══ -->
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2 class="closing-h">The only rate aligned with your growth.</h2>
+    <p>Start with a free audit of your real comp set. You'll see your bigger number — and the 90% you keep — before you owe a thing.</p>
+    <div class="closing-cta">
+      <a href="/get-started" class="btn-gold">Get My Free Revenue Audit</a>
+      <a href="/sample-audit" class="link-sample">see a sample audit <span class="arw">→</span></a>
+    </div>
+    <span class="closing-fine">The audit is free. No lock-in after — cancel anytime.</span>
+  </section>
+
+</main>
+
 <footer>
   <div class="foot">
     <div class="foot-brand">
@@ -507,12 +533,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 </footer>
 
 <script>
-/* nav: scroll shade + mobile menu */
 (function(){
   var nav=document.getElementById('siteNav');
   window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
   var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
-  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}
   btn.addEventListener('click',function(e){e.stopPropagation();
     if(menu.classList.contains('open'))close();
     else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
@@ -521,27 +546,19 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 })();
 </script>
 
-<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
-
-<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<!-- GHL Chat Widget: lazy-loads on first interaction or after 5s -->
 <script>
 (function(){
-  var loaded = false;
-  function loadWidget() {
-    if (loaded) return;
-    loaded = true;
-    var s = document.createElement('script');
-    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
-    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
-    s.async = true;
-    document.body.appendChild(s);
+  var loaded=false;
+  function loadWidget(){ if(loaded)return; loaded=true;
+    var s=document.createElement('script');
+    s.src='https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id','67322c9be99a3280cce39a8e');
+    s.async=true; document.body.appendChild(s);
   }
-  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
-  events.forEach(function(e) {
-    window.addEventListener(e, loadWidget, {once: true, passive: true});
-  });
-  setTimeout(loadWidget, 5000);
+  ['scroll','click','touchstart','mousemove','keydown'].forEach(function(e){ window.addEventListener(e,loadWidget,{once:true,passive:true}); });
+  setTimeout(loadWidget,5000);
 })();
 </script>
 </body>
