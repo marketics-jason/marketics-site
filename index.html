@@ -43,6 +43,20 @@
   "slogan": "Your Market. Mastered."
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What does Marketics actually do?", "acceptedAnswer": { "@type": "Answer", "text": "Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together, not a pricing dial turned once. It is the only thing we do." } },
+    { "@type": "Question", "name": "How is this different from my property manager?", "acceptedAnswer": { "@type": "Answer", "text": "A property manager runs the house — keys, cleaning, calendars — with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it." } },
+    { "@type": "Question", "name": "How do you charge?", "acceptedAnswer": { "@type": "Answer", "text": "On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations — the running of the house — is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows." } },
+    { "@type": "Question", "name": "Do you guarantee a specific tier or an Airbnb Luxe placement?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market — a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell." } },
+    { "@type": "Question", "name": "What is the free revenue audit?", "acceptedAnswer": { "@type": "Answer", "text": "A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together." } },
+    { "@type": "Question", "name": "What markets do you work in?", "acceptedAnswer": { "@type": "Answer", "text": "A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly." } }
+  ]
+}
+</script>
 
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -354,6 +368,16 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .hero h1{margin-top:0 !important;margin-left:-6px !important;}
 .hero .hero-lead{margin-left:-6px !important;}
 </style>
+<style>
+/* GEO semantic markup (ol/dl/h2/h3) — reset UA defaults so there is zero visual change */
+ol.rows,dl.rows{margin:0;padding:0;list-style:none;}
+li.mrow{list-style:none;}
+h2.split-h,h2.rh-t,h2.story-h{margin-bottom:0;}
+h3.mt,h3.rttl,h3.tk-t{margin:0;}
+dt.fq{margin:0;}
+dd.fa{margin:0;}
+.rc-art{display:contents;}
+</style>
 </head>
 <body>
 
@@ -454,7 +478,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ PHILOSOPHY ══ -->
 <section class="philo sec">
   <div class="philo-kick">The idea underneath all of it</div>
-  <p class="philo-big">I don't price the market.<br>The market prices <em>me</em> — based on what they see.</p>
+  <h2 class="philo-big">I don't price the market.<br>The market prices <em>me</em> — based on what they see.</h2>
   <p class="philo-sub">Nobody prices the market. We build the value; they choose what it's worth. Price isn't something we set — it's the verdict the market returns.</p>
   <div class="asym">
     <p class="asym-lead">A booking means the value was <span class="hl">well perceived</span>. No booking means it wasn't. From there, exactly two moves — and they are not equal.</p>
@@ -470,18 +494,18 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <section class="split sec">
   <div class="split-aside">
     <div class="kicker"><div class="bar"></div><span>The Method</span></div>
-    <span class="split-h">We realign the<br>whole listing.</span>
+    <h2 class="split-h">We realign the<br>whole listing.</h2>
     <p class="split-p">Most operators start with price. We touch it last. Value comes first — what your property is, how it's seen, where it belongs. The market sets the number from there.</p>
-    <p class="split-p">Both rate and occupancy move. That is what lifts RevPAR into a higher tier.</p>
+    <p class="split-p">Both rate and occupancy move. That is what lifts <a href="https://en.wikipedia.org/wiki/RevPAR" target="_blank" rel="noopener">RevPAR — revenue per available night</a> — into a higher tier.</p>
   </div>
-  <div class="rows">
-    <div class="mrow"><span class="num">01</span><div><span class="mt">Market positioning</span><p class="mb">We read the real comp set and place the property in the tier it can actually win — the diagnosis every other lever is built on.</p></div></div>
-    <div class="mrow"><span class="num">02</span><div><span class="mt">Storytelling</span><p class="mb">Photography direction, amenities, design cues, and the sequence a guest scrolls — the listing tells the story of the tier it belongs in.</p></div></div>
-    <div class="mrow"><span class="num">03</span><div><span class="mt">Distribution</span><p class="mb">The right channels, syndicated and kept in sync, so the property is seen by the guests who pay for that tier.</p></div></div>
-    <div class="mrow"><span class="num">04</span><div><span class="mt">Ranking</span><p class="mb">Search position against the comp set, defended daily — visibility is worthless if a competitor sits above you.</p></div></div>
-    <div class="mrow"><span class="num">05</span><div><span class="mt">Pricing</span><p class="mb">Dynamic rates that read demand, events, and the tier ceiling — the last lever, not the first, and never the only one.</p></div></div>
+  <ol class="rows">
+    <li class="mrow"><span class="num">01</span><div><h3 class="mt">Market positioning</h3><p class="mb">We read the real comp set — the comparable listings you're priced against — and place the property in the tier it can actually win — the diagnosis every other lever is built on.</p></div></li>
+    <li class="mrow"><span class="num">02</span><div><h3 class="mt">Storytelling</h3><p class="mb">Photography direction, amenities, design cues, and the sequence a guest scrolls — the listing tells the story of the tier it belongs in.</p></div></li>
+    <li class="mrow"><span class="num">03</span><div><h3 class="mt">Distribution</h3><p class="mb">The right channels, syndicated and kept in sync, so the property is seen by the guests who pay for that tier.</p></div></li>
+    <li class="mrow"><span class="num">04</span><div><h3 class="mt">Ranking</h3><p class="mb">Search position against the comp set, defended daily — visibility is worthless if a competitor sits above you.</p></div></li>
+    <li class="mrow"><span class="num">05</span><div><h3 class="mt">Pricing</h3><p class="mb">Dynamic rates that read demand, events, and the tier ceiling — the last lever, not the first, and never the only one.</p></div></li>
     <div class="cap"></div>
-  </div>
+  </ol>
 </section>
 
 <!-- ══ RESULTS ══ -->
@@ -489,32 +513,32 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <div class="results-head">
     <div>
       <div class="kicker"><div class="bar"></div><span>Selected work</span></div>
-      <span class="rh-t">Right-fitted, across 22 markets.</span>
+      <h2 class="rh-t">Right-fitted, across 22 markets.</h2>
     </div>
     <span class="rh-note">A median 45% lift, net of market, across 19 documented engagements. A few, quietly.</span>
   </div>
   <div class="rgrid">
-    <a class="rcard" href="/case-studies/anthony-san-antonio">
+    <article class="rc-art"><a class="rcard" href="/case-studies/anthony-san-antonio">
       <div class="rimg" style="background-image:url(/case-studies/anthony-san-antonio/images/pool-mural.webp)">
         <span class="rtier">STANDARD → PREMIUM</span>
-        <div class="rcap"><span class="rmkt">San Antonio, TX</span><span class="rttl">Just a place to stay, made a destination</span></div>
+        <div class="rcap"><span class="rmkt">San Antonio, TX</span><h3 class="rttl">Just a place to stay, made a destination</h3></div>
       </div>
       <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+45%</span></div>
-    </a>
-    <a class="rcard" href="/case-studies/montreal-hotel">
+    </a></article>
+    <article class="rc-art"><a class="rcard" href="/case-studies/montreal-hotel">
       <div class="rimg" style="background-image:url(/case-studies/montreal-hotel/images/heron-suite.webp)">
         <span class="rtier">REPOSITIONED</span>
-        <div class="rcap"><span class="rmkt">Montréal, QC</span><span class="rttl">A 40-room boutique stay</span></div>
+        <div class="rcap"><span class="rmkt">Montréal, QC</span><h3 class="rttl">A 40-room boutique stay</h3></div>
       </div>
       <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+65%</span></div>
-    </a>
-    <a class="rcard" href="/case-studies/wally-puerto-rico">
+    </a></article>
+    <article class="rc-art"><a class="rcard" href="/case-studies/wally-puerto-rico">
       <div class="rimg" style="background-image:url(/case-studies/wally-puerto-rico/images/after-bedroom.webp)">
         <span class="rtier">PREMIUM → LUXURY</span>
-        <div class="rcap"><span class="rmkt">Río Grande, PR</span><span class="rttl">An ocean-and-jungle villa</span></div>
+        <div class="rcap"><span class="rmkt">Río Grande, PR</span><h3 class="rttl">An ocean-and-jungle villa</h3></div>
       </div>
       <div class="rfoot"><span class="rol">Tier reached</span><span class="rov">Luxury</span></div>
-    </a>
+    </a></article>
   </div>
   <div class="results-cta"><a href="/sample-audit" class="samplelink" style="letter-spacing:2px;color:var(--gold)">SEE A SAMPLE AUDIT <span>→</span></a></div>
 </section>
@@ -524,11 +548,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <div class="story-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter, founder of Marketics" loading="lazy"></div>
   <div class="story-body">
     <div class="kicker"><div class="bar"></div><span>Our Story</span></div>
-    <span class="story-h">Founder-led.<br>A decade in one lane.</span>
+    <h2 class="story-h">Founder-led.<br>A decade in one lane.</h2>
     <p class="story-p">Marketics does one thing — short-term rental revenue. Five years operating a 50+ listing portfolio of my own, then building the specialist practice that runs revenue for owners. A decade in the same lane: the comp set, the ranking, the craft of the listing.</p>
     <div class="luxe">
       <span class="lx-n">1 <small>property</small></span>
-      <span class="lx-a">converted to the Airbnb Luxe collection <span style="color:var(--gold)">· documented</span></span>
+      <span class="lx-a">converted to the <a href="https://www.airbnb.com/luxury" target="_blank" rel="noopener">Airbnb Luxe</a> collection <span style="color:var(--gold)">· documented</span></span>
       <span class="lx-b">They invited us back.</span>
     </div>
     <p class="story-quote">"Airbnb's Luxe team kept our photos, title, and copy — a handful of subtle edits where a typical home gets a full rewrite."</p>
@@ -539,18 +563,32 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <section class="split sec">
   <div class="split-aside">
     <div class="kicker"><div class="bar"></div><span>Questions</span></div>
-    <span class="split-h">Straight<br>answers.</span>
+    <h2 class="split-h">Straight<br>answers.</h2>
     <p class="split-p">The ones every owner asks before the first call.</p>
   </div>
-  <div class="rows">
-    <div class="faqrow"><span class="fq">What does Marketics actually do?</span><p class="fa">Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together, not a pricing dial turned once. It is the only thing we do.</p></div>
-    <div class="faqrow"><span class="fq">How is this different from my property manager?</span><p class="fa">A property manager runs the house — keys, cleaning, calendars — with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it.</p></div>
-    <div class="faqrow"><span class="fq">How do you charge?</span><p class="fa">On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations — the running of the house — is a fixed fee, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows.</p></div>
-    <div class="faqrow"><span class="fq">Do you guarantee a specific tier or an Airbnb Luxe placement?</span><p class="fa">No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market — a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell.</p></div>
-    <div class="faqrow"><span class="fq">What is the free revenue audit?</span><p class="fa">A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together.</p></div>
-    <div class="faqrow"><span class="fq">What markets do you work in?</span><p class="fa">A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly.</p></div>
+  <dl class="rows">
+    <div class="faqrow"><dt class="fq">What does Marketics actually do?</dt><dd class="fa">Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together, not a pricing dial turned once. It is the only thing we do.</dd></div>
+    <div class="faqrow"><dt class="fq">How is this different from my property manager?</dt><dd class="fa">A property manager runs the house — keys, cleaning, calendars — with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it.</dd></div>
+    <div class="faqrow"><dt class="fq">How do you charge?</dt><dd class="fa">On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations — the running of the house — is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows.</dd></div>
+    <div class="faqrow"><dt class="fq">Do you guarantee a specific tier or an Airbnb Luxe placement?</dt><dd class="fa">No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market — a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell.</dd></div>
+    <div class="faqrow"><dt class="fq">What is the free revenue audit?</dt><dd class="fa">A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together.</dd></div>
+    <div class="faqrow"><dt class="fq">What markets do you work in?</dt><dd class="fa">A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly.</dd></div>
     <div class="cap"></div>
+  </dl>
+</section>
+
+<!-- ══ KEY TAKEAWAYS ══ -->
+<section class="split sec">
+  <div class="split-aside">
+    <div class="kicker"><div class="bar"></div><span>Key takeaways</span></div>
+    <h2 class="split-h">In three<br>lines.</h2>
   </div>
+  <ol class="rows">
+    <li class="mrow"><span class="num">01</span><div><h3 class="mt">Value before price.</h3><p class="mb">We raise what the market sees your property is worth — positioning, storytelling, distribution, ranking — and let price follow. Cutting rate is the one move that compounds against you.</p></div></li>
+    <li class="mrow"><span class="num">02</span><div><h3 class="mt">Full-stack revenue, run together.</h3><p class="mb">One practice owns the whole revenue stack, paid only when your revenue grows — not a pricing dial turned once.</p></div></li>
+    <li class="mrow"><span class="num">03</span><div><h3 class="mt">A documented 45% median lift, net of market.</h3><p class="mb">Across 1,000+ listings in 22 markets. Every property is audited free before any target is set.</p></div></li>
+    <div class="cap"></div>
+  </ol>
 </section>
 
 <!-- ══ CLOSING ══ -->
