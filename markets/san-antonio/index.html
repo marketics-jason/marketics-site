@@ -181,15 +181,6 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .mh1 em{font-style:italic;font-weight:300;color:var(--gold);}
 .mlead{font-size:18px;line-height:1.7;color:var(--body);margin:30px 0 0;max-width:760px;}
 
-/* ══ SNAPSHOT ══ */
-.snapshot{display:grid;grid-template-columns:repeat(4,1fr);}
-.snap{padding:36px var(--gutter-snap,40px);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;}
-.snapshot{padding:0;}
-.snap:first-child{padding-left:var(--gutter);}
-.snap:last-child{border-right:none;padding-right:var(--gutter);}
-.snap-v{font-family:var(--display);font-weight:300;font-size:34px;color:var(--white);}
-.snap-l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;line-height:1.5;}
-
 /* ══ DEMAND DRIVERS ══ */
 .block{padding:72px var(--gutter);}
 .block-h{font-family:var(--display);font-weight:300;font-size:32px;letter-spacing:.5px;color:var(--white);margin:16px 0 36px;}
@@ -247,6 +238,66 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
 .foot-legal a:hover{color:var(--muted);}
 
+/* ══ CHARACTER STRIP ══ */
+.charstrip{display:flex;flex-wrap:wrap;}
+.charstrip .ch{padding:22px 34px;border-right:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+.charstrip .ch:first-child{padding-left:var(--gutter);}
+.charstrip .ch:last-child{border-right:none;}
+.charstrip .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.charstrip .ch.place .dot{background:var(--faint);}
+.charstrip .ch span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--body);text-transform:uppercase;}
+.charstrip .ch.place span{color:var(--dim);}
+
+/* ══ METRICS STACK (market context) ══ */
+.metrics{background:var(--panel-2);}
+.metrics-inner{padding:64px var(--gutter);}
+.metrics-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px;flex-wrap:wrap;}
+.metrics-head .mh-l{display:flex;flex-direction:column;gap:8px;}
+.metrics-head .mh-e{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;}
+.metrics-head .mh-t{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:.5px;color:var(--white);}
+.metrics-head .mh-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase;padding-bottom:6px;}
+.metrics-grid{border:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);}
+.metric{padding:32px 30px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px;}
+.metric:last-child{border-right:none;}
+.metric .m-v{font-family:var(--display);font-weight:300;font-size:32px;color:var(--white);}
+.metric .m-l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;}
+.metric .m-n{font-size:12.5px;line-height:1.6;color:var(--muted);}
+.metrics-note{font-size:11.5px;line-height:1.6;color:var(--faint);margin:20px 0 0;max-width:780px;}
+
+/* ══ SEASONAL SHAPE ══ */
+.season-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:center;}
+.season-chart{border:1px solid var(--line-3);background:var(--panel-2);padding:26px 26px 20px;}
+.season-chart .sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.season-chart .sc-top span{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);}
+.season-chart .sc-top .sc-ctx{color:var(--dim);}
+.season-chart svg{width:100%;height:300px;display:block;overflow:visible;}
+.season-months{display:flex;justify-content:space-between;margin-top:12px;}
+.season-months span{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--dim);}
+.season-months span.hi{color:var(--gold);}
+.season-legend{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);}
+.season-legend .dash{width:0;height:12px;border-left:1.5px dashed rgba(200,132,64,.8);}
+.season-legend span{font-size:11.5px;color:var(--muted);}
+.season-read{border-left:2px solid var(--gold);padding:6px 0 6px 26px;display:flex;flex-direction:column;gap:18px;}
+.season-read p{font-size:16px;line-height:1.75;color:var(--body);margin:0;}
+.season-read p strong{color:var(--bright);font-weight:400;}
+
+/* ══ REGULATORY TRAP ══ */
+.regtrap-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:start;}
+.regtrap-copy{display:flex;flex-direction:column;gap:16px;}
+.regtrap-copy .rt-e{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:#C0392B;text-transform:uppercase;}
+.regtrap-copy h2{font-family:var(--display);font-weight:300;font-size:30px;line-height:1.2;letter-spacing:.5px;color:var(--white);margin:0;}
+.regtrap-copy p{font-size:15px;line-height:1.75;color:var(--muted);margin:0;}
+.regtrap-card{border:1px solid rgba(192,57,43,.35);background:rgba(192,57,43,.04);padding:34px 36px;display:flex;flex-direction:column;gap:20px;}
+.regtrap-card p{font-size:16px;line-height:1.75;color:var(--bright);margin:0;}
+.regtrap-card p.sub{font-size:15px;color:var(--body);}
+.regtrap-card p strong{color:var(--white);font-weight:400;}
+.regtrap-warn{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid rgba(192,57,43,.2);}
+.regtrap-warn span{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--dim);}
+
+/* ══ BRIDGE ══ */
+.bridge{padding:34px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.bridge p{font-size:16px;line-height:1.6;color:var(--body);margin:0;max-width:680px;}
+
 /* ══ RESPONSIVE ══ */
 @media (max-width:1080px){
   nav{padding:0 40px;}
@@ -264,6 +315,12 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   .sameness-grid{grid-template-columns:1fr;gap:36px;}
   .proof-grid{grid-template-columns:1fr;gap:28px;}
   .proof-img img{height:300px;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .metric:nth-child(2){border-right:none;}
+  .metric:nth-child(1),.metric:nth-child(2){border-bottom:1px solid var(--line);}
+  .season-grid{grid-template-columns:1fr;gap:32px;}
+  .regtrap-grid{grid-template-columns:1fr;gap:32px;}
+  .charstrip .ch{border-bottom:1px solid var(--line);}
 }
 @media (max-width:600px){
   nav{padding:0 24px;height:64px;}
@@ -273,12 +330,15 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   .block,.closing{padding-top:56px;padding-bottom:56px;}
   .mh1{font-size:34px;letter-spacing:0;}
   .mlead{font-size:16px;}
-  .snapshot{grid-template-columns:1fr 1fr;}
-  .snap{padding:26px 24px;}
-  .snap:nth-child(1),.snap:nth-child(3){padding-left:24px;}
-  .snap:nth-child(2),.snap:nth-child(4){border-right:none;padding-right:24px;}
-  .snap:nth-child(1),.snap:nth-child(2){border-bottom:1px solid var(--line);}
-  .snap-v{font-size:28px;}
+  .metrics-inner{padding:44px 24px;}
+  .metrics-grid{grid-template-columns:1fr;}
+  .metric{border-right:none;border-bottom:1px solid var(--line);}
+  .metric:last-child{border-bottom:none;}
+  .metric .m-v{font-size:28px;}
+  .charstrip .ch,.charstrip .ch:first-child{padding:18px 24px;}
+  .season-chart svg{height:220px;}
+  .regtrap-card{padding:26px 24px;}
+  .bridge{padding:28px 24px;}
   .block-h{font-size:26px;}
   .sameness-copy h2{font-size:24px;}
   .sameness-quote q{font-size:18px;}
@@ -316,6 +376,8 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
+<main>
+
 <!-- ══ HERO ══ -->
 <header class="mhero">
   <div class="mhero-inner">
@@ -330,13 +392,49 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   </div>
 </header>
 
-<!-- ══ SNAPSHOT ══ -->
+<!-- ══ CHARACTER STRIP (qualitative — no numbers) ══ -->
 <section class="sec">
-  <div class="snapshot">
-    <div class="snap"><span class="snap-v">30M+</span><span class="snap-l">Annual visitors</span></div>
-    <div class="snap"><span class="snap-v">3-yr</span><span class="snap-l">STR permit term</span></div>
-    <div class="snap"><span class="snap-v">100+</span><span class="snap-l">New permits / month</span></div>
-    <div class="snap"><span class="snap-v">3.4×</span><span class="snap-l">Local portfolio result</span></div>
+  <div class="charstrip">
+    <div class="ch"><span class="dot"></span><span>Urban value market</span></div>
+    <div class="ch"><span class="dot"></span><span>Year-round tourism base</span></div>
+    <div class="ch"><span class="dot"></span><span>Event-led compression</span></div>
+    <div class="ch place"><span class="dot"></span><span>San Antonio · TX · USA</span></div>
+  </div>
+</section>
+
+<!-- ══ METRICS STACK · market context ══ -->
+<section class="sec metrics">
+  <div class="metrics-inner">
+    <div class="metrics-head">
+      <div class="mh-l">
+        <span class="mh-e">The market, in numbers</span>
+        <span class="mh-t">The numbers, before the reading</span>
+      </div>
+      <span class="mh-tag">Market context · not a Marketics result</span>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <span class="m-v">30M+</span>
+        <span class="m-l">Annual visitors</span>
+        <span class="m-n">Leisure, convention, medical and business travel keep a demand floor year-round.</span>
+      </div>
+      <div class="metric">
+        <span class="m-v">Citywide</span>
+        <span class="m-l">STR permitting</span>
+        <span class="m-n">Allowed across the city — but Type 2 density caps bind by block face.</span>
+      </div>
+      <div class="metric">
+        <span class="m-v">3-year</span>
+        <span class="m-l">Permit term</span>
+        <span class="m-n">One of the more permissive frameworks among major Texas markets.</span>
+      </div>
+      <div class="metric">
+        <span class="m-v">100+</span>
+        <span class="m-l">New permits / month</span>
+        <span class="m-n">A steadily growing, competitive field — differentiation matters more each cycle.</span>
+      </div>
+    </div>
+    <p class="metrics-note">Figures describe the San Antonio market, not Marketics client outcomes.</p>
   </div>
 </section>
 
@@ -365,6 +463,42 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   </div>
 </section>
 
+<!-- ══ SEASONAL SHAPE ══ -->
+<section class="sec">
+  <div class="block">
+    <span class="eyebrow">The seasonal shape · and what to do about it</span>
+    <h2 class="block-h">It doesn't spike. It compounds — then softens.</h2>
+    <div class="season-grid">
+      <div class="season-chart">
+        <div class="sc-top"><span>Relative demand · by month</span><span class="sc-ctx">Market context</span></div>
+        <svg viewBox="0 0 1000 360" preserveAspectRatio="none" role="img" aria-label="Relative San Antonio short-term-rental demand by month, peaking March through July with a late-April Fiesta spike">
+          <defs>
+            <linearGradient id="saFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(214,173,96,0.26)"></stop>
+              <stop offset="100%" stop-color="rgba(214,173,96,0)"></stop>
+            </linearGradient>
+          </defs>
+          <line x1="0" x2="1000" y1="24" y2="24" stroke="#1c1c1a" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+          <line x1="0" x2="1000" y1="124" y2="124" stroke="#1c1c1a" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+          <line x1="0" x2="1000" y1="224" y2="224" stroke="#1c1c1a" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+          <line x1="0" x2="1000" y1="324" y2="324" stroke="#2a2a28" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+          <line x1="272.7" x2="272.7" y1="24" y2="324" stroke="rgba(200,132,64,0.5)" stroke-width="1" stroke-dasharray="4 5" vector-effect="non-scaling-stroke"></line>
+          <path d="M0,324 L0.0,159.0 L90.9,150.0 L181.8,126.0 L272.7,78.0 L363.6,114.0 L454.5,120.0 L545.5,132.0 L636.4,138.0 L727.3,126.0 L818.2,132.0 L909.1,174.0 L1000.0,162.0 L1000,324 Z" fill="url(#saFill)"></path>
+          <polyline points="0.0,159.0 90.9,150.0 181.8,126.0 272.7,78.0 363.6,114.0 454.5,120.0 545.5,132.0 636.4,138.0 727.3,126.0 818.2,132.0 909.1,174.0 1000.0,162.0" fill="none" stroke="#D6AD60" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+        </svg>
+        <div class="season-months">
+          <span>J</span><span>F</span><span class="hi">M</span><span class="hi">A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span>
+        </div>
+        <div class="season-legend"><span class="dash"></span><span>Late April · Fiesta San Antonio — the year's tightest window</span></div>
+      </div>
+      <div class="season-read">
+        <p>Peak runs <strong>March through July</strong>, and late April is Fiesta — the single highest-compression window of the year. <strong>If you're not pricing Fiesta in January, you've already given that revenue away.</strong></p>
+        <p>November through January is where undifferentiated listings feel the softness most. It's also where disciplined midweek and extended-stay pricing quietly makes the year — the base demand never fully leaves, so the discount most owners reach for is rarely the move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ THE SAMENESS TRAP ══ -->
 <section class="sec sameness">
   <div class="sameness-grid">
@@ -376,6 +510,26 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     <div class="sameness-quote">
       <q>The fix isn't a lower price. It's giving each unit its own guest — and a reason that guest picks it over the identical door next to it.</q>
       <cite>— The Marketics Method, applied to San Antonio</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGULATORY TRAP ══ -->
+<section class="sec">
+  <div class="block">
+    <div class="regtrap-grid">
+      <div class="regtrap-copy">
+        <span class="rt-e">The trap nobody warns you about</span>
+        <h2>A San Antonio property can look perfect and still be un-permittable</h2>
+        <p>This is the part a listing dashboard will never tell you — and the reason a market read has to come from someone who has actually operated here.</p>
+      </div>
+      <div class="regtrap-card">
+        <p>San Antonio permits short-term rentals citywide under a registration system — but <strong>Type 2 rentals (non-owner-occupied)</strong> are capped to a percentage of units per block face, with minimum separation distances between them. A home that looks ideal can be blocked simply because its block has already hit the cap.</p>
+        <p class="sub">The move: <strong>confirm Type 2 eligibility for the specific address before you buy</strong> — not the neighborhood, the address. We check it as step one, every time.</p>
+        <div class="regtrap-warn">
+          <span>⚑ Regulation changes — verify current city code for your address before acting</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -407,6 +561,14 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   </div>
 </section>
 
+<!-- ══ BRIDGE ══ -->
+<section class="sec">
+  <div class="bridge">
+    <p>San Antonio listing underperforming its comp set? There's usually a five-cause diagnosis behind it.</p>
+    <a href="/intel/why-airbnb-not-getting-bookings" class="arrowlink">read the diagnosis <span>→</span></a>
+  </div>
+</section>
+
 <!-- ══ CLOSING CTA ══ -->
 <section class="sec">
   <div class="closing">
@@ -418,6 +580,8 @@ nav.scrolled{background:rgba(13,13,12,.97);}
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ══ FOOTER ══ -->
 <footer>
