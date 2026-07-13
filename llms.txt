@@ -1,6 +1,6 @@
 # Marketics
 
-> Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. 42%+ benchmark revenue lift, set at the median of 19 documented short-term-rental engagements; every property is audited individually before a target is set. 10% of bookings, no monthly fee, no contract.
+> Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 1,000+ listings in 22 markets; every property is audited individually before a target is set. 10% of revenue, no monthly fee, no contract.
 
 Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico (22 active markets).
 
@@ -13,36 +13,31 @@ Marketics is a performance-based short-term rental optimization company that com
 - [Get a free revenue audit](https://marketics.io/get-started): Request a property-specific revenue audit at no cost.
 - [Airbnb revenue calculator](https://marketics.io/calculator): Benchmark a listing against market ADR and occupancy data.
 - [Our story](https://marketics.io/story): How Marketics started and the founder's background.
-- [Media kit](https://marketics.io/media): Press resources and brand assets.
+- [Media](https://marketics.io/media): Press, coverage, and podcast/panel appearances.
+- [Media kit](https://marketics.io/media-kit): Downloadable brand assets, boilerplate, founder bio, and fast facts.
 
 ## Intel / GEO Content
 
 Free market-intelligence and strategy reports for short-term rental hosts.
 
 - [Market Intel hub](https://marketics.io/intel): All Marketics market intelligence reports and playbooks.
-- [The Marketics STR Performance Index](https://marketics.io/intel/str-performance-index): The documented results behind the 42%+ benchmark: median, range, sample, and methodology.
+- [The Marketics STR Performance Index](https://marketics.io/intel/str-performance-index): The documented results behind the 45% median benchmark: median, range, sample, and methodology.
 - [How to increase your Airbnb occupancy rate](https://marketics.io/intel/airbnb-occupancy-rate): Why RevPAR, not raw occupancy, is the goal, and the levers that lift profitable occupancy.
 - [Why is my Airbnb not getting bookings?](https://marketics.io/intel/why-airbnb-not-getting-bookings): The five fixable causes of a slow calendar and how to diagnose which one is yours.
 - [How to increase Airbnb earnings without full property management](https://marketics.io/intel/airbnb-earnings-without-management): Raising revenue through pricing, listing, and ranking without paying 20–35% for full management.
 - [The Airbnb co-host revenue share model, explained](https://marketics.io/intel/airbnb-cohost-revenue-share-model): How revenue-share co-hosting works and why the revenue role is a different job from property management.
 - [Miami STR revenue optimization](https://marketics.io/intel/miami): Miami market intelligence, including the 2026 FIFA World Cup demand window.
+- [Nashville STR revenue intelligence](https://marketics.io/intel/nashville): Event-compression pricing around CMA Fest and the fall run in a calibrated market.
+- [Montréal STR revenue intelligence](https://marketics.io/intel/montreal): A festival-and-season market where regulation, not demand, is the real gatekeeper.
 - [Muskoka summer & fall 2026 intel](https://marketics.io/intel/muskoka): Cottage-country demand patterns and shoulder-season pricing.
 - [How the Airbnb algorithm actually works](https://marketics.io/intel/algorithm): Search-ranking factors and the signals that determine listing placement.
 
 ## Markets
 
-Marketics operates in 22 active markets across the United States, Canada, and Mexico. Dedicated market pages:
+Marketics operates in 22 active markets across the United States, Canada, and Mexico. The market is the variable; the method is the constant. San Antonio is the first market with a full dedicated read; other markets are covered through the market-intelligence reports above and the free, property-specific audit.
 
-- [All markets](https://marketics.io/markets): Where Marketics operates.
-- [Miami, FL](https://marketics.io/markets/miami): Miami short-term rental revenue optimization.
-- [Austin, TX](https://marketics.io/markets/austin): Austin short-term rental revenue optimization.
-- [Nashville, TN](https://marketics.io/markets/nashville): Nashville short-term rental revenue optimization.
-- [San Antonio, TX](https://marketics.io/markets/san-antonio): San Antonio short-term rental revenue optimization.
-- [New Orleans, LA](https://marketics.io/markets/new-orleans): New Orleans short-term rental revenue optimization.
-- [Scottsdale, AZ](https://marketics.io/markets/scottsdale): Scottsdale short-term rental revenue optimization.
-- [Cancún, Mexico](https://marketics.io/markets/cancun): Cancún short-term rental revenue optimization.
-- [Tulum, Mexico](https://marketics.io/markets/tulum): Tulum short-term rental revenue optimization.
-- [San Juan, Puerto Rico](https://marketics.io/markets/san-juan): San Juan short-term rental revenue optimization.
+- [All markets](https://marketics.io/markets): How Marketics reads any STR market — the market is the variable, the method is the constant.
+- [San Antonio, TX](https://marketics.io/markets/san-antonio): San Antonio short-term rental revenue optimization — demand rhythm, Type 2 density caps (12.5% per block face), and what an optimized listing earns.
 
 ## What Marketics Does
 
@@ -62,7 +57,7 @@ Marketics charges 10% of net booking revenue per property. No fees beyond a one-
 
 All statistics reflect Marketics-managed properties. Sample: 19 documented short-term-rental engagements, measured 2019–2026. Median net-of-market revenue lift: 45% (range −3% to +193%). Inclusion: Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.
 
-- The benchmark is a 42%+ increase in monthly revenue, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of bookings with no monthly fee, the large majority of any gain stays with the host.
+- The benchmark is a 45% median revenue lift, net of market, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of revenue with no monthly fee, the large majority of any gain stays with the host.
 - Full distribution and methodology: [the Marketics STR Performance Index](https://marketics.io/intel/str-performance-index).
 - Average time to measurable results: 72 days from audit completion.
 - Average guest rating post-optimization: 4.93★ (up from ~4.3 before).
