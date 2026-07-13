@@ -268,6 +268,17 @@ main{padding-top:74px;}
 .m-hero h1{margin-top:0 !important;margin-left:-6px !important;}
 .m-hero .m-hero-lead{margin-left:-6px !important;}
 </style>
+<style>
+/* GEO semantic tags — preserve exact spacing, no visual change */
+dl.footprint{margin:0;}
+.fp-cell dd,.fp-cell dt{margin:0;}
+ul.citycards{margin:0;padding:0;list-style:none;}
+.citycards>li{display:contents;}
+h3.cc-name{margin:0;}
+.travels-head h2.t{margin:0;}
+dl.faq-list{margin-bottom:0;}
+dt.q{margin:0;}
+</style>
 </head>
 <body>
 
@@ -306,18 +317,18 @@ main{padding-top:74px;}
   </section>
 
   <!-- FOOTPRINT -->
-  <section class="footprint">
-    <div class="fp-cell"><span class="v">22</span><span class="l">Markets run</span></div>
-    <div class="fp-cell"><span class="v">3</span><span class="l">Countries · US · CA · MX</span></div>
-    <div class="fp-cell"><span class="v">1,000+</span><span class="l">Listings optimized</span></div>
-    <div class="fp-cell"><span class="v">45%</span><span class="l">Median lift · net of market</span></div>
-  </section>
+  <dl class="footprint">
+    <div class="fp-cell"><dd class="v">22</dd><dt class="l">Markets run</dt></div>
+    <div class="fp-cell"><dd class="v">3</dd><dt class="l">Countries · US · CA · MX</dt></div>
+    <div class="fp-cell"><dd class="v">1,000+</dd><dt class="l">Listings optimized</dt></div>
+    <div class="fp-cell"><dd class="v">45%</dd><dt class="l">Median lift · net of market</dt></div>
+  </dl>
 
   <!-- THE METHOD TRAVELS -->
   <section class="travels">
     <div class="travels-head">
       <span class="k">Why the market matters less than you think</span>
-      <span class="t">The data is portable to anyone. The reading isn't.</span>
+      <h2 class="t">The data is portable to anyone. The reading isn't.</h2>
     </div>
     <div class="travels-body">
       <p>Anyone can pull the rates and occupancy for your city — the numbers aren't the hard part, and they aren't the edge. <span>What actually moves your revenue is knowing which signals to act on, when the window opens, and where a market punishes the average listing.</span> That's not data. That's interpretation — and it's the one thing that travels with us into a market we've never named.</p>
@@ -330,73 +341,73 @@ main{padding-top:74px;}
     <div class="cards-head">
       <div>
         <div class="kicker"><div class="bar"></div><span>Read a market</span></div>
-        <div class="title">Six markets, read the way yours would be.</div>
+        <h2 class="title">Six markets, read the way yours would be.</h2>
       </div>
       <span class="count">6 of 22 · more in progress</span>
     </div>
-    <div class="citycards">
+    <ul class="citycards">
 
-      <a href="/markets/san-antonio" class="ccard live">
+      <li><a href="/markets/san-antonio" class="ccard live">
         <div class="cc-top">
-          <div><span class="cc-name">San Antonio</span><span class="cc-meta">TX · USA · Urban value</span></div>
+          <div><h3 class="cc-name">San Antonio</h3><span class="cc-meta">TX · USA · Urban value</span></div>
           <span class="cc-badge">LIVE</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,25.6 25.1,24.2 46.2,23.2 67.3,17.4 88.4,20.3 109.5,19.4 130.5,21.3 151.6,23.2 172.7,22.2 193.8,23.2 214.9,28.0 236.0,27.0" fill="none" stroke="#D6AD60" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">A sea of interchangeable downtown listings — which is exactly why differentiation, not discounting, is what wins here.</p>
         <span class="cc-cta">Read the San Antonio market <span>→</span></span>
-      </a>
+      </a></li>
 
-      <a href="/intel/nashville" class="ccard report">
+      <li><a href="/intel/nashville" class="ccard report">
         <div class="cc-top">
-          <div><span class="cc-name">Nashville</span><span class="cc-meta">TN · USA · Event-led</span></div>
+          <div><h3 class="cc-name">Nashville</h3><span class="cc-meta">TN · USA · Event-led</span></div>
           <span class="cc-badge">MARKET REPORT</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,31.8 25.1,30.9 46.2,28.0 67.3,25.6 88.4,23.2 109.5,11.2 130.5,18.4 151.6,22.2 172.7,20.3 193.8,17.4 214.9,25.6 236.0,28.0" fill="none" stroke="#D6AD60" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">An event-compression market. Price the calendar around CMA Fest and the fall run, or hand the peak to the listing next door.</p>
         <span class="cc-cta">Read the market report <span>→</span></span>
-      </a>
+      </a></li>
 
-      <a href="/intel/miami" class="ccard report">
+      <li><a href="/intel/miami" class="ccard report">
         <div class="cc-top">
-          <div><span class="cc-name">Miami</span><span class="cc-meta">FL · USA · Seasonal</span></div>
+          <div><h3 class="cc-name">Miami</h3><span class="cc-meta">FL · USA · Seasonal</span></div>
           <span class="cc-badge">MARKET REPORT</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,8.8 25.1,7.8 46.2,11.2 67.3,18.4 88.4,25.6 109.5,30.4 130.5,32.8 151.6,31.8 172.7,32.8 193.8,28.0 214.9,22.2 236.0,14.6" fill="none" stroke="#D6AD60" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">The winter peak is obvious and everyone chases it. The real edge is in the shoulder months almost nobody prices deliberately.</p>
         <span class="cc-cta">Read the market report <span>→</span></span>
-      </a>
+      </a></li>
 
-      <a href="/intel/montreal" class="ccard report">
+      <li><a href="/intel/montreal" class="ccard report">
         <div class="cc-top">
-          <div><span class="cc-name">Montreal</span><span class="cc-meta">QC · CAN · Festival + regulated</span></div>
+          <div><h3 class="cc-name">Montreal</h3><span class="cc-meta">QC · CAN · Festival + regulated</span></div>
           <span class="cc-badge">MARKET REPORT</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,37.6 25.1,36.6 46.2,32.8 67.3,28.0 88.4,22.2 109.5,13.6 130.5,8.8 151.6,11.2 172.7,23.2 193.8,28.0 214.9,33.8 236.0,35.7" fill="none" stroke="#D6AD60" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">A festival-and-season city where regulation, not demand, is the real gatekeeper — eligibility decides the deal before pricing does.</p>
         <span class="cc-cta">Read the market report <span>→</span></span>
-      </a>
+      </a></li>
 
-      <a href="/intel/muskoka" class="ccard report">
+      <li><a href="/intel/muskoka" class="ccard report">
         <div class="cc-top">
-          <div><span class="cc-name">Muskoka</span><span class="cc-meta">ON · CAN · Seasonal cottage</span></div>
+          <div><h3 class="cc-name">Muskoka</h3><span class="cc-meta">ON · CAN · Seasonal cottage</span></div>
           <span class="cc-badge">MARKET REPORT</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,44.8 25.1,44.3 46.2,42.4 67.3,37.6 88.4,28.0 109.5,11.2 130.5,5.0 151.6,7.8 172.7,25.6 193.8,37.6 214.9,43.4 236.0,45.3" fill="none" stroke="#D6AD60" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">A short, ferocious summer. Nearly the whole year of margin is won or lost inside a twelve-week window — timing is everything.</p>
         <span class="cc-cta">Read the market report <span>→</span></span>
-      </a>
+      </a></li>
 
-      <a href="/get-started" class="ccard">
+      <li><a href="/get-started" class="ccard">
         <div class="cc-top">
-          <div><span class="cc-name">Rio Grande Valley</span><span class="cc-meta">TX · USA · Winter-Texan</span></div>
+          <div><h3 class="cc-name">Rio Grande Valley</h3><span class="cc-meta">TX · USA · Winter-Texan</span></div>
           <span class="cc-badge">IN PROGRESS</span>
         </div>
         <svg viewBox="0 0 240 56" preserveAspectRatio="none" class="cc-spark"><polyline points="4.0,13.6 25.1,12.6 46.2,16.0 67.3,25.6 88.4,31.8 109.5,33.8 130.5,34.7 151.6,33.8 172.7,31.8 193.8,25.6 214.9,17.4 236.0,12.6" fill="none" stroke="#55534E" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></polyline></svg>
         <p class="cc-read">A value market where winter Texans, not summer tourists, set the real demand curve — the season runs opposite to the instinct.</p>
         <span class="cc-cta">Audit reads your market <span>→</span></span>
-      </a>
+      </a></li>
 
-    </div>
+    </ul>
   </section>
 
   <!-- CTA -->
@@ -414,30 +425,30 @@ main{padding-top:74px;}
   <section class="faq-sec">
     <div class="faq-head">
       <div class="kicker"><div class="bar"></div><span>Before you ask</span></div>
-      <span class="t">The questions that come up most.</span>
+      <h2 class="t">The questions that come up most.</h2>
     </div>
-    <div class="faq-list">
+    <dl class="faq-list">
       <div class="faq-row">
-        <span class="q">Do you cover my market?</span>
-        <p class="a">Almost certainly. We've run 22 markets across three countries, and the method reads an unfamiliar market the same way it reads a home one. If we haven't named yours yet, the free audit still reads your actual comp set.</p>
+        <dt class="q">Do you cover my market?</dt>
+        <dd class="a">Almost certainly. We've run 22 markets across three countries, and the method reads an unfamiliar market the same way it reads a home one. If we haven't named yours yet, the free audit still reads your actual comp set.</dd>
       </div>
       <div class="faq-row">
-        <span class="q">What if my market isn't listed above?</span>
-        <p class="a">The markets shown are the ones with a published read — not the limit of where we work. Send your listing and the audit builds the read for your market directly.</p>
+        <dt class="q">What if my market isn't listed above?</dt>
+        <dd class="a">The markets shown are the ones with a published read — not the limit of where we work. Send your listing and the audit builds the read for your market directly.</dd>
       </div>
       <div class="faq-row">
-        <span class="q">How fast can you read a new market?</span>
-        <p class="a">The audit returns a first read in days, not weeks. It pulls your live comp set, the seasonal shape, and the regulatory constraints as step one.</p>
+        <dt class="q">How fast can you read a new market?</dt>
+        <dd class="a">The audit returns a first read in days, not weeks. It pulls your live comp set, the seasonal shape, and the regulatory constraints as step one.</dd>
       </div>
       <div class="faq-row">
-        <span class="q">Do you work in regulated markets?</span>
-        <p class="a">Yes. Regulation is part of the read, not a reason to avoid a market — we confirm eligibility for the specific address before anything else.</p>
+        <dt class="q">Do you work in regulated markets?</dt>
+        <dd class="a">Yes. Regulation is part of the read, not a reason to avoid a market — we confirm eligibility for the specific address before anything else.</dd>
       </div>
       <div class="faq-row">
-        <span class="q">Is the audit really free?</span>
-        <p class="a">Yes. You see your market read and your property's revenue gap before you owe anything.</p>
+        <dt class="q">Is the audit really free?</dt>
+        <dd class="a">Yes. You see your market read and your property's revenue gap before you owe anything.</dd>
       </div>
-    </div>
+    </dl>
   </section>
 
 </main>
