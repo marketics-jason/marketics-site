@@ -127,7 +127,7 @@
       '#mkx-decline{',
         'flex:1;padding:10px 16px;border:1px solid rgba(255,255,255,.1);border-radius:4px;',
         'cursor:pointer;background:transparent;',
-        'color:rgba(248,246,242,.45);',
+        'color:rgba(248,246,242,.62);',
         'font-family:"DM Sans",system-ui,sans-serif;font-size:12px;',
         'letter-spacing:.04em;text-transform:uppercase;',
         'transition:border-color .15s,color .15s;',
