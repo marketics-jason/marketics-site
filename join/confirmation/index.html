@@ -2,149 +2,137 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="canonical" href="https://marketics.io/join/confirmation">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>You're In — Marketics</title>
-<meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0f0f0f">
+<meta name="description" content="Your deposit is confirmed and your onboarding slot is reserved. Book your kickoff call to get started.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://marketics.io/join/confirmation">
+
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--gold:#D6AD60;--night:#0f0f0f;--n2:#141414;--n3:#1a1a1a;--n4:#222;--stone:#B4B2A9;--dim:#6B6A65;--white:#f8f6f2;--ok:#2D7A4F;--d:'Josefin Sans',sans-serif;--s:'DM Sans',sans-serif;--m:'DM Mono',monospace;}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--s);background:var(--night);color:var(--white);font-size:15px;line-height:1.65;min-height:100dvh;overflow-x:hidden;}
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;background:rgba(10,10,10,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(214,173,96,.1);}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-mark{height:32px;width:auto;flex-shrink:0;}
-.confirm-hero{padding:64px 48px 48px;max-width:800px;margin:0 auto;text-align:center;}
-.confirm-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--m);font-size:9px;color:#4caf74;letter-spacing:.14em;text-transform:uppercase;background:rgba(45,122,79,.1);border:1px solid rgba(45,122,79,.2);border-radius:20px;padding:6px 16px;margin-bottom:24px;}
-.confirm-h{font-family:var(--d);font-size:clamp(28px,4vw,42px);font-weight:200;letter-spacing:.05em;text-transform:uppercase;color:var(--white);line-height:1.1;margin-bottom:14px;}
-.confirm-h em{color:var(--gold);font-style:normal;}
-.confirm-sub{font-size:15px;color:var(--stone);font-weight:300;max-width:480px;margin:0 auto 40px;line-height:1.75;}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:860px;margin:0 auto 56px;}
-.step{background:var(--n3);padding:20px 18px;text-align:left;border-top:2px solid transparent;}
-.step.active{border-top-color:var(--gold);background:rgba(214,173,96,.04);}
-.step-num{font-family:var(--m);font-size:9px;color:var(--dim);letter-spacing:.1em;margin-bottom:8px;}
-.step.active .step-num{color:var(--gold);}
-.step-title{font-size:12px;font-weight:500;color:var(--white);margin-bottom:4px;}
-.step-desc{font-size:11px;color:var(--dim);line-height:1.5;font-weight:300;}
-.step-done{font-size:10px;color:#4caf74;margin-top:6px;font-family:var(--m);}
-.cal-section{max-width:860px;margin:0 auto;padding:0 48px 64px;}
-.section-label{font-family:var(--d);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-.section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06);}
-.cal-header{background:var(--n3);border:1px solid rgba(214,173,96,.15);border-bottom:none;border-radius:4px 4px 0 0;padding:20px 24px;}
-.cal-host-line{display:flex;align-items:center;gap:14px;}
-.cal-avatar{width:44px;height:44px;border-radius:50%;background:rgba(214,173,96,.12);border:1px solid rgba(214,173,96,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.cal-name{font-family:var(--d);font-size:14px;font-weight:600;color:var(--white);letter-spacing:.04em;}
-.cal-creds{font-size:11px;color:var(--dim);margin-top:2px;}
-.cal-event{font-family:var(--d);font-size:16px;font-weight:500;color:var(--gold);margin-top:12px;}
-.cal-meta{display:flex;gap:16px;margin-top:6px;font-family:var(--m);font-size:10px;color:var(--dim);}
-.cal-wrap{background:#1a1a1a;border:1px solid rgba(214,173,96,.15);border-top:none;border-radius:0 0 4px 4px;overflow:hidden;}
-.calendly-inline-widget{min-width:280px;height:700px;}
-.receipt-section{max-width:860px;margin:0 auto;padding:0 48px 40px;}
-.receipt-card{background:var(--n3);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:24px 28px;}
-.rrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;}
-.rrow:last-child{border-bottom:none;}
-.rl{color:var(--dim);font-family:var(--m);font-size:10px;letter-spacing:.06em;}
-.rv{color:var(--stone);}
-.rv.gold{color:var(--gold);font-weight:500;}
-.site-footer{text-align:center;padding:24px 40px 40px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:var(--dim);line-height:1.9;}
-.site-footer a{color:rgba(214,173,96,.5);text-decoration:none;}
-.site-footer a:hover{color:var(--gold);}
-@media(max-width:680px){nav{padding:0 20px;}.confirm-hero,.cal-section,.receipt-section{padding-left:20px;padding-right:20px;}.steps{grid-template-columns:1fr 1fr;}.cal-meta{flex-direction:column;gap:4px;}}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
 </style>
-<!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
+
+<link rel="preconnect" href="https://assets.calendly.com">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="/mkx-consent.js" defer></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
+<style>
+:root{
+  --gold:#D6AD60;--ink:#111110;--panel:#171716;--sink:#0d0d0c;
+  --line:#202020;--line-2:#252525;--field-bd:#2a2a28;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;--dim:#6B6A65;--faint:#55534E;
+  --green:#2D7A4F;--green-hi:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+strong{color:var(--bright);font-weight:500;}
+
+.co-nav{display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter);height:74px;border-bottom:1px solid rgba(214,173,96,.15);background:var(--sink);}
+.co-nav .logo img{height:30px;width:auto;display:block;margin-left:-8px;}
+.co-badge{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;color:var(--green-hi);border:1px solid rgba(45,122,79,.4);padding:12px 24px;}
+
+.wrap{max-width:1440px;margin:0 auto;}
+.conf-head{padding:84px var(--gutter) 56px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;align-items:center;text-align:center;}
+.conf-check{width:72px;height:72px;border-radius:50%;border:1px solid rgba(45,122,79,.5);background:rgba(45,122,79,.08);display:flex;align-items:center;justify-content:center;margin-bottom:32px;}
+.conf-check .tick{width:26px;height:14px;border-left:2px solid var(--green-hi);border-bottom:2px solid var(--green-hi);transform:rotate(-45deg);margin-top:-6px;}
+.conf-eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--green-hi);text-transform:uppercase;margin-bottom:22px;}
+.conf-h{font-family:var(--display);font-weight:200;font-size:56px;line-height:1.08;letter-spacing:2px;color:var(--white);margin:0;max-width:780px;}
+.conf-p{font-size:17px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:580px;}
+
+.conf-grid{display:grid;grid-template-columns:1.1fr 1fr;align-items:stretch;}
+.cal-col{padding:64px var(--gutter);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:22px;}
+.cal-col h2{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:.5px;color:var(--white);margin:0;}
+.cal-col p{font-size:14.5px;line-height:1.7;color:var(--muted);margin:0;}
+.calendly-inline-widget{min-width:280px;height:660px;border:1px solid var(--field-bd);}
+.prep-col{padding:64px var(--gutter);background:var(--sink);display:flex;flex-direction:column;gap:22px;}
+.prep-label{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--dim);text-transform:uppercase;}
+.prep{display:flex;flex-direction:column;}
+.prep-item{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--line-2);}
+.prep-n{font-family:var(--display);font-weight:200;font-size:28px;color:var(--gold);line-height:1;flex-shrink:0;width:34px;}
+.prep-t{font-family:var(--sans);font-weight:500;font-size:15px;color:var(--white);}
+.prep-b{font-size:13.5px;line-height:1.6;color:var(--muted);margin-top:5px;}
+.prep-note{font-size:12.5px;line-height:1.6;color:var(--dim);}
+
+.co-foot{border-top:1px solid rgba(214,173,96,.15);padding:28px var(--gutter);max-width:1440px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.co-foot span,.co-foot a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.co-foot a:hover{color:var(--muted);}
+
+@media (max-width:1080px){ .co-nav{padding:0 40px;} .conf-head,.cal-col,.prep-col,.co-foot{padding-left:40px;padding-right:40px;} }
+@media (max-width:820px){ .conf-grid{grid-template-columns:1fr;} .cal-col{border-right:none;border-bottom:1px solid var(--line);} }
+@media (max-width:600px){
+  .co-nav{padding:0 24px;height:64px;}
+  .conf-head{padding:56px 24px 44px;}
+  .conf-h{font-size:38px;}
+  .cal-col,.prep-col{padding:44px 24px;}
+  .co-foot{padding:24px;flex-direction:column;align-items:flex-start;gap:10px;}
+}
+</style>
 </head>
 <body>
-<nav>
-  <a href="/" class="nav-logo">
-    <svg class="nav-mark" viewBox="67.222 55.6875 240.75 231" xmlns="http://www.w3.org/2000/svg"><path fill="#D6AD60" d="M 187.5 55.6875 L 67.804688 140.480469 L 67.804688 286.605469 L 173.136719 286.605469 L 173.136719 152.878906 L 115.683594 193.144531 L 115.683594 277.03125 L 77.378906 277.03125 L 77.378906 145.410156 L 187.5 67.417969 L 297.621094 145.410156 L 297.621094 277.03125 L 259.316406 277.03125 L 259.316406 159.632812 L 201.863281 119.367188 L 201.863281 286.605469 L 307.195312 286.605469 L 307.195312 140.480469 Z M 125.257812 198.125 L 163.5625 171.3125 L 163.5625 277.03125 L 125.257812 277.03125 Z M 249.742188 277.03125 L 211.4375 277.03125 L 211.4375 137.796875 L 249.742188 164.609375 Z M 249.742188 277.03125"/></svg>
-    <img src="/assets/logo.svg" alt="Marketics" style="height:20px;width:auto;display:block;flex-shrink:0;" width="607" height="120">
-  </a>
-</nav>
-<div class="confirm-hero">
-  <div class="confirm-badge">Payment Confirmed</div>
-  <h1 class="confirm-h">Welcome to<br><em>Marketics</em></h1>
-  <p class="confirm-sub">Your $500 onboarding investment is confirmed. Book your strategy call below — Jason will review your listing before the call and come prepared with specific numbers.</p>
+
+<div class="co-nav">
+  <a href="/" class="logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <div class="co-badge">PAYMENT CONFIRMED ✓</div>
 </div>
-<div class="steps">
-  <div class="step">
-    <div class="step-num">Step 01</div>
-    <div class="step-title">Audit Request</div>
-    <div class="step-desc">Property submitted for analysis</div>
-    <div class="step-done">Complete</div>
+
+<main class="wrap">
+
+  <div class="conf-head">
+    <div class="conf-check"><div class="tick"></div></div>
+    <div class="conf-eyebrow">Welcome to Marketics</div>
+    <h1 class="conf-h">You're in. Let's set the tier from day one.</h1>
+    <p class="conf-p">Your deposit is confirmed and your onboarding slot is reserved. A receipt is on its way to your inbox. One thing left before we start: <strong>book your kickoff call.</strong></p>
   </div>
-  <div class="step">
-    <div class="step-num">Step 02</div>
-    <div class="step-title">Payment</div>
-    <div class="step-desc">$500 onboarding investment secured</div>
-    <div class="step-done">Complete</div>
-  </div>
-  <div class="step active">
-    <div class="step-num">Step 03</div>
-    <div class="step-title">Book Your Call</div>
-    <div class="step-desc">Schedule your 15-min strategy session with Jason</div>
-  </div>
-  <div class="step">
-    <div class="step-num">Step 04</div>
-    <div class="step-title">Go Live</div>
-    <div class="step-desc">Listing optimized and live within 7 days</div>
-  </div>
-</div>
-<div class="cal-section">
-  <div class="section-label">Book Your Strategy Call</div>
-  <div class="cal-header">
-    <div class="cal-host-line">
-      <div class="cal-avatar">
-        <svg width="20" height="20" viewBox="67.222 55.6875 240.75 231" xmlns="http://www.w3.org/2000/svg"><path fill="#D6AD60" d="M 187.5 55.6875 L 67.804688 140.480469 L 67.804688 286.605469 L 173.136719 286.605469 L 173.136719 152.878906 L 115.683594 193.144531 L 115.683594 277.03125 L 77.378906 277.03125 L 77.378906 145.410156 L 187.5 67.417969 L 297.621094 145.410156 L 297.621094 277.03125 L 259.316406 277.03125 L 259.316406 159.632812 L 201.863281 119.367188 L 201.863281 286.605469 L 307.195312 286.605469 L 307.195312 140.480469 Z M 125.257812 198.125 L 163.5625 171.3125 L 163.5625 277.03125 L 125.257812 277.03125 Z M 249.742188 277.03125 L 211.4375 277.03125 L 211.4375 137.796875 L 249.742188 164.609375 Z M 249.742188 277.03125"/></svg>
+
+  <div class="conf-grid">
+    <!-- Calendly (real inline widget) -->
+    <section class="cal-col">
+      <h2>Book your kickoff call</h2>
+      <p>A kickoff call with Jason to walk your property, your goals, and the first 90 days. Pick a time that works.</p>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/jason-marketics/15min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=f8f6f2&primary_color=D6AD60" aria-label="Book your kickoff call with Marketics"></div>
+    </section>
+
+    <!-- Prep steps -->
+    <aside class="prep-col">
+      <span class="prep-label">Before the call — 3 quick things</span>
+      <div class="prep">
+        <div class="prep-item"><span class="prep-n">1</span><div><div class="prep-t">Have your listing link handy</div><div class="prep-b">The Airbnb or VRBO URL — or the address, if you're pre-launch. It's all we need to start reading your market.</div></div></div>
+        <div class="prep-item"><span class="prep-n">2</span><div><div class="prep-t">Think about your goals</div><div class="prep-b">Revenue target, blackout dates you keep for yourself, anything you've already tried. The call goes faster with this in mind.</div></div></div>
+        <div class="prep-item"><span class="prep-n">3</span><div><div class="prep-t">Watch for the receipt</div><div class="prep-b">A confirmation and receipt are landing in your inbox now. Reply to it any time with questions before we talk.</div></div></div>
       </div>
-      <div>
-        <div class="cal-name">Jason Baxter</div>
-        <div class="cal-creds">35x Airbnb Superhost &nbsp;·&nbsp; Founder, Marketics</div>
-      </div>
-    </div>
-    <div class="cal-event">Marketics Onboarding Call</div>
-    <div class="cal-meta">
-      <span>15 minutes</span>
-      <span>Video call</span>
-      <span>Pick a time below</span>
-    </div>
+      <span class="prep-note">No rush — the co-host invite and details can all happen on or after the call. Nothing else is needed from you right now.</span>
+    </aside>
   </div>
-  <div class="cal-wrap">
-    <div class="calendly-inline-widget" data-url="https://calendly.com/jason-marketics/15min?hide_gdpr_banner=1&background_color=1a1a1a&text_color=f8f6f2&primary_color=D6AD60"></div>
-  </div>
+
+</main>
+
+<div class="co-foot">
+  <span>© 2026 Marketics, LLC</span>
+  <span>Questions? <a href="mailto:jason@marketics.io">jason@marketics.io</a></span>
 </div>
-<div class="receipt-section">
-  <div class="section-label">Payment Receipt</div>
-  <div class="receipt-card">
-    <div class="rrow"><span class="rl">Product</span><span class="rv">Marketics Onboarding Investment</span></div>
-    <div class="rrow"><span class="rl">Amount</span><span class="rv gold">$500.00 USD</span></div>
-    <div class="rrow"><span class="rl">Deposit</span><span class="rv">Refunded automatically when you complete the 90-day program</span></div>
-    <div class="rrow"><span class="rl">Processor</span><span class="rv">Secured via Stripe · 256-bit SSL</span></div>
-    <div class="rrow"><span class="rl">Questions</span><span class="rv">support at marketics.io</span></div>
-  </div>
-</div>
-<div class="site-footer">
-  <p>2026 Marketics, LLC · Miami, Florida<br>
-  <a href="https://marketics.io/legal">Privacy Policy</a> &nbsp;·&nbsp;
-  <a href="https://marketics.io/legal?tab=terms">Terms of Service</a></p>
-</div>
+
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script>
-(function(){
-  var w="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";
-  fetch(w,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({source:"join_confirmation",status:"payment_completed",timestamp:new Date().toISOString()})}).catch(function(){});
-}());
-</script>
-<script src="/mkx-consent.js" defer></script>
 </body>
 </html>
