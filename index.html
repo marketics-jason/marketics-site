@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Marketics: Your Market. Mastered.™</title>
-<meta name="description" content="Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing — run together. A documented 45% median lift, net of market, across 1,000+ listings in 22 markets. 10% of revenue, no monthly fee.">
+<meta name="description" content="Full-stack short-term rental revenue — a documented 45% median lift, net of market, across 1,000+ listings in 22 markets. 10% of revenue, no monthly fee.">
 <link rel="canonical" href="https://marketics.io/">
 
 <meta property="og:type" content="website">
@@ -41,6 +41,20 @@
     "https://www.trustpilot.com/review/marketics.io"
   ],
   "slogan": "Your Market. Mastered."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://marketics.io/#webpage",
+  "url": "https://marketics.io/",
+  "name": "Marketics: Your Market. Mastered.™",
+  "isPartOf": { "@id": "https://marketics.io/#business" },
+  "about": { "@id": "https://marketics.io/#business" },
+  "publisher": { "@id": "https://marketics.io/#business" },
+  "author": { "@type": "Person", "@id": "https://marketics.io/story#jason", "name": "Jason Baxter" },
+  "dateModified": "2026-07-14T09:00:00-04:00"
 }
 </script>
 <script type="application/ld+json">
@@ -381,9 +395,14 @@ dd.fa{margin:0;}
 .rc-art{display:contents;}
 /* inline links must not rely on color alone (WCAG 1.4.1) */
 .w-body a,.split-p a,.lx-a a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:rgba(214,173,96,.55);}
+/* skip link: hidden until keyboard-focused */
+.skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
+.skip-link:focus{top:0;}
 </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="siteNav">
   <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
@@ -407,6 +426,8 @@ dd.fa{margin:0;}
   <a href="/intel">Insights</a>
   <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
+
+<main id="main-content">
 
 <!-- ══ HERO ══ -->
 <header class="hero">
@@ -605,6 +626,8 @@ dd.fa{margin:0;}
     <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
   </div>
 </section>
+
+</main>
 
 <!-- ══ FOOTER ══ -->
 <footer>
