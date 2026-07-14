@@ -122,7 +122,7 @@ a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 .wrap{max-width:1240px;margin:0 auto;padding:0 72px;}
 /* every top-level section shares the hero's centered 1440 column so edges align */
-.compare,.philo,.split,.results,.story,.closing,.foot,.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;}
+.wedge,.compare,.philo,.split,.results,.story,.closing,.foot,.foot-legal{max-width:1440px;margin-left:auto;margin-right:auto;}
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;
@@ -221,6 +221,21 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .ch-cal:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
 .ch-note{font-size:10.5px;line-height:1.6;color:var(--faint);max-width:520px;}
 
+/* ══ WEDGE ══ */
+.wedge{display:grid;grid-template-columns:1fr 1fr;}
+.wedge>div{padding:34px 72px;display:flex;flex-direction:column;gap:8px;}
+.wedge .w-left{border-right:1px solid var(--line);}
+.wedge .w-right{background:rgba(214,173,96,.03);}
+.wedge .w-kick{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;}
+.wedge .w-left .w-kick{color:var(--dim);}
+.wedge .w-right .w-kick{color:var(--gold);}
+.wedge .w-title{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:2px;}
+.wedge .w-left .w-title{color:var(--muted);}
+.wedge .w-right .w-title{color:var(--white);}
+.wedge .w-body{font-size:13.5px;line-height:1.6;}
+.wedge .w-left .w-body{color:var(--muted);}
+.wedge .w-right .w-body{color:var(--body);}
+.wedge .w-body .nw{color:var(--gold);white-space:nowrap;}
 /* ══ COMPARISON TABLE (PM vs Marketics) ══ */
 .compare .compare-inner{padding:34px 72px;}
 .compare .kicker{margin-bottom:24px;}
@@ -342,7 +357,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   .wrap{padding:0 40px;}
   nav{padding:0 40px;}
   .hero-grid{grid-template-columns:1fr 480px;gap:48px;}
-  .philo,.split,.results,.closing,.compare .compare-inner{padding-left:40px;padding-right:40px;}
+  .philo,.split,.results,.closing,.wedge>div,.compare .compare-inner{padding-left:40px;padding-right:40px;}
   .story-body,.foot{padding-left:40px;padding-right:40px;}
   .foot-legal{padding-left:40px;padding-right:40px;}
   .story{grid-template-columns:1fr;}
@@ -372,6 +387,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   .stats{flex-wrap:wrap;gap:20px 0;}
   .stat{padding:0 16px 0 0;border-right:none;flex:0 0 33%;}
   .philo,.split,.results,.closing{padding-left:24px;padding-right:24px;padding-top:56px;padding-bottom:56px;}
+  .wedge{grid-template-columns:1fr;}
+  .wedge>div{padding:28px 24px;}
+  .wedge .w-left{border-right:none;border-bottom:1px solid var(--line);}
   .compare .compare-inner{padding:28px 24px;}
   .compare-table{font-size:12px;}
   .compare-table th,.compare-table td{padding:11px 9px;}
@@ -501,42 +519,17 @@ dd.fa{margin:0;}
   </div>
 </header>
 
-<!-- ══ COMPARISON: PM vs MARKETICS ══ -->
-<section class="compare sec">
-  <div class="compare-inner">
-    <div class="kicker"><div class="bar"></div><span>Two roles, one property</span></div>
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th scope="col"><span class="sr-only">Capability</span></th>
-          <th scope="col" class="ct-pm">A Property Manager</th>
-          <th scope="col" class="ct-mx">Marketics</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Owns operations?</th>
-          <td>Yes — keys, cleaning, guests.</td>
-          <td class="ct-mx-cell">No — we never touch the house.</td>
-        </tr>
-        <tr>
-          <th scope="row">Owns revenue?</th>
-          <td>One line among many.</td>
-          <td class="ct-mx-cell">The entire mandate.</td>
-        </tr>
-        <tr>
-          <th scope="row">How paid?</th>
-          <td>Flat % of every booking — grow or not.</td>
-          <td class="ct-mx-cell">10% of revenue — paid only when yours grows.</td>
-        </tr>
-        <tr>
-          <th scope="row">What it optimizes?</th>
-          <td>Smooth operations, low friction.</td>
-          <td class="ct-mx-cell">The tier your property is priced into.</td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="compare-foot">The two run in parallel: your manager keeps the house running, we make the market pay more for it. <a href="/method" class="nw">See the Method →</a></p>
+<!-- ══ WEDGE ══ -->
+<section class="wedge sec">
+  <div class="w-left">
+    <span class="w-kick">A PROPERTY MANAGER</span>
+    <span class="w-title">Runs the house.</span>
+    <span class="w-body">Keys, cleaning, guest experience — paid the same whether your revenue grows or not.</span>
+  </div>
+  <div class="w-right">
+    <span class="w-kick">FULL-STACK STR REVENUE</span>
+    <span class="w-title">Runs the market.</span>
+    <span class="w-body">Market positioning, storytelling, distribution, ranking — and the price the market gives back. Paid only when your revenue grows. <a href="/method" class="nw">See the Method →</a></span>
   </div>
 </section>
 
@@ -622,6 +615,45 @@ dd.fa{margin:0;}
     </div>
     <p class="story-quote">"Airbnb's Luxe team kept our photos, title, and copy — a handful of subtle edits where a typical home gets a full rewrite."</p>
     <span class="story-byline">Jason Baxter · Founder, Marketics · Operating since 2015 · <a href="https://www.linkedin.com/in/jasonbaxter1" target="_blank" rel="noopener">LinkedIn ↗</a></span>
+  </div>
+</section>
+
+<!-- ══ COMPARISON: PM vs MARKETICS ══ -->
+<section class="compare sec">
+  <div class="compare-inner">
+    <div class="kicker"><div class="bar"></div><span>Two roles, one property</span></div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="sr-only">Capability</span></th>
+          <th scope="col" class="ct-pm">A Property Manager</th>
+          <th scope="col" class="ct-mx">Marketics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Owns operations?</th>
+          <td>Yes — keys, cleaning, guests.</td>
+          <td class="ct-mx-cell">No — we never touch the house.</td>
+        </tr>
+        <tr>
+          <th scope="row">Owns revenue?</th>
+          <td>One line among many.</td>
+          <td class="ct-mx-cell">The entire mandate.</td>
+        </tr>
+        <tr>
+          <th scope="row">How paid?</th>
+          <td>20–35% of every booking — grow or not.</td>
+          <td class="ct-mx-cell">10% of revenue — paid only when yours grows.</td>
+        </tr>
+        <tr>
+          <th scope="row">What it optimizes?</th>
+          <td>Smooth operations, low friction.</td>
+          <td class="ct-mx-cell">The tier your property is priced into.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="compare-foot">The two run in parallel: your manager keeps the house running, we make the market pay more for it. <a href="/method" class="nw">See the Method →</a></p>
   </div>
 </section>
 
