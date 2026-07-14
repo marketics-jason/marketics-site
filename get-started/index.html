@@ -258,8 +258,14 @@ textarea{min-height:92px;resize:none;}
 .audit-form h1{margin-top:0 !important;margin-left:-6px !important;}
 .audit-form .audit-lead{margin-left:-6px !important;}
 </style>
+<style>
+.skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold,#D6AD60);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono,monospace);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
+.skip-link:focus{top:0;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+</style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="siteNav">
   <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
@@ -284,7 +290,7 @@ textarea{min-height:92px;resize:none;}
   <a href="/get-started" class="cta">Get My Free Audit →</a>
 </div>
 
-<main>
+<main id="main-content">
 
   <!-- ══ AUDIT REQUEST ══ -->
   <section class="audit wrap">
