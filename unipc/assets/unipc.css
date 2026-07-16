@@ -211,12 +211,16 @@ main{flex:1}
 .swatch{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--hair)}
 .swatch .chip{width:38px;height:38px;border-radius:8px;flex:none;border:1px solid rgba(0,0,0,0.08)}
 
-/* ---- Scroll reveal (opt-in, degrades to visible) ---- */
+/* ---- Scroll reveal (opt-in, degrades to visible) ----
+   Content is VISIBLE by default. JS only hides an element (adds .u-fade) once
+   it has committed to animating it, and a safety-net timeout guarantees every
+   element is revealed even if the IntersectionObserver never fires. With JS
+   off/blocked, .u-fade is never added, so nothing is ever hidden. */
 [data-fade]{opacity:1;transform:none}
-.js-fade [data-fade]{opacity:0;transform:translateY(14px)}
-.js-fade [data-fade].is-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.u-fade{opacity:0;transform:translateY(14px)}
+.u-fade.is-in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
 @media (prefers-reduced-motion:reduce){
-  .js-fade [data-fade]{opacity:1;transform:none;transition:none}
+  .u-fade,.u-fade.is-in{opacity:1;transform:none;transition:none}
 }
 
 /* ---- Grids used across pages ---- */

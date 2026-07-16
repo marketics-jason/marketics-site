@@ -10,13 +10,18 @@
     var nodes = document.querySelectorAll('[data-fade]');
     if (!nodes.length) return;
     if (reduce || !('IntersectionObserver' in window)) return; // stay fully visible
-    document.documentElement.classList.add('js-fade');
+    // Hide only now that we can animate; each element carries its own hidden state.
+    nodes.forEach(function (n) { n.classList.add('u-fade'); });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
     nodes.forEach(function (n) { io.observe(n); });
+    // Safety net: whatever happens, never leave content hidden.
+    setTimeout(function () {
+      nodes.forEach(function (n) { n.classList.add('is-in'); });
+    }, 1600);
   }
 
   /* ---- Mailto forms with inline success ------------------------------ */
