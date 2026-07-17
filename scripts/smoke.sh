@@ -31,13 +31,21 @@ echo "Smoke test against: $BASE"
 echo
 
 echo "· Status codes"
-for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/markets/austin" "/join/confirmation"; do
+for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/markets/san-antonio" "/join/confirmation"; do
   c=$(code "$BASE$p"); [ "$c" = "200" ] && ok "200 $p" || no "$p returned $c (want 200)"
 done
 
-echo "· Redirects (single 301 to canonical)"
-c=$(code "$BASE/intel/miami/");  [ "$c" = "301" ] && ok "/intel/miami/ -> 301" || no "/intel/miami/ = $c (want 301 depth-2 slash)"
-c=$(code "$BASE/method/");       [ "$c" = "301" ] && ok "/method/ -> 301"      || no "/method/ = $c (want 301)"
+echo "· Canonical URL form (no-slash resolves 200; slash deduped by canonical tag)"
+# The no-slash form is canonical and must resolve directly (no redirect).
+c=$(code "$BASE/method");        [ "$c" = "200" ] && ok "/method -> 200 (canonical)" || no "/method = $c (want 200 canonical)"
+# The slash form returns 200 via Netlify's directory index (a strict 301 isn't
+# achievable on this platform); the canonical tag must point back to no-slash.
+grep -q '<link rel="canonical" href="https://marketics.io/method">' <<<"$(body "$BASE/method/")" \
+  && ok "/method/ served with no-slash canonical tag" || no "/method/ missing no-slash canonical tag"
+grep -q '<link rel="canonical" href="https://marketics.io/intel/miami">' <<<"$(body "$BASE/intel/miami/")" \
+  && ok "/intel/miami/ served with no-slash canonical tag" || no "/intel/miami/ missing no-slash canonical tag"
+
+echo "· Legacy path redirects (Squarespace migration, single 301)"
 c=$(code "$BASE/privacy");       [ "$c" = "301" ] && ok "/privacy -> 301"      || no "/privacy = $c (want 301)"
 c=$(code "$BASE/terms");         [ "$c" = "301" ] && ok "/terms -> 301"        || no "/terms = $c (want 301)"
 
