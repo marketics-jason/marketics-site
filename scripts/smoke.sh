@@ -55,10 +55,10 @@ grep -qi 'x-robots-tag:.*noindex' <<<"$jc" \
 
 echo "· Canon copy actually shipped"
 h=$(body "$BASE/")
-grep -q '19 documented short-term-rental engagements' <<<"$h" && ok "homepage: 19-engagements canon" || no "homepage missing 19-engagements canon"
-grep -Eq 'random sample|30 documented|~42' <<<"$h" && no "homepage still shows retired canon" || ok "homepage: no retired canon"
+grep -q '45% median lift, net of market' <<<"$h" && ok "homepage: 45% net-of-market canon" || no "homepage missing 45% net-of-market canon"
+grep -Eq 'random sample|30 documented|~42|42%\+' <<<"$h" && no "homepage still shows retired canon" || ok "homepage: no retired canon"
 ix=$(body "$BASE/intel/str-performance-index")
-grep -q '45%' <<<"$ix" && grep -q '42%+' <<<"$ix" && ok "Index: 45% median + 42%+ benchmark" || no "Index missing 45%/42%+"
+grep -q '45% median benchmark' <<<"$ix" && ok "Index: 45% median benchmark canon" || no "Index missing 45% median benchmark canon"
 
 echo
 echo "Result: $pass passed, $fail failed"
