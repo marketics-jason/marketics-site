@@ -31,7 +31,7 @@ echo "Smoke test against: $BASE"
 echo
 
 echo "· Status codes"
-for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/markets/austin" "/join/confirmation"; do
+for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/markets/san-antonio" "/join/confirmation"; do
   c=$(code "$BASE$p"); [ "$c" = "200" ] && ok "200 $p" || no "$p returned $c (want 200)"
 done
 

@@ -28,6 +28,25 @@
   status = 301
   force = true
 
+# Serve each directory's index at its NO-SLASH url as a 200 (a rewrite, not a
+# redirect), so /method resolves to 200 directly instead of Netlify's default
+# directory-redirect to /method/. Combined with the slash-strip redirects above
+# this makes the no-slash form canonical (matching the <link rel=canonical> tags)
+# with no redirect loop. Non-force, so real files (/assets/*, /robots.txt, …)
+# still win and are served directly.
+[[redirects]]
+  from = "/:seg"
+  to = "/:seg/index.html"
+  status = 200
+[[redirects]]
+  from = "/:a/:b"
+  to = "/:a/:b/index.html"
+  status = 200
+[[redirects]]
+  from = "/:a/:b/:c"
+  to = "/:a/:b/:c/index.html"
+  status = 200
+
 # ── PERFORMANCE: LONG-CACHE STATIC ASSETS ─────────────
 # Images, fonts, and SVGs are content-addressed or rarely change.
 # 1-year immutable cache eliminates 75 KiB of repeat downloads per visit.
