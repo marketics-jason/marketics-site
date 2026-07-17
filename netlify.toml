@@ -2,38 +2,24 @@
 #  Marketics — Netlify Configuration
 # ══════════════════════════════════════════════════════
 
-# Trailing slash normalisation
-# Netlify's Pretty URLs adds a 301 /path → /path/ by default.
-# This conflicts with canonical tags (which use no trailing slash).
-# This rule normalises /path/ → /path so URLs match canonicals.
-[[redirects]]
-  from = "/:splat/"
-  to = "/:splat"
-  status = 301
-  force = true
-
-# Placeholder rules match ONE path segment each, so the rule above only
-# covers depth-1 URLs (/method/). These cover depth-2 and depth-3
-# (/intel/miami/, /intel/miami/report/) so slash variants 301 to the
-# canonical instead of serving duplicate 200s.
-[[redirects]]
-  from = "/:a/:b/"
-  to = "/:a/:b"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/:a/:b/:c/"
-  to = "/:a/:b/:c"
-  status = 301
-  force = true
-
-# Serve each directory's index at its NO-SLASH url as a 200 (a rewrite, not a
-# redirect), so /method resolves to 200 directly instead of Netlify's default
-# directory-redirect to /method/. Combined with the slash-strip redirects above
-# this makes the no-slash form canonical (matching the <link rel=canonical> tags)
-# with no redirect loop. Non-force, so real files (/assets/*, /robots.txt, …)
-# still win and are served directly.
+# Trailing-slash canonicalisation
+# Every page's <link rel="canonical"> uses the NO-SLASH form (/method). Without
+# these rules Netlify 301-redirects the no-slash request to the directory form
+# (/method → /method/), i.e. it redirects AWAY from the canonical URL — bad for
+# crawlers and it broke header/CSP smoke checks (they read /join/confirmation,
+# which was 301ing).
+#
+# Fix: serve each directory's index at its no-slash URL as a 200 rewrite (not a
+# redirect), so /method, /intel/miami, and /intel/miami/report resolve to 200
+# directly — matching the canonical tags, no redirect. Non-force, so real files
+# (/assets/*, /robots.txt, /*.svg, …) keep static-file precedence and are served
+# directly rather than rewritten.
+#
+# The SLASH form (/method/) still returns 200 via Netlify's built-in directory
+# index — forced redirects can't override directory-index resolution on this
+# platform, so a strict slash→no-slash 301 isn't achievable without flattening
+# every index.html to a .html file. The canonical tag on each page dedupes the
+# slash/no-slash pair for search engines, so this is cosmetic, not an SEO risk.
 [[redirects]]
   from = "/:seg"
   to = "/:seg/index.html"
