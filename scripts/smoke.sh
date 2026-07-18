@@ -23,6 +23,8 @@ code() { curl -s -o /dev/null -A "$UA" -w "%{http_code}" --max-time 20 "$1"; }
 body() { curl -sL -A "$UA" --max-time 20 "$1"; }
 # hdr URL — response headers only (no follow)
 hdr()  { curl -sI -A "$UA" --max-time 20 "$1"; }
+# loc URL — the Location header of a single redirect (no follow), path only
+loc()  { curl -sI -A "$UA" --max-time 20 "$1" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r' | sed -E 's#^https?://[^/]+##'; }
 
 ok()   { pass=$((pass+1)); printf '  \033[32m✓\033[0m %s\n' "$1"; }
 no()   { fail=$((fail+1)); printf '  \033[31m✗\033[0m %s\n' "$1"; }
@@ -48,6 +50,20 @@ grep -q '<link rel="canonical" href="https://marketics.io/intel/miami">' <<<"$(b
 echo "· Legacy path redirects (Squarespace migration, single 301)"
 c=$(code "$BASE/privacy");       [ "$c" = "301" ] && ok "/privacy -> 301"      || no "/privacy = $c (want 301)"
 c=$(code "$BASE/terms");         [ "$c" = "301" ] && ok "/terms -> 301"        || no "/terms = $c (want 301)"
+
+# Regression guard: the no-slash 200 rewrites (/:seg, /:a/:b) must NOT shadow the
+# legacy 301s for paths that have no page. Assert both the 301 status AND the
+# target — a soft-200 or wrong target would silently drop old link equity.
+# depth-1 legacy (rewrite target /performance-based-pricing/index.html doesn't exist):
+c=$(code "$BASE/performance-based-pricing"); t=$(loc "$BASE/performance-based-pricing")
+{ [ "$c" = "301" ] && [ "$t" = "/pricing" ]; } && ok "/performance-based-pricing -> 301 /pricing" || no "/performance-based-pricing = $c -> '$t' (want 301 /pricing)"
+c=$(code "$BASE/home"); t=$(loc "$BASE/home")
+{ [ "$c" = "301" ] && [ "$t" = "/" ]; } && ok "/home -> 301 /" || no "/home = $c -> '$t' (want 301 /)"
+# depth-2 legacy (rewrite target /markets/austin/index.html doesn't exist):
+c=$(code "$BASE/markets/austin"); t=$(loc "$BASE/markets/austin")
+{ [ "$c" = "301" ] && [ "$t" = "/markets" ]; } && ok "/markets/austin -> 301 /markets" || no "/markets/austin = $c -> '$t' (want 301 /markets)"
+c=$(code "$BASE/intel/economics"); t=$(loc "$BASE/intel/economics")
+{ [ "$c" = "301" ] && [ "$t" = "/intel/money" ]; } && ok "/intel/economics -> 301 /intel/money" || no "/intel/economics = $c -> '$t' (want 301 /intel/money)"
 
 echo "· Not-public artifacts (404)"
 c=$(code "$BASE/marketics-site-audit-2026-07.md"); [ "$c" = "404" ] && ok "audit report 404" || no "audit report = $c (want 404)"
