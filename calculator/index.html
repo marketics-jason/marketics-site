@@ -410,23 +410,6 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Airbnb Revenue Calculator",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "Free short-term rental income calculator. Enter your market and property details to see your revenue gap vs. top performers and your 90-day revenue potential with Marketics.",
-  "url": "https://marketics.io/calculator",
-  "provider": {"@id": "https://marketics.io/#business"}
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "Marketics 16-Market Short-Term Rental Benchmark Data (USD-Normalized)",
   "description": "Average nightly rate (ADR) and occupancy benchmarks for 16 short-term rental markets across the United States, Canada, and Mexico, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. Each market includes a market-average benchmark and a top-performer figure reflecting the average performance of Marketics-managed properties. Figures are updated quarterly.",
@@ -435,7 +418,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
   "license": "https://marketics.io/legal",
   "creator": {"@id": "https://marketics.io/#business"},
   "keywords": ["short-term rental","Airbnb","vacation rental","average daily rate","ADR","occupancy rate","STR benchmark","revenue"],
-  "spatialCoverage": ["Austin, TX","Scottsdale, AZ","Nashville, TN","Miami, FL","New Orleans, LA","San Diego, CA","Chicago, IL","Seattle, WA","Phoenix, AZ","Denver, CO","Toronto, ON","Vancouver, BC","Montréal, QC","Cancún, MX","Mexico City, MX","Puerto Vallarta, MX"],
+  "spatialCoverage": [{"@type":"Place","name":"Austin, TX"},{"@type":"Place","name":"Scottsdale, AZ"},{"@type":"Place","name":"Nashville, TN"},{"@type":"Place","name":"Miami, FL"},{"@type":"Place","name":"New Orleans, LA"},{"@type":"Place","name":"San Diego, CA"},{"@type":"Place","name":"Chicago, IL"},{"@type":"Place","name":"Seattle, WA"},{"@type":"Place","name":"Phoenix, AZ"},{"@type":"Place","name":"Denver, CO"},{"@type":"Place","name":"Toronto, ON"},{"@type":"Place","name":"Vancouver, BC"},{"@type":"Place","name":"Montréal, QC"},{"@type":"Place","name":"Cancún, MX"},{"@type":"Place","name":"Mexico City, MX"},{"@type":"Place","name":"Puerto Vallarta, MX"}],
   "variableMeasured": [
     {"@type": "PropertyValue","name": "Benchmark Average Daily Rate (ADR)","unitText": "USD"},
     {"@type": "PropertyValue","name": "Benchmark Occupancy Rate","unitText": "PERCENT"},
