@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111110">
+<meta name="msapplication-TileColor" content="#D6AD60">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Is Low Occupancy a Pricing or Positioning Problem?</title>
+<meta name="description" content="A soft calendar caused by pricing and one caused by positioning look identical in the data — and the fixes are opposite. How to tell which you have.">
+<link rel="canonical" href="https://marketics.io/intel/pricing-problem-or-positioning-problem">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Marketics">
+<meta property="og:title" content="Is Low Occupancy a Pricing or Positioning Problem? — Marketics">
+<meta property="og:description" content="Two causes of a soft calendar look identical in the data and have opposite fixes. The diagnostic question that tells you which one you actually have.">
+<meta property="og:url" content="https://marketics.io/intel/pricing-problem-or-positioning-problem">
+<meta property="og:image" content="https://marketics.io/og/default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is Low Occupancy a Pricing or Positioning Problem? — Marketics">
+<meta name="twitter:description" content="Cutting price on a positioning problem re-tiers your property downward. How Marketics diagnoses the difference before touching the rate.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Is low occupancy a pricing problem or a positioning problem?",
+ "description": "A soft calendar has two possible causes that look identical in the data and have opposite fixes. Marketics diagnoses the difference with one question: at roughly your rate, are comparable listings booked? If yes, it is positioning; if no, it is pricing.",
+ "author": {"@type": "Person", "name": "Jason Baxter", "url": "https://marketics.io/story"},
+ "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io", "logo": {"@type": "ImageObject", "url": "https://marketics.io/assets/logo.svg"}},
+ "image": "https://marketics.io/og/default.jpg",
+ "datePublished": "2026-07-18T09:00:00-04:00",
+ "dateModified": "2026-07-18T09:00:00-04:00",
+ "mainEntityOfPage": "https://marketics.io/intel/pricing-problem-or-positioning-problem",
+ "url": "https://marketics.io/intel/pricing-problem-or-positioning-problem"
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://marketics.io"},
+  {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://marketics.io/intel"},
+  {"@type": "ListItem", "position": 3, "name": "Is low occupancy a pricing problem or a positioning problem?", "item": "https://marketics.io/intel/pricing-problem-or-positioning-problem"}
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I know what my comp set actually is?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Genuinely comparable means similar size, similar sub-area, similar guest experience and similar amenity level — not simply nearby. Marketics builds the comp set before diagnosing anything, because a wrong comp set produces a confident wrong answer."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I have both problems at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, and it's common. The order matters: fix positioning first, then price into the tier you've earned. Pricing into a tier you haven't established yet just produces empty nights."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "If comparable listings are also empty, is the whole market soft?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sometimes — and that's a third answer worth naming. If the entire comp set is empty, the issue may be market-level demand rather than anything about your listing. That's why Marketics measures results net of market: stripping out what the wider market did that season is the only way to know whether a change actually worked."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does it take to fix a positioning problem?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Photography and listing quality can change within days. Ranking signals respond over weeks, as booking and review behavior accumulate. That lag is exactly why the diagnosis matters — you don't want to spend a season fixing the wrong thing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does Marketics do about it?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Marketics runs the diagnosis before touching rate, then works the levers in order — positioning, listing quality, ranking, and pricing last. Across optimized properties the documented median lift is 45%, net of market. Results are property-specific; every property is audited before a target is set."
+   }
+  }
+ ]
+}
+</script>
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
+<script src="/mkx-consent.js" defer></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+
+<style>
+:root{
+  --gold:#D6AD60;--gold-hi:#e8c47c;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
+  --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
+  --dim:#8C8A81;--faint:#86847C;--green:#3f9e6b;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+  --sans:'DM Sans',-apple-system,system-ui,sans-serif;
+  --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--gold);text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* a11y */
+.skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:var(--gold);color:var(--ink);
+  font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:1px;padding:12px 20px;}
+.skip-link:focus{left:16px;top:16px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;
+  padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);
+  border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;
+  transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ ARTICLE ══ */
+.article{max-width:1440px;margin:0 auto;padding:0 var(--gutter);}
+.reading{max-width:720px;margin:0 auto;padding:128px 0 40px;}
+
+.breadcrumb{position:static;z-index:auto;height:auto;padding:0;background:none;backdrop-filter:none;border-bottom:none;justify-content:flex-start;display:flex;align-items:center;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
+.breadcrumb a,.breadcrumb span{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb .sep{color:var(--faint);}
+.breadcrumb .cur{color:var(--gold);}
+
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+
+.art-h1{font-family:var(--display);font-weight:200;font-size:clamp(38px,6vw,56px);line-height:1.08;letter-spacing:1px;color:var(--white);margin:0;}
+.art-h1 em{font-style:italic;font-weight:300;color:var(--gold);}
+
+.deck{font-family:var(--sans);font-weight:300;font-size:19px;line-height:1.65;color:var(--body);margin:30px 0 0;}
+
+/* inline text byline */
+.meta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:36px 0 0;padding:20px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.meta .m-name{font-family:var(--sans);font-size:13px;letter-spacing:.5px;color:var(--bright);}
+.meta .m-cred{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--dim);}
+.meta .m-cred time{color:inherit;}
+.meta .sep{color:var(--faint);}
+.meta .m-li{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:inherit;text-decoration:none;transition:color .15s;}
+.meta .m-li:hover{color:var(--gold);text-decoration:underline;}
+
+.body{display:flex;flex-direction:column;gap:26px;margin-top:44px;}
+.body p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.8;color:var(--body);margin:0;}
+.body p strong{color:var(--bright);font-weight:500;}
+.body a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
+.body a:hover{border-bottom-color:var(--gold);}
+.body h2{font-family:var(--display);font-weight:300;font-size:30px;letter-spacing:.5px;color:var(--white);margin:26px 0 0;}
+.body ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;}
+.body ul.plain li{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;color:var(--body);padding-left:22px;position:relative;}
+.body ul.plain li::before{content:"—";position:absolute;left:0;color:var(--gold);}
+.body ul.plain li strong{color:var(--bright);font-weight:500;}
+
+/* 30-second answer (citation payload) */
+.answer{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.04);padding:34px 38px;margin-top:44px;}
+.answer .a-label{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.answer .a-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.answer .a-label span{font-family:var(--mono);font-size:10.5px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+.answer p{font-family:var(--sans);font-weight:300;font-size:18px;line-height:1.7;color:var(--bright);margin:0;}
+.answer p strong{color:var(--white);font-weight:400;}
+
+/* big pull-quote */
+.bigquote{margin:8px 0;border-left:2px solid var(--gold);padding:8px 0 8px 28px;
+  font-family:var(--display);font-weight:300;font-size:26px;line-height:1.5;letter-spacing:.5px;color:var(--bright);}
+
+/* two-path contrast */
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.move{border:1px solid var(--line-2);padding:28px 30px;display:flex;flex-direction:column;gap:12px;}
+.move .m-k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.move .m-h{font-family:var(--display);font-weight:300;font-size:22px;letter-spacing:1px;color:var(--white);margin:0;}
+.move p{font-family:var(--sans);font-weight:300;font-size:14px;line-height:1.7;color:var(--body);margin:0;}
+.move .m-k.gold{color:var(--gold);}
+
+/* comparison table */
+.honest{margin:10px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.honest table{width:100%;min-width:560px;border-collapse:collapse;font-family:var(--sans);}
+.honest caption{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;padding-bottom:16px;}
+.honest th,.honest td{border:1px solid var(--line-2);padding:15px 18px;text-align:left;vertical-align:top;}
+.honest thead th{background:var(--panel);color:var(--bright);font-family:var(--sans);font-weight:500;font-size:13.5px;letter-spacing:.3px;width:38%;}
+.honest thead th.corner{background:transparent;border:none;width:24%;}
+.honest tbody th{background:var(--raised);color:var(--bright);font-family:var(--mono);font-weight:400;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+.honest tbody td{font-weight:300;font-size:14px;line-height:1.6;color:var(--body);}
+
+/* key takeaways */
+.takeaways-wrap{border-top:1px solid var(--line);padding-top:40px;margin-top:8px;}
+.tk-label{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.tk-label .bar{width:32px;height:1px;background:var(--gold);}
+.tk-label h2{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin:0;}
+.takeaways{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style:none;}
+.takeaways li{display:grid;grid-template-columns:20px 1fr;gap:14px;font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;color:var(--body);}
+.takeaways li .arw{color:var(--gold);}
+
+/* inline CTA */
+.cta-box{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.04);padding:40px;margin-top:48px;display:flex;flex-direction:column;gap:16px;align-items:flex-start;}
+.cta-box .cta-h{font-family:var(--display);font-weight:300;font-size:26px;letter-spacing:.5px;color:var(--white);}
+.cta-box .cta-h em{font-style:italic;color:var(--gold);}
+.cta-box p{font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.7;color:var(--body);margin:0;}
+.cta-box p a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.3);}
+.cta-box p a:hover{border-bottom-color:var(--gold);}
+.cta-btn{font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:2.5px;color:var(--ink);background:var(--gold);padding:15px 32px;margin-top:6px;text-transform:uppercase;transition:filter .2s,transform .15s;}
+.cta-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
+
+/* FAQ */
+.faq{margin-top:48px;}
+.faq .faq-label{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.faq .faq-list{display:flex;flex-direction:column;margin-top:20px;border-top:1px solid var(--line);}
+.faq .faq-item{padding:26px 0;border-bottom:1px solid #1c1c1a;display:flex;flex-direction:column;gap:12px;}
+.faq .faq-q{font-family:var(--sans);font-weight:500;font-size:17px;color:var(--white);}
+.faq .faq-a{font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.75;color:var(--body);margin:0;}
+.faq .faq-a strong{color:var(--bright);font-weight:500;}
+
+/* keep reading */
+.related{border-top:1px solid var(--line);margin-top:40px;padding-top:36px;}
+.related .rel-k{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--dim);text-transform:uppercase;}
+.related .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
+.related .rel-card{border:1px solid var(--line-3);background:var(--panel);padding:24px 26px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s;}
+.related .rel-card:hover{border-color:rgba(214,173,96,.4);}
+.related .rel-card .rc-k{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
+.related .rel-card .rc-t{font-family:var(--display);font-weight:300;font-size:20px;letter-spacing:.5px;color:var(--white);}
+.related .rel-card .rc-d{font-family:var(--sans);font-weight:300;font-size:13.5px;line-height:1.6;color:var(--muted);}
+.related .rel-hub{display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+  font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;}
+.related .rel-hub:hover{color:var(--gold-hi);}
+
+/* ══ FOOTER ══ */
+footer{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;}
+.foot{max-width:1440px;margin:0 auto;padding:56px var(--gutter) 44px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin:0 auto;border-top:1px solid var(--raised);padding:20px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){
+  nav{padding:0 40px;}
+  .article{padding:0 40px;}
+  .foot{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+  .foot-legal{padding-left:40px;padding-right:40px;}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .moves,.related .rel-grid{grid-template-columns:1fr;}
+}
+@media (max-width:600px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  .article{padding:0 24px;}
+  .reading{padding:104px 0 32px;}
+  .art-h1{font-size:38px;}
+  .deck{font-size:17px;}
+  .body h2{font-size:26px;}
+  .answer{padding:26px 24px;}
+  .answer p{font-size:16px;}
+  .bigquote{font-size:22px;padding-left:20px;}
+  .cta-box{padding:28px 24px;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}
+  .foot-brand{grid-column:1/-1;}
+  .foot-brand p{max-width:none;}
+  .foot-tag{grid-column:1/-1;}
+  .foot-legal{padding:20px 24px;}
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/story">Our Story</a>
+    <a href="/intel" class="active">Insights</a>
+  </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
+</div>
+
+<!-- ARTICLE -->
+<main id="main-content" class="article">
+  <article class="reading">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/intel">Insights</a>
+      <span class="sep">/</span>
+      <span class="cur">Pricing problem or positioning problem</span>
+    </nav>
+
+    <div class="kicker"><span class="bar"></span><span>The diagnosis</span></div>
+
+    <h1 class="art-h1">Is low occupancy a pricing problem or a <em>positioning problem?</em></h1>
+
+    <p class="deck">Every owner with a soft calendar reaches the same conclusion: the price is too high. It's the easiest lever to pull — and it's wrong about half the time.</p>
+
+    <div class="meta">
+      <span class="m-name">Jason Baxter</span>
+      <span class="sep">·</span>
+      <span class="m-cred">Founder, Marketics</span>
+      <span class="sep">·</span>
+      <span class="m-cred">Operating since 2015</span>
+      <span class="sep">·</span>
+      <a class="m-li" href="https://www.linkedin.com/in/jasonbaxter1" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span class="sep">·</span>
+      <span class="m-cred">Published <time datetime="2026-07-18">July 18, 2026</time></span>
+      <span class="sep">·</span>
+      <span class="m-cred">Updated <time datetime="2026-07-18">July 18, 2026</time></span>
+    </div>
+
+    <!-- 30-SECOND ANSWER (citation payload) -->
+    <div class="answer">
+      <div class="a-label"><span class="a-dot"></span><span>The short answer</span></div>
+      <p>A soft calendar has two possible causes, and they look identical in the data. Marketics diagnoses the difference this way: if comparable listings are booked at a similar rate and yours isn't, the problem is <strong>positioning</strong> — photography, listing quality, or how the algorithm ranks you — and cutting price won't fix it. If comparable listings are also empty at your rate but filling below it, the problem is <strong>pricing</strong>. The distinction matters because the fixes are opposite. Dropping rate on a positioning problem teaches the market your property is worth less, and that repositioning is slow and difficult to reverse.</p>
+    </div>
+
+    <div class="body">
+      <h2>Two problems that produce the same symptom</h2>
+      <p>Every owner with a soft calendar reaches the same conclusion in the same order: <em>my price is too high.</em> It's the most available explanation and the easiest lever to pull. It's also wrong about half the time.</p>
+      <p>An empty week tells you demand didn't convert. It doesn't tell you why. Two very different failures produce that identical result — and because the symptom is the same, most owners treat both with the same medicine.</p>
+
+      <h2>The diagnostic question</h2>
+      <p>Ask one thing: <strong>at roughly your rate, are comparable listings booked?</strong></p>
+      <p><strong>If yes</strong> — comparable properties at your price are filling, and you're not — you have a positioning problem. The market is willing to pay your rate. It just isn't choosing you. That's a listing-quality, photography, or ranking issue. Your property isn't being seen, or it's being seen and passed over.</p>
+      <p><strong>If no</strong> — comparable properties at your rate are also empty, and the bookings are happening below you — you have a pricing problem. Demand exists, but not at the number you're asking. Here, adjusting rate is the correct move.</p>
+      <p>The comparison has to be genuinely comparable: similar size, similar area, similar guest experience. A three-bedroom with a pool is not your comp set because it's nearby.</p>
+
+      <div class="moves">
+        <div class="move">
+          <span class="m-k gold">If comps ARE booked</span>
+          <h3 class="m-h">Positioning path</h3>
+          <p>Photography, listing quality, ranking signals, comp-set placement. The market will pay your rate — it isn't choosing you. Cutting price won't fix it.</p>
+        </div>
+        <div class="move">
+          <span class="m-k gold">If comps are ALSO empty</span>
+          <h3 class="m-h">Pricing path</h3>
+          <p>Rate structure, minimum stays, lead-time curve. Demand exists below your number. Adjusting the rate — or how it moves — is the correct move.</p>
+        </div>
+      </div>
+
+      <h2>Why the wrong fix is expensive</h2>
+      <p>If you cut rate on a positioning problem, two things happen.</p>
+      <p>The first is immediate: you book, at less than the property is worth. That feels like the fix worked. It didn't — you bought occupancy with margin.</p>
+      <p>The second is durable, and it's the reason this matters. <strong>Price is a signal.</strong> Guests read a low rate as information about quality, and platforms read booking behavior as information about where a listing belongs. Once your property is established at a lower tier, moving back up means re-earning the ranking and re-training guest expectations. It is far slower to climb than it was to drop.</p>
+
+      <blockquote class="bigquote">You can lower a rate in an afternoon. You can spend a season earning it back.</blockquote>
+
+      <h2>What positioning actually means</h2>
+      <p>"Positioning" sounds abstract. Concretely, it's three things.</p>
+      <p><strong>Listing quality.</strong> The cover photo, the photo sequence, the title, the description. This is what determines whether someone stops scrolling. A property can be excellent and photographed in a way that doesn't communicate it.</p>
+      <p><strong>Algorithm ranking.</strong> Response time, review velocity, booking conversion, calendar accuracy. Platforms reward listings that convert the traffic they're given. A listing buried on page four doesn't have a pricing problem — it has a visibility problem.</p>
+      <p><strong>Comp-set placement.</strong> Where your property sits relative to genuine alternatives. A listing priced correctly but presented as a lesser option will lose to worse properties that present better.</p>
+
+      <h2>When it's genuinely pricing</h2>
+      <p>Pricing problems are real, and they're usually structural rather than absolute:</p>
+      <ul class="plain">
+        <li><strong>Flat rates across uneven demand.</strong> One rate applied to a season with a festival week, a shoulder month and a dead stretch will leave money on the table in the peak and sit empty in the trough.</li>
+        <li><strong>Minimum-stay rules fighting the market.</strong> A trough that looks like a price problem is often a length-of-stay problem — the demand is for two nights and the listing requires four.</li>
+        <li><strong>Lead-time mismatch.</strong> Rates that don't move as the booking window closes.</li>
+      </ul>
+      <p>Notice that none of those are solved by "lower the price." They're solved by pricing <em>differently</em> — the core of <a href="https://en.wikipedia.org/wiki/Revenue_management" target="_blank" rel="noopener">revenue management</a>, which optimizes revenue per available night (<a href="https://en.wikipedia.org/wiki/RevPAR" target="_blank" rel="noopener">RevPAR</a>) rather than occupancy alone.</p>
+
+      <h2>The honest case for lowering price</h2>
+      <p>Sometimes the answer is that the rate is simply too high for what the property offers, and no amount of photography changes that. If the comp set is genuinely better — better location, better amenities, better condition — then price is doing the honest work of placing you correctly.</p>
+      <p>The point isn't that lowering rate is always wrong. It's that it should be a <strong>conclusion</strong>, not a first move.</p>
+
+      <!-- COMPARISON TABLE -->
+      <div class="honest">
+        <table>
+          <caption>Positioning problem vs. pricing problem</caption>
+          <thead>
+            <tr>
+              <th class="corner" scope="col"><span class="sr-only">Consideration</span></th>
+              <th scope="col">Positioning problem</th>
+              <th scope="col">Pricing problem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">The tell</th>
+              <td>Comparable listings book at your rate; you don't</td>
+              <td>Comparable listings are empty at your rate too</td>
+            </tr>
+            <tr>
+              <th scope="row">What's failing</th>
+              <td>Being seen, or being chosen once seen</td>
+              <td>The number, or how the number moves</td>
+            </tr>
+            <tr>
+              <th scope="row">The fix</th>
+              <td>Photography, listing quality, ranking signals, comp-set placement</td>
+              <td>Rate structure, minimum stays, lead-time curve</td>
+            </tr>
+            <tr>
+              <th scope="row">What lowering price does</th>
+              <td>Books at a discount and re-tiers the property downward</td>
+              <td>Correctly meets existing demand</td>
+            </tr>
+            <tr>
+              <th scope="row">Time to recover if misdiagnosed</th>
+              <td>Slow — re-earning tier and ranking takes a season or more</td>
+              <td>Fast — rate can be adjusted immediately</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- KEY TAKEAWAYS -->
+    <div class="takeaways-wrap">
+      <div class="tk-label"><span class="bar"></span><h2>Key takeaways</h2></div>
+      <ul class="takeaways">
+        <li><span class="arw" aria-hidden="true">→</span> A soft calendar has two causes that look identical. Diagnose before acting.</li>
+        <li><span class="arw" aria-hidden="true">→</span> The diagnostic question: at roughly your rate, are comparable listings booked? If yes, it's positioning. If no, it's pricing.</li>
+        <li><span class="arw" aria-hidden="true">→</span> The wrong fix is asymmetrically expensive. Cutting rate on a positioning problem re-tiers the property, and climbing back is slow.</li>
+        <li><span class="arw" aria-hidden="true">→</span> Most "pricing problems" are structural — flat rates, minimum-stay rules, lead-time curves — not absolute.</li>
+        <li><span class="arw" aria-hidden="true">→</span> Lowering price should be a conclusion, not a first move.</li>
+      </ul>
+    </div>
+
+    <!-- inline CTA -->
+    <div class="cta-box">
+      <span class="cta-h">Not sure which one you have? <em>The audit runs the diagnosis.</em></span>
+      <p>A free audit runs the positioning-vs-pricing diagnosis on your property — before you commit to anything. We work on performance: 10% of revenue, no monthly fee, paid only when your revenue grows. Or <a href="/sample-audit">see a sample audit</a> first.</p>
+      <a href="/get-started" class="cta-btn">Get My Free Audit</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <span class="faq-label">Common questions</span>
+      <div class="faq-list">
+        <div class="faq-item">
+          <span class="faq-q">How do I know what my comp set actually is?</span>
+          <p class="faq-a">Genuinely comparable means similar size, similar sub-area, similar guest experience and similar amenity level — not simply nearby. Marketics builds the comp set before diagnosing anything, because a wrong comp set produces a confident wrong answer.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">Can I have both problems at once?</span>
+          <p class="faq-a">Yes, and it's common. The order matters: fix positioning first, then price into the tier you've earned. Pricing into a tier you haven't established yet just produces empty nights.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">If comparable listings are also empty, is the whole market soft?</span>
+          <p class="faq-a">Sometimes — and that's a third answer worth naming. If the entire comp set is empty, the issue may be market-level demand rather than anything about your listing. That's why Marketics measures results net of market: stripping out what the wider market did that season is the only way to know whether a change actually worked.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">How long does it take to fix a positioning problem?</span>
+          <p class="faq-a">Photography and listing quality can change within days. Ranking signals respond over weeks, as booking and review behavior accumulate. That lag is exactly why the diagnosis matters — you don't want to spend a season fixing the wrong thing.</p>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">What does Marketics do about it?</span>
+          <p class="faq-a">Marketics runs the diagnosis before touching rate, then works the levers in order — positioning, listing quality, ranking, and pricing last. Across optimized properties the documented median lift is 45%, net of market. Results are property-specific; every property is audited before a target is set.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEEP READING (hub + sibling spokes) -->
+    <div class="related">
+      <span class="rel-k">Keep reading</span>
+      <div class="rel-grid">
+        <a href="/intel/airbnb-occupancy-rate" class="rel-card">
+          <span class="rc-k">Occupancy</span>
+          <span class="rc-t">How to increase your Airbnb occupancy rate</span>
+          <span class="rc-d">The tactics, once you've diagnosed which problem you actually have.</span>
+        </a>
+        <a href="/intel/why-lowering-your-price-doesnt-work" class="rel-card">
+          <span class="rc-k">Pricing strategy</span>
+          <span class="rc-t">Why lowering your price doesn't work</span>
+          <span class="rc-d">The price-signal argument in depth — why a cut compounds against you.</span>
+        </a>
+        <a href="/intel/str-performance-index" class="rel-card">
+          <span class="rc-k">Methodology</span>
+          <span class="rc-t">The Marketics STR Performance Index</span>
+          <span class="rc-d">The documented results behind the 45% median benchmark, net of market.</span>
+        </a>
+      </div>
+      <a href="/intel" class="rel-hub">← Browse all Insights</a>
+    </div>
+
+  </article>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+      <a href="/faq">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="/media-kit">Media Kit</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal">Terms</a>
+    </div>
+    <span>Miami · Montréal · Nomadic</span>
+  </div>
+</footer>
+
+<script>
+/* nav: scroll shade + mobile menu */
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+
+<script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
+
+<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<script>
+(function(){
+  var loaded = false;
+  function loadWidget() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
+  events.forEach(function(e) {
+    window.addEventListener(e, loadWidget, {once: true, passive: true});
+  });
+  setTimeout(loadWidget, 5000);
+})();
+</script>
+</body>
+</html>
