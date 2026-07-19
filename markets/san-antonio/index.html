@@ -28,12 +28,13 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@type": "ProfessionalService",
- "name": "Marketics — San Antonio",
+ "@type": "Service",
+ "name": "Short-Term Rental Revenue Optimization — San Antonio",
+ "serviceType": "Short-term rental revenue optimization",
  "description": "Performance-based short-term rental revenue optimization in San Antonio, Texas — pricing, listing, and search positioning for STR operators.",
  "url": "https://marketics.io/markets/san-antonio",
- "areaServed": "San Antonio, Texas",
- "parentOrganization": {
+ "areaServed": {"@type": "City", "name": "San Antonio", "containedInPlace": {"@type": "State", "name": "Texas"}},
+ "provider": {
   "@type": "Organization",
   "@id": "https://marketics.io/#business",
   "name": "Marketics"
