@@ -210,6 +210,44 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .drow .dwhy{font-size:15px;line-height:1.75;color:var(--muted);}
 
 /* ══ HOW IT RUNS ══ */
+/* ══ THE FLOW (order is the argument) ══ */
+.flow{padding:88px 72px;}
+.flow .flead{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:680px;}
+.fc{display:flex;align-items:stretch;gap:0;margin-top:52px;}
+.fc-value{flex:1;border:1px solid rgba(214,173,96,.28);background:rgba(214,173,96,.02);padding:22px 26px 26px;}
+.fc-vh{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px;}
+.fc-vh .k{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+.fc-vh .r{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;}
+.fc-levers{display:flex;align-items:stretch;gap:0;}
+.fc-lever{flex:1;display:flex;align-items:stretch;}
+.fc-lever .lv{flex:1;display:flex;flex-direction:column;gap:10px;padding:4px 8px;}
+.fc-lever .lv .n{font-family:var(--display);font-weight:200;font-size:28px;color:var(--gold);line-height:1;}
+.fc-lever .lv .nm{font-family:var(--display);font-weight:400;font-size:17px;letter-spacing:.5px;color:var(--white);line-height:1.2;}
+.fc-lever .lv .tg{font-family:var(--sans);font-weight:300;font-size:12.5px;line-height:1.55;color:var(--muted);}
+.fc-lever .ar{display:flex;align-items:center;padding:0 4px;color:#3a3a38;font-size:15px;}
+.fc-gate{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 22px;}
+.fc-gate .ln{width:1px;flex:1;background:linear-gradient(to bottom,transparent,var(--line-3) 30%,var(--line-3) 70%,transparent);}
+.fc-gate .then{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);padding:12px 0;}
+.fc-price{width:300px;border:1px solid var(--gold);background:rgba(214,173,96,.06);padding:22px 26px 26px;display:flex;flex-direction:column;}
+.fc-ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.fc-ph .k{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
+.fc-ph .c{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--gold-hi);text-transform:uppercase;}
+.fc-price .pb{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center;}
+.fc-price .pb .n{font-family:var(--display);font-weight:200;font-size:28px;color:var(--gold);line-height:1;}
+.fc-price .pb .nm{font-family:var(--display);font-weight:400;font-size:22px;letter-spacing:.5px;color:var(--white);line-height:1.2;}
+.fc-price .pb .ds{font-family:var(--sans);font-weight:300;font-size:13px;line-height:1.6;color:var(--body);}
+.fc-note{font-family:var(--sans);font-weight:300;font-size:13px;line-height:1.6;color:var(--faint);margin:22px 0 0;max-width:720px;}
+@media(max-width:900px){
+  .fc{flex-direction:column;}
+  .fc-levers{flex-direction:column;}
+  .fc-lever{flex-direction:column;}
+  .fc-lever .lv{padding:16px 8px;border-bottom:1px solid rgba(214,173,96,.12);}
+  .fc-lever:last-child .lv{border-bottom:none;}
+  .fc-lever .ar{display:none;}
+  .fc-gate{flex-direction:row;padding:16px 0;}
+  .fc-gate .ln{flex:none;width:24px;height:1px;background:var(--line-3);}
+  .fc-price{width:auto;}
+}
 .runs{padding:88px 72px;}
 .runs .runs-kick{margin-bottom:52px;}
 .runs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
@@ -364,7 +402,7 @@ li.drow,li.rcol,ul.aud-list li{list-style:none;}
 <section class="philo sec">
   <h2 class="philo-kick">The idea underneath all of it</h2>
   <p class="philo-big">You don't price the market.<br>The market prices <em>you</em> — on what it sees.</p>
-  <p class="philo-sub">Nobody prices the market. We build the value; the market chooses what it's worth. Price isn't something we set — it's the verdict the market returns.</p>
+  <p class="philo-sub">Price is determined by market perception — of quality, of fit, of what a stay is worth. We build what the market perceives; the number it returns is the verdict, not our starting point.</p>
 </section>
 
 <!-- ══ THE ASYMMETRY ══ -->
@@ -433,6 +471,31 @@ li.drow,li.rcol,ul.aud-list li{list-style:none;}
       <span class="dwhy">The last lever, not the first. Price set before the value is built only anchors the listing to the tier it's trying to leave.</span>
     </li>
   </ol>
+</section>
+
+<!-- ══ THE FLOW · value levers → price last ══ -->
+<section class="flow sec">
+  <div class="kicker"><div class="bar"></div><span>The order is the argument</span></div>
+  <h2 class="dh">Four levers build the value. The fifth reads it.</h2>
+  <p class="flead">Positioning, storytelling, distribution, and ranking run together to change what the market sees. Only then does pricing calibrate — reading demand against the new ceiling.</p>
+
+  <div class="fc" role="img" aria-label="Marketics method flowchart for short-term rental revenue optimization: four value levers — market positioning, storytelling, distribution, and search ranking — run in sequence to build perceived value, then pricing calibrates last against the new tier ceiling.">
+    <div class="fc-value">
+      <div class="fc-vh"><span class="k">Value · built first</span><span class="r">Run together, in order</span></div>
+      <div class="fc-levers">
+        <div class="fc-lever"><div class="lv"><span class="n">01</span><span class="nm">Positioning</span><span class="tg">The tier the property can win.</span></div><div class="ar" aria-hidden="true">→</div></div>
+        <div class="fc-lever"><div class="lv"><span class="n">02</span><span class="nm">Storytelling</span><span class="tg">The listing tells that tier.</span></div><div class="ar" aria-hidden="true">→</div></div>
+        <div class="fc-lever"><div class="lv"><span class="n">03</span><span class="nm">Distribution</span><span class="tg">In front of the right guests.</span></div><div class="ar" aria-hidden="true">→</div></div>
+        <div class="fc-lever"><div class="lv"><span class="n">04</span><span class="nm">Ranking</span><span class="tg">Held above the comp set.</span></div></div>
+      </div>
+    </div>
+    <div class="fc-gate"><div class="ln"></div><span class="then">Then</span><div class="ln"></div></div>
+    <div class="fc-price">
+      <div class="fc-ph"><span class="k">Price · last</span><span class="c">Calibrated</span></div>
+      <div class="pb"><span class="n">05</span><span class="nm">Pricing</span><span class="ds">Dynamic rates that read demand, events, and the tier ceiling the first four levers just raised.</span></div>
+    </div>
+  </div>
+  <p class="fc-note">Reverse the order — price before value — and you anchor the listing to the tier it's trying to leave.</p>
 </section>
 
 <!-- ══ HOW IT RUNS ══ -->
