@@ -72,6 +72,10 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
 @media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
 
 :root{--gutter:max(72px, calc((100% - 1440px) / 2 + 72px));--gold:#D6AD60;--gold2:rgba(214,173,96,.15);--gold3:rgba(214,173,96,.06);--night:#0f0f0f;--n2:#111;--n3:#181818;--n4:#202020;--n5:#282828;--stone:#B4B2A9;--dim:#8C8A81;--white:#f8f6f2;--ok:#2D7A4F;--ok2:rgba(45,122,79,.12);--d:'Josefin Sans',sans-serif;--s:'DM Sans',sans-serif;--m:'DM Mono',monospace;--max:860px;}
+a{color:var(--gold);text-decoration:none;}
+.body-text a{border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
+.body-text a:hover{border-bottom-color:var(--gold);}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:74px;}
 body{font-family:var(--s);background:var(--night);color:var(--white);font-size:15px;line-height:1.7;overflow-x:hidden;padding-top:74px;}
@@ -220,6 +224,27 @@ img,iframe,video{max-width:100%;height:auto;}
 <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
 <!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<style>
+.mkxf{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;background:#111110;}
+.mkxf a{text-decoration:none;}
+.mkxf-grid{max-width:1440px;margin:0 auto;padding:56px max(72px,calc((100% - 1440px)/2 + 72px)) 44px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;}
+.mkxf-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;display:block;}
+.mkxf-brand p{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:12px;line-height:1.8;color:#8C8A81;margin:0;max-width:300px;}
+.mkxf-col{display:flex;flex-direction:column;gap:14px;}
+.mkxf-col .mkxf-h{font-family:'DM Mono',ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:2px;color:#86847C;text-transform:uppercase;}
+.mkxf-col a{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-size:13px;color:#8F8C83;}
+.mkxf-col a:hover{color:#D6AD60;}
+.mkxf-col a.gold{color:#D6AD60;}
+.mkxf-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.mkxf-tag .mkxf-tt{font-family:'Josefin Sans',-apple-system,system-ui,sans-serif;font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:#D6AD60;}
+.mkxf-tag .mkxf-tu{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-size:12px;color:#8C8A81;}
+.mkxf-legal{max-width:1440px;margin:0 auto;border-top:1px solid #1a1a18;padding:20px max(72px,calc((100% - 1440px)/2 + 72px));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.mkxf-ll{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.mkxf-legal span,.mkxf-legal a{font-family:'DM Mono',ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:1.5px;color:#86847C;}
+.mkxf-legal a:hover{color:#8F8C83;}
+@media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
+@media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -571,44 +596,41 @@ img,iframe,video{max-width:100%;height:auto;}
 </div>
 
 </main>
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <div class="sf-copy">&copy; 2026 Marketics, LLC</div>
-      <div class="sf-location">Miami &middot; Montr&eacute;al &middot; Nomadic</div>
+<footer class="mkxf">
+  <div class="mkxf-grid">
+    <div class="mkxf-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets, a documented 45% median lift, net of market.</p>
     </div>
-    <div class="sf-nav">
-      <div class="sf-col">
-        <div class="sf-col-label">Company</div>
-        <a href="/method">Method</a>
-        <a href="/story">Our Story</a>
-        <a href="/results">Results</a>
-        <a href="/case-studies">Case Studies</a>
-        <a href="/pricing">Pricing</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Tools</div>
-        <a href="/markets">Markets</a>
-        <a href="/calculator">Airbnb Revenue Calculator</a>
-        <a href="/get-started">Free Audit</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Market Intel</div>
-        <a href="/intel">Browse All</a>
-        <a href="/intel#reports">Market Reports</a>
-        <a href="/intel#playbook">Playbooks</a>
-      </div>
-      <div class="sf-col">
-        <div class="sf-col-label">Legal</div>
-        <a href="/legal">Privacy Policy</a>
-        <a href="/legal?tab=terms">Terms of Service</a>
-        <a href="/media">Media Kit</a>
-      </div>
+    <div class="mkxf-col">
+      <span class="mkxf-h">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+      <a href="/faq">FAQ</a>
+    </div>
+    <div class="mkxf-col">
+      <span class="mkxf-h">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/media">Media</a>
+      <a href="/media-kit">Media Kit</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="mkxf-tag">
+      <div class="mkxf-tt">Your Market. Mastered.</div>
+      <span class="mkxf-tu">marketics.io</span>
     </div>
   </div>
-  <div class="sf-bottom">
-    <span>Your Market. Mastered.&trade;</span>
-    <span>marketics.io</span>
+  <div class="mkxf-legal">
+    <div class="mkxf-ll">
+      <span>© 2026 Marketics, LLC</span>
+      <a href="/legal">Privacy Policy</a>
+      <a href="/legal?tab=terms">Terms</a>
+    </div>
+    <span>Miami · Montréal · Nomadic</span>
   </div>
 </footer>
 
