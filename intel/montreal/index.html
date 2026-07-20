@@ -149,6 +149,10 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
   --d:'Josefin Sans',sans-serif;--s:'DM Sans',sans-serif;--m:'DM Mono',monospace;
   --max:860px;
 }
+a{color:var(--gold);text-decoration:none;}
+.body-text a{border-bottom:1px solid rgba(214,173,96,.3);transition:border-color .15s;}
+.body-text a:hover{border-bottom-color:var(--gold);}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:74px;}
 body{font-family:var(--s);background:var(--night);color:var(--white);font-size:15px;line-height:1.7;overflow-x:hidden;padding-top:74px;}
