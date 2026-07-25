@@ -55,7 +55,7 @@ Marketics charges 10% of net booking revenue per property. No fees beyond a one-
 
 ## Key Results (Methodology)
 
-All statistics reflect Marketics-managed properties. Sample: 19 documented short-term-rental engagements, measured 2019–2026. Median net-of-market revenue lift: 45% (range −3% to +193%). Inclusion: Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.
+All statistics reflect Marketics-managed properties. Sample: 19 documented short-term-rental engagements, measured 2024–2026. Median net-of-market revenue lift: 45% (range −3% to +193%). Inclusion: Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.
 
 - The benchmark is a 45% median revenue lift, net of market, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of revenue with no monthly fee, the large majority of any gain stays with the host.
 - Full distribution and methodology: [the Marketics STR Performance Index](https://marketics.io/intel/str-performance-index).
