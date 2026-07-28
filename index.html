@@ -349,6 +349,21 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .closing-p{font-size:17px;line-height:1.7;color:var(--body);margin:28px 0 0;max-width:520px;}
 .closing-actions{display:flex;align-items:center;gap:30px;margin-top:40px;flex-wrap:wrap;justify-content:center;}
 
+/* ══ RICH-CONTENT VIZ (Design handback 2026-07-28) ══ */
+.rcard .rviz{margin:0;padding:2px 22px 22px;display:flex;flex-direction:column;gap:11px;}
+.rcard .rviz svg{width:100%;height:auto;display:block;max-width:100%;}
+.rcard .rviz-idx{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:#55534E;}
+.rcard .rviz-cap{font-family:var(--sans);font-weight:300;font-size:12px;line-height:1.55;color:var(--dim);margin:0;}
+.flowsec{border-top:1px solid var(--line);padding:56px var(--gutter) 88px;}
+.flowfig{margin:0;display:flex;flex-direction:column;gap:16px;}
+.flowfig svg{width:100%;height:auto;display:block;max-width:100%;}
+.flowfig svg.flow-mobile{display:none;}
+.flow-cap{font-family:var(--sans);font-weight:300;font-size:13px;line-height:1.6;color:var(--dim);max-width:780px;margin:0;}
+@media(max-width:768px){.flowfig svg.flow-desktop{display:none;}.flowfig svg.flow-mobile{display:block;max-width:340px;}.flowsec{padding:48px 24px 56px;}}
+
+.closing-thumb{margin:56px 0 0;width:100%;max-width:250px;display:flex;flex-direction:column;gap:12px;}
+.closing-thumb svg{width:100%;height:auto;display:block;max-width:100%;}
+.closing-thumb figcaption{font-family:var(--sans);font-weight:300;font-size:11.5px;line-height:1.55;color:var(--dim);text-align:center;}
 /* ══ FURTHER READING ══ */
 .reading{padding:72px var(--gutter);}
 .reading .kicker{margin-bottom:28px;}
@@ -591,6 +606,71 @@ dd.fa{margin:0;}
   </ol>
 </section>
 
+<!-- ══ METHOD FLOWCHART (Design handback) ══ -->
+<section class="flowsec sec">
+  <figure class="flowfig">
+    <svg class="flow-desktop" viewBox="0 0 800 118" role="img" aria-label="Marketics method flowchart for short-term rental revenue optimization: four value levers (market positioning, storytelling, distribution and search ranking) build perceived value in sequence, then demand-based pricing calibrates last against the new tier ceiling."><title>Marketics method flowchart for short-term rental revenue optimization: four value levers (market positioning, storytelling, distribution and search ranking) build perceived value in sequence, then demand-based pricing calibrates last against the new tier ceiling.</title>
+      <text x="0" y="9" font-family="'DM Mono',monospace" font-size="9" letter-spacing="2" fill="#D6AD60">VALUE · BUILT FIRST</text>
+      <rect x="0" y="18" width="538" height="80" fill="rgba(214,173,96,0.02)" stroke="rgba(214,173,96,0.22)" stroke-width="1"></rect>
+      <rect x="12" y="32" width="116" height="52" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="22" y="50" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">01</text>
+      <text x="22" y="65" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Positioning</text>
+      <text x="22" y="77" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">The tier it can win</text>
+      <path d="M130,58 L140,58 M136,54 L140,58 L136,62" fill="none" stroke="#3a3a38" stroke-width="1.2"></path>
+      <rect x="142" y="32" width="116" height="52" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="152" y="50" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">02</text>
+      <text x="152" y="65" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Storytelling</text>
+      <text x="152" y="77" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">It tells that tier</text>
+      <path d="M260,58 L270,58 M266,54 L270,58 L266,62" fill="none" stroke="#3a3a38" stroke-width="1.2"></path>
+      <rect x="272" y="32" width="116" height="52" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="282" y="50" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">03</text>
+      <text x="282" y="65" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Distribution</text>
+      <text x="282" y="77" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">The right guests</text>
+      <path d="M390,58 L400,58 M396,54 L400,58 L396,62" fill="none" stroke="#3a3a38" stroke-width="1.2"></path>
+      <rect x="402" y="32" width="116" height="52" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="412" y="50" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">04</text>
+      <text x="412" y="65" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Ranking</text>
+      <text x="412" y="77" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">Held above the comp set</text>
+      <path d="M566,30 L566,50" stroke="#2a2a28" stroke-width="1"></path>
+      <text x="566" y="62" font-family="'DM Mono',monospace" font-size="9" letter-spacing="1.5" fill="#6B6A65" text-anchor="middle">THEN</text>
+      <path d="M566,68 L566,88" stroke="#2a2a28" stroke-width="1"></path>
+      <text x="620" y="9" font-family="'DM Mono',monospace" font-size="9" letter-spacing="2" fill="#D6AD60">PRICE · LAST</text>
+      <rect x="620" y="18" width="180" height="80" fill="rgba(214,173,96,0.06)" stroke="#D6AD60" stroke-width="1"></rect>
+      <text x="634" y="46" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">05</text>
+      <text x="634" y="63" font-family="'Josefin Sans',sans-serif" font-size="14" fill="#FFFFFF">Pricing</text>
+      <text x="634" y="77" font-family="'DM Sans',sans-serif" font-size="8" fill="#B4B2A9">Reads demand against the</text>
+      <text x="634" y="87" font-family="'DM Sans',sans-serif" font-size="8" fill="#B4B2A9">ceiling the four just raised</text>
+    </svg>
+    <svg class="flow-mobile" viewBox="0 0 300 250" role="img" aria-label="Marketics method flowchart for short-term rental revenue optimization: four value levers (market positioning, storytelling, distribution and search ranking) build perceived value in sequence, then demand-based pricing calibrates last against the new tier ceiling."><title>Marketics method flowchart for short-term rental revenue optimization: four value levers (market positioning, storytelling, distribution and search ranking) build perceived value in sequence, then demand-based pricing calibrates last against the new tier ceiling.</title>
+      <text x="0" y="9" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.5" fill="#D6AD60">VALUE · BUILT FIRST</text>
+      <rect x="0" y="16" width="300" height="150" fill="rgba(214,173,96,0.02)" stroke="rgba(214,173,96,0.22)" stroke-width="1"></rect>
+      <rect x="10" y="26" width="280" height="30" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="20" y="45" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">01</text>
+      <text x="42" y="45" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Positioning</text>
+      <text x="140" y="45" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">The tier it can win</text>
+      <rect x="10" y="61" width="280" height="30" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="20" y="80" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">02</text>
+      <text x="42" y="80" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Storytelling</text>
+      <text x="140" y="80" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">It tells that tier</text>
+      <rect x="10" y="96" width="280" height="30" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="20" y="115" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">03</text>
+      <text x="42" y="115" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Distribution</text>
+      <text x="140" y="115" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">The right guests</text>
+      <rect x="10" y="131" width="280" height="30" fill="#1c1c1a" stroke="#2a2a28" stroke-width="1"></rect>
+      <text x="20" y="150" font-family="'DM Mono',monospace" font-size="9" fill="#D6AD60">04</text>
+      <text x="42" y="150" font-family="'Josefin Sans',sans-serif" font-size="12" fill="#FFFFFF">Ranking</text>
+      <text x="140" y="150" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">Above the comp set</text>
+      <path d="M150,172 L150,182" stroke="#2a2a28" stroke-width="1"></path>
+      <text x="150" y="194" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.5" fill="#6B6A65" text-anchor="middle">THEN</text>
+      <rect x="0" y="202" width="300" height="46" fill="rgba(214,173,96,0.06)" stroke="#D6AD60" stroke-width="1"></rect>
+      <text x="12" y="217" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.5" fill="#D6AD60">PRICE · LAST</text>
+      <text x="12" y="233" font-family="'Josefin Sans',sans-serif" font-size="13" fill="#FFFFFF">05 · Pricing</text>
+      <text x="12" y="243" font-family="'DM Sans',sans-serif" font-size="7.5" fill="#B4B2A9">Reads demand against the ceiling the four just raised</text>
+    </svg>
+    <figcaption class="flow-cap">The order is the argument: four levers build what the market sees, then pricing calibrates against the new ceiling. Reverse it (price before value) and you anchor the listing to the tier it&rsquo;s trying to leave.</figcaption>
+  </figure>
+</section>
+
 <!-- ══ RESULTS ══ -->
 <section class="results sec">
   <div class="results-head">
@@ -608,6 +688,16 @@ dd.fa{margin:0;}
         <figcaption class="rcap"><span class="rmkt">San Antonio, TX</span><h3 class="rttl">Just a place to stay, made a destination</h3></figcaption>
       </figure>
       <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+45%</span></div>
+      <figure class="rviz">
+        <svg viewBox="0 0 240 46" role="img" aria-label="Bar chart comparing short-term rental RevPAR before and after revenue optimization in San Antonio: indexed 100 at baseline, 145 after: a 45% lift, net of market."><title>Bar chart comparing short-term rental RevPAR before and after revenue optimization in San Antonio: indexed 100 at baseline, 145 after: a 45% lift, net of market.</title>
+          <text x="0" y="13" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#8C8A81">BEFORE</text>
+          <rect x="48" y="4" width="124" height="11" fill="#3a3a38"></rect>
+          <text x="0" y="41" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#D6AD60">AFTER</text>
+          <rect x="48" y="32" width="180" height="11" fill="#D6AD60"></rect>
+        </svg>
+        <span class="rviz-idx">REVPAR, INDEXED · 100 &rarr; 145</span>
+        <figcaption class="rviz-cap">RevPAR before and after the engagement, indexed to 100 at baseline.</figcaption>
+      </figure>
     </a></article>
     <article class="rc-art"><a class="rcard" href="/case-studies/montreal-hotel">
       <figure class="rimg">
@@ -616,6 +706,16 @@ dd.fa{margin:0;}
         <figcaption class="rcap"><span class="rmkt">Montréal, QC</span><h3 class="rttl">A 40-room boutique stay</h3></figcaption>
       </figure>
       <div class="rfoot"><span class="rol">RevPAR lift</span><span class="rov">+65%</span></div>
+      <figure class="rviz">
+        <svg viewBox="0 0 240 46" role="img" aria-label="Bar chart comparing vacation rental RevPAR before and after market repositioning in Montréal: indexed 100 at baseline, 165 after: a 65% lift, net of market."><title>Bar chart comparing vacation rental RevPAR before and after market repositioning in Montréal: indexed 100 at baseline, 165 after: a 65% lift, net of market.</title>
+          <text x="0" y="13" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#8C8A81">BEFORE</text>
+          <rect x="48" y="4" width="109" height="11" fill="#3a3a38"></rect>
+          <text x="0" y="41" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#D6AD60">AFTER</text>
+          <rect x="48" y="32" width="180" height="11" fill="#D6AD60"></rect>
+        </svg>
+        <span class="rviz-idx">REVPAR, INDEXED · 100 &rarr; 165</span>
+        <figcaption class="rviz-cap">RevPAR before and after repositioning, indexed to 100 at baseline.</figcaption>
+      </figure>
     </a></article>
     <article class="rc-art"><a class="rcard" href="/case-studies/wally-puerto-rico">
       <figure class="rimg">
@@ -624,6 +724,17 @@ dd.fa{margin:0;}
         <figcaption class="rcap"><span class="rmkt">Río Grande, PR</span><h3 class="rttl">An ocean-and-jungle villa</h3></figcaption>
       </figure>
       <div class="rfoot"><span class="rol">Tier reached</span><span class="rov">Luxury</span></div>
+      <figure class="rviz">
+        <svg viewBox="0 0 240 46" role="img" aria-label="Diagram of a vacation rental market position step-up in Río Grande, Puerto Rico: from the premium tier to the luxury tier through listing optimization."><title>Diagram of a vacation rental market position step-up in Río Grande, Puerto Rico: from the premium tier to the luxury tier through listing optimization.</title>
+          <rect x="0" y="24" width="92" height="17" fill="#3a3a38"></rect>
+          <text x="6" y="36" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#B4B2A9">PREMIUM</text>
+          <path d="M100,32 L118,32 M112,27 L118,32 L112,37" fill="none" stroke="#55534E" stroke-width="1.4"></path>
+          <rect x="126" y="6" width="114" height="17" fill="#D6AD60"></rect>
+          <text x="132" y="18" font-family="'DM Mono',monospace" font-size="8" letter-spacing="1.2" fill="#171717">LUXURY</text>
+        </svg>
+        <span class="rviz-idx">MARKET POSITION · TIER STEP</span>
+        <figcaption class="rviz-cap">Market position before and after: premium tier to luxury tier, and an invitation back.</figcaption>
+      </figure>
     </a></article>
   </div>
   <div class="results-cta"><a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a></div>
@@ -746,6 +857,50 @@ dd.fa{margin:0;}
     <a href="/get-started" class="btn-fill">Get My Free Revenue Audit</a>
     <a href="/sample-audit" class="samplelink">see a sample audit <span>→</span></a>
   </div>
+  <figure class="closing-thumb">
+    <svg viewBox="0 0 300 380" role="img" aria-label="Preview of the free Marketics revenue audit deliverable: a one-page report showing the tier verdict with current versus achievable monthly revenue, a comp-set table of comparable listings with their rates and occupancy, and a prioritised list of what it would take to close the gap."><title>Preview of the free Marketics revenue audit deliverable: a one-page report showing the tier verdict with current versus achievable monthly revenue, a comp-set table of comparable listings with their rates and occupancy, and a prioritised list of what it would take to close the gap.</title>
+      <rect x="0" y="0" width="300" height="380" fill="#171717" stroke="#2a2a28" stroke-width="1"></rect>
+      <rect x="0" y="0" width="300" height="34" fill="#0d0d0c"></rect>
+      <text x="16" y="21" font-family="'Josefin Sans',sans-serif" font-size="11" letter-spacing="2" fill="#D6AD60">REVENUE AUDIT</text>
+      <text x="284" y="21" font-family="'DM Mono',monospace" font-size="7" letter-spacing="1" fill="#55534E" text-anchor="end">SAMPLE</text>
+      <text x="16" y="58" font-family="'DM Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="#D6AD60">01 · THE VERDICT</text>
+      <text x="16" y="80" font-family="'DM Mono',monospace" font-size="7" fill="#8C8A81">CURRENT</text>
+      <text x="16" y="98" font-family="'Josefin Sans',sans-serif" font-size="19" fill="#B4B2A9">$3,690</text>
+      <text x="150" y="80" font-family="'DM Mono',monospace" font-size="7" fill="#D6AD60">ACHIEVABLE</text>
+      <text x="150" y="98" font-family="'Josefin Sans',sans-serif" font-size="19" fill="#D6AD60">$5,400</text>
+      <rect x="16" y="108" width="120" height="5" fill="#3a3a38"></rect>
+      <rect x="150" y="108" width="134" height="5" fill="#D6AD60"></rect>
+      <line x1="16" y1="130" x2="284" y2="130" stroke="#202020" stroke-width="1"></line>
+      <text x="16" y="152" font-family="'DM Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="#D6AD60">02 · THE COMP-SET READ</text>
+      <text x="16" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">LISTING</text>
+      <text x="210" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">ADR</text>
+      <text x="262" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">OCC</text>
+      <rect x="16" y="176" width="268" height="18" fill="rgba(214,173,96,0.10)"></rect>
+      <text x="22" y="188" font-family="'DM Sans',sans-serif" font-size="8" fill="#D6AD60">Your listing</text>
+      <text x="210" y="188" font-family="'DM Mono',monospace" font-size="8" fill="#D6AD60">$142</text>
+      <text x="262" y="188" font-family="'DM Mono',monospace" font-size="8" fill="#D6AD60">61%</text>
+      <text x="22" y="208" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">Comparable A</text>
+      <text x="210" y="208" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">$196</text>
+      <text x="262" y="208" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">78%</text>
+      <text x="22" y="226" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">Comparable B</text>
+      <text x="210" y="226" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">$188</text>
+      <text x="262" y="226" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">74%</text>
+      <text x="22" y="244" font-family="'DM Sans',sans-serif" font-size="8" fill="#8C8A81">Comparable C</text>
+      <text x="210" y="244" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">$205</text>
+      <text x="262" y="244" font-family="'DM Mono',monospace" font-size="8" fill="#B4B2A9">81%</text>
+      <line x1="16" y1="262" x2="284" y2="262" stroke="#202020" stroke-width="1"></line>
+      <text x="16" y="284" font-family="'DM Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="#D6AD60">03 · WHAT IT TAKES</text>
+      <text x="16" y="304" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#D6AD60">&#8594;</text>
+      <text x="30" y="304" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#B4B2A9">Re-shoot the cover and first five images</text>
+      <text x="16" y="322" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#D6AD60">&#8594;</text>
+      <text x="30" y="322" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#B4B2A9">Reposition the title to the premium tier</text>
+      <text x="16" y="340" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#D6AD60">&#8594;</text>
+      <text x="30" y="340" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#B4B2A9">Rebuild the rate calendar around events</text>
+      <line x1="16" y1="356" x2="284" y2="356" stroke="#202020" stroke-width="1"></line>
+      <text x="16" y="371" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="1" fill="#55534E">ILLUSTRATIVE &#183; YOUR AUDIT READS YOUR OWN COMP SET</text>
+    </svg>
+    <figcaption>What you get: the tier verdict, your comp-set read, and what it takes to close the gap.</figcaption>
+  </figure>
 </section>
 
 </main>
