@@ -315,6 +315,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .skip-link:focus{top:0;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 </style>
+<style>
+.dgm{margin:32px 0;display:flex;flex-direction:column;gap:14px;}
+.dgm svg{width:100%;height:auto;display:block;max-width:520px;}
+.dgm figcaption{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:13px;line-height:1.6;color:#8C8A81;max-width:520px;margin:0;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -391,6 +396,26 @@ nav.scrolled{background:rgba(13,13,12,.97);}
         <p class="trap-note">The aim is <strong>profitable occupancy</strong>, not just a full calendar. 70% at the right rate beats 100% at a low price almost every time, and with less cleaning, wear, and turnover.</p>
       </div>
 
+      <figure class="dgm">
+        <svg viewBox="0 0 470 220" role="img" aria-label="Curve chart showing RevPAR against occupancy rate for a short-term rental: revenue per available night rises with occupancy, peaks near 70 to 75 percent, then declines as rates are cut to force a full calendar, so 100 percent booked at a low rate earns less than 70 percent at the right rate.">
+              <title>Curve chart showing RevPAR against occupancy rate for a short-term rental: revenue per available night rises with occupancy, peaks near 70 to 75 percent, then declines as rates are cut to force a full calendar, so 100 percent booked at a low rate earns less than 70 percent at the right rate.</title>
+              <text x="0" y="10" font-family="'DM Mono', monospace" font-size="9" letter-spacing="1.5" fill="#8C8A81">REVPAR</text>
+              <line x1="40" y1="20" x2="40" y2="180" stroke="#2a2a28" stroke-width="1"></line>
+              <line x1="40" y1="180" x2="460" y2="180" stroke="#2a2a28" stroke-width="1"></line>
+              <line x1="40" y1="52" x2="327" y2="52" stroke="#1c1c1a" stroke-width="1" stroke-dasharray="3 4"></line>
+              <polyline points="45,168 90,150 135,124 180,98 225,74 270,58 300,52 327,51 360,58 400,74 450,98" fill="none" stroke="#D6AD60" stroke-width="2.5"></polyline>
+              <line x1="327" y1="51" x2="327" y2="180" stroke="rgba(214,173,96,0.45)" stroke-width="1" stroke-dasharray="4 4"></line>
+              <circle cx="327" cy="51" r="4" fill="#D6AD60"></circle>
+              <text x="327" y="40" font-family="'DM Sans', sans-serif" font-size="11" fill="#D6AD60" text-anchor="middle">peak RevPAR</text>
+              <circle cx="450" cy="98" r="4" fill="none" stroke="#8F8C83" stroke-width="1.5"></circle>
+              <text x="448" y="90" font-family="'DM Sans', sans-serif" font-size="10.5" fill="#8F8C83" text-anchor="end">100% booked, rate cut</text>
+              <text x="40" y="196" font-family="'DM Mono', monospace" font-size="8" fill="#55534E">0%</text>
+              <text x="327" y="196" font-family="'DM Mono', monospace" font-size="8" fill="#D6AD60" text-anchor="middle">~70&ndash;75%</text>
+              <text x="460" y="196" font-family="'DM Mono', monospace" font-size="8" fill="#55534E" text-anchor="end">100%</text>
+              <text x="250" y="214" font-family="'DM Mono', monospace" font-size="8" letter-spacing="1.5" fill="#8C8A81" text-anchor="middle">OCCUPANCY RATE</text>
+            </svg>
+        <figcaption>The aim is <strong style="color: #E6E3DA; font-weight: 500;">profitable occupancy</strong>, not just a full calendar. 70% at the right rate beats 100% at a low price almost every time, and with less cleaning, wear, and turnover.</figcaption>
+      </figure>
       <h2>What actually drives occupancy</h2>
       <div class="levers">
         <div class="lever">
