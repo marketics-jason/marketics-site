@@ -319,6 +319,11 @@ footer{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;}
   .foot-legal{padding:20px 24px;}
 }
 </style>
+<style>
+.dgm{margin:32px 0;display:flex;flex-direction:column;gap:14px;}
+.dgm svg{width:100%;height:auto;display:block;max-width:520px;}
+.dgm figcaption{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:13px;line-height:1.6;color:#8C8A81;max-width:520px;margin:0;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -395,6 +400,30 @@ footer{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;}
       </ul>
       <p>Three completely different diseases. One symptom. <strong>If you don't know which one you have, you cannot know which fix to apply, and the price slider is the wrong answer to two of the three.</strong></p>
 
+      <figure class="dgm">
+        <svg viewBox="0 0 470 200" role="img" aria-label="Decision diagram for a slow Airbnb calendar: check the listing view count, then branch, high views with low bookings is a conversion problem in price, photos, title or reviews; low views is a ranking and visibility problem the algorithm controls.">
+              <title>Decision diagram for a slow Airbnb calendar: check the listing view count, then branch, high views with low bookings is a conversion problem in price, photos, title or reviews; low views is a ranking and visibility problem the algorithm controls.</title>
+              <rect x="145" y="16" width="180" height="30" fill="#171717" stroke="#2a2a28" stroke-width="1"></rect>
+              <text x="235" y="30" font-family="'DM Mono', monospace" font-size="8" letter-spacing="1.5" fill="#D6AD60" text-anchor="middle">START HERE</text>
+              <text x="235" y="41" font-family="'DM Sans', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Check your view count</text>
+              <path d="M235,46 L235,60 M118,60 L352,60 M118,60 L118,74 M352,60 L352,74" fill="none" stroke="#2a2a28" stroke-width="1"></path>
+              <path d="M112,68 L118,74 L124,68" fill="none" stroke="#2a2a28" stroke-width="1"></path>
+              <path d="M346,68 L352,74 L358,68" fill="none" stroke="#2a2a28" stroke-width="1"></path>
+              <rect x="6" y="76" width="224" height="104" fill="#171717" stroke="#2a2a28" stroke-width="1"></rect>
+              <text x="20" y="96" font-family="'DM Mono', monospace" font-size="8.5" letter-spacing="1.5" fill="#D6AD60">VIEWS HIGH · BOOKINGS LOW</text>
+              <text x="20" y="118" font-family="'Josefin Sans', sans-serif" font-size="16" fill="#FFFFFF">A conversion problem</text>
+              <text x="20" y="138" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">They see it and choose someone else.</text>
+              <text x="20" y="152" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">Price, photos, title, or reviews are</text>
+              <text x="20" y="166" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">losing them. A persuasion problem.</text>
+              <rect x="240" y="76" width="224" height="104" fill="#171717" stroke="#2a2a28" stroke-width="1"></rect>
+              <text x="254" y="96" font-family="'DM Mono', monospace" font-size="8.5" letter-spacing="1.5" fill="#D6AD60">VIEWS THEMSELVES LOW</text>
+              <text x="254" y="118" font-family="'Josefin Sans', sans-serif" font-size="16" fill="#FFFFFF">A ranking problem</text>
+              <text x="254" y="138" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">The algorithm isn&rsquo;t showing it to</text>
+              <text x="254" y="152" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">searchers. Better photos can&rsquo;t fix a</text>
+              <text x="254" y="166" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#8F8C83">listing nobody sees. Visibility.</text>
+            </svg>
+        <figcaption>One number splits the diagnosis in two, and chasing the wrong branch is why owners spend money and stay stuck.</figcaption>
+      </figure>
       <h2>Cause 1: Visibility. Nobody's seeing it.</h2>
       <p>If impressions are low, the listing is ranked poorly, and ranking is downstream of past performance: booking velocity, review count and recency, response rate, cancellation history, calendar availability, and how complete the listing is.</p>
       <div class="moves">
