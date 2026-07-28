@@ -316,6 +316,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .csfig .csm{display:none;}
 @media(max-width:768px){.csfig .csd{display:none;}.csfig .csm{display:block;}.csfig{margin:28px 0 0;}}
 </style>
+<style>
+figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
+.hero-cap{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:12.5px;line-height:1.6;color:#8C8A81;padding:14px max(72px,calc((100% - 1440px)/2 + 72px)) 4px;margin:0;}
+@media(max-width:768px){.hero-cap{padding:12px 24px 4px;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -371,12 +376,13 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 </section>
 
 <!-- ══ HERO IMAGE ══ -->
-<div class="cs-heroimg">
+<figure class="cs-heroimg">
   <picture>
     <source srcset="/case-studies/montreal-hotel/images/heron-suite.webp" type="image/webp">
     <img src="/case-studies/montreal-hotel/images/heron-suite.jpg" width="1440" height="560" alt="The Heron Suite at the Montréal boutique hotel after the Marketics redesign — design-forward, editorial interior">
   </picture>
-</div>
+  <figcaption class="hero-cap">The Heron Suite after the redesign: editorial photography that moved the listing into a higher tier.</figcaption>
+</figure>
 
 <!-- ══ 01 · THE SITUATION ══ -->
 <section class="cs-sec">
