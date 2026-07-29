@@ -2,7 +2,7 @@
 
 > Performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 19 documented engagements; a decade of work across 1,000+ listings in 22 markets; every property is audited individually before a target is set. 10% of revenue, no monthly fee, no contract.
 
-Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico (22 active markets).
+Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico.
 
 ## Core Pages
 
@@ -34,7 +34,7 @@ Free market-intelligence and strategy reports for short-term rental hosts.
 
 ## Markets
 
-Marketics operates in 22 active markets across the United States, Canada, and Mexico. The market is the variable; the method is the constant. San Antonio is the first market with a full dedicated read; other markets are covered through the market-intelligence reports above and the free, property-specific audit.
+Marketics optimizes in any market across the United States, Canada, and Mexico; the market is the variable, the method is the constant. Its footprint spans 1,000+ listings across 22 markets to date. San Antonio is the first market with a full dedicated read; other markets are covered through the market-intelligence reports above and the free, property-specific audit.
 
 - [All markets](https://marketics.io/markets): How Marketics reads any STR market — the market is the variable, the method is the constant.
 - [San Antonio, TX](https://marketics.io/markets/san-antonio): San Antonio short-term rental revenue optimization — demand rhythm, Type 2 density caps (12.5% per block face), and what an optimized listing earns.

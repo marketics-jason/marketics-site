@@ -38,6 +38,9 @@ RETIRED_TOKENS = [
     "30 documented",      # old sample count
     "met or exceeded",    # retired relation framing
     "50–75", "50-75",     # retired engagement-target range
+    "3 active markets",   # retired operational-depth framing (three-tier canon is internal-only)
+    "active depth markets",
+    "22 active markets",  # public copy never states an active-market count
 ]
 
 # Pages that legitimately carry no consent script (confidential, untracked).
