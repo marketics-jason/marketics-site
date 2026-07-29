@@ -78,6 +78,8 @@
 # Internal docs — never serve publicly (force-shadow the static files)
 /marketics-site-audit-2026-07      /404.html                  404!
 /marketics-site-audit-2026-07.md   /404.html                  404!
+/CANON-REGISTRY                    /404.html                  404!
+/CANON-REGISTRY.md                 /404.html                  404!
 
 # 404 fallback
 /* /404.html 404
