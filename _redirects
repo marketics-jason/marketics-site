@@ -75,6 +75,21 @@
 # ══ FUNCTIONAL REDIRECTS ══════════════════════════════════════════
 /call    https://link.crmvo.com/widget/booking/aQX2MzEekR2mKSIMk69e    301
 
+# Cost Seg Smart branded referral link (Strategy brief, 2026-07-30). Ref code
+# + UTM params defined ONCE here — editing the destination means editing
+# these two lines, nowhere else. :placement forwards from the path into
+# utm_content so each surface (partner page, intel article, email footer, a
+# 1:1 send) is distinguishable in Cost Seg Smart's own UTM reporting.
+# Must live in THIS file, not netlify.toml: Netlify evaluates a _redirects
+# file's rules as a complete block before netlify.toml's [[redirects]] are
+# ever consulted, so a rule placed only in netlify.toml is shadowed by this
+# file's own /* 404 catch-all below, regardless of ordering within netlify.toml.
+# 301 (not 302) per spec — this is a pure edge redirect (no page renders on
+# our domain), so it gives no independent click count on its own; see the
+# accompanying PR note on that gap.
+/costseg/:placement    https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement    301!
+/costseg               https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct         301!
+
 # Internal docs — never serve publicly (force-shadow the static files)
 /marketics-site-audit-2026-07      /404.html                  404!
 /marketics-site-audit-2026-07.md   /404.html                  404!
