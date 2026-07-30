@@ -2,34 +2,6 @@
 #  Marketics — Netlify Configuration
 # ══════════════════════════════════════════════════════
 
-# ── PARTNER REFERRAL REDIRECTS ─────────────────────────
-# Cost Seg Smart branded referral link (Strategy brief, 2026-07-30). Ref code
-# and UTM params are defined ONCE here — editing the destination means editing
-# these two rules, nowhere else. :placement is forwarded from the path into
-# utm_content so each surface (partner page, intel article, email footer, a
-# 1:1 send) is distinguishable in Cost Seg Smart's own UTM reporting.
-#
-# True 301 (not 302) per spec — permanent-redirect semantics for a durable
-# branded link. NOTE: because this is a pure edge redirect (no page ever
-# renders on our domain), no on-page script can fire, so this alone does NOT
-# give an independent click count — see the accompanying brief note on that
-# gap before treating this as the finished tracking solution.
-#
-# Must be listed BEFORE the generic /:seg and /:a/:b rewrite rules below —
-# Netlify matches redirects in file order, first match wins, and those
-# generic single/two-segment patterns would otherwise shadow /costseg and
-# /costseg/:placement before this block is ever reached.
-[[redirects]]
-  from = "/costseg/:placement"
-  to = "https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/costseg"
-  to = "https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct"
-  status = 301
-  force = true
-
 # Trailing-slash canonicalisation
 # Every page's <link rel="canonical"> uses the NO-SLASH form (/method). Without
 # these rules Netlify 301-redirects the no-slash request to the directory form
