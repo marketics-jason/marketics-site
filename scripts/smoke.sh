@@ -65,6 +65,21 @@ c=$(code "$BASE/markets/austin"); t=$(loc "$BASE/markets/austin")
 c=$(code "$BASE/intel/economics"); t=$(loc "$BASE/intel/economics")
 { [ "$c" = "301" ] && [ "$t" = "/intel/money" ]; } && ok "/intel/economics -> 301 /intel/money" || no "/intel/economics = $c -> '$t' (want 301 /intel/money)"
 
+echo "· Partner referral redirect (Cost Seg Smart) — guards against generic-rule shadowing"
+# /costseg and /costseg/:placement are listed BEFORE the generic /:seg and
+# /:a/:b rewrite rules in netlify.toml specifically so they aren't shadowed.
+# This is an external redirect (costsegsmart.com), so check the raw Location
+# header rather than the loc() helper, which strips the host.
+loc_raw() { hdr "$1" | awk 'tolower($1)=="location:"{ $1=""; print }' | tr -d '\r' | sed -E 's/^ //'; }
+c=$(code "$BASE/costseg/partner-page"); l=$(loc_raw "$BASE/costseg/partner-page")
+{ [ "$c" = "301" ] && [ "$l" = "https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=partner-page" ]; } \
+  && ok "/costseg/partner-page -> 301 costsegsmart.com (utm_content=partner-page)" \
+  || no "/costseg/partner-page = $c -> '$l' (want 301 costsegsmart.com utm_content=partner-page)"
+c=$(code "$BASE/costseg"); l=$(loc_raw "$BASE/costseg")
+{ [ "$c" = "301" ] && [ "$l" = "https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct" ]; } \
+  && ok "/costseg -> 301 costsegsmart.com (utm_content=direct)" \
+  || no "/costseg = $c -> '$l' (want 301 costsegsmart.com utm_content=direct)"
+
 echo "· Not-public artifacts (404)"
 c=$(code "$BASE/marketics-site-audit-2026-07.md"); [ "$c" = "404" ] && ok "audit report 404" || no "audit report = $c (want 404)"
 
