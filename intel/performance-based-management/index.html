@@ -34,7 +34,7 @@
  "publisher": {"@type": "Organization", "name": "Marketics", "url": "https://marketics.io"},
  "image": "https://marketics.io/og/default.jpg",
  "datePublished": "2026-04-18T09:00:00-04:00",
- "dateModified": "2026-07-12T09:00:00-04:00",
+ "dateModified": "2026-07-31T09:00:00-04:00",
  "url": "https://marketics.io/intel/performance-based-management"
 }
 </script>
@@ -62,12 +62,31 @@
  ]
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "VideoObject",
+ "@id": "https://marketics.io/intel/performance-based-management#video",
+ "name": "Is Airbnb Property Management Worth It? Wrong Question.",
+ "description": "A full-service property manager charges a cut of everything you earn, for a bundle that is mostly commodity labor. Once you see how that fee is built, you cannot unsee it.\n\nIn 3 minutes: how the management fee is actually constructed, why three of its four parts do not scale with your revenue, what a 45% median lift net of market actually means, and why a full-service manager structurally cannot copy this model even if they want to.\n\nThe management fee bundles four things: cleaning, turnovers, guest messaging, and revenue optimization, all priced as one percentage of your gross. Three of those four are fixed-cost labor. They cost the same whether you had a record month or a dead one. Only the optimization, the read on the market, actually scales with your revenue. The whole bundle is priced as if all of it did.\n\nThe labor is real and good managers work hard. This is not about managers overcharging. It is about the model being built around the wrong thing, and nobody questioning it because everyone charges the same way.\n\nSo we unbundled it. We do the one part that actually moves your number, the revenue optimization, and price it against the outcome rather than your gross. The documented median lift is 45%, net of market. Net of market means we strip out whatever the whole market did that season, so you are not paying for a rising tide. That is the number after we subtract the luck. Every property gets audited before we put a target on it, so that 45% is a median across real engagements, not a promise about your specific place.\n\nThe obvious question is why a full-service manager cannot just add this. Anyone can add a service. It's very difficult subtract one. Their whole model is the bundle, and the bundle is how they justify the percentage. The day they unbundle, they price themselves out of their own business. It is not a feature they can bolt on. It is a position they structurally cannot take.\n\nThe audit tells you, for free, whether your property is one where that optimization has room to run. The honest version is that it is a fit or it is not, and the audit tells us which. That is the whole offer.\n\nChapters\n0:00 A revenue-linked price for a cost-linked service\n0:21 The bundle: four things, one percentage\n1:13 45% median, net of market\n1:54 You can add a service. You cannot subtract one.\n2:26 What the audit actually tells you",
+ "thumbnailUrl": "https://i.ytimg.com/vi/seAUEF4sq3Q/maxresdefault.jpg",
+ "uploadDate": "2026-07-31",
+ "duration": "PT2M44S",
+ "embedUrl": "https://www.youtube.com/embed/seAUEF4sq3Q",
+ "contentUrl": "https://www.youtube.com/watch?v=seAUEF4sq3Q",
+ "publisher": {"@id": "https://marketics.io/#business"},
+ "creator": {"@type": "Person", "@id": "https://marketics.io/story#jason", "name": "Jason Baxter"},
+ "isPartOf": {"@id": "https://marketics.io/#website"}
+}
+</script>
 
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Fonts: font-display:optional so slow-network loads commit to the fallback with zero layout shift; preloads above keep the real fonts on normal connections. Self-contained (does not use the shared /fonts/fonts.css swap policy). -->
 <style>
 @font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
@@ -248,7 +267,8 @@ h1.ah em{font-style:italic;font-weight:300;color:var(--gold);}
 @media (max-width:600px){
   nav{padding:0 24px;height:64px;}
   .nav-mobile{top:64px;}
-  .reading{padding:96px 0 40px;padding-left:24px;padding-right:24px;}
+  .article{padding:0 24px;}
+  .reading{padding:96px 0 40px;}
   h1.ah{font-size:34px;letter-spacing:.5px;}
   .deck{font-size:16px;}
   .body p{font-size:16px;}
@@ -273,6 +293,20 @@ h1.ah em{font-style:italic;font-weight:300;color:var(--gold);}
 .dgm{margin:32px 0;display:flex;flex-direction:column;align-items:center;gap:14px;}
 .dgm svg{width:100%;height:auto;display:block;max-width:520px;}
 .dgm figcaption{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:13px;line-height:1.6;color:#8C8A81;max-width:520px;width:100%;margin:0;}
+.video-embed{margin:36px 0 8px;}
+.video-embed .v-kicker{font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:2px;color:#8C8A81;text-transform:uppercase;margin-bottom:12px;}
+.video-embed .frame{position:relative;aspect-ratio:16/9;background:#0d0d0c;border:1px solid #202020;overflow:hidden;}
+.video-embed .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.video-embed figcaption{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:13px;line-height:1.6;color:#8C8A81;margin-top:12px;}
+.transcript{margin:20px 0 36px;border:1px solid #202020;}
+.transcript summary{cursor:pointer;padding:16px 20px;font-family:'DM Mono',ui-monospace,monospace;font-size:11px;letter-spacing:1.5px;color:#D6AD60;text-transform:uppercase;list-style:none;display:flex;align-items:center;gap:10px;}
+.transcript summary::-webkit-details-marker{display:none;}
+.transcript summary::before{content:'+';font-size:14px;}
+.transcript[open] summary::before{content:'−';}
+.transcript .t-body{padding:4px 20px 24px;}
+.transcript .t-body h3{font-family:'DM Mono',ui-monospace,monospace;font-size:10px;letter-spacing:1.5px;color:#8C8A81;text-transform:uppercase;margin:22px 0 8px;}
+.transcript .t-body h3:first-child{margin-top:0;}
+.transcript .t-body p{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:14px;line-height:1.7;color:#B4B2A9;margin:0 0 14px;}
 </style>
 </head>
 <body>
@@ -325,6 +359,41 @@ h1.ah em{font-style:italic;font-weight:300;color:var(--gold);}
         <div class="b-meta">35× SUPERHOST · APRIL 2026 · ~7 MIN READ</div>
       </div>
     </div>
+
+    <figure class="video-embed">
+      <div class="v-kicker">Watch · 2:44</div>
+      <div class="frame">
+        <iframe
+          src="https://www.youtube.com/embed/seAUEF4sq3Q"
+          title="Is Airbnb Property Management Worth It? Wrong Question."
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <figcaption>Jason Baxter breaks down why a revenue-linked fee for a mostly cost-linked bundle of services doesn't add up, and what changes when you unbundle it.</figcaption>
+    </figure>
+
+    <details class="transcript">
+      <summary>Read the full transcript</summary>
+      <div class="t-body">
+        <h3>A revenue-linked price for a cost-linked service</h3>
+        <p>A full-service property manager charges you a cut of everything you earn for a bundle that's mostly commodity labor. Same cleaning work whether you're flat or up 40% in the month. Same guest messaging. Same turnovers. You're paying a revenue-linked price for a cost-linked service. Once you see that, you can't unsee it.</p>
+
+        <h3>The bundle: four things, one percentage</h3>
+        <p>Management fee bundles four things: cleaning, turnover, guest messaging, and revenue optimization &mdash; all priced as one percentage of your gross revenue. Three of those four are fixed labor costs. They cost the same whether you've had a record month or a slow one. Only one, the optimization, the read on the market, actually scales with your revenue. But the whole bundle is priced as if it all did. A growing cut of a growing number for work that mostly doesn't grow.</p>
+        <p>The labor is real, and good managers work hard. This isn't about managers overcharging. It's about the model being built around the wrong thing. Nobody questions it because everyone charges the same way.</p>
+
+        <h3>45% median, net of market</h3>
+        <p>So we unbundled it. We do the one part that actually moves your number, the revenue optimization, and price it against the outcome, not your gross. The documented median lift is 45% net of the market. Net of the market means we strip out whatever the whole market did that season, so you're not paying us for a rising tide. That's the number after we subtract the luck. Every property gets audited before we put a target on it &mdash; that 45% is a median across real engagements, not a promise about your specific property listing.</p>
+
+        <h3>You can add a service. You cannot subtract one.</h3>
+        <p>So why can't a full-service manager just add this? Anyone can add a service. It's very difficult subtract one. Their whole model is the bundle. The bundle is how they justify the percentage. The day that they unbundle, they've priced themselves out of their own business. It's a feature they can't bolt on &mdash; it's a position they structurally can't take.</p>
+
+        <h3>What the audit actually tells you</h3>
+        <p>The audit tells you, free, whether your property is one where the optimization has room to run. The honest version is it's a fit or it isn't, and the audit tells us which. That's the whole offer.</p>
+      </div>
+    </details>
 
     <div class="body">
 
