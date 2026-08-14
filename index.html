@@ -178,8 +178,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .btn-fill{display:inline-block;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;
   text-transform:uppercase;color:var(--ink);background:var(--gold);padding:18px 40px;transition:filter .2s;}
 .btn-fill:hover{filter:brightness(1.08);}
-.samplelink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.samplelink{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);min-height:48px;padding:12px 4px;}
 .samplelink:hover{color:var(--gold);}
+.samplelink+.thumb-link{margin-top:8px;}
 .samplelink span{color:var(--gold);}
 
 /* ══ HERO ══ */
@@ -354,7 +355,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 /* ══ RICH-CONTENT VIZ (Design handback 2026-07-28) ══ */
 .rcard .rviz{margin:0;padding:2px 22px 22px;display:flex;flex-direction:column;gap:11px;}
 .rcard .rviz svg{width:100%;height:auto;display:block;max-width:100%;}
-.rcard .rviz-idx{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:#55534E;}
+.rcard .rviz-idx{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--dim);}
 .rcard .rviz-cap{font-family:var(--sans);font-weight:300;font-size:12px;line-height:1.55;color:var(--dim);margin:0;}
 .flowsec{border-top:1px solid var(--line);padding:56px var(--gutter) 88px;}
 .flowfig{margin:0;display:flex;flex-direction:column;gap:16px;}
@@ -473,6 +474,9 @@ dd.fa{margin:0;}
 .rc-art{display:contents;}
 /* inline links must not rely on color alone (WCAG 1.4.1) */
 .w-body a,.split-p a,.lx-a a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:rgba(214,173,96,.55);}
+.mb a{border-bottom:1px solid rgba(214,173,96,.45);transition:border-color .2s;}
+.mb a:hover{border-bottom-color:var(--gold);}
+.mb a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 /* skip link: hidden until keyboard-focused */
 .skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
 .skip-link:focus{top:0;}
@@ -484,7 +488,7 @@ dd.fa{margin:0;}
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="siteNav">
-  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
@@ -542,7 +546,7 @@ dd.fa{margin:0;}
             <span class="ch-rev" id="chRev"></span>
             <div class="ch-mark" id="chMark">
               <div class="ch-ring"></div>
-              <img src="/assets/logo-mark-square.svg" alt="property position">
+              <img src="/assets/logo-mark-square.svg" alt="" aria-hidden="true" width="500" height="500">
             </div>
           </div>
         </div>
@@ -877,7 +881,7 @@ dd.fa{margin:0;}
       <rect x="0" y="0" width="300" height="380" fill="#171717" stroke="#2a2a28" stroke-width="1"></rect>
       <rect x="0" y="0" width="300" height="34" fill="#0d0d0c"></rect>
       <text x="16" y="21" font-family="'Josefin Sans',sans-serif" font-size="11" letter-spacing="2" fill="#D6AD60">REVENUE AUDIT</text>
-      <text x="284" y="21" font-family="'DM Mono',monospace" font-size="7" letter-spacing="1" fill="#55534E" text-anchor="end">SAMPLE</text>
+      <text x="284" y="21" font-family="'DM Mono',monospace" font-size="7" letter-spacing="1" fill="#8C8A81" text-anchor="end">SAMPLE</text>
       <text x="16" y="58" font-family="'DM Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="#D6AD60">01 · THE VERDICT</text>
       <text x="16" y="80" font-family="'DM Mono',monospace" font-size="7" fill="#8C8A81">CURRENT</text>
       <text x="16" y="98" font-family="'Josefin Sans',sans-serif" font-size="19" fill="#B4B2A9">$3,690</text>
@@ -887,9 +891,9 @@ dd.fa{margin:0;}
       <rect x="150" y="108" width="134" height="5" fill="#D6AD60"></rect>
       <line x1="16" y1="130" x2="284" y2="130" stroke="#202020" stroke-width="1"></line>
       <text x="16" y="152" font-family="'DM Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="#D6AD60">02 · THE COMP-SET READ</text>
-      <text x="16" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">LISTING</text>
-      <text x="210" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">ADR</text>
-      <text x="262" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#55534E">OCC</text>
+      <text x="16" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#8C8A81">LISTING</text>
+      <text x="210" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#8C8A81">ADR</text>
+      <text x="262" y="170" font-family="'DM Mono',monospace" font-size="6.5" fill="#8C8A81">OCC</text>
       <rect x="16" y="176" width="268" height="18" fill="rgba(214,173,96,0.10)"></rect>
       <text x="22" y="188" font-family="'DM Sans',sans-serif" font-size="8" fill="#D6AD60">Your listing</text>
       <text x="210" y="188" font-family="'DM Mono',monospace" font-size="8" fill="#D6AD60">$142</text>
@@ -912,7 +916,7 @@ dd.fa{margin:0;}
       <text x="16" y="340" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#D6AD60">&#8594;</text>
       <text x="30" y="340" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#B4B2A9">Rebuild the rate calendar around events</text>
       <line x1="16" y1="356" x2="284" y2="356" stroke="#202020" stroke-width="1"></line>
-      <text x="16" y="371" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="1" fill="#55534E">ILLUSTRATIVE &#183; YOUR AUDIT READS YOUR OWN COMP SET</text>
+      <text x="16" y="371" font-family="'DM Mono',monospace" font-size="6.5" letter-spacing="1" fill="#8C8A81">ILLUSTRATIVE &#183; YOUR AUDIT READS YOUR OWN COMP SET</text>
     </svg>
     <figcaption>What you get: the tier verdict, your comp-set read, and what it takes to close the gap.</figcaption>
   </figure>
@@ -925,7 +929,7 @@ dd.fa{margin:0;}
 <footer>
   <div class="foot">
     <div class="foot-brand">
-      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
     </div>
     <div class="foot-col">
@@ -1064,7 +1068,11 @@ dd.fa{margin:0;}
 
 <script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
 
-<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
+<!-- GHL Chat Widget: lazy-loads only on genuine user interaction, never loads for a
+     passive visitor. (Previously also had a blind 5s setTimeout fallback; removed —
+     it was the one thing forcing this heavy third-party bundle into Lighthouse's
+     mobile trace window even for a hands-off page load. All 5 real-interaction
+     triggers below already cover the practical cases.) -->
 <script>
 (function(){
   var loaded = false;
@@ -1082,7 +1090,6 @@ dd.fa{margin:0;}
   events.forEach(function(e) {
     window.addEventListener(e, loadWidget, {once: true, passive: true});
   });
-  setTimeout(loadWidget, 5000);
 })();
 </script>
 </body>
