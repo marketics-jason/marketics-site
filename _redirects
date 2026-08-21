@@ -90,28 +90,6 @@
 /costseg/:placement    https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement    301!
 /costseg               https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct         301!
 
-# ══ TRAILING-SLASH CANONICALISATION ═══════════════════════════════
-# Aug 21 2026 CTO brief (P2). GSC was indexing BOTH /page and /page/
-# independently and splitting clicks/impressions/position between them —
-# /intel/montreal/ held the better average position (6.49) and got zero
-# clicks while /intel/montreal (7.08) got all three. A canonical tag alone
-# doesn't prevent this: it hints a preference, but Google will still index a
-# URL that returns 200. The slash form had to stop being a 200.
-#
-# These MUST live in this file, not netlify.toml. Verified against deploy
-# preview 115 on 2026-08-21: the same rules as `force = true` in
-# netlify.toml did NOT override Netlify's built-in directory-index
-# resolution — /method/ still returned 200. `_redirects` is evaluated as a
-# complete block before netlify.toml's [[redirects]] are consulted (the same
-# ordering lesson as the costseg rules below), so a forced rule here wins.
-#
-# Placed AFTER the specific legacy redirects above so those keep first-match
-# precedence (e.g. /home/ → / stays a single hop, not /home/ → /home → /),
-# and BEFORE the /* 404 catch-all so it doesn't shadow them.
-/:seg/                             /:seg                      301!
-/:a/:b/                            /:a/:b                     301!
-/:a/:b/:c/                         /:a/:b/:c                  301!
-
 # Internal docs — never serve publicly (force-shadow the static files)
 /marketics-site-audit-2026-07      /404.html                  404!
 /marketics-site-audit-2026-07.md   /404.html                  404!
