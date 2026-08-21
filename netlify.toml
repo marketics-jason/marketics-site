@@ -3,23 +3,44 @@
 # ══════════════════════════════════════════════════════
 
 # Trailing-slash canonicalisation
-# Every page's <link rel="canonical"> uses the NO-SLASH form (/method). Without
-# these rules Netlify 301-redirects the no-slash request to the directory form
-# (/method → /method/), i.e. it redirects AWAY from the canonical URL — bad for
-# crawlers and it broke header/CSP smoke checks (they read /join/confirmation,
-# which was 301ing).
+# Every page's <link rel="canonical"> uses the NO-SLASH form (/method).
 #
-# Fix: serve each directory's index at its no-slash URL as a 200 rewrite (not a
-# redirect), so /method, /intel/miami, and /intel/miami/report resolve to 200
-# directly — matching the canonical tags, no redirect. Non-force, so real files
-# (/assets/*, /robots.txt, /*.svg, …) keep static-file precedence and are served
-# directly rather than rewritten.
+# Aug 21 2026 correction: an earlier version of this file treated the slash
+# form (/method/) still 200ing via Netlify's built-in directory index as
+# "cosmetic, not an SEO risk," on the theory that a forced redirect can't
+# override directory-index resolution on this platform. GSC data proved that
+# wrong: Google was indexing BOTH /method and /method/ independently and
+# splitting clicks/impressions/position between them (montreal was the clear
+# case — the better-positioned variant got zero clicks). A canonical tag alone
+# doesn't stop Google from indexing a URL that returns 200; it only hints
+# which one to prefer. The directory-index 200 needed to become an actual 301.
 #
-# The SLASH form (/method/) still returns 200 via Netlify's built-in directory
-# index — forced redirects can't override directory-index resolution on this
-# platform, so a strict slash→no-slash 301 isn't achievable without flattening
-# every index.html to a .html file. The canonical tag on each page dedupes the
-# slash/no-slash pair for search engines, so this is cosmetic, not an SEO risk.
+# Fix: force=true redirects for the slash form now run BEFORE Netlify's
+# default directory-index serving and win over it (force=true is exactly the
+# escape hatch for that precedence — untested in the original pass). These
+# must come first in file order: Netlify evaluates redirects top-to-bottom,
+# first match wins, and a matching static asset only pre-empts a rule when
+# that rule ISN'T force=true.
+[[redirects]]
+  from = "/:seg/"
+  to = "/:seg"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/:a/:b/"
+  to = "/:a/:b"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/:a/:b/:c/"
+  to = "/:a/:b/:c"
+  status = 301
+  force = true
+
+# No-slash form: served as a 200 rewrite (not a redirect) so /method,
+# /intel/miami, and /intel/miami/report resolve directly, matching the
+# canonical tags with no hop. Non-force, so real files (/assets/*,
+# /robots.txt, /*.svg, …) keep static-file precedence over these.
 [[redirects]]
   from = "/:seg"
   to = "/:seg/index.html"

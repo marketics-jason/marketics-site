@@ -246,9 +246,18 @@ def main():
         smp = os.path.join(ROOT, "sitemap.xml")
         if os.path.exists(smp):
             sm = open(smp).read()
+        sm_raw_urls = re.findall(r"<loc>([^<]+)</loc>", sm)
+        # Trailing-slash regression guard (Aug 21 2026 CTO brief, P2): the slash
+        # and no-slash forms of a page were indexing independently in GSC and
+        # splitting clicks/impressions between them. The sitemap must only ever
+        # emit the canonical no-slash form (root "/" is the sole exception).
+        for u in sm_raw_urls:
+            path = u.replace("https://marketics.io", "") or "/"
+            if path != "/" and path.endswith("/"):
+                hard.append(f"sitemap.xml: trailing-slash entry {u!r} (emit the no-slash canonical form)")
         sm_urls = {
             (u.replace("https://marketics.io", "") or "/").rstrip("/") or "/"
-            for u in re.findall(r"<loc>([^<]+)</loc>", sm)
+            for u in sm_raw_urls
         }
         for u in sorted(sm_urls & set(pages)):
             if u != "/" and not (inbound.get(u, set()) - {u}):

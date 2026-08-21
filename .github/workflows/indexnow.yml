@@ -1,0 +1,21 @@
+name: IndexNow submit
+
+# Submits every sitemap URL to IndexNow after each deploy to main, so search
+# engines get pinged automatically instead of the site-audit tool flagging a
+# stale "1 page to submit" every week (Aug 21 2026 CTO brief, P6).
+#
+# Runs after the push actually lands on main (Netlify deploys on the same
+# trigger), and can be run manually to re-submit on demand.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Submit sitemap to IndexNow
+        run: bash scripts/indexnow-submit.sh

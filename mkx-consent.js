@@ -16,6 +16,27 @@
   var CONSENT_KEY = 'mkx_consent';
   var CONSENT_VER = '1'; // bump this to force re-consent after policy changes
 
+  /* ── Consent-decision instrumentation (Aug 21 2026 CTO brief, P1) ──
+     GA4 is gated behind this banner and was reporting ~2 users in 4 weeks
+     against 28 GSC clicks on the homepage alone — consistent with most
+     visitors never reaching Accept. This beacon is the denominator GA4
+     can't see: it fires server-side (same consent-independent GHL webhook
+     already used for lead capture, distinguished by the `event` field —
+     same pattern as /join's `deposit_checkout_started`) on banner
+     impression, accept, and decline, regardless of the visitor's answer.
+     Best-effort only: swallow failures, never block the banner. */
+  var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e';
+  function beacon(event) {
+    try {
+      var body = JSON.stringify({ event: event, source: 'consent-banner', path: location.pathname, timestamp: new Date().toISOString() });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(GHL_HOOK, new Blob([body], { type: 'application/json' }));
+      } else {
+        fetch(GHL_HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+      }
+    } catch (e) { /* non-critical */ }
+  }
+
   /* ── Read stored consent ──────────────────────────── */
   function getConsent() {
     try {
@@ -162,15 +183,18 @@
     ].join('');
 
     document.body.appendChild(banner);
+    beacon('consent_impression');
 
     document.getElementById('mkx-accept').addEventListener('click', function () {
       setConsent(true);
+      beacon('consent_accept');
       loadAnalytics();
       dismiss(banner);
     });
 
     document.getElementById('mkx-decline').addEventListener('click', function () {
       setConsent(false);
+      beacon('consent_decline');
       dismiss(banner);
     });
   }

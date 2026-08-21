@@ -93,6 +93,27 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ClaimReview",
+  "url": "https://marketics.io/",
+  "claimReviewed": "Our benchmark is a 45% median revenue lift, net of market, across 19 documented short-term-rental engagements (2024–2026). Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of revenue with no monthly fee, the large majority of any gain stays with you.",
+  "citation": "https://marketics.io/intel/str-performance-index",
+  "itemReviewed": {
+    "@type": "Claim",
+    "author": { "@type": "Organization", "name": "Marketics" },
+    "appearance": { "@type": "WebPage", "url": "https://marketics.io/" }
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "alternateName": "Documented"
+  },
+  "author": { "@type": "Organization", "name": "Marketics" }
+}
+</script>
 
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -198,6 +219,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .hero-actions{display:flex;align-items:center;gap:30px;margin-top:36px;flex-wrap:wrap;}
 .stats{display:flex;margin-top:52px;}
 .stat{display:flex;flex-direction:column;gap:6px;padding:0 40px;border-right:1px solid var(--line-2);}
+a.stat .l{transition:color .2s;}
+a.stat:hover .l,a.stat:focus-visible .l{color:var(--gold);}
+a.stat:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
 .stat:first-child{padding-left:0;}
 .stat:last-child{border-right:none;}
 .stat .n{font-family:var(--display);font-weight:300;font-size:32px;color:var(--white);}
@@ -238,6 +262,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   border:1px solid rgba(214,173,96,.4);padding:11px 24px;cursor:pointer;background:none;transition:border-color .2s,background .2s;}
 .ch-cal:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
 .ch-note{font-size:10.5px;line-height:1.6;color:var(--faint);max-width:520px;}
+.ch-note a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.45);transition:border-color .2s;}
+.ch-note a:hover{border-bottom-color:var(--gold);}
+.ch-note a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 
 /* ══ WEDGE ══ */
 .wedge{display:grid;grid-template-columns:1fr 1fr;}
@@ -304,6 +331,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .mrow{display:grid;grid-template-columns:68px 1fr;gap:32px;padding:30px 0;border-top:1px solid var(--line);align-items:start;}
 .mrow .num{font-family:var(--display);font-weight:200;font-size:34px;color:var(--gold);}
 .mrow .mt{font-family:var(--display);font-weight:400;font-size:23px;letter-spacing:1.5px;color:var(--white);}
+.mt a{border-bottom:1px solid rgba(214,173,96,.45);transition:border-color .2s;}
+.mt a:hover{border-bottom-color:var(--gold);}
+.mt a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 .mrow .mb{font-size:14.5px;line-height:1.7;color:var(--body);margin:8px 0 0;max-width:560px;}
 .rows .cap{border-top:1px solid var(--line);}
 .faqrow{display:flex;flex-direction:column;gap:12px;padding:30px 0;border-top:1px solid var(--line);}
@@ -315,6 +345,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .results-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:32px;}
 .results-head .rh-t{font-family:var(--display);font-weight:200;font-size:46px;line-height:1.15;letter-spacing:3px;color:var(--white);margin-top:22px;}
 .results-head .rh-note{font-size:13.5px;line-height:1.7;color:var(--muted);max-width:300px;text-align:right;}
+.rh-note a{color:var(--gold);border-bottom:1px solid rgba(214,173,96,.45);transition:border-color .2s;}
+.rh-note a:hover{border-bottom-color:var(--gold);}
+.rh-note a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .rcard{display:flex;flex-direction:column;border:1px solid var(--line-2);}
 .rcard .rimg{position:relative;height:340px;overflow:hidden;background:#1e1e1e center/cover no-repeat;margin:0;}
@@ -539,7 +572,7 @@ dd.fa{margin:0;}
       <div class="stats">
         <div class="stat"><span class="n">35×</span><span class="l">Airbnb<br>Superhost</span></div>
         <div class="stat"><span class="n">1,000+</span><span class="l">Listings<br>22 markets</span></div>
-        <div class="stat"><span class="n">45%</span><span class="l">Median lift<br>net of market</span></div>
+        <a class="stat" href="/intel/str-performance-index"><span class="n">45%</span><span class="l">Median lift<br>net of market</span></a>
       </div>
     </div>
 
@@ -576,7 +609,7 @@ dd.fa{margin:0;}
           <button class="ch-cal" id="chCal">CALIBRATE →</button>
         </div>
       </div>
-      <span class="ch-note">Illustrative of the calibration principle. Each example shows the documented 45% median lift, net of market, measured across documented engagements from January 2024 to June 2026. Not a promise of a specific tier; every property is audited individually before any target is set.</span>
+      <span class="ch-note">Illustrative of the calibration principle. Each example shows the documented <a href="/intel/str-performance-index">45% median lift, net of market</a>, measured across 19 documented engagements from January 2024 to June 2026. Not a promise of a specific tier; every property is audited individually before any target is set.</span>
     </div>
   </div>
 </header>
@@ -700,7 +733,7 @@ dd.fa{margin:0;}
       <div class="kicker"><div class="bar"></div><span>Selected work</span></div>
       <h2 class="rh-t">Right-fitted, across 22 markets.</h2>
     </div>
-    <span class="rh-note">A median 45% lift, net of market, across 19 documented engagements. A few, quietly.</span>
+    <span class="rh-note">A <a href="/intel/str-performance-index">median 45% lift, net of market</a>, across 19 documented engagements, 2024–2026. A few, quietly.</span>
   </div>
   <div class="rgrid">
     <article class="rc-art"><a class="rcard" href="/case-studies/anthony-san-antonio">
@@ -841,12 +874,12 @@ dd.fa{margin:0;}
   <div class="split-aside">
     <div class="kicker"><div class="bar"></div><span>Key takeaways</span></div>
     <h2 class="split-h">In three<br>lines.</h2>
-    <aside class="relation-note">A decade across 1,000+ listings in 22 markets. The <a href="/intel/str-performance-index">45% median</a> is measured against the 19 engagements documented to that standard.</aside>
+    <aside class="relation-note">A decade across 1,000+ listings in 22 markets. The <a href="/intel/str-performance-index">45% median</a> is measured against the 19 engagements documented to that standard, 2024–2026.</aside>
   </div>
   <ol class="rows">
     <li class="mrow"><span class="num">01</span><div><h3 class="mt">Value before price.</h3><p class="mb">We raise what the market sees your property is worth (positioning, storytelling, distribution, ranking) and let price follow. Cutting rate is the one move that compounds against you.</p></div></li>
     <li class="mrow"><span class="num">02</span><div><h3 class="mt">Full-stack revenue, run together.</h3><p class="mb">One practice owns the whole revenue stack, paid only when your revenue grows. Not a pricing dial turned once.</p></div></li>
-    <li class="mrow"><span class="num">03</span><div><h3 class="mt">A documented 45% median lift, net of market.</h3><p class="mb">1,000+ listings optimized across 22 markets over the past decade; the 45% median comes from the 19 engagements with complete before/after documentation (2024–2026). Every property is audited free before any target is set. <a href="/intel/str-performance-index">See the methodology →</a></p></div></li>
+    <li class="mrow"><span class="num">03</span><div><h3 class="mt">A documented <a href="/intel/str-performance-index">45% median lift, net of market</a>.</h3><p class="mb">1,000+ listings optimized across 22 markets over the past decade; the 45% median comes from the 19 engagements with complete before/after documentation (2024–2026). Every property is audited free before any target is set. <a href="/intel/str-performance-index">See the methodology →</a></p></div></li>
     <li class="cap" aria-hidden="true"></li>
   </ol>
 </section>

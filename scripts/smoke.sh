@@ -37,15 +37,23 @@ for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/mar
   c=$(code "$BASE$p"); [ "$c" = "200" ] && ok "200 $p" || no "$p returned $c (want 200)"
 done
 
-echo "· Canonical URL form (no-slash resolves 200; slash deduped by canonical tag)"
+echo "· Canonical URL form (no-slash resolves 200; slash form force-301s to it)"
 # The no-slash form is canonical and must resolve directly (no redirect).
 c=$(code "$BASE/method");        [ "$c" = "200" ] && ok "/method -> 200 (canonical)" || no "/method = $c (want 200 canonical)"
-# The slash form returns 200 via Netlify's directory index (a strict 301 isn't
-# achievable on this platform); the canonical tag must point back to no-slash.
-grep -q '<link rel="canonical" href="https://marketics.io/method">' <<<"$(body "$BASE/method/")" \
-  && ok "/method/ served with no-slash canonical tag" || no "/method/ missing no-slash canonical tag"
-grep -q '<link rel="canonical" href="https://marketics.io/intel/miami">' <<<"$(body "$BASE/intel/miami/")" \
-  && ok "/intel/miami/ served with no-slash canonical tag" || no "/intel/miami/ missing no-slash canonical tag"
+# Regression guard (Aug 21 2026 CTO brief, P2): GSC was indexing the slash
+# form independently of the no-slash form and splitting clicks/impressions
+# between them — a 200-with-canonical-tag on the slash form isn't enough to
+# stop that. The slash form must now 301 to the no-slash form in one hop.
+c=$(code "$BASE/method/"); t=$(loc "$BASE/method/")
+{ [ "$c" = "301" ] && [ "$t" = "/method" ]; } && ok "/method/ -> 301 /method" || no "/method/ = $c -> '$t' (want 301 /method)"
+c=$(code "$BASE/intel/miami/"); t=$(loc "$BASE/intel/miami/")
+{ [ "$c" = "301" ] && [ "$t" = "/intel/miami" ]; } && ok "/intel/miami/ -> 301 /intel/miami" || no "/intel/miami/ = $c -> '$t' (want 301 /intel/miami)"
+c=$(code "$BASE/intel/miami/report/"); t=$(loc "$BASE/intel/miami/report/")
+{ [ "$c" = "301" ] && [ "$t" = "/intel/miami/report" ]; } && ok "/intel/miami/report/ -> 301 /intel/miami/report" || no "/intel/miami/report/ = $c -> '$t' (want 301 /intel/miami/report)"
+grep -q '<link rel="canonical" href="https://marketics.io/method">' <<<"$(body "$BASE/method")" \
+  && ok "/method canonical tag is no-slash" || no "/method missing no-slash canonical tag"
+grep -q '<link rel="canonical" href="https://marketics.io/intel/miami">' <<<"$(body "$BASE/intel/miami")" \
+  && ok "/intel/miami canonical tag is no-slash" || no "/intel/miami missing no-slash canonical tag"
 
 echo "· Legacy path redirects (Squarespace migration, single 301)"
 c=$(code "$BASE/privacy");       [ "$c" = "301" ] && ok "/privacy -> 301"      || no "/privacy = $c (want 301)"
