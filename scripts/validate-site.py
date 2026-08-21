@@ -41,6 +41,7 @@ RETIRED_TOKENS = [
     "3 active markets",   # retired operational-depth framing (three-tier canon is internal-only)
     "active depth markets",
     "22 active markets",  # public copy never states an active-market count
+    "2024–2026", "2024-2026", "2024/2026",  # narrowed window; Board ruling v2.9 is 2019–2026
 ]
 
 # Pages that legitimately carry no consent script (confidential, untracked).
