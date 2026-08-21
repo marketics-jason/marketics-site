@@ -304,9 +304,22 @@
     updateConsent(false);
   } else if (!eea) {
     // Outside the EEA/UK/CH the inline defaults already grant analytics, so
-    // there's nothing to ask and nothing to update — just the cookie-setting
-    // tool to start.
-    loadClarity();
+    // there's nothing to ask and nothing to update.
+    //
+    // Clarity deliberately does NOT load here. It only runs on an explicit
+    // Accept (the branch above). Two reasons, one measured and one principled:
+    //
+    //  - Measured: Clarity is a session recorder. It instruments the DOM and
+    //    serialises the page on load, and on /calculator — the heaviest, most
+    //    DOM-dense page on the site — that main-thread work delays the <h1>
+    //    paint enough to blow the 4s LCP budget. CI bisect isolated item 1 as
+    //    the cause; the network timeline shows every third-party file finishing
+    //    by 816ms while main-thread work runs to 2.1s and LCP lands at 5.3s,
+    //    equal to TTI. It was never bandwidth.
+    //  - Principled: session recording is a bigger ask than analytics, it has
+    //    no Consent Mode equivalent so it can't degrade to a cookieless mode,
+    //    and riding an implied default is the wrong default for it. The Board's
+    //    ruling was about GA4 measurement; it did not ask for this.
   } else {
     // EEA/UK/CH, undecided: defaults are denied for this region; ask.
     if (document.readyState === 'loading') {
