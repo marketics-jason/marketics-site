@@ -21,7 +21,19 @@
   'use strict';
 
   var KEY = 'mkx_utm';
+  var LAND_KEY = 'mkx_landing';
   var PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+  /* First-touch landing page. The lead form lives on /get-started, so every CRM
+     record used to read source:"get-started" regardless of where the session
+     actually began — landing pages were distinguishable only by utm_campaign,
+     which comes from the ad and is absent if someone reaches an LP without one.
+     Captured once per session, first page wins, same as the UTMs. */
+  try {
+    if (!sessionStorage.getItem(LAND_KEY)) {
+      sessionStorage.setItem(LAND_KEY, window.location.pathname);
+    }
+  } catch (e) { /* sessionStorage blocked */ }
 
   try {
     var params = new URLSearchParams(window.location.search);
@@ -35,6 +47,11 @@
       sessionStorage.setItem(KEY, JSON.stringify(found));
     }
   } catch (e) { /* sessionStorage blocked — proceed without persisting */ }
+
+  /* Read back anywhere on-site: window.mkxGetLanding() -> "/lp/keep-control" or "" */
+  window.mkxGetLanding = function () {
+    try { return sessionStorage.getItem(LAND_KEY) || ''; } catch (e) { return ''; }
+  };
 
   /* Read back anywhere on-site: window.mkxGetUTM() -> {utm_source, ...} or {} */
   window.mkxGetUTM = function () {
