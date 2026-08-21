@@ -40,8 +40,14 @@ done
 echo "· Canonical URL form (no-slash resolves 200; slash deduped by canonical tag)"
 # The no-slash form is canonical and must resolve directly (no redirect).
 c=$(code "$BASE/method");        [ "$c" = "200" ] && ok "/method -> 200 (canonical)" || no "/method = $c (want 200 canonical)"
-# The slash form returns 200 via Netlify's directory index (a strict 301 isn't
-# achievable on this platform); the canonical tag must point back to no-slash.
+# The slash form returns 200 via Netlify's directory index. A strict
+# slash->no-slash 301 is NOT achievable on this platform without flattening
+# every index.html to a .html file — both a netlify.toml force=true rule and
+# the same rule in _redirects were tried against a deploy preview on
+# 2026-08-21 and failed (see the trailing-slash comment in netlify.toml).
+# Known SEO cost, tracked: GSC is indexing both variants. Until that
+# structural decision is made, the canonical tag is the only lever, so assert
+# it points back to no-slash on the slash-form response.
 grep -q '<link rel="canonical" href="https://marketics.io/method">' <<<"$(body "$BASE/method/")" \
   && ok "/method/ served with no-slash canonical tag" || no "/method/ missing no-slash canonical tag"
 grep -q '<link rel="canonical" href="https://marketics.io/intel/miami">' <<<"$(body "$BASE/intel/miami/")" \

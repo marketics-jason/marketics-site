@@ -3,23 +3,39 @@
 # ══════════════════════════════════════════════════════
 
 # Trailing-slash canonicalisation
-# Every page's <link rel="canonical"> uses the NO-SLASH form (/method). Without
-# these rules Netlify 301-redirects the no-slash request to the directory form
-# (/method → /method/), i.e. it redirects AWAY from the canonical URL — bad for
-# crawlers and it broke header/CSP smoke checks (they read /join/confirmation,
-# which was 301ing).
+# Every page's <link rel="canonical"> uses the NO-SLASH form (/method).
 #
-# Fix: serve each directory's index at its no-slash URL as a 200 rewrite (not a
-# redirect), so /method, /intel/miami, and /intel/miami/report resolve to 200
-# directly — matching the canonical tags, no redirect. Non-force, so real files
-# (/assets/*, /robots.txt, /*.svg, …) keep static-file precedence and are served
-# directly rather than rewritten.
+# Aug 21 2026 — the slash/no-slash split is NOT cosmetic, but it is also not
+# fixable with redirect rules on this platform. Recording both halves so this
+# doesn't get re-attempted a fourth time.
 #
-# The SLASH form (/method/) still returns 200 via Netlify's built-in directory
-# index — forced redirects can't override directory-index resolution on this
-# platform, so a strict slash→no-slash 301 isn't achievable without flattening
-# every index.html to a .html file. The canonical tag on each page dedupes the
-# slash/no-slash pair for search engines, so this is cosmetic, not an SEO risk.
+# The problem is real: GSC shows Google indexing BOTH /page and /page/
+# independently and splitting clicks/impressions/position between them
+# (/intel/montreal/ holds the better average position, 6.49, and gets zero
+# clicks; /intel/montreal at 7.08 gets all three). A canonical tag only hints
+# a preference — it does not stop Google indexing a URL that returns 200.
+#
+# Two fixes were tried against deploy preview 115 and BOTH failed:
+#   1. `force = true` 301s here, ordered before the 200 rewrites below.
+#      Netlify's built-in directory-index resolution still won: /method/,
+#      /intel/miami/ and /intel/miami/report/ all still returned 200.
+#   2. The same rules in `_redirects` (which IS evaluated before this file —
+#      see the costseg block there). Netlify normalises the trailing slash
+#      off a `from` pattern, so `/:seg/` is treated as `/:seg` and matched the
+#      NO-slash form too — self-redirecting the site and breaking the audit
+#      404 guard, /join/confirmation's security headers, and the Index page.
+#      13 smoke failures. Reverted.
+#
+# The remaining option is structural: flatten every foo/index.html to foo.html
+# so there is no directory for Netlify to serve an index from, at which point
+# the slash form 404s or redirects naturally. That touches all 51 pages and
+# every internal link, so it is a scoped decision, not a config tweak — routed
+# to the Boardroom rather than improvised here.
+#
+# No-slash form: served as a 200 rewrite (not a redirect) so /method,
+# /intel/miami, and /intel/miami/report resolve directly, matching the
+# canonical tags with no hop. Non-force, so real files (/assets/*,
+# /robots.txt, /*.svg, …) keep static-file precedence over these.
 [[redirects]]
   from = "/:seg"
   to = "/:seg/index.html"
@@ -94,6 +110,16 @@
   for = "/join/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Paid landing pages — noindex. These argue the same case as their organic
+# counterparts by design (e.g. /lp/keep-control vs
+# /intel/switch-property-manager-to-revenue-manager) and must never compete with
+# them in search; that's the whole reason they're separate pages. The in-head
+# meta robots tag says the same thing — this is the edge-level backstop.
+[[headers]]
+  for = "/lp/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
 
 # Intel report pages — noindex (gated content, form required)
 [[headers]]

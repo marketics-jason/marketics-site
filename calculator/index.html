@@ -114,7 +114,7 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom-color:rgba(214,173,96,.
   --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
   --gold:#D6AD60;--gold-lo:rgba(214,173,96,.08);--gold-mid:rgba(214,173,96,.2);
   --night:#0f0f0f;--n2:#131313;--n3:#1a1a1a;--n4:#202020;--n5:#272727;
-  --stone:#B4B2A9;--dim:#8C8A81;--dim2:#5a5956;--white:#f8f6f2;
+  --stone:#B4B2A9;--dim:#8C8A81;--dim2:#86847C;--white:#f8f6f2;
   --ok:#2D7A4F;--ok-lo:rgba(45,122,79,.1);--ok-mid:rgba(45,122,79,.25);
   --warn:#b8860b;--warn-lo:rgba(184,134,11,.1);
   --display:'Josefin Sans',sans-serif;
@@ -562,10 +562,10 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
       <div class="inputs">
 
         <div class="input-group">
-          <div class="input-lbl">
+          <label class="input-lbl" for="mktSelect">
             Your Market
             <span class="currency-badge" id="currencyBadge"></span>
-          </div>
+          </label>
           <select class="mkt-select" id="mktSelect">
             <option value="">Select your city&#8230;</option>
             <optgroup label="United States">
@@ -613,7 +613,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
 
         <div id="calcInputsSliders">
         <div class="input-group">
-          <div class="input-lbl">Your Current Nightly Rate</div>
+          <label class="input-lbl" for="rateSlider">Your Current Nightly Rate</label>
           <div class="slider-row">
             <div class="slider-wrap">
               <input type="range" id="rateSlider" min="50" max="600" value="120" step="5">
@@ -629,7 +629,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
         </div>
 
         <div class="input-group">
-          <div class="input-lbl">Your Current Occupancy</div>
+          <label class="input-lbl" for="occSlider">Your Current Occupancy</label>
           <div class="slider-row">
             <div class="slider-wrap">
               <input type="range" id="occSlider" min="10" max="95" value="48" step="1">
@@ -818,7 +818,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
     .mkx-benchmark__note{font-size:12px;font-weight:300;color:#6B6A65;line-height:1.6;margin:0 0 16px;max-width:760px;}
     .mkx-benchmark__scroll{border:1px solid rgba(255,255,255,.06);border-radius:8px;}
     .mkx-benchmark__table{width:100%;border-collapse:collapse;font-size:13px;}
-    .mkx-benchmark__table caption{caption-side:bottom;text-align:left;font-size:11px;font-weight:300;font-style:italic;color:#5a5956;padding:12px 16px 0;line-height:1.5;}
+    .mkx-benchmark__table caption{caption-side:bottom;text-align:left;font-size:11px;font-weight:300;font-style:italic;color:#86847C;padding:12px 16px 0;line-height:1.5;}
     .mkx-benchmark__table thead th{font-family:'Josefin Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#D6AD60;text-align:right;padding:14px 16px;background:rgba(214,173,96,.05);border-bottom:1px solid rgba(214,173,96,.14);white-space:nowrap;}
     .mkx-benchmark__table thead th:first-child{text-align:left;}
     .mkx-benchmark__table tbody th{font-weight:500;color:#f8f6f2;text-align:left;padding:12px 16px;white-space:nowrap;}
@@ -834,7 +834,7 @@ input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 6px rgba(214,173,
   </style>
   <h2 id="mkx-benchmark-heading" class="mkx-benchmark__title">16-Market STR Benchmark Data (USD-Normalized)</h2>
   <p class="mkx-benchmark__note">Average nightly rate (ADR) and occupancy by market, normalized to US dollars. Canadian rates are converted from CAD at ~1.36 and Mexican rates from MXN at ~17.5. The <strong>Benchmark</strong> columns reflect the market average; the <strong>Top Performer</strong> columns reflect the average of Marketics-managed properties in that market. Figures updated quarterly.</p>
-  <div class="mkx-benchmark__scroll">
+  <div class="mkx-benchmark__scroll" tabindex="0" role="group" aria-labelledby="mkx-benchmark-heading">
     <table class="mkx-benchmark__table">
       <thead>
         <tr>
