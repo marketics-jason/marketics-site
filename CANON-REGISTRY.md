@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v2.9 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.0 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -52,6 +52,47 @@ unchanged; only the date was wrong.)*
 **Finding:** the calculator's ~32% figure = the median **gross** uplift of "top-performer" comps (the average of Marketics-managed properties per city) over the market-average benchmark, across the calculator's city models — gross booking revenue, not the net-of-market pre/post-engagement basis of the documented 45% median.
 
 **Disposition:** no code change required. The calculator renders a **dollar walk** (current → market benchmark → with-Marketics, in $/mo), never a standalone performance percentage; the top-performer basis is named inline in the benchmark-table caption and the calculator FAQ; `+32%` is already a `RETIRED_TOKENS` entry; the underlying constant is real per-city data with no "conservative" caption to contradict it. Confirmed by CTO 2026-07-2x.
+
+## v3.0 — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating (2026-08-21)
+
+**Ruling:** add Consent Mode v2 **and** region-gate the banner to EEA/UK/CH, so
+US/Canadian traffic — the actual market — measures normally. Treated as a
+**pre-flight gate for paid**: no ad spend is read as valid until measurement
+works, because CAC cannot be read through a blind analytics install.
+
+**Recorded caveat, at the Board's instruction.** The region-gate half rests on a
+PIPEDA / US-state-privacy judgment. Jason made the call and it is a standard
+posture. This registry entry is the record of a **business decision, not a legal
+opinion** — if it is ever pressure-tested, that is a counsel question, not a Code
+one.
+
+**What changed.** The prior build was a hard block: `gtag.js` was never requested
+until an Accept click, so declined and undecided traffic was invisible to GA4
+entirely (2 measured users against 28 GSC clicks). Now `gtag.js` loads on every
+path and the consent *signals* decide what may be stored, so denied traffic
+contributes cookieless pings instead of nothing.
+
+**`ad_*` stays denied everywhere — including after an Accept.** The banner copy
+promises *"No advertising or third-party tracking."* Granting `ad_storage`,
+`ad_user_data` or `ad_personalization` would contradict the notice the visitor
+just read. **This is a live constraint on the paid launch:** Google Ads
+conversion tracking will want those signals, and turning them on requires
+changing the banner copy *first*. That is a Strategy/Board call, not a Code one,
+and it should be settled before ads run rather than discovered mid-campaign.
+
+**Region detection is deliberately split.** The consent *signals* are
+region-scoped by Google server-side via the `region` parameter — authoritative.
+The *banner* is gated by browser timezone, which is approximate, over-inclusive
+(any `Europe/*` zone), and fail-safe (a detection failure shows the banner).
+Mismatches degrade safely in both directions.
+
+**Also:** Clarity has no consent-mode equivalent and sets cookies
+unconditionally, so it remains gated on an actual grant. The
+impression/accept/decline beacon is retained and now deduped once per session —
+the banner re-renders on every pageview until answered, and one webhook call per
+pageview would have swamped the CRM.
+
+---
 
 ## v2.9 — BOARD RULING: the window is 2019–2026 (2026-08-21)
 
@@ -113,6 +154,7 @@ figures.
 
 ## Version history
 
+- **v3.0** (2026-08-21) — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating; gtag.js now loads on every path (cookieless pings for denied traffic). `ad_*` denied everywhere pending banner-copy change — flagged as a live constraint on the paid launch.
 - **v2.9** (2026-08-21) — BOARD RULING: window reverted to 2019–2026; PR #95's narrowing to 2024–2026 was an unverified assumption. Verified the 45% median was never recomputed on the narrowed set (figures byte-identical since the Index page was created). `2024–2026` added to RETIRED_TOKENS.
 - **v2.8** (2026-08-21) — sample-window provenance recorded (PR #95, Code-side correction, no dataset in-repo to independently re-verify); entity graph / sameAs wiring for Organization + founder Person, disambiguation identity string added.
 - **v2.7** (2026-07-2x) — same-breath baseline rule made explicit; market-tier correction (retired "3/22 active markets" framings); footer tagline 45%-clause dropped site-wide; Item 1 calculator baseline finding recorded; this registry created.

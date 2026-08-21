@@ -113,7 +113,15 @@
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
