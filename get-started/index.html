@@ -58,6 +58,7 @@
 <link rel="dns-prefetch" href="https://services.leadconnectorhq.com">
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
+<script src="/mkx-utm.js" defer></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
@@ -512,6 +513,10 @@ function setMode(m){
     btn.disabled = true;
     document.getElementById('submitTxt').textContent = 'Sending…';
 
+    /* First-touch UTM capture (mkx-utm.js) — campaign attribution survives to the lead
+       record even when GA4 never fires (see the generate_lead consent note below). */
+    var utm = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
+
     /* GHL / CRM payload — keeps the established field keys so existing automations still map */
     var payload = {
       email: email,
@@ -522,7 +527,12 @@ function setMode(m){
       propertyType: document.getElementById('propType').value.trim(),
       auditQuestion: document.getElementById('notes').value.trim(),
       source: 'get-started',
-      submittedAt: new Date().toISOString()
+      submittedAt: new Date().toISOString(),
+      utm_source: utm.utm_source || '',
+      utm_medium: utm.utm_medium || '',
+      utm_campaign: utm.utm_campaign || '',
+      utm_content: utm.utm_content || '',
+      utm_term: utm.utm_term || ''
     };
     try{
       await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
@@ -531,8 +541,12 @@ function setMode(m){
     /* Show confirmation regardless of the webhook's CORS/network outcome */
     form.style.display='none';
     document.getElementById('confirm').classList.add('on');
-    /* GA4 conversion — fires when the success state renders, once consent-gated gtag.js has loaded */
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'get-started' });
+    /* GA4 conversion — fires when the success state renders, once consent-gated gtag.js has loaded.
+       NOTE: if the visitor declined/hasn't answered the cookie banner, gtag.js is never loaded
+       (see mkx-consent.js) and this call queues into dataLayer but is never sent — GA4 undercounts
+       leads by design here. GHL (above) is consent-independent and is the source of truth for lead
+       count; GA4 is the source of truth for campaign attribution on the consented subset only. */
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', Object.assign({ form: 'get-started' }, utm));
     window.scrollTo({top:0,behavior:'smooth'});
   });
 })();
