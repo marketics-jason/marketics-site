@@ -221,5 +221,6 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 <script>(function(){var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.fi').forEach(function(el){obs.observe(el);});})();</script>
 <script src="/mkx-consent.js" defer></script>
+<script src="/mkx-utm.js" defer></script>
 </body>
 </html>

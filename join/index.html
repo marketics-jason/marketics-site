@@ -34,6 +34,7 @@
 <link rel="dns-prefetch" href="https://services.leadconnectorhq.com">
 <link rel="dns-prefetch" href="https://buy.stripe.com">
 <script src="/mkx-consent.js" defer></script>
+<script src="/mkx-utm.js" defer></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
@@ -276,14 +277,22 @@ async function pay(){
   var btn=document.getElementById('payBtn');
   btn.disabled=true; btn.textContent='Redirecting to secure checkout…';
 
+  /* First-touch UTM capture (mkx-utm.js) — carries campaign attribution through to checkout,
+     same as the /get-started lead payload. */
+  var utm = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
+
   /* Record the checkout intent (non-blocking); Stripe collects email + card on its hosted page */
   try{
     await fetch(GHL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join'})});
+      body:JSON.stringify(Object.assign({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join'},{
+        utm_source: utm.utm_source || '', utm_medium: utm.utm_medium || '', utm_campaign: utm.utm_campaign || '', utm_content: utm.utm_content || '', utm_term: utm.utm_term || ''
+      }))});
   }catch(e){ console.warn('GHL webhook non-critical error:', e); }
 
-  /* GA4 conversion — pre-payment (page redirects to Stripe next); transmits post-consent */
-  if (typeof gtag === 'function') gtag('event', 'begin_checkout', { form: 'join' });
+  /* GA4 conversion — pre-payment (page redirects to Stripe next); transmits post-consent.
+     Same GHL-vs-GA4 measurement split as /get-started: GHL above is consent-independent and
+     is the lead-count source of truth; this event only reaches GA4 for consented visitors. */
+  if (typeof gtag === 'function') gtag('event', 'begin_checkout', Object.assign({ form: 'join' }, utm));
 
   window.location.href = STRIPE_URL + '?utm_source=join_page';
 }
