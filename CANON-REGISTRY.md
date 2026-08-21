@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v2.8 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v2.9 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -19,7 +19,11 @@ This file is the single in-repo source of truth for performance-claim wording, r
 **Rule:** wherever a performance figure and a footprint/count figure sit adjacent (same section, same summary block, same sentence group) with no stated relationship between them, that is a canon violation — an "adjacency-without-distinction" instance. The fix is always the same shape: **performance number + named baseline + date, in the same breath.** A methodology link alone does not satisfy this — links don't travel with extracted spans (AI summarizers, snippet extraction).
 
 **Ruled pattern** (homepage Key Takeaways, applied 2026-07-2x):
-> "1,000+ listings optimized across 22 markets over the past decade; the 45% median comes from the 19 engagements with complete before/after documentation (2024–2026)."
+> "1,000+ listings optimized across 22 markets over the past decade; the 45% median comes from the 19 engagements with complete before/after documentation (2019–2026)."
+
+*(Window corrected from 2024–2026 to 2019–2026 per the v2.9 Board ruling below.
+The shape of the rule — number + named baseline + date, same breath — is
+unchanged; only the date was wrong.)*
 
 **Footer tagline resolution:** the site-wide footer tagline could not carry baseline + gate in a one-line brand tagline, so the 45% clause was **dropped** from the footer (site-wide, 49 pages) rather than patched — the 45% claim continues to live, gated and sourced, on every page that actually makes the claim (homepage, /results, /pricing, case studies, the Index). Footer now reads: *"Full-stack short-term rental revenue · 1,000+ listings across 22 markets."*
 
@@ -49,7 +53,55 @@ This file is the single in-repo source of truth for performance-claim wording, r
 
 **Disposition:** no code change required. The calculator renders a **dollar walk** (current → market benchmark → with-Marketics, in $/mo), never a standalone performance percentage; the top-performer basis is named inline in the benchmark-table caption and the calculator FAQ; `+32%` is already a `RETIRED_TOKENS` entry; the underlying constant is real per-city data with no "conservative" caption to contradict it. Confirmed by CTO 2026-07-2x.
 
+## v2.9 — BOARD RULING: the window is 2019–2026 (2026-08-21)
+
+**This supersedes v2.8's window statement below, which was wrong.** Recorded here
+as a Board ruling rather than a silent PR, at the Board's explicit instruction.
+
+**Ruling:** the documented span is **2019–2026**, sample **19 documented
+engagements**, median **45% net of market**, range **−3% to +193%**. Confirmed by
+Jason from direct knowledge of the engagements.
+
+**What went wrong.** PR #95 (2026-07-25) narrowed the label from 2019–2026 to
+2024–2026 on an *assumption* about COVID-era demand distortion. That was an
+unverified Code-side change and it was incorrect — some of the 19 documented
+engagements fall outside 2024–2026, so the count and the window contradicted each
+other. COVID distortion is already handled by **"net of market,"** which is the
+correct mechanism; you don't relabel the window to clean the data. Reverted
+across all 22 instances site-wide on 2026-08-21.
+
+**The load-bearing check, and its result.** The Board asked whether the 45%
+median had been silently recomputed on the narrowed 2024–2026 set — which would
+have made the headline figure wrong and put a wrong number into paid ads.
+**It was not.** Verified in git history:
+
+- `a030885` is the commit that *created* `/intel/str-performance-index`
+  (confirmed via `--diff-filter=A`). The figures were born there as 45% median,
+  range −3% to +193%, 19 engagements, **measured 2019–2026**.
+- PR #95 changed *only* the window label. On every line it touched,
+  `median revenue lift 45%, range −3% to +193%` and `19 documented engagements`
+  are byte-identical on both sides of the diff.
+- No commit before or since has altered the median, the range, or the count
+  (checked with `git log -S` on each figure across all branches).
+
+So the 45% has always been computed on the full 19-engagement 2019–2026 set, and
+reverting the label restores the exact state the figures were first published
+under. **No recompute is required** — and none is possible in-repo regardless,
+since no per-engagement data is checked in.
+
+**Machine guard.** `2024–2026` is now a `RETIRED_TOKENS` entry in
+`scripts/validate-site.py`, so any page reintroducing the narrowed window fails
+CI. This is the same "defend the canon by machine" pattern used for the 42/45
+figures.
+
+---
+
 ## v2.8 — sample-window provenance + entity graph (2026-08-21, Boardroom pre-flight cycle)
+
+> **SUPERSEDED IN PART by v2.9 above.** The window statement in this section is
+> wrong — the span is 2019–2026, not 2024–2026. Retained unedited as the record
+> of what was believed at the time and why. The entity-graph paragraph below
+> stands unchanged.
 
 **Sample-window provenance, recorded per the Aug 17 brief's request.** The documented window is **2024–2026**, sample **19 documented engagements**. This was corrected from an earlier **2019–2026** label in **PR #95** (2026-07-25, "Claims accuracy: machine-layer conflation, WebSite entity, sample window, Trustpilot") — that PR's own commit message states the reasoning: *"the 19 documented engagements span 2024–2026; the 2019–2026 label was wrong and would fold in COVID-era demand years."* This was a **Code-side factual correction**, not a recorded Boardroom ruling at the time — no prior changelog entry existed until this one. **Open gap:** no raw per-engagement dataset (dates, individual records) is checked into this repo — only the aggregate stat, repeated consistently across pages and schema. This registry's confirmation rests on PR #95's determination; independent re-verification against source records (spreadsheet/CRM) has not been done in-repo and would need to happen off-platform.
 
@@ -61,6 +113,7 @@ This file is the single in-repo source of truth for performance-claim wording, r
 
 ## Version history
 
+- **v2.9** (2026-08-21) — BOARD RULING: window reverted to 2019–2026; PR #95's narrowing to 2024–2026 was an unverified assumption. Verified the 45% median was never recomputed on the narrowed set (figures byte-identical since the Index page was created). `2024–2026` added to RETIRED_TOKENS.
 - **v2.8** (2026-08-21) — sample-window provenance recorded (PR #95, Code-side correction, no dataset in-repo to independently re-verify); entity graph / sameAs wiring for Organization + founder Person, disambiguation identity string added.
 - **v2.7** (2026-07-2x) — same-breath baseline rule made explicit; market-tier correction (retired "3/22 active markets" framings); footer tagline 45%-clause dropped site-wide; Item 1 calculator baseline finding recorded; this registry created.
 - **Pre-v2.7** — tracked informally across PR descriptions and the July 4 audit doc (`marketics-site-audit-2026-07.md`); no single versioned file existed. This registry is the first consolidated version.
