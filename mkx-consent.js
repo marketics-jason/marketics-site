@@ -131,8 +131,11 @@
       '}',
       /* Text */
       '#mkx-consent p{margin:0 0 16px;color:rgba(248,246,242,.7);}',
-      '#mkx-consent a{color:rgba(214,173,96,.8);text-decoration:none;}',
-      '#mkx-consent a:hover{text-decoration:underline;}',
+      /* Underlined, not colour-only: the banner's gold sits at just 1.45:1
+         against its own body text, well under the 3:1 that colour-alone
+         differentiation needs. Applies to every page that loads the banner. */
+      '#mkx-consent a{color:rgba(214,173,96,.8);text-decoration:underline;}',
+      '#mkx-consent a:hover{color:rgba(214,173,96,1);}',
       /* Button row */
       '#mkx-consent .mkx-btns{display:flex;gap:10px;}',
       /* Accept button */
