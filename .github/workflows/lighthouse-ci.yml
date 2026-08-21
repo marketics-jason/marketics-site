@@ -8,6 +8,33 @@ name: Lighthouse CI (mobile)
 # does NOT exercise netlify.toml headers (CSP, cache) or the trailing-slash
 # redirects. Treat Best-Practices/cache deltas vs production PageSpeed as
 # expected; the core perf metrics (FCP/LCP/TBT/CLS/image sizing) are the signal.
+#
+# ── Why /calculator has its own LCP budget (lighthouserc.json assertMatrix) ──
+# Every page is held to LCP <= 4000ms. /calculator alone is held to 5200ms.
+# JSON can't carry comments, so the reasoning lives here.
+#
+# The calculator is the densest page on the site (~83KB of inline HTML/CSS/JS,
+# a 16-market benchmark table, live sliders). Its LCP element is the <h1> TEXT,
+# and its measured LCP is 4678-4700ms once GA4 loads on every pageview -- which
+# is required by the Board's Consent Mode ruling (2026-08-21) and is the whole
+# point of that change, so it cannot be engineered away.
+#
+# This is a deliberately narrow exception, not a relaxed gate:
+#   - It applies to ONE url pattern. The homepage stays at 4000ms and currently
+#     reports zero findings.
+#   - The user-facing metrics on this page are strong: FCP 0.9s, Speed Index
+#     0.9s, CLS 0. The page is perceived as instant; LCP here is a heavy-DOM
+#     text-paint artifact.
+#   - 5200ms is derived from measurement, not comfort: median 4678-4700ms with
+#     observed run-to-run variance up to ~350ms, leaving ~500ms of headroom.
+#     A regression the size of the one just fixed (Clarity, ~1000ms) still
+#     fails the build.
+#   - The two patterns are mutually exclusive on purpose. LHCI applies EVERY
+#     matching assertMatrix entry, so a catch-all ".*" base would silently
+#     re-impose the 4000ms budget on the calculator.
+#
+# Booked, not dropped: /calculator needs a real performance pass (main-thread
+# work runs to ~2.1s). When that lands, lower this back toward 4000ms.
 
 on:
   pull_request:
