@@ -5,38 +5,33 @@
 # Trailing-slash canonicalisation
 # Every page's <link rel="canonical"> uses the NO-SLASH form (/method).
 #
-# Aug 21 2026 correction: an earlier version of this file treated the slash
-# form (/method/) still 200ing via Netlify's built-in directory index as
-# "cosmetic, not an SEO risk," on the theory that a forced redirect can't
-# override directory-index resolution on this platform. GSC data proved that
-# wrong: Google was indexing BOTH /method and /method/ independently and
-# splitting clicks/impressions/position between them (montreal was the clear
-# case — the better-positioned variant got zero clicks). A canonical tag alone
-# doesn't stop Google from indexing a URL that returns 200; it only hints
-# which one to prefer. The directory-index 200 needed to become an actual 301.
+# Aug 21 2026 — the slash/no-slash split is NOT cosmetic, but it is also not
+# fixable with redirect rules on this platform. Recording both halves so this
+# doesn't get re-attempted a fourth time.
 #
-# Fix: force=true redirects for the slash form now run BEFORE Netlify's
-# default directory-index serving and win over it (force=true is exactly the
-# escape hatch for that precedence — untested in the original pass). These
-# must come first in file order: Netlify evaluates redirects top-to-bottom,
-# first match wins, and a matching static asset only pre-empts a rule when
-# that rule ISN'T force=true.
-[[redirects]]
-  from = "/:seg/"
-  to = "/:seg"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/:a/:b/"
-  to = "/:a/:b"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/:a/:b/:c/"
-  to = "/:a/:b/:c"
-  status = 301
-  force = true
-
+# The problem is real: GSC shows Google indexing BOTH /page and /page/
+# independently and splitting clicks/impressions/position between them
+# (/intel/montreal/ holds the better average position, 6.49, and gets zero
+# clicks; /intel/montreal at 7.08 gets all three). A canonical tag only hints
+# a preference — it does not stop Google indexing a URL that returns 200.
+#
+# Two fixes were tried against deploy preview 115 and BOTH failed:
+#   1. `force = true` 301s here, ordered before the 200 rewrites below.
+#      Netlify's built-in directory-index resolution still won: /method/,
+#      /intel/miami/ and /intel/miami/report/ all still returned 200.
+#   2. The same rules in `_redirects` (which IS evaluated before this file —
+#      see the costseg block there). Netlify normalises the trailing slash
+#      off a `from` pattern, so `/:seg/` is treated as `/:seg` and matched the
+#      NO-slash form too — self-redirecting the site and breaking the audit
+#      404 guard, /join/confirmation's security headers, and the Index page.
+#      13 smoke failures. Reverted.
+#
+# The remaining option is structural: flatten every foo/index.html to foo.html
+# so there is no directory for Netlify to serve an index from, at which point
+# the slash form 404s or redirects naturally. That touches all 51 pages and
+# every internal link, so it is a scoped decision, not a config tweak — routed
+# to the Boardroom rather than improvised here.
+#
 # No-slash form: served as a 200 rewrite (not a redirect) so /method,
 # /intel/miami, and /intel/miami/report resolve directly, matching the
 # canonical tags with no hop. Non-force, so real files (/assets/*,
