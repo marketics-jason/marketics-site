@@ -119,13 +119,31 @@
     } catch (e) { /* localStorage blocked — proceed without storing */ }
   }
 
-  /* ── Idle delivery (avoid main-thread congestion / TBT) ── */
+  /* ── Idle delivery, gated on the load event ───────────
+     Waits for `load` BEFORE scheduling on idle. Under Consent Mode these tags
+     load for every non-EEA visitor rather than only after an Accept click, so
+     for the first time they sit on the critical path of an ordinary pageview.
+     requestIdleCallback alone can fire while the page is still painting.
+
+     Measured, not assumed: /calculator's LCP regressed to ~5.5s against a 4s
+     budget, reproducibly, across two CI runners — while the same commit's
+     parent passed on a third. Blocking the two third-party scripts under
+     matched throttling recovers ~430ms, and /calculator is the heaviest page
+     so it tipped first. Gating on load keeps analytics off the render path.
+
+     Trade-off, accepted: a visitor who leaves before the load event isn't
+     measured. On a static site with self-hosted fonts that window is small,
+     and Consent Mode feeds modelled aggregates regardless. */
   function idle(fn) {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(fn, { timeout: 4000 });
-    } else {
-      setTimeout(fn, 4000);
+    function schedule() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(fn, { timeout: 4000 });
+      } else {
+        setTimeout(fn, 1000);
+      }
     }
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
   }
 
   /* ── Fire analytics (only after acceptance) ──────── */
