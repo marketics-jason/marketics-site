@@ -5,38 +5,14 @@
 # Trailing-slash canonicalisation
 # Every page's <link rel="canonical"> uses the NO-SLASH form (/method).
 #
-# Aug 21 2026 correction: an earlier version of this file treated the slash
-# form (/method/) still 200ing via Netlify's built-in directory index as
-# "cosmetic, not an SEO risk," on the theory that a forced redirect can't
-# override directory-index resolution on this platform. GSC data proved that
-# wrong: Google was indexing BOTH /method and /method/ independently and
-# splitting clicks/impressions/position between them (montreal was the clear
-# case — the better-positioned variant got zero clicks). A canonical tag alone
-# doesn't stop Google from indexing a URL that returns 200; it only hints
-# which one to prefer. The directory-index 200 needed to become an actual 301.
+# The slash→no-slash 301s live in `_redirects`, NOT here. Netlify evaluates
+# the whole `_redirects` file before any [[redirects]] in this file, and —
+# verified against a deploy preview on 2026-08-21 — a `force = true` rule in
+# netlify.toml does NOT win over Netlify's built-in directory-index
+# resolution: /method/ still returned 200 with the forced 301 in place. The
+# same rule in `_redirects` does win. See the trailing-slash block in that
+# file for the full reasoning.
 #
-# Fix: force=true redirects for the slash form now run BEFORE Netlify's
-# default directory-index serving and win over it (force=true is exactly the
-# escape hatch for that precedence — untested in the original pass). These
-# must come first in file order: Netlify evaluates redirects top-to-bottom,
-# first match wins, and a matching static asset only pre-empts a rule when
-# that rule ISN'T force=true.
-[[redirects]]
-  from = "/:seg/"
-  to = "/:seg"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/:a/:b/"
-  to = "/:a/:b"
-  status = 301
-  force = true
-[[redirects]]
-  from = "/:a/:b/:c/"
-  to = "/:a/:b/:c"
-  status = 301
-  force = true
-
 # No-slash form: served as a 200 rewrite (not a redirect) so /method,
 # /intel/miami, and /intel/miami/report resolve directly, matching the
 # canonical tags with no hop. Non-force, so real files (/assets/*,
