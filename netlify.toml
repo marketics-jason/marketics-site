@@ -111,6 +111,16 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
+# Paid landing pages — noindex. These argue the same case as their organic
+# counterparts by design (e.g. /lp/keep-control vs
+# /intel/switch-property-manager-to-revenue-manager) and must never compete with
+# them in search; that's the whole reason they're separate pages. The in-head
+# meta robots tag says the same thing — this is the edge-level backstop.
+[[headers]]
+  for = "/lp/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
+
 # Intel report pages — noindex (gated content, form required)
 [[headers]]
   for = "/intel/*/report/*"
