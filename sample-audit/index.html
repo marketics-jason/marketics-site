@@ -80,7 +80,15 @@
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
@@ -326,7 +334,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="siteNav">
-  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
@@ -355,7 +363,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 
     <!-- header bar -->
     <div class="au-bar">
-      <a href="/" class="au-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" class="au-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <div class="au-bar-tags">
         <span class="au-lbl">REVENUE AUDIT</span>
         <span class="au-badge">SAMPLE · ILLUSTRATIVE</span>
@@ -385,11 +393,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
           <div class="au-tier eco"><span class="lab">ECONOMY</span></div>
           <div class="au-tier std">
             <span class="lab">STANDARD</span>
-            <div class="au-marker"><span class="mk">TODAY</span><img src="/assets/logo-mark-square.svg" alt="current position"></div>
+            <div class="au-marker"><span class="mk">TODAY</span><img src="/assets/logo-mark-square.svg" alt="current position" width="500" height="500"></div>
           </div>
           <div class="au-tier prem">
             <span class="lab">PREMIUM</span>
-            <div class="au-marker target"><span class="mk">TRUE TIER</span><img src="/assets/logo-mark-square.svg" alt="target tier"></div>
+            <div class="au-marker target"><span class="mk">TRUE TIER</span><img src="/assets/logo-mark-square.svg" alt="target tier" width="500" height="500"></div>
           </div>
           <div class="au-tier lux"><span class="lab">LUXURY</span></div>
         </div>
@@ -505,7 +513,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <footer>
   <div class="foot">
     <div class="foot-brand">
-      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
     </div>
     <div class="foot-col">

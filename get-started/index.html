@@ -59,7 +59,15 @@
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
@@ -272,7 +280,7 @@ textarea{min-height:92px;resize:none;}
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="siteNav">
-  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
@@ -376,7 +384,7 @@ textarea{min-height:92px;resize:none;}
         <div class="row"><span class="k">Turnaround</span><span class="v">2–3 business days</span></div>
         <div class="div"></div>
         <div class="side-who">
-          <img src="/images/jason-founder-hero.webp" alt="Jason Baxter">
+          <img src="/images/jason-founder-hero.webp" alt="Jason Baxter" width="2000" height="1333">
           <div><div class="n">Read personally by Jason</div><div class="m">Founder · not a sales team</div></div>
         </div>
       </div>
@@ -423,7 +431,7 @@ textarea{min-height:92px;resize:none;}
 <footer>
   <div class="foot">
     <div class="foot-brand">
-      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
     </div>
     <div class="foot-col">
@@ -516,6 +524,7 @@ function setMode(m){
     /* First-touch UTM capture (mkx-utm.js) — campaign attribution survives to the lead
        record even when GA4 never fires (see the generate_lead consent note below). */
     var utm = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
+    var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
 
     /* GHL / CRM payload — keeps the established field keys so existing automations still map */
     var payload = {
@@ -527,6 +536,7 @@ function setMode(m){
       propertyType: document.getElementById('propType').value.trim(),
       auditQuestion: document.getElementById('notes').value.trim(),
       source: 'get-started',
+      landingPage: landing,      /* where the session actually began; `source` is only where the form lives */
       submittedAt: new Date().toISOString(),
       utm_source: utm.utm_source || '',
       utm_medium: utm.utm_medium || '',
@@ -546,7 +556,7 @@ function setMode(m){
        (see mkx-consent.js) and this call queues into dataLayer but is never sent — GA4 undercounts
        leads by design here. GHL (above) is consent-independent and is the source of truth for lead
        count; GA4 is the source of truth for campaign attribution on the consented subset only. */
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', Object.assign({ form: 'get-started' }, utm));
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', Object.assign({ form: 'get-started', landing_page: landing }, utm));
     window.scrollTo({top:0,behavior:'smooth'});
   });
 })();

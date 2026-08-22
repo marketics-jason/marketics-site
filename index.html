@@ -137,7 +137,15 @@
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
@@ -738,7 +746,7 @@ dd.fa{margin:0;}
   <div class="rgrid">
     <article class="rc-art"><a class="rcard" href="/case-studies/anthony-san-antonio">
       <figure class="rimg">
-        <img class="rimg-img" src="/case-studies/anthony-san-antonio/images/pool-mural.webp" alt="Poolside mural at a restyled San Antonio short-term rental" loading="lazy">
+        <img class="rimg-img" src="/case-studies/anthony-san-antonio/images/pool-mural.webp" alt="Poolside mural at a restyled San Antonio short-term rental" loading="lazy" width="1600" height="1200">
         <span class="rtier">STANDARD → PREMIUM</span>
         <figcaption class="rcap"><span class="rmkt">San Antonio, TX</span><h3 class="rttl">Just a place to stay, made a destination</h3></figcaption>
       </figure>
@@ -756,7 +764,7 @@ dd.fa{margin:0;}
     </a></article>
     <article class="rc-art"><a class="rcard" href="/case-studies/montreal-hotel">
       <figure class="rimg">
-        <img class="rimg-img" src="/case-studies/montreal-hotel/images/heron-suite.webp" alt="Heron suite in a 40-room Montréal boutique stay" loading="lazy">
+        <img class="rimg-img" src="/case-studies/montreal-hotel/images/heron-suite.webp" alt="Heron suite in a 40-room Montréal boutique stay" loading="lazy" width="1600" height="1066">
         <span class="rtier">REPOSITIONED</span>
         <figcaption class="rcap"><span class="rmkt">Montréal, QC</span><h3 class="rttl">A 40-room boutique stay</h3></figcaption>
       </figure>
@@ -774,7 +782,7 @@ dd.fa{margin:0;}
     </a></article>
     <article class="rc-art"><a class="rcard" href="/case-studies/wally-puerto-rico">
       <figure class="rimg">
-        <img class="rimg-img" src="/case-studies/wally-puerto-rico/images/after-bedroom.webp" alt="Ocean-and-jungle villa bedroom in Río Grande, Puerto Rico" loading="lazy">
+        <img class="rimg-img" src="/case-studies/wally-puerto-rico/images/after-bedroom.webp" alt="Ocean-and-jungle villa bedroom in Río Grande, Puerto Rico" loading="lazy" width="960" height="640">
         <span class="rtier">PREMIUM → LUXURY</span>
         <figcaption class="rcap"><span class="rmkt">Río Grande, PR</span><h3 class="rttl">An ocean-and-jungle villa</h3></figcaption>
       </figure>
@@ -797,7 +805,7 @@ dd.fa{margin:0;}
 
 <!-- ══ OUR STORY ══ -->
 <section class="story sec">
-  <div class="story-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter, founder of Marketics" loading="lazy"></div>
+  <div class="story-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter, founder of Marketics" loading="lazy" width="2000" height="1333"></div>
   <div class="story-body">
     <div class="kicker"><div class="bar"></div><span>Our Story</span></div>
     <h2 class="story-h">Founder-led.<br>A decade in one lane.</h2>

@@ -224,7 +224,15 @@ main {
 }
 </style>
 <!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 <style>
 .mkxf{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;background:#111110;}
 .mkxf a{text-decoration:none;}
@@ -295,7 +303,7 @@ main {
 <footer class="mkxf">
   <div class="mkxf-grid">
     <div class="mkxf-brand">
-      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
     </div>
     <div class="mkxf-col">

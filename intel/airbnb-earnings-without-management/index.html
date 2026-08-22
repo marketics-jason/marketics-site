@@ -120,7 +120,15 @@
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
@@ -334,7 +342,7 @@ footer{max-width:1440px;margin:0 auto;border-top:1px solid var(--line);}
 
 <!-- NAV -->
 <nav id="siteNav">
-  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
   <div class="nav-links">
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
@@ -375,7 +383,7 @@ footer{max-width:1440px;margin:0 auto;border-top:1px solid var(--line);}
     <p class="deck">You can raise short-term rental revenue without handing over your keys. Marketics separates the two things a full-service manager bundles together: the <strong>operations</strong> (cleaning, turnovers, guest messaging) and the <strong>revenue optimization</strong> (pricing, listing quality, algorithm ranking). Only the second one scales with what you earn. In the properties Marketics optimizes, the documented median lift is <strong>45%, net of market</strong>: meaning the figure is measured after stripping out what the wider market did that season. Results are property-specific; every property is audited before a target is set. The practical answer for most owners: keep your cleaner, keep your operational setup, and hire the revenue seat separately rather than paying a percentage of gross for both.</p>
 
     <div class="byline">
-      <div class="byline-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter"></div>
+      <div class="byline-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter" width="2000" height="1333"></div>
       <div class="byline-meta">
         <span class="byline-name">Jason Baxter</span>
         <span class="byline-cred">35× SUPERHOST · 1,000+ LISTINGS OPTIMIZED · JUNE 2026</span>
@@ -529,7 +537,7 @@ footer{max-width:1440px;margin:0 auto;border-top:1px solid var(--line);}
 <footer>
   <div class="foot">
     <div class="foot-brand">
-      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
       <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
     </div>
     <div class="foot-col">

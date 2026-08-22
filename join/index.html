@@ -35,7 +35,15 @@
 <link rel="dns-prefetch" href="https://buy.stripe.com">
 <script src="/mkx-consent.js" defer></script>
 <script src="/mkx-utm.js" defer></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
+<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
+     asks there), analytics granted elsewhere so the core market measures normally. These
+     defaults MUST sit in dataLayer before the config command below, which is why they're
+     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
+     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
 
 <style>
 :root{
@@ -150,7 +158,7 @@ strong{color:var(--bright);font-weight:500;}
 <body>
 
 <div class="co-nav">
-  <a href="/" class="logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics"></a>
+  <a href="/" class="logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
   <div class="co-secure"><span class="dot"></span><span>SECURE CHECKOUT · STRIPE</span></div>
 </div>
 
@@ -172,7 +180,7 @@ strong{color:var(--bright);font-weight:500;}
     </div>
 
     <div class="co-quote">
-      <img src="/images/jason-founder-hero.webp" alt="Jason Baxter">
+      <img src="/images/jason-founder-hero.webp" alt="Jason Baxter" width="2000" height="1333">
       <p>"You'll hear from me directly within a day of this, not a rep." <span class="who">— Jason, founder</span></p>
     </div>
   </section>
@@ -280,11 +288,12 @@ async function pay(){
   /* First-touch UTM capture (mkx-utm.js) — carries campaign attribution through to checkout,
      same as the /get-started lead payload. */
   var utm = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
+  var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
 
   /* Record the checkout intent (non-blocking); Stripe collects email + card on its hosted page */
   try{
     await fetch(GHL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(Object.assign({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join'},{
+      body:JSON.stringify(Object.assign({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join',landingPage:landing},{
         utm_source: utm.utm_source || '', utm_medium: utm.utm_medium || '', utm_campaign: utm.utm_campaign || '', utm_content: utm.utm_content || '', utm_term: utm.utm_term || ''
       }))});
   }catch(e){ console.warn('GHL webhook non-critical error:', e); }
@@ -292,7 +301,7 @@ async function pay(){
   /* GA4 conversion — pre-payment (page redirects to Stripe next); transmits post-consent.
      Same GHL-vs-GA4 measurement split as /get-started: GHL above is consent-independent and
      is the lead-count source of truth; this event only reaches GA4 for consented visitors. */
-  if (typeof gtag === 'function') gtag('event', 'begin_checkout', Object.assign({ form: 'join' }, utm));
+  if (typeof gtag === 'function') gtag('event', 'begin_checkout', Object.assign({ form: 'join', landing_page: landing }, utm));
 
   window.location.href = STRIPE_URL + '?utm_source=join_page';
 }

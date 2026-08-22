@@ -2,12 +2,37 @@
    Marketics Cookie Consent — mkx-consent.js
    ~2KB inline. Replaces CookieYes entirely.
    
-   GDPR / PIPEDA compliant:
-   - No non-essential cookies set before consent
-   - Preference stored in localStorage (not a cookie)
-   - Accept / Decline options clearly presented
-   - Decision remembered for 365 days
-   - Version bump forces re-consent when cookie policy changes
+   Consent Mode v2 + EEA/UK/CH region gating (Board ruling 2026-08-21).
+
+   Prior behaviour was a hard block: gtag.js was never requested until an Accept
+   click, so declined and undecided traffic was invisible to GA4 entirely. That
+   produced 2 measured users against 28 GSC clicks. Now:
+
+   - The Consent Mode v2 defaults live INLINE in each page's head (they must sit
+     in dataLayer before the config command). Denied in EEA/UK/CH, analytics
+     granted elsewhere.
+   - gtag.js now loads for EVERYONE. Under Consent Mode, denied traffic sends
+     cookieless pings instead of nothing, so GA4 gets modelled aggregates.
+   - The banner is shown only in EEA/UK/CH. Elsewhere consent is granted by
+     default per the ruling, so the core market measures normally.
+   - Clarity has no consent-mode equivalent and sets cookies unconditionally, so
+     it stays gated on actual consent (explicit accept, or the granted default
+     outside the EEA).
+   - ad_storage / ad_user_data / ad_personalization stay DENIED everywhere, in
+     every path, including after an Accept. The banner text promises "No
+     advertising or third-party tracking" — granting them would contradict the
+     notice the visitor just read. Changing that requires changing the banner
+     copy first, which is a Strategy/Board call.
+
+   Region detection for the banner is timezone-based (no network call, no
+   dependency) and deliberately over-inclusive: any Europe/* zone gets the
+   banner, and a detection failure gets the banner. Both mismatch directions
+   degrade safely — Google resolves the actual region server-side for the
+   consent signals themselves, so the measurement half is authoritative
+   regardless of what the browser reports.
+
+   Preference stored in localStorage (not a cookie); remembered 365 days;
+   version bump forces re-consent when the policy changes.
    ═══════════════════════════════════════════════════════ */
 
 (function () {
@@ -15,6 +40,37 @@
 
   var CONSENT_KEY = 'mkx_consent';
   var CONSENT_VER = '1'; // bump this to force re-consent after policy changes
+
+  /* ── Region gate for the BANNER only ─────────────────
+     The consent SIGNALS are region-scoped by Google server-side (see the inline
+     defaults in each page head). This only decides whether a human sees a
+     banner. Over-inclusive and fail-safe by design. */
+  function looksEEA() {
+    try {
+      var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+      if (tz.indexOf('Europe/') === 0) return true;
+      // EEA territories that don't sit under Europe/*
+      return ['Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Madeira',
+              'Atlantic/Azores', 'Atlantic/Faroe'].indexOf(tz) !== -1;
+    } catch (e) {
+      return true; // can't tell -> show the banner
+    }
+  }
+
+  /* ── Push a consent decision to Google ────────────────
+     ad_* deliberately omitted from the granted set; see the header note. */
+  function updateConsent(granted) {
+    if (typeof gtag !== 'function') return;
+    var v = granted ? 'granted' : 'denied';
+    gtag('consent', 'update', {
+      analytics_storage: v,
+      functionality_storage: v,
+      personalization_storage: v,
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+  }
 
   /* ── Consent-decision instrumentation (Aug 21 2026 CTO brief, P1) ──
      GA4 is gated behind this banner and was reporting ~2 users in 4 weeks
@@ -63,20 +119,39 @@
     } catch (e) { /* localStorage blocked — proceed without storing */ }
   }
 
-  /* ── Idle delivery (avoid main-thread congestion / TBT) ── */
+  /* ── Idle delivery, gated on the load event ───────────
+     Waits for `load` BEFORE scheduling on idle. Under Consent Mode these tags
+     load for every non-EEA visitor rather than only after an Accept click, so
+     for the first time they sit on the critical path of an ordinary pageview.
+     requestIdleCallback alone can fire while the page is still painting.
+
+     Measured, not assumed: /calculator's LCP regressed to ~5.5s against a 4s
+     budget, reproducibly, across two CI runners — while the same commit's
+     parent passed on a third. Blocking the two third-party scripts under
+     matched throttling recovers ~430ms, and /calculator is the heaviest page
+     so it tipped first. Gating on load keeps analytics off the render path.
+
+     Trade-off, accepted: a visitor who leaves before the load event isn't
+     measured. On a static site with self-hosted fonts that window is small,
+     and Consent Mode feeds modelled aggregates regardless. */
   function idle(fn) {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(fn, { timeout: 4000 });
-    } else {
-      setTimeout(fn, 4000);
+    function schedule() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(fn, { timeout: 4000 });
+      } else {
+        setTimeout(fn, 1000);
+      }
     }
+    if (document.readyState === 'complete') schedule();
+    else window.addEventListener('load', schedule, { once: true });
   }
 
   /* ── Fire analytics (only after acceptance) ──────── */
-  function loadAnalytics() {
-    // Google Analytics 4 — loaded idle, only after consent.
-    // The inline <head> stub has already queued gtag('js') + gtag('config', ID)
-    // into dataLayer; loading gtag.js here flushes the queue and starts measurement.
+  function loadGA4() {
+    // Loaded for everyone now. Consent Mode decides whether it may use storage;
+    // denied traffic still contributes cookieless pings. The inline <head> stub
+    // has already queued the consent defaults + gtag('js') + gtag('config', ID)
+    // into dataLayer, in that order; loading gtag.js flushes the queue.
     idle(function () {
       if (window.__mkxGA4) return;
       window.__mkxGA4 = true;
@@ -85,8 +160,11 @@
       g.src = 'https://www.googletagmanager.com/gtag/js?id=G-51HW9TQFTJ';
       document.head.appendChild(g);
     });
+  }
 
-    // Microsoft Clarity — loaded idle to avoid main-thread congestion
+  function loadClarity() {
+    // No consent-mode equivalent and it sets cookies unconditionally, so this
+    // only runs on an actual grant.
     idle(function () {
       if (window.__mkxClarity) return;
       window.__mkxClarity = true;
@@ -186,32 +264,64 @@
     ].join('');
 
     document.body.appendChild(banner);
-    beacon('consent_impression');
+    // Once per session — the banner re-renders on every pageview until answered,
+    // and one webhook call per pageview would swamp the CRM.
+    try {
+      if (!sessionStorage.getItem('mkx_imp')) {
+        sessionStorage.setItem('mkx_imp', '1');
+        beacon('consent_impression');
+      }
+    } catch (e) { beacon('consent_impression'); }
 
     document.getElementById('mkx-accept').addEventListener('click', function () {
       setConsent(true);
       beacon('consent_accept');
-      loadAnalytics();
+      updateConsent(true);
+      loadClarity();          // GA4 is already loaded; this is the cookie-setting one
       dismiss(banner);
     });
 
     document.getElementById('mkx-decline').addEventListener('click', function () {
       setConsent(false);
       beacon('consent_decline');
+      updateConsent(false);   // explicit denial; GA4 keeps sending cookieless pings
       dismiss(banner);
     });
   }
 
   /* ── Entry point ──────────────────────────────────── */
   var consent = getConsent();
+  var eea = looksEEA();
+
+  // GA4 loads on every path now. Under Consent Mode the signals, not the script
+  // tag, decide what it may store — which is the whole point of the change.
+  loadGA4();
 
   if (consent === true) {
-    // Already accepted — fire analytics immediately
-    loadAnalytics();
+    updateConsent(true);
+    loadClarity();
   } else if (consent === false) {
-    // Already declined — do nothing, no analytics
+    updateConsent(false);
+  } else if (!eea) {
+    // Outside the EEA/UK/CH the inline defaults already grant analytics, so
+    // there's nothing to ask and nothing to update.
+    //
+    // Clarity deliberately does NOT load here. It only runs on an explicit
+    // Accept (the branch above). Two reasons, one measured and one principled:
+    //
+    //  - Measured: Clarity is a session recorder. It instruments the DOM and
+    //    serialises the page on load, and on /calculator — the heaviest, most
+    //    DOM-dense page on the site — that main-thread work delays the <h1>
+    //    paint enough to blow the 4s LCP budget. CI bisect isolated item 1 as
+    //    the cause; the network timeline shows every third-party file finishing
+    //    by 816ms while main-thread work runs to 2.1s and LCP lands at 5.3s,
+    //    equal to TTI. It was never bandwidth.
+    //  - Principled: session recording is a bigger ask than analytics, it has
+    //    no Consent Mode equivalent so it can't degrade to a cookieless mode,
+    //    and riding an implied default is the wrong default for it. The Board's
+    //    ruling was about GA4 measurement; it did not ask for this.
   } else {
-    // No decision yet — show banner after DOM ready
+    // EEA/UK/CH, undecided: defaults are denied for this region; ask.
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', showBanner);
     } else {
