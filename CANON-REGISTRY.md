@@ -200,7 +200,15 @@ so this is a one-place change by design, not an omission.
 could not fetch `clutch.co` — the environment's egress policy denied it (403 at the gateway),
 the same denial pattern as `marketics.io` during the v3.1 sweep. Unlike that case there is no
 CI path to verify a third-party page, and adding one would make our build depend on an external
-site. **So liveness and identity were confirmed by Jason directly, not by machine.**
+site. **So liveness and identity rest on Clutch's own publication notice, not on a machine check.**
+
+The evidence is Clutch's "Your Profile is Published" email to Jason, 2026-08-26 07:49
+("Marketics is now visible to over 1 million buyers…"). That is the right evidence for this
+specific doubt. Jason first confirmed while logged in to Clutch, then flagged the risk himself:
+an owner viewing their own profile sees it whether or not it is published, so a logged-in look
+cannot distinguish "live" from "still under review" — the exact state v2.8 recorded. The
+publication notice settles it from Clutch's side, and being addressed to Jason settles the
+same-name question below at the same time.
 
 That confirmation mattered more than usual here: `sameAs` asserts identity, and this repo already
 tracks an unrelated Bangalore analytics firm trading as "Marketics" (acquired by WNS, 2007) —
@@ -208,7 +216,14 @@ the reason v2.8 added the `"Marketics, LLC (marketics.io)"` disambiguation strin
 place. A generic `/profile/marketics` slug pointing at the wrong company would have actively
 merged the two entities in search engines, the precise opposite of what the entity-graph work
 exists to do. **Rule going forward: a `sameAs` URL gets added only on positive confirmation that
-the destination is Marketics, LLC — never on a plausible-looking slug.**
+the destination is Marketics, LLC — never on a plausible-looking slug.** And a corollary the owner-view catch earned: **for a third-party
+listing, "I can see it" is not evidence it is public** — confirmation has to come from the
+platform (a publication notice) or from a logged-out load, never from an authenticated session.
+
+**Residual, small and cheap to fix:** the publication notice names the company, not the URL
+slug, so the exact path `/profile/marketics` rests on Jason reading it off his own profile. It
+is Clutch's standard public profile format. If that URL ever 404s, the fix is deleting one line
+from the `sameAs` array — no other surface depends on it.
 
 **Still open from v2.8:** nothing. The entity-graph task is complete as specified.
 
