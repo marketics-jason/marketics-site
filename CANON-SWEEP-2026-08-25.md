@@ -180,5 +180,30 @@ documented inline in `smoke.sh` so it isn't reintroduced.
 
 ---
 
-*Post-deploy verification result is appended below once this lands on `main` and Netlify
-redeploys.*
+## Production verification — **zero survivors, confirmed live**
+
+The new full-pattern gate was run against **`https://marketics.io`** directly, without waiting
+for merge: the sweep only reads served HTML, and this branch changes no page content, so
+production's output is exactly what needed auditing.
+
+> **Run [32918260563](https://github.com/marketics-jason/marketics-site/actions/runs/32918260563),
+> 2026-08-26 01:15 UTC, `base_url=https://marketics.io` — 41 passed, 0 failed**
+
+```
+· Retired-claim sweep (rendered copy + inline JSON-LD + meta tags)
+  ✓ clean /          ✓ clean /results       ✓ clean /pricing
+  ✓ clean /method    ✓ clean /sample-audit  ✓ clean /calculator
+  ✓ clean /faq       ✓ clean /case-studies  ✓ clean /story
+  ✓ clean /markets   ✓ clean /media-kit     ✓ clean /llms.txt
+  ✓ clean /intel/str-performance-index      ✓ clean /lp/keep-control
+  ✓ clean /case-studies/montreal-hotel      ✓ clean /case-studies/anthony-san-antonio
+  ✓ clean /case-studies/wally-puerto-rico
+```
+
+**All 8 brief patterns, all 17 public claim surfaces, live production: zero survivors, zero
+`{{`.** This closes the brief's success criterion directly against production rather than by
+inference — and it settles the verdict beyond the cross-check: production is clean *now*, on the
+full pattern set, not just on the three strings the old assertion covered.
+
+The same sweep runs on every future deploy via the daily scheduled job, so this is a standing
+guard rather than a one-time result.
