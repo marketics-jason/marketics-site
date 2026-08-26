@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Media — Marketics</title>
-<meta name="description" content="Panels, podcasts and conversations where Marketics founder Jason Baxter makes the value-before-price case for STR revenue. Press: press@marketics.io">
+<meta name="description" content="Press coverage, panels and podcasts featuring Marketics founder Jason Baxter — quoted in CNBC Make It on Airbnb host economics. Available for quotes and commentary: press@marketics.io">
 <link rel="canonical" href="https://marketics.io/media">
 
 <meta property="og:type" content="website">
@@ -226,6 +226,27 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .ep-outlet{font-family:var(--mono);font-size:12px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;}
 .ep-date{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--dim);}
 .ep-title{font-family:var(--display);font-weight:300;font-size:32px;letter-spacing:.5px;color:var(--white);margin-top:20px;line-height:1.2;}
+/* ── Press section (CNBC brief, Aug 26 2026) ──
+   Deliberately distinct from the appearance cards below it. Appearances are
+   Jason talking; press is a third party deciding he is worth quoting. The
+   second is the rarer proof, so it leads the page and must not read as a
+   fourth episode card.
+   Entries are data: outlet mark, title, byline, one-line context, link. Adding
+   the next one is one <article>. Marks are assets, never typed as styled text,
+   and grayscale(1) guarantees no outlet ever renders in full colour here. */
+.press{display:flex;flex-direction:column;border-bottom:1px solid var(--line);}
+.press-head{padding:64px 72px 0;}
+.press-h{font-family:var(--mono);font-size:12px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin:0;}
+.pr{padding:34px 72px 60px;display:flex;flex-direction:column;}
+.pr-outlet{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.pr-mark{height:22px;width:auto;display:block;opacity:.8;filter:grayscale(1);}
+.pr-date{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--dim);}
+.pr-title{font-family:var(--display);font-weight:300;font-size:32px;letter-spacing:.5px;color:var(--white);margin:22px 0 0;line-height:1.25;}
+.pr-byline{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--muted);margin-top:14px;}
+.pr-context{font-size:16px;line-height:1.7;color:var(--body);margin:16px 0 0;max-width:760px;}
+.pr-link{display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-family:var(--mono);font-size:12px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--gold);align-self:flex-start;}
+.pr-link:hover{color:var(--gold-hi);}
 .ep-meta{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;color:var(--dim);margin-top:12px;}
 .ep-desc{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;color:var(--body);margin:22px 0 0;max-width:900px;}
 
@@ -278,7 +299,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .foot-legal a:hover{color:var(--muted);}
 
 @media (max-width:1080px){
-  .hero,.ep,.book,.foot{padding-left:40px;padding-right:40px;}
+  .hero,.ep,.book,.foot,.press-head,.pr{padding-left:40px;padding-right:40px;}
   .foot-legal{padding-left:40px;padding-right:40px;}
 }
 @media (max-width:900px){
@@ -297,6 +318,9 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   .hero-lead{font-size:14px;}
   .ep{padding:40px 24px;}
   .ep-title{font-size:23px;}
+  .press-head{padding:40px 24px 0;}
+  .pr{padding:24px 24px 44px;}
+  .pr-title{font-size:23px;}
   .ep-desc{font-size:13.5px;}
   .book{padding:48px 24px;}
   .book-h{font-size:28px;letter-spacing:1.5px;}
@@ -352,9 +376,30 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <div class="kicker"><div class="bar"></div><span>Media</span></div>
   <div class="hero-top">
     <h1 class="hero-h">On the record.</h1>
-    <p class="hero-lead">Panels, podcasts, and conversations where the thinking gets tested in public. The value-before-price argument, in rooms full of operators who push back.</p>
+    <p class="hero-lead">Press coverage, panels, and conversations where the thinking gets tested in public — quoted by reporters on the economics, and in rooms full of operators who push back.</p>
   </div>
 </header>
+
+<!-- ══ PRESS ══
+     Leads the page: press outranks appearances in proof weight. A journalist
+     vetting Jason as a source lands here, and the first thing they should see
+     is that another outlet already made that call. Data-shaped — the next
+     entry is one <article>, no redesign. -->
+<section class="sec press">
+  <div class="press-head"><h2 class="press-h">In the press</h2></div>
+
+  <!-- CNBC Make It — Airbnb host fee change (Aug 22, 2026) -->
+  <article class="pr">
+    <div class="pr-outlet">
+      <img class="pr-mark" src="/images/press/cnbc-make-it.svg" alt="CNBC Make It — article quoting Jason Baxter, founder of Marketics" width="130" height="22">
+      <span class="pr-date">August 22, 2026</span>
+    </div>
+    <h3 class="pr-title">Airbnb's new fee change frustrates hosts — what to know before renting out your home</h3>
+    <span class="pr-byline">by Mike Winters · CNBC Make It · Aug 22, 2026</span>
+    <p class="pr-context">Jason quoted on the economics of the new 15.5% host fee and who should — and shouldn't — enter short-term rentals.</p>
+    <a class="pr-link" href="https://www.cnbc.com/2026/08/22/airbnb-fee-change-frustrates-hosts-what-to-know-before-listing.html" target="_blank" rel="noopener" aria-label="Read “Airbnb's new fee change frustrates hosts” on CNBC Make It">Read the article <span aria-hidden="true">→</span></a>
+  </article>
+</section>
 
 <!-- ══ EPISODES ══ -->
 <section class="sec eps">
@@ -427,8 +472,8 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <!-- ══ BOOKING CTA ══ -->
 <section class="sec book">
   <div>
-    <h2 class="book-h">Booking a guest or a panel?</h2>
-    <p class="book-p">Jason goes on record about STR revenue, market positioning, and why cutting price is usually the wrong move. Topics and a bio available on request from the press desk.</p>
+    <h2 class="book-h">Booking a guest, a panel — or need a quote on deadline?</h2>
+    <p class="book-p">Jason goes on record about STR revenue, market positioning, and why cutting price is usually the wrong move. Reporters working a story: he's available for quotes and commentary, and answers on deadline. Topics and a bio available on request from the press desk.</p>
   </div>
   <div class="book-right">
     <a href="mailto:press@marketics.io" class="btn-fill">Contact the Press Desk</a>

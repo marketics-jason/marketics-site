@@ -115,6 +115,24 @@ h1{font-family:var(--display);font-weight:200;font-size:52px;line-height:1.15;le
 .btn:hover{filter:brightness(1.08);}
 .btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 .trust{font-family:var(--mono);font-size:11.5px;letter-spacing:1px;color:var(--muted);line-height:1.7;}
+/* ── Press bar: "Quoted by" citation row (CNBC brief, Aug 26 2026) ──
+   Same component as the homepage; kept in sync by hand because this site has
+   no template engine. If you change one, change both.
+   Accepts 1..n outlets — adding outlet #2 is ONE <li>, a data change.
+   Label is literal (they quoted him): never "trusted by" / "as seen on".
+   Never gold (CTA accent — a third-party mark in the action colour dilutes the
+   CTA and implies affiliation); never full-colour, which grayscale(1) makes
+   mechanical rather than a rule someone has to remember. */
+/* Top rule only: the next <section> already draws its own border-top, so a
+   border-bottom here would render a double line at the seam. */
+.pressbar{display:flex;align-items:center;gap:18px 22px;flex-wrap:wrap;
+  padding:26px 0 30px;border-top:1px solid var(--line);}
+.pb-label{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;white-space:nowrap;}
+.pb-list{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
+.pb-link{display:inline-flex;align-items:center;}
+.pb-link:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
+.pb-mark{height:20px;width:auto;display:block;opacity:.72;filter:grayscale(1);transition:opacity .2s;}
+.pb-link:hover .pb-mark{opacity:1;}
 
 /* ══ SECTIONS ══ */
 section{border-top:1px solid var(--line);padding:72px 0;}
@@ -220,6 +238,19 @@ footer a:hover{color:var(--muted);}
   <div class="cta-row">
     <a href="/get-started" class="btn">Get my free revenue audit</a>
     <span class="trust">No contract. No monthly fee. Every property is audited before any target is set.</span>
+  </div>
+</div>
+
+<!-- ══ PRESS CITATION ══
+     Between the hero and the persuasion body. The Buyer-A ad hook is this exact
+     fee change, so a visitor arriving from that ad meets the story they just
+     clicked on. Press only — no podcast or directory logos. -->
+<div class="wrap">
+  <div class="pressbar">
+    <span class="pb-label">Quoted by</span>
+    <ul class="pb-list">
+      <li><a class="pb-link" href="https://www.cnbc.com/2026/08/22/airbnb-fee-change-frustrates-hosts-what-to-know-before-listing.html" target="_blank" rel="noopener"><img class="pb-mark" src="/images/press/cnbc-make-it.svg" alt="CNBC Make It — article quoting Jason Baxter, founder of Marketics" width="118" height="20"></a></li>
+    </ul>
   </div>
 </div>
 
