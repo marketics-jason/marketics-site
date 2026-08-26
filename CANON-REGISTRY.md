@@ -229,8 +229,70 @@ from the `sameAs` array — no other surface depends on it.
 
 ---
 
+## v3.3 — press citation: "Quoted by" bar + /media Press section (2026-08-26)
+
+Jason was quoted by name in **CNBC Make It**, Aug 22 2026 — "Airbnb's new fee change frustrates
+hosts," by Mike Winters. First third-party press citation on the estate, so the claim strings are
+registered here before they multiply across surfaces.
+
+**Registered strings — exact, no improvisation:**
+
+| Slot | String |
+|---|---|
+| Bar label | `Quoted by` (fallback, if design needs length: `As featured in`) |
+| Logo alt / entity string | `CNBC Make It — article quoting Jason Baxter, founder of Marketics` |
+| Article URL | `https://www.cnbc.com/2026/08/22/airbnb-fee-change-frustrates-hosts-what-to-know-before-listing.html` |
+| /media byline | `by Mike Winters · CNBC Make It · Aug 22, 2026` |
+| Verbatim quote (only if displayed) | "If you're looking for passive income and not active income, don't touch it." |
+
+**Retired before it was ever used:** "trusted by," "endorsed by," "as seen on," and any variant
+implying CNBC recommends Marketics. The claim is literal and narrow — **they quoted him**. An
+outlet quoting a source is not an outlet endorsing a vendor, and the gap between those two is
+exactly where a credibility asset turns into a liability.
+
+**Treatment rules, and where they are enforced.** Outlet marks are placed as assets, never typed
+as styled text. Single-tone, never gold (gold is the CTA accent — a third-party mark wearing the
+action colour dilutes the CTA and implies affiliation) and never full-colour (a colour mark reads
+as an ad row; monochrome reads as a citation). The never-full-colour rule is enforced in CSS via
+`filter:grayscale(1)` rather than left as a rule someone must remember when adding outlet #2.
+Every mark links to its own source: a proof element that links to its source audits itself, one
+that doesn't looks decorative.
+
+**Press bar is press only.** No podcast or directory logos for balance — Clutch (v3.2) lives in
+the review layer, appearances live on `/media`. Not animated, not a carousel, never in the footer.
+
+**Growth path:** the bar and the `/media` Press section both take 1..n entries. Outlet #2
+(GlobeSt, second CNBC piece) is one `<li>` and one `<article>` — data, not redesign. The bar
+renders correctly at n=1; the `Quoted by` label carries it.
+
+**No numeric claims added.** The 45% median, the gate sentence, the 19-engagement sample and the
+2019–2026 window are untouched by this work.
+
+**Asset provenance.** The CNBC wordmark is **inlined** in each placement as paths with
+`fill="currentColor"` — no external file. Jason supplied the vector after this session's egress
+blocked every source (`upload.wikimedia.org`, `commons.wikimedia.org`, `www.cnbc.com` all denied;
+`simple-icons` on npm carries only `nbc.svg`, the NBC peacock, which is a different network's mark
+and would misattribute the outlet). Hand-drawing a trademarked wordmark was never an option.
+
+The supplied vector was full-colour (navy `#001e5a` letterforms, `#0076ff` wedge) on a transparent
+ground. Both fills were stripped so the root `fill="currentColor"` carries the tone. The wedge
+merges into the N, which is how CNBC's own one-colour logo reads — the wedge is integral to the
+letterform, not a separate accent. Verified by rendering before it went on three pages.
+
+**Why inline rather than an `<img>` asset:** it makes the colour rule structural. There is no
+colour left in the mark to leak, so "never full-colour, never gold" cannot be violated by a future
+asset swap — it is not a rule someone has to remember when adding outlet #2, it is a property of
+the markup. Cost is ~3.4 KB of path data duplicated per page, accepted deliberately.
+
+**Mark is the plain CNBC wordmark, not the Make It lockup** — the documented fallback in the
+brief. It is literally true (the article lives on cnbc.com), and "Make It" precision is carried by
+the accessible name and the `/media` byline.
+
+---
+
 ## Version history
 
+- **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
 - **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
 - **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.
 - **v3.0** (2026-08-21) — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating; gtag.js now loads on every path (cookieless pings for denied traffic). `ad_*` denied everywhere pending banner-copy change — flagged as a live constraint on the paid launch.
