@@ -87,7 +87,17 @@ c=$(code "$BASE/costseg"); l=$(loc_raw "$BASE/costseg")
   || no "/costseg = $c -> '$l' (want 301 costsegsmart.com utm_content=direct)"
 
 echo "· Not-public artifacts (404)"
-c=$(code "$BASE/marketics-site-audit-2026-07.md"); [ "$c" = "404" ] && ok "audit report 404" || no "audit report = $c (want 404)"
+# Internal docs are plain files at the repo root, so they are servable by
+# default and are only hidden by the force-shadow block in _redirects. That
+# makes the shadow load-bearing and easy to forget: a new internal doc is
+# public the moment it merges unless someone remembers to add two lines. Every
+# one of them gets asserted here, in both the extensionless and .md forms,
+# since the shadow lists both and a rule covering only one still leaks.
+for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08-25"; do
+  for f in "$d" "$d.md"; do
+    c=$(code "$BASE$f"); [ "$c" = "404" ] && ok "$f 404 (internal)" || no "$f = $c (want 404 — internal doc is PUBLIC)"
+  done
+done
 
 echo "· Security headers"
 jc=$(hdr "$BASE/join/confirmation")
