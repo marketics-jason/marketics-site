@@ -152,8 +152,42 @@ figures.
 
 ---
 
+## v3.1 — canon sweep: verdict *cache artifact*, two gates closed (2026-08-25)
+
+**Trigger:** a search surfaced live marketics.io showing retired claims — "50–75% revenue
+increases," "28+ documented client outcomes," "35 consecutive quarters," "90-Day Guarantee."
+Brief: determine cache vs. stale deploy vs. repo, then remediate.
+
+**Verdict: cache artifact.** Zero repo hits on every pattern; production serves `e7d2faa`
+(== `origin/main`); the daily production smoke test has asserted shipped canon green
+continuously. The corrections landed 2026-07-13→07-29 and have been live since — the dirty copy
+exists only in the search index. **No copy was changed.** Full evidence, hit list, near-miss
+table and legal-lane report: `CANON-SWEEP-2026-08-25.md`.
+
+**What the sweep exposed, and what shipped.** The claims were absent but under-defended:
+
+- `RETIRED_TOKENS` did **not** gate `28 documented` / `28+ documented`, `consecutive quarters`,
+  `90-Day Guarantee`, `42%+`, or `20 years` — all five could have been reintroduced without
+  failing CI. Added, plus entity-encoded dash forms of the retired range.
+- `scripts/smoke.sh` checked four phrasings on the homepage only. Now sweeps the full retired
+  pattern set across all 17 public claim surfaces, so "is production actually clean?" is
+  answerable from CI instead of a manual fetch.
+
+**Method note worth keeping.** The live gate's first version used the bracket class `50[–-]75`,
+which silently could not match the en-dash form — the exact phrasing of the retired claim —
+because `[–-]` is a *byte* range once grep reads UTF-8. A negative-control test (assert the gate
+fires on each retired claim) caught it; a clean run alone would have shipped a gate that never
+worked. **Canon gates get tested in both directions: zero false positives, and every retired
+phrasing actually caught.**
+
+**Standing rule reaffirmed:** a retired phrasing recorded in this registry must have a matching
+`RETIRED_TOKENS` entry in the same PR. This sweep found five that didn't.
+
+---
+
 ## Version history
 
+- **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.
 - **v3.0** (2026-08-21) — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating; gtag.js now loads on every path (cookieless pings for denied traffic). `ad_*` denied everywhere pending banner-copy change — flagged as a live constraint on the paid launch.
 - **v2.9** (2026-08-21) — BOARD RULING: window reverted to 2019–2026; PR #95's narrowing to 2024–2026 was an unverified assumption. Verified the 45% median was never recomputed on the narrowed set (figures byte-identical since the Index page was created). `2024–2026` added to RETIRED_TOKENS.
 - **v2.8** (2026-08-21) — sample-window provenance recorded (PR #95, Code-side correction, no dataset in-repo to independently re-verify); entity graph / sameAs wiring for Organization + founder Person, disambiguation identity string added.

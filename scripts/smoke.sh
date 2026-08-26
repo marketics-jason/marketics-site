@@ -87,7 +87,17 @@ c=$(code "$BASE/costseg"); l=$(loc_raw "$BASE/costseg")
   || no "/costseg = $c -> '$l' (want 301 costsegsmart.com utm_content=direct)"
 
 echo "· Not-public artifacts (404)"
-c=$(code "$BASE/marketics-site-audit-2026-07.md"); [ "$c" = "404" ] && ok "audit report 404" || no "audit report = $c (want 404)"
+# Internal docs are plain files at the repo root, so they are servable by
+# default and are only hidden by the force-shadow block in _redirects. That
+# makes the shadow load-bearing and easy to forget: a new internal doc is
+# public the moment it merges unless someone remembers to add two lines. Every
+# one of them gets asserted here, in both the extensionless and .md forms,
+# since the shadow lists both and a rule covering only one still leaks.
+for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08-25"; do
+  for f in "$d" "$d.md"; do
+    c=$(code "$BASE$f"); [ "$c" = "404" ] && ok "$f 404 (internal)" || no "$f = $c (want 404 — internal doc is PUBLIC)"
+  done
+done
 
 echo "· Security headers"
 jc=$(hdr "$BASE/join/confirmation")
@@ -101,9 +111,35 @@ grep -qi 'x-robots-tag:.*noindex' <<<"$jc" \
 echo "· Canon copy actually shipped"
 h=$(body "$BASE/")
 grep -q '45% median lift, net of market' <<<"$h" && ok "homepage: 45% net-of-market canon" || no "homepage missing 45% net-of-market canon"
-grep -Eq 'random sample|30 documented|~42|42%\+' <<<"$h" && no "homepage still shows retired canon" || ok "homepage: no retired canon"
 ix=$(body "$BASE/intel/str-performance-index")
 grep -q '45% median benchmark' <<<"$ix" && ok "Index: 45% median benchmark canon" || no "Index missing 45% median benchmark canon"
+
+# Retired-claim sweep across every public claim surface (Aug 25 2026 canon-sweep
+# brief). validate-site.py gates the REPO; this gates what is actually SERVED --
+# the gap that made "stale deploy or search cache?" unanswerable without a
+# manual fetch. Replaces the old homepage-only retired-canon check, which
+# covered four phrasings on one page.
+#
+# Each alternative is scoped tightly enough to match only the retired claim:
+# the bare words all appear in legitimate copy ("we make no guarantee", a case
+# study's "two consecutive disasters", "34-42%" market occupancy, 28px in CSS).
+# The dash alternatives are spelled out rather than written as a bracket class:
+# [–-] is a BYTE range once grep sees UTF-8, and silently fails to match the
+# en-dash form -- which is the exact phrasing the retired claim used. Entity
+# forms are covered too, since the copy could return encoded.
+#
+# Verified against every surface below before shipping, in both directions:
+# zero matches on live copy, and every retired phrasing caught. Widen only with
+# both checks re-run.
+RETIRED='50(-|–|—|‐|&#45;|&#8211;|&#8212;|&#x2013;|&ndash;|&mdash;| to )75|28\+? documented|documented client outcomes|consecutive quarters|90.Day Guarantee|42%\+|~42|\+32%|20 years|\{\{|random sample|30 documented|met or exceeded'
+echo "· Retired-claim sweep (rendered copy + inline JSON-LD + meta tags)"
+for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sample-audit" \
+         "/calculator" "/faq" "/case-studies" "/case-studies/montreal-hotel" \
+         "/case-studies/anthony-san-antonio" "/case-studies/wally-puerto-rico" \
+         "/story" "/markets" "/media-kit" "/lp/keep-control" "/llms.txt"; do
+  found=$(grep -Eoh "$RETIRED" <<<"$(body "$BASE$p")" | sort -u | tr '\n' ' ')
+  [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
+done
 
 echo
 echo "Result: $pass passed, $fail failed"
