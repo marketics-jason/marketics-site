@@ -42,6 +42,21 @@ RETIRED_TOKENS = [
     "active depth markets",
     "22 active markets",  # public copy never states an active-market count
     "2024–2026", "2024-2026", "2024/2026",  # narrowed window; Board ruling v2.9 is 2019–2026
+    # v3.1 sweep (2026-08-25): claims named in the canon registry but never
+    # machine-gated. All were already absent from the repo — these entries stop
+    # them coming back, they did not fix anything. Each is deliberately narrow:
+    # the bare words ("consecutive", "guarantee", "28") appear in legitimate copy
+    # (case-study timelines, "we make no guarantee", CSS pixel values), so the
+    # token must carry enough context to only match the retired claim.
+    "42%+",               # retired floor framing; canon is "45% median, net of market"
+    "28 documented", "28+ documented",   # wrong sample count; canon is 19
+    "documented client outcomes",        # retired phrasing around that count
+    "consecutive quarters",              # retired Superhost framing; canon is "35× Superhost"
+    "90-Day Guarantee", "90 Day Guarantee",  # retired refund framing; canon is the $500 deposit
+    "20 years",           # retired tenure claim in STR context; canon is "the past decade"
+    # Entity-encoded dash forms of the retired range. A page authored with an
+    # encoded en-dash renders identically but would slip the literal tokens above.
+    "50&ndash;75", "50&#8211;75", "50&mdash;75", "50&#8212;75",
 ]
 
 # Pages that legitimately carry no consent script (confidential, untracked).
