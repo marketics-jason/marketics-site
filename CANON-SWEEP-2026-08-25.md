@@ -184,6 +184,8 @@ documented inline in `smoke.sh` so it isn't reintroduced.
 > **Note for CTO:** no action needed on the site. If the stale snippet is still showing in
 > search, the lever is re-indexing, not code — the IndexNow workflow already pings on every
 > deploy to main, and a GSC "Request Indexing" on the affected URLs is the fastest nudge.
+> **Merged** as `31d6cf3` (#118), 2026-08-26; post-merge production sweep re-verified clean
+> (46/46). The guards are now the standing daily check.
 > **Out of scope, untouched, as instructed:** 2019–2026 window revert (already shipped in #116),
 > `/legal` + Co-Host Agreement, `/audits/` token pages.
 
@@ -216,3 +218,19 @@ full pattern set, not just on the three strings the old assertion covered.
 
 The same sweep runs on every future deploy via the daily scheduled job, so this is a standing
 guard rather than a one-time result.
+
+### Post-merge re-verification — the brief's closing criterion
+
+The sweep above ran from the branch, before merge. Re-run against production after
+`31d6cf3` ("Canon sweep…", #118) merged to `main` and Netlify redeployed, so the result reflects
+the deployed output rather than a pre-merge snapshot:
+
+> **Run [32923006568](https://github.com/marketics-jason/marketics-site/actions/runs/32923006568),
+> 2026-08-26 02:31 UTC, `head_sha 31d6cf3`, `base_url=https://marketics.io` —
+> 46 passed, 0 failed**
+
+**Zero survivors, zero `{{`, on the deployed output.** The count rises from 41 to 46 because the
+merged commit also carries the six internal-doc 404 assertions. Deliverable 3 closed.
+
+Verified at four points in total: repo (`validate-site`), deploy preview (46/46, `_redirects`
+applied), production pre-merge (41/41), production post-merge (46/46).
