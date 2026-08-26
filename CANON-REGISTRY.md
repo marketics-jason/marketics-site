@@ -268,18 +268,31 @@ renders correctly at n=1; the `Quoted by` label carries it.
 **No numeric claims added.** The 45% median, the gate sentence, the 19-engagement sample and the
 2019–2026 window are untouched by this work.
 
-**Asset dependency, recorded because it gates the ship.** The component references
-`/images/press/cnbc-make-it.svg`, which is **not yet in the repo** — the session building this
-could not source it (egress denies `upload.wikimedia.org`, `commons.wikimedia.org` and
-`www.cnbc.com`), and fabricating a trademarked wordmark by hand is not an option. `validate-site`
-fails on the broken resource src until the real asset lands, so this **cannot merge half-done** —
-the gate is mechanical, not a note in a ticket.
+**Asset provenance.** The CNBC wordmark is **inlined** in each placement as paths with
+`fill="currentColor"` — no external file. Jason supplied the vector after this session's egress
+blocked every source (`upload.wikimedia.org`, `commons.wikimedia.org`, `www.cnbc.com` all denied;
+`simple-icons` on npm carries only `nbc.svg`, the NBC peacock, which is a different network's mark
+and would misattribute the outlet). Hand-drawing a trademarked wordmark was never an option.
+
+The supplied vector was full-colour (navy `#001e5a` letterforms, `#0076ff` wedge) on a transparent
+ground. Both fills were stripped so the root `fill="currentColor"` carries the tone. The wedge
+merges into the N, which is how CNBC's own one-colour logo reads — the wedge is integral to the
+letterform, not a separate accent. Verified by rendering before it went on three pages.
+
+**Why inline rather than an `<img>` asset:** it makes the colour rule structural. There is no
+colour left in the mark to leak, so "never full-colour, never gold" cannot be violated by a future
+asset swap — it is not a rule someone has to remember when adding outlet #2, it is a property of
+the markup. Cost is ~3.4 KB of path data duplicated per page, accepted deliberately.
+
+**Mark is the plain CNBC wordmark, not the Make It lockup** — the documented fallback in the
+brief. It is literally true (the article lives on cnbc.com), and "Make It" precision is carried by
+the accessible name and the `/media` byline.
 
 ---
 
 ## Version history
 
-- **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, alt text and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Blocked on the CNBC SVG asset, enforced by `validate-site`.
+- **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
 - **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
 - **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.
 - **v3.0** (2026-08-21) — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating; gtag.js now loads on every path (cookieless pings for denied traffic). `ad_*` denied everywhere pending banner-copy change — flagged as a live constraint on the paid launch.
