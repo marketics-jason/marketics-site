@@ -119,6 +119,15 @@ smoke test is the stronger evidence anyway: it runs from an unblocked runner, ag
 production, on a schedule, with the result recorded. Note it is also what CLAUDE.md's own
 guidance points at, since `marketics.io` 403s non-browser fetchers regardless.
 
+**This is now precedent, with a hard constraint (CTO, 2026-08-25).** A session whose egress
+denies `marketics.io` may verify production by dispatching the smoke workflow and reading the
+run log. That path carries **read-only verification against production and nothing else** —
+never anything that writes, deploys, mutates remote state, or authenticates. Widening it would
+turn a verification lane into an ambient egress bypass, which is what the denial exists to
+prevent. Recorded in `.github/workflows/smoke.yml` and enforced there rather than merely asked
+for: the job token is `contents: read` and the workflow references no secrets, so a step that
+tried to write would fail rather than quietly succeed.
+
 **Consequence for this report:** the pre-existing live assertions covered three canon strings on
 two pages. The full 8-pattern sweep across all 17 claim surfaces was verified **in-repo** and is
 **now also enforced live** by the smoke-test change below — see the post-deploy result appended
