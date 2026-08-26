@@ -148,7 +148,7 @@ figures.
 
 **Confirmed consistent as of this cycle:** rendered copy and `Dataset` schema on `/intel/str-performance-index`, the `/intel` hub description, and `llms.txt` all read 2024–2026 / 19 engagements with no drift found.
 
-**Entity graph / sameAs wiring (Task 1, Aug 17 brief).** Organization `sameAs` on the canonical entity (`index.html`, mirrored in `results/index.html`'s description) now includes LinkedIn company page, Crunchbase, Trustpilot, YouTube, and Google Business Profile (confirmed live by Jason, 2026-08-21). Founder Person entity (`story/index.html#jason`, the canonical definition — other pages reference it by `@id`) now includes Jason's LinkedIn, personal site (jasonbaxter.ca), and Instagram. Added `legalName: "Marketics, LLC"` and `foundingDate: "2023"` to the Organization entity, and led the canonical description with the identity string `"Marketics, LLC (marketics.io)"` for disambiguation against the unrelated Bangalore analytics firm of the same brand name (acquired by WNS, 2007). **Gap, not fixed:** Clutch listing is under review with Clutch as of this cycle — not yet claimed/live, so not wired; revisit once live.
+**Entity graph / sameAs wiring (Task 1, Aug 17 brief).** Organization `sameAs` on the canonical entity (`index.html`, mirrored in `results/index.html`'s description) now includes LinkedIn company page, Crunchbase, Trustpilot, YouTube, and Google Business Profile (confirmed live by Jason, 2026-08-21). Founder Person entity (`story/index.html#jason`, the canonical definition — other pages reference it by `@id`) now includes Jason's LinkedIn, personal site (jasonbaxter.ca), and Instagram. Added `legalName: "Marketics, LLC"` and `foundingDate: "2023"` to the Organization entity, and led the canonical description with the identity string `"Marketics, LLC (marketics.io)"` for disambiguation against the unrelated Bangalore analytics firm of the same brand name (acquired by WNS, 2007). **Gap, not fixed:** Clutch listing is under review with Clutch as of this cycle — not yet claimed/live, so not wired; revisit once live. — **CLOSED 2026-08-26, see v3.2 below.**
 
 ---
 
@@ -185,8 +185,38 @@ phrasing actually caught.**
 
 ---
 
+## v3.2 — Clutch listing wired; v2.8 entity-graph gap closed (2026-08-26)
+
+The Clutch listing recorded as an open gap in v2.8 ("under review with Clutch … not yet
+claimed/live, so not wired; revisit once live") is now live and claimed. Added
+`https://clutch.co/profile/marketics` to the Organization `sameAs` on the canonical entity
+(`index.html`, `@id: https://marketics.io/#business`). That completes the v2.8 `sameAs` set:
+LinkedIn, Crunchbase, Trustpilot, Clutch, YouTube, Google Business Profile.
+
+Only the canonical entity carries `sameAs` — other pages reference the Organization by `@id`,
+so this is a one-place change by design, not an omission.
+
+**Verification note, recorded because it is a real limit.** The session that made this change
+could not fetch `clutch.co` — the environment's egress policy denied it (403 at the gateway),
+the same denial pattern as `marketics.io` during the v3.1 sweep. Unlike that case there is no
+CI path to verify a third-party page, and adding one would make our build depend on an external
+site. **So liveness and identity were confirmed by Jason directly, not by machine.**
+
+That confirmation mattered more than usual here: `sameAs` asserts identity, and this repo already
+tracks an unrelated Bangalore analytics firm trading as "Marketics" (acquired by WNS, 2007) —
+the reason v2.8 added the `"Marketics, LLC (marketics.io)"` disambiguation string in the first
+place. A generic `/profile/marketics` slug pointing at the wrong company would have actively
+merged the two entities in search engines, the precise opposite of what the entity-graph work
+exists to do. **Rule going forward: a `sameAs` URL gets added only on positive confirmation that
+the destination is Marketics, LLC — never on a plausible-looking slug.**
+
+**Still open from v2.8:** nothing. The entity-graph task is complete as specified.
+
+---
+
 ## Version history
 
+- **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
 - **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.
 - **v3.0** (2026-08-21) — BOARD RULING: Consent Mode v2 + EEA/UK/CH region gating; gtag.js now loads on every path (cookieless pings for denied traffic). `ad_*` denied everywhere pending banner-copy change — flagged as a live constraint on the paid launch.
 - **v2.9** (2026-08-21) — BOARD RULING: window reverted to 2019–2026; PR #95's narrowing to 2024–2026 was an unverified assumption. Verified the 45% median was never recomputed on the narrowed set (figures byte-identical since the Index page was created). `2024–2026` added to RETIRED_TOKENS.
