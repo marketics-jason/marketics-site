@@ -93,7 +93,7 @@ echo "· Not-public artifacts (404)"
 # public the moment it merges unless someone remembers to add two lines. Every
 # one of them gets asserted here, in both the extensionless and .md forms,
 # since the shadow lists both and a rule covering only one still leaks.
-for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08-25"; do
+for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08-25" "/LEGAL-ROUTING-2026-08-27"; do
   for f in "$d" "$d.md"; do
     c=$(code "$BASE$f"); [ "$c" = "404" ] && ok "$f 404 (internal)" || no "$f = $c (want 404 — internal doc is PUBLIC)"
   done

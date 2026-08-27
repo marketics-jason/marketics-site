@@ -482,8 +482,35 @@ does not draft policy — but the structural gate is **met**.
 
 ---
 
+## v3.7 — three rulings closed (Jason, 2026-08-27)
+
+**1. PM cost range 20–35% — CONFIRMED as standard.** Closes open ledger flag #4. The four
+published instances stand as built; no re-string. Sources on file: SkyRun Apr 2026, PriceLabs
+May 2026. Live on `/lp/keep-control` (strip, Sections 1 and 4, FAQ), the homepage comparison
+table, and the intel pages that carry the contrast.
+
+**2. 45%-provenance check — CLOSED, gate satisfied.** Ruled by Jason: the median was computed by
+Claude on the documented engagement set. Rev C made this a hard precondition for the LP going
+live; that precondition is now met and the LP is clear to ship.
+
+Recorded precisely, because the two statements sit side by side and should not be conflated:
+v2.9 established the 45% was **never recomputed** on the narrowed 2024–2026 window — the figures
+have been byte-identical since the Index page was created. This ruling adds the provenance of the
+original figure. The standing limitation from v2.8 is unchanged and still true: **no
+per-engagement dataset is checked into this repo**, so no in-repo recomputation is possible, and
+any future re-verification is an off-platform exercise against source records.
+
+**3. `/legal` fee contradiction — routed to counsel.** Lined up as `LEGAL-ROUTING-2026-08-27.md`
+(internal, 404-shadowed): a counsel-ready statement of the four conflicting sections, what each
+says, why they cannot all be true, and what the rest of the estate now says. Code did not edit
+`/legal` and will not. The `validate-site.py` counsel-lane warning stays on until it is resolved,
+so it cannot quietly fall off the list.
+
+---
+
 ## Version history
 
+- **v3.7** (2026-08-27) — PM cost 20–35% confirmed standard (closes ledger flag #4); 45%-provenance check closed by Jason's ruling, unblocking the LP sequencing gate; `/legal` fee contradiction routed to counsel with a prepared brief.
 - **v3.6** (2026-08-27) — fee-phrasing ruling RATIFIED (Jason); canonical fee sentence applied estate-wide, growth-contingent variants retired across homepage/`/pricing`/12 intel pages, comparison table re-strung as a pair; survivor sweep run with every hit reviewed individually. LP fine-print footer added as the sole sanctioned no-exit exception; `/legal` confirmed to carry an adequate privacy policy, so the ad-launch gate is met.
 - **v3.5** (2026-08-27) — `/lp/keep-control` rebuilt from copy v3.1 to ship brief Rev C; v1/v2/v3 superseded; LP claim strings registered; two ruled LP-only exceptions (methodology pointer plain text, press mark unlinked); PM-cost and Airbnb-fee ledger entries written; FAQ pair check added to CI.
 - **v3.4** (2026-08-27) — fee basis corrected to **net payout** across 19 marketing surfaces (was "10% of revenue", a different basis than the signed Co-Host Agreement); `/legal`'s internal gross-vs-net contradiction reported to counsel, not edited. Press mark switched to the outlet's own reversed lockup from one shared asset, superseding v3.3's monochrome rule — recolouring a third party's trademark is the bigger risk.
