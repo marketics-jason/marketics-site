@@ -136,7 +136,7 @@ echo "· Retired-claim sweep (rendered copy + inline JSON-LD + meta tags)"
 for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sample-audit" \
          "/calculator" "/faq" "/case-studies" "/case-studies/montreal-hotel" \
          "/case-studies/anthony-san-antonio" "/case-studies/wally-puerto-rico" \
-         "/story" "/markets" "/media-kit" "/lp/keep-control" "/llms.txt"; do
+         "/story" "/markets" "/media" "/media-kit" "/lp/keep-control" "/llms.txt"; do
   found=$(grep -Eoh "$RETIRED" <<<"$(body "$BASE$p")" | sort -u | tr '\n' ' ')
   [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
 done
