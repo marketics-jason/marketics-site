@@ -258,10 +258,9 @@ strong{color:var(--bright);font-weight:500;}
 .close-sec{background:var(--panel);}
 
 /* footer — legal only; privacy/terms are an ad-policy requirement, not navigation */
-footer{border-top:1px solid var(--line);padding:28px var(--gutter);display:flex;align-items:center;
-  justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1224px;margin:0 auto;}
-.fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.fl-links{display:flex;align-items:center;gap:20px;}
+footer{border-top:1px solid var(--line);padding:26px var(--gutter);display:flex;align-items:center;
+  justify-content:center;gap:12px;flex-wrap:wrap;max-width:1224px;margin:0 auto;}
+.fdot{color:var(--line-3);}
 footer span,footer a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
 footer a:hover{color:var(--muted);}
 
@@ -589,15 +588,20 @@ footer a:hover{color:var(--muted);}
   </div>
 </section>
 
+<!-- ══ FINE-PRINT FOOTER ══
+     ADDENDUM to Rev C §1 (Strategy, Aug 27): the sole sanctioned exception to
+     this page's no-exit rule. Ad-platform destination requirements effectively
+     require a reachable privacy policy on a page collecting personal data
+     through a lead form, and this page exists to put names and emails into GHL
+     off paid traffic. A missing link risks disapproval at the moment the
+     six-week test starts. Both links open in a new tab, so the exception costs
+     the page no visitor. Same treatment applies to any future paid LP. -->
 <footer>
-  <div class="fl-l">
-    <span>&copy; 2026 Marketics, LLC</span>
-    <span>Your Market. Mastered.</span>
-  </div>
-  <div class="fl-links">
-    <a href="/legal">Privacy Policy</a>
-    <a href="/legal?tab=terms">Terms</a>
-  </div>
+  <span>&copy; Marketics, LLC</span>
+  <span class="fdot" aria-hidden="true">&middot;</span>
+  <a href="/legal" target="_blank" rel="noopener">Privacy Policy</a>
+  <span class="fdot" aria-hidden="true">&middot;</span>
+  <a href="/legal?tab=terms" target="_blank" rel="noopener">Terms</a>
 </footer>
 
 </body>

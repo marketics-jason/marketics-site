@@ -416,8 +416,75 @@ disapproval. Flagged rather than silently resolved either way.
 
 ---
 
+## v3.6 — fee-phrasing ruling RATIFIED; LP fine-print footer (2026-08-27)
+
+**Jason: ratified.** The Boardroom sign-off the Rev C contingency was waiting on. The homepage
+re-string was executed in full rather than held as a follow-on PR.
+
+### The canonical fee sentence — one truth, every surface
+
+> **10% of your net payout, per booking — you keep 90%. No monthly fee, no retainer, no contract.
+> Our fee only grows when your revenue does.**
+
+Incentive close, where only the clause fits: *"Our fee only grows when your revenue does."*
+
+**What was retired, and why it mattered more than tone.** Every "paid only when your revenue
+grows" variant described a **growth-contingent fee** — you pay only on the increase. Under
+GATE 0 (Option A) that is simply not the structure: the fee is 10% of net payout on *every*
+booking. These were not off-brand phrasings, they were **inaccurate descriptions of what the
+client is charged**, and they sat next to the corrected basis until now. Re-strung across the
+homepage, `/pricing`, and 12 intel pages.
+
+**Comparison table re-strung as a PAIR** (per Rev C, because the row's contrast depended on the
+retired claim — fixing one cell would have left the row arguing nothing):
+
+| | Before | After |
+|---|---|---|
+| Property manager | "20–35% of every booking, grow or not." | "20–35% of every booking, contract typical." |
+| Marketics | "10% of net payout, paid only when yours grows." | "10% of your net payout — you keep 90%. No contract." |
+
+**"How do you charge?" rebuilt, not patched.** Its closing clause was the visible problem; the
+body was worse — *"Revenue growth earns a commission"* is the incremental structure stated as
+principle. Now leads with the canonical sentence, keeps the commission-what-scales principle,
+and drops the growth-contingent framing entirely. Schema and rendered re-strung together.
+
+### Survivor sweep — every hit reviewed, not pattern-replaced
+
+Rev C's four patterns plus the incentive-close family. Kept as legitimate, and why:
+
+- `/legal` §603 "earns the Service Fee only when the Client earns booking revenue" — accurate (no
+  bookings, no fee) and counsel lane regardless.
+- `/intel/performance-based-management` "You pay only when a booking happens" — accurate per-booking.
+- `/intel/airbnb-cohost-revenue-share-model` "the co-host earns more only when you do" — says the
+  fee is *larger* when revenue is larger. True of a percentage, and not the retired claim.
+- `llms.txt` "Marketics only earns when the host earns" — same shape; about earning at all, not growth.
+- `/lp/keep-control` "Our fee is only worth more when your revenue is" — v3.1 ruled copy, same distinction.
+- Wally case study "earning only when summer pushed enough volume" — narrative about the property.
+- `/media` "used only when no real media exists" — a CSS comment.
+
+**The distinction that decides each case:** *contingent on growth* is retired; *proportional to
+revenue* is true and stays. A blind find-and-replace would have destroyed the accurate ones.
+
+### LP fine-print footer — ADDENDUM to Rev C §1
+
+`© Marketics, LLC · Privacy Policy · Terms`, both links `target="_blank" rel="noopener"`.
+**The sole sanctioned exception to the no-exit rule**, on ad-platform destination requirements
+and lead-capture compliance: this page puts names and emails into GHL off paid traffic. Opening
+in a new tab means the exception costs the page no visitor. **Same treatment applies to any
+future paid LP.**
+
+**Privacy policy: it exists, and it is adequate — no launch blocker.** `/legal` carries a full
+Privacy Policy covering all four things Strategy named: what the form collects ("Information We
+Collect"), processing via **GoHighLevel** (named as CRM sub-processor), analytics and pixels
+(GA4, Clarity, cookies), and contact routes for data requests. `/privacy` and `/privacy-policy`
+301 to it; `/terms` 301 to the terms tab. Contents are still a Jason/legal review item — Code
+does not draft policy — but the structural gate is **met**.
+
+---
+
 ## Version history
 
+- **v3.6** (2026-08-27) — fee-phrasing ruling RATIFIED (Jason); canonical fee sentence applied estate-wide, growth-contingent variants retired across homepage/`/pricing`/12 intel pages, comparison table re-strung as a pair; survivor sweep run with every hit reviewed individually. LP fine-print footer added as the sole sanctioned no-exit exception; `/legal` confirmed to carry an adequate privacy policy, so the ad-launch gate is met.
 - **v3.5** (2026-08-27) — `/lp/keep-control` rebuilt from copy v3.1 to ship brief Rev C; v1/v2/v3 superseded; LP claim strings registered; two ruled LP-only exceptions (methodology pointer plain text, press mark unlinked); PM-cost and Airbnb-fee ledger entries written; FAQ pair check added to CI.
 - **v3.4** (2026-08-27) — fee basis corrected to **net payout** across 19 marketing surfaces (was "10% of revenue", a different basis than the signed Co-Host Agreement); `/legal`'s internal gross-vs-net contradiction reported to counsel, not edited. Press mark switched to the outlet's own reversed lockup from one shared asset, superseding v3.3's monochrome rule — recolouring a third party's trademark is the bigger risk.
 - **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
