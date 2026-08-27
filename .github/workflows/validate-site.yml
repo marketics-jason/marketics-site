@@ -6,6 +6,13 @@ name: Validate site invariants
 # cheap and the whole point is catching drift anywhere, not just in changed files.
 
 on:
+  # Runnable on demand as well as on PRs. Added 2026-08-27 after a batch was
+  # pushed while no PR was open: no `pull_request` event ever fired for those
+  # commits, so the claims gate had no run on that head and there was no
+  # honest way to force one -- an empty commit or a close/reopen to kick CI is
+  # not acceptable. This makes the gate available for any ref, any time, which
+  # is what a gate guarding published claims should be.
+  workflow_dispatch: {}
   pull_request:
     paths:
       - '**/*.html'

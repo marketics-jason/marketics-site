@@ -57,7 +57,32 @@ RETIRED_TOKENS = [
     # Entity-encoded dash forms of the retired range. A page authored with an
     # encoded en-dash renders identically but would slip the literal tokens above.
     "50&ndash;75", "50&#8211;75", "50&mdash;75", "50&#8212;75",
+    # v3.4 (2026-08-27): the fee is 10% of NET PAYOUT, the basis the signed
+    # Co-Host Agreement uses. These phrasings describe a different basis than
+    # the contract, which on a booking is a real money difference (the
+    # platform's host service fee plus taxes), so they are gated rather than
+    # merely corrected once. "one rate on the whole number" is the retired
+    # gloss that made the gross reading explicit.
+    "10% of revenue", "10% of the revenue", "10% of your revenue",
+    "10% of bookings", "10% of net bookings", "10% of booking revenue",
+    "one rate on the whole number",
 ]
+
+# Counsel-lane exemptions: (file, token) pairs that Code is not permitted to fix.
+# These do NOT pass silently — each is reported as a warning on every run so it
+# stays visible until counsel resolves it. Never add to this to get CI green on
+# something Code *could* fix; it exists only for documents Code must not edit.
+#
+# legal/index.html (2026-08-27, registry v3.4): /legal contradicts itself on the
+# fee basis. §601 says "10% of the net payout per booking" (matching the signed
+# Co-Host Agreement); §390, §588 and §602 say booking revenue / gross booking
+# revenue "before platform service fees, taxes, or other deductions". Those are
+# mutually exclusive, and every marketing surface now says net payout. Reported,
+# not edited, per the standing counsel-lane rule.
+COUNSEL_LANE_EXEMPT = {
+    "legal/index.html": ("10% of revenue", "10% of the revenue", "10% of booking revenue",
+                         "10% of bookings", "10% of net bookings", "one rate on the whole number"),
+}
 
 # Pages that legitimately carry no consent script (confidential, untracked).
 CONSENT_EXEMPT_PREFIXES = ("/audits/",)
@@ -150,7 +175,11 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
     # 1. retired tokens (scan raw so schema + copy both covered)
     for tok in RETIRED_TOKENS:
         if tok in raw:
-            hard.append(f"{where}: retired token present: {tok!r}")
+            if tok in COUNSEL_LANE_EXEMPT.get(where, ()):
+                warn.append(f"{where}: counsel-lane token still present: {tok!r} "
+                            f"(Code must not edit this document — see registry v3.4)")
+            else:
+                hard.append(f"{where}: retired token present: {tok!r}")
 
     # 2. consent gating
     if not url.startswith(CONSENT_EXEMPT_PREFIXES):
@@ -223,7 +252,49 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                 if isinstance(au, dict) and not au.get("url"):
                     hard.append(f"{where}: Article author.url missing")
 
-    # 6. structural warnings
+    # 6. FAQ pair check (Rev C, 2026-08-27): where a page renders FAQ accordions
+    # AND carries FAQPage schema, the two must be verbatim identical. The schema
+    # is generated from the copy file's strings; if someone edits the rendered
+    # answer and not the schema (or the reverse), Google is shown different text
+    # than the visitor — which is both a structured-data violation and a claims
+    # risk on a page that states the fee. Only fires when both halves exist, so
+    # it costs nothing on pages that have one or neither.
+    rendered_faq = re.findall(
+        r"<summary><h3>(.*?)</h3></summary>\s*<p class=\"fa\">(.*?)</p>", raw, re.S)
+    if rendered_faq:
+        schema_faq = []
+        for block in p.jsonld:
+            try:
+                d = json.loads(block)
+            except Exception:
+                continue
+            for node in (d if isinstance(d, list) else [d]):
+                if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                    for q in node.get("mainEntity", []):
+                        schema_faq.append((q.get("name", ""),
+                                           (q.get("acceptedAnswer") or {}).get("text", "")))
+        if schema_faq:
+            def norm(x):
+                return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", "", x))).strip()
+            r = [(norm(a), norm(b)) for a, b in rendered_faq]
+            sm = [(norm(a), norm(b)) for a, b in schema_faq]
+            if len(r) != len(sm):
+                hard.append(f"{where}: FAQ pair mismatch — {len(r)} rendered vs {len(sm)} in schema")
+            else:
+                for idx, (ra, sa) in enumerate(zip(r, sm)):
+                    if ra == sa:
+                        continue
+                    # Say which half diverged: printing two identical-looking
+                    # questions when it was the answer that changed sends the
+                    # next person looking in the wrong place.
+                    part = "question" if ra[0] != sa[0] else "answer"
+                    ri, si = (ra[0], sa[0]) if part == "question" else (ra[1], sa[1])
+                    hard.append(f"{where}: FAQ {part} mismatch at #{idx+1} "
+                                f"({ra[0][:44]!r}):\n       rendered: {ri[:90]!r}"
+                                f"\n       schema  : {si[:90]!r}")
+                    break
+
+    # 7. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):

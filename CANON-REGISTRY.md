@@ -290,8 +290,230 @@ the accessible name and the `/media` byline.
 
 ---
 
+## v3.4 — fee basis is NET PAYOUT; press mark is the outlet's own (2026-08-27)
+
+Two rulings from Jason on the Aug 27 design review.
+
+### The fee is 10% of net payout, not "10% of revenue"
+
+**Canon:** *"10% of your net payout, taken per booking."* Net payout is what the platform deposits
+after its own fees and platform-remitted taxes — the definition already written into the Co-Host
+Agreement (`/join` §2). Retired: "10% of revenue", "10% of the revenue your property earns",
+"10% of bookings", "10% of net bookings", "one rate on the whole number".
+
+This was not a rewrite for tone. The site was describing the fee on a **different basis than the
+contract the client signs**, and gross-vs-net on a booking is a real money difference (the
+platform's host service fee plus taxes). Corrected across 19 marketing surfaces — homepage,
+`/pricing`, `/results`, `/faq`, `/join` page copy, `/lp/keep-control`, `llms.txt`, and 11 intel
+pages — with rendered copy and JSON-LD kept verbatim-identical wherever both exist.
+
+**COUNSEL LANE — NOT FIXED HERE, AND IT NEEDS FIXING.** `/legal` contradicts itself on the fee
+basis and no marketing wording can resolve that:
+
+| `/legal` | Says |
+|---|---|
+| §390 | "Marketics receives **10% of booking revenue** directly from the platform at the time of payout" |
+| §588 | "direct **10% of gross booking revenue** per booking" |
+| §601 | "the ongoing service fee is **10% of the net payout** per booking" |
+| §602 | "The Service Fee is calculated on **gross booking revenue before platform service fees, taxes, or other deductions**" |
+
+§601 and §602 are mutually exclusive: net payout is *after* those deductions, gross-before-
+deductions is the opposite. The Co-Host Agreement (`/join` §2) says net payout, matching §601.
+So the terms a client reads disagree with themselves, and two of the four statements now
+disagree with every marketing surface. **Routed to counsel; Code did not edit `/legal` or the
+Co-Host Agreement body, per the standing counsel-lane rule.** Until it is corrected the estate is
+consistent on net payout everywhere *except* `/legal` §390, §588 and §602.
+
+### Press mark: the outlet's own logo, unmodified — supersedes v3.3's monochrome rule
+
+**v3.3 said single-tone, never full-colour, enforced via `fill="currentColor"`. That is
+withdrawn.** The mark is now Design's reversed CNBC lockup as supplied — white letterforms,
+CNBC's own blue accent retained — served from one shared asset, `/images/press/cnbc.svg`, used
+identically on the homepage bar, the `/lp/keep-control` bar and the `/media` Press entry.
+
+**Why the reversal.** The monochrome rule had us *recolouring a third party's trademark*.
+Altering a mark is generally the bigger brand-guideline risk; carrying the outlet's own reversed
+variant is the conservative choice. **CNBC's actual brand guidelines could not be checked** —
+`cnbc.com` is denied by the build environment's egress — so this is reasoned, not verified, and
+would be worth confirming against their press kit if one is ever to hand.
+
+Still in force from v3.3: label is literal (`Quoted by`); "trusted by" / "endorsed by" / "as seen
+on" stay retired; **never gold**, which is the CTA accent; press only, no podcast or directory
+logos; not animated, not a carousel, never in the footer.
+
+One asset also means outlet #2 stays a data change — a new file plus one `<li>` — and there is
+now a single place to change the treatment rather than three inlined copies.
+
+---
+
+## v3.5 — `/lp/keep-control` rebuilt from copy v3.1; two ledger entries (2026-08-27)
+
+Built to ship brief **Rev C** from copy **v3.1**. Both staleness checks in the batch README were
+run before building: the brief reads "GATE 0 — RULED" (not BLOCKER), and the copy's Section 4 H2
+reads "You pay 10%. Your manager takes 20–35%." — the v3.1 fingerprint, with no "growth" or "the
+increase" framing.
+
+**Copy versions v1, v2 and v3 are all superseded.** v1 carries the stale 2024–2026 window; v2
+carries canon apparatus in body copy; v3 carries the retired incremental fee framing. Build from
+v3.1 only.
+
+### Registered LP claim strings
+
+| Claim | String, as built |
+|---|---|
+| Fee | "10% of your net payout, taken per booking — a 90/10 split at the transaction level." |
+| Performance | "On median: 45% more revenue than the market would have given you." (Section 5 H2, **once**) |
+| Baseline | "Measured across 19 documented engagements, 2019–2026." |
+| Gate sentence | "Results are property-specific; every property is audited before a target is set." |
+| PM cost | "20–35%" |
+| Tenure / footprint | "1,000+ listings across 22 markets over the past decade." · "35× Airbnb Superhost." |
+| Press | "Quoted by CNBC on short-term rental economics." |
+
+### Two LP-only exceptions to standing canon — ruled, not drift
+
+1. **The methodology pointer is plain text, not a link.** Canon says performance claims link to
+   the STR Performance Index. Rev C overrides that for this page: `Full methodology:
+   marketics.io/intel/str-performance-index` renders as text. Canon's substance is satisfied —
+   the methodology home is named in the same block as the claim — without adding an exit to a
+   paid page. **Applies to `/lp/*` only.** Indexed surfaces still link.
+2. **The press mark renders unlinked here.** Homepage and `/media` keep the article link, so the
+   citation remains auditable on every surface a reader can reach organically. Same component,
+   two behaviours.
+
+Both exist because a paid landing page's job is different from an indexed page's. Neither weakens
+a claim; both remove an exit.
+
+### Ledger entries riding this ship
+
+- **PM cost range 20–35%** — ratified for published surfaces. Sources: SkyRun Apr 2026,
+  PriceLabs May 2026. Closes open flag #4. *(If Jason holds 25–35, Strategy re-strings the four
+  instances the same day.)*
+- **Airbnb fee change** — 15.5%, effective Sept 15; **18.34% is arithmetic on it** (1 ÷ 0.845),
+  not a separate claim. Anchors: Airbnb's official fee-structure announcement and CNBC Make It,
+  Aug 22 2026 (Winters). The paid page's numbers are therefore sourced.
+
+### Build gates verified on the built page
+
+Scan test (H1 + 7 H2s read as the complete argument, matching the copy header chain) · 45%
+appears exactly once · gate sentence verbatim · fine print in the same block as the claim and
+never sized up · methodology pointer plain text · press strip unlinked · single CTA path (three
+buttons, one destination) · no accordions above the first CTA · no property photos · `noindex,
+follow` in the rendered head · FAQ schema identical to rendered FAQ, both generated from v3.1.
+
+**New CI gate:** `validate-site.py` now runs a **FAQ pair check** — where a page renders FAQ
+accordions and carries `FAQPage` schema, the two must match verbatim. Editing one and not the
+other shows Google different text than the visitor, which on a page that states the fee is a
+claims risk, not just a structured-data one. Negative-control tested.
+
+**Not done here, and not Code's to do:** the CTA end-to-end test (form → GHL → sequence) and the
+UTM assertion on the GHL contact record and GA4 conversion event both need a tagged live
+submission against systems this environment cannot reach.
+
+**Footer deviation from the design, deliberate:** the design shows a link-free footer. The build
+keeps Privacy and Terms, per the standing note in the LP source that these are an **ad-policy
+requirement, not navigation** — a paid landing page without a privacy link risks ad
+disapproval. Flagged rather than silently resolved either way.
+
+---
+
+## v3.6 — fee-phrasing ruling RATIFIED; LP fine-print footer (2026-08-27)
+
+**Jason: ratified.** The Boardroom sign-off the Rev C contingency was waiting on. The homepage
+re-string was executed in full rather than held as a follow-on PR.
+
+### The canonical fee sentence — one truth, every surface
+
+> **10% of your net payout, per booking — you keep 90%. No monthly fee, no retainer, no contract.
+> Our fee only grows when your revenue does.**
+
+Incentive close, where only the clause fits: *"Our fee only grows when your revenue does."*
+
+**What was retired, and why it mattered more than tone.** Every "paid only when your revenue
+grows" variant described a **growth-contingent fee** — you pay only on the increase. Under
+GATE 0 (Option A) that is simply not the structure: the fee is 10% of net payout on *every*
+booking. These were not off-brand phrasings, they were **inaccurate descriptions of what the
+client is charged**, and they sat next to the corrected basis until now. Re-strung across the
+homepage, `/pricing`, and 12 intel pages.
+
+**Comparison table re-strung as a PAIR** (per Rev C, because the row's contrast depended on the
+retired claim — fixing one cell would have left the row arguing nothing):
+
+| | Before | After |
+|---|---|---|
+| Property manager | "20–35% of every booking, grow or not." | "20–35% of every booking, contract typical." |
+| Marketics | "10% of net payout, paid only when yours grows." | "10% of your net payout — you keep 90%. No contract." |
+
+**"How do you charge?" rebuilt, not patched.** Its closing clause was the visible problem; the
+body was worse — *"Revenue growth earns a commission"* is the incremental structure stated as
+principle. Now leads with the canonical sentence, keeps the commission-what-scales principle,
+and drops the growth-contingent framing entirely. Schema and rendered re-strung together.
+
+### Survivor sweep — every hit reviewed, not pattern-replaced
+
+Rev C's four patterns plus the incentive-close family. Kept as legitimate, and why:
+
+- `/legal` §603 "earns the Service Fee only when the Client earns booking revenue" — accurate (no
+  bookings, no fee) and counsel lane regardless.
+- `/intel/performance-based-management` "You pay only when a booking happens" — accurate per-booking.
+- `/intel/airbnb-cohost-revenue-share-model` "the co-host earns more only when you do" — says the
+  fee is *larger* when revenue is larger. True of a percentage, and not the retired claim.
+- `llms.txt` "Marketics only earns when the host earns" — same shape; about earning at all, not growth.
+- `/lp/keep-control` "Our fee is only worth more when your revenue is" — v3.1 ruled copy, same distinction.
+- Wally case study "earning only when summer pushed enough volume" — narrative about the property.
+- `/media` "used only when no real media exists" — a CSS comment.
+
+**The distinction that decides each case:** *contingent on growth* is retired; *proportional to
+revenue* is true and stays. A blind find-and-replace would have destroyed the accurate ones.
+
+### LP fine-print footer — ADDENDUM to Rev C §1
+
+`© Marketics, LLC · Privacy Policy · Terms`, both links `target="_blank" rel="noopener"`.
+**The sole sanctioned exception to the no-exit rule**, on ad-platform destination requirements
+and lead-capture compliance: this page puts names and emails into GHL off paid traffic. Opening
+in a new tab means the exception costs the page no visitor. **Same treatment applies to any
+future paid LP.**
+
+**Privacy policy: it exists, and it is adequate — no launch blocker.** `/legal` carries a full
+Privacy Policy covering all four things Strategy named: what the form collects ("Information We
+Collect"), processing via **GoHighLevel** (named as CRM sub-processor), analytics and pixels
+(GA4, Clarity, cookies), and contact routes for data requests. `/privacy` and `/privacy-policy`
+301 to it; `/terms` 301 to the terms tab. Contents are still a Jason/legal review item — Code
+does not draft policy — but the structural gate is **met**.
+
+---
+
+## v3.7 — three rulings closed (Jason, 2026-08-27)
+
+**1. PM cost range 20–35% — CONFIRMED as standard.** Closes open ledger flag #4. The four
+published instances stand as built; no re-string. Sources on file: SkyRun Apr 2026, PriceLabs
+May 2026. Live on `/lp/keep-control` (strip, Sections 1 and 4, FAQ), the homepage comparison
+table, and the intel pages that carry the contrast.
+
+**2. 45%-provenance check — CLOSED, gate satisfied.** Ruled by Jason: the median was computed by
+Claude on the documented engagement set. Rev C made this a hard precondition for the LP going
+live; that precondition is now met and the LP is clear to ship.
+
+Recorded precisely, because the two statements sit side by side and should not be conflated:
+v2.9 established the 45% was **never recomputed** on the narrowed 2024–2026 window — the figures
+have been byte-identical since the Index page was created. This ruling adds the provenance of the
+original figure. The standing limitation from v2.8 is unchanged and still true: **no
+per-engagement dataset is checked into this repo**, so no in-repo recomputation is possible, and
+any future re-verification is an off-platform exercise against source records.
+
+**3. `/legal` fee contradiction — routed to counsel.** Lined up as `LEGAL-ROUTING-2026-08-27.md`
+(internal, 404-shadowed): a counsel-ready statement of the four conflicting sections, what each
+says, why they cannot all be true, and what the rest of the estate now says. Code did not edit
+`/legal` and will not. The `validate-site.py` counsel-lane warning stays on until it is resolved,
+so it cannot quietly fall off the list.
+
+---
+
 ## Version history
 
+- **v3.7** (2026-08-27) — PM cost 20–35% confirmed standard (closes ledger flag #4); 45%-provenance check closed by Jason's ruling, unblocking the LP sequencing gate; `/legal` fee contradiction routed to counsel with a prepared brief.
+- **v3.6** (2026-08-27) — fee-phrasing ruling RATIFIED (Jason); canonical fee sentence applied estate-wide, growth-contingent variants retired across homepage/`/pricing`/12 intel pages, comparison table re-strung as a pair; survivor sweep run with every hit reviewed individually. LP fine-print footer added as the sole sanctioned no-exit exception; `/legal` confirmed to carry an adequate privacy policy, so the ad-launch gate is met.
+- **v3.5** (2026-08-27) — `/lp/keep-control` rebuilt from copy v3.1 to ship brief Rev C; v1/v2/v3 superseded; LP claim strings registered; two ruled LP-only exceptions (methodology pointer plain text, press mark unlinked); PM-cost and Airbnb-fee ledger entries written; FAQ pair check added to CI.
+- **v3.4** (2026-08-27) — fee basis corrected to **net payout** across 19 marketing surfaces (was "10% of revenue", a different basis than the signed Co-Host Agreement); `/legal`'s internal gross-vs-net contradiction reported to counsel, not edited. Press mark switched to the outlet's own reversed lockup from one shared asset, superseding v3.3's monochrome rule — recolouring a third party's trademark is the bigger risk.
 - **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
 - **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
 - **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.

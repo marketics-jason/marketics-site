@@ -34,7 +34,7 @@
   "url": "https://marketics.io",
   "logo": "https://marketics.io/assets/logo.svg",
   "foundingDate": "2023",
-  "description": "Marketics, LLC (marketics.io): performance-based short-term rental revenue optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 19 documented engagements. A decade of work across 1,000+ listings in 22 markets. Marketics is paid 10% of revenue with no monthly fee.",
+  "description": "Marketics, LLC (marketics.io): performance-based short-term rental revenue optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 19 documented engagements. A decade of work across 1,000+ listings in 22 markets. Marketics is paid 10% of net payout with no monthly fee.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "1000 Brickell Avenue, Suite 715",
@@ -87,7 +87,7 @@
   "mainEntity": [
     { "@type": "Question", "name": "What does Marketics actually do?", "acceptedAnswer": { "@type": "Answer", "text": "Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing, run together. Not a pricing dial turned once. It is the only thing we do." } },
     { "@type": "Question", "name": "How is this different from my property manager?", "acceptedAnswer": { "@type": "Answer", "text": "A property manager runs the house (keys, cleaning, calendars) with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it." } },
-    { "@type": "Question", "name": "How do you charge?", "acceptedAnswer": { "@type": "Answer", "text": "On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations (the running of the house) is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows." } },
+    { "@type": "Question", "name": "How do you charge?", "acceptedAnswer": { "@type": "Answer", "text": "10% of your net payout, per booking — you keep 90%. No monthly fee, no retainer, no contract. Our fee only grows when your revenue does. On principle: you commission what scales, and fix-fee what is operational. Operations (the running of the house) is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards." } },
     { "@type": "Question", "name": "Do you guarantee a specific tier or an Airbnb Luxe placement?", "acceptedAnswer": { "@type": "Answer", "text": "No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market: a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell." } },
     { "@type": "Question", "name": "What is the free revenue audit?", "acceptedAnswer": { "@type": "Answer", "text": "A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together." } },
     { "@type": "Question", "name": "What markets do you work in?", "acceptedAnswer": { "@type": "Answer", "text": "A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly." } }
@@ -99,7 +99,7 @@
   "@context": "https://schema.org",
   "@type": "ClaimReview",
   "url": "https://marketics.io/",
-  "claimReviewed": "Our benchmark is a 45% median revenue lift, net of market, across 19 documented short-term-rental engagements (2019–2026). Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of revenue with no monthly fee, the large majority of any gain stays with you.",
+  "claimReviewed": "Our benchmark is a 45% median revenue lift, net of market, across 19 documented short-term-rental engagements (2019–2026). Results are property-specific, so we audit every property individually before setting a target. We don't quote a number on a listing we haven't seen. Because Marketics charges 10% of net payout with no monthly fee, the large majority of any gain stays with you.",
   "citation": "https://marketics.io/intel/str-performance-index",
   "itemReviewed": {
     "@type": "Claim",
@@ -255,13 +255,14 @@ a.stat:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
 .pb-list{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0;flex-wrap:wrap;}
 .pb-link{display:inline-flex;align-items:center;}
 .pb-link:focus-visible{outline:2px solid var(--gold);outline-offset:4px;}
-/* The mark is inlined SVG with fill="currentColor", so its colour is CSS and
-   nothing else -- an outlet mark physically cannot render in its own brand
-   colour here. That is stronger than a filter, which only corrects a colour
-   asset after the fact. Width/height are both fixed so the mark reserves its
-   box before paint (no CLS); 75x24 is the 587.225:187.645 viewBox ratio. */
-.pb-mark{height:24px;width:75px;display:block;color:var(--body);opacity:.82;transition:color .2s,opacity .2s;}
-.pb-link:hover .pb-mark{color:var(--bright);opacity:1;}
+/* One shared asset, /images/press/cnbc.svg -- Design's reversed lockup (white
+   letterforms, CNBC's own blue accent kept). We do NOT recolour it: altering a
+   third party's mark is a bigger risk than carrying its accent, and CNBC's
+   brand guidelines could not be checked from the build environment. Opacity
+   alone does the settling into the page. Width/height both fixed so the mark
+   reserves its box before paint (no CLS); 75x24 is the 587.225:187.645 ratio. */
+.pb-mark{height:24px;width:75px;display:block;opacity:.8;transition:opacity .2s;}
+.pb-link:hover .pb-mark{opacity:1;}
 
 /* ══ CHART ══ */
 .chart{display:flex;flex-direction:column;gap:24px;}
@@ -616,7 +617,7 @@ dd.fa{margin:0;}
       <div class="pressbar">
         <span class="pb-label">Quoted by</span>
         <ul class="pb-list">
-          <li><a class="pb-link" href="https://www.cnbc.com/2026/08/22/airbnb-fee-change-frustrates-hosts-what-to-know-before-listing.html" target="_blank" rel="noopener" aria-label="CNBC Make It — article quoting Jason Baxter, founder of Marketics"><svg class="pb-mark" viewBox="0 0 587.225 187.645" fill="currentColor" aria-hidden="true" focusable="false"><path d="m142.995 159.955-21.715-21.96c-3.305 3.012-6.298 5.518-9.493 7.86-8.067 5.914-14.827 8.106-19.797 9.17-3.578.766-7.372 1.14-11.44 1.14-9.487 0-17.52-2.868-23.737-6.934a44 44 0 0 1-10.7-9.911c-8.77-11.382-10.453-24.007-10.453-31.797v-.438c0-6.72 1.271-16.43 6.734-25.91 3.462-6.008 8.905-12.542 17.378-17.144 5.325-2.89 12.33-5.186 20.778-5.186a51 51 0 0 1 9.108.82c2.513.46 5.57 1.205 9.138 2.616 4.274 1.69 8.215 3.929 11.79 6.389s6.783 5.142 9.594 7.68l21.698-25.031c-.751-.772-5.342-5.418-11.525-9.748-5.518-3.942-11.117-6.737-16.386-8.734-5.447-2.064-10.844-3.353-15.838-4.154-7.028-1.127-13-1.28-17.356-1.28-3.629 0-7.038.185-10.438.573-12.633 1.44-23.564 5.558-32.334 10.794a76.5 76.5 0 0 0-22.107 19.9C8.726 68.239 3.86 79.361 1.547 91.278.523 96.559 0 101.797 0 107.524v.445c0 8.433 1.242 19.504 5.964 31.136 4.256 10.483 10.221 18.854 16.606 25.324 4.711 4.774 11.334 10.25 20.061 14.639 5.362 2.697 11.905 5.299 20.279 6.957a85 85 0 0 0 16.532 1.62c6.762 0 14.018-.628 20.068-1.881 6.05-1.255 11.892-3.147 16.983-5.58 8.107-3.875 16.627-9.629 26.502-20.229"/><path d="M152.38 30.034v154.93h33.67V87.575l97.39 97.39h23.87v-23.763L186.24 40.136l-.365-.41-9.685-9.692Z"/><path d="M307.265 30.035V161.19l23.77 23.775 49.929.01c8.708.002 16.6-.87 23.756-2.64s13.318-4.47 18.409-8.01c2.663-1.853 5.807-4.545 8.588-8.263a34.5 34.5 0 0 0 5.108-9.76c1.42-4.224 2.135-8.921 2.135-13.905v-.245c0-2.93-.194-7.163-1.359-11.677-.746-2.892-1.886-5.844-3.6-8.738a31.5 31.5 0 0 0-4.597-5.98c-2.975-3.045-6.845-5.907-11.86-8.475a74 74 0 0 0-7.545-3.325c2.735-1.443 5.484-3.466 6.94-4.623 8.316-6.606 10.744-13.909 11.601-16.534 1.108-3.393 1.795-7.491 1.795-12.238v-.445c0-4.073-.54-7.892-1.591-11.442a34 34 0 0 0-4.325-9.204c-2.145-3.223-4.802-6.071-7.809-8.467-5.359-4.27-11.83-7.25-19.488-9.04-6.688-1.562-13.152-1.929-18.229-1.929ZM340.48 59.96h33.621c1.954 0 5.64.07 9.476 1.04 4.99 1.26 9.609 3.842 11.716 8.815.724 1.707 1.147 3.7 1.147 6.058v.445c0 5.896-2.514 9.504-5.64 11.792-5.64 4.13-14.27 4.57-18.908 4.57H340.48Zm0 61.085h39.577c4.008 0 7.676.326 11.125 1.152 4.125.988 7.616 2.674 10.076 5.289 2.993 3.18 3.822 7.049 3.822 10.358v.446c0 2.571-.484 4.889-1.41 6.9-2.029 4.4-5.992 6.856-10.23 8.211-3.523 1.127-7.828 1.683-12.677 1.684H340.48Z"/><path d="m587.225 159.955-21.715-21.96c-3.305 3.012-6.298 5.518-9.493 7.86-8.067 5.914-14.827 8.106-19.797 9.17-3.578.766-7.372 1.14-11.44 1.14-9.487 0-17.52-2.868-23.737-6.934a44 44 0 0 1-10.7-9.911c-8.77-11.382-10.453-24.007-10.453-31.797v-.438c0-6.72 1.271-16.43 6.734-25.91 3.462-6.008 8.905-12.542 17.378-17.144 5.325-2.89 12.33-5.186 20.778-5.186a51 51 0 0 1 9.108.82c2.514.46 5.57 1.205 9.137 2.616 4.275 1.69 8.216 3.929 11.79 6.389 3.575 2.46 6.784 5.142 9.595 7.68l21.699-25.031c-.752-.772-5.343-5.418-11.526-9.748-5.518-3.942-11.117-6.737-16.386-8.734-5.447-2.064-10.844-3.353-15.838-4.154-7.028-1.127-13-1.28-17.356-1.28-3.629 0-7.038.185-10.438.573-12.633 1.44-23.564 5.558-32.334 10.794a76.5 76.5 0 0 0-22.108 19.899c-7.167 9.57-12.033 20.692-14.345 32.609-1.025 5.281-1.548 10.519-1.548 16.246v.445c0 8.433 1.242 19.504 5.964 31.136 4.256 10.483 10.221 18.854 16.606 25.324 4.711 4.774 11.334 10.25 20.061 14.639 5.362 2.697 11.905 5.299 20.279 6.957a85 85 0 0 0 16.532 1.62c6.762 0 14.018-.628 20.068-1.881 6.05-1.255 11.892-3.147 16.983-5.58 8.107-3.875 16.627-9.629 26.502-20.229"/><path d="M286.09 110.045V0H176.06Z"/></svg></a></li>
+          <li><a class="pb-link" href="https://www.cnbc.com/2026/08/22/airbnb-fee-change-frustrates-hosts-what-to-know-before-listing.html" target="_blank" rel="noopener"><img class="pb-mark" src="/images/press/cnbc.svg" alt="CNBC Make It — article quoting Jason Baxter, founder of Marketics" width="75" height="24"></a></li>
         </ul>
       </div>
     </div>
@@ -669,7 +670,7 @@ dd.fa{margin:0;}
   <div class="w-right">
     <span class="w-kick">FULL-STACK STR REVENUE</span>
     <span class="w-title">Runs the market.</span>
-    <span class="w-body">Market positioning, storytelling, distribution, ranking, and the price the market gives back. Paid only when your revenue grows. <a href="/method" class="nw">See the Method →</a></span>
+    <span class="w-body">Market positioning, storytelling, distribution, ranking, and the price the market gives back. Our fee only grows when your revenue does. <a href="/method" class="nw">See the Method →</a></span>
   </div>
 </section>
 
@@ -882,8 +883,8 @@ dd.fa{margin:0;}
         </tr>
         <tr>
           <th scope="row">How paid?</th>
-          <td>20–35% of every booking, grow or not.</td>
-          <td class="ct-mx-cell">10% of revenue, paid only when yours grows.</td>
+          <td>20–35% of every booking, contract typical.</td>
+          <td class="ct-mx-cell">10% of your net payout — you keep 90%. No contract.</td>
         </tr>
         <tr>
           <th scope="row">What it optimizes?</th>
@@ -906,7 +907,7 @@ dd.fa{margin:0;}
   <dl class="rows">
     <div class="faqrow"><dt class="fq">What does Marketics actually do?</dt><dd class="fa">Full-stack short-term rental revenue: market positioning, storytelling, distribution, ranking, and pricing, run together. Not a pricing dial turned once. It is the only thing we do.</dd></div>
     <div class="faqrow"><dt class="fq">How is this different from my property manager?</dt><dd class="fa">A property manager runs the house (keys, cleaning, calendars) with revenue as one line among many. We run the market. We do not touch operations; we specialize in the revenue the listing can earn. The two run in parallel: your manager keeps the house running, we make the market pay more for it.</dd></div>
-    <div class="faqrow"><dt class="fq">How do you charge?</dt><dd class="fa">On principle: you commission what scales, and fix-fee what is operational. Revenue growth earns a commission, because it aligns our incentive with yours. Operations (the running of the house) is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards, and it is why we are paid only when your revenue grows.</dd></div>
+    <div class="faqrow"><dt class="fq">How do you charge?</dt><dd class="fa">10% of your net payout, per booking — you keep 90%. No monthly fee, no retainer, no contract. Our fee only grows when your revenue does. On principle: you commission what scales, and fix-fee what is operational. Operations (the running of the house) is a fixed fee, per month or per reservation, because it is not what scales your revenue. Most managers charge a revenue-style commission for operational work; we think that is backwards.</dd></div>
     <div class="faqrow"><dt class="fq">Do you guarantee a specific tier or an Airbnb Luxe placement?</dt><dd class="fa">No. Every property is audited individually before any target is set. We show a documented 45% median lift, net of market: a median across real engagements, not a promise for any one home. Luxe is a credential we have earned, not an outcome we sell.</dd></div>
     <div class="faqrow"><dt class="fq">What is the free revenue audit?</dt><dd class="fa">A read of your real comp set: the tier your property can win, the gap to it, and what it would take. No obligation, and yours to keep whether or not we work together.</dd></div>
     <div class="faqrow"><dt class="fq">What markets do you work in?</dt><dd class="fa">A decade of work across 22 markets and 1,000+ listings. If your market is not one we know cold, the audit will tell you plainly.</dd></div>
@@ -923,7 +924,7 @@ dd.fa{margin:0;}
   </div>
   <ol class="rows">
     <li class="mrow"><span class="num">01</span><div><h3 class="mt">Value before price.</h3><p class="mb">We raise what the market sees your property is worth (positioning, storytelling, distribution, ranking) and let price follow. Cutting rate is the one move that compounds against you.</p></div></li>
-    <li class="mrow"><span class="num">02</span><div><h3 class="mt">Full-stack revenue, run together.</h3><p class="mb">One practice owns the whole revenue stack, paid only when your revenue grows. Not a pricing dial turned once.</p></div></li>
+    <li class="mrow"><span class="num">02</span><div><h3 class="mt">Full-stack revenue, run together.</h3><p class="mb">One practice owns the whole revenue stack, paid 10% of your net payout. Not a pricing dial turned once.</p></div></li>
     <li class="mrow"><span class="num">03</span><div><h3 class="mt">A documented <a href="/intel/str-performance-index">45% median lift, net of market</a>.</h3><p class="mb">1,000+ listings optimized across 22 markets over the past decade; the 45% median comes from the 19 engagements with complete before/after documentation (2019–2026). Every property is audited free before any target is set. <a href="/intel/str-performance-index">See the methodology →</a></p></div></li>
     <li class="cap" aria-hidden="true"></li>
   </ol>

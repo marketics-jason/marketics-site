@@ -1,6 +1,6 @@
 # Marketics
 
-> Marketics, LLC (marketics.io): performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 19 documented engagements; a decade of work across 1,000+ listings in 22 markets; every property is audited individually before a target is set. 10% of revenue, no monthly fee, no contract.
+> Marketics, LLC (marketics.io): performance-based short-term rental (STR) optimization for Airbnb and VRBO hosts. A documented 45% median revenue lift, net of market, across 19 documented engagements; a decade of work across 1,000+ listings in 22 markets; every property is audited individually before a target is set. 10% of net payout, no monthly fee, no contract.
 
 Marketics is a performance-based short-term rental optimization company that combines dynamic pricing, listing optimization, automated guest communication, market analytics, and marketing into a managed offering for Airbnb and VRBO hosts. Founded in 2023 by Jason Baxter, a 35× Airbnb Superhost with 10+ years in the vacation rental industry and 1,000+ properties optimized across North America. Headquarters: 1000 Brickell Avenue, Suite 715, Miami, FL 33131. Service area: United States, Canada, Mexico.
 
@@ -8,7 +8,7 @@ Marketics is a performance-based short-term rental optimization company that com
 
 - [Marketics homepage](https://marketics.io): Performance-based Airbnb revenue optimization on a 10%-of-bookings model.
 - [The Marketics Method](https://marketics.io/method): The five-stage system for optimizing pricing, listing, ranking, and guest experience.
-- [Pricing](https://marketics.io/pricing): 10% of net bookings, no retainer or contract; $500 commitment deposit, refunded automatically on completing the 90-day program.
+- [Pricing](https://marketics.io/pricing): 10% of net payout, no retainer or contract; $500 commitment deposit, refunded automatically on completing the 90-day program.
 - [Results](https://marketics.io/results): Documented client outcomes and case studies.
 - [Get a free revenue audit](https://marketics.io/get-started): Request a property-specific revenue audit at no cost.
 - [Airbnb revenue calculator](https://marketics.io/calculator): Benchmark a listing against market ADR and occupancy data.
@@ -51,13 +51,13 @@ A fully managed revenue optimization service for short-term rental owners and pr
 
 ## Pricing & Refund
 
-Marketics charges 10% of net booking revenue per property. No fees beyond a one-time **$500 commitment deposit — refunded automatically when you complete the 90-day program**. The only condition is completion; withdrawing before Day 90 forfeits the deposit. No monthly retainers, no long-term contracts. The model is performance-based: Marketics only earns when the host earns.
+Marketics charges 10% of net payout per booking. No fees beyond a one-time **$500 commitment deposit — refunded automatically when you complete the 90-day program**. The only condition is completion; withdrawing before Day 90 forfeits the deposit. No monthly retainers, no long-term contracts. The model is performance-based: Marketics only earns when the host earns.
 
 ## Key Results (Methodology)
 
 All statistics reflect Marketics-managed properties. Sample: 19 documented short-term-rental engagements, measured 2019–2026. Median net-of-market revenue lift: 45% (range −3% to +193%). Inclusion: Includes every documented client engagement where the property was already operating as a short-term rental at intake and revenue records (PMS exports) are on file. Results are measured net of same-market, same-period movement. Long-term-rental conversions and engagements without verifiable records are excluded.
 
-- The benchmark is a 45% median revenue lift, net of market, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of revenue with no monthly fee, the large majority of any gain stays with the host.
+- The benchmark is a 45% median revenue lift, net of market, set at the median of 19 documented short-term-rental engagements. Results are property-specific, so every property is audited individually before a target is set; we don't quote a number on a listing we haven't seen. Because the fee is 10% of net payout with no monthly fee, the large majority of any gain stays with the host.
 - Full distribution and methodology: [the Marketics STR Performance Index](https://marketics.io/intel/str-performance-index).
 - Average time to measurable results: 72 days from audit completion.
 - Average guest rating post-optimization: 4.93★ (up from ~4.3 before).
