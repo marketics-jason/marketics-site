@@ -252,7 +252,49 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                 if isinstance(au, dict) and not au.get("url"):
                     hard.append(f"{where}: Article author.url missing")
 
-    # 6. structural warnings
+    # 6. FAQ pair check (Rev C, 2026-08-27): where a page renders FAQ accordions
+    # AND carries FAQPage schema, the two must be verbatim identical. The schema
+    # is generated from the copy file's strings; if someone edits the rendered
+    # answer and not the schema (or the reverse), Google is shown different text
+    # than the visitor — which is both a structured-data violation and a claims
+    # risk on a page that states the fee. Only fires when both halves exist, so
+    # it costs nothing on pages that have one or neither.
+    rendered_faq = re.findall(
+        r"<summary><h3>(.*?)</h3></summary>\s*<p class=\"fa\">(.*?)</p>", raw, re.S)
+    if rendered_faq:
+        schema_faq = []
+        for block in p.jsonld:
+            try:
+                d = json.loads(block)
+            except Exception:
+                continue
+            for node in (d if isinstance(d, list) else [d]):
+                if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                    for q in node.get("mainEntity", []):
+                        schema_faq.append((q.get("name", ""),
+                                           (q.get("acceptedAnswer") or {}).get("text", "")))
+        if schema_faq:
+            def norm(x):
+                return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", "", x))).strip()
+            r = [(norm(a), norm(b)) for a, b in rendered_faq]
+            sm = [(norm(a), norm(b)) for a, b in schema_faq]
+            if len(r) != len(sm):
+                hard.append(f"{where}: FAQ pair mismatch — {len(r)} rendered vs {len(sm)} in schema")
+            else:
+                for idx, (ra, sa) in enumerate(zip(r, sm)):
+                    if ra == sa:
+                        continue
+                    # Say which half diverged: printing two identical-looking
+                    # questions when it was the answer that changed sends the
+                    # next person looking in the wrong place.
+                    part = "question" if ra[0] != sa[0] else "answer"
+                    ri, si = (ra[0], sa[0]) if part == "question" else (ra[1], sa[1])
+                    hard.append(f"{where}: FAQ {part} mismatch at #{idx+1} "
+                                f"({ra[0][:44]!r}):\n       rendered: {ri[:90]!r}"
+                                f"\n       schema  : {si[:90]!r}")
+                    break
+
+    # 7. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):

@@ -346,8 +346,79 @@ now a single place to change the treatment rather than three inlined copies.
 
 ---
 
+## v3.5 — `/lp/keep-control` rebuilt from copy v3.1; two ledger entries (2026-08-27)
+
+Built to ship brief **Rev C** from copy **v3.1**. Both staleness checks in the batch README were
+run before building: the brief reads "GATE 0 — RULED" (not BLOCKER), and the copy's Section 4 H2
+reads "You pay 10%. Your manager takes 20–35%." — the v3.1 fingerprint, with no "growth" or "the
+increase" framing.
+
+**Copy versions v1, v2 and v3 are all superseded.** v1 carries the stale 2024–2026 window; v2
+carries canon apparatus in body copy; v3 carries the retired incremental fee framing. Build from
+v3.1 only.
+
+### Registered LP claim strings
+
+| Claim | String, as built |
+|---|---|
+| Fee | "10% of your net payout, taken per booking — a 90/10 split at the transaction level." |
+| Performance | "On median: 45% more revenue than the market would have given you." (Section 5 H2, **once**) |
+| Baseline | "Measured across 19 documented engagements, 2019–2026." |
+| Gate sentence | "Results are property-specific; every property is audited before a target is set." |
+| PM cost | "20–35%" |
+| Tenure / footprint | "1,000+ listings across 22 markets over the past decade." · "35× Airbnb Superhost." |
+| Press | "Quoted by CNBC on short-term rental economics." |
+
+### Two LP-only exceptions to standing canon — ruled, not drift
+
+1. **The methodology pointer is plain text, not a link.** Canon says performance claims link to
+   the STR Performance Index. Rev C overrides that for this page: `Full methodology:
+   marketics.io/intel/str-performance-index` renders as text. Canon's substance is satisfied —
+   the methodology home is named in the same block as the claim — without adding an exit to a
+   paid page. **Applies to `/lp/*` only.** Indexed surfaces still link.
+2. **The press mark renders unlinked here.** Homepage and `/media` keep the article link, so the
+   citation remains auditable on every surface a reader can reach organically. Same component,
+   two behaviours.
+
+Both exist because a paid landing page's job is different from an indexed page's. Neither weakens
+a claim; both remove an exit.
+
+### Ledger entries riding this ship
+
+- **PM cost range 20–35%** — ratified for published surfaces. Sources: SkyRun Apr 2026,
+  PriceLabs May 2026. Closes open flag #4. *(If Jason holds 25–35, Strategy re-strings the four
+  instances the same day.)*
+- **Airbnb fee change** — 15.5%, effective Sept 15; **18.34% is arithmetic on it** (1 ÷ 0.845),
+  not a separate claim. Anchors: Airbnb's official fee-structure announcement and CNBC Make It,
+  Aug 22 2026 (Winters). The paid page's numbers are therefore sourced.
+
+### Build gates verified on the built page
+
+Scan test (H1 + 7 H2s read as the complete argument, matching the copy header chain) · 45%
+appears exactly once · gate sentence verbatim · fine print in the same block as the claim and
+never sized up · methodology pointer plain text · press strip unlinked · single CTA path (three
+buttons, one destination) · no accordions above the first CTA · no property photos · `noindex,
+follow` in the rendered head · FAQ schema identical to rendered FAQ, both generated from v3.1.
+
+**New CI gate:** `validate-site.py` now runs a **FAQ pair check** — where a page renders FAQ
+accordions and carries `FAQPage` schema, the two must match verbatim. Editing one and not the
+other shows Google different text than the visitor, which on a page that states the fee is a
+claims risk, not just a structured-data one. Negative-control tested.
+
+**Not done here, and not Code's to do:** the CTA end-to-end test (form → GHL → sequence) and the
+UTM assertion on the GHL contact record and GA4 conversion event both need a tagged live
+submission against systems this environment cannot reach.
+
+**Footer deviation from the design, deliberate:** the design shows a link-free footer. The build
+keeps Privacy and Terms, per the standing note in the LP source that these are an **ad-policy
+requirement, not navigation** — a paid landing page without a privacy link risks ad
+disapproval. Flagged rather than silently resolved either way.
+
+---
+
 ## Version history
 
+- **v3.5** (2026-08-27) — `/lp/keep-control` rebuilt from copy v3.1 to ship brief Rev C; v1/v2/v3 superseded; LP claim strings registered; two ruled LP-only exceptions (methodology pointer plain text, press mark unlinked); PM-cost and Airbnb-fee ledger entries written; FAQ pair check added to CI.
 - **v3.4** (2026-08-27) — fee basis corrected to **net payout** across 19 marketing surfaces (was "10% of revenue", a different basis than the signed Co-Host Agreement); `/legal`'s internal gross-vs-net contradiction reported to counsel, not edited. Press mark switched to the outlet's own reversed lockup from one shared asset, superseding v3.3's monochrome rule — recolouring a third party's trademark is the bigger risk.
 - **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
 - **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
