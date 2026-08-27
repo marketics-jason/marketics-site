@@ -57,7 +57,32 @@ RETIRED_TOKENS = [
     # Entity-encoded dash forms of the retired range. A page authored with an
     # encoded en-dash renders identically but would slip the literal tokens above.
     "50&ndash;75", "50&#8211;75", "50&mdash;75", "50&#8212;75",
+    # v3.4 (2026-08-27): the fee is 10% of NET PAYOUT, the basis the signed
+    # Co-Host Agreement uses. These phrasings describe a different basis than
+    # the contract, which on a booking is a real money difference (the
+    # platform's host service fee plus taxes), so they are gated rather than
+    # merely corrected once. "one rate on the whole number" is the retired
+    # gloss that made the gross reading explicit.
+    "10% of revenue", "10% of the revenue", "10% of your revenue",
+    "10% of bookings", "10% of net bookings", "10% of booking revenue",
+    "one rate on the whole number",
 ]
+
+# Counsel-lane exemptions: (file, token) pairs that Code is not permitted to fix.
+# These do NOT pass silently — each is reported as a warning on every run so it
+# stays visible until counsel resolves it. Never add to this to get CI green on
+# something Code *could* fix; it exists only for documents Code must not edit.
+#
+# legal/index.html (2026-08-27, registry v3.4): /legal contradicts itself on the
+# fee basis. §601 says "10% of the net payout per booking" (matching the signed
+# Co-Host Agreement); §390, §588 and §602 say booking revenue / gross booking
+# revenue "before platform service fees, taxes, or other deductions". Those are
+# mutually exclusive, and every marketing surface now says net payout. Reported,
+# not edited, per the standing counsel-lane rule.
+COUNSEL_LANE_EXEMPT = {
+    "legal/index.html": ("10% of revenue", "10% of the revenue", "10% of booking revenue",
+                         "10% of bookings", "10% of net bookings", "one rate on the whole number"),
+}
 
 # Pages that legitimately carry no consent script (confidential, untracked).
 CONSENT_EXEMPT_PREFIXES = ("/audits/",)
@@ -150,7 +175,11 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
     # 1. retired tokens (scan raw so schema + copy both covered)
     for tok in RETIRED_TOKENS:
         if tok in raw:
-            hard.append(f"{where}: retired token present: {tok!r}")
+            if tok in COUNSEL_LANE_EXEMPT.get(where, ()):
+                warn.append(f"{where}: counsel-lane token still present: {tok!r} "
+                            f"(Code must not edit this document — see registry v3.4)")
+            else:
+                hard.append(f"{where}: retired token present: {tok!r}")
 
     # 2. consent gating
     if not url.startswith(CONSENT_EXEMPT_PREFIXES):

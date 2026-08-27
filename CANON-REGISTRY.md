@@ -290,8 +290,65 @@ the accessible name and the `/media` byline.
 
 ---
 
+## v3.4 — fee basis is NET PAYOUT; press mark is the outlet's own (2026-08-27)
+
+Two rulings from Jason on the Aug 27 design review.
+
+### The fee is 10% of net payout, not "10% of revenue"
+
+**Canon:** *"10% of your net payout, taken per booking."* Net payout is what the platform deposits
+after its own fees and platform-remitted taxes — the definition already written into the Co-Host
+Agreement (`/join` §2). Retired: "10% of revenue", "10% of the revenue your property earns",
+"10% of bookings", "10% of net bookings", "one rate on the whole number".
+
+This was not a rewrite for tone. The site was describing the fee on a **different basis than the
+contract the client signs**, and gross-vs-net on a booking is a real money difference (the
+platform's host service fee plus taxes). Corrected across 19 marketing surfaces — homepage,
+`/pricing`, `/results`, `/faq`, `/join` page copy, `/lp/keep-control`, `llms.txt`, and 11 intel
+pages — with rendered copy and JSON-LD kept verbatim-identical wherever both exist.
+
+**COUNSEL LANE — NOT FIXED HERE, AND IT NEEDS FIXING.** `/legal` contradicts itself on the fee
+basis and no marketing wording can resolve that:
+
+| `/legal` | Says |
+|---|---|
+| §390 | "Marketics receives **10% of booking revenue** directly from the platform at the time of payout" |
+| §588 | "direct **10% of gross booking revenue** per booking" |
+| §601 | "the ongoing service fee is **10% of the net payout** per booking" |
+| §602 | "The Service Fee is calculated on **gross booking revenue before platform service fees, taxes, or other deductions**" |
+
+§601 and §602 are mutually exclusive: net payout is *after* those deductions, gross-before-
+deductions is the opposite. The Co-Host Agreement (`/join` §2) says net payout, matching §601.
+So the terms a client reads disagree with themselves, and two of the four statements now
+disagree with every marketing surface. **Routed to counsel; Code did not edit `/legal` or the
+Co-Host Agreement body, per the standing counsel-lane rule.** Until it is corrected the estate is
+consistent on net payout everywhere *except* `/legal` §390, §588 and §602.
+
+### Press mark: the outlet's own logo, unmodified — supersedes v3.3's monochrome rule
+
+**v3.3 said single-tone, never full-colour, enforced via `fill="currentColor"`. That is
+withdrawn.** The mark is now Design's reversed CNBC lockup as supplied — white letterforms,
+CNBC's own blue accent retained — served from one shared asset, `/images/press/cnbc.svg`, used
+identically on the homepage bar, the `/lp/keep-control` bar and the `/media` Press entry.
+
+**Why the reversal.** The monochrome rule had us *recolouring a third party's trademark*.
+Altering a mark is generally the bigger brand-guideline risk; carrying the outlet's own reversed
+variant is the conservative choice. **CNBC's actual brand guidelines could not be checked** —
+`cnbc.com` is denied by the build environment's egress — so this is reasoned, not verified, and
+would be worth confirming against their press kit if one is ever to hand.
+
+Still in force from v3.3: label is literal (`Quoted by`); "trusted by" / "endorsed by" / "as seen
+on" stay retired; **never gold**, which is the CTA accent; press only, no podcast or directory
+logos; not animated, not a carousel, never in the footer.
+
+One asset also means outlet #2 stays a data change — a new file plus one `<li>` — and there is
+now a single place to change the treatment rather than three inlined copies.
+
+---
+
 ## Version history
 
+- **v3.4** (2026-08-27) — fee basis corrected to **net payout** across 19 marketing surfaces (was "10% of revenue", a different basis than the signed Co-Host Agreement); `/legal`'s internal gross-vs-net contradiction reported to counsel, not edited. Press mark switched to the outlet's own reversed lockup from one shared asset, superseding v3.3's monochrome rule — recolouring a third party's trademark is the bigger risk.
 - **v3.3** (2026-08-26) — CNBC Make It press citation: "Quoted by" bar (homepage + `/lp/keep-control`) and `/media` Press section. Claim strings, accessible-name string and treatment rules registered; "trusted by"/"as seen on"/endorsement framings retired before first use. Mark inlined with `fill="currentColor"`, which makes the never-full-colour/never-gold rule structural rather than remembered.
 - **v3.2** (2026-08-26) — Clutch listing live and claimed; wired into Organization `sameAs`, closing the last open v2.8 entity-graph gap. Liveness/identity confirmed by Jason (egress blocked `clutch.co`, no CI path for third-party pages). Rule recorded: `sameAs` additions require positive identity confirmation, given the same-name Bangalore firm.
 - **v3.1** (2026-08-25) — canon sweep: verdict *cache artifact* (repo clean, deploy current, live clean). No copy changed. Closed two enforcement gaps: five brief-named retired claims were ungated in CI; live canon check covered four phrasings on one page, now the full pattern set across 17 surfaces. Findings: `CANON-SWEEP-2026-08-25.md`.
