@@ -589,8 +589,87 @@ missed promise costs most.
 
 ---
 
+## v3.9 — board addendum A: turnaround canon, paid event, perf gate (2026-08-30)
+
+Rides with the Aug 30 LP/form ruling memo. A1, A2 and A5 shipped; A3 held pending the
+what-actually-fires inventory; A4, A6, A7 are Jason's.
+
+### A1 — one turnaround phrasing
+
+**Canon: "48 hours or less."** Every surface that promises the audit. The 24-hour internal
+delivery target is **not** a published claim. Retired: "24 hours" as a turnaround promise, and
+"2–3 business days" outright.
+
+Applied to 24 instances across the four market pages (request form + success state), their
+report and thank-you pages, `/get-started` (confirmation + the Turnaround spec row),
+`/calculator`, and `/lp/keep-control`.
+
+**Two hits reviewed and deliberately NOT swept** — the same phrase carrying a different claim:
+
+| Surface | Text | Why it stays |
+|---|---|---|
+| `/pricing` §payout | "about 24 hours after the guest checks in" | **Payout settlement timing**, not audit turnaround |
+| `/join` §2 | "Implement Marketics' recommendations within 48 hours of receipt" | **Client obligation in the Co-Host Agreement** — counsel lane, report only |
+
+`/calculator`'s "free demand report within 48 hours" is a **different deliverable** (market demand
+report, not the audit) and was left as authored; flagged to Strategy rather than harmonised by Code.
+
+**This corrects v3.8's own table**, which listed `/pricing` as a 24-hour turnaround surface and
+`/join` as a 48-hour one. Neither is a turnaround claim. The v3.8 count was wrong.
+
+**Enforcement.** "2–3 business days" is a flat retired token. "24 hours" could not be, precisely
+because of the `/pricing` payout line — so the rule is **scoped**: no page but `/pricing` may
+carry the phrase, and the exemption records which claim it is. Adding a second exemption requires
+naming the claim, which is the step that stops the next blind sweep.
+
+### A2 — the paid conversion event
+
+**`lp_audit_lead` stands.** The paid-only conversion event, fired by `/lp/keep-control` on
+successful submit with `form: 'lp-keep-control'`, `landing_page`, and the captured UTMs.
+
+**Never shared with organic.** `/get-started` fires `generate_lead`. A shared event name would let
+organic leads train the paid bidding signal, which is the opposite of what the six-week test
+measures. To be imported into Google Ads as its own conversion action (CTO).
+
+### A5 — the paid page is now measured
+
+`/lp/keep-control` added to Lighthouse CI. It is held to the **homepage bar**, not the
+calculator's relaxed LCP — it carries spend. Current: performance 100, accessibility 100,
+LCP 1.8s, TBT 0ms, CLS 0.
+
+Its own matrix entry turns the SEO assertion **off**: the page is deliberately `noindex, follow`,
+which Lighthouse scores ~69, and a gate that warns every run for a setting we chose on purpose
+trains people to ignore it.
+
+### Standing rule, promoted from method to policy
+
+**Individual review over pattern-replace on ambiguous hits.** The fee sweep (v3.6) worked this
+way; A1 confirms it as the rule. The payout-settlement line and the Co-Host Agreement obligation
+are semantically different claims wearing the same phrase, and a pattern replace would have
+corrupted both. Ratified by CTO, Aug 30.
+
+### Correction recorded against Code
+
+The A1 sweep was run twice because the first pass was wrong in two ways: a **truncated match
+string** produced `"Delivered in 48 hours or lessurs."` on `/intel/nashville/thank-you`, and
+**three instances were missed** (two thank-you pages and a Miami line with different phrasing).
+Both were caught by re-sweeping from zero afterwards rather than trusting the edit list. A sweep
+is not finished when the edits apply; it is finished when the grep comes back empty.
+
+### Open — the tracking inventory
+
+`/legal` describes a **Meta Pixel** performing retargeting. **No Meta Pixel exists anywhere on
+this site.** The contradiction is three-way: the policy describes advertising tracking that does
+not run, the banner promises none (currently true), and A3 would permit it. Per CTO: Code produces
+a one-page factual inventory of what actually fires, routed through CTO to counsel and the Board,
+so `/legal`, the banner and reality are aligned in one pass against the post-ruling state.
+**A3 is not built until that lands.**
+
+---
+
 ## Version history
 
+- **v3.9** (2026-08-30) — board addendum A: turnaround canon unified to "48 hours or less" across 24 instances with two same-phrase/different-claim hits deliberately excluded (`/pricing` payout, `/join` contract); scoped CI guard rather than a blanket token; `lp_audit_lead` recorded as the paid-only conversion event; `/lp/keep-control` added to Lighthouse CI at the homepage bar. Corrects v3.8's turnaround table. A3 held pending the what-actually-fires inventory — `/legal` describes a Meta Pixel that does not exist.
 - **v3.8** (2026-08-30) — inline audit form shipped on `/lp/keep-control` per the board memo; `pricing_owner` select, distinct paid conversion event, honeypot, UTM + hidden-source plumbing to the same GHL pipeline as `/get-started`. Paid-LP no-exit rule and retired-contrast-token guards added to CI — the first caught a masthead logo link Code shipped on Aug 27, now corrected along with the missing wordmark. Turnaround-time divergence (24h / 48h / 2–3 business days) recorded as an open canon question.
 - **v3.7** (2026-08-27) — PM cost 20–35% confirmed standard (closes ledger flag #4); 45%-provenance check closed by Jason's ruling, unblocking the LP sequencing gate; `/legal` fee contradiction routed to counsel with a prepared brief.
 - **v3.6** (2026-08-27) — fee-phrasing ruling RATIFIED (Jason); canonical fee sentence applied estate-wide, growth-contingent variants retired across homepage/`/pricing`/12 intel pages, comparison table re-strung as a pair; survivor sweep run with every hit reviewed individually. LP fine-print footer added as the sole sanctioned no-exit exception; `/legal` confirmed to carry an adequate privacy policy, so the ad-launch gate is met.

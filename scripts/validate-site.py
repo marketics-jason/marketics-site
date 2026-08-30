@@ -66,6 +66,10 @@ RETIRED_TOKENS = [
     "10% of revenue", "10% of the revenue", "10% of your revenue",
     "10% of bookings", "10% of net bookings", "10% of booking revenue",
     "one rate on the whole number",
+    # A1 (board addendum, 2026-08-30): one turnaround phrasing — "48 hours or
+    # less" — on every surface that promises the audit. Published promise is
+    # 48h; the 24h internal delivery target is not a published claim.
+    "2\u20133 business days", "2-3 business days",
 ]
 
 # Counsel-lane exemptions: (file, token) pairs that Code is not permitted to fix.
@@ -92,6 +96,16 @@ NO_EXIT_ALLOW = ("/legal", "/legal?tab=terms")
 # page designs (Home, Pricing, Method, case studies, intel) and are Design's to
 # schedule; the pages built to the current tokens must not regress into them.
 RETIRED_GRAYS = ("#6B6A65", "#55534E")
+
+# "24 hours" cannot be a blanket retired token: /pricing uses it for PAYOUT
+# SETTLEMENT ("about 24 hours after the guest checks in"), which is a different
+# claim wearing the same phrase — the exact trap the Aug 30 sweep caught. So the
+# rule is scoped instead: nobody but /pricing may say it. If a page legitimately
+# needs the phrase for something other than audit turnaround, add it here with a
+# note saying which claim it is.
+TURNAROUND_EXEMPT = {
+    "pricing/index.html": "payout settlement timing, not audit turnaround",
+}
 CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
 
 COUNSEL_LANE_EXEMPT = {
@@ -158,7 +172,12 @@ class Page(HTMLParser):
 def collect():
     pages, assets = {}, set()
     for dp, _, fs in os.walk(ROOT):
-        if "/.git" in dp or "/scratchpad" in dp:
+        # Skip VCS, scratch, and local tool output. `.lighthouseci/` holds the
+        # HTML reports a local `lhci autorun` drops in the repo root: gitignored,
+        # so they never deploy, but this walk reads the filesystem rather than
+        # git and would otherwise audit them as if they were site pages —
+        # inflating the page count and the warning list for whoever ran it last.
+        if any(x in dp for x in ("/.git", "/scratchpad", "/.lighthouseci", "/node_modules")):
             continue
         for f in fs:
             rel = os.path.relpath(os.path.join(dp, f), ROOT)
@@ -326,7 +345,12 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                 hard.append(f"{where}: retired contrast token {g} — this page is built "
                             f"to the current accessible tokens (--dim/--faint)")
 
-    # 9. structural warnings
+    # 9. turnaround promise — one phrasing, per board addendum A1
+    if "24 hours" in raw and where not in TURNAROUND_EXEMPT:
+        hard.append(f"{where}: retired turnaround phrasing '24 hours' — the published "
+                    f"promise is '48 hours or less' everywhere (board addendum A1)")
+
+    # 10. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):
