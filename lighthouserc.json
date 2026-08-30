@@ -4,14 +4,15 @@
       "staticDistDir": ".",
       "url": [
         "http://localhost/index.html",
-        "http://localhost/calculator/index.html"
+        "http://localhost/calculator/index.html",
+        "http://localhost/lp/keep-control/index.html"
       ],
       "numberOfRuns": 3
     },
     "assert": {
       "assertMatrix": [
         {
-          "matchingUrlPattern": "^(?!.*calculator).*$",
+          "matchingUrlPattern": "^(?!.*calculator)(?!.*keep-control).*$",
           "assertions": {
             "categories:performance": ["error", { "minScore": 0.8 }],
             "total-blocking-time": ["error", { "maxNumericValue": 1000 }],
@@ -38,6 +39,25 @@
             "categories:best-practices": ["warn", { "minScore": 0.9 }],
             "categories:seo": ["warn", { "minScore": 0.9 }],
             "categories:accessibility": ["error", { "minScore": 0.95 }],
+            "render-blocking-resources": "off",
+            "uses-responsive-images": ["warn", {}],
+            "unminified-javascript": "off",
+            "unused-javascript": "off",
+            "errors-in-console": "off",
+            "csp-xss": "off"
+          }
+        },
+        {
+          "matchingUrlPattern": ".*keep-control.*",
+          "assertions": {
+            "categories:performance": ["error", { "minScore": 0.8 }],
+            "total-blocking-time": ["error", { "maxNumericValue": 1000 }],
+            "largest-contentful-paint": ["error", { "maxNumericValue": 4000 }],
+            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+            "categories:best-practices": ["warn", { "minScore": 0.9 }],
+            "categories:accessibility": ["error", { "minScore": 0.95 }],
+            "categories:seo": "off",
+            "is-crawlable": "off",
             "render-blocking-resources": "off",
             "uses-responsive-images": ["warn", {}],
             "unminified-javascript": "off",

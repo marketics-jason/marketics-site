@@ -1160,30 +1160,5 @@ dd.fa{margin:0;}
 </script>
 
 <script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
-
-<!-- GHL Chat Widget: lazy-loads only on genuine user interaction, never loads for a
-     passive visitor. (Previously also had a blind 5s setTimeout fallback; removed —
-     it was the one thing forcing this heavy third-party bundle into Lighthouse's
-     mobile trace window even for a hands-off page load. All 5 real-interaction
-     triggers below already cover the practical cases.) -->
-<script>
-(function(){
-  var loaded = false;
-  function loadWidget() {
-    if (loaded) return;
-    loaded = true;
-    var s = document.createElement('script');
-    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
-    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
-    s.async = true;
-    document.body.appendChild(s);
-  }
-  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
-  events.forEach(function(e) {
-    window.addEventListener(e, loadWidget, {once: true, passive: true});
-  });
-})();
-</script>
 </body>
 </html>

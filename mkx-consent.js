@@ -2,34 +2,21 @@
    Marketics Cookie Consent — mkx-consent.js
    ~2KB inline. Replaces CookieYes entirely.
    
-   Consent Mode v2 + EEA/UK/CH region gating (Board ruling 2026-08-21).
+   Consent Mode v2 + region gating. Board ruling 2026-08-21, amended by
+   Addendum B (2026-08-30), which supersedes A3. Full rationale lives in
+   CANON-REGISTRY.md v3.10 — kept there, not here, because this file ships to
+   every visitor and /calculator has no performance headroom to spare.
 
-   Prior behaviour was a hard block: gtag.js was never requested until an Accept
-   click, so declined and undecided traffic was invisible to GA4 entirely. That
-   produced 2 measured users against 28 GSC clicks. Now:
+   - GATED (EEA/UK/CH + Canada): banner; all denied until Accept. Accept grants
+     all four families and permits Clarity and the chat widget; Decline denies
+     everything.
+   - ELSEWHERE: no banner. Analytics and the three ad signals granted by
+     default, reversible by the footer "Do Not Sell or Share" control or GPC.
+     Clarity still does not load — see the ungated branch.
 
-   - The Consent Mode v2 defaults live INLINE in each page's head (they must sit
-     in dataLayer before the config command). Denied in EEA/UK/CH, analytics
-     granted elsewhere.
-   - gtag.js now loads for EVERYONE. Under Consent Mode, denied traffic sends
-     cookieless pings instead of nothing, so GA4 gets modelled aggregates.
-   - The banner is shown only in EEA/UK/CH. Elsewhere consent is granted by
-     default per the ruling, so the core market measures normally.
-   - Clarity has no consent-mode equivalent and sets cookies unconditionally, so
-     it stays gated on actual consent (explicit accept, or the granted default
-     outside the EEA).
-   - ad_storage / ad_user_data / ad_personalization stay DENIED everywhere, in
-     every path, including after an Accept. The banner text promises "No
-     advertising or third-party tracking" — granting them would contradict the
-     notice the visitor just read. Changing that requires changing the banner
-     copy first, which is a Strategy/Board call.
-
-   Region detection for the banner is timezone-based (no network call, no
-   dependency) and deliberately over-inclusive: any Europe/* zone gets the
-   banner, and a detection failure gets the banner. Both mismatch directions
-   degrade safely — Google resolves the actual region server-side for the
-   consent signals themselves, so the measurement half is authoritative
-   regardless of what the browser reports.
+   Region detection is timezone-based and deliberately over-inclusive: a
+   detection failure gets the banner. Google resolves the real region
+   server-side for the signals themselves.
 
    Preference stored in localStorage (not a cookie); remembered 365 days;
    version bump forces re-consent when the policy changes.
@@ -41,14 +28,26 @@
   var CONSENT_KEY = 'mkx_consent';
   var CONSENT_VER = '1'; // bump this to force re-consent after policy changes
 
-  /* ── Region gate for the BANNER only ─────────────────
-     The consent SIGNALS are region-scoped by Google server-side (see the inline
-     defaults in each page head). This only decides whether a human sees a
-     banner. Over-inclusive and fail-safe by design. */
-  function looksEEA() {
+  /* ── Gated regions: banner shown, everything denied until Accept ──
+     EEA/UK/CH, plus CANADA as of Addendum B2 (Quebec Law 25 posture).
+     Timezone-based: no network call, no dependency, and deliberately
+     over-inclusive — a detection failure gets the banner, which is the
+     safe direction. */
+  var CA_ZONES = [
+    'America/Toronto', 'America/Vancouver', 'America/Edmonton', 'America/Winnipeg',
+    'America/Halifax', 'America/St_Johns', 'America/Regina', 'America/Moncton',
+    'America/Whitehorse', 'America/Yellowknife', 'America/Iqaluit', 'America/Inuvik',
+    'America/Dawson', 'America/Dawson_Creek', 'America/Fort_Nelson', 'America/Creston',
+    'America/Swift_Current', 'America/Rankin_Inlet', 'America/Resolute',
+    'America/Cambridge_Bay', 'America/Glace_Bay', 'America/Goose_Bay',
+    'America/Blanc-Sablon', 'America/Atikokan', 'America/Nipigon',
+    'America/Thunder_Bay', 'America/Pangnirtung', 'America/Rainy_River'
+  ];
+  function inGatedRegion() {
     try {
       var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
       if (tz.indexOf('Europe/') === 0) return true;
+      if (CA_ZONES.indexOf(tz) !== -1) return true;
       // EEA territories that don't sit under Europe/*
       return ['Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Madeira',
               'Atlantic/Azores', 'Atlantic/Faroe'].indexOf(tz) !== -1;
@@ -57,30 +56,54 @@
     }
   }
 
+  /* ── Opt-out of advertising signals (B1) ──────────────
+     Two routes, one effect. Either flips the three ad signals to denied and
+     keeps them there: the visitor's "Do Not Sell or Share" click, stored; or
+     Global Privacy Control, which several US state laws require be honoured as
+     a valid opt-out signal without any further action from the visitor.
+     Analytics is untouched — the opt-out is about sale/sharing, not measurement. */
+  var OPTOUT_KEY = 'mkx_ad_optout';
+  function gpcOn() {
+    try { return navigator.globalPrivacyControl === true; } catch (e) { return false; }
+  }
+  function optedOut() {
+    if (gpcOn()) return true;
+    try { return localStorage.getItem(OPTOUT_KEY) === '1'; } catch (e) { return false; }
+  }
+  function setOptOut() {
+    try { localStorage.setItem(OPTOUT_KEY, '1'); } catch (e) { /* proceed unstored */ }
+  }
+
   /* ── Push a consent decision to Google ────────────────
-     ad_* deliberately omitted from the granted set; see the header note. */
+     `granted` covers analytics/functionality/personalization. Advertising
+     signals follow it too (Addendum B1/B3) unless the visitor has opted out,
+     in which case they are denied no matter what else was accepted. */
   function updateConsent(granted) {
     if (typeof gtag !== 'function') return;
     var v = granted ? 'granted' : 'denied';
+    var ad = (granted && !optedOut()) ? 'granted' : 'denied';
     gtag('consent', 'update', {
       analytics_storage: v,
       functionality_storage: v,
       personalization_storage: v,
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
+      ad_storage: ad,
+      ad_user_data: ad,
+      ad_personalization: ad
     });
   }
 
   /* ── Consent-decision instrumentation (Aug 21 2026 CTO brief, P1) ──
      GA4 is gated behind this banner and was reporting ~2 users in 4 weeks
      against 28 GSC clicks on the homepage alone — consistent with most
-     visitors never reaching Accept. This beacon is the denominator GA4
-     can't see: it fires server-side (same consent-independent GHL webhook
-     already used for lead capture, distinguished by the `event` field —
-     same pattern as /join's `deposit_checkout_started`) on banner
-     impression, accept, and decline, regardless of the visitor's answer.
-     Best-effort only: swallow failures, never block the banner. */
+     visitors never reaching Accept. Posts to the same CONSENT-INDEPENDENT GHL
+     webhook used for lead capture, distinguished by the `event` field.
+
+     Consent-independent is NOT server-side — this said "server-side" and was
+     wrong. The request originates in the browser, so a content blocker blocks
+     it. Unrelated properties, and the conflation was relied on downstream.
+
+     It also only fires where a banner renders, so it has never been a
+     site-wide accept rate. Best-effort; never block the banner. */
   var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e';
   function beacon(event) {
     try {
@@ -178,6 +201,84 @@
     });
   }
 
+  /* ── GHL chat widget (Addendum B4) ───────────────────
+     One page only. It used to load on 34, and on 33 of them 5s after load with
+     no interaction — a third-party script for a visitor who had done nothing.
+     Never on /lp/keep-control, where the form is the only door. In gated
+     regions it waits for Accept; elsewhere the 5s timer. No page exceptions.
+
+     One page, not two: B4 also names /audit-request, which has never existed
+     here — a stale name for /get-started. Not carried in the allowlist,
+     because an entry for a path that does not exist is how the name survives
+     to the next brief. */
+  var WIDGET_PAGES = ['/get-started'];
+  function widgetAllowedHere() {
+    var p = location.pathname.replace(/\/+$/, '') || '/';
+    return WIDGET_PAGES.indexOf(p) !== -1;
+  }
+  function loadWidget() {
+    if (!widgetAllowedHere() || window.__mkxWidget) return;
+    // Defensive: the per-page inline loaders this replaces keep their own
+    // closure flag and cannot see window.__mkxWidget, so until every one of
+    // them is removed, check the DOM for a loader that is already there. Two
+    // copies of the widget is a worse bug than none.
+    if (document.querySelector('script[src*="widgets.leadconnectorhq.com"]')) return;
+    window.__mkxWidget = true;
+    var s = document.createElement('script');
+    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
+    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
+    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  /* ── "Do Not Sell or Share My Personal Information" (B1) ──
+     Required wherever the ungated default grants ad signals. Injected from here
+     rather than hand-added to 51 footers: one implementation cannot drift, and
+     a footer that silently lost the link on one page is what no template engine
+     is here to prevent. A control, not a link — it acts in place and navigates
+     nowhere, so it can sit on /lp/keep-control without breaking no-exit. Gated
+     regions don't get it; there the banner is the mechanism. */
+  function mountOptOut(gated) {
+    if (gated) return;
+    function mount() {
+      var foot = document.querySelector('footer');
+      if (!foot || document.getElementById('mkx-dns')) return;
+      var st = document.createElement('style');
+      st.textContent = '#mkx-dns{background:none;border:0;padding:0;margin:0;cursor:pointer;' +
+        'font:inherit;color:inherit;opacity:.85;text-decoration:underline;text-underline-offset:2px;}' +
+        '#mkx-dns:hover{opacity:1;}' +
+        '#mkx-dns:focus-visible{outline:2px solid currentColor;outline-offset:3px;}' +
+        '#mkx-dns[disabled]{cursor:default;text-decoration:none;opacity:.6;}';
+      document.head.appendChild(st);
+
+      var sep = document.createElement('span');
+      sep.setAttribute('aria-hidden', 'true');
+      sep.textContent = '·';
+      sep.style.cssText = 'opacity:.4;margin:0 10px;';
+
+      var b = document.createElement('button');
+      b.id = 'mkx-dns';
+      b.type = 'button';
+      b.textContent = optedOut() ? 'Advertising opted out' : 'Do Not Sell or Share My Personal Information';
+      if (optedOut()) b.disabled = true;
+      b.addEventListener('click', function () {
+        setOptOut();
+        updateConsent(true);   // analytics stays; the three ad signals go denied
+        beacon('ad_optout');
+        b.textContent = 'Advertising opted out';
+        b.disabled = true;
+      });
+      foot.appendChild(sep);
+      foot.appendChild(b);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mount);
+    } else {
+      mount();
+    }
+  }
+
   /* ── Remove the banner ────────────────────────────── */
   function dismiss(banner) {
     banner.style.opacity = '0';
@@ -253,8 +354,8 @@
     banner.innerHTML = [
       '<div class="mkx-brand">Marketics</div>',
       '<p>',
-        'We use analytics cookies to understand how visitors use this site. ',
-        'No advertising or third-party tracking. ',
+        'We use cookies for analytics and advertising measurement if you accept. ',
+        'No tracking if you decline. ',
         '<a href="/legal" target="_blank">Privacy Policy</a>',
       '</p>',
       '<div class="mkx-btns">',
@@ -276,8 +377,9 @@
     document.getElementById('mkx-accept').addEventListener('click', function () {
       setConsent(true);
       beacon('consent_accept');
-      updateConsent(true);
+      updateConsent(true);    // B3: all four signals, advertising included
       loadClarity();          // GA4 is already loaded; this is the cookie-setting one
+      loadWidget();           // B4: in gated regions the chat widget waits for this
       dismiss(banner);
     });
 
@@ -291,37 +393,42 @@
 
   /* ── Entry point ──────────────────────────────────── */
   var consent = getConsent();
-  var eea = looksEEA();
+  var gated = inGatedRegion();
 
-  // GA4 loads on every path now. Under Consent Mode the signals, not the script
-  // tag, decide what it may store — which is the whole point of the change.
+  mountOptOut(gated);
+
+  // ORDERING, load-bearing: the inline <head> stub only QUEUES the defaults,
+  // gtag('js') and gtag('config'). Nothing is sent until gtag.js loads, and
+  // gtag.js is injected here inside idle(), after load — so every
+  // updateConsent() below lands in the queue ahead of the flush. That is what
+  // lets this file, not 51 duplicated stubs, decide consent: the stubs stay
+  // deny-advertising as the fail-safe, the grant happens where the region is
+  // known.
   loadGA4();
 
   if (consent === true) {
     updateConsent(true);
     loadClarity();
+    loadWidget();           // accepted on a previous pageview
   } else if (consent === false) {
-    updateConsent(false);
-  } else if (!eea) {
-    // Outside the EEA/UK/CH the inline defaults already grant analytics, so
-    // there's nothing to ask and nothing to update.
-    //
-    // Clarity deliberately does NOT load here. It only runs on an explicit
-    // Accept (the branch above). Two reasons, one measured and one principled:
-    //
-    //  - Measured: Clarity is a session recorder. It instruments the DOM and
-    //    serialises the page on load, and on /calculator — the heaviest, most
-    //    DOM-dense page on the site — that main-thread work delays the <h1>
-    //    paint enough to blow the 4s LCP budget. CI bisect isolated item 1 as
-    //    the cause; the network timeline shows every third-party file finishing
-    //    by 816ms while main-thread work runs to 2.1s and LCP lands at 5.3s,
-    //    equal to TTI. It was never bandwidth.
-    //  - Principled: session recording is a bigger ask than analytics, it has
-    //    no Consent Mode equivalent so it can't degrade to a cookieless mode,
-    //    and riding an implied default is the wrong default for it. The Board's
-    //    ruling was about GA4 measurement; it did not ask for this.
+    updateConsent(false);   // declined: nothing loads, widget included
+  } else if (!gated) {
+    setTimeout(loadWidget, 5000);   // B4: the standard timer, ungated regions
+    // B1: ad signals granted by default here, reversible by the opt-out control
+    // or GPC — updateConsent() applies that itself. Explicit rather than
+    // inherited, because the inline stubs deny advertising everywhere as the
+    // fail-safe.
+    updateConsent(true);
+    // Clarity still does NOT load here — explicit Accept only. Measured: it is
+    // a session recorder whose DOM serialisation on load blew /calculator's 4s
+    // LCP budget (CI bisect; main-thread, not bandwidth). Principled: session
+    // recording has no cookieless mode to degrade to, so riding an implied
+    // default is wrong for it. The Board's ruling was about GA4 measurement.
   } else {
-    // EEA/UK/CH, undecided: defaults are denied for this region; ask.
+    // Gated (EEA/UK/CH/CA), undecided: deny and ask. Explicit, because the
+    // stubs' region list has no Canada and their ungated line grants analytics,
+    // so a Canadian would otherwise be measured before answering.
+    updateConsent(false);
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', showBanner);
     } else {

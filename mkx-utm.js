@@ -12,9 +12,15 @@
    the session, not last click.
 
    Consent-independent by design, matching the GHL webhook it
-   feeds: same server-side lead-capture path that already
-   collects form data regardless of the analytics cookie
-   consent decision (see mkx-consent.js).
+   feeds: the same lead-capture path that collects form data
+   regardless of the analytics cookie consent decision
+   (see mkx-consent.js).
+
+   Consent-independent, NOT server-side — this comment used to
+   say server-side and it was wrong. The POST originates in the
+   visitor's browser, so a content blocker that blocks the vendor
+   domain blocks the lead itself, not just its measurement. The
+   two properties are unrelated; keep them apart.
    ═══════════════════════════════════════════════════════ */
 
 (function () {
