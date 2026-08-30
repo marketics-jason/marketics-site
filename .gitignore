@@ -1,1 +1,7 @@
 .DS_Store
+
+# Lighthouse CI writes its reports here on any local `lhci autorun`. Netlify
+# deploys from the repo root, so anything committed at that root is published:
+# a stray run would put full performance reports (and every audited URL) on the
+# live site. Ignored so a local diagnostic run can't ship itself.
+.lighthouseci/
