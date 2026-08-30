@@ -3,36 +3,20 @@
    ~2KB inline. Replaces CookieYes entirely.
    
    Consent Mode v2 + region gating. Board ruling 2026-08-21, amended by
-   Addendum B (2026-08-30), which supersedes Addendum A3.
+   Addendum B (2026-08-30), which supersedes A3. Full rationale lives in
+   CANON-REGISTRY.md v3.10 — kept there, not here, because this file ships to
+   every visitor and /calculator has no performance headroom to spare.
 
-   Two populations, and the difference is the whole design:
+   - GATED (EEA/UK/CH + Canada): banner; all denied until Accept. Accept grants
+     all four families and permits Clarity and the chat widget; Decline denies
+     everything.
+   - ELSEWHERE: no banner. Analytics and the three ad signals granted by
+     default, reversible by the footer "Do Not Sell or Share" control or GPC.
+     Clarity still does not load — see the ungated branch.
 
-   - GATED REGIONS — EEA/UK/CH and, as of B2, CANADA. Banner shown. Everything
-     denied until an explicit Accept. On Accept all four signal families are
-     granted, Clarity may load, and the chat widget may load. On Decline
-     nothing loads.
-   - EVERYWHERE ELSE — no banner. Analytics AND the three advertising signals
-     are granted by default (B1), disclosed in the privacy policy, and
-     reversible by the visitor at any time through the "Do Not Sell or Share My
-     Personal Information" control in the footer, or automatically by a Global
-     Privacy Control signal. Clarity still does not load here — see the note at
-     the ungated branch.
-
-   WHY THE GRANT LIVES IN THIS FILE AND NOT IN THE 51 INLINE STUBS. The inline
-   Consent Mode defaults must sit in dataLayer before the config command, so
-   they are duplicated in every page head. They deny advertising everywhere,
-   and that stays true: it is the fail-safe if this script is blocked or fails.
-   gtag.js is injected from here, on idle, after the load event — so nothing is
-   ever SENT until this file has run, and every update it pushes is queued
-   ahead of the flush. One file decides; 51 copies stay conservative. It also
-   means Canada could join the gated set without editing 51 region lists.
-
-   Region detection is timezone-based (no network call, no dependency) and
-   deliberately over-inclusive: any Europe/* zone or Canadian zone gets the
-   banner, and a detection failure gets the banner. Both mismatch directions
-   degrade safely — Google resolves the actual region server-side for the
-   consent signals themselves, so the measurement half is authoritative
-   regardless of what the browser reports.
+   Region detection is timezone-based and deliberately over-inclusive: a
+   detection failure gets the banner. Google resolves the real region
+   server-side for the signals themselves.
 
    Preference stored in localStorage (not a cookie); remembered 365 days;
    version bump forces re-consent when the policy changes.
@@ -111,23 +95,15 @@
   /* ── Consent-decision instrumentation (Aug 21 2026 CTO brief, P1) ──
      GA4 is gated behind this banner and was reporting ~2 users in 4 weeks
      against 28 GSC clicks on the homepage alone — consistent with most
-     visitors never reaching Accept. This beacon is the denominator GA4
-     can't see: it posts to the same CONSENT-INDEPENDENT GHL webhook already
-     used for lead capture, distinguished by the `event` field (same pattern as
-     /join's `deposit_checkout_started`), on banner impression, accept and
-     decline, regardless of the visitor's answer.
+     visitors never reaching Accept. Posts to the same CONSENT-INDEPENDENT GHL
+     webhook used for lead capture, distinguished by the `event` field.
 
-     CONSENT-INDEPENDENT IS NOT SERVER-SIDE. This comment used to say
-     "server-side" and it was wrong: the request originates in the browser, so a
-     content blocker that blocks the vendor domain blocks it. The two properties
-     are unrelated and the conflation was relied on downstream — hence the
-     distinction is spelled out here rather than assumed.
+     Consent-independent is NOT server-side — this said "server-side" and was
+     wrong. The request originates in the browser, so a content blocker blocks
+     it. Unrelated properties, and the conflation was relied on downstream.
 
-     Second limitation, worth knowing before citing the number: the beacon only
-     fires where a banner renders, i.e. gated regions. It is not a site-wide
-     accept rate and never was.
-
-     Best-effort only: swallow failures, never block the banner. */
+     It also only fires where a banner renders, so it has never been a
+     site-wide accept rate. Best-effort; never block the banner. */
   var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e';
   function beacon(event) {
     try {
@@ -226,24 +202,15 @@
   }
 
   /* ── GHL chat widget (Addendum B4) ───────────────────
-     Restricted to the audit-request form page, where a question mid-form is a
-     real support need. It used to load on 34 pages, and on 33 of them five
-     seconds after load with no interaction at all — a third-party script and
-     its storage for a visitor who had done nothing and, outside the gated
-     regions, been asked nothing.
+     One page only. It used to load on 34, and on 33 of them 5s after load with
+     no interaction — a third-party script for a visitor who had done nothing.
+     Never on /lp/keep-control, where the form is the only door. In gated
+     regions it waits for Accept; elsewhere the 5s timer. No page exceptions.
 
-     Never on /lp/keep-control: that page's whole discipline is that the form is
-     the only door, and a chat widget is a second one.
-
-     One behaviour, no per-page exceptions: in gated regions it waits for an
-     explicit Accept (called from the banner handler); everywhere else it loads
-     on the standard 5s timer. */
-  // One page, not two. Addendum B4 names "/get-started and /audit-request", but
-  // /audit-request has never existed on this site — it is a stale name for
-  // /get-started that has travelled through the Aug 30 design handoff and both
-  // board memos. Recorded here rather than kept in the allowlist, because an
-  // allowlist entry for a path that does not exist is how the name survives to
-  // the next brief.
+     One page, not two: B4 also names /audit-request, which has never existed
+     here — a stale name for /get-started. Not carried in the allowlist,
+     because an entry for a path that does not exist is how the name survives
+     to the next brief. */
   var WIDGET_PAGES = ['/get-started'];
   function widgetAllowedHere() {
     var p = location.pathname.replace(/\/+$/, '') || '/';
@@ -266,16 +233,12 @@
   }
 
   /* ── "Do Not Sell or Share My Personal Information" (B1) ──
-     Required wherever the ungated default grants advertising signals. Injected
-     from here rather than hand-added to 51 hand-authored footers, for the same
-     reason the banner is: one implementation cannot drift out of sync with
-     itself, and a footer that silently lost the link on one page is exactly the
-     failure this site has no template engine to prevent.
-
-     It is a control, not a link — it acts in place and navigates nowhere, which
-     is why it can also sit on /lp/keep-control without breaking the no-exit
-     rule. Gated regions don't get it: there the banner is the mechanism, and
-     advertising is denied until someone opts IN. */
+     Required wherever the ungated default grants ad signals. Injected from here
+     rather than hand-added to 51 footers: one implementation cannot drift, and
+     a footer that silently lost the link on one page is what no template engine
+     is here to prevent. A control, not a link — it acts in place and navigates
+     nowhere, so it can sit on /lp/keep-control without breaking no-exit. Gated
+     regions don't get it; there the banner is the mechanism. */
   function mountOptOut(gated) {
     if (gated) return;
     function mount() {
@@ -432,22 +395,15 @@
   var consent = getConsent();
   var gated = inGatedRegion();
 
-  // The "Do Not Sell or Share" control is a legal requirement wherever the
-  // ungated default grants advertising signals, so it is mounted before any
-  // branch below decides what those signals are.
   mountOptOut(gated);
 
-  // GA4 loads on every path now. Under Consent Mode the signals, not the script
-  // tag, decide what it may store — which is the whole point of the change.
-  //
-  // ORDERING, and it is load-bearing: the inline <head> stub only QUEUES the
-  // defaults, gtag('js') and gtag('config') into dataLayer. Nothing is sent
-  // until gtag.js itself loads, and gtag.js is injected here — inside idle(),
-  // after the load event. Every updateConsent() call below therefore lands in
-  // the queue ahead of the flush. That is what lets this file, rather than 51
-  // duplicated inline stubs, be the single place that decides consent: the
-  // inline defaults stay deny-advertising everywhere as a fail-safe, and the
-  // grant happens here where the region is actually known.
+  // ORDERING, load-bearing: the inline <head> stub only QUEUES the defaults,
+  // gtag('js') and gtag('config'). Nothing is sent until gtag.js loads, and
+  // gtag.js is injected here inside idle(), after load — so every
+  // updateConsent() below lands in the queue ahead of the flush. That is what
+  // lets this file, not 51 duplicated stubs, decide consent: the stubs stay
+  // deny-advertising as the fail-safe, the grant happens where the region is
+  // known.
   loadGA4();
 
   if (consent === true) {
@@ -458,38 +414,20 @@
     updateConsent(false);   // declined: nothing loads, widget included
   } else if (!gated) {
     setTimeout(loadWidget, 5000);   // B4: the standard timer, ungated regions
-    // Addendum B1 — outside the gated regions the advertising signals are
-    // GRANTED by default, disclosed in the privacy policy, and reversible by
-    // the "Do Not Sell or Share" control or a GPC header. updateConsent()
-    // applies the opt-out itself, so this one call is correct either way.
-    //
-    // This is an explicit update rather than a reliance on the inline default,
-    // because the inline default denies advertising on every page (fail-safe if
-    // this script never runs) and Canada now falls under the gated branch
-    // without the region list in those 51 stubs having to know about it.
+    // B1: ad signals granted by default here, reversible by the opt-out control
+    // or GPC — updateConsent() applies that itself. Explicit rather than
+    // inherited, because the inline stubs deny advertising everywhere as the
+    // fail-safe.
     updateConsent(true);
-    //
-    // Clarity deliberately does NOT load here. It only runs on an explicit
-    // Accept (the branch above). Two reasons, one measured and one principled:
-    //
-    //  - Measured: Clarity is a session recorder. It instruments the DOM and
-    //    serialises the page on load, and on /calculator — the heaviest, most
-    //    DOM-dense page on the site — that main-thread work delays the <h1>
-    //    paint enough to blow the 4s LCP budget. CI bisect isolated item 1 as
-    //    the cause; the network timeline shows every third-party file finishing
-    //    by 816ms while main-thread work runs to 2.1s and LCP lands at 5.3s,
-    //    equal to TTI. It was never bandwidth.
-    //  - Principled: session recording is a bigger ask than analytics, it has
-    //    no Consent Mode equivalent so it can't degrade to a cookieless mode,
-    //    and riding an implied default is the wrong default for it. The Board's
-    //    ruling was about GA4 measurement; it did not ask for this.
+    // Clarity still does NOT load here — explicit Accept only. Measured: it is
+    // a session recorder whose DOM serialisation on load blew /calculator's 4s
+    // LCP budget (CI bisect; main-thread, not bandwidth). Principled: session
+    // recording has no cookieless mode to degrade to, so riding an implied
+    // default is wrong for it. The Board's ruling was about GA4 measurement.
   } else {
-    // Gated region (EEA/UK/CH/CA), undecided: deny everything and ask.
-    //
-    // The deny is explicit rather than inherited. The inline stubs' region list
-    // covers EEA/UK/CH but not Canada, and their ungated line grants analytics —
-    // so a Canadian visitor would otherwise be measured before answering. This
-    // call closes that without editing 51 pages.
+    // Gated (EEA/UK/CH/CA), undecided: deny and ask. Explicit, because the
+    // stubs' region list has no Canada and their ungated line grants analytics,
+    // so a Canadian would otherwise be measured before answering.
     updateConsent(false);
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', showBanner);
