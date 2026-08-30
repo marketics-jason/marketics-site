@@ -526,21 +526,5 @@ dt.q{margin:0;}
   document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
 })();
 </script>
-
-<!-- GHL Chat Widget: lazy-loads on first interaction or after 5s -->
-<script>
-(function(){
-  var loaded=false;
-  function loadWidget(){ if(loaded)return; loaded=true;
-    var s=document.createElement('script');
-    s.src='https://widgets.leadconnectorhq.com/loader.js';
-    s.setAttribute('data-resources-url','https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-    s.setAttribute('data-widget-id','67322c9be99a3280cce39a8e');
-    s.async=true; document.body.appendChild(s);
-  }
-  ['scroll','click','touchstart','mousemove','keydown'].forEach(function(e){ window.addEventListener(e,loadWidget,{once:true,passive:true}); });
-  setTimeout(loadWidget,5000);
-})();
-</script>
 </body>
 </html>

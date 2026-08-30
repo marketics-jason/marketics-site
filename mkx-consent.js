@@ -238,7 +238,13 @@
      One behaviour, no per-page exceptions: in gated regions it waits for an
      explicit Accept (called from the banner handler); everywhere else it loads
      on the standard 5s timer. */
-  var WIDGET_PAGES = ['/get-started', '/audit-request'];
+  // One page, not two. Addendum B4 names "/get-started and /audit-request", but
+  // /audit-request has never existed on this site — it is a stale name for
+  // /get-started that has travelled through the Aug 30 design handoff and both
+  // board memos. Recorded here rather than kept in the allowlist, because an
+  // allowlist entry for a path that does not exist is how the name survives to
+  // the next brief.
+  var WIDGET_PAGES = ['/get-started'];
   function widgetAllowedHere() {
     var p = location.pathname.replace(/\/+$/, '') || '/';
     return WIDGET_PAGES.indexOf(p) !== -1;

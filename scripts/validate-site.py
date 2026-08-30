@@ -345,7 +345,15 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                 hard.append(f"{where}: retired contrast token {g} — this page is built "
                             f"to the current accessible tokens (--dim/--faint)")
 
-    # 9. turnaround promise — one phrasing, per board addendum A1
+    # 9. the chat widget is loaded from mkx-consent.js and nowhere else (B4).
+    # Inline per-page loaders are what put a third-party script on 33 pages for
+    # a passive visitor, under no consent decision. One loader, one policy.
+    if "widgets.leadconnectorhq.com/loader.js" in raw:
+        hard.append(f"{where}: inline chat-widget loader — the widget is loaded from "
+                    f"mkx-consent.js only, which restricts it by page and gates it on "
+                    f"consent (board addendum B4)")
+
+    # 10. turnaround promise — one phrasing, per board addendum A1
     if "24 hours" in raw and where not in TURNAROUND_EXEMPT:
         hard.append(f"{where}: retired turnaround phrasing '24 hours' — the published "
                     f"promise is '48 hours or less' everywhere (board addendum A1)")

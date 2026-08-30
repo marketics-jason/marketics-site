@@ -548,27 +548,5 @@ footer{border-top:1px solid rgba(214,173,96,.12);margin-top:80px;}
 </script>
 
 <script>var MARKETICS_GHL="https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";</script>
-
-<!-- GHL Chat Widget: lazy-loads on first user interaction or after 5s — not on page load -->
-<script>
-(function(){
-  var loaded = false;
-  function loadWidget() {
-    if (loaded) return;
-    loaded = true;
-    var s = document.createElement('script');
-    s.src = 'https://widgets.leadconnectorhq.com/loader.js';
-    s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
-    s.setAttribute('data-widget-id', '67322c9be99a3280cce39a8e');
-    s.async = true;
-    document.body.appendChild(s);
-  }
-  var events = ['scroll', 'click', 'touchstart', 'mousemove', 'keydown'];
-  events.forEach(function(e) {
-    window.addEventListener(e, loadWidget, {once: true, passive: true});
-  });
-  setTimeout(loadWidget, 5000);
-})();
-</script>
 </body>
 </html>
