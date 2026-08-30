@@ -139,7 +139,15 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ');</script>
   --mono:'DM Mono',ui-monospace,Menlo,monospace;
   --sans:'DM Sans',-apple-system,system-ui,sans-serif;
   --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
-  --gutter:max(72px, calc((100% - 1080px) / 2 + 72px));
+  /* Flat, not a calc. The previous value calculated the gutter against a
+     1080px canvas while .wrap capped the box at 1224px — two numbers that did
+     not agree, so past 1080px the padding grew while the box did not and the
+     content was squeezed out of it: 880px of measure at a 1280 viewport, 648px
+     at 1512, 240px at 1920. It got worse the bigger the screen.
+     1440 canvas / 88px gutter is the design artboard's own pair, giving the
+     1264px measure it was drawn at, capped and never shrinking. */
+  --gutter:88px;
+  --canvas:1440px;
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -149,13 +157,16 @@ a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 
 /* ══ MASTHEAD — logo only. Paid landing page: every other exit is a lost click. ══ */
-.mast{display:flex;align-items:center;justify-content:space-between;padding:26px var(--gutter) 0;}
+/* Same canvas as .wrap, so the logo lines up with the content beneath it
+   instead of sitting at the viewport edge on a wide screen. */
+.mast{display:flex;align-items:center;justify-content:space-between;
+  padding:26px var(--gutter) 0;max-width:var(--canvas);margin:0 auto;}
 .mast img{height:30px;width:auto;display:block;}
 /* The wordmark is a label, not a link. The logo isn't a link either: on a paid
    page the masthead is identification, not navigation (Rev C §1, no nav). */
 .mast .wm{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--faint);}
 
-.wrap{padding-left:var(--gutter);padding-right:var(--gutter);max-width:1224px;margin:0 auto;}
+.wrap{padding-left:var(--gutter);padding-right:var(--gutter);max-width:var(--canvas);margin:0 auto;}
 
 /* ══ HERO ══ */
 /* longhand, not shorthand: .hero shares an element with .wrap, and a `padding:
@@ -264,11 +275,11 @@ strong{color:var(--bright);font-weight:500;}
    ONE form and ONE anchor id: the mockup's #lp-audit-form / #lp-audit-form-m
    pair exists only because it shows two artboards in one document. */
 .close-sec{background:var(--panel);scroll-margin-top:24px;}
-/* The design's artboard has a 1264px canvas; this page's measure is 720px, so
-   the headline and lead sit at full measure (as every other section does) and
-   the two-column split carries the part that actually needs to be side by side:
-   the reassurance beside the form. */
-.conv{display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:start;margin-top:44px;}
+/* The design's own split on its own canvas: 1264 measure, 668 left / 520 card.
+   The headline and lead sit above at full measure, as every other section on
+   this page does; the two-column part carries what actually needs to be side by
+   side — the reassurance beside the form. */
+.conv{display:grid;grid-template-columns:1fr 520px;gap:76px;align-items:start;margin-top:44px;}
 
 /* left column — what happens after they send it */
 .steps{border-top:1px solid var(--line);}
@@ -285,7 +296,7 @@ strong{color:var(--bright);font-weight:500;}
 .byline .bl-2{display:block;font-size:12px;color:var(--dim);margin-top:3px;}
 
 /* form card */
-.fcard{border:1px solid rgba(214,173,96,.4);background:#141413;padding:34px 32px;}
+.fcard{border:1px solid rgba(214,173,96,.4);background:#141413;padding:40px 42px;}
 .fhead{margin-bottom:24px;}
 .fhead .fh-k{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:8px;}
@@ -338,7 +349,7 @@ strong{color:var(--bright);font-weight:500;}
 
 /* footer — legal only; privacy/terms are an ad-policy requirement, not navigation */
 footer{border-top:1px solid var(--line);padding:26px var(--gutter);display:flex;align-items:center;
-  justify-content:center;gap:12px;flex-wrap:wrap;max-width:1224px;margin:0 auto;}
+  justify-content:center;gap:12px;flex-wrap:wrap;max-width:var(--canvas);margin:0 auto;}
 .fdot{color:var(--line-3);}
 footer span,footer a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
 footer a:hover{color:var(--muted);}
