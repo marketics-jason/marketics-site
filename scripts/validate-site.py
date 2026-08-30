@@ -79,6 +79,21 @@ RETIRED_TOKENS = [
 # revenue "before platform service fees, taxes, or other deductions". Those are
 # mutually exclusive, and every marketing surface now says net payout. Reported,
 # not edited, per the standing counsel-lane rule.
+# ── Paid landing pages: the no-exit rule (Rev C §1, Strategy addendum 2026-08-27) ──
+# These pages are bought traffic. Every outbound link is a leak, and the page has
+# exactly one sanctioned exception: the fine-print footer's privacy/terms links,
+# which ad-platform destination policy effectively requires on a page collecting
+# personal data. Anything else that links off-page is a regression, not a choice.
+# Enforcing an existing ruling — not a canon change.
+NO_EXIT_PAGES = {"lp/keep-control/index.html"}
+NO_EXIT_ALLOW = ("/legal", "/legal?tab=terms")
+
+# Contrast tokens retired by Design. Site-wide these are known debt on the older
+# page designs (Home, Pricing, Method, case studies, intel) and are Design's to
+# schedule; the pages built to the current tokens must not regress into them.
+RETIRED_GRAYS = ("#6B6A65", "#55534E")
+CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
+
 COUNSEL_LANE_EXEMPT = {
     "legal/index.html": ("10% of revenue", "10% of the revenue", "10% of booking revenue",
                          "10% of bookings", "10% of net bookings", "one rate on the whole number"),
@@ -294,7 +309,24 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                                 f"\n       schema  : {si[:90]!r}")
                     break
 
-    # 7. structural warnings
+    # 7. no-exit rule on paid landing pages
+    if where in NO_EXIT_PAGES:
+        for href in re.findall(r'<a\b[^>]*\bhref="([^"]+)"', raw):
+            if href.startswith("#"):
+                continue                       # in-page anchor: the CTA path itself
+            if href in NO_EXIT_ALLOW:
+                continue                       # the sanctioned fine-print footer
+            hard.append(f"{where}: paid LP no-exit rule — outbound link {href!r} "
+                        f"(only in-page anchors and the fine-print footer are allowed)")
+
+    # 8. retired contrast tokens on pages built to the current palette
+    if where in CURRENT_TOKEN_PAGES:
+        for g in RETIRED_GRAYS:
+            if g.lower() in raw.lower():
+                hard.append(f"{where}: retired contrast token {g} — this page is built "
+                            f"to the current accessible tokens (--dim/--faint)")
+
+    # 9. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):

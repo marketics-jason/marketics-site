@@ -508,8 +508,90 @@ so it cannot quietly fall off the list.
 
 ---
 
+## v3.8 — inline audit form on `/lp/keep-control` (board memo, 2026-08-30)
+
+**Signed off by the board, conditional on the Aug 30 memo.** The lead form now sits on the LP
+itself rather than routing paid traffic to a second page. `/get-started` is unchanged and keeps
+serving organic and direct traffic.
+
+### What the board settled
+
+| # | Ruling | Effect on the build |
+|---|---|---|
+| 2 | `pricing_owner` ships as a **select** (I do / my property manager / a pricing tool / not sure) | Optional, never gates submission, diagnostic only |
+| 4 | The paid conversion event is **distinct** from the organic form's | LP fires its own event, not `generate_lead` |
+| 5 | Privacy link in the fine-print footer | Already live since v3.6; design caught up in its Aug 30 revision |
+| 6 | Fee wording — **not** "10% of revenue" | Already canon since v3.4; the handoff README's "held sacred" line was stale, the design itself was clean |
+| — | Inline form vs. separate page | Inline. A stripped-down second page stops being a different kind of page and becomes a click between the pitch and the ask |
+
+**The memo itself is not in hand.** Rulings 4, 5 and 6 are known from the handoff README's own
+overruled-lines note and the board's message; rulings 1 and 3 have not been seen by Code. Nothing
+in the build depends on them, but they are unread, not cleared.
+
+### The one assumption in the build
+
+Ruling 4 says the paid event is distinct; it does not reach Code with the event's **name**. Built
+as `lp_audit_lead`, held in a single constant at the top of the LP's form script so the memo's own
+name is a one-line change. Everything else about the wiring matches `/get-started` deliberately:
+same GHL webhook, same first-touch UTM source (`mkx-utm.js`), so one pipeline receives both and
+only the paid signal is separable.
+
+### Registered LP form strings
+
+| Element | String |
+|---|---|
+| Card | "Free revenue audit" · "Send the listing. See the gap." |
+| Fields | "Your listing URL" · "Where to send it" · "Who sets your pricing today? — optional" |
+| Submit note | "Two minutes to request. Yours within 48 hours. Free, no contract, yours to keep either way." |
+| Consent line | "We use your details only to prepare and send the audit, and we never share them." |
+| Confirmation | "Request received." · "Jason reads it personally and sends the audit back within 48 hours. Nothing happens to your listing in the meantime — and you don't need to tell your manager anything yet." |
+
+The consent line is claims-adjacent and gated by the same page-wide token sweep as the rest of
+the copy, per the handoff.
+
+### Two guards added — both enforce rulings that already existed
+
+- **Paid-LP no-exit rule** (Rev C §1 + the v3.6 footer addendum). Any `<a href>` on
+  `/lp/keep-control` that is not an in-page anchor or the fine-print footer's `/legal` links is
+  now a hard CI failure. It fired on its first run — see the correction below.
+- **Retired contrast tokens** on pages built to the current palette. `#6B6A65` / `#55534E` are
+  known debt on the older designs and remain Design's to schedule; a page built to the current
+  tokens may not regress into them.
+
+Both were verified by deliberately breaking them, as was the existing FAQ pair check.
+
+### Correction to the Thursday build (Code)
+
+The no-exit guard immediately caught **an exit Code shipped on Aug 27**: the masthead logo was
+wrapped in `<a href="/">`. Both design handoffs — Aug 27 and Aug 30, identical in this respect —
+show the logo as a plain image with a `MARKETICS.IO` wordmark beside it, and Rev C §1 says no nav.
+The link was Code's addition and contradicted both. Logo unlinked, wordmark added. On a paid page
+the masthead is identification, not navigation.
+
+The founder thumbnail was also being served from the 2000×1333 hero image (68 KB) for a 44px
+box; replaced with a pre-cropped 88px asset (2 KB).
+
+### Open — not resolved by this ship
+
+**Audit turnaround is published three different ways, and the page that receives the request
+promises the slowest.** Unregistered until now:
+
+| Promise | Surfaces |
+|---|---|
+| 24 hours | `/pricing`, 4 market pages + their report/thank-you pages |
+| 48 hours | `/calculator`, `/lp/keep-control`, `/join` |
+| 2–3 business days | `/get-started` |
+
+The LP's "48 hours" is v3.1 ruled copy and board-approved, so it was built verbatim rather than
+reconciled by Code. This is a canon question for Strategy: one number, or a stated reason the
+paid path is faster. It now sits on the submit path of a page buying traffic, which is where a
+missed promise costs most.
+
+---
+
 ## Version history
 
+- **v3.8** (2026-08-30) — inline audit form shipped on `/lp/keep-control` per the board memo; `pricing_owner` select, distinct paid conversion event, honeypot, UTM + hidden-source plumbing to the same GHL pipeline as `/get-started`. Paid-LP no-exit rule and retired-contrast-token guards added to CI — the first caught a masthead logo link Code shipped on Aug 27, now corrected along with the missing wordmark. Turnaround-time divergence (24h / 48h / 2–3 business days) recorded as an open canon question.
 - **v3.7** (2026-08-27) — PM cost 20–35% confirmed standard (closes ledger flag #4); 45%-provenance check closed by Jason's ruling, unblocking the LP sequencing gate; `/legal` fee contradiction routed to counsel with a prepared brief.
 - **v3.6** (2026-08-27) — fee-phrasing ruling RATIFIED (Jason); canonical fee sentence applied estate-wide, growth-contingent variants retired across homepage/`/pricing`/12 intel pages, comparison table re-strung as a pair; survivor sweep run with every hit reviewed individually. LP fine-print footer added as the sole sanctioned no-exit exception; `/legal` confirmed to carry an adequate privacy policy, so the ad-launch gate is met.
 - **v3.5** (2026-08-27) — `/lp/keep-control` rebuilt from copy v3.1 to ship brief Rev C; v1/v2/v3 superseded; LP claim strings registered; two ruled LP-only exceptions (methodology pointer plain text, press mark unlinked); PM-cost and Airbnb-fee ledger entries written; FAQ pair check added to CI.

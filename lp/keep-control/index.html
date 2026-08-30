@@ -149,8 +149,11 @@ a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 
 /* ══ MASTHEAD — logo only. Paid landing page: every other exit is a lost click. ══ */
-.mast{display:flex;align-items:center;padding:26px var(--gutter) 0;}
-.mast img{height:30px;width:auto;}
+.mast{display:flex;align-items:center;justify-content:space-between;padding:26px var(--gutter) 0;}
+.mast img{height:30px;width:auto;display:block;}
+/* The wordmark is a label, not a link. The logo isn't a link either: on a paid
+   page the masthead is identification, not navigation (Rev C §1, no nav). */
+.mast .wm{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--faint);}
 
 .wrap{padding-left:var(--gutter);padding-right:var(--gutter);max-width:1224px;margin:0 auto;}
 
@@ -254,8 +257,84 @@ strong{color:var(--bright);font-weight:500;}
 .fq .q{display:block;font-family:var(--sans);font-weight:500;font-size:16.5px;color:var(--white);margin-bottom:11px;}
 .fq p{font-size:15.5px;color:var(--dim);margin:0;}
 
-/* closing CTA */
-.close-sec{background:var(--panel);}
+/* ══ CONVERSION BLOCK (Section 7) — the form is inline, not a separate step ══
+   Board memo, Aug 30: paid traffic converts on this page. `/get-started` stays
+   as it is for organic. Two columns on desktop — the argument's last beat on the
+   left, the form on the right so it is beside the reassurance, not below it.
+   ONE form and ONE anchor id: the mockup's #lp-audit-form / #lp-audit-form-m
+   pair exists only because it shows two artboards in one document. */
+.close-sec{background:var(--panel);scroll-margin-top:24px;}
+/* The design's artboard has a 1264px canvas; this page's measure is 720px, so
+   the headline and lead sit at full measure (as every other section does) and
+   the two-column split carries the part that actually needs to be side by side:
+   the reassurance beside the form. */
+.conv{display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:start;margin-top:44px;}
+
+/* left column — what happens after they send it */
+.steps{border-top:1px solid var(--line);}
+.step{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid #1c1c1a;}
+.step-n{font-family:var(--display);font-weight:200;font-size:26px;line-height:1;color:var(--gold);
+  width:30px;flex:0 0 auto;}
+.step-t{font-size:15px;font-weight:500;color:var(--white);margin:0 0 5px;}
+.step-b{font-size:13.5px;line-height:1.6;color:var(--dim);margin:0;}
+.byline{display:flex;align-items:center;gap:16px;margin-top:30px;}
+/* Pre-cropped square at 2x (88px source for a 44px box) rather than object-fit
+   on the 2000x1333 hero — 68KB to 2KB on a page that is bought traffic. */
+.byline img{width:44px;height:44px;display:block;border:1px solid var(--line-3);flex:0 0 auto;}
+.byline .bl-1{display:block;font-size:13.5px;color:var(--bright);}
+.byline .bl-2{display:block;font-size:12px;color:var(--dim);margin-top:3px;}
+
+/* form card */
+.fcard{border:1px solid rgba(214,173,96,.4);background:#141413;padding:34px 32px;}
+.fhead{margin-bottom:24px;}
+.fhead .fh-k{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--gold);
+  text-transform:uppercase;display:block;margin-bottom:8px;}
+.fhead .fh-t{font-family:var(--display);font-weight:300;font-size:25px;letter-spacing:.5px;
+  color:var(--white);display:block;}
+.field{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+.field label{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--dim);
+  text-transform:uppercase;}
+.field .req{color:var(--gold);}
+.field .opt{color:var(--faint);}
+/* Placeholder and focus styling can't be expressed inline, which is why the
+   design handed these over as CSS rather than as artboard values. */
+.field input,.field select{font-family:var(--sans);font-size:15px;color:var(--bright);
+  background:var(--raised);border:1px solid var(--line-3);padding:16px 18px;width:100%;
+  border-radius:0;-webkit-appearance:none;appearance:none;}
+.field select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238C8A81' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 18px center;padding-right:44px;}
+.field input::placeholder{color:var(--faint);}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold);}
+.field input:focus-visible,.field select:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.field input.bad,.field select.bad{border-color:#c2603f;}
+.f-err{display:none;font-size:12.5px;line-height:1.6;color:#e08a68;margin:-14px 0 22px;}
+.f-err.on{display:block;}
+.fsend{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:2.5px;color:var(--ink);
+  background:var(--gold);border:none;padding:20px 0;width:100%;text-align:center;cursor:pointer;
+  margin-top:4px;transition:filter .2s;}
+.fsend:hover{filter:brightness(1.08);}
+.fsend:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.fsend[disabled]{cursor:default;filter:none;opacity:.72;}
+.ffine{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);
+  margin-top:20px;padding-top:20px;}
+.ffine .fn-1{font-size:13px;line-height:1.6;color:var(--body);}
+.ffine .fn-1 b{color:var(--bright);font-weight:400;}
+/* Claims-adjacent: this line is what the visitor is consenting to. Gated in CI
+   alongside the rest of the page's copy — see scripts/validate-site.py. */
+.ffine .fn-2{font-size:12px;line-height:1.6;color:var(--faint);}
+
+/* Honeypot: off-screen rather than display:none, because some bots skip hidden
+   inputs. Never focusable, never announced. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+
+/* Submitted state REPLACES the form — the card must not show a filled form
+   under a success banner (handoff, "the form unmounts"). */
+.fdone{display:none;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:40px 0;}
+.fdone.on{display:flex;}
+.fdone .tick{width:46px;height:46px;border-radius:50%;border:1px solid rgba(214,173,96,.55);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:21px;}
+.fdone .fd-h{font-family:var(--display);font-weight:200;font-size:30px;letter-spacing:1px;color:var(--white);}
+.fdone p{font-size:15px;line-height:1.75;color:var(--body);margin:0;max-width:360px;}
 
 /* footer — legal only; privacy/terms are an ad-policy requirement, not navigation */
 footer{border-top:1px solid var(--line);padding:26px var(--gutter);display:flex;align-items:center;
@@ -363,19 +442,24 @@ footer a:hover{color:var(--muted);}
 @media (max-width:900px){
   h2{font-size:34px;}
   .jobs,.money{grid-template-columns:1fr;}
+  /* Form below the argument, not beside it. The mobile artboard shows the same
+     order; only the grid changes. */
+  .conv{grid-template-columns:1fr;gap:44px;}
 }
 @media (max-width:600px){
   h2{font-size:27px;}
   .mcard .mv{font-size:31px;}
   .fine{font-size:12px;}
   .onramp .wrap{padding-top:26px;padding-bottom:26px;}
+  .fcard{padding:32px 26px;}
 }
 </style>
 </head>
 <body>
 
 <header class="mast">
-  <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
+  <img src="/assets/logo.svg" alt="Marketics" width="607" height="120">
+  <span class="wm">MARKETICS.IO</span>
 </header>
 
 <!-- ══ HERO ══ -->
@@ -384,7 +468,7 @@ footer a:hover{color:var(--muted);}
   <h1>Leaving your property manager doesn&rsquo;t mean handing the keys to another one.</h1>
   <p class="hero-sub">Keep your cleaners. Keep your accounts. Keep the final word. Change only who runs your pricing &mdash; for 10%, instead of the 20&ndash;35% full management costs.</p>
   <div class="cta-row">
-    <a href="/get-started" class="btn">Get my free revenue audit</a>
+    <a href="#lp-audit-form" class="btn">Get my free revenue audit</a>
     <span class="trust">Free. No contract. No monthly fee. Yours to keep either way.</span>
   </div>
 </div>
@@ -495,7 +579,7 @@ footer a:hover{color:var(--muted);}
     <p>And the incentive points the same way yours does: 10% of a flat number never grows. Our fee is only worth more when your revenue is.</p>
     <p>One commitment: a $500 deposit at onboarding, <strong>refunded automatically</strong> when you complete the 90 days. Completing is the only condition.</p>
     <div class="midcta">
-      <a href="/get-started" class="btn">Get my free revenue audit</a>
+      <a href="#lp-audit-form" class="btn">Get my free revenue audit</a>
       <span class="trust">See what the gap is worth on your property before you change anything. Free, and yours to keep either way.</span>
     </div>
   </div>
@@ -533,15 +617,108 @@ footer a:hover{color:var(--muted);}
   </div>
 </section>
 
-<!-- ══ 7 · CTA BLOCK ══ -->
-<section class="close-sec">
+<!-- ══ 7 · CONVERSION BLOCK — the form is inline (board memo, Aug 30) ══
+     All page CTAs are native anchors to #lp-audit-form: no JS scrolling, so the
+     jump works before the script parses and with JS off entirely. -->
+<section class="close-sec" id="lp-audit-form">
   <div class="wrap">
+
     <h2>Start with the audit. <em>Decide after.</em></h2>
     <p>Free, and it commits you to nothing. You&rsquo;ll see your comp set, where your property sits in it, and <strong>what the gap is worth in dollars per year.</strong></p>
     <p>If the number is small, you&rsquo;ll know that too &mdash; and you should stay where you are.</p>
-    <div class="cta-row">
-      <a href="/get-started" class="btn">Get my free revenue audit</a>
-      <span class="trust">Two minutes to request. Yours within 48 hours.</span>
+
+    <div class="conv">
+    <div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <div>
+            <p class="step-t">We read your real comp set</p>
+            <p class="step-b">The actual listings you compete with &mdash; not a template.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <div>
+            <p class="step-t">We put a number on the gap</p>
+            <p class="step-b">What the property earns now, what the market says it could, and the dollars in between.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <div>
+            <p class="step-t">You decide, on your timeline</p>
+            <p class="step-b">No call required. Nothing to say to your manager until you want to.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="byline">
+        <img src="/images/jason-founder-44.webp" alt="Jason Baxter" width="44" height="44" loading="lazy" decoding="async">
+        <span>
+          <span class="bl-1">Read personally by Jason &middot; back within 48 hours</span>
+          <span class="bl-2">Founder &middot; not a sales team</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="fcard">
+      <form id="lpAuditForm" novalidate>
+        <div class="fhead">
+          <span class="fh-k">Free revenue audit</span>
+          <span class="fh-t">Send the listing. See the gap.</span>
+        </div>
+
+        <div class="field">
+          <label for="lpListingUrl">Your listing URL <span class="req" aria-hidden="true">*</span></label>
+          <input type="url" id="lpListingUrl" name="listing_url" required
+                 placeholder="airbnb.com/rooms/&hellip; or vrbo.com/&hellip;"
+                 autocomplete="url" inputmode="url" aria-describedby="lpErr">
+        </div>
+
+        <div class="field">
+          <label for="lpEmail">Where to send it <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="lpEmail" name="email" required
+                 placeholder="you@email.com" autocomplete="email" aria-describedby="lpErr">
+        </div>
+
+        <!-- Diagnostic, never qualifying: skippable, and it never gates submission. -->
+        <div class="field">
+          <label for="lpPricingOwner">Who sets your pricing today? <span class="opt">&mdash; optional</span></label>
+          <select id="lpPricingOwner" name="pricing_owner">
+            <option value="">Select one &mdash; or skip</option>
+            <option value="me">I do</option>
+            <option value="manager">My property manager</option>
+            <option value="tool">A pricing tool</option>
+            <option value="unsure">Not sure</option>
+          </select>
+        </div>
+
+        <p class="f-err" id="lpErr" role="alert">Please add your listing link and a valid email so we can send the audit.</p>
+
+        <!-- Tags the lead to the paid keep-control angle rather than generic organic.
+             A real field, not a JS constant, so the value travels with the form. -->
+        <input type="hidden" name="source" value="lp-keep-control">
+        <div class="hp" aria-hidden="true">
+          <label for="lpCompany">Company</label>
+          <input type="text" id="lpCompany" name="company" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit" class="fsend" id="lpSend">SEND MY FREE AUDIT</button>
+
+        <div class="ffine">
+          <span class="fn-1">Two minutes to request. Yours within 48 hours. <b>Free, no contract, yours to keep either way.</b></span>
+          <span class="fn-2">We use your details only to prepare and send the audit, and we never share them.</span>
+        </div>
+      </form>
+
+      <div class="fdone" id="lpDone" tabindex="-1">
+        <div class="tick" aria-hidden="true">&#10003;</div>
+        <span class="fd-h">Request received.</span>
+        <p>Jason reads it personally and sends the audit back within 48 hours. Nothing happens to your listing in the meantime &mdash; and you don&rsquo;t need to tell your manager anything yet.</p>
+      </div>
+    </div>
+
     </div>
   </div>
 </section>
@@ -603,6 +780,104 @@ footer a:hover{color:var(--muted);}
   <span class="fdot" aria-hidden="true">&middot;</span>
   <a href="/legal?tab=terms" target="_blank" rel="noopener">Terms</a>
 </footer>
+
+<script>
+/* ══ AUDIT FORM — the shared component's behaviour, inline on this LP ══
+   Same GHL webhook and the same first-touch UTM source as /get-started, so a
+   lead lands in one pipeline however it arrived. What differs is deliberate:
+   the `source` field and the conversion event name (see MKX_LP_EVENT). */
+(function(){
+  var GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";
+
+  /* Ruling 4 (board memo, Aug 30): the paid conversion event is DISTINCT from
+     the organic form's `generate_lead`. Sharing the name would let organic
+     leads train the paid bidding signal, which is the opposite of what the
+     six-week test is measuring. Held in one constant so the memo's own name,
+     if it differs from this, is a one-line change. */
+  var MKX_LP_EVENT = 'lp_audit_lead';
+
+  var form = document.getElementById('lpAuditForm');
+  if (!form) return;
+  var err   = document.getElementById('lpErr');
+  var done  = document.getElementById('lpDone');
+  var send  = document.getElementById('lpSend');
+  var elUrl = document.getElementById('lpListingUrl');
+  var elEml = document.getElementById('lpEmail');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /* Deliberately loose: owners paste "airbnb.com/rooms/123" without a scheme far
+     more often than they paste something genuinely unusable, and a rejected
+     paste at the last field is a lost lead. Anything host-shaped passes; Jason
+     reads every one of these by hand anyway. */
+  function urlish(v){ return /^(https?:\/\/)?[a-z0-9.-]+\.[a-z]{2,}(\/|$)/i.test(v); }
+
+  function bad(el){
+    el.classList.add('bad');
+    el.addEventListener('input', function(){ el.classList.remove('bad'); }, {once:true});
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    err.classList.remove('on');
+
+    var listingUrl = elUrl.value.trim();
+    var email      = elEml.value.trim();
+    var ok = true;
+    if (!urlish(listingUrl)) { bad(elUrl); ok = false; }
+    if (!emailRe.test(email)) { bad(elEml); ok = false; }
+    if (!ok) {
+      err.classList.add('on');
+      (elUrl.classList.contains('bad') ? elUrl : elEml).focus();
+      return;
+    }
+
+    /* Honeypot: a human never sees this field, so anything in it is a bot. Show
+       the same confirmation and post nothing — a visible rejection just tells
+       the bot what to change. */
+    var trap = document.getElementById('lpCompany').value;
+
+    send.disabled = true;
+    send.textContent = 'SENDING…';
+
+    var utm     = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
+    var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
+
+    if (!trap) {
+      var payload = {
+        email: email,
+        listingUrl: listingUrl,
+        pricingOwner: document.getElementById('lpPricingOwner').value,
+        mode: 'existing_listing',   /* no toggle here: this audience has a live listing by definition */
+        source: form.querySelector('input[name="source"]').value,
+        landingPage: landing,
+        submittedAt: new Date().toISOString(),
+        utm_source: utm.utm_source || '',
+        utm_medium: utm.utm_medium || '',
+        utm_campaign: utm.utm_campaign || '',
+        utm_content: utm.utm_content || '',
+        utm_term: utm.utm_term || ''
+      };
+      try {
+        await fetch(GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      } catch (ex) { console.warn('GHL webhook non-critical error:', ex); }
+    }
+
+    /* The form UNMOUNTS — the card shows the confirmation in its place, never a
+       filled form under a success banner. */
+    form.style.display = 'none';
+    done.classList.add('on');
+    done.focus();
+
+    /* GA4 — same consent caveat as /get-started: if the visitor hasn't accepted
+       the banner, gtag.js never loads and this queues into dataLayer unsent.
+       GHL above is consent-independent and remains the lead count of record;
+       GA4 measures campaign attribution on the consented subset only. */
+    if (!trap && typeof gtag === 'function') {
+      gtag('event', MKX_LP_EVENT, Object.assign({ form: 'lp-keep-control', landing_page: landing }, utm));
+    }
+  });
+})();
+</script>
 
 </body>
 </html>

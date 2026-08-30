@@ -141,6 +141,36 @@ for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sam
   [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
 done
 
+# ── Paid LP: the conversion path itself ─────────────────────────────────────
+# The LP exists to put a lead into GHL off bought traffic. Everything below is
+# a way that silently stops working: the form never renders, a CTA points at a
+# page that no longer exists, or an edit reopens the exit the no-exit rule
+# closed. CI checks the repo; this checks what visitors are actually served.
+echo
+echo "· /lp/keep-control conversion path"
+lp=$(body "$BASE/lp/keep-control")
+
+grep -q 'id="lp-audit-form"' <<<"$lp" \
+  && ok "form anchor present" || no "form anchor #lp-audit-form missing"
+grep -q 'id="lpAuditForm"' <<<"$lp" \
+  && ok "audit form renders" || no "audit form missing from served page"
+for f in 'name="listing_url"' 'name="email"' 'name="pricing_owner"' 'name="source"'; do
+  grep -q "$f" <<<"$lp" && ok "field $f" || no "field $f missing"
+done
+grep -q 'leadconnectorhq.com/hooks/' <<<"$lp" \
+  && ok "GHL webhook wired" || no "GHL webhook missing — leads would go nowhere"
+[ "$(grep -c 'href="#lp-audit-form"' <<<"$lp")" -ge 2 ] \
+  && ok "CTAs anchor to the form" || no "CTAs no longer anchor to the form"
+
+# No-exit rule: in-page anchors and the fine-print footer only.
+exits=$(grep -Eoh 'href="[^"#][^"]*"' <<<"$lp" \
+        | grep -Ev 'href="(/legal|/legal\?tab=terms|/assets/|/images/|/fonts/|/favicon|/apple-touch-icon|https://marketics.io/lp/keep-control|https://widgets.leadconnectorhq.com|https://www.clarity.ms)' \
+        | sort -u | tr '\n' ' ')
+[ -z "$exits" ] && ok "no-exit rule holds" || no "outbound link(s) on the paid LP: $exits"
+
+grep -q 'noindex, follow' <<<"$lp" \
+  && ok "noindex, follow" || no "robots meta wrong on the paid LP"
+
 echo
 echo "Result: $pass passed, $fail failed"
 [ "$fail" -eq 0 ] || exit 1
