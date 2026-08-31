@@ -819,8 +819,76 @@ note, both visually distinct from the guest author's text.
 
 ---
 
+## v3.12 — Google Ads tag, and the conversion that was not installed (Jason, 2026-08-31)
+
+Google Ads account `AW-18418837499` is now a destination on the site. Jason forwarded
+Google's own "set up a Google tag" instructions; the tag went in, one of the two snippets
+did not.
+
+### What Google's instructions say, and why the build differs
+
+**"Paste `<script async src=".../gtag/js?id=AW-...">` before `</head>` on every page."**
+Not done, twice over. `gtag.js` is one library serving many destinations — we already
+load it once, from `mkx-consent.js`, on idle. A second script tag fetches and bootstraps
+the same library again for nothing. The real objection is placement: markup in `<head>`
+runs *before* this file decides consent, so a visitor in a gated region would be
+registered for advertising having been asked nothing. That is the same failure B4 fixed
+for the chat widget. Ads is added as `gtag('config', ADS_ID)` in the one file, after the
+region-aware grant, so it inherits the whole consent gate — denied by default in
+EEA/UK/CH/Canada until Accept, and denied anywhere the Do Not Sell control or GPC says so.
+
+**"Install the page-view conversion snippet."** Deliberately NOT installed, and this is
+the substantive call rather than a plumbing preference. That snippet fires
+`gtag('event','conversion', {value: 1.0, currency: 'USD'})` on page load. Installed as
+instructed it scores every pageview as a one-dollar conversion, which does not merely
+measure the wrong thing — it points Smart Bidding at pageviews instead of leads and
+spends real budget doing it. It also contradicts board addendum A2, which already named
+`lp_audit_lead` as the paid conversion event. And there is nowhere honest to put it: the
+LP form does not navigate on success, it unmounts and confirms inline, so no page load
+corresponds to a conversion.
+
+The conversion label Jason was given (`8867CLagvescEPvP5M5E`) belongs to that page-view
+action and is therefore not wired to anything.
+
+### Open, and Jason's to close
+
+A **lead** conversion action has to be created in Google Ads. Then either import
+`lp_audit_lead` from GA4 (preferred — no new code, inherits consent handling), or fire
+`gtag('event','conversion',{send_to:'AW-18418837499/<lead label>'})` inside the existing
+success handler next to the lead event. Code has done neither, because the action does
+not exist yet.
+
+`value: 1.0 USD` is Google's placeholder. If value-based bidding is wanted the figure
+should reflect real lead economics; otherwise send no value and bid on conversion count.
+A fabricated $1 is worse than none.
+
+### Enforced
+
+Two CI guards, both negative-controlled against the exact snippets Google supplies:
+
+- any inline `googletagmanager.com/gtag/js` loader on any page — hard failure
+- any page-level `gtag('event','conversion', ...)` — hard failure
+
+These exist because the instructions Jason received are the instructions anyone receives,
+and the next person to read them will be told to paste the same two blocks.
+
+### Gate effect
+
+The site half of the pre-spend gate is done: the tag is live and consent-gated. Still
+open from v3.10 before spend — P1b (form → GHL → sequence, UTM on contact), US Ads
+account verification, lead-loss proxy status — plus the lead conversion action above.
+
+### Cost
+
+`mkx-consent.js` +437 bytes. Held deliberately low: this file ships to every page and
+`/calculator` has no headroom, which is what the v3.10 entry records. The long rationale
+lives here rather than in the source for exactly that reason.
+
+---
+
 ## Version history
 
+- **v3.12** (2026-08-31) — Google Ads `AW-18418837499` added as a second destination on the existing gtag.js load in `mkx-consent.js`, after the region-aware grant, so it inherits the consent gate rather than being pasted into 53 `<head>`s ahead of it. Google's page-view conversion snippet deliberately NOT installed: it scores every pageview as a $1 conversion, points Smart Bidding at pageviews instead of leads, and contradicts A2, which named `lp_audit_lead`. A lead conversion action in Ads is Jason's to create; nothing is wired to the page-view label. Both rules are CI guards, negative-controlled against Google's own snippets.
 - **v3.11** (2026-08-31) — first guest byline: pen-name rule recorded and enforced structurally. Name + firm always paired, disclosure line verbatim on the author page and the article foot, author page limited to five elements with no photo/bio/credentials/socials, Article `author` as Organization rather than Person, author page `WebPage` only with no `sameAs`. Strategy's draft called the pen name "founder of Cost Seg Smart" in two places; Code stopped rather than swap it and Jason ruled the title out. `/partners` and the Miami partner card deferred, so two of the brief's items are open.
 - **v3.10** (2026-08-30) — Addendum B, superseding A3: advertising signals granted by default outside the gated regions, with a "Do Not Sell or Share" control and GPC as the opt-out; Canada joins the banner gate; new banner copy grants all four families on Accept and nothing on Decline. Implemented in one file rather than 51 inline stubs — gtag.js is injected on idle, so the stubs' deny-advertising default stays as the fail-safe. Chat widget cut from 34 pages to one, page-restricted and consent-gated, with a CI guard. `/audit-request` retired as a path that never existed.
 - **v3.9** (2026-08-30) — board addendum A: turnaround canon unified to "48 hours or less" across 24 instances with two same-phrase/different-claim hits deliberately excluded (`/pricing` payout, `/join` contract); scoped CI guard rather than a blanket token; `lp_audit_lead` recorded as the paid-only conversion event; `/lp/keep-control` added to Lighthouse CI at the homepage bar. Corrects v3.8's turnaround table. A3 held pending the what-actually-fires inventory — `/legal` describes a Meta Pixel that does not exist.

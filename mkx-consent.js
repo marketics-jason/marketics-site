@@ -170,6 +170,9 @@
   }
 
   /* ── Fire analytics (only after acceptance) ──────── */
+  var GA4_ID = 'G-51HW9TQFTJ';
+  var ADS_ID = 'AW-18418837499';
+
   function loadGA4() {
     // Loaded for everyone now. Consent Mode decides whether it may use storage;
     // denied traffic still contributes cookieless pings. The inline <head> stub
@@ -178,9 +181,17 @@
     idle(function () {
       if (window.__mkxGA4) return;
       window.__mkxGA4 = true;
+
+      // Ads is a second DESTINATION on this same library, never a second
+      // library, and it is configured here rather than in page markup so it
+      // lands after the region-aware grant above. Conversions are the audit
+      // lead, not pageviews. Both rules and why: registry v3.12. CI enforces
+      // them; see validate-site.py.
+      gtag('config', ADS_ID);
+
       var g = document.createElement('script');
       g.async = 1;
-      g.src = 'https://www.googletagmanager.com/gtag/js?id=G-51HW9TQFTJ';
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
       document.head.appendChild(g);
     });
   }

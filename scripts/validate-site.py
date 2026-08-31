@@ -414,7 +414,28 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                     f"line — it is required verbatim on the author page and at the foot of "
                     f"every article carrying the byline (registry v3.11)")
 
-    # 12. structural warnings
+    # 12. no inline gtag.js loader on any page (registry v3.12).
+    # gtag.js is loaded once, from mkx-consent.js, after this file has decided
+    # consent for the visitor's region. Google's own setup page tells you to
+    # paste a <script src="...gtag/js?id=..."> into every page's <head>, which
+    # would register the destination before any consent decision — the same
+    # failure B4 fixed for the chat widget, and the reason that one is a gate
+    # too. Additional destinations are `gtag('config', ID)` in mkx-consent.js.
+    if "googletagmanager.com/gtag/js" in raw:
+        hard.append(f"{where}: inline gtag.js loader — the tag is loaded once from "
+                    f"mkx-consent.js, after consent is decided; extra destinations "
+                    f"are a gtag('config', ID) there, not a second script tag "
+                    f"(registry v3.12)")
+
+    # A page-view conversion scores every pageview as a lead. The paid
+    # conversion is `lp_audit_lead` on form success (addendum A2).
+    if "'conversion'" in raw or '"conversion"' in raw:
+        if re.search(r"gtag\(\s*['\"]event['\"]\s*,\s*['\"]conversion['\"]", raw):
+            hard.append(f"{where}: page-level Google Ads conversion event — the paid "
+                        f"conversion is the audit lead, fired on form success, not a "
+                        f"pageview (board addendum A2, registry v3.12)")
+
+    # 12b. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):
