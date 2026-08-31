@@ -940,8 +940,61 @@ clicks is correct, because there is no conversion history to bid against.
 
 ---
 
+## v3.14 — the Ads tag is scoped to the paid path (CI, 2026-08-31)
+
+Corrects v3.12, which configured Google Ads on every page. CI caught it; I did not.
+
+### What failed
+
+`/calculator`, mobile, three consecutive runs — not a flake:
+
+  performance               0.68, 0.67, 0.67   floor 0.80
+  largest-contentful-paint  6549, 6597, 6589   budget 5200ms
+
+The previous head without the Ads tag passed. A second gtag destination is not
+free: it is roughly **1,850ms of extra mobile LCP** on the heaviest page on the
+site, the same page v3.10 already records as having no headroom.
+
+### Why local verification missed it
+
+This is the part worth keeping. Local Lighthouse runs showed `/calculator` at 100
+across three runs, and they were measuring a lie: **the sandbox blocks
+`googletagmanager.com`**, so gtag.js never loaded and the runs scored a page with no
+third-party tag on it at all. The thing under test was the one thing that could not
+execute.
+
+The lesson generalises past this tag: a local perf number for anything third-party is
+worthless here, and CI is the only measurement that means anything. v3.10's regression
+was caught locally because it was bytes-on-the-wire; this one could not have been.
+
+### The fix, and why it is not a workaround
+
+`ADS_PAGES = ['/lp/keep-control']`, mirroring B4's `WIDGET_PAGES`. Not a budget
+relaxation, and not merely the cheapest way to green — it is where the tag belongs:
+
+- Conversions happen on the LP form and nowhere else.
+- Paid traffic lands on the LP, and the no-exit rule keeps it there, so the LP *is*
+  the entire paid path.
+- Site-wide Ads would only add remarketing-audience collection, which nobody asked
+  for, which no board ruling authorises, and which is precisely the kind of ambient
+  ad-tech the consent architecture exists to keep scoped.
+
+GA4 is unchanged and still configured everywhere.
+
+### Verified
+
+27 checks: the destination is configured on the LP in the US and in the gated regions
+(where Consent Mode denies it until Accept), and is **absent** on `/`, `/calculator`,
+`/get-started` and an intel page, each of which still carries GA4. One gtag.js tag and
+one request throughout.
+
+The perf recovery itself can only be confirmed by CI, for the reason above.
+
+---
+
 ## Version history
 
+- **v3.14** (2026-08-31) — corrects v3.12: the Ads destination is scoped to `/lp/keep-control` rather than every page. Configured site-wide it cost `/calculator` ~1,850ms of mobile LCP (0.68 vs the 0.80 floor, 6549ms vs the 5200ms budget) and failed CI. Local runs could not have caught it — this sandbox blocks googletagmanager.com, so they were scoring a page with no tag on it. The LP is the whole paid path (no-exit rule) and the only page a conversion can occur on, so the scope is correct on the merits, not just cheap. GA4 unchanged everywhere.
 - **v3.13** (2026-08-31) — paid conversion event named `generate_lead_paid` by Strategy, replacing the `lp_audit_lead` placeholder v3.8 recorded pending the name. Board ruling 4 (paid and organic never share a counter) promoted from a source comment to a hard CI gate that compares the LP's event against every event the rest of the site fires; negative-controlled three ways. Sequencing noted for the Ads import: GA4 will not offer an event as a key event until it has fired at least once.
 - **v3.12** (2026-08-31) — Google Ads `AW-18418837499` added as a second destination on the existing gtag.js load in `mkx-consent.js`, after the region-aware grant, so it inherits the consent gate rather than being pasted into 53 `<head>`s ahead of it. Google's page-view conversion snippet deliberately NOT installed: it scores every pageview as a $1 conversion, points Smart Bidding at pageviews instead of leads, and contradicts A2, which named `lp_audit_lead`. A lead conversion action in Ads is Jason's to create; nothing is wired to the page-view label. Both rules are CI guards, negative-controlled against Google's own snippets.
 - **v3.11** (2026-08-31) — first guest byline: pen-name rule recorded and enforced structurally. Name + firm always paired, disclosure line verbatim on the author page and the article foot, author page limited to five elements with no photo/bio/credentials/socials, Article `author` as Organization rather than Person, author page `WebPage` only with no `sameAs`. Strategy's draft called the pen name "founder of Cost Seg Smart" in two places; Code stopped rather than swap it and Jason ruled the title out. `/partners` and the Miami partner card deferred, so two of the brief's items are open.
