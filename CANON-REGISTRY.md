@@ -809,11 +809,17 @@ note, both visually distinct from the guest author's text.
 
 ### Open — not resolved by this ship
 
+- **CLOSED 2026-08-31 (Jason): Cost Seg Smart has signed off on the pen-name treatment.** The
+  brief's footer asked for that confirmation before publish and the article shipped with #126
+  ahead of it, so the approval was retrospective by a few hours. It is given: pen name + firm +
+  disclosure, no invented persona, is acceptable to them. The pages stay live and indexable; no
+  `noindex` needed. Jonathan's separate approval of the tax claims was already on record.
 - `/partners` and the Miami partner card do not exist. The brief's §3 referral-URL swap in the
   partner card and §4 inbound link from `/partners` are therefore **not done** — Jason confirmed
-  the cards are built and published after this. The article's only inbound links today are the
-  `/intel` hub card and the author page, which is thin for a page the brief itself says will
-  otherwise sit unindexed.
+  the cards are built and published after this, and that they will link back to this article and
+  to other items once they exist. The article's only inbound links today are the `/intel` hub card
+  and the author page, which is thin for a page the brief itself says will otherwise sit
+  unindexed.
 - IndexNow submission for both pages, once that is wired (ties to the open P2 indexing batch).
 - Jason has committed to indexing the reciprocal post on Cost Seg Smart's site; tracked separately.
 
