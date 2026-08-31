@@ -904,9 +904,10 @@ footer a:hover{color:var(--muted);}
   /* Ruling 4 (board memo, Aug 30): the paid conversion event is DISTINCT from
      the organic form's `generate_lead`. Sharing the name would let organic
      leads train the paid bidding signal, which is the opposite of what the
-     six-week test is measuring. Held in one constant so the memo's own name,
-     if it differs from this, is a one-line change. */
-  var MKX_LP_EVENT = 'lp_audit_lead';
+     six-week test is measuring. Held in one constant for exactly this moment:
+     Strategy named it on Aug 31, so the placeholder `lp_audit_lead` became a
+     one-line change. Distinctness is a CI gate -- see validate-site.py. */
+  var MKX_LP_EVENT = 'generate_lead_paid';
 
   var form = document.getElementById('lpAuditForm');
   if (!form) return;

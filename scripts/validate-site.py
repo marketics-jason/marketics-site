@@ -223,11 +223,28 @@ def collect():
     return pages, assets, redirects
 
 
+def redirect_patterns(redirects):
+    """Netlify placeholder rules, compiled.
+
+    A rule like `/costseg/:placement` is stored literally by collect(), so a
+    real link to /costseg/intel-article would be reported broken. `:param`
+    matches one path segment, `*` (splat) matches the rest.
+    """
+    pats = []
+    for r in redirects:
+        if ":" not in r and "*" not in r:
+            continue
+        rx = "".join(r"[^/]+" if seg.startswith(":") else re.escape(seg)
+                     for seg in re.split(r"(?<=/)", r)).replace(re.escape("*"), ".*")
+        pats.append(re.compile("^" + rx.rstrip("/") + "$"))
+    return pats
+
+
 EXTERNAL = re.compile(r"^(https?:)?//|^mailto:|^tel:|^javascript:|^#|^data:")
 ISO_TZ = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$")
 
 
-def check(rel, pages, assets, redirects, inbound, hard, warn):
+def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     path = os.path.join(ROOT, rel)
     raw = open(path, encoding="utf-8", errors="replace").read()
     url = url_for(rel)
@@ -275,7 +292,8 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
         norm = pth.rstrip("/") or "/"
         if pth != "/" and pth.endswith("/"):
             hard.append(f"{where}: trailing-slash internal link {l!r} (forces 301)")
-        if norm in pages or norm in redirects or pth in assets or norm in assets:
+        if (norm in pages or norm in redirects or pth in assets or norm in assets
+                or any(rx.match(norm) for rx in rpats)):
             if norm in pages:
                 inbound.setdefault(norm, set()).add(url)
             continue
@@ -414,7 +432,28 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
                     f"line — it is required verbatim on the author page and at the foot of "
                     f"every article carrying the byline (registry v3.11)")
 
-    # 12. structural warnings
+    # 12. no inline gtag.js loader on any page (registry v3.12).
+    # gtag.js is loaded once, from mkx-consent.js, after this file has decided
+    # consent for the visitor's region. Google's own setup page tells you to
+    # paste a <script src="...gtag/js?id=..."> into every page's <head>, which
+    # would register the destination before any consent decision — the same
+    # failure B4 fixed for the chat widget, and the reason that one is a gate
+    # too. Additional destinations are `gtag('config', ID)` in mkx-consent.js.
+    if "googletagmanager.com/gtag/js" in raw:
+        hard.append(f"{where}: inline gtag.js loader — the tag is loaded once from "
+                    f"mkx-consent.js, after consent is decided; extra destinations "
+                    f"are a gtag('config', ID) there, not a second script tag "
+                    f"(registry v3.12)")
+
+    # A page-view conversion scores every pageview as a lead. The paid
+    # conversion is `generate_lead_paid` on form success (addendum A2, named v3.13).
+    if "'conversion'" in raw or '"conversion"' in raw:
+        if re.search(r"gtag\(\s*['\"]event['\"]\s*,\s*['\"]conversion['\"]", raw):
+            hard.append(f"{where}: page-level Google Ads conversion event — the paid "
+                        f"conversion is the audit lead, fired on form success, not a "
+                        f"pageview (board addendum A2, registry v3.12)")
+
+    # 12b. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):
@@ -427,6 +466,7 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
 
 def main():
     pages, assets, redirects = collect()
+    rpats = redirect_patterns(redirects)
     args = sys.argv[1:]
     if args:
         targets = {}
@@ -445,7 +485,38 @@ def main():
 
     hard, warn, inbound = [], [], {}
     for url, rel in sorted(targets.items()):
-        check(rel, pages, assets, redirects, inbound, hard, warn)
+        check(rel, pages, assets, redirects, rpats, inbound, hard, warn)
+
+    # Paid and organic never share a conversion counter (board ruling 4; Strategy
+    # restated it 2026-08-31 when naming the paid event). If they shared a name,
+    # organic leads would train the paid bidding signal — the opposite of what
+    # the test is measuring, and invisible once it happens because both counters
+    # would simply look healthy. Compared against the events every OTHER page
+    # fires rather than a hardcoded name, so renaming the organic event cannot
+    # silently collide either.
+    if not args:
+        lp_rel = "lp/keep-control/index.html"
+        lp_path = os.path.join(ROOT, lp_rel)
+        if os.path.exists(lp_path):
+            lp_src = open(lp_path, encoding="utf-8").read()
+            m = re.search(r"MKX_LP_EVENT\s*=\s*['\"]([^'\"]+)['\"]", lp_src)
+            paid = m.group(1) if m else None
+            if not paid:
+                hard.append(f"{lp_rel}: paid conversion event name not found — it is "
+                            f"held in MKX_LP_EVENT so it stays greppable and gateable "
+                            f"(board ruling 4)")
+            else:
+                organic = set()
+                for u, rel in sorted(pages.items()):
+                    if rel == lp_rel:
+                        continue
+                    src = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+                    organic.update(re.findall(
+                        r"gtag\(\s*['\"]event['\"]\s*,\s*['\"]([^'\"]+)['\"]", src))
+                if paid in organic:
+                    hard.append(f"{lp_rel}: paid conversion event {paid!r} is also fired "
+                                f"by an organic page — paid and organic never share a "
+                                f"counter (board ruling 4)")
 
     # orphan check only meaningful on a full run
     if not args:

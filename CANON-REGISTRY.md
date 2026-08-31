@@ -809,18 +809,200 @@ note, both visually distinct from the guest author's text.
 
 ### Open — not resolved by this ship
 
+- **CLOSED 2026-08-31 (Jason): Cost Seg Smart has signed off on the pen-name treatment.** The
+  brief's footer asked for that confirmation before publish and the article shipped with #126
+  ahead of it, so the approval was retrospective by a few hours. It is given: pen name + firm +
+  disclosure, no invented persona, is acceptable to them. The pages stay live and indexable; no
+  `noindex` needed. Jonathan's separate approval of the tax claims was already on record.
 - `/partners` and the Miami partner card do not exist. The brief's §3 referral-URL swap in the
   partner card and §4 inbound link from `/partners` are therefore **not done** — Jason confirmed
-  the cards are built and published after this. The article's only inbound links today are the
-  `/intel` hub card and the author page, which is thin for a page the brief itself says will
-  otherwise sit unindexed.
+  the cards are built and published after this, and that they will link back to this article and
+  to other items once they exist. The article's only inbound links today are the `/intel` hub card
+  and the author page, which is thin for a page the brief itself says will otherwise sit
+  unindexed.
 - IndexNow submission for both pages, once that is wired (ties to the open P2 indexing batch).
 - Jason has committed to indexing the reciprocal post on Cost Seg Smart's site; tracked separately.
 
 ---
 
+## v3.12 — Google Ads tag, and the conversion that was not installed (Jason, 2026-08-31)
+
+Google Ads account `AW-18418837499` is now a destination on the site. Jason forwarded
+Google's own "set up a Google tag" instructions; the tag went in, one of the two snippets
+did not.
+
+### What Google's instructions say, and why the build differs
+
+**"Paste `<script async src=".../gtag/js?id=AW-...">` before `</head>` on every page."**
+Not done, twice over. `gtag.js` is one library serving many destinations — we already
+load it once, from `mkx-consent.js`, on idle. A second script tag fetches and bootstraps
+the same library again for nothing. The real objection is placement: markup in `<head>`
+runs *before* this file decides consent, so a visitor in a gated region would be
+registered for advertising having been asked nothing. That is the same failure B4 fixed
+for the chat widget. Ads is added as `gtag('config', ADS_ID)` in the one file, after the
+region-aware grant, so it inherits the whole consent gate — denied by default in
+EEA/UK/CH/Canada until Accept, and denied anywhere the Do Not Sell control or GPC says so.
+
+**"Install the page-view conversion snippet."** Deliberately NOT installed, and this is
+the substantive call rather than a plumbing preference. That snippet fires
+`gtag('event','conversion', {value: 1.0, currency: 'USD'})` on page load. Installed as
+instructed it scores every pageview as a one-dollar conversion, which does not merely
+measure the wrong thing — it points Smart Bidding at pageviews instead of leads and
+spends real budget doing it. It also contradicts board addendum A2, which already named
+`lp_audit_lead` as the paid conversion event. And there is nowhere honest to put it: the
+LP form does not navigate on success, it unmounts and confirms inline, so no page load
+corresponds to a conversion.
+
+The conversion label Jason was given (`8867CLagvescEPvP5M5E`) belongs to that page-view
+action and is therefore not wired to anything.
+
+### Open, and Jason's to close
+
+A **lead** conversion action has to be created in Google Ads. Then either import
+`lp_audit_lead` from GA4 (preferred — no new code, inherits consent handling), or fire
+`gtag('event','conversion',{send_to:'AW-18418837499/<lead label>'})` inside the existing
+success handler next to the lead event. Code has done neither, because the action does
+not exist yet.
+
+`value: 1.0 USD` is Google's placeholder. If value-based bidding is wanted the figure
+should reflect real lead economics; otherwise send no value and bid on conversion count.
+A fabricated $1 is worse than none.
+
+### Enforced
+
+Two CI guards, both negative-controlled against the exact snippets Google supplies:
+
+- any inline `googletagmanager.com/gtag/js` loader on any page — hard failure
+- any page-level `gtag('event','conversion', ...)` — hard failure
+
+These exist because the instructions Jason received are the instructions anyone receives,
+and the next person to read them will be told to paste the same two blocks.
+
+### Gate effect
+
+The site half of the pre-spend gate is done: the tag is live and consent-gated. Still
+open from v3.10 before spend — P1b (form → GHL → sequence, UTM on contact), US Ads
+account verification, lead-loss proxy status — plus the lead conversion action above.
+
+### Cost
+
+`mkx-consent.js` +437 bytes. Held deliberately low: this file ships to every page and
+`/calculator` has no headroom, which is what the v3.10 entry records. The long rationale
+lives here rather than in the source for exactly that reason.
+
+---
+
+## v3.13 — the paid conversion event gets its name (Strategy, 2026-08-31)
+
+Strategy named the paid conversion event `generate_lead_paid` and restated the board's
+rule while doing so: paid and organic never share a counter.
+
+### The rename
+
+`MKX_LP_EVENT` on `/lp/keep-control` moves from the placeholder `lp_audit_lead` to
+**`generate_lead_paid`**. This is the one-line change the constant was built for — v3.8
+recorded the placeholder precisely because "the memo's own event name has not reached
+Code," and it now has.
+
+  organic  `/get-started`      generate_lead
+  organic  `/join`             begin_checkout
+  paid     `/lp/keep-control`  generate_lead_paid
+
+### The rule is now a gate, not a comment
+
+Board ruling 4 lived in a source comment. It is now a hard CI failure: the validator
+reads `MKX_LP_EVENT` out of the LP and compares it against every `gtag('event', …)` name
+fired by every other page on the site. Compared against what the site actually fires
+rather than a hardcoded `generate_lead`, so renaming the organic event later cannot
+silently collide either.
+
+Negative-controlled three ways, all firing: colliding with `generate_lead`, colliding
+with `/join`'s `begin_checkout`, and removing the constant altogether.
+
+This matters more than most gates because the failure is invisible. If the two shared a
+name, organic leads would train the paid bidding signal and both counters would simply
+look healthy — nothing would break, the number would just be wrong, and the six-week
+test would measure the wrong thing.
+
+### Where this sits in Strategy's chain
+
+  tracking code live -> generate_lead_paid firing -> imported into Ads as the
+  conversion action -> full-path UTM test -> replace the rep's automated campaign
+  with the three paused Search campaigns -> un-pause on Jason's word
+
+Code owns link one and has now delivered it (with v3.12's tag). **Link two is a
+sequencing constraint worth stating: GA4 will not offer an event as a key event until it
+has seen it fire at least once.** So the order is deploy, submit the form once for real,
+then mark `generate_lead_paid` as a key event in GA4, then import it into Ads. The Ads
+conversion action cannot be created from an event that has never fired.
+
+Everything from link two onward is Jason's and the CTO's.
+
+### Bidding
+
+Strategy's note stands and is not a Code decision: once the event has fired a few real
+times, that is the moment bidding can move off Maximize clicks. Until then Maximize
+clicks is correct, because there is no conversion history to bid against.
+
+---
+
+## v3.14 — the Ads tag is scoped to the paid path (CI, 2026-08-31)
+
+Corrects v3.12, which configured Google Ads on every page. CI caught it; I did not.
+
+### What failed
+
+`/calculator`, mobile, three consecutive runs — not a flake:
+
+  performance               0.68, 0.67, 0.67   floor 0.80
+  largest-contentful-paint  6549, 6597, 6589   budget 5200ms
+
+The previous head without the Ads tag passed. A second gtag destination is not
+free: it is roughly **1,850ms of extra mobile LCP** on the heaviest page on the
+site, the same page v3.10 already records as having no headroom.
+
+### Why local verification missed it
+
+This is the part worth keeping. Local Lighthouse runs showed `/calculator` at 100
+across three runs, and they were measuring a lie: **the sandbox blocks
+`googletagmanager.com`**, so gtag.js never loaded and the runs scored a page with no
+third-party tag on it at all. The thing under test was the one thing that could not
+execute.
+
+The lesson generalises past this tag: a local perf number for anything third-party is
+worthless here, and CI is the only measurement that means anything. v3.10's regression
+was caught locally because it was bytes-on-the-wire; this one could not have been.
+
+### The fix, and why it is not a workaround
+
+`ADS_PAGES = ['/lp/keep-control']`, mirroring B4's `WIDGET_PAGES`. Not a budget
+relaxation, and not merely the cheapest way to green — it is where the tag belongs:
+
+- Conversions happen on the LP form and nowhere else.
+- Paid traffic lands on the LP, and the no-exit rule keeps it there, so the LP *is*
+  the entire paid path.
+- Site-wide Ads would only add remarketing-audience collection, which nobody asked
+  for, which no board ruling authorises, and which is precisely the kind of ambient
+  ad-tech the consent architecture exists to keep scoped.
+
+GA4 is unchanged and still configured everywhere.
+
+### Verified
+
+27 checks: the destination is configured on the LP in the US and in the gated regions
+(where Consent Mode denies it until Accept), and is **absent** on `/`, `/calculator`,
+`/get-started` and an intel page, each of which still carries GA4. One gtag.js tag and
+one request throughout.
+
+The perf recovery itself can only be confirmed by CI, for the reason above.
+
+---
+
 ## Version history
 
+- **v3.14** (2026-08-31) — corrects v3.12: the Ads destination is scoped to `/lp/keep-control` rather than every page. Configured site-wide it cost `/calculator` ~1,850ms of mobile LCP (0.68 vs the 0.80 floor, 6549ms vs the 5200ms budget) and failed CI. Local runs could not have caught it — this sandbox blocks googletagmanager.com, so they were scoring a page with no tag on it. The LP is the whole paid path (no-exit rule) and the only page a conversion can occur on, so the scope is correct on the merits, not just cheap. GA4 unchanged everywhere.
+- **v3.13** (2026-08-31) — paid conversion event named `generate_lead_paid` by Strategy, replacing the `lp_audit_lead` placeholder v3.8 recorded pending the name. Board ruling 4 (paid and organic never share a counter) promoted from a source comment to a hard CI gate that compares the LP's event against every event the rest of the site fires; negative-controlled three ways. Sequencing noted for the Ads import: GA4 will not offer an event as a key event until it has fired at least once.
+- **v3.12** (2026-08-31) — Google Ads `AW-18418837499` added as a second destination on the existing gtag.js load in `mkx-consent.js`, after the region-aware grant, so it inherits the consent gate rather than being pasted into 53 `<head>`s ahead of it. Google's page-view conversion snippet deliberately NOT installed: it scores every pageview as a $1 conversion, points Smart Bidding at pageviews instead of leads, and contradicts A2, which named `lp_audit_lead`. A lead conversion action in Ads is Jason's to create; nothing is wired to the page-view label. Both rules are CI guards, negative-controlled against Google's own snippets.
 - **v3.11** (2026-08-31) — first guest byline: pen-name rule recorded and enforced structurally. Name + firm always paired, disclosure line verbatim on the author page and the article foot, author page limited to five elements with no photo/bio/credentials/socials, Article `author` as Organization rather than Person, author page `WebPage` only with no `sameAs`. Strategy's draft called the pen name "founder of Cost Seg Smart" in two places; Code stopped rather than swap it and Jason ruled the title out. `/partners` and the Miami partner card deferred, so two of the brief's items are open.
 - **v3.10** (2026-08-30) — Addendum B, superseding A3: advertising signals granted by default outside the gated regions, with a "Do Not Sell or Share" control and GPC as the opt-out; Canada joins the banner gate; new banner copy grants all four families on Accept and nothing on Decline. Implemented in one file rather than 51 inline stubs — gtag.js is injected on idle, so the stubs' deny-advertising default stays as the fail-safe. Chat widget cut from 34 pages to one, page-restricted and consent-gated, with a CI guard. `/audit-request` retired as a path that never existed.
 - **v3.9** (2026-08-30) — board addendum A: turnaround canon unified to "48 hours or less" across 24 instances with two same-phrase/different-claim hits deliberately excluded (`/pricing` payout, `/join` contract); scoped CI guard rather than a blanket token; `lp_audit_lead` recorded as the paid-only conversion event; `/lp/keep-control` added to Lighthouse CI at the homepage bar. Corrects v3.8's turnaround table. A3 held pending the what-actually-fires inventory — `/legal` describes a Meta Pixel that does not exist.
