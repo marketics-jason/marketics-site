@@ -446,7 +446,7 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                     f"(registry v3.12)")
 
     # A page-view conversion scores every pageview as a lead. The paid
-    # conversion is `lp_audit_lead` on form success (addendum A2).
+    # conversion is `generate_lead_paid` on form success (addendum A2, named v3.13).
     if "'conversion'" in raw or '"conversion"' in raw:
         if re.search(r"gtag\(\s*['\"]event['\"]\s*,\s*['\"]conversion['\"]", raw):
             hard.append(f"{where}: page-level Google Ads conversion event — the paid "
@@ -486,6 +486,37 @@ def main():
     hard, warn, inbound = [], [], {}
     for url, rel in sorted(targets.items()):
         check(rel, pages, assets, redirects, rpats, inbound, hard, warn)
+
+    # Paid and organic never share a conversion counter (board ruling 4; Strategy
+    # restated it 2026-08-31 when naming the paid event). If they shared a name,
+    # organic leads would train the paid bidding signal — the opposite of what
+    # the test is measuring, and invisible once it happens because both counters
+    # would simply look healthy. Compared against the events every OTHER page
+    # fires rather than a hardcoded name, so renaming the organic event cannot
+    # silently collide either.
+    if not args:
+        lp_rel = "lp/keep-control/index.html"
+        lp_path = os.path.join(ROOT, lp_rel)
+        if os.path.exists(lp_path):
+            lp_src = open(lp_path, encoding="utf-8").read()
+            m = re.search(r"MKX_LP_EVENT\s*=\s*['\"]([^'\"]+)['\"]", lp_src)
+            paid = m.group(1) if m else None
+            if not paid:
+                hard.append(f"{lp_rel}: paid conversion event name not found — it is "
+                            f"held in MKX_LP_EVENT so it stays greppable and gateable "
+                            f"(board ruling 4)")
+            else:
+                organic = set()
+                for u, rel in sorted(pages.items()):
+                    if rel == lp_rel:
+                        continue
+                    src = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+                    organic.update(re.findall(
+                        r"gtag\(\s*['\"]event['\"]\s*,\s*['\"]([^'\"]+)['\"]", src))
+                if paid in organic:
+                    hard.append(f"{lp_rel}: paid conversion event {paid!r} is also fired "
+                                f"by an organic page — paid and organic never share a "
+                                f"counter (board ruling 4)")
 
     # orphan check only meaningful on a full run
     if not args:
