@@ -753,8 +753,75 @@ contact), US Ads account verification, lead-loss proxy status.
 
 ---
 
+## v3.11 — guest bylines and pen names (Strategy brief, 2026-08-31)
+
+First partner content on the site, and the first byline that is not Jason's. Cost Seg Smart
+publishes editorial under the pen name **Jamie Melgar**; the principal keeps his legal name off
+published content because of expert-witness work.
+
+### The rule
+
+A pen name is legitimate and has a long publishing history. Manufacturing a **person** is not.
+The line between them is what this build enforces structurally rather than by remembering:
+
+- Any guest byline shows **name + affiliated firm** — never a name floating alone.
+- A pen name additionally carries the disclosure line, verbatim, in two places: the author page
+  and the foot of the article.
+- The author page carries exactly five things: the name, one line of what they write about, the
+  disclosure, the firm link, and the list of posts under that byline.
+- It carries **no** photo or avatar of any kind (including a placeholder silhouette, which still
+  implies a person), no biography beyond that one line, no credentials, titles, years of
+  experience or education, no social or LinkedIn link, no contact form or personal email.
+- Article `author` in schema is the **Organization that stands behind the content**, not a Person.
+  The visible byline may be the pen name; the machine-readable claim attaches to the entity that
+  is actually accountable.
+- The author page emits `WebPage` only. **No `Person`, no `sameAs`.**
+
+The schema rule is the load-bearing one. A pen name in visible text is a publishing convention a
+reader understands. The same name asserted as a verified individual in structured data is a false
+claim, made to the systems — search and AI engines — that increasingly check exactly this.
+
+### Registered strings
+
+- Byline, rendered: `Jamie Melgar, Cost Seg Smart`
+- Disclosure, verbatim, both placements: *"Jamie Melgar is the byline used for editorial content
+  from Cost Seg Smart, Marketics' cost segregation partner. Cost Seg Smart and Marketics are
+  referral partners."*
+- Referral URL, all visible links: `https://costsegsmart.com/?ref=MARKETICS-Q0DZ`
+- Schema `author.url`: `https://costsegsmart.com` — the plain domain. A tracking parameter does
+  not belong in an entity identifier; the referral link is a visitor path, not an identity.
+
+### Correction to the draft, made under this rule
+
+Strategy's draft bylined "Jonathan [LAST NAME], **founder of** Cost Seg Smart" and closed with
+"Jonathan [LAST NAME] is the **founder of** Cost Seg Smart". Swapping the pen name in mechanically
+would have published *"Jamie Melgar is the founder of Cost Seg Smart"* — a title attached to a
+person who does not exist, which is the precise failure the rest of this rule exists to prevent.
+Code stopped rather than swapping. Jason ruled: remove the founder. The closing sentence is now
+the disclosure line, which is where §2d puts it anyway; the byline drops the title per §2a.
+
+### Claims ownership
+
+Every tax statement in the article belongs to Cost Seg Smart and publishes under their byline.
+No Marketics performance claim appears in the piece — no 45%, no engagement count — verified
+against the draft and not added. The only Marketics voice is Jason's framing intro and closing
+note, both visually distinct from the guest author's text.
+
+### Open — not resolved by this ship
+
+- `/partners` and the Miami partner card do not exist. The brief's §3 referral-URL swap in the
+  partner card and §4 inbound link from `/partners` are therefore **not done** — Jason confirmed
+  the cards are built and published after this. The article's only inbound links today are the
+  `/intel` hub card and the author page, which is thin for a page the brief itself says will
+  otherwise sit unindexed.
+- IndexNow submission for both pages, once that is wired (ties to the open P2 indexing batch).
+- Jason has committed to indexing the reciprocal post on Cost Seg Smart's site; tracked separately.
+
+---
+
 ## Version history
 
+- **v3.11** (2026-08-31) — first guest byline: pen-name rule recorded and enforced structurally. Name + firm always paired, disclosure line verbatim on the author page and the article foot, author page limited to five elements with no photo/bio/credentials/socials, Article `author` as Organization rather than Person, author page `WebPage` only with no `sameAs`. Strategy's draft called the pen name "founder of Cost Seg Smart" in two places; Code stopped rather than swap it and Jason ruled the title out. `/partners` and the Miami partner card deferred, so two of the brief's items are open.
 - **v3.10** (2026-08-30) — Addendum B, superseding A3: advertising signals granted by default outside the gated regions, with a "Do Not Sell or Share" control and GPC as the opt-out; Canada joins the banner gate; new banner copy grants all four families on Accept and nothing on Decline. Implemented in one file rather than 51 inline stubs — gtag.js is injected on idle, so the stubs' deny-advertising default stays as the fail-safe. Chat widget cut from 34 pages to one, page-restricted and consent-gated, with a CI guard. `/audit-request` retired as a path that never existed.
 - **v3.9** (2026-08-30) — board addendum A: turnaround canon unified to "48 hours or less" across 24 instances with two same-phrase/different-claim hits deliberately excluded (`/pricing` payout, `/join` contract); scoped CI guard rather than a blanket token; `lp_audit_lead` recorded as the paid-only conversion event; `/lp/keep-control` added to Lighthouse CI at the homepage bar. Corrects v3.8's turnaround table. A3 held pending the what-actually-fires inventory — `/legal` describes a Meta Pixel that does not exist.
 - **v3.8** (2026-08-30) — inline audit form shipped on `/lp/keep-control` per the board memo; `pricing_owner` select, distinct paid conversion event, honeypot, UTM + hidden-source plumbing to the same GHL pipeline as `/get-started`. Paid-LP no-exit rule and retired-contrast-token guards added to CI — the first caught a masthead logo link Code shipped on Aug 27, now corrected along with the missing wordmark. Turnaround-time divergence (24h / 48h / 2–3 business days) recorded as an open canon question.

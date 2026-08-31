@@ -97,6 +97,33 @@ NO_EXIT_ALLOW = ("/legal", "/legal?tab=terms")
 # schedule; the pages built to the current tokens must not regress into them.
 RETIRED_GRAYS = ("#6B6A65", "#55534E")
 
+# ── Pen-name integrity (registry v3.11) ──
+# "Jamie Melgar" is the byline Cost Seg Smart publishes editorial under. It is a
+# pen name for a firm's content, not a person, and the disclosure is what keeps
+# that true at face value — so the byline and the disclosure are not allowed to
+# drift apart. Compared entity- and whitespace-insensitively via _flat(), since
+# the apostrophe ships as &rsquo; in markup and as U+2019 in JSON-LD.
+PEN_NAME = "Jamie Melgar"
+DISCLOSURE = ("jamie melgar is the byline used for editorial content from cost seg smart, "
+              "marketics' cost segregation partner. cost seg smart and marketics are "
+              "referral partners.")
+# Pages that may name the byline without carrying the disclosure: listings that
+# link to the article rather than publishing it. The hub card names the article,
+# not the author, so this is empty today and should stay small.
+PEN_NAME_EXEMPT: set = set()
+
+
+def _flat(raw: str) -> str:
+    """Rendered text: tags stripped, entities resolved, whitespace collapsed.
+
+    Tags have to go before the compare. The disclosure links the byline in the
+    article and does not on the author page, so matching against markup would
+    pass one and fail the other for no reason a reader could see.
+    """
+    txt = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", raw, flags=re.S | re.I)
+    txt = re.sub(r"<[^>]+>", " ", txt)
+    return re.sub(r"\s+", " ", htmllib.unescape(txt)).lower().replace("’", "'")
+
 # "24 hours" cannot be a blanket retired token: /pricing uses it for PAYOUT
 # SETTLEMENT ("about 24 hours after the guest checks in"), which is a different
 # claim wearing the same phrase — the exact trap the Aug 30 sweep caught. So the
@@ -358,7 +385,36 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
         hard.append(f"{where}: retired turnaround phrasing '24 hours' — the published "
                     f"promise is '48 hours or less' everywhere (board addendum A1)")
 
-    # 10. structural warnings
+    # 11. pen-name integrity (registry v3.11).
+    # A pen name is a publishing convention; a manufactured person is a false
+    # claim. The difference is a handful of fields, and every one of them is
+    # the kind of thing a later "let's flesh out the author page" edit adds
+    # without meaning anything by it. So it is a gate, not a note in a doc.
+    if where.startswith("authors/"):
+        blob = " ".join(p.jsonld)
+        if '"Person"' in blob:
+            hard.append(f"{where}: author page emits Person schema — a pen name asserted "
+                        f"as a verified individual is the one thing that makes it a false "
+                        f"claim. WebPage only (registry v3.11)")
+        if "sameAs" in blob:
+            hard.append(f"{where}: author page emits sameAs — there is no external identity "
+                        f"to link a pen name to (registry v3.11)")
+        for host in ("linkedin.com", "twitter.com", "x.com/", "facebook.com", "instagram.com"):
+            if host in raw.lower():
+                hard.append(f"{where}: author page links {host} — no social profile for a "
+                            f"pen name (registry v3.11)")
+        for word in ("founder", "co-founder", "years of experience", "CPA", "headshot"):
+            if re.search(rf"\b{re.escape(word)}\b", raw, re.I):
+                hard.append(f"{where}: author page carries a credential or title "
+                            f"({word!r}) — name and one line only (registry v3.11)")
+
+    # Wherever the pen name is published, the disclosure travels with it.
+    if PEN_NAME in raw and where not in PEN_NAME_EXEMPT and DISCLOSURE not in _flat(raw):
+        hard.append(f"{where}: uses the {PEN_NAME!r} byline without the partner disclosure "
+                    f"line — it is required verbatim on the author page and at the foot of "
+                    f"every article carrying the byline (registry v3.11)")
+
+    # 12. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
     ):
