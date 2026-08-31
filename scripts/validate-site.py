@@ -223,11 +223,28 @@ def collect():
     return pages, assets, redirects
 
 
+def redirect_patterns(redirects):
+    """Netlify placeholder rules, compiled.
+
+    A rule like `/costseg/:placement` is stored literally by collect(), so a
+    real link to /costseg/intel-article would be reported broken. `:param`
+    matches one path segment, `*` (splat) matches the rest.
+    """
+    pats = []
+    for r in redirects:
+        if ":" not in r and "*" not in r:
+            continue
+        rx = "".join(r"[^/]+" if seg.startswith(":") else re.escape(seg)
+                     for seg in re.split(r"(?<=/)", r)).replace(re.escape("*"), ".*")
+        pats.append(re.compile("^" + rx.rstrip("/") + "$"))
+    return pats
+
+
 EXTERNAL = re.compile(r"^(https?:)?//|^mailto:|^tel:|^javascript:|^#|^data:")
 ISO_TZ = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$")
 
 
-def check(rel, pages, assets, redirects, inbound, hard, warn):
+def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     path = os.path.join(ROOT, rel)
     raw = open(path, encoding="utf-8", errors="replace").read()
     url = url_for(rel)
@@ -275,7 +292,8 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
         norm = pth.rstrip("/") or "/"
         if pth != "/" and pth.endswith("/"):
             hard.append(f"{where}: trailing-slash internal link {l!r} (forces 301)")
-        if norm in pages or norm in redirects or pth in assets or norm in assets:
+        if (norm in pages or norm in redirects or pth in assets or norm in assets
+                or any(rx.match(norm) for rx in rpats)):
             if norm in pages:
                 inbound.setdefault(norm, set()).add(url)
             continue
@@ -448,6 +466,7 @@ def check(rel, pages, assets, redirects, inbound, hard, warn):
 
 def main():
     pages, assets, redirects = collect()
+    rpats = redirect_patterns(redirects)
     args = sys.argv[1:]
     if args:
         targets = {}
@@ -466,7 +485,7 @@ def main():
 
     hard, warn, inbound = [], [], {}
     for url, rel in sorted(targets.items()):
-        check(rel, pages, assets, redirects, inbound, hard, warn)
+        check(rel, pages, assets, redirects, rpats, inbound, hard, warn)
 
     # orphan check only meaningful on a full run
     if not args:

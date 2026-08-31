@@ -17,20 +17,38 @@ BASE="${BASE%/}"
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 pass=0 fail=0
 
+# RETRY, and why it is narrow: on 2026-08-31 the daily production run failed on
+# its very first assertion with `000` (no response) after 6.1s, while every
+# later request in the same run — including two more fetches of that same
+# homepage — returned in ~0.3s. A cold DNS/TLS connection timing out, not a
+# regression. Without this the whole production gate reds on any first-request
+# hiccup, and a gate that cries wolf is one people stop reading.
+#
+# `--retry` covers transport failures and transient HTTP (timeout, 408, 429,
+# 5xx) only. It deliberately does NOT use --retry-all-errors, which would also
+# retry 404s and 301s — the very codes these checks assert, so masking them
+# would turn a real regression into a pass.
+RETRY=(--retry 2 --retry-connrefused --retry-delay 1)
+
 # code URL [expected_code]  — no redirect follow; asserts the status of the URL itself
-code() { curl -s -o /dev/null -A "$UA" -w "%{http_code}" --max-time 20 "$1"; }
+code() { curl -s -o /dev/null -A "$UA" "${RETRY[@]}" -w "%{http_code}" --max-time 20 "$1"; }
 # body URL — follows redirects, returns body
-body() { curl -sL -A "$UA" --max-time 20 "$1"; }
+body() { curl -sL -A "$UA" "${RETRY[@]}" --max-time 20 "$1"; }
 # hdr URL — response headers only (no follow)
-hdr()  { curl -sI -A "$UA" --max-time 20 "$1"; }
+hdr()  { curl -sI -A "$UA" "${RETRY[@]}" --max-time 20 "$1"; }
 # loc URL — the Location header of a single redirect (no follow), path only
-loc()  { curl -sI -A "$UA" --max-time 20 "$1" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r' | sed -E 's#^https?://[^/]+##'; }
+loc()  { curl -sI -A "$UA" "${RETRY[@]}" --max-time 20 "$1" | awk 'tolower($1)=="location:"{print $2}' | tr -d '\r' | sed -E 's#^https?://[^/]+##'; }
 
 ok()   { pass=$((pass+1)); printf '  \033[32m✓\033[0m %s\n' "$1"; }
 no()   { fail=$((fail+1)); printf '  \033[31m✗\033[0m %s\n' "$1"; }
 
 echo "Smoke test against: $BASE"
 echo
+
+# Warm-up, deliberately unasserted: primes DNS and the TLS session so the first
+# real assertion is not also the first connection. Its result is discarded, so
+# it can never turn a failure into a pass.
+curl -s -o /dev/null -A "$UA" --max-time 20 "$BASE/" || true
 
 echo "· Status codes"
 for p in "" "/method" "/pricing" "/results" "/intel/str-performance-index" "/markets/san-antonio" "/join/confirmation"; do
