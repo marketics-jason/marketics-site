@@ -241,7 +241,7 @@ strong{color:var(--bright);font-weight:500;}
 .pair p{margin:0;}
 
 /* doors */
-.doors{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0 28px;max-width:840px;}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0 28px;}
 .door{border:1px solid var(--line-2);background:var(--panel);padding:28px 30px;}
 .door .dl{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--faint);
   text-transform:uppercase;display:block;margin-bottom:12px;}
@@ -418,11 +418,11 @@ footer a:hover{color:var(--muted);}
 .onramp .wrap{padding-top:32px;padding-bottom:32px;}
 .onramp-grid{display:grid;grid-template-columns:296px 1fr;gap:44px;align-items:start;}
 .onramp .oh{font-family:var(--sans);font-weight:500;font-size:15px;line-height:1.5;color:var(--gold);margin:0;}
-.onramp p{font-size:14.5px;line-height:1.7;color:var(--body);margin:0;}
+.onramp p{font-size:14.5px;line-height:1.7;color:var(--body);margin:0;max-width:none;}
 .onramp strong{color:var(--bright);}
 
 /* two-job pair (Section 2) */
-.jobs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 28px;max-width:840px;}
+.jobs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 28px;}
 .job{border:1px solid var(--line-2);background:var(--panel);padding:28px 30px;}
 .job .jl{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);
   text-transform:uppercase;display:block;margin-bottom:12px;}
@@ -432,7 +432,7 @@ footer a:hover{color:var(--muted);}
    The one piece of visual apparatus on the page. Two cards so the money
    argument lands before the prose restates it. Both figures are illustrations
    on stated figures ($5,000/mo), never promises -- the caption says so. */
-.money{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:30px 0 28px;max-width:840px;}
+.money{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:30px 0 28px;}
 .mcard{border:1px solid var(--line-2);background:var(--panel);padding:28px 30px;}
 .mcard.is-us{border-color:rgba(214,173,96,.32);}
 .mcard .ml{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--faint);
@@ -445,7 +445,7 @@ footer a:hover{color:var(--muted);}
    A rule above it so it reads as a pause, not a new section. Same audit path
    as the other two buttons: single-CTA rule holds (one path, not one button). */
 .midcta{margin:38px 0 0;padding-top:34px;border-top:1px solid var(--line-2);
-  display:flex;flex-direction:column;align-items:flex-start;gap:14px;max-width:720px;}
+  display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
 
 /* ══ PROOF (Section 5) ══
    The only tonal shift on the page, so the 45% gets its own ground without
