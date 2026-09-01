@@ -998,8 +998,158 @@ The perf recovery itself can only be confirmed by CI, for the reason above.
 
 ---
 
+## v3.15 — live-page fixes and the registered guest-article strings (Strategy, 2026-08-31)
+
+Strategy's live-page brief. Three fixes applied, three verifications reported, and the
+article's claim strings registered as the checklist asked.
+
+### Applied
+
+- **Meta description and `og:description`** replaced with the ruled string, em dash gone:
+  *"Cost segregation explained for STR owners: what a study reclassifies, the material
+  participation test, and the question a refund can't answer."*
+  Also applied to **`twitter:description`**, which the brief did not name but carried the
+  same em dash the house rule exists to remove. Same ruled string rather than one Code
+  invented; revert that one line if Strategy wants it separate.
+- **Framing, ruled by Jason.** *"The closing question, though, is mine."* → *"I've added one
+  thought at the end, from the revenue side."* And *"Here is the question the study cannot
+  answer, and the reason this article is on my site."* → *"Here is the question the study
+  cannot answer."* Both blocks otherwise unchanged.
+
+### Reported, not changed
+
+- **`og:title` and `twitter:title` still contain an em dash** — "The tax half of the STR buy
+  decision — Marketics". That is the site-wide title convention on every intel page, so if the
+  no-em-dash rule extends to titles it is a change to twenty-odd pages and a style decision,
+  not this page's fix. Left for Strategy to rule.
+
+### The partner link: intentional, ref intact, and two things the brief did not assume
+
+`/costseg/intel-article` is a deliberate internal redirect, not a placeholder. It 301s with
+the ref parameter intact, so **the partner's attribution window opens correctly.** Two
+differences from what the brief expected:
+
+1. It resolves to **`costsegsmart.com/order/`**, not the bare domain.
+2. It appends four UTMs (`utm_source=marketics`, `utm_medium=partner`,
+   `utm_campaign=costseg`, `utm_content=<placement>`) which the bare URL has no way to carry.
+
+Both come from the `/costseg/:placement` rule in `_redirects`, which predates this article and
+was presumably written for a partner-card CTA. **Worth a ruling: `/order/` is the right landing
+for someone clicking "get a study" from a card, but an article reader meeting the firm mid-
+paragraph is a colder audience, and dropping them on an order form may convert worse than the
+homepage.** Code has not changed it — the rule is shared with the cards.
+
+Per-placement destinations are now asserted in `smoke.sh` against production, so a partner link
+that silently loses its ref fails the daily gate. It would otherwise be invisible: the link
+still goes somewhere sensible, it just arrives anonymous.
+
+### Verified
+
+- **Article `author` is `Organization: Cost Seg Smart`.** No `Person`, no `sameAs`.
+  `/authors/jamie-melgar` emits `WebPage` only. All four are CI gates as of v3.11, not just
+  facts about today's file.
+- **Sitemap:** both pages present.
+- **IndexNow:** not wired yet. Still open with the P2 batch.
+- **Internal links — short of the brief's bar, honestly counted.** The article has two
+  distinct referring pages (the `/intel` hub card and the author page). The author page has
+  **one** (the article, which links it twice — from the byline and from the disclosure). The
+  brief's suggested third source, a cost-seg mention in `/intel/money`, **does not exist**;
+  there is no cost-seg mention anywhere in `/intel` outside this article. Code did not
+  manufacture links to hit the number: `/partners` and the Miami card are the real fix and are
+  Jason's, pending.
+
+### Registered claim strings — `/intel/str-cost-segregation-tax-half`
+
+Tax claims belong to Cost Seg Smart and publish under their byline; Marketics makes none of
+them. Registered so a later sweep can tell the difference between a partner's claim and ours:
+
+| String | Owner |
+|---|---|
+| "residential studies from $495, delivered in about an hour" | Cost Seg Smart |
+| "Traditional engineering firms charge $5,000 to $15,000" | Cost Seg Smart |
+| "more than 100 hours in the year and more hours than anyone else" | Cost Seg Smart |
+| "a five-figure deduction pulled forward into the first return, sometimes six" | Cost Seg Smart |
+| "$60,000 year-one deduction … $20,000 less than its market" | Jason, illustrative |
+| "The audit is free and it commits you to nothing." | Marketics, existing canon |
+
+No Marketics performance claim appears in the piece — no 45%, no engagement count — verified
+again after these edits and gated by the byline suite.
+
+### `/authors/jamie-melgar`
+
+Registered strings are the v3.11 set: the one-line descriptor and the disclosure, both verbatim
+and both CI-gated.
+
+---
+
+## v3.16 — Strategy's rulings on the live-page brief (2026-09-01)
+
+Three rulings on the questions v3.15 routed back.
+
+### 1. Editorial placements land softer than card placements
+
+Ruling: keep the shared `/costseg/:placement` rule as it is — rewiring it for one page would
+change the cards too — but give the article a different destination **if that is config-level
+rather than a refactor.**
+
+**It is config-level.** Netlify resolves `_redirects` first-match-wins, so two specific paths
+listed *above* the wildcard override it and the shared rule is untouched by construction:
+
+```
+/costseg/intel-article  ->  costsegsmart.com/       (+ ref + 4 UTMs)
+/costseg/author-page    ->  costsegsmart.com/       (+ ref + 4 UTMs)
+/costseg/:placement     ->  costsegsmart.com/order/ (unchanged — cards)
+```
+
+The reasoning, in Strategy's words, is scent: a card reader has already been told what Cost Seg
+Smart is and is clicking a CTA, so `/order/` matches intent; a reader who met the firm
+mid-paragraph has not been sold anything, and the wasted click is *worse than no click* because
+it burns the referral without a conversion.
+
+**`/costseg/author-page` was included though the ruling named only the article.** That link is
+labelled "costsegsmart.com" — pointing a link labelled with a domain at an order form is the
+same scent break, arguably plainer. One line to revert if Strategy wants it back on `/order/`.
+
+Homepage rather than a methodology page: egress from the build environment cannot reach
+`costsegsmart.com`, so a methodology URL could not be verified to exist. The homepage is the URL
+the original brief named, so it is known good.
+
+Smoke now asserts both editorial placements land on the homepage **and** that a card placement
+still reaches `/order/` — the second assertion is the one that matters, because if those two
+specific lines ever slipped below the wildcard the destination would silently revert and nothing
+else would notice.
+
+### 2. House style amended: em dashes are a prose rule, not a title rule
+
+Strategy's own amendment, recorded because it is now canon and broader than one page:
+
+> **No em dashes in prose. The title-suffix separator is exempt as a structural convention.**
+
+So `og:title` / `twitter:title` keep "Title — Marketics" across the estate. Description strings
+still change as briefed, because those are prose. Changing the separator would be a deliberate
+estate-wide sweep with its own brief, never a side effect of a partner-page fix.
+
+### 3. The third internal link stays unmanufactured
+
+Ruling: correct not to invent one. A link created to satisfy a checklist makes an
+internal-linking audit look healthy while helping nothing.
+
+The author page ships with its two real links. The deeper fix is a **content gap, not a linking
+task** — Strategy will write one-line cost-seg references into `/intel/money` and
+`/intel/what-a-property-manager-actually-costs`, where they belong naturally, rather than asking
+Code to invent placements. Tracked as Strategy's.
+
+### Open — P3
+
+If the editorial link produces clicks that do not convert, revisit the destination. The
+attribution works either way, which was the actual risk.
+
+---
+
 ## Version history
 
+- **v3.16** (2026-09-01) — Strategy rulings. Editorial partner placements (`/costseg/intel-article`, `/costseg/author-page`) now land on the Cost Seg Smart homepage rather than `/order/`, as specific `_redirects` lines above the shared `:placement` rule, which is untouched so card behaviour is unchanged; same ref, same four UTMs. Smoke asserts both the new destinations and that a card placement still reaches `/order/`. House style amended: no em dashes in PROSE, the "Title — Marketics" separator exempt as a structural convention, so titles are unchanged estate-wide. The third internal link stays unmanufactured — a cost-seg reference in `/intel/money` and `/intel/what-a-property-manager-actually-costs` is a content gap Strategy will write.
+- **v3.15** (2026-08-31) — Strategy live-page brief: ruled meta description applied to `description`, `og:description` and (unnamed but same defect) `twitter:description`; both framing edits applied verbatim. Partner link confirmed intentional with the ref intact, and two unassumed differences reported — it resolves to `/order/` rather than the bare domain and carries four UTMs, both from a `_redirects` rule shared with the partner cards, with a ruling invited on whether an order form is the right landing for an article reader. Per-placement destinations now asserted in smoke against production. Schema verified as Organization/WebPage. Internal-link count reported honestly as short of the brief's bar rather than padded; `/intel/money` has no cost-seg mention to link from. Article claim strings registered by owner. `og:title`/`twitter:title` em dashes left as a site-wide style question.
 - **v3.14** (2026-08-31) — corrects v3.12: the Ads destination is scoped to `/lp/keep-control` rather than every page. Configured site-wide it cost `/calculator` ~1,850ms of mobile LCP (0.68 vs the 0.80 floor, 6549ms vs the 5200ms budget) and failed CI. Local runs could not have caught it — this sandbox blocks googletagmanager.com, so they were scoring a page with no tag on it. The LP is the whole paid path (no-exit rule) and the only page a conversion can occur on, so the scope is correct on the merits, not just cheap. GA4 unchanged everywhere.
 - **v3.13** (2026-08-31) — paid conversion event named `generate_lead_paid` by Strategy, replacing the `lp_audit_lead` placeholder v3.8 recorded pending the name. Board ruling 4 (paid and organic never share a counter) promoted from a source comment to a hard CI gate that compares the LP's event against every event the rest of the site fires; negative-controlled three ways. Sequencing noted for the Ads import: GA4 will not offer an event as a key event until it has fired at least once.
 - **v3.12** (2026-08-31) — Google Ads `AW-18418837499` added as a second destination on the existing gtag.js load in `mkx-consent.js`, after the region-aware grant, so it inherits the consent gate rather than being pasted into 53 `<head>`s ahead of it. Google's page-view conversion snippet deliberately NOT installed: it scores every pageview as a $1 conversion, points Smart Bidding at pageviews instead of leads, and contradicts A2, which named `lp_audit_lead`. A lead conversion action in Ads is Jason's to create; nothing is wired to the page-view label. Both rules are CI guards, negative-controlled against Google's own snippets.

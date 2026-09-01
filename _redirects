@@ -87,6 +87,23 @@
 # 301 (not 302) per spec — this is a pure edge redirect (no page renders on
 # our domain), so it gives no independent click count on its own; see the
 # accompanying PR note on that gap.
+#
+# Editorial placements land SOFTER than card placements, per Strategy's ruling
+# 2026-09-01. A card reader has already been told what Cost Seg Smart is and is
+# clicking a CTA, so /order/ matches their intent. A reader who met the firm
+# mid-paragraph in an article, or who clicked a link labelled "costsegsmart.com"
+# on the author page, has not been sold anything yet -- dropping them on an
+# order form is a scent break, and the click it wastes is worse than no click
+# because it burns the referral without a conversion.
+#
+# These are specific paths listed BEFORE the :placement rule below, which
+# Netlify resolves first-match-wins, so the shared card behaviour is untouched
+# by design -- rewiring :placement itself would have changed the cards too.
+# Same ref code, same four UTMs, same per-placement attribution; only the
+# landing page differs.
+/costseg/intel-article https://costsegsmart.com/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=intel-article    301!
+/costseg/author-page   https://costsegsmart.com/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=author-page      301!
+
 /costseg/:placement    https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement    301!
 /costseg               https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct         301!
 

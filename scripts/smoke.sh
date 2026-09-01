@@ -104,6 +104,32 @@ c=$(code "$BASE/costseg"); l=$(loc_raw "$BASE/costseg")
   && ok "/costseg -> 301 costsegsmart.com (utm_content=direct)" \
   || no "/costseg = $c -> '$l' (want 301 costsegsmart.com utm_content=direct)"
 
+# The placements the live pages actually link to. An untagged partner link is
+# invisible when it breaks -- it still goes somewhere sensible, it just arrives
+# with no ref and no attribution -- so the destination is asserted per
+# placement rather than trusting the :placement rule in the abstract.
+#
+# Editorial placements land on the HOMEPAGE, not /order/ (Strategy 2026-09-01):
+# an article or author-page reader has not been sold anything yet. They are
+# specific rules listed above :placement in _redirects, so this also asserts
+# that the ordering still holds -- if those lines moved below the wildcard the
+# destination would silently revert to /order/ and nothing else would notice.
+for pl in intel-article author-page; do
+  c=$(code "$BASE/costseg/$pl"); l=$(loc_raw "$BASE/costseg/$pl")
+  want="https://costsegsmart.com/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=$pl"
+  { [ "$c" = "301" ] && [ "$l" = "$want" ]; } \
+    && ok "/costseg/$pl -> 301 homepage with ref + utm_content=$pl" \
+    || no "/costseg/$pl = $c -> '$l' (want 301 '$want')"
+done
+
+# The card placements must still reach /order/ -- proves the editorial rules
+# above did not swallow the shared behaviour they sit in front of.
+c=$(code "$BASE/costseg/miami-card"); l=$(loc_raw "$BASE/costseg/miami-card")
+want="https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=miami-card"
+{ [ "$c" = "301" ] && [ "$l" = "$want" ]; } \
+  && ok "/costseg/<card> still -> 301 /order/ (shared rule intact)" \
+  || no "/costseg/miami-card = $c -> '$l' (want 301 '$want')"
+
 echo "· Not-public artifacts (404)"
 # Internal docs are plain files at the repo root, so they are servable by
 # default and are only hidden by the force-shadow block in _redirects. That
