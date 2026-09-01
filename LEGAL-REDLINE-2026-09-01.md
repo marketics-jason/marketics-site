@@ -1,8 +1,21 @@
 # `/legal` REDLINE — Board Addendum C3, seven ruled edits
-**Prepared by:** Code · **Date:** 2026-09-01 · **Status:** awaiting Jason's approval, NOT shipped
+**Prepared by:** Code · **Date:** 2026-09-01
+**Status: APPROVED by Jason 2026-09-01 and APPLIED.** All seven edits are in `legal/index.html`,
+plus all three flagged items, which Jason approved in the same ruling. This document is kept as
+the record of what was approved — the text below is what shipped, not a proposal.
 **Authority:** Board Addendum C, Sept 1 2026. C2 names Jason as the interim counsel lane;
-C3 rules the seven edits below. C3's sequence is **redline → Jason approves → Code ships.**
+C3 rules the seven edits below. C3's sequence was **redline → Jason approves → Code ships**, and
+that is the order it ran in.
 **Public visibility:** internal only — force-shadowed to 404 in `_redirects`.
+
+**How the three flagged items were resolved** (all three approved):
+- **A — §06 Clarity contradiction:** the analytics-cookie line now says *"Clarity's cookies are
+  set only for visitors who have accepted them, as described in Section 4.1."*
+- **B — GA4 "IP anonymization is enabled":** replaced with *"Google Analytics 4 does not store
+  IP addresses."*
+- **C — §03 notice block:** the notice keeps only *"We do not sell your personal data to third
+  parties."* The Google Ads explanation sits in ordinary body text immediately below it, so the
+  flat commitment keeps its visual weight. Verified in a browser.
 
 ---
 

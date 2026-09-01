@@ -187,6 +187,38 @@ for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sam
   [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
 done
 
+# ── /legal disclosures (board addendum C3, 2026-09-01) ──────────────────────
+# The policy drifted out of step with the site's actual tracking for five and a
+# half months and nothing noticed, because nothing was watching. validate-site.py
+# now gates the repo copy; this gates what is SERVED, which is the version a
+# regulator or an ad platform would read. Both directions: the vendor we do not
+# run must stay absent, and the vendor we do run must stay named.
+echo
+echo "· /legal disclosures"
+lg=$(body "$BASE/legal")
+# Prove the page actually arrived before trusting anything below. Absence checks
+# pass VACUOUSLY on an empty body: a dead origin would cheerfully report "no Meta
+# Pixel in /legal" and look green. Found by accident when the local origin died
+# mid-run and four assertions reported clean against nothing at all.
+grep -q 'Privacy Policy' <<<"$lg" \
+  && ok "/legal fetched (absence checks below are meaningful)" \
+  || no "/legal did not fetch — every absence check below would pass on an empty body"
+grep -qi 'meta pixel' <<<"$lg" \
+  && no "/legal names Meta Pixel — no Pixel exists on this site (C3 item 3)" \
+  || ok "no Meta Pixel in /legal (vendor we do not run stays absent)"
+grep -q 'Google Ads' <<<"$lg" \
+  && ok "/legal names Google Ads (vendor we DO run stays named)" \
+  || no "/legal does not name Google Ads — the omission the counsel routing was about"
+grep -qi 'gross booking revenue' <<<"$lg" \
+  && no "/legal still states the gross fee basis — contradicts the Co-Host Agreement" \
+  || ok "no gross fee basis in /legal"
+grep -q 'net payout' <<<"$lg" \
+  && ok "/legal states the net payout fee basis" || no "/legal missing the net payout fee basis"
+grep -q 'Do Not Sell or Share' <<<"$lg" \
+  && ok "/legal describes the Do Not Sell control" || no "/legal omits the Do Not Sell control"
+grep -q 'Global Privacy Control' <<<"$lg" \
+  && ok "/legal describes GPC support" || no "/legal omits GPC support"
+
 # ── Paid LP: the conversion path itself ─────────────────────────────────────
 # The LP exists to put a lead into GHL off bought traffic. Everything below is
 # a way that silently stops working: the form never renders, a CTA points at a

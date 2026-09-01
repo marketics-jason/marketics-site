@@ -66,6 +66,16 @@ RETIRED_TOKENS = [
     "10% of revenue", "10% of the revenue", "10% of your revenue",
     "10% of bookings", "10% of net bookings", "10% of booking revenue",
     "one rate on the whole number",
+    # C3 item 7 (board addendum C, 2026-09-01): the last three holdouts lived in
+    # /legal, which Code could not edit until C2 named a ruler for that lane.
+    # Now corrected, so the gloss that stated the gross basis outright is gated
+    # with the rest of them rather than left as a documented exception.
+    "gross booking revenue",
+    # C3 item 3: the policy described a Meta Pixel that has never existed on
+    # this site. Retired as a token so a future "add our vendors back" edit
+    # fails rather than reintroducing a vendor we do not run. If a Pixel is ever
+    # actually installed, this entry is the thing that forces the conversation.
+    "Meta Pixel",
     # A1 (board addendum, 2026-08-30): one turnaround phrasing — "48 hours or
     # less" — on every surface that promises the audit. Published promise is
     # 48h; the 24h internal delivery target is not a published claim.
@@ -77,12 +87,14 @@ RETIRED_TOKENS = [
 # stays visible until counsel resolves it. Never add to this to get CI green on
 # something Code *could* fix; it exists only for documents Code must not edit.
 #
-# legal/index.html (2026-08-27, registry v3.4): /legal contradicts itself on the
-# fee basis. §601 says "10% of the net payout per booking" (matching the signed
-# Co-Host Agreement); §390, §588 and §602 say booking revenue / gross booking
-# revenue "before platform service fees, taxes, or other deductions". Those are
-# mutually exclusive, and every marketing surface now says net payout. Reported,
-# not edited, per the standing counsel-lane rule.
+# EMPTY as of 2026-09-01, and that is the point: the fee-basis entry for
+# legal/index.html (v3.4) was here for five days because Code could not edit the
+# document, not because the contradiction was acceptable. Board Addendum C2 named
+# an interim ruler for that lane, C3 ruled the corrections, and Jason approved
+# them — so §390, §588 and §602 now say net payout like §601 and every marketing
+# surface, and the exemption is deleted rather than kept as a courtesy.
+# The dict stays because the mechanism is still right: a document Code must not
+# edit gets a visible warning, never a silent pass.
 # ── Paid landing pages: the no-exit rule (Rev C §1, Strategy addendum 2026-08-27) ──
 # These pages are bought traffic. Every outbound link is a leak, and the page has
 # exactly one sanctioned exception: the fine-print footer's privacy/terms links,
@@ -142,9 +154,30 @@ TURNAROUND_EXEMPT = {
 }
 CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
 
-COUNSEL_LANE_EXEMPT = {
-    "legal/index.html": ("10% of revenue", "10% of the revenue", "10% of booking revenue",
-                         "10% of bookings", "10% of net bookings", "one rate on the whole number"),
+COUNSEL_LANE_EXEMPT: dict = {}
+
+# Same phrase, different claim — the trap the Aug 30 turnaround sweep caught and
+# the reason "24 hours" is scoped rather than blanket-retired. A retired token
+# gates a CLAIM, not a string, so a page using the same words for something else
+# is exempted here with the reason written down, never by softening the token.
+# Caught by the gate on its first run, which is what it is for.
+SAME_PHRASE_EXEMPT = {
+    "calculator/index.html": {
+        "gross booking revenue":
+            "what the calculator MEASURES (top-line, before platform and cleaning "
+            "fees) — not the basis Marketics' 10% fee is charged on. The page says "
+            "so explicitly in its assumptions list. Different claim, same words.",
+    },
+}
+
+# Required tokens: the inverse gate. A retired token catches copy that came back;
+# this catches copy that quietly went away. /legal must name the ad platform in
+# use — that omission is the whole reason for the 2026-09-01 counsel routing, and
+# it is the kind of thing a later tidy-up of a vendor list removes without
+# noticing (registry v3.20, board addendum C3 item 1).
+REQUIRED_TOKENS = {
+    "legal/index.html": ("Google Ads", "net payout", "Do Not Sell or Share",
+                         "Global Privacy Control"),
 }
 
 # Pages that legitimately carry no consent script (confidential, untracked).
@@ -260,11 +293,19 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # 1. retired tokens (scan raw so schema + copy both covered)
     for tok in RETIRED_TOKENS:
         if tok in raw:
+            if tok in SAME_PHRASE_EXEMPT.get(where, {}):
+                continue
             if tok in COUNSEL_LANE_EXEMPT.get(where, ()):
                 warn.append(f"{where}: counsel-lane token still present: {tok!r} "
                             f"(Code must not edit this document — see registry v3.4)")
             else:
                 hard.append(f"{where}: retired token present: {tok!r}")
+
+    # 1b. required tokens — copy that must not quietly disappear (registry v3.20)
+    for tok in REQUIRED_TOKENS.get(where, ()):
+        if tok not in raw:
+            hard.append(f"{where}: required token missing: {tok!r} — the document has "
+                        f"to keep describing this (board addendum C3, registry v3.20)")
 
     # 2. consent gating
     if not url.startswith(CONSENT_EXEMPT_PREFIXES):
