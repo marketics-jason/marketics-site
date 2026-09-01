@@ -113,6 +113,13 @@ DISCLOSURE = ("jamie melgar is the byline used for editorial content from cost s
 PEN_NAME_EXEMPT: set = set()
 
 
+# ── Partner capacity (registry v3.18) ──
+# Matched against _flat() output, so entity- and whitespace-insensitive.
+PARTNER_CAPACITY = re.compile(
+    r"\b(?:our|marketics'?s?)\s+(?:national\s+)?"
+    r"(?:tax|accounting|cpa|legal)\s+(?:partner|advis[eo]r|firm)\b")
+
+
 def _flat(raw: str) -> str:
     """Rendered text: tags stripped, entities resolved, whitespace collapsed.
 
@@ -431,6 +438,20 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
         hard.append(f"{where}: uses the {PEN_NAME!r} byline without the partner disclosure "
                     f"line — it is required verbatim on the author page and at the foot of "
                     f"every article carrying the byline (registry v3.11)")
+
+    # 11b. partner capacity (registry v3.18).
+    # Cost Seg Smart's own terms disclaim being a CPA firm, accounting firm, law
+    # firm or RIA, and our referral agreement obliges us not to hold them out as
+    # able to advise. "Our tax partner" implies exactly the capacity they
+    # disclaim; "cost segregation partner" describes what they actually produce.
+    # Scoped to the possessive form on purpose — a page telling a reader to check
+    # with THEIR own tax advisor is the correct sentence and must keep passing.
+    m = PARTNER_CAPACITY.search(_flat(raw))
+    if m:
+        hard.append(f"{where}: describes a partner as {m.group(0)!r} — an advisory "
+                    f"capacity our referral partner disclaims. They run cost "
+                    f"segregation studies: 'cost segregation partner' "
+                    f"(Strategy ruling 2026-09-01, registry v3.18)")
 
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided

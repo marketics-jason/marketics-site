@@ -1208,8 +1208,48 @@ conflict (v3.4, `LEGAL-ROUTING-2026-08-27.md`) should be resolved in the same pa
 
 ---
 
+## v3.18 — Partner capacity: they run studies, they do not advise (Strategy ruling, 2026-09-01)
+
+Cost Seg Smart's own terms disclaim being a CPA firm, accounting firm, law firm or registered
+investment adviser, and disclaim providing tax, legal, accounting or financial advice. Section 6
+of the referral agreement obliges Marketics not to hold them out as able to give tax advice on
+their behalf. **"Our tax partner" claims exactly the capacity they disclaim.** "Cost segregation
+partner" describes what they actually produce: an engineering-based study.
+
+### Standing rule
+
+On any Marketics surface, a cost segregation study is described as a **study, never as advice**,
+and readers are pointed to their own CPA for their situation. Tax conclusions belong to the
+partner; **Marketics makes no tax claims.**
+
+### What changed
+
+| | |
+|---|---|
+| `/intel/str-cost-segregation-tax-half`, Jason's note | "Cost Seg Smart is our tax partner" → **"Cost Seg Smart runs cost segregation studies"** |
+| Miami partner card, "Our national tax partner." | **no such card exists yet** — the partner cards are still open from v3.11, so the ruling is recorded here and applies when the card is built |
+| Sitewide sweep for "tax partner" | **one instance**, the one above. No others anywhere in the estate, `_redirects` and the registry included — the grep was run unscoped by extension this time, per the v3.15 lesson |
+
+Explicitly unchanged, per the brief: the "Tax & cost segregation" category heading (it labels a
+category of need, not the partner's capacity), the word "partner" itself (their agreement uses
+"Referral Partner" as a commercial designation), and the author-page disclosure line, which
+already said "cost segregation partner".
+
+### Made structural
+
+A string ruling that lives only in a doc comes back. `PARTNER_CAPACITY` in `validate-site.py` is
+a hard gate on the possessive capacity forms — `our|Marketics'` + `tax|accounting|CPA|legal` +
+`partner|advisor|adviser|firm` — matched against rendered text, so entity- and
+whitespace-insensitive. Scoped to the possessive on purpose: a page telling a reader to check with
+**their own** tax advisor is the correct sentence and has to keep passing. Negative-controlled
+four ways — "is our tax partner" fires, "Our national tax partner" fires, "Marketics&rsquo; tax
+advisor" fires (proving the entity form is caught), "your own tax advisor" does not.
+
+---
+
 ## Version history
 
+- **v3.18** (2026-09-01) — Strategy terminology ruling: Cost Seg Smart is our **cost segregation partner**, never our "tax partner" — their own terms disclaim advisory capacity and the referral agreement obliges us not to hold them out as advisers. One instance estate-wide, in Jason's note on the guest article; the Miami card the brief also names does not exist yet (partner cards still open from v3.11), so the ruling waits for it. Standing rule recorded: a cost segregation study is a **study, never advice**, readers go to their own CPA, and Marketics makes no tax claims. Enforced by a `PARTNER_CAPACITY` gate scoped to the possessive form, so "your own tax advisor" still passes.
 - **v3.17** (2026-09-01) — `/legal` routed to counsel a second time (`LEGAL-ROUTING-2026-09-01.md`): the policy names a Meta Pixel that does not exist, omits the Google Ads tag that does, carries a "we do not share with advertisers" sentence in tension with `ad_personalization` granted by default, over-describes Clarity (which runs only on explicit Accept, so only for gated-region visitors — an inversion worth naming), and leaves the working Do Not Sell control and GPC support undisclosed. Reported, not edited. Recommended as a gate on first ad spend, since the remedy is documentation and the cost of fixing it after launch is materially higher. Doc 404-shadowed in both URL forms and asserted in smoke.
 - **v3.16** (2026-09-01) — Strategy rulings. Editorial partner placements (`/costseg/intel-article`, `/costseg/author-page`) now land on the Cost Seg Smart homepage rather than `/order/`, as specific `_redirects` lines above the shared `:placement` rule, which is untouched so card behaviour is unchanged; same ref, same four UTMs. Smoke asserts both the new destinations and that a card placement still reaches `/order/`. House style amended: no em dashes in PROSE, the "Title — Marketics" separator exempt as a structural convention, so titles are unchanged estate-wide. The third internal link stays unmanufactured — a cost-seg reference in `/intel/money` and `/intel/what-a-property-manager-actually-costs` is a content gap Strategy will write.
 - **v3.15** (2026-08-31) — Strategy live-page brief: ruled meta description applied to `description`, `og:description` and (unnamed but same defect) `twitter:description`; both framing edits applied verbatim. Partner link confirmed intentional with the ref intact, and two unassumed differences reported — it resolves to `/order/` rather than the bare domain and carries four UTMs, both from a `_redirects` rule shared with the partner cards, with a ruling invited on whether an order form is the right landing for an article reader. Per-placement destinations now asserted in smoke against production. Schema verified as Organization/WebPage. Internal-link count reported honestly as short of the brief's bar rather than padded; `/intel/money` has no cost-seg mention to link from. Article claim strings registered by owner. `og:title`/`twitter:title` em dashes left as a site-wide style question.
