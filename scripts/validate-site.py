@@ -66,6 +66,16 @@ RETIRED_TOKENS = [
     "10% of revenue", "10% of the revenue", "10% of your revenue",
     "10% of bookings", "10% of net bookings", "10% of booking revenue",
     "one rate on the whole number",
+    # C3 item 7 (board addendum C, 2026-09-01): the last three holdouts lived in
+    # /legal, which Code could not edit until C2 named a ruler for that lane.
+    # Now corrected, so the gloss that stated the gross basis outright is gated
+    # with the rest of them rather than left as a documented exception.
+    "gross booking revenue",
+    # C3 item 3: the policy described a Meta Pixel that has never existed on
+    # this site. Retired as a token so a future "add our vendors back" edit
+    # fails rather than reintroducing a vendor we do not run. If a Pixel is ever
+    # actually installed, this entry is the thing that forces the conversation.
+    "Meta Pixel",
     # A1 (board addendum, 2026-08-30): one turnaround phrasing — "48 hours or
     # less" — on every surface that promises the audit. Published promise is
     # 48h; the 24h internal delivery target is not a published claim.
@@ -77,12 +87,14 @@ RETIRED_TOKENS = [
 # stays visible until counsel resolves it. Never add to this to get CI green on
 # something Code *could* fix; it exists only for documents Code must not edit.
 #
-# legal/index.html (2026-08-27, registry v3.4): /legal contradicts itself on the
-# fee basis. §601 says "10% of the net payout per booking" (matching the signed
-# Co-Host Agreement); §390, §588 and §602 say booking revenue / gross booking
-# revenue "before platform service fees, taxes, or other deductions". Those are
-# mutually exclusive, and every marketing surface now says net payout. Reported,
-# not edited, per the standing counsel-lane rule.
+# EMPTY as of 2026-09-01, and that is the point: the fee-basis entry for
+# legal/index.html (v3.4) was here for five days because Code could not edit the
+# document, not because the contradiction was acceptable. Board Addendum C2 named
+# an interim ruler for that lane, C3 ruled the corrections, and Jason approved
+# them — so §390, §588 and §602 now say net payout like §601 and every marketing
+# surface, and the exemption is deleted rather than kept as a courtesy.
+# The dict stays because the mechanism is still right: a document Code must not
+# edit gets a visible warning, never a silent pass.
 # ── Paid landing pages: the no-exit rule (Rev C §1, Strategy addendum 2026-08-27) ──
 # These pages are bought traffic. Every outbound link is a leak, and the page has
 # exactly one sanctioned exception: the fine-print footer's privacy/terms links,
@@ -113,6 +125,13 @@ DISCLOSURE = ("jamie melgar is the byline used for editorial content from cost s
 PEN_NAME_EXEMPT: set = set()
 
 
+# ── Partner capacity (registry v3.18) ──
+# Matched against _flat() output, so entity- and whitespace-insensitive.
+PARTNER_CAPACITY = re.compile(
+    r"\b(?:our|marketics'?s?)\s+(?:national\s+)?"
+    r"(?:tax|accounting|cpa|legal)\s+(?:partner|advis[eo]r|firm)\b")
+
+
 def _flat(raw: str) -> str:
     """Rendered text: tags stripped, entities resolved, whitespace collapsed.
 
@@ -135,9 +154,30 @@ TURNAROUND_EXEMPT = {
 }
 CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
 
-COUNSEL_LANE_EXEMPT = {
-    "legal/index.html": ("10% of revenue", "10% of the revenue", "10% of booking revenue",
-                         "10% of bookings", "10% of net bookings", "one rate on the whole number"),
+COUNSEL_LANE_EXEMPT: dict = {}
+
+# Same phrase, different claim — the trap the Aug 30 turnaround sweep caught and
+# the reason "24 hours" is scoped rather than blanket-retired. A retired token
+# gates a CLAIM, not a string, so a page using the same words for something else
+# is exempted here with the reason written down, never by softening the token.
+# Caught by the gate on its first run, which is what it is for.
+SAME_PHRASE_EXEMPT = {
+    "calculator/index.html": {
+        "gross booking revenue":
+            "what the calculator MEASURES (top-line, before platform and cleaning "
+            "fees) — not the basis Marketics' 10% fee is charged on. The page says "
+            "so explicitly in its assumptions list. Different claim, same words.",
+    },
+}
+
+# Required tokens: the inverse gate. A retired token catches copy that came back;
+# this catches copy that quietly went away. /legal must name the ad platform in
+# use — that omission is the whole reason for the 2026-09-01 counsel routing, and
+# it is the kind of thing a later tidy-up of a vendor list removes without
+# noticing (registry v3.20, board addendum C3 item 1).
+REQUIRED_TOKENS = {
+    "legal/index.html": ("Google Ads", "net payout", "Do Not Sell or Share",
+                         "Global Privacy Control"),
 }
 
 # Pages that legitimately carry no consent script (confidential, untracked).
@@ -253,11 +293,19 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # 1. retired tokens (scan raw so schema + copy both covered)
     for tok in RETIRED_TOKENS:
         if tok in raw:
+            if tok in SAME_PHRASE_EXEMPT.get(where, {}):
+                continue
             if tok in COUNSEL_LANE_EXEMPT.get(where, ()):
                 warn.append(f"{where}: counsel-lane token still present: {tok!r} "
                             f"(Code must not edit this document — see registry v3.4)")
             else:
                 hard.append(f"{where}: retired token present: {tok!r}")
+
+    # 1b. required tokens — copy that must not quietly disappear (registry v3.20)
+    for tok in REQUIRED_TOKENS.get(where, ()):
+        if tok not in raw:
+            hard.append(f"{where}: required token missing: {tok!r} — the document has "
+                        f"to keep describing this (board addendum C3, registry v3.20)")
 
     # 2. consent gating
     if not url.startswith(CONSENT_EXEMPT_PREFIXES):
@@ -432,6 +480,20 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                     f"line — it is required verbatim on the author page and at the foot of "
                     f"every article carrying the byline (registry v3.11)")
 
+    # 11b. partner capacity (registry v3.18).
+    # Cost Seg Smart's own terms disclaim being a CPA firm, accounting firm, law
+    # firm or RIA, and our referral agreement obliges us not to hold them out as
+    # able to advise. "Our tax partner" implies exactly the capacity they
+    # disclaim; "cost segregation partner" describes what they actually produce.
+    # Scoped to the possessive form on purpose — a page telling a reader to check
+    # with THEIR own tax advisor is the correct sentence and must keep passing.
+    m = PARTNER_CAPACITY.search(_flat(raw))
+    if m:
+        hard.append(f"{where}: describes a partner as {m.group(0)!r} — an advisory "
+                    f"capacity our referral partner disclaims. They run cost "
+                    f"segregation studies: 'cost segregation partner' "
+                    f"(Strategy ruling 2026-09-01, registry v3.18)")
+
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
     # consent for the visitor's region. Google's own setup page tells you to
@@ -452,6 +514,16 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
             hard.append(f"{where}: page-level Google Ads conversion event — the paid "
                         f"conversion is the audit lead, fired on form success, not a "
                         f"pageview (board addendum A2, registry v3.12)")
+
+    # 13. ad_personalization is denied everywhere (board addendum C1, registry v3.19).
+    # C1 amends B1: the two ad MEASUREMENT signals still follow the region rules,
+    # but personalization is off for every visitor, including one who clicks
+    # Accept in a gated region. The inline stubs already deny it; this makes a
+    # later "grant everything on Accept" edit to a stub fail rather than ship.
+    if re.search(r"ad_personalization\s*:\s*['\"]granted['\"]", raw):
+        hard.append(f"{where}: grants ad_personalization — it is denied for every "
+                    f"visitor in every region, with no Accept path that turns it "
+                    f"on (board addendum C1, registry v3.19)")
 
     # 12b. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
@@ -517,6 +589,26 @@ def main():
                     hard.append(f"{lp_rel}: paid conversion event {paid!r} is also fired "
                                 f"by an organic page — paid and organic never share a "
                                 f"counter (board ruling 4)")
+
+    # The same rule for mkx-consent.js, which is where the grant actually
+    # happens — the pages only carry defaults. Checked as a literal rather than
+    # a variable: `ad_personalization: ad` was the B1 shape and reads correct at
+    # a glance, so the gate requires the hardcoded 'denied' and rejects anything
+    # derived (board addendum C1, registry v3.19).
+    if not args:
+        cpath = os.path.join(ROOT, "mkx-consent.js")
+        if os.path.exists(cpath):
+            csrc = open(cpath, encoding="utf-8").read()
+            vals = re.findall(r"ad_personalization\s*:\s*([^,\n}]+)", csrc)
+            if not vals:
+                hard.append("mkx-consent.js: no ad_personalization in the consent "
+                            "update — it must be sent explicitly denied, not omitted "
+                            "(board addendum C1)")
+            for v in vals:
+                if v.strip() not in ("'denied'", '"denied"'):
+                    hard.append(f"mkx-consent.js: ad_personalization set to {v.strip()!r} "
+                                f"— it is a hardcoded 'denied' so no code path can turn "
+                                f"it on (board addendum C1, registry v3.19)")
 
     # orphan check only meaningful on a full run
     if not args:

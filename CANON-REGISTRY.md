@@ -1146,8 +1146,253 @@ attribution works either way, which was the actual risk.
 
 ---
 
+## v3.17 — `/legal` routed to counsel a second time: the tracking disclosures (Code, 2026-09-01)
+
+`LEGAL-ROUTING-2026-09-01.md`. Raised by Code, reported not edited, per the standing counsel-lane
+rule — which held here even though two of the four findings are plainly just wrong rather than
+arguable.
+
+### The finding
+
+`/legal` was last updated **2026-03-17**. The tracking has changed substantially since. The policy
+now names a vendor that is not present, omits one that is, and carries one sentence the current
+configuration puts under strain.
+
+| | |
+|---|---|
+| **Meta Pixel** | described in §04.1 and §06 — **does not exist**, zero occurrences anywhere |
+| **Google Ads** `AW-18418837499` | **live since v3.12** — **named nowhere in the policy** |
+| §03 "we do not share your personal data with advertisers…" | in tension: `ad_personalization` is **granted by default** outside the gated regions (Addendum B) |
+| **Microsoft Clarity** | described as a general vendor — actually runs **only after an explicit Accept**, and the banner only shows in the EEA/UK/CH and Canada |
+| **Do Not Sell control + GPC** | both exist and work — **undisclosed** in §08 |
+
+Every row verified against the running site by the browser suite under EEA, Canadian and US
+timezones, not read off the source.
+
+### The Clarity inversion, recorded because it is counter-intuitive
+
+Session recording runs **only for visitors in the EEA, UK, Switzerland and Canada who actively
+opted in.** A US visitor is never shown a banner, therefore never accepts, therefore is never
+recorded. The people being session-recorded are exactly the people in the most privacy-protective
+jurisdictions, and they are the only ones who were asked. The behaviour is defensible; the
+disclosure describes more collection than occurs.
+
+### Recommended sequencing: a gate on first spend
+
+Not legal advice, and stated as sequencing. This is the only open pre-spend item where fixing it
+afterwards costs materially more than fixing it before: the remedy is documentation and therefore
+fast, ad-platform terms require the destination's disclosures to describe the practices in use,
+and once campaigns run the inaccurate window acquires spend and conversion data rather than
+staying a quiet gap.
+
+### What was NOT done, deliberately
+
+`/legal` untouched. The §03 sentence is raised as a **tension rather than a violation** because
+Code cannot characterise it legally — not because it is minor. The brief also carries what the
+site does *well* (region gating, working opt-out, GPC, single tag load, Ads scoped to one page,
+all CI-enforced) so counsel can see the configuration is careful and the gap is in the
+description of it.
+
+The doc is force-shadowed to 404 in both URL forms and **asserted in `smoke.sh`** — a new internal
+doc is public the moment it merges unless two lines are remembered, which is why that assertion
+exists rather than being trusted.
+
+### Open
+
+Six questions for counsel, listed in the brief. Point 6 — whether the update needs an
+effective-date change or user notice — is the one Code flagged as unanswerable from the
+repository, the same class as point 3 in the August 27 routing.
+
+Both `/legal` routings are now open at once. If counsel amends the document, the fee-basis
+conflict (v3.4, `LEGAL-ROUTING-2026-08-27.md`) should be resolved in the same pass.
+
+---
+
+## v3.18 — Partner capacity: they run studies, they do not advise (Strategy ruling, 2026-09-01)
+
+Cost Seg Smart's own terms disclaim being a CPA firm, accounting firm, law firm or registered
+investment adviser, and disclaim providing tax, legal, accounting or financial advice. Section 6
+of the referral agreement obliges Marketics not to hold them out as able to give tax advice on
+their behalf. **"Our tax partner" claims exactly the capacity they disclaim.** "Cost segregation
+partner" describes what they actually produce: an engineering-based study.
+
+### Standing rule
+
+On any Marketics surface, a cost segregation study is described as a **study, never as advice**,
+and readers are pointed to their own CPA for their situation. Tax conclusions belong to the
+partner; **Marketics makes no tax claims.**
+
+### What changed
+
+| | |
+|---|---|
+| `/intel/str-cost-segregation-tax-half`, Jason's note | "Cost Seg Smart is our tax partner" → **"Cost Seg Smart runs cost segregation studies"** |
+| Miami partner card, "Our national tax partner." | **no such card exists yet** — the partner cards are still open from v3.11, so the ruling is recorded here and applies when the card is built |
+| Sitewide sweep for "tax partner" | **one instance**, the one above. No others anywhere in the estate, `_redirects` and the registry included — the grep was run unscoped by extension this time, per the v3.15 lesson |
+
+Explicitly unchanged, per the brief: the "Tax & cost segregation" category heading (it labels a
+category of need, not the partner's capacity), the word "partner" itself (their agreement uses
+"Referral Partner" as a commercial designation), and the author-page disclosure line, which
+already said "cost segregation partner".
+
+### Made structural
+
+A string ruling that lives only in a doc comes back. `PARTNER_CAPACITY` in `validate-site.py` is
+a hard gate on the possessive capacity forms — `our|Marketics'` + `tax|accounting|CPA|legal` +
+`partner|advisor|adviser|firm` — matched against rendered text, so entity- and
+whitespace-insensitive. Scoped to the possessive on purpose: a page telling a reader to check with
+**their own** tax advisor is the correct sentence and has to keep passing. Negative-controlled
+four ways — "is our tax partner" fires, "Our national tax partner" fires, "Marketics&rsquo; tax
+advisor" fires (proving the entity form is caught), "your own tax advisor" does not.
+
+---
+
+## v3.19 — BOARD ADDENDUM C: `ad_personalization` denied everywhere; the counsel lane has a ruler (2026-09-01)
+
+Addendum C responds to the counsel routing of the same day (v3.17) and **adopts Code's
+sequencing recommendation: `/legal` accuracy gates first spend.** Spend does not start until
+C1–C4 are live on production.
+
+### C1 — amends B1: advertising personalization is off for everyone
+
+| Signal | Gated (EEA/UK/CH/CA) | Everywhere else |
+|---|---|---|
+| `analytics_storage` | denied → granted on Accept | granted |
+| `ad_storage` | denied → granted on Accept | granted |
+| `ad_user_data` | denied → granted on Accept | granted |
+| **`ad_personalization`** | **denied, stays denied** | **denied** |
+
+Remarketing audiences are unusable below ~1,000 users and the six-week test will not reach that,
+so personalization buys nothing today while making §03 harder to write. **Conversion measurement
+— the CAC read the whole build exists for — is unaffected**, because it rides `ad_storage` and
+`ad_user_data`.
+
+**Not a permanent posture, and not automatic either:** revisiting is trigger-gated on a "scale"
+ruling at activation + 6 weeks, with lawyer-drafted policy language to support it. Recorded here
+as a flag so the trigger is findable rather than remembered.
+
+**Implementation.** `ad_personalization` is a **hardcoded `'denied'` literal** in `updateConsent()`,
+not a variable and not derived from `granted` — there is no path through that function, Accept
+included, that turns it on. The previous shape was `ad_personalization: ad`, which reads correct
+at a glance and is exactly what a later edit would restore by accident, so the gate rejects
+anything derived rather than just anything granted.
+
+Two CI gates, negative-controlled three ways: reverting to the derived form fires, deleting the
+key fires, and a single page's inline stub granting it fires. Verified behaviourally as well, in
+a browser under four region/consent combinations — US ungated, EEA undecided, EEA after Accept,
+Canada after Accept — **20/20, with `ad_personalization` denied in every consent call in all
+four**, and the measurement signals still following the region rules exactly as the table says.
+
+### C2 — the counsel lane now has a named ruler
+
+No retained counsel exists. Until one does, **Jason rules factual corrections to `/legal`; Code
+drafts and ships them with the ruling dated here.** Characterisation questions defer to the C4
+lawyer review. The boundary Code has held since v3.4 — never edit `/legal` unbidden — stands
+unchanged; what changed is that there is now someone to ask.
+
+### C3 — seven ruled edits, drafted as a redline
+
+`LEGAL-REDLINE-2026-09-01.md`. Google Ads added to §04.1 and §06; §03's advertiser sentence
+qualified rather than removed; both Meta Pixel passages deleted; Clarity corrected to
+consent-only in four jurisdictions; §08 describing the Do Not Sell control and GPC; effective
+date moved; and the fee basis at lines 390, 588 and 602 corrected to net payout, closing the
+Aug 27 routing.
+
+**Sequence is redline → Jason approves → Code ships**, so the document is unchanged on production
+until that approval. Three items are flagged in the redline rather than drafted, because the
+ruling does not cover them: §06 still implying Clarity sets cookies for everyone, §04.1's
+"IP anonymization is enabled" describing a GA4 setting that does not exist, and whether the §03
+notice block should carry the longer explanation or keep it in body text.
+
+On shipping, the claim sweep extends to `/legal` — `Meta Pixel` and `gross booking revenue` as
+retired tokens, `Google Ads` as a required one — and the counsel-lane exemption that lets
+`/legal` carry the retired fee strings is removed, since it exists only because the document
+could not be edited.
+
+### C4 — a lawyer, dated
+
+One-hour paid review of the full document, both routings, by a privacy/commercial lawyer with US
+and Canadian exposure. **Booked by Sept 12, completed by Sept 30.** Scope: confirm C3 items 2 and
+6, catch what the factual pass missed, and pre-draft the personalization language for C1's
+trigger.
+
+---
+
+## v3.20 — `/legal` corrected: the first edit Code has ever made to that document (2026-09-01)
+
+Jason approved the C3 redline and all three flagged items the same day. **`LEGAL-REDLINE-2026-09-01.md`
+is the record of what was approved; the seven edits are now in `legal/index.html`.**
+
+This is the first time Code has edited `/legal`. The boundary did not move because the document
+became less sensitive — it moved because C2 named someone with authority to rule on it. Every
+edit below traces to a ruling; none was Code's judgement about what the policy should say.
+
+### What the document now says
+
+| # | Was | Is |
+|---|---|---|
+| 1 | Google Ads named nowhere | §04.1 vendor entry + §06 marketing-cookie line, both naming conversion measurement on the paid LP and *no* personalization or remarketing |
+| 2 | "We do not share your personal data with advertisers…" | the sell sentence kept verbatim; a body paragraph now states what *is* shared with Google Ads and why, and that no advertising audiences are built |
+| 3 | Meta Pixel described in two places | **removed**, and `Meta Pixel` is now a retired token |
+| 4 | Clarity as a general vendor | "runs only for visitors in the EEA, UK, Switzerland and Canada who have explicitly accepted… It does not run for any other visitor." |
+| 5 | §08 pointed only at an email address | describes the footer Do Not Sell control and automatic GPC support, email kept as the fallback |
+| 6 | Effective / Last Updated: March 17, 2026 | **September 1, 2026**, both tabs — the Terms half changed too, so its date could not stay |
+| 7 | §390/§588/§602 on a gross basis, contradicting §601 | all four now say **net payout**, matching the signed Co-Host Agreement |
+
+The three flagged items were approved as proposed: §06's analytics line now says Clarity's
+cookies are set only for visitors who accepted them; GA4's "IP anonymization is enabled" — which
+is Universal Analytics language for a setting GA4 does not have — became "does not store IP
+addresses"; and §03's notice block keeps only the flat commitment, with the Google Ads
+explanation in body text below it, verified in a browser so the gold-ruled block still reads as
+a promise rather than an argument.
+
+### The Aug 27 routing closes with it
+
+`LEGAL-ROUTING-2026-08-27.md` was open for five days over the fee basis. Edit 7 closes it, and
+the **counsel-lane exemption is deleted rather than kept as a courtesy** — it existed only
+because Code could not edit the document, and keeping a dead exemption is how a real one stops
+being noticed. `COUNSEL_LANE_EXEMPT` is now empty; the mechanism stays, because a document Code
+must not edit should still warn rather than pass silently.
+
+### Enforcement, both directions
+
+A retired token catches copy that came *back*. `/legal` needed the inverse too — the whole
+finding was about copy that quietly *went away* — so **`REQUIRED_TOKENS`** is new: `Google Ads`,
+`net payout`, `Do Not Sell or Share` and `Global Privacy Control` must all remain present.
+Negative-controlled four ways, including removing each required string and reintroducing the
+Pixel. Smoke asserts the same six facts against the **served** page, since the repo copy and the
+deployed copy are different questions and this document is the one an ad platform or a regulator
+reads.
+
+**One assertion class was nearly worthless and got caught by accident.** The local origin died
+mid-run and the absence checks — "no Meta Pixel in `/legal`" — all reported green **against an
+empty body**. Absence is unfalsifiable when the fetch fails. The block now proves the page
+arrived before trusting anything that follows.
+
+### `gross booking revenue` on `/calculator` — the same-phrase trap, third occurrence
+
+Adding the token failed CI immediately on `/calculator`, which uses the phrase for **what the
+calculator measures** (top-line, before platform and cleaning fees — it says so in its own
+assumptions list), not for the basis Marketics' fee is charged on. Same words, different claim —
+the trap `24 hours` on `/pricing` set in v3.9 and the Aug 30 sweep set before that. Handled the
+same way: a scoped exemption with the reason written down, **never by softening the token**.
+`SAME_PHRASE_EXEMPT` now carries that pattern explicitly instead of it being re-derived each time.
+
+### Still open
+
+C3 items 2 and 6 — the §03 characterisation and whether the date change needs user notice —
+remain **provisional pending C4**, the lawyer review booked by Sept 12 and complete by Sept 30.
+Everything else in the `/legal` accuracy gate is closed, which clears Addendum C's gate on first
+spend as far as Code's side of it goes.
+
+---
+
 ## Version history
 
+- **v3.20** (2026-09-01) — **`/legal` corrected — the first edit Code has ever made to that document**, on Jason's approval of the C3 redline (all seven edits plus all three flagged items). Google Ads named in §04.1 and §06; §03's sell sentence kept verbatim with the advertiser claim replaced by what is actually shared; both Meta Pixel passages removed; Clarity corrected to consent-only in four jurisdictions; §08 describing the Do Not Sell control and GPC; dates moved on both tabs; and the fee basis at §390/§588/§602 corrected to net payout, **closing the Aug 27 routing** and deleting the counsel-lane exemption rather than keeping it as a courtesy. New `REQUIRED_TOKENS` gate for copy that quietly goes away, the inverse of a retired token; smoke asserts the same six facts against the served page. Two things caught in the doing: the absence assertions passed **vacuously against an empty body** when the origin died, now guarded; and `gross booking revenue` on `/calculator` is the same-phrase/different-claim trap for the third time, scoped with its reason rather than softening the token. C3 items 2 and 6 stay provisional pending the C4 lawyer review.
+- **v3.19** (2026-09-01) — BOARD ADDENDUM C, amending B1: `ad_personalization` **denied for every visitor in every region**, including an Accept in a gated region — remarketing is unusable at test scale, so it buys nothing while straining §03; conversion measurement is unaffected. Hardcoded literal rather than a derived value, since `ad_personalization: ad` reads correct at a glance; two CI gates, negative-controlled three ways, plus a four-region browser test (20/20). `/legal` accuracy adopted as a **gate on first spend**, per Code's recommendation. Counsel lane now has a named ruler (Jason, interim) — the never-edit-unbidden boundary is unchanged. Seven ruled edits drafted as `LEGAL-REDLINE-2026-09-01.md` and awaiting approval; three uncovered items flagged rather than drafted. Lawyer review booked by Sept 12, complete by Sept 30.
+- **v3.18** (2026-09-01) — Strategy terminology ruling: Cost Seg Smart is our **cost segregation partner**, never our "tax partner" — their own terms disclaim advisory capacity and the referral agreement obliges us not to hold them out as advisers. One instance estate-wide, in Jason's note on the guest article; the Miami card the brief also names does not exist yet (partner cards still open from v3.11), so the ruling waits for it. Standing rule recorded: a cost segregation study is a **study, never advice**, readers go to their own CPA, and Marketics makes no tax claims. Enforced by a `PARTNER_CAPACITY` gate scoped to the possessive form, so "your own tax advisor" still passes.
+- **v3.17** (2026-09-01) — `/legal` routed to counsel a second time (`LEGAL-ROUTING-2026-09-01.md`): the policy names a Meta Pixel that does not exist, omits the Google Ads tag that does, carries a "we do not share with advertisers" sentence in tension with `ad_personalization` granted by default, over-describes Clarity (which runs only on explicit Accept, so only for gated-region visitors — an inversion worth naming), and leaves the working Do Not Sell control and GPC support undisclosed. Reported, not edited. Recommended as a gate on first ad spend, since the remedy is documentation and the cost of fixing it after launch is materially higher. Doc 404-shadowed in both URL forms and asserted in smoke.
 - **v3.16** (2026-09-01) — Strategy rulings. Editorial partner placements (`/costseg/intel-article`, `/costseg/author-page`) now land on the Cost Seg Smart homepage rather than `/order/`, as specific `_redirects` lines above the shared `:placement` rule, which is untouched so card behaviour is unchanged; same ref, same four UTMs. Smoke asserts both the new destinations and that a card placement still reaches `/order/`. House style amended: no em dashes in PROSE, the "Title — Marketics" separator exempt as a structural convention, so titles are unchanged estate-wide. The third internal link stays unmanufactured — a cost-seg reference in `/intel/money` and `/intel/what-a-property-manager-actually-costs` is a content gap Strategy will write.
 - **v3.15** (2026-08-31) — Strategy live-page brief: ruled meta description applied to `description`, `og:description` and (unnamed but same defect) `twitter:description`; both framing edits applied verbatim. Partner link confirmed intentional with the ref intact, and two unassumed differences reported — it resolves to `/order/` rather than the bare domain and carries four UTMs, both from a `_redirects` rule shared with the partner cards, with a ruling invited on whether an order form is the right landing for an article reader. Per-placement destinations now asserted in smoke against production. Schema verified as Organization/WebPage. Internal-link count reported honestly as short of the brief's bar rather than padded; `/intel/money` has no cost-seg mention to link from. Article claim strings registered by owner. `og:title`/`twitter:title` em dashes left as a site-wide style question.
 - **v3.14** (2026-08-31) — corrects v3.12: the Ads destination is scoped to `/lp/keep-control` rather than every page. Configured site-wide it cost `/calculator` ~1,850ms of mobile LCP (0.68 vs the 0.80 floor, 6549ms vs the 5200ms budget) and failed CI. Local runs could not have caught it — this sandbox blocks googletagmanager.com, so they were scoring a page with no tag on it. The LP is the whole paid path (no-exit rule) and the only page a conversion can occur on, so the scope is correct on the merits, not just cheap. GA4 unchanged everywhere.
