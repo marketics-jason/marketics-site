@@ -104,6 +104,18 @@ c=$(code "$BASE/costseg"); l=$(loc_raw "$BASE/costseg")
   && ok "/costseg -> 301 costsegsmart.com (utm_content=direct)" \
   || no "/costseg = $c -> '$l' (want 301 costsegsmart.com utm_content=direct)"
 
+# The placements the live pages actually link to. An untagged partner link is
+# invisible when it breaks -- it still goes somewhere sensible, it just arrives
+# with no ref and no attribution -- so the destination is asserted per
+# placement rather than trusting the :placement rule in the abstract.
+for pl in intel-article author-page; do
+  c=$(code "$BASE/costseg/$pl"); l=$(loc_raw "$BASE/costseg/$pl")
+  want="https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=$pl"
+  { [ "$c" = "301" ] && [ "$l" = "$want" ]; } \
+    && ok "/costseg/$pl -> 301 with ref + utm_content=$pl" \
+    || no "/costseg/$pl = $c -> '$l' (want 301 '$want')"
+done
+
 echo "· Not-public artifacts (404)"
 # Internal docs are plain files at the repo root, so they are servable by
 # default and are only hidden by the force-shadow block in _redirects. That
