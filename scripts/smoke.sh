@@ -138,7 +138,8 @@ echo "· Not-public artifacts (404)"
 # one of them gets asserted here, in both the extensionless and .md forms,
 # since the shadow lists both and a rule covering only one still leaks.
 for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08-25" \
-         "/LEGAL-ROUTING-2026-08-27" "/LEGAL-ROUTING-2026-09-01"; do
+         "/LEGAL-ROUTING-2026-08-27" "/LEGAL-ROUTING-2026-09-01" \
+         "/LEGAL-REDLINE-2026-09-01"; do
   for f in "$d" "$d.md"; do
     c=$(code "$BASE$f"); [ "$c" = "404" ] && ok "$f 404 (internal)" || no "$f = $c (want 404 — internal doc is PUBLIC)"
   done

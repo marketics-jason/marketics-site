@@ -3,16 +3,20 @@
    ~2KB inline. Replaces CookieYes entirely.
    
    Consent Mode v2 + region gating. Board ruling 2026-08-21, amended by
-   Addendum B (2026-08-30), which supersedes A3. Full rationale lives in
-   CANON-REGISTRY.md v3.10 — kept there, not here, because this file ships to
-   every visitor and /calculator has no performance headroom to spare.
+   Addendum B (2026-08-30, superseding A3) and Addendum C (2026-09-01, amending
+   B1). Full rationale lives in CANON-REGISTRY.md v3.10 and v3.19 — kept there,
+   not here, because this file ships to every visitor and /calculator has no
+   performance headroom to spare.
 
    - GATED (EEA/UK/CH + Canada): banner; all denied until Accept. Accept grants
-     all four families and permits Clarity and the chat widget; Decline denies
+     analytics, functionality, personalization and the two ad MEASUREMENT
+     signals, and permits Clarity and the chat widget; Decline denies
      everything.
-   - ELSEWHERE: no banner. Analytics and the three ad signals granted by
-     default, reversible by the footer "Do Not Sell or Share" control or GPC.
+   - ELSEWHERE: no banner. Analytics and the two ad measurement signals granted
+     by default, reversible by the footer "Do Not Sell or Share" control or GPC.
      Clarity still does not load — see the ungated branch.
+   - EVERYWHERE, no exceptions: ad_personalization DENIED (Addendum C1). It is
+     not granted by an Accept, by the ungated default, or by anything else.
 
    Region detection is timezone-based and deliberately over-inclusive: a
    detection failure gets the banner. Google resolves the real region
@@ -57,8 +61,9 @@
   }
 
   /* ── Opt-out of advertising signals (B1) ──────────────
-     Two routes, one effect. Either flips the three ad signals to denied and
-     keeps them there: the visitor's "Do Not Sell or Share" click, stored; or
+     Two routes, one effect. Either flips the ad measurement signals to denied
+     and keeps them there (ad_personalization is already denied for everyone
+     under C1, so the opt-out has nothing left to do for it): the visitor's "Do Not Sell or Share" click, stored; or
      Global Privacy Control, which several US state laws require be honoured as
      a valid opt-out signal without any further action from the visitor.
      Analytics is untouched — the opt-out is about sale/sharing, not measurement. */
@@ -75,9 +80,21 @@
   }
 
   /* ── Push a consent decision to Google ────────────────
-     `granted` covers analytics/functionality/personalization. Advertising
-     signals follow it too (Addendum B1/B3) unless the visitor has opted out,
-     in which case they are denied no matter what else was accepted. */
+     `granted` covers analytics/functionality/personalization. The two
+     MEASUREMENT ad signals follow it too (Addendum B1/B3) unless the visitor
+     has opted out, in which case they are denied no matter what else was
+     accepted.
+
+     ad_personalization is the exception and is DENIED unconditionally
+     (Addendum C1, amending B1). Not a variable, not derived from `granted`,
+     and not granted by an Accept in the gated regions either — a hardcoded
+     literal, so there is no path through this function that turns it on.
+     Remarketing audiences are unusable below ~1,000 users and the six-week
+     test will not reach that, so personalization buys nothing today while
+     making the privacy policy harder to write. Conversion measurement — the
+     CAC read this whole build exists for — rides ad_storage and ad_user_data
+     and is unaffected. Revisit is trigger-gated, not automatic: a scale
+     ruling at activation + 6 weeks, with policy language to match. */
   function updateConsent(granted) {
     if (typeof gtag !== 'function') return;
     var v = granted ? 'granted' : 'denied';
@@ -88,7 +105,7 @@
       personalization_storage: v,
       ad_storage: ad,
       ad_user_data: ad,
-      ad_personalization: ad
+      ad_personalization: 'denied'
     });
   }
 
@@ -399,7 +416,7 @@
     document.getElementById('mkx-accept').addEventListener('click', function () {
       setConsent(true);
       beacon('consent_accept');
-      updateConsent(true);    // B3: all four signals, advertising included
+      updateConsent(true);    // B3, as amended by C1: everything except ad_personalization
       loadClarity();          // GA4 is already loaded; this is the cookie-setting one
       loadWidget();           // B4: in gated regions the chat widget waits for this
       dismiss(banner);
@@ -436,10 +453,11 @@
     updateConsent(false);   // declined: nothing loads, widget included
   } else if (!gated) {
     setTimeout(loadWidget, 5000);   // B4: the standard timer, ungated regions
-    // B1: ad signals granted by default here, reversible by the opt-out control
-    // or GPC — updateConsent() applies that itself. Explicit rather than
-    // inherited, because the inline stubs deny advertising everywhere as the
-    // fail-safe.
+    // B1: ad MEASUREMENT signals granted by default here, reversible by the
+    // opt-out control or GPC — updateConsent() applies that itself. Explicit
+    // rather than inherited, because the inline stubs deny advertising
+    // everywhere as the fail-safe. ad_personalization is not among them: C1
+    // denies it everywhere, so the stubs' denial simply stands.
     updateConsent(true);
     // Clarity still does NOT load here — explicit Accept only. Measured: it is
     // a session recorder whose DOM serialisation on load blew /calculator's 4s

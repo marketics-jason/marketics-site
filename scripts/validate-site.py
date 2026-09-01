@@ -474,6 +474,16 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"conversion is the audit lead, fired on form success, not a "
                         f"pageview (board addendum A2, registry v3.12)")
 
+    # 13. ad_personalization is denied everywhere (board addendum C1, registry v3.19).
+    # C1 amends B1: the two ad MEASUREMENT signals still follow the region rules,
+    # but personalization is off for every visitor, including one who clicks
+    # Accept in a gated region. The inline stubs already deny it; this makes a
+    # later "grant everything on Accept" edit to a stub fail rather than ship.
+    if re.search(r"ad_personalization\s*:\s*['\"]granted['\"]", raw):
+        hard.append(f"{where}: grants ad_personalization — it is denied for every "
+                    f"visitor in every region, with no Accept path that turns it "
+                    f"on (board addendum C1, registry v3.19)")
+
     # 12b. structural warnings
     if "/cdn-cgi/" in raw and "email-protection" in raw and not any(
         w.startswith(where) and "Cloudflare artifact" in w for w in warn
@@ -538,6 +548,26 @@ def main():
                     hard.append(f"{lp_rel}: paid conversion event {paid!r} is also fired "
                                 f"by an organic page — paid and organic never share a "
                                 f"counter (board ruling 4)")
+
+    # The same rule for mkx-consent.js, which is where the grant actually
+    # happens — the pages only carry defaults. Checked as a literal rather than
+    # a variable: `ad_personalization: ad` was the B1 shape and reads correct at
+    # a glance, so the gate requires the hardcoded 'denied' and rejects anything
+    # derived (board addendum C1, registry v3.19).
+    if not args:
+        cpath = os.path.join(ROOT, "mkx-consent.js")
+        if os.path.exists(cpath):
+            csrc = open(cpath, encoding="utf-8").read()
+            vals = re.findall(r"ad_personalization\s*:\s*([^,\n}]+)", csrc)
+            if not vals:
+                hard.append("mkx-consent.js: no ad_personalization in the consent "
+                            "update — it must be sent explicitly denied, not omitted "
+                            "(board addendum C1)")
+            for v in vals:
+                if v.strip() not in ("'denied'", '"denied"'):
+                    hard.append(f"mkx-consent.js: ad_personalization set to {v.strip()!r} "
+                                f"— it is a hardcoded 'denied' so no code path can turn "
+                                f"it on (board addendum C1, registry v3.19)")
 
     # orphan check only meaningful on a full run
     if not args:
