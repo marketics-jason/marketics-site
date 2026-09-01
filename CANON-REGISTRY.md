@@ -1146,8 +1146,71 @@ attribution works either way, which was the actual risk.
 
 ---
 
+## v3.17 — `/legal` routed to counsel a second time: the tracking disclosures (Code, 2026-09-01)
+
+`LEGAL-ROUTING-2026-09-01.md`. Raised by Code, reported not edited, per the standing counsel-lane
+rule — which held here even though two of the four findings are plainly just wrong rather than
+arguable.
+
+### The finding
+
+`/legal` was last updated **2026-03-17**. The tracking has changed substantially since. The policy
+now names a vendor that is not present, omits one that is, and carries one sentence the current
+configuration puts under strain.
+
+| | |
+|---|---|
+| **Meta Pixel** | described in §04.1 and §06 — **does not exist**, zero occurrences anywhere |
+| **Google Ads** `AW-18418837499` | **live since v3.12** — **named nowhere in the policy** |
+| §03 "we do not share your personal data with advertisers…" | in tension: `ad_personalization` is **granted by default** outside the gated regions (Addendum B) |
+| **Microsoft Clarity** | described as a general vendor — actually runs **only after an explicit Accept**, and the banner only shows in the EEA/UK/CH and Canada |
+| **Do Not Sell control + GPC** | both exist and work — **undisclosed** in §08 |
+
+Every row verified against the running site by the browser suite under EEA, Canadian and US
+timezones, not read off the source.
+
+### The Clarity inversion, recorded because it is counter-intuitive
+
+Session recording runs **only for visitors in the EEA, UK, Switzerland and Canada who actively
+opted in.** A US visitor is never shown a banner, therefore never accepts, therefore is never
+recorded. The people being session-recorded are exactly the people in the most privacy-protective
+jurisdictions, and they are the only ones who were asked. The behaviour is defensible; the
+disclosure describes more collection than occurs.
+
+### Recommended sequencing: a gate on first spend
+
+Not legal advice, and stated as sequencing. This is the only open pre-spend item where fixing it
+afterwards costs materially more than fixing it before: the remedy is documentation and therefore
+fast, ad-platform terms require the destination's disclosures to describe the practices in use,
+and once campaigns run the inaccurate window acquires spend and conversion data rather than
+staying a quiet gap.
+
+### What was NOT done, deliberately
+
+`/legal` untouched. The §03 sentence is raised as a **tension rather than a violation** because
+Code cannot characterise it legally — not because it is minor. The brief also carries what the
+site does *well* (region gating, working opt-out, GPC, single tag load, Ads scoped to one page,
+all CI-enforced) so counsel can see the configuration is careful and the gap is in the
+description of it.
+
+The doc is force-shadowed to 404 in both URL forms and **asserted in `smoke.sh`** — a new internal
+doc is public the moment it merges unless two lines are remembered, which is why that assertion
+exists rather than being trusted.
+
+### Open
+
+Six questions for counsel, listed in the brief. Point 6 — whether the update needs an
+effective-date change or user notice — is the one Code flagged as unanswerable from the
+repository, the same class as point 3 in the August 27 routing.
+
+Both `/legal` routings are now open at once. If counsel amends the document, the fee-basis
+conflict (v3.4, `LEGAL-ROUTING-2026-08-27.md`) should be resolved in the same pass.
+
+---
+
 ## Version history
 
+- **v3.17** (2026-09-01) — `/legal` routed to counsel a second time (`LEGAL-ROUTING-2026-09-01.md`): the policy names a Meta Pixel that does not exist, omits the Google Ads tag that does, carries a "we do not share with advertisers" sentence in tension with `ad_personalization` granted by default, over-describes Clarity (which runs only on explicit Accept, so only for gated-region visitors — an inversion worth naming), and leaves the working Do Not Sell control and GPC support undisclosed. Reported, not edited. Recommended as a gate on first ad spend, since the remedy is documentation and the cost of fixing it after launch is materially higher. Doc 404-shadowed in both URL forms and asserted in smoke.
 - **v3.16** (2026-09-01) — Strategy rulings. Editorial partner placements (`/costseg/intel-article`, `/costseg/author-page`) now land on the Cost Seg Smart homepage rather than `/order/`, as specific `_redirects` lines above the shared `:placement` rule, which is untouched so card behaviour is unchanged; same ref, same four UTMs. Smoke asserts both the new destinations and that a card placement still reaches `/order/`. House style amended: no em dashes in PROSE, the "Title — Marketics" separator exempt as a structural convention, so titles are unchanged estate-wide. The third internal link stays unmanufactured — a cost-seg reference in `/intel/money` and `/intel/what-a-property-manager-actually-costs` is a content gap Strategy will write.
 - **v3.15** (2026-08-31) — Strategy live-page brief: ruled meta description applied to `description`, `og:description` and (unnamed but same defect) `twitter:description`; both framing edits applied verbatim. Partner link confirmed intentional with the ref intact, and two unassumed differences reported — it resolves to `/order/` rather than the bare domain and carries four UTMs, both from a `_redirects` rule shared with the partner cards, with a ruling invited on whether an order form is the right landing for an article reader. Per-placement destinations now asserted in smoke against production. Schema verified as Organization/WebPage. Internal-link count reported honestly as short of the brief's bar rather than padded; `/intel/money` has no cost-seg mention to link from. Article claim strings registered by owner. `og:title`/`twitter:title` em dashes left as a site-wide style question.
 - **v3.14** (2026-08-31) — corrects v3.12: the Ads destination is scoped to `/lp/keep-control` rather than every page. Configured site-wide it cost `/calculator` ~1,850ms of mobile LCP (0.68 vs the 0.80 floor, 6549ms vs the 5200ms budget) and failed CI. Local runs could not have caught it — this sandbox blocks googletagmanager.com, so they were scoring a page with no tag on it. The LP is the whole paid path (no-exit rule) and the only page a conversion can occur on, so the scope is correct on the merits, not just cheap. GA4 unchanged everywhere.
