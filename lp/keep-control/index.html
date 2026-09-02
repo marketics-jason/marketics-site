@@ -959,7 +959,16 @@ footer a:hover{color:var(--muted);}
       var payload = {
         email: email,
         listingUrl: listingUrl,
+        /* Two keys, one value, on purpose. `pricingOwner` is the original and
+           may already be consumed downstream; `pricing_owner` matches the GHL
+           custom field's key exactly, so the workflow mapping is a like-for-like
+           pick rather than a judgement call. The listingUrl/listingurl confusion
+           of 2026-09-01 came from exactly this gap between what the form CALLS a
+           field and what the payload SENDS. Drop `pricingOwner` once nothing
+           else reads it. Value is the option's `value`, not its label — see the
+           select above and registry v3.21. */
         pricingOwner: document.getElementById('lpPricingOwner').value,
+        pricing_owner: document.getElementById('lpPricingOwner').value,
         mode: 'existing_listing',   /* no toggle here: this audience has a live listing by definition */
         source: form.querySelector('input[name="source"]').value,
         landingPage: landing,
