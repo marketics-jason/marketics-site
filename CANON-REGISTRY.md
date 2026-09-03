@@ -1762,10 +1762,56 @@ behaviour and the stamp are byte-for-byte unaffected.
 
 ---
 
+## v3.27 — the sixth host, and the CORS error that is not a bug (2026-09-03)
+
+### Unblocking one layer reveals the next
+
+The first console capture showed five blocked hosts and v3.24 fixed those five. The post-deploy
+console then showed a **sixth**: `pagead2.googlesyndication.com/ccm/collect`, where the Ads
+conversion beacon actually goes.
+
+It was not missing from the first capture by oversight. **A browser reports the first block, not
+every block** — gtag never got far enough to attempt the conversion beacon while the earlier hosts
+were being refused. So "fix everything the console showed" was a correct step and still an
+incomplete one, and the same will be true of the next capture.
+
+Added: `pagead2.googlesyndication.com` (demonstrated) and `www.googleadservices.com`
+(**precautionary, and labelled as such**). Every other host in this directive was added only
+against a demonstrated block; that distinction is kept visible rather than blurred, because "we
+added it because the console showed it" and "we added it because it seemed likely" are different
+kinds of claim and the file should not pretend otherwise.
+
+### The GHL webhook CORS error is expected and harmless
+
+```
+Access to resource at 'https://services.leadconnectorhq.com/hooks/…' from origin
+'https://marketics.io' has been blocked by CORS policy: … 'Access-Control-Allow-Origin'
+must not be the wildcard '*' when the request's credentials mode is 'include'.
+```
+
+**The contact is created anyway.** Confirmed by Jason on 2026-09-03, and consistent with every
+submission before it: the POST reaches GHL server-side; only the browser's ability to *read the
+response* is refused. Nothing in this estate sets `credentials: 'include'` — the fetch is
+byte-identical on `/lp/keep-control` and `/get-started`, and the escalation comes from the
+visitor's browser environment.
+
+`/get-started` has carried the comment *"Show confirmation regardless of the webhook's CORS/network
+outcome"* since long before today; the code catches and proceeds by design. **This is recorded
+because it looks exactly like a broken lead path and is not one.** It was re-diagnosed on a launch
+day at the cost of a full stop, and it will look just as alarming to the next person who opens a
+console.
+
+The distinction that matters, if it ever does need investigating: a console CORS error is
+consistent with the lead arriving. **The decisive test is whether the contact exists in GHL, not
+what the console says.**
+
+---
+
 ## Version history
 
 
 
+- **v3.27** (2026-09-03) — **a sixth blocked host, and a CORS error that is not a bug.** The post-deploy console showed `pagead2.googlesyndication.com/ccm/collect` still refused — not an oversight in v3.24 but the shape of the problem: **a browser reports the first block, not every block**, so gtag never reached the conversion beacon while earlier hosts were being refused. "Fix what the console showed" is correct and incomplete, and will be again next time. Added it plus `www.googleadservices.com`, the latter labelled **precautionary** rather than evidenced, since every other host here was added against a demonstrated block and the two kinds of claim should stay distinguishable. Also recorded: the GHL webhook's CORS error (`ACAO must not be '*' when credentials mode is 'include'`) is **expected and harmless — the contact is created anyway**, confirmed by Jason. Nothing in the estate sets `credentials: 'include'`; the fetch is identical to `/get-started`, which has carried "show confirmation regardless of the webhook's CORS/network outcome" since long before today. Written down because it looks exactly like a broken lead path, cost a full stop on a launch day, and will alarm the next person to open a console. **The decisive test is whether the contact exists in GHL, not what the console says.**
 - **v3.26** (2026-09-03) — **GA4 has no path-based data filters.** Data filters are Developer traffic and Internal traffic only; Internal traffic tests `traffic_type`. Recorded as a standing fact because Code proposed a nonexistent "exclude paths ending in `/index.html`" filter **twice in one day** and it was struck both times — if automated traffic is to be excluded, the page has to stamp it, because the server side can only filter on what the page sends. Consequence: the v3.25 gap (one unstamped page_view per CI run, since the stub's `gtag('config')` flushes before a separate `set`) is closed at source rather than accepted — `navigator.webdriver` is readable at parse time, so the stub now carries `traffic_type` on the config call itself across all **53** stub-bearing pages. The 54th, `/audits/<token>/`, has no stub by design. The `set` in `mkx-consent.js` is kept and narrowed to its real job: destinations configured after the stub, i.e. the Ads destination on the paid LP. Still stamped, not suppressed (v3.14). Console task is one filter: Internal traffic, `traffic_type = internal`, Active.
 - **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial as first shipped and stated as such; closed at config time in v3.26 (the GA4 path-filter proposed here does not exist). Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
 - **v3.24** (2026-09-03) — **the measurement layer was double-blocked: consent AND CSP.** `generate_lead_paid` never reached GA4; the three suspects proposed (build-time flag, redirect race, silent JS error) were all wrong, and a browser repro proved the site pushes the event to `dataLayer` in every scenario including a slow and a failing GHL endpoint. The blocker was CSP `connect-src` refusing every Google measurement beacon. **`script-src` governs whether a tag loads; `connect-src` governs whether it can send** — so gtag.js loaded fine the whole time and nothing looked broken. The trap: `https://*.analytics.google.com` was already listed, and a CSP host wildcard matches **subdomains only, never the bare domain**, so `analytics.google.com` was blocked by the line that appeared to allow it. Two of the seven hosts in the incoming brief were already present; the real delta was five (`analytics.google.com`, `www.google.com`, `google.com`, `ad.doubleclick.net`, `googleads.g.doubleclick.net`), `connect-src` only. Named blind spot: **a local server sends no CSP**, so every browser repro in this repo is structurally blind to this class of bug and passed while production refused every beacon. Smoke now asserts the served `connect-src` scoped to the **directive** — load-bearing, since `www.google.com` is in `script-src` and a whole-header grep would have called this bug green. Regression-tested by replaying the guard against the pre-fix policy: fires on exactly the five blocked hosts. Retroactive lead, not a conclusion: the v2.7 "~2 users vs 28 GSC clicks" anomaly may never have been only consent gating.
