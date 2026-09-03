@@ -109,30 +109,28 @@
     });
   }
 
-  /* ── Consent-decision instrumentation (Aug 21 2026 CTO brief, P1) ──
-     GA4 is gated behind this banner and was reporting ~2 users in 4 weeks
-     against 28 GSC clicks on the homepage alone — consistent with most
-     visitors never reaching Accept. Posts to the same CONSENT-INDEPENDENT GHL
-     webhook used for lead capture, distinguished by the `event` field.
+  /* ── Consent-decision instrumentation — REMOVED 2026-09-03 (registry v3.30) ──
+     A beacon here posted consent_impression / consent_accept / consent_decline /
+     ad_optout to a GHL inbound webhook. It never delivered a single event, from
+     the day it shipped.
 
-     Consent-independent is NOT server-side — this said "server-side" and was
-     wrong. The request originates in the browser, so a content blocker blocks
-     it. Unrelated properties, and the conflation was relied on downstream.
+     `navigator.sendBeacon()` always sends with credentials mode 'include' —
+     specified behaviour, not a browser quirk and not an extension. The body was
+     a Blob typed `application/json`, which is NOT CORS-safelisted, so the
+     request required a preflight; GHL answers preflights with a wildcard
+     `Access-Control-Allow-Origin: *`, which is invalid under credentials mode
+     'include'. The preflight failed every time, and a failed preflight sends
+     nothing at all. Four console errors per banner, zero data.
 
-     It also only fires where a banner renders, so it has never been a
-     site-wide accept rate. Best-effort; never block the banner. */
-  var GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e';
-  function beacon(event) {
-    try {
-      var body = JSON.stringify({ event: event, source: 'consent-banner', path: location.pathname, timestamp: new Date().toISOString() });
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(GHL_HOOK, new Blob([body], { type: 'application/json' }));
-      } else {
-        fetch(GHL_HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-      }
-    } catch (e) { /* non-critical */ }
-  }
+     It cost more than it ever returned: on 2026-09-03 those errors were read as
+     a broken LEAD path and "fixed" with a Content-Type change GHL rejects,
+     dropping ~20 minutes of real submissions (registry v3.29). The lead form was
+     never involved — it is a different endpoint on the same page.
 
+     Do not re-add it in this shape. If consent telemetry is wanted again it goes
+     through a same-origin proxy, where CORS does not apply at all: it is a
+     browser-enforced mechanism and a same-origin request never triggers it.
+     Gated in validate-site.py and scripts/smoke.sh. */
   /* ── Read stored consent ──────────────────────────── */
   function getConsent() {
     try {
@@ -338,7 +336,6 @@
       b.addEventListener('click', function () {
         setOptOut();
         updateConsent(true);   // analytics stays; the three ad signals go denied
-        beacon('ad_optout');
         b.textContent = 'Advertising opted out';
         b.disabled = true;
       });
@@ -438,18 +435,9 @@
     ].join('');
 
     document.body.appendChild(banner);
-    // Once per session — the banner re-renders on every pageview until answered,
-    // and one webhook call per pageview would swamp the CRM.
-    try {
-      if (!sessionStorage.getItem('mkx_imp')) {
-        sessionStorage.setItem('mkx_imp', '1');
-        beacon('consent_impression');
-      }
-    } catch (e) { beacon('consent_impression'); }
 
     document.getElementById('mkx-accept').addEventListener('click', function () {
       setConsent(true);
-      beacon('consent_accept');
       updateConsent(true);    // B3, as amended by C1: everything except ad_personalization
       loadClarity();          // GA4 is already loaded; this is the cookie-setting one
       loadWidget();           // B4: in gated regions the chat widget waits for this
@@ -458,7 +446,6 @@
 
     document.getElementById('mkx-decline').addEventListener('click', function () {
       setConsent(false);
-      beacon('consent_decline');
       updateConsent(false);   // explicit denial; GA4 keeps sending cookieless pings
       dismiss(banner);
     });

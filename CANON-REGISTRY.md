@@ -1807,10 +1807,150 @@ what the console says.**
 
 ---
 
+## v3.29 — the CORS errors were never the lead form (2026-09-03)
+
+### The evidence was in the first screenshot
+
+The failing request's URL ends **`b58c-e3a47721392e`**. That is
+`1297f709-5970-411d-b58c-e3a47721392e` — the **consent beacon's** hook. The paid LP's form posts to
+`3c750621-84a1-444d-b64a-5712e15cfb5e`, which appears in none of the errors.
+
+On `/lp/keep-control`, the only thing that posts to `1297f709` is `beacon()` in `mkx-consent.js`.
+The form and the beacon are two different requests to two different endpoints, and only the beacon
+was failing.
+
+**The lead form has been succeeding silently the whole time.** That is why a contact existed
+alongside the errors — not intermittency, not a race, not luck.
+
+### What that means for v3.27, and for the entry that briefly replaced it
+
+- **v3.27 reached the right conclusion for the wrong reason.** "The CORS error is harmless, the
+  contact is created anyway" is correct, and stands. The reasoning given — *"the POST reaches GHL
+  server-side; only reading the response is refused"* — was wrong, and it was wrong about a request
+  that was not the one erroring.
+- **v3.28 (written, shipped, reverted the same evening; no longer in this file, since the revert
+  took the entry with the code) overturned a correct conclusion using a correct general fact.** A
+  failed preflight really does drop a request — that mechanism was demonstrated against a mock and
+  remains true. But it was applied to the form, which was not the thing preflighting and failing.
+  The result was a change that broke a working path to fix a problem it did not have, and cost
+  roughly twenty minutes of silently dropped submissions.
+
+The durable finding from that reverted entry, worth keeping even though its application was wrong:
+**`application/json` is not CORS-safelisted and forces a preflight; a failed preflight sends
+nothing at all. And GHL rejects a `text/plain` body**, so that escape route is closed — proven the
+expensive way.
+
+### The failure mode in my own reasoning
+
+Two errors compounding, and the second was avoidable:
+
+1. **I read the error text and not the URL.** The hook id was truncated in the console display but
+   present, and it is the only thing that identifies *which request* failed. I diagnosed a symptom
+   without establishing which component produced it.
+2. **I then built a mock to test the mechanism** — and the mock was faithful about CORS while being
+   silent about identity. It could confirm "a failed preflight drops a body". It could not tell me
+   whether the request I was theorising about was the request that failed.
+
+**Rule: before diagnosing why a request failed, establish which request it was.** On a page with
+more than one endpoint, the error text is not enough; the URL is the identity.
+
+### What is actually broken, and it is small
+
+The consent beacon fails under `credentials:'include'`. It carries `consent_impression`,
+`consent_accept`, `consent_decline` and `ad_optout` — instrumentation only, no lead data, and
+already documented in-file as best-effort. Losing some of it costs an accept-rate signal that has
+never been reliable anyway (it only fires where a banner renders).
+
+`text/plain` is not the remedy for it either: GHL rejected that body outright, which is what #137
+proved at the cost of twenty minutes of dropped leads. If the beacon is worth fixing, it is worth
+fixing the same way the form would be — same-origin, through a proxy — not by another
+Content-Type guess.
+
+---
+
+## v3.30 — the consent beacon never worked, and "we don't set that" was the wrong check (2026-09-03)
+
+Removed on 2026-09-03 on Jason's ruling. Root cause, which is exact and not a probability:
+
+**`navigator.sendBeacon()` always sends with credentials mode `include`.** That is specified
+behaviour of the API, not a browser quirk, not a setting, and not an extension. The beacon passed a
+`Blob` typed `application/json`, which is not one of the three CORS-safelisted Content-Types, so the
+request required a preflight — and GHL answers preflights with a wildcard
+`Access-Control-Allow-Origin: *`, which is invalid under credentials mode `include`. The preflight
+failed every time, and a failed preflight sends nothing at all.
+
+So the beacon was not intermittent, not degraded, and not environment-dependent. It delivered
+**zero events from the day it shipped** (Aug 21 2026 CTO brief, P1) to the day it was removed. Four
+console errors per banner render, no data, and nothing in the calling code able to tell.
+
+### The check that failed
+
+v3.27 recorded, as the reason the CORS errors were harmless: *"Nothing in the estate sets
+`credentials: 'include'`."* That sentence is **true about our code and wrong about the request.**
+`sendBeacon` sets it for us. The CTO brief then compounded it by reaching for a browser extension
+to explain a credentials mode the platform was supplying by specification.
+
+**Rule: "our code does not set X" is not the same as "X is not set."** A platform API has specified
+defaults you did not write and cannot see at the call site. When a request behaves as though a flag
+is set, read the API's spec, not only your own arguments.
+
+This is a different failure from v3.29 and worth keeping separate. v3.29 was *not establishing which
+request failed*. This one is *establishing the right request and then reasoning about it from our
+source instead of the platform's contract.* Both produce a confident wrong answer from true premises.
+
+### Why removal rather than a fix
+
+Option B was to retype the Blob as `text/plain`, which is safelisted and would transmit. Ruled out:
+whether GHL then **parses** that body is an assumption about a system we did not write, and that
+exact assumption broke lead capture the same evening (#137, v3.29). Transmission is the half we can
+verify; reception is not. If consent telemetry is wanted again it goes through a same-origin proxy,
+where CORS does not apply at all — it is browser-enforced and a same-origin request never triggers
+it. That also takes the webhook URL out of public page source and gives a submission-side counter.
+
+Removed: `GHL_HOOK`, `beacon()`, its four call sites (`ad_optout`, `consent_impression`,
+`consent_accept`, `consent_decline`), and the `mkx_imp` sessionStorage dedupe, which existed only to
+stop the beacon firing once per pageview. Nothing else referenced it.
+
+**Nothing measurable was lost, because nothing was ever measured.** The accept-rate signal this was
+built to capture — the v2.7 "~2 users in 4 weeks against 28 GSC clicks" anomaly — has never had a
+working instrument. That anomaly now has two partial explanations on record (consent gating, v2.7;
+CSP refusing every measurement beacon, v3.24) and the thing that was supposed to arbitrate between
+them was dead the whole time.
+
+### Gated
+
+- `validate-site.py`: `mkx-consent.js` may carry no `webhook-trigger/…` at all. Matched on the URL
+  **path segment**, not a list of hook ids — a newly minted trigger id would sail past an id list
+  and be the same mistake.
+- `validate-site.py`: estate-wide, a `sendBeacon` call carrying a Content-Type outside the three
+  safelisted values is a hard failure — on every HTML page and on both JS files, since `check()`
+  only sees HTML.
+- `smoke.sh`: the **served** `mkx-consent.js` carries no webhook trigger, behind the existing fetch
+  guard. A stale deploy or a rollback is what would put it back, and the only symptom is console
+  errors on a page nobody has open.
+
+Negative-controlled four ways: the webhook gate fires on a re-added URL, the sendBeacon gate fires
+in JS and in HTML, and a `text/plain` beacon produces no finding — the false-positive control, since
+a gate that fires on the correct fix is worse than no gate.
+
+### Confirmed the same evening, unrelated to the removal
+
+`generate_lead_paid` **fires on production.** `dataLayer.filter(a => a[0] === 'event').map(a => a[1])`
+returned `['generate_lead_paid']` after a real submission. Separately, a `collect` request to
+`analytics.google.com` returned **204** carrying `gcs=G111` and `npa=1` — the CSP fix (v3.24/v3.27)
+proven end-to-end, and board addendum **C1 verified on the wire** rather than only in source, since
+`npa=1` is `ad_personalization: 'denied'` as Google received it. The event captured in that
+particular request was `form_start`, GA4's own enhanced-measurement auto-event; it is generated
+inside the tag and never appears in `dataLayer`, which is why the two observations agree rather
+than conflict.
+
+---
+
 ## Version history
 
 
-
+- **v3.30** (2026-09-03) — **the consent beacon never worked, and "we don't set that" was the wrong check.** `navigator.sendBeacon()` **always** sends with credentials mode `include` — specified behaviour, not a quirk and not an extension. The beacon's `application/json` Blob is not CORS-safelisted, so it needed a preflight, and GHL's wildcard `Access-Control-Allow-Origin: *` is invalid under credentials mode `include`. The preflight failed every time and a failed preflight sends nothing: **zero events delivered from the day it shipped** (Aug 21 2026) to its removal. Not intermittent, not environment-dependent. This retires two things on record: v3.27's *"nothing in the estate sets `credentials: 'include'`"* — true about our code, wrong about the request — and the CTO brief's extension theory, which reached for a cause the platform was already supplying by spec. **Rule: "our code does not set X" is not the same as "X is not set."** A platform API has defaults you did not write and cannot see at the call site; read the spec, not only your own arguments. Distinct from v3.29, which was failing to establish *which* request failed — this is establishing the right request and then reasoning about it from our source instead of the platform's contract. **Jason ruled removal, not a Content-Type change:** whether GHL *parses* a `text/plain` body is an assumption about a system we did not write, and that exact assumption broke lead capture the same evening (#137). Removed `GHL_HOOK`, `beacon()`, its four call sites and the `mkx_imp` dedupe that existed only to throttle it. Nothing measurable was lost because nothing was ever measured — the v2.7 accept-rate anomaly's designated instrument was dead the whole time. If consent telemetry returns it goes same-origin through a proxy, where CORS does not apply at all. Gated three ways (no `webhook-trigger/` in `mkx-consent.js`, matched on the path segment so a *new* hook id fails too; no non-safelisted `sendBeacon` type anywhere, HTML and both JS files; the served file in smoke behind its fetch guard), negative-controlled four ways including a `text/plain` false-positive control. Also confirmed this evening: **`generate_lead_paid` fires on production** (`dataLayer` returned `['generate_lead_paid']`), and a `collect` to `analytics.google.com` came back **204** with `gcs=G111` and `npa=1` — the CSP fix proven end-to-end and **C1 verified on the wire**, not just in source.
+- **v3.29** (2026-09-03) — **the CORS errors were never the lead form.** The failing URL ends `b58c-e3a47721392e` — the **consent beacon's** hook (`1297f709-…`). The paid LP's form posts to `3c750621-…b64a-5712e15cfb5e`, which appears in none of the errors. On that page the only thing posting to `1297f709` is `beacon()` in `mkx-consent.js`, documented in-file as *"best-effort; never block the banner."* **The form has been succeeding silently throughout** — that is why a contact existed alongside the errors, not intermittency or luck. Consequences: v3.27's conclusion (harmless, contact created) was right for the wrong reason and stands; v3.28 — written, shipped and reverted the same evening — overturned it using a true general fact applied to the wrong request, breaking a working path and dropping ~20 minutes of submissions. **My reasoning failure, in two steps:** I read the error text and not the URL, so I never established *which* request failed; then I built a mock faithful about CORS but silent about identity, which could confirm the mechanism while being unable to tell me it was the wrong component. **Rule: before diagnosing why a request failed, establish which request it was — on a page with more than one endpoint, the URL is the identity, not the error text.** Durable from the reverted entry: `application/json` forces a preflight and a failed preflight sends nothing; and GHL rejects `text/plain`, so that route is closed. What is actually broken is the beacon — instrumentation only, no lead data — and it needs the same-origin proxy, not another Content-Type guess.
 - **v3.27** (2026-09-03) — **a sixth blocked host, and a CORS error that is not a bug.** The post-deploy console showed `pagead2.googlesyndication.com/ccm/collect` still refused — not an oversight in v3.24 but the shape of the problem: **a browser reports the first block, not every block**, so gtag never reached the conversion beacon while earlier hosts were being refused. "Fix what the console showed" is correct and incomplete, and will be again next time. Added it plus `www.googleadservices.com`, the latter labelled **precautionary** rather than evidenced, since every other host here was added against a demonstrated block and the two kinds of claim should stay distinguishable. Also recorded: the GHL webhook's CORS error (`ACAO must not be '*' when credentials mode is 'include'`) is **expected and harmless — the contact is created anyway**, confirmed by Jason. Nothing in the estate sets `credentials: 'include'`; the fetch is identical to `/get-started`, which has carried "show confirmation regardless of the webhook's CORS/network outcome" since long before today. Written down because it looks exactly like a broken lead path, cost a full stop on a launch day, and will alarm the next person to open a console. **The decisive test is whether the contact exists in GHL, not what the console says.**
 - **v3.26** (2026-09-03) — **GA4 has no path-based data filters.** Data filters are Developer traffic and Internal traffic only; Internal traffic tests `traffic_type`. Recorded as a standing fact because Code proposed a nonexistent "exclude paths ending in `/index.html`" filter **twice in one day** and it was struck both times — if automated traffic is to be excluded, the page has to stamp it, because the server side can only filter on what the page sends. Consequence: the v3.25 gap (one unstamped page_view per CI run, since the stub's `gtag('config')` flushes before a separate `set`) is closed at source rather than accepted — `navigator.webdriver` is readable at parse time, so the stub now carries `traffic_type` on the config call itself across all **53** stub-bearing pages. The 54th, `/audits/<token>/`, has no stub by design. The `set` in `mkx-consent.js` is kept and narrowed to its real job: destinations configured after the stub, i.e. the Ads destination on the paid LP. Still stamped, not suppressed (v3.14). Console task is one filter: Internal traffic, `traffic_type = internal`, Active.
 - **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial as first shipped and stated as such; closed at config time in v3.26 (the GA4 path-filter proposed here does not exist). Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
