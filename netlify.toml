@@ -96,6 +96,27 @@
     Cache-Control = "public, max-age=86400"
 
 # ── SECURITY HEADERS ──────────────────────────────────
+#
+# CSP MUST BE REVISITED WHENEVER A NEW THIRD-PARTY TAG SHIPS. A tag that loads
+# fine can still be unable to SEND anything: script-src governs loading, and
+# connect-src governs the fetch/beacon it makes afterwards. Nothing on the page
+# looks broken when connect-src is wrong — the console logs a violation the
+# visitor never sees and the vendor simply receives nothing.
+#
+# That is what happened on 2026-09-03 (registry v3.24). Google Ads went live on
+# 08-31 and gtag.js loaded correctly the whole time, so script-src was right —
+# but every measurement beacon was refused, and the symptom was "GA4 shows
+# page_view but not the conversion event". Three days of paid-launch debugging.
+#
+# The trap that made it survive review: `https://*.analytics.google.com` was
+# already listed, and a CSP host wildcard matches SUBDOMAINS ONLY, never the
+# bare domain — so `analytics.google.com` itself was blocked while the line
+# above it looked like it covered exactly that. If a host is used bare AND as a
+# subdomain, both forms have to be listed.
+#
+# Smoke asserts the served connect-src (scripts/smoke.sh), because this class of
+# bug is invisible to a local server: nothing in dev sends this header, so the
+# code-level repro passed while production was refusing every beacon.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -103,7 +124,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://services.leadconnectorhq.com https://widgets.leadconnectorhq.com https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://buy.stripe.com https://cdn-cgi.cloudflare.com https://www.clarity.ms https://*.clarity.ms https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://assets.calendly.com; connect-src 'self' https://services.leadconnectorhq.com https://widgets.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://services.msgsndr.com https://www.clarity.ms https://*.clarity.ms https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; img-src 'self' data: https:; frame-src https://buy.stripe.com https://widgets.leadconnectorhq.com https://www.youtube.com https://www.youtube-nocookie.com https://open.spotify.com https://calendly.com; style-src 'self' 'unsafe-inline' https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://fonts.bunny.net https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://fonts.bunny.net https://fonts.gstatic.com;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://services.leadconnectorhq.com https://widgets.leadconnectorhq.com https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://buy.stripe.com https://cdn-cgi.cloudflare.com https://www.clarity.ms https://*.clarity.ms https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://assets.calendly.com; connect-src 'self' https://services.leadconnectorhq.com https://widgets.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://services.msgsndr.com https://www.clarity.ms https://*.clarity.ms https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://google.com https://ad.doubleclick.net https://googleads.g.doubleclick.net; img-src 'self' data: https:; frame-src https://buy.stripe.com https://widgets.leadconnectorhq.com https://www.youtube.com https://www.youtube-nocookie.com https://open.spotify.com https://calendly.com; style-src 'self' 'unsafe-inline' https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://fonts.bunny.net https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://cdn.leadconnectorhq.com https://stcdn.leadconnectorhq.com https://fonts.bunny.net https://fonts.gstatic.com;"
 
 # Join/confirmation pages — noindex (payment flow)
 [[headers]]

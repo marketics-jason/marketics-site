@@ -204,6 +204,36 @@
       if (window.__mkxGA4) return;
       window.__mkxGA4 = true;
 
+      /* ── Stamp automated traffic as internal (registry v3.25) ──
+         Lighthouse CI loads three pages three times each on every PR, in
+         headless Chrome with open internet and no CSP (lhci serves from its own
+         static server, so netlify.toml never applies). Those hits are real GA4
+         page_views: the 2026-09-03 Realtime panel showed /calculator/index.html
+         and /lp/keep-control/index.html at 3 users each, which is numberOfRuns
+         exactly. The `/index.html` suffix is the tell — no real visitor ever
+         sees those paths.
+
+         It matters more from today: opening connect-src means CI's full event
+         stream now transmits, where before the header was refusing it.
+
+         STAMPED, NOT SUPPRESSED. Skipping gtag.js under webdriver would also
+         stop measuring what the tag COSTS, and v3.14 exists because the Ads tag
+         cost /calculator ~1,850ms of LCP. A prettier score that hides real
+         third-party weight is the wrong trade, especially with /calculator
+         sitting on its 0.80 floor. So the tag loads exactly as it does for a
+         visitor; only the data is marked.
+
+         PARTIAL BY CONSTRUCTION, and this is the honest limit: the inline stub
+         already queued gtag('config') during parse, so its page_view flushes
+         ahead of this `set` and goes out unstamped. Every subsequent event —
+         generate_lead_paid included — carries the mark. Closing the page_view
+         gap needs either the same check in all 53 inline stubs or a GA4 data
+         filter on page paths ending in `/index.html`; the filter is the cheaper
+         half and is Jason's to add. */
+      try {
+        if (navigator.webdriver === true) gtag('set', { traffic_type: 'internal' });
+      } catch (e) { /* never let instrumentation break the tag */ }
+
       // Ads is a second DESTINATION on this same library, never a second
       // library, and it is configured here rather than in page markup so it
       // lands after the region-aware grant above. Conversions are the audit
