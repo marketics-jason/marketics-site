@@ -156,6 +156,13 @@ CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
 
 COUNSEL_LANE_EXEMPT: dict = {}
 
+# ── Webhook triggers (registry v3.22) ──
+# Trigger ids only, never the full URL: these strings are already public in the
+# page source of every visitor's browser, but there is no reason for a grep of
+# this file to hand someone a ready-to-POST endpoint.
+SHARED_HOOK = "1297f709-5970-411d-b58c-e3a47721392e"   # organic: 29 files + the consent beacon
+PAID_HOOK = "2ebb4312-80b3-4ef6-9e78-10e3807abc40"     # /lp/keep-control ONLY
+
 # Same phrase, different claim — the trap the Aug 30 turnaround sweep caught and
 # the reason "24 hours" is scoped rather than blanket-retired. A retired token
 # gates a CLAIM, not a string, so a page using the same words for something else
@@ -508,6 +515,27 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 hard.append(f"{where}: webhook payload key {key!r} missing — GHL maps on "
                             f"the transmitted key, not the form field name, so renaming "
                             f"one empties a CRM field silently (registry v3.21)")
+
+    # 11d. the paid LP posts to its OWN webhook trigger (registry v3.22).
+    # SHARED_HOOK is the organic one: 29 files use it, the consent beacon
+    # included. The paid path had to be separated because a workflow sharing it
+    # can only tell itself apart by filtering on `source`, and a filter that
+    # quietly stops matching looks exactly like a broken deploy — two hours were
+    # lost to that on 2026-09-03. Gated in both directions: the LP must carry the
+    # paid hook, and must not carry the shared one. A copy-paste from any other
+    # form's handler would otherwise put it back without anyone noticing.
+    if where == "lp/keep-control/index.html":
+        if SHARED_HOOK in raw:
+            hard.append(f"{where}: posts to the SHARED organic webhook trigger — the paid "
+                        f"path has its own, so the paid workflow does not have to filter "
+                        f"itself out of 29 other surfaces (registry v3.22)")
+        if PAID_HOOK not in raw:
+            hard.append(f"{where}: paid webhook trigger {PAID_HOOK!r} missing — this is the "
+                        f"only entry point for the paid conversion path (registry v3.22)")
+    elif PAID_HOOK in raw:
+        hard.append(f"{where}: uses the PAID LP webhook trigger — it belongs to "
+                    f"/lp/keep-control alone, and a second caller would put organic "
+                    f"traffic into the paid conversion workflow (registry v3.22)")
 
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
