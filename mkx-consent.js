@@ -223,13 +223,17 @@
          sitting on its 0.80 floor. So the tag loads exactly as it does for a
          visitor; only the data is marked.
 
-         PARTIAL BY CONSTRUCTION, and this is the honest limit: the inline stub
-         already queued gtag('config') during parse, so its page_view flushes
-         ahead of this `set` and goes out unstamped. Every subsequent event —
-         generate_lead_paid included — carries the mark. Closing the page_view
-         gap needs either the same check in all 53 inline stubs or a GA4 data
-         filter on page paths ending in `/index.html`; the filter is the cheaper
-         half and is Jason's to add. */
+         NO GAP, as of the config-time stamp (registry v3.26). The first version
+         of this stamped via a separate gtag('set'), which left the stub's own
+         page_view unstamped — the stub queues gtag('config') during parse, so it
+         flushes first. The stub now carries the parameter on the config call
+         itself, in all 53 pages, so nothing goes out unmarked. This `set` is the
+         net for anything configured AFTER the stub — the Ads destination below
+         being the case that exists today.
+
+         There is no GA4 data filter that matches URL patterns. Data filters are
+         Developer traffic and Internal traffic only, and Internal traffic tests
+         `traffic_type`. That is why the stamp has to come from the page. */
       try {
         if (navigator.webdriver === true) gtag('set', { traffic_type: 'internal' });
       } catch (e) { /* never let instrumentation break the tag */ }

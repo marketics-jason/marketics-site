@@ -1678,11 +1678,12 @@ prettier score that hides real third-party weight is the wrong trade — the sam
 `blockedUrlPatterns` was rejected. The tag loads exactly as it does for a visitor; only the data is
 marked.
 
-**Partial by construction, stated rather than glossed.** The inline stub queues `gtag('config')`
-during parse, so its page_view flushes ahead of this `set` and goes out unstamped. Every subsequent
-event carries the mark. Closing the page_view gap needs the same check in all 53 inline stubs, or a
-**GA4 data filter on page paths ending in `/index.html`** — the cheaper half, and Jason's to add.
-The two together are complete; either alone is not.
+**Partial when first shipped; closed in v3.26.** The inline stub queues `gtag('config')` during
+parse, so its page_view flushed ahead of the `set` and went out unstamped. The stub now carries the
+parameter on the config call itself.
+
+> **CORRECTION.** This entry originally proposed closing the gap with "a GA4 data filter on page
+> paths ending in `/index.html`". **No such filter exists.** See v3.26.
 
 Verified in a browser both ways: headless (`navigator.webdriver === true`) emits
 `["set",{"traffic_type":"internal"}]`; spoofed as a real visitor emits nothing.
@@ -1698,11 +1699,60 @@ page is genuinely faster.
 
 ---
 
+## v3.26 — GA4 has no path-based data filters; stamp at config time instead (2026-09-03)
+
+### The standing fact, recorded because it has now been proposed twice in one day
+
+**GA4 data filters support exactly two types: Developer traffic and Internal traffic. Neither
+matches URL or path patterns.** Internal traffic tests the `traffic_type` parameter. There is no
+"exclude page paths ending in `/index.html`" filter to create, and no amount of looking in the
+console will produce one.
+
+Code proposed that mechanism twice on 2026-09-03 — once in v3.24's follow-up and again in v3.25 —
+and it was struck both times. It is written here as a fact rather than a correction so the third
+proposal does not happen: **if automated traffic is to be excluded from GA4, the exclusion has to
+be stamped by the page.** The server side can only filter on what the page sends.
+
+### The consequence: stamp on `config`, not via `set`
+
+v3.25 stamped `traffic_type: 'internal'` with a separate `gtag('set')` from `mkx-consent.js`, and
+was honest that this left one page_view unstamped per CI run: the inline stub queues
+`gtag('config')` during parse, so it flushes first. With no path filter available to catch the
+remainder, "accept the bounded gap" was the only fallback — so the gap is closed at source instead.
+
+`navigator.webdriver` is readable at parse time, so the stub carries the parameter on the config
+call itself:
+
+```js
+gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{traffic_type:'internal'}:{});
+```
+
+Applied to all **53** pages that carry the stub. The 54th, `/audits/<token>/`, has no stub and no
+consent script by design (`CONSENT_EXEMPT_PREFIXES`) — nothing to stamp there.
+
+The `set` in `mkx-consent.js` is kept, narrowed to what it is now for: the net for destinations
+configured *after* the stub, which today is the Ads destination on the paid LP.
+
+### Still stamped, not suppressed
+
+Unchanged from v3.25 and worth restating, since the refinement makes suppression look tempting:
+skipping gtag.js under webdriver would stop measuring what the tag *costs*, and v3.14 exists
+because the Ads tag cost `/calculator` ~1,850ms of LCP. The tag loads exactly as it does for a
+visitor; only the data is marked.
+
+### Console task
+
+Create the **Internal traffic** filter matching `traffic_type = internal`, set straight to
+**Active**. That is the whole GA4-side job — there is no second filter.
+
+---
+
 ## Version history
 
 
 
-- **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial by construction and stated as such: the stub's page_view flushes before the `set`, so a GA4 data filter on `/index.html` paths is the complementary half. Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
+- **v3.26** (2026-09-03) — **GA4 has no path-based data filters.** Data filters are Developer traffic and Internal traffic only; Internal traffic tests `traffic_type`. Recorded as a standing fact because Code proposed a nonexistent "exclude paths ending in `/index.html`" filter **twice in one day** and it was struck both times — if automated traffic is to be excluded, the page has to stamp it, because the server side can only filter on what the page sends. Consequence: the v3.25 gap (one unstamped page_view per CI run, since the stub's `gtag('config')` flushes before a separate `set`) is closed at source rather than accepted — `navigator.webdriver` is readable at parse time, so the stub now carries `traffic_type` on the config call itself across all **53** stub-bearing pages. The 54th, `/audits/<token>/`, has no stub by design. The `set` in `mkx-consent.js` is kept and narrowed to its real job: destinations configured after the stub, i.e. the Ads destination on the paid LP. Still stamped, not suppressed (v3.14). Console task is one filter: Internal traffic, `traffic_type = internal`, Active.
+- **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial as first shipped and stated as such; closed at config time in v3.26 (the GA4 path-filter proposed here does not exist). Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
 - **v3.24** (2026-09-03) — **the measurement layer was double-blocked: consent AND CSP.** `generate_lead_paid` never reached GA4; the three suspects proposed (build-time flag, redirect race, silent JS error) were all wrong, and a browser repro proved the site pushes the event to `dataLayer` in every scenario including a slow and a failing GHL endpoint. The blocker was CSP `connect-src` refusing every Google measurement beacon. **`script-src` governs whether a tag loads; `connect-src` governs whether it can send** — so gtag.js loaded fine the whole time and nothing looked broken. The trap: `https://*.analytics.google.com` was already listed, and a CSP host wildcard matches **subdomains only, never the bare domain**, so `analytics.google.com` was blocked by the line that appeared to allow it. Two of the seven hosts in the incoming brief were already present; the real delta was five (`analytics.google.com`, `www.google.com`, `google.com`, `ad.doubleclick.net`, `googleads.g.doubleclick.net`), `connect-src` only. Named blind spot: **a local server sends no CSP**, so every browser repro in this repo is structurally blind to this class of bug and passed while production refused every beacon. Smoke now asserts the served `connect-src` scoped to the **directive** — load-bearing, since `www.google.com` is in `script-src` and a whole-header grep would have called this bug green. Regression-tested by replaying the guard against the pre-fix policy: fires on exactly the five blocked hosts. Retroactive lead, not a conclusion: the v2.7 "~2 users vs 28 GSC clicks" anomaly may never have been only consent gating.
 - **v3.23** (2026-09-03) — the consent posture is now asserted against **production**, not just the repo: smoke checks the served `mkx-consent.js` for C1's hardcoded `ad_personalization: 'denied'` **and** the absence of the pre-C1 derived `ad_personalization: ad`, plus B1's GPC and Do Not Sell opt-out and B2's Canada gate. Both directions on C1 deliberately — "denied appears somewhere" would not catch the derived shape, which reads correct at a glance. Negative-controlled four ways including an empty body, which fires the fetch guard because the absence checks genuinely do pass vacuously (v3.20). The accompanying US-visitor behavioural check (3 timezones × 3 pages, 63/0, `ad_personalization` denied in every consent call rather than only the last) ran against a clean worktree of the deployed commit, not the live origin — egress to `marketics.io` is denied and a browser confirmed it; same bytes, not the same act, and recorded as such. Also fixes the `## Version history` heading dropped from this file in v3.22.
 - **v3.22** (2026-09-03) — the paid LP gets its **own** inbound-webhook trigger (`3c750621-…`), separating it from the shared organic hook that 29 files use, the consent beacon included. Sharing it meant the paid workflow could only distinguish itself by filtering on `source`, and a filter that silently stops matching is indistinguishable from a broken deploy — two hours were lost hunting for a serverless Function that has never existed here (every GHL call on this site is a browser fetch to an inbound webhook, so the site cannot map a field or apply a tag at all). Contacts were being created by whatever legacy workflow owns the shared hook while the new paid workflow showed 0 executions, never having been pointed at. Fix was wiring, not archaeology. The owner, once found, was "Inbound Lead" -- already restored and ruled out during the hunt as pre-dating the website; it created contacts and never tagged them. Ruling a workflow out by name and vintage is what kept the search running: a workflow can acquire a webhook trigger long after its name stopped describing it. Gated both directions — the LP must carry the paid hook and not the shared one, and no other file may carry the paid hook — negative-controlled both ways, with ids rather than full URLs in the validator. Flagged and not fixed here: after the swap nothing creates the contact unless the paid workflow does it itself.
