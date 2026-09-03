@@ -1745,6 +1745,21 @@ visitor; only the data is marked.
 Create the **Internal traffic** filter matching `traffic_type = internal`, set straight to
 **Active**. That is the whole GA4-side job — there is no second filter.
 
+### The stub comment, corrected in the same pass
+
+All 53 stubs still carried *"ad_* stay denied everywhere pending an explicit decision when paid
+launches — see CANON-REGISTRY v3.0."* That has been untrue since **Addendum B** granted the two ad
+measurement signals outside the gated regions, and doubly so since **C1** made
+`ad_personalization` permanently denied rather than pending. A comment that describes a *pending
+decision* which has since been ruled twice is worse than no comment: it invites someone to "finish"
+a decision that is already made.
+
+Rewritten to state the actual posture — Canada in the gate, measurement signals granted outside it
+and reversible by the Do Not Sell control or GPC, `ad_personalization` denied everywhere with no
+Accept path — and to explain why the stamp sits on `config` rather than a later `set`. Comment-only
+across 53 files; verified that every changed line is inside the comment block and that the consent
+behaviour and the stamp are byte-for-byte unaffected.
+
 ---
 
 ## Version history
