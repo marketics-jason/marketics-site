@@ -161,7 +161,11 @@ COUNSEL_LANE_EXEMPT: dict = {}
 # page source of every visitor's browser, but there is no reason for a grep of
 # this file to hand someone a ready-to-POST endpoint.
 SHARED_HOOK = "1297f709-5970-411d-b58c-e3a47721392e"   # organic: 29 files + the consent beacon
-PAID_HOOK = "2ebb4312-80b3-4ef6-9e78-10e3807abc40"     # /lp/keep-control ONLY
+PAID_HOOK = "3c750621-84a1-444d-b64a-5712e15cfb5e"     # /lp/keep-control ONLY
+# 2ebb4312-… was superseded before it ever shipped — named here so a stale copy
+# of it in a branch, a doc or someone's clipboard fails loudly rather than
+# quietly posting paid leads into a trigger nobody is watching.
+DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 
 # Same phrase, different claim — the trap the Aug 30 turnaround sweep caught and
 # the reason "24 hours" is scoped rather than blanket-retired. A retired token
@@ -536,6 +540,12 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
         hard.append(f"{where}: uses the PAID LP webhook trigger — it belongs to "
                     f"/lp/keep-control alone, and a second caller would put organic "
                     f"traffic into the paid conversion workflow (registry v3.22)")
+
+    for dead in DEAD_HOOKS:
+        if dead in raw:
+            hard.append(f"{where}: posts to a RETIRED webhook trigger {dead!r} — it is not "
+                        f"wired to any workflow, so leads sent there are lost with no "
+                        f"error and no contact (registry v3.22)")
 
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
