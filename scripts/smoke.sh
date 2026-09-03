@@ -175,6 +175,17 @@ grep -q 'mkx_ad_optout' <<<"$mc" \
 grep -q 'America/Toronto' <<<"$mc" \
   && ok "B2: Canada inside the region gate" || no "B2: Canada missing from the region gate"
 
+# The consent beacon was removed on 2026-09-03 (registry v3.30). It posted to a
+# GHL inbound webhook via sendBeacon, which always sends with credentials mode
+# 'include' -- so its preflight could never be satisfied by GHL's wildcard ACAO
+# and it never delivered a single event. Asserted on the SERVED file because a
+# rollback or a stale deploy is what would put it back, and the only symptom is
+# console errors on a page nobody has open. The fetch guard above is what makes
+# this absence check mean anything.
+grep -q 'webhook-trigger/' <<<"$mc" \
+  && no "v3.30 UNDONE: consent script posts to a CRM webhook again" \
+  || ok "v3.30: consent script carries no CRM webhook"
+
 echo
 echo "· Security headers"
 jc=$(hdr "$BASE/join/confirmation")

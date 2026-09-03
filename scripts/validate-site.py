@@ -167,6 +167,32 @@ PAID_HOOK = "3c750621-84a1-444d-b64a-5712e15cfb5e"     # /lp/keep-control ONLY
 # quietly posting paid leads into a trigger nobody is watching.
 DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 
+# ── sendBeacon + a non-safelisted Content-Type (registry v3.30) ──
+# navigator.sendBeacon() ALWAYS sends with credentials mode 'include'. That is
+# specified behaviour, not a browser quirk and not an extension. A Blob typed
+# anything outside the three CORS-safelisted values therefore forces a preflight,
+# and a preflight can never be satisfied by the wildcard
+# `Access-Control-Allow-Origin: *` that most third-party webhooks answer with —
+# so the request is dropped before it leaves the browser. Console errors, zero
+# data, and nothing in the calling code can tell that nothing was delivered.
+#
+# The consent beacon shipped in exactly this shape and never delivered a single
+# event. Its errors were then misread as a broken LEAD path and "fixed" with a
+# Content-Type change GHL rejects, dropping ~20 minutes of real submissions
+# (registry v3.29/v3.30). Gated so the shape cannot return on any file.
+SAFELISTED_TYPES = ("text/plain", "application/x-www-form-urlencoded",
+                    "multipart/form-data")
+SENDBEACON_CALL = re.compile(r"sendBeacon\s*\(([^;]{0,300})")
+
+def sendbeacon_violations(raw):
+    """Content-Types passed to sendBeacon that will fail preflight. Empty = fine."""
+    bad = []
+    for args in SENDBEACON_CALL.findall(raw):
+        for t in re.findall(r"type\s*:\s*['\"]([^'\"]+)['\"]", args):
+            if t.split(";")[0].strip().lower() not in SAFELISTED_TYPES:
+                bad.append(t)
+    return bad
+
 # Same phrase, different claim — the trap the Aug 30 turnaround sweep caught and
 # the reason "24 hours" is scoped rather than blanket-retired. A retired token
 # gates a CLAIM, not a string, so a page using the same words for something else
@@ -547,6 +573,13 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"wired to any workflow, so leads sent there are lost with no "
                         f"error and no contact (registry v3.22)")
 
+    # 11e. sendBeacon with a non-safelisted Content-Type is a dead request.
+    for t in sendbeacon_violations(raw):
+        hard.append(f"{where}: sendBeacon sends a {t!r} body — sendBeacon always uses "
+                    f"credentials mode 'include', so a non-safelisted type forces a "
+                    f"preflight no wildcard ACAO can satisfy and the request never "
+                    f"leaves the browser (registry v3.30)")
+
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
     # consent for the visitor's region. Google's own setup page tells you to
@@ -662,6 +695,39 @@ def main():
                     hard.append(f"mkx-consent.js: ad_personalization set to {v.strip()!r} "
                                 f"— it is a hardcoded 'denied' so no code path can turn "
                                 f"it on (board addendum C1, registry v3.19)")
+
+    # The consent script does not talk to the CRM (registry v3.30). A beacon
+    # here posted consent_impression/accept/decline/ad_optout to a GHL inbound
+    # webhook and never delivered one event: sendBeacon's credentials mode made
+    # the preflight unsatisfiable against GHL's wildcard ACAO. It was removed on
+    # 2026-09-03 rather than re-typed, because "make it transmit" is a guess
+    # about whether GHL PARSES the new type, and that exact guess broke lead
+    # capture the same evening. If consent telemetry returns it goes through a
+    # same-origin proxy, which has no CORS to satisfy — so a webhook URL
+    # reappearing in this file means the removal was undone, not fixed.
+    #
+    # Both JS files get the sendBeacon gate too; check() only sees HTML.
+    if not args:
+        for jsrel in ("mkx-consent.js", "mkx-utm.js"):
+            jspath = os.path.join(ROOT, jsrel)
+            if not os.path.exists(jspath):
+                continue
+            jsrc = open(jspath, encoding="utf-8").read()
+            for t in sendbeacon_violations(jsrc):
+                hard.append(f"{jsrel}: sendBeacon sends a {t!r} body — sendBeacon always "
+                            f"uses credentials mode 'include', so a non-safelisted type "
+                            f"forces a preflight no wildcard ACAO can satisfy and the "
+                            f"request never leaves the browser (registry v3.30)")
+        cpath = os.path.join(ROOT, "mkx-consent.js")
+        if os.path.exists(cpath):
+            csrc = open(cpath, encoding="utf-8").read()
+            # Match the URL path segment, not a hook id: a NEW trigger id would
+            # sail past an id list, and any of them is the same mistake.
+            for m in re.findall(r"webhook-trigger/[0-9a-f-]+", csrc):
+                hard.append(f"mkx-consent.js: posts to a CRM webhook ({m}) — the consent "
+                            f"beacon was removed on 2026-09-03 because sendBeacon can "
+                            f"never satisfy that endpoint's preflight; telemetry from "
+                            f"this file goes same-origin or not at all (registry v3.30)")
 
     # orphan check only meaningful on a full run
     if not args:
