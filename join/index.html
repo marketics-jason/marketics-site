@@ -299,7 +299,7 @@ async function pay(){
 
   /* Record the checkout intent (non-blocking); Stripe collects email + card on its hosted page */
   try{
-    await fetch(GHL,{method:'POST',headers:{'Content-Type':'application/json'},
+    await fetch(GHL,{method:'POST',headers:{'Content-Type': 'text/plain'},
       body:JSON.stringify(Object.assign({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join',landingPage:landing},{
         utm_source: utm.utm_source || '', utm_medium: utm.utm_medium || '', utm_campaign: utm.utm_campaign || '', utm_content: utm.utm_content || '', utm_term: utm.utm_term || ''
       }))});

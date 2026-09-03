@@ -552,7 +552,7 @@ function setMode(m){
       utm_term: utm.utm_term || ''
     };
     try{
-      await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type': 'text/plain'}, body: JSON.stringify(payload) });
     }catch(err){ console.warn('GHL webhook non-critical error:', err); }
 
     /* Show confirmation regardless of the webhook's CORS/network outcome */
