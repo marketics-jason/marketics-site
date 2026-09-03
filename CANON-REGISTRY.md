@@ -1807,10 +1807,72 @@ what the console says.**
 
 ---
 
+## v3.29 — the CORS errors were never the lead form (2026-09-03)
+
+### The evidence was in the first screenshot
+
+The failing request's URL ends **`b58c-e3a47721392e`**. That is
+`1297f709-5970-411d-b58c-e3a47721392e` — the **consent beacon's** hook. The paid LP's form posts to
+`3c750621-84a1-444d-b64a-5712e15cfb5e`, which appears in none of the errors.
+
+On `/lp/keep-control`, the only thing that posts to `1297f709` is `beacon()` in `mkx-consent.js`.
+The form and the beacon are two different requests to two different endpoints, and only the beacon
+was failing.
+
+**The lead form has been succeeding silently the whole time.** That is why a contact existed
+alongside the errors — not intermittency, not a race, not luck.
+
+### What that means for v3.27, and for the entry that briefly replaced it
+
+- **v3.27 reached the right conclusion for the wrong reason.** "The CORS error is harmless, the
+  contact is created anyway" is correct, and stands. The reasoning given — *"the POST reaches GHL
+  server-side; only reading the response is refused"* — was wrong, and it was wrong about a request
+  that was not the one erroring.
+- **v3.28 (written, shipped, reverted the same evening; no longer in this file, since the revert
+  took the entry with the code) overturned a correct conclusion using a correct general fact.** A
+  failed preflight really does drop a request — that mechanism was demonstrated against a mock and
+  remains true. But it was applied to the form, which was not the thing preflighting and failing.
+  The result was a change that broke a working path to fix a problem it did not have, and cost
+  roughly twenty minutes of silently dropped submissions.
+
+The durable finding from that reverted entry, worth keeping even though its application was wrong:
+**`application/json` is not CORS-safelisted and forces a preflight; a failed preflight sends
+nothing at all. And GHL rejects a `text/plain` body**, so that escape route is closed — proven the
+expensive way.
+
+### The failure mode in my own reasoning
+
+Two errors compounding, and the second was avoidable:
+
+1. **I read the error text and not the URL.** The hook id was truncated in the console display but
+   present, and it is the only thing that identifies *which request* failed. I diagnosed a symptom
+   without establishing which component produced it.
+2. **I then built a mock to test the mechanism** — and the mock was faithful about CORS while being
+   silent about identity. It could confirm "a failed preflight drops a body". It could not tell me
+   whether the request I was theorising about was the request that failed.
+
+**Rule: before diagnosing why a request failed, establish which request it was.** On a page with
+more than one endpoint, the error text is not enough; the URL is the identity.
+
+### What is actually broken, and it is small
+
+The consent beacon fails under `credentials:'include'`. It carries `consent_impression`,
+`consent_accept`, `consent_decline` and `ad_optout` — instrumentation only, no lead data, and
+already documented in-file as best-effort. Losing some of it costs an accept-rate signal that has
+never been reliable anyway (it only fires where a banner renders).
+
+`text/plain` is not the remedy for it either: GHL rejected that body outright, which is what #137
+proved at the cost of twenty minutes of dropped leads. If the beacon is worth fixing, it is worth
+fixing the same way the form would be — same-origin, through a proxy — not by another
+Content-Type guess.
+
+---
+
 ## Version history
 
 
 
+- **v3.29** (2026-09-03) — **the CORS errors were never the lead form.** The failing URL ends `b58c-e3a47721392e` — the **consent beacon's** hook (`1297f709-…`). The paid LP's form posts to `3c750621-…b64a-5712e15cfb5e`, which appears in none of the errors. On that page the only thing posting to `1297f709` is `beacon()` in `mkx-consent.js`, documented in-file as *"best-effort; never block the banner."* **The form has been succeeding silently throughout** — that is why a contact existed alongside the errors, not intermittency or luck. Consequences: v3.27's conclusion (harmless, contact created) was right for the wrong reason and stands; v3.28 — written, shipped and reverted the same evening — overturned it using a true general fact applied to the wrong request, breaking a working path and dropping ~20 minutes of submissions. **My reasoning failure, in two steps:** I read the error text and not the URL, so I never established *which* request failed; then I built a mock faithful about CORS but silent about identity, which could confirm the mechanism while being unable to tell me it was the wrong component. **Rule: before diagnosing why a request failed, establish which request it was — on a page with more than one endpoint, the URL is the identity, not the error text.** Durable from the reverted entry: `application/json` forces a preflight and a failed preflight sends nothing; and GHL rejects `text/plain`, so that route is closed. What is actually broken is the beacon — instrumentation only, no lead data — and it needs the same-origin proxy, not another Content-Type guess.
 - **v3.27** (2026-09-03) — **a sixth blocked host, and a CORS error that is not a bug.** The post-deploy console showed `pagead2.googlesyndication.com/ccm/collect` still refused — not an oversight in v3.24 but the shape of the problem: **a browser reports the first block, not every block**, so gtag never reached the conversion beacon while earlier hosts were being refused. "Fix what the console showed" is correct and incomplete, and will be again next time. Added it plus `www.googleadservices.com`, the latter labelled **precautionary** rather than evidenced, since every other host here was added against a demonstrated block and the two kinds of claim should stay distinguishable. Also recorded: the GHL webhook's CORS error (`ACAO must not be '*' when credentials mode is 'include'`) is **expected and harmless — the contact is created anyway**, confirmed by Jason. Nothing in the estate sets `credentials: 'include'`; the fetch is identical to `/get-started`, which has carried "show confirmation regardless of the webhook's CORS/network outcome" since long before today. Written down because it looks exactly like a broken lead path, cost a full stop on a launch day, and will alarm the next person to open a console. **The decisive test is whether the contact exists in GHL, not what the console says.**
 - **v3.26** (2026-09-03) — **GA4 has no path-based data filters.** Data filters are Developer traffic and Internal traffic only; Internal traffic tests `traffic_type`. Recorded as a standing fact because Code proposed a nonexistent "exclude paths ending in `/index.html`" filter **twice in one day** and it was struck both times — if automated traffic is to be excluded, the page has to stamp it, because the server side can only filter on what the page sends. Consequence: the v3.25 gap (one unstamped page_view per CI run, since the stub's `gtag('config')` flushes before a separate `set`) is closed at source rather than accepted — `navigator.webdriver` is readable at parse time, so the stub now carries `traffic_type` on the config call itself across all **53** stub-bearing pages. The 54th, `/audits/<token>/`, has no stub by design. The `set` in `mkx-consent.js` is kept and narrowed to its real job: destinations configured after the stub, i.e. the Ads destination on the paid LP. Still stamped, not suppressed (v3.14). Console task is one filter: Internal traffic, `traffic_type = internal`, Active.
 - **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial as first shipped and stated as such; closed at config time in v3.26 (the GA4 path-filter proposed here does not exist). Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
