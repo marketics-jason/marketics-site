@@ -808,11 +808,18 @@ section {
 @media(max-width:768px){.site-footer{padding:40px 20px 24px;}.sf-inner{grid-template-columns:1fr;gap:28px;}.sf-nav{grid-template-columns:repeat(2,1fr);gap:20px;}.sf-bottom{flex-direction:column;gap:8px;text-align:center;}}
 </style>
 <!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
-<!-- Consent Mode v2. Board ruling 2026-08-21: denied by default in EEA/UK/CH (the banner
-     asks there), analytics granted elsewhere so the core market measures normally. These
-     defaults MUST sit in dataLayer before the config command below, which is why they're
-     inline rather than in mkx-consent.js. ad_* stay denied everywhere pending an explicit
-     decision when paid launches -- see CANON-REGISTRY v3.0. -->
+<!-- Consent Mode v2. Board ruling 2026-08-21, as amended by Addendum B (2026-08-30) and
+     Addendum C (2026-09-01). Denied by default in the EEA, UK, Switzerland and CANADA, where
+     the banner asks; analytics and the two ad MEASUREMENT signals granted elsewhere, and
+     reversible there by the footer "Do Not Sell or Share" control or by GPC.
+     ad_personalization is denied EVERYWHERE and no Accept grants it -- see C1, and the
+     hardcoded literal in mkx-consent.js that CI asserts against the SERVED file.
+     These defaults MUST sit in dataLayer before the config command below, which is why they
+     are inline here rather than in mkx-consent.js.
+     The config below stamps traffic_type on automated traffic, at config time rather than
+     via a later gtag('set'), so CI's own page_view is marked at source: GA4 data filters
+     match only Developer/Internal traffic, never URL patterns, so the page has to do it.
+     Rationale: CANON-REGISTRY v3.0, v3.10 (Addendum B), v3.19 (C1), v3.26 (the stamp). -->
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
