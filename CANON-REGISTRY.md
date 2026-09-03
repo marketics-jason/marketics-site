@@ -1466,8 +1466,20 @@ field or apply a tag at all. Contacts were being created (with the correct `sour
 legacy workflow owns the shared hook, while "Paid LP — Tag → Audit Sequence" showed 0 executions
 because nothing had ever pointed at it.
 
-So the fix was wiring, not archaeology. The old owner still has not been identified, and no longer
-needs to be.
+So the fix was wiring, not archaeology.
+
+### The owner, once found: "Inbound Lead" — and why it was ruled out
+
+It was **"Inbound Lead"**, and it had already been restored and dismissed during the hunt as
+*"old native Facebook/TikTok/LinkedIn lead-form routing, pre-dates the website, not a webhook
+trigger."* It created contacts and never applied a tag, which is exactly the symptom.
+
+**Ruling a workflow out by its name and its vintage is what kept the search running for two
+hours.** A workflow can acquire an inbound-webhook trigger long after it was built and long after
+its name stopped describing it; the name is documentation, and documentation drifts. The
+identifying question is which trigger a workflow *currently holds*, never what it was for.
+
+Recorded because the same trap is set again the moment another old workflow gets repurposed.
 
 ### The paid path now has its own entry point
 
@@ -1489,16 +1501,30 @@ paid conversion workflow. Negative-controlled both ways. The gate holds trigger 
 URLs — they are already public in every visitor's page source, but a grep of the validator should
 not hand anyone a ready-to-POST endpoint.
 
-### Flagged to the CTO, not fixed here
+### Flagged to the CTO, not fixed here — and it was the missing step
 
-The swap moves contact creation. Today the legacy workflow on the shared hook creates the contact;
+The swap moves contact creation. The legacy workflow on the shared hook was creating the contact;
 after the swap nothing on that path does, so the paid workflow must create it itself. An Inbound
 Webhook trigger does not create a contact on its own — that is an action, and it was not in the
-wiring plan. Named before the swap rather than discovered after it.
+wiring plan. **Named before the swap rather than discovered after it**, and it went into the final
+build as the explicit first action.
+
+### CONFIRMED LIVE — 2026-09-03
+
+Verified by the CTO through GHL's Execution Logs, not by inspection: **three test submissions, one
+clean single-pass execution each**, routed correctly to the Manager / Self-or-Tool / None branches
+with the right email variant firing each time, and **zero duplicate or parallel executions** — the
+last being the point of the whole change, since it is what proves the old trigger is detached
+rather than quietly running alongside.
+
+Smoke now asserts on the **served** page which trigger the LP posts to: the paid one present, the
+shared one absent, the retired one absent. `validate-site.py` gates the repo copy; a stale deploy
+or a bad rollback is a different question, and this is the one that would put paid leads back on
+the shared hook with nothing visibly wrong.
 
 
 
-- **v3.22** (2026-09-03) — the paid LP gets its **own** inbound-webhook trigger (`3c750621-…`), separating it from the shared organic hook that 29 files use, the consent beacon included. Sharing it meant the paid workflow could only distinguish itself by filtering on `source`, and a filter that silently stops matching is indistinguishable from a broken deploy — two hours were lost hunting for a serverless Function that has never existed here (every GHL call on this site is a browser fetch to an inbound webhook, so the site cannot map a field or apply a tag at all). Contacts were being created by whatever legacy workflow owns the shared hook while the new paid workflow showed 0 executions, never having been pointed at. Fix was wiring, not archaeology; the old owner is still unidentified and no longer needs to be. Gated both directions — the LP must carry the paid hook and not the shared one, and no other file may carry the paid hook — negative-controlled both ways, with ids rather than full URLs in the validator. Flagged and not fixed here: after the swap nothing creates the contact unless the paid workflow does it itself.
+- **v3.22** (2026-09-03) — the paid LP gets its **own** inbound-webhook trigger (`3c750621-…`), separating it from the shared organic hook that 29 files use, the consent beacon included. Sharing it meant the paid workflow could only distinguish itself by filtering on `source`, and a filter that silently stops matching is indistinguishable from a broken deploy — two hours were lost hunting for a serverless Function that has never existed here (every GHL call on this site is a browser fetch to an inbound webhook, so the site cannot map a field or apply a tag at all). Contacts were being created by whatever legacy workflow owns the shared hook while the new paid workflow showed 0 executions, never having been pointed at. Fix was wiring, not archaeology. The owner, once found, was "Inbound Lead" -- already restored and ruled out during the hunt as pre-dating the website; it created contacts and never tagged them. Ruling a workflow out by name and vintage is what kept the search running: a workflow can acquire a webhook trigger long after its name stopped describing it. Gated both directions — the LP must carry the paid hook and not the shared one, and no other file may carry the paid hook — negative-controlled both ways, with ids rather than full URLs in the validator. Flagged and not fixed here: after the swap nothing creates the contact unless the paid workflow does it itself.
 - **v3.21** (2026-09-01) — a form field's `name` is **not** the key the webhook sends: the LP hand-builds its JSON payload, so `name="listing_url"` transmits as `listingUrl` and is never sent as written. Code had read the markup rather than the request earlier the same day and gave Jason a wrong key while debugging a GHL error; corrected directly. The pricing dropdown already reached GHL as `pricingOwner`; `pricing_owner` added alongside it so the new custom field maps like-for-like, with the old key kept until something is known to no longer read it. The transmitted values are the option **values** (`me`, `manager`, `tool`, `unsure`, `""`), not the visible labels — a conditional branch built on "My property manager" would never have fired. Payload keys now gated by name, negative-controlled three ways; all five options verified by intercepting the real POST, 25/25.
 - **v3.20** (2026-09-01) — **`/legal` corrected — the first edit Code has ever made to that document**, on Jason's approval of the C3 redline (all seven edits plus all three flagged items). Google Ads named in §04.1 and §06; §03's sell sentence kept verbatim with the advertiser claim replaced by what is actually shared; both Meta Pixel passages removed; Clarity corrected to consent-only in four jurisdictions; §08 describing the Do Not Sell control and GPC; dates moved on both tabs; and the fee basis at §390/§588/§602 corrected to net payout, **closing the Aug 27 routing** and deleting the counsel-lane exemption rather than keeping it as a courtesy. New `REQUIRED_TOKENS` gate for copy that quietly goes away, the inverse of a retired token; smoke asserts the same six facts against the served page. Two things caught in the doing: the absence assertions passed **vacuously against an empty body** when the origin died, now guarded; and `gross booking revenue` on `/calculator` is the same-phrase/different-claim trap for the third time, scoped with its reason rather than softening the token. C3 items 2 and 6 stay provisional pending the C4 lawyer review.
 - **v3.19** (2026-09-01) — BOARD ADDENDUM C, amending B1: `ad_personalization` **denied for every visitor in every region**, including an Accept in a gated region — remarketing is unusable at test scale, so it buys nothing while straining §03; conversion measurement is unaffected. Hardcoded literal rather than a derived value, since `ad_personalization: ad` reads correct at a glance; two CI gates, negative-controlled three ways, plus a four-region browser test (20/20). `/legal` accuracy adopted as a **gate on first spend**, per Code's recommendation. Counsel lane now has a named ruler (Jason, interim) — the never-edit-unbidden boundary is unchanged. Seven ruled edits drafted as `LEGAL-REDLINE-2026-09-01.md` and awaiting approval; three uncovered items flagged rather than drafted. Lawyer review booked by Sept 12, complete by Sept 30.

@@ -228,6 +228,22 @@ echo
 echo "· /lp/keep-control conversion path"
 lp=$(body "$BASE/lp/keep-control")
 
+# Which trigger the SERVED page posts to. validate-site.py gates the repo copy;
+# this is the deployed one, and they are different questions -- a stale deploy or
+# a bad rollback puts the paid path back on the shared hook with nothing to see.
+# Confirmed live 2026-09-03 after the owner turned out to be "Inbound Lead",
+# which created contacts and never tagged them. Absence checks are meaningful
+# here because the form-renders assertion above already proves the body arrived.
+grep -q '3c750621-84a1-444d-b64a-5712e15cfb5e' <<<"$lp" \
+  && ok "LP posts to its own paid trigger" \
+  || no "LP is NOT on the paid trigger -- paid leads are going somewhere else"
+grep -q '1297f709-5970-411d-b58c-e3a47721392e' <<<"$lp" \
+  && no "LP posts to the SHARED organic trigger -- the separation has been reverted" \
+  || ok "LP is off the shared organic trigger"
+grep -q '2ebb4312-80b3-4ef6-9e78-10e3807abc40' <<<"$lp" \
+  && no "LP posts to the RETIRED trigger -- leads are lost with no error" \
+  || ok "no retired trigger on the LP"
+
 grep -q 'id="lp-audit-form"' <<<"$lp" \
   && ok "form anchor present" || no "form anchor #lp-audit-form missing"
 grep -q 'id="lpAuditForm"' <<<"$lp" \
