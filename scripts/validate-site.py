@@ -494,6 +494,21 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                     f"segregation studies: 'cost segregation partner' "
                     f"(Strategy ruling 2026-09-01, registry v3.18)")
 
+    # 11c. the LP webhook payload keys GHL maps on (registry v3.21).
+    # A form field's `name` and the JSON key the webhook actually SENDS are two
+    # different things here: the handler reads elements by id and hand-builds the
+    # payload, so `name="listing_url"` is never transmitted — `listingUrl` is.
+    # That gap cost a wrong diagnosis on 2026-09-01 and is invisible from the
+    # markup, so the transmitted keys are gated by name. A rename here silently
+    # empties a CRM field and a conditional email branch downstream; nothing
+    # errors, the lead just arrives blank.
+    if where == "lp/keep-control/index.html":
+        for key in ("email", "listingUrl", "pricingOwner", "pricing_owner", "source"):
+            if not re.search(rf"^\s*{re.escape(key)}\s*:", raw, re.M):
+                hard.append(f"{where}: webhook payload key {key!r} missing — GHL maps on "
+                            f"the transmitted key, not the form field name, so renaming "
+                            f"one empties a CRM field silently (registry v3.21)")
+
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
     # consent for the visitor's region. Google's own setup page tells you to

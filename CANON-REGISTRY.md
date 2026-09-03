@@ -1387,8 +1387,68 @@ spend as far as Code's side of it goes.
 
 ---
 
+## v3.21 — a form field's NAME is not the key the webhook sends (2026-09-01)
+
+Jason asked whether the LP's pricing dropdown reaches GHL. **It already did** — as `pricingOwner`,
+since the form shipped in v3.8. The question surfaced something more useful than the answer.
+
+### The distinction that cost a wrong diagnosis
+
+The LP handler reads elements by id and **hand-builds the JSON payload**. It does not serialise
+the form. So the `name` attributes and the transmitted keys are two different vocabularies, and
+only one of them ever reaches GHL:
+
+| Form `name` | Key GHL receives |
+|---|---|
+| `listing_url` | **`listingUrl`** |
+| `pricing_owner` | **`pricingOwner`** |
+| `email` | `email` |
+| `source` | `source` |
+
+Earlier the same day, debugging a GHL custom-variable error, Code read the `name` attributes and
+told Jason "the site posts `listing_url`" — and built a field-collision hypothesis on it.
+**`listing_url` is never transmitted.** The markup says one thing and the wire says another, and
+nothing in the file makes that visible; the payload is 200 lines below the inputs. Corrected to
+Jason directly rather than quietly.
+
+**Rule: when a question is about what a third party receives, read the request, not the markup.**
+Verified here by intercepting the actual POST in a browser, not by reading either.
+
+### `pricing_owner` added alongside `pricingOwner`
+
+Both keys, one value. The new key matches the GHL custom field exactly, so the workflow mapping is
+a like-for-like pick rather than a judgement call — which is the whole failure mode the same day's
+`listingurl` confusion demonstrated. `pricingOwner` stays until it is known that nothing consumes
+it; renaming a live key to tidy up is how a CRM field silently empties.
+
+### The values are the option `value`s, not the labels
+
+This is the part that would have broken the conditional email branch:
+
+| Label in the dropdown | String GHL receives |
+|---|---|
+| I do | `me` |
+| My property manager | `manager` |
+| A pricing tool | `tool` |
+| Not sure | `unsure` |
+| *(skipped)* | `""` (empty string) |
+
+A branch built on "My property manager" never fires. The values are also the better thing to
+branch on — short, stable, no punctuation — so the label copy can be rewritten without touching
+the workflow. Verified across all five options by intercepting the POST: **25/25.**
+
+### Gated
+
+The transmitted keys are now checked by name in `validate-site.py`. A rename here throws no error
+and breaks nothing visibly — the lead simply arrives with an empty field and a conditional branch
+that silently takes the wrong path. Negative-controlled on all three of `listingUrl`,
+`pricingOwner` and `pricing_owner`.
+
+---
+
 ## Version history
 
+- **v3.21** (2026-09-01) — a form field's `name` is **not** the key the webhook sends: the LP hand-builds its JSON payload, so `name="listing_url"` transmits as `listingUrl` and is never sent as written. Code had read the markup rather than the request earlier the same day and gave Jason a wrong key while debugging a GHL error; corrected directly. The pricing dropdown already reached GHL as `pricingOwner`; `pricing_owner` added alongside it so the new custom field maps like-for-like, with the old key kept until something is known to no longer read it. The transmitted values are the option **values** (`me`, `manager`, `tool`, `unsure`, `""`), not the visible labels — a conditional branch built on "My property manager" would never have fired. Payload keys now gated by name, negative-controlled three ways; all five options verified by intercepting the real POST, 25/25.
 - **v3.20** (2026-09-01) — **`/legal` corrected — the first edit Code has ever made to that document**, on Jason's approval of the C3 redline (all seven edits plus all three flagged items). Google Ads named in §04.1 and §06; §03's sell sentence kept verbatim with the advertiser claim replaced by what is actually shared; both Meta Pixel passages removed; Clarity corrected to consent-only in four jurisdictions; §08 describing the Do Not Sell control and GPC; dates moved on both tabs; and the fee basis at §390/§588/§602 corrected to net payout, **closing the Aug 27 routing** and deleting the counsel-lane exemption rather than keeping it as a courtesy. New `REQUIRED_TOKENS` gate for copy that quietly goes away, the inverse of a retired token; smoke asserts the same six facts against the served page. Two things caught in the doing: the absence assertions passed **vacuously against an empty body** when the origin died, now guarded; and `gross booking revenue` on `/calculator` is the same-phrase/different-claim trap for the third time, scoped with its reason rather than softening the token. C3 items 2 and 6 stay provisional pending the C4 lawyer review.
 - **v3.19** (2026-09-01) — BOARD ADDENDUM C, amending B1: `ad_personalization` **denied for every visitor in every region**, including an Accept in a gated region — remarketing is unusable at test scale, so it buys nothing while straining §03; conversion measurement is unaffected. Hardcoded literal rather than a derived value, since `ad_personalization: ad` reads correct at a glance; two CI gates, negative-controlled three ways, plus a four-region browser test (20/20). `/legal` accuracy adopted as a **gate on first spend**, per Code's recommendation. Counsel lane now has a named ruler (Jason, interim) — the never-edit-unbidden boundary is unchanged. Seven ruled edits drafted as `LEGAL-REDLINE-2026-09-01.md` and awaiting approval; three uncovered items flagged rather than drafted. Lawyer review booked by Sept 12, complete by Sept 30.
 - **v3.18** (2026-09-01) — Strategy terminology ruling: Cost Seg Smart is our **cost segregation partner**, never our "tax partner" — their own terms disclaim advisory capacity and the referral agreement obliges us not to hold them out as advisers. One instance estate-wide, in Jason's note on the guest article; the Miami card the brief also names does not exist yet (partner cards still open from v3.11), so the ruling waits for it. Standing rule recorded: a cost segregation study is a **study, never advice**, readers go to their own CPA, and Marketics makes no tax claims. Enforced by a `PARTNER_CAPACITY` gate scoped to the possessive form, so "your own tax advisor" still passes.
