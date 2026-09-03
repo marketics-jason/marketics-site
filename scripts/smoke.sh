@@ -203,7 +203,8 @@ cs=$(grep -o 'connect-src [^;]*' <<<"$csp")
   || no "no connect-src in the served CSP — every check below would pass vacuously"
 for host in 'https://\*\.google-analytics\.com' 'https://analytics\.google\.com' \
             'https://www\.google\.com' 'https://google\.com' \
-            'https://ad\.doubleclick\.net' 'https://googleads\.g\.doubleclick\.net'; do
+            'https://ad\.doubleclick\.net' 'https://googleads\.g\.doubleclick\.net' \
+            'https://pagead2\.googlesyndication\.com' 'https://www\.googleadservices\.com'; do
   plain=$(sed 's/\\//g' <<<"$host")
   grep -qE "$host(\s|$)" <<<"$cs" \
     && ok "connect-src allows $plain" \
