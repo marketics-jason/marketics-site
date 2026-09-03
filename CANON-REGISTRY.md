@@ -1781,13 +1781,7 @@ against a demonstrated block; that distinction is kept visible rather than blurr
 added it because the console showed it" and "we added it because it seemed likely" are different
 kinds of claim and the file should not pretend otherwise.
 
-> **CORRECTED BY v3.28 — read that first.** The section below said the CORS error is harmless
-> because "the POST reaches GHL server-side". **That is wrong when the preflight is the thing
-> failing**, which is what the later screenshot showed. A failed preflight means the browser sends
-> nothing at all. It is left here, struck rather than deleted, because it was written into the
-> registry on a launch day and acted on.
-
-### ~~The GHL webhook CORS error is expected and harmless~~ (superseded)
+### The GHL webhook CORS error is expected and harmless
 
 ```
 Access to resource at 'https://services.leadconnectorhq.com/hooks/…' from origin
@@ -1813,67 +1807,10 @@ what the console says.**
 
 ---
 
-## v3.28 — a failed CORS preflight drops the lead; every GHL post is now `text/plain` (2026-09-03)
-
-### Correcting v3.27, which was wrong
-
-v3.27 recorded the GHL CORS error as harmless: *"the POST reaches GHL server-side; only the
-browser's ability to read the response is refused."* That was written on Jason's confirmation that
-a contact existed, and **it was not tested.** The later console showed the actual wording:
-
-> *Response to **preflight** request doesn't pass access control check*
-
-A failed **preflight** is a different animal from a failed response read. **When a preflight fails,
-the browser sends nothing at all** — no POST, no body, no lead. Only a console error.
-
-### Demonstrated, not reasoned
-
-Built a mock replying with the same wildcard `Access-Control-Allow-Origin` GHL sends, and logged
-what the *server* actually received:
-
-| Request | Server received |
-|---|---|
-| `application/json`, normal credentials | preflight **+ body** |
-| `application/json` + `credentials:'include'` | **preflight only — no body** |
-| `text/plain`, normal credentials | **body** (no preflight at all) |
-| `text/plain` + `credentials:'include'` | **body** |
-
-Then the real LP form against the same mock: **all 13 payload keys arrived in both conditions**,
-including the one that previously dropped everything.
-
-### Why `text/plain` fixes it
-
-`application/json` is **not a CORS-safelisted `Content-Type`**, so it forces a preflight. GHL
-answers preflights with a wildcard ACAO, which a browser rejects whenever the request's credentials
-mode is `include`. `text/plain` **is** safelisted: no preflight exists, so none can fail. The body
-is the same JSON string; the receiver parses it identically.
-
-Nothing in this estate sets `credentials: 'include'` — that comes from the visitor's browser
-environment, which is exactly why it cannot be designed around and has to be made unreachable.
-
-Applied to **all 9 GHL post sites**: the paid LP, `/get-started`, `/join`, four intel email
-captures, and both branches of the consent beacon — including the `sendBeacon` Blob type, which had
-the same defect and no way to report it at all.
-
-### Gated
-
-`validate-site.py` fails any page declaring `application/json` on a webhook post.
-Negative-controlled: reverting one page fires it.
-
-### The lesson worth more than the fix
-
-**A console error and a delivered request are not mutually exclusive — but they are not
-interchangeable either.** v3.27 collapsed the two on one observation and a plausible story. The
-distinction that decides it is *which* CORS failure: reading a response (harmless) or a preflight
-(fatal). One word in the error message separates them, and it was in the screenshot the whole time.
-
----
-
 ## Version history
 
 
 
-- **v3.28** (2026-09-03) — **a failed CORS preflight drops the lead — v3.27 was wrong.** v3.27 recorded the GHL CORS error as harmless ("the POST reaches GHL server-side") on a confirmation that a contact existed, **without testing it**. The later console named the actual failure: *"Response to **preflight** request doesn't pass access control check."* When a preflight fails the browser sends **nothing** — no POST, no lead, just a console error. Demonstrated against a mock replying with GHL's own wildcard ACAO: `application/json` + `credentials:'include'` → server saw the preflight and **no body**; `text/plain` under the same condition → **full body**. Then the real LP form: all 13 payload keys arrived in both conditions. Fix: `application/json` is not CORS-safelisted so it forces a preflight; `text/plain` is, so no preflight exists to fail — same JSON string, same parsing. Applied to **all 9 GHL post sites** including the `sendBeacon` Blob type, which had the same defect and no way to report it. Gated in `validate-site.py`, negative-controlled. **The lesson:** a console error and a delivered request are not interchangeable — *which* CORS failure decides it, reading a response (harmless) versus a preflight (fatal), and that word was in the screenshot the whole time.
 - **v3.27** (2026-09-03) — **a sixth blocked host, and a CORS error that is not a bug.** The post-deploy console showed `pagead2.googlesyndication.com/ccm/collect` still refused — not an oversight in v3.24 but the shape of the problem: **a browser reports the first block, not every block**, so gtag never reached the conversion beacon while earlier hosts were being refused. "Fix what the console showed" is correct and incomplete, and will be again next time. Added it plus `www.googleadservices.com`, the latter labelled **precautionary** rather than evidenced, since every other host here was added against a demonstrated block and the two kinds of claim should stay distinguishable. Also recorded: the GHL webhook's CORS error (`ACAO must not be '*' when credentials mode is 'include'`) is **expected and harmless — the contact is created anyway**, confirmed by Jason. Nothing in the estate sets `credentials: 'include'`; the fetch is identical to `/get-started`, which has carried "show confirmation regardless of the webhook's CORS/network outcome" since long before today. Written down because it looks exactly like a broken lead path, cost a full stop on a launch day, and will alarm the next person to open a console. **The decisive test is whether the contact exists in GHL, not what the console says.**
 - **v3.26** (2026-09-03) — **GA4 has no path-based data filters.** Data filters are Developer traffic and Internal traffic only; Internal traffic tests `traffic_type`. Recorded as a standing fact because Code proposed a nonexistent "exclude paths ending in `/index.html`" filter **twice in one day** and it was struck both times — if automated traffic is to be excluded, the page has to stamp it, because the server side can only filter on what the page sends. Consequence: the v3.25 gap (one unstamped page_view per CI run, since the stub's `gtag('config')` flushes before a separate `set`) is closed at source rather than accepted — `navigator.webdriver` is readable at parse time, so the stub now carries `traffic_type` on the config call itself across all **53** stub-bearing pages. The 54th, `/audits/<token>/`, has no stub by design. The `set` in `mkx-consent.js` is kept and narrowed to its real job: destinations configured after the stub, i.e. the Ads destination on the paid LP. Still stamped, not suppressed (v3.14). Console task is one filter: Internal traffic, `traffic_type = internal`, Active.
 - **v3.25** (2026-09-03) — **the phantom traffic on `/calculator` was our own CI.** GA4 Realtime's three active users matched `lighthouserc.json`'s three URLs at `numberOfRuns: 3` exactly; the `/index.html` suffix is the tell, since Netlify serves pretty URLs and no visitor ever sees those paths. lhci serves from `staticDistDir` with no CSP on a runner with open internet — the v3.24 blind spot from the other side. Conversions are clean (Lighthouse never submits the form) but page-level metrics carry ~9 page_views per PR, so real traffic is *lower* than the dashboard shows. `traffic_type: 'internal'` now stamps `navigator.webdriver` traffic — **stamped, not suppressed**, because skipping gtag.js would stop measuring what the tag costs and v3.14 exists for that reason. Partial as first shipped and stated as such; closed at config time in v3.26 (the GA4 path-filter proposed here does not exist). Verified both ways in a browser. Also: the 0.79-vs-0.80 `/calculator` failure was **threshold drift, not a regression** — ruled out three ways (the failing run predated the CSP commit by 77 minutes; the diff was registry + smoke only; Lighthouse never reads `netlify.toml`), and a later run on the CSP head passed. Budget not relaxed; `/calculator` is a dated P1.
