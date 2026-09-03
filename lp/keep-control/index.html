@@ -895,11 +895,24 @@ footer a:hover{color:var(--muted);}
 
 <script>
 /* ══ AUDIT FORM — the shared component's behaviour, inline on this LP ══
-   Same GHL webhook and the same first-touch UTM source as /get-started, so a
-   lead lands in one pipeline however it arrived. What differs is deliberate:
-   the `source` field and the conversion event name (see MKX_LP_EVENT). */
+   Same first-touch UTM source as /get-started, so a lead carries the same
+   attribution however it arrived. What differs is deliberate: the `source`
+   field, the conversion event name (see MKX_LP_EVENT), and — since 2026-09-03
+   — the webhook trigger itself.
+
+   DEDICATED TRIGGER, not the shared one (registry v3.22). Every other form on
+   this site posts to 1297f709-…, and so did this one until tonight: 29 files,
+   including /get-started, /join, /404, every intel page and the consent
+   banner's beacon. Sharing it meant the paid workflow could only distinguish
+   itself by filtering on `source`, and a filter that silently fails to match is
+   indistinguishable from a broken deploy — which is exactly the two hours the
+   CTO lost hunting for which workflow owned the shared hook.
+
+   It also matters for bidding: this is the only path that fires a conversion
+   Smart Bidding learns from, and it should not share an entry point with 29
+   organic surfaces and a cookie banner. The organic hook is untouched. */
 (function(){
-  var GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";
+  var GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/3c750621-84a1-444d-b64a-5712e15cfb5e";
 
   /* Ruling 4 (board memo, Aug 30): the paid conversion event is DISTINCT from
      the organic form's `generate_lead`. Sharing the name would let organic
