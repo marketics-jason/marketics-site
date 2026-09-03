@@ -1572,10 +1572,76 @@ of a paid launch.
 
 ---
 
+## v3.24 — the measurement layer was double-blocked: consent AND CSP (2026-09-03)
+
+`generate_lead_paid` never reached GA4. Three suspects were proposed — a build-time flag, a
+redirect race, a silent JS error — and **all three were wrong.** The site's code was correct
+throughout: a browser repro of the form submit put the event into `dataLayer` in every scenario
+tested, including a deliberately slow GHL endpoint and a failing one.
+
+The blocker was the **CSP `connect-src` header**, refusing every Google measurement beacon.
+
+### Why it survived three days and every test we had
+
+**`script-src` governs whether a tag LOADS. `connect-src` governs whether it can SEND.** Get the
+second wrong and nothing looks broken: gtag.js loads, `page_view` may still arrive by an allowed
+route, and the conversion beacon is refused into a console the visitor never opens.
+
+**The trap that made it pass review:** `https://*.analytics.google.com` was already in the policy.
+A CSP host wildcard matches **subdomains only, never the bare domain** — so `analytics.google.com`
+itself was blocked while the line directly above it looked like it covered exactly that. If a host
+is used both bare and as a subdomain, both forms must be listed.
+
+Worth stating plainly, because the brief that arrived proposed adding seven hosts: two of them
+(`*.google-analytics.com`, `www.googletagmanager.com`) were **already present**. The wildcard was
+never the problem. The real delta was five hosts:
+
+| Added to `connect-src` | Was blocking |
+|---|---|
+| `https://analytics.google.com` | `/g/collect` — GA4 |
+| `https://www.google.com` | `/g/collect`, `/ccm/collect`, `/pagead/form-data` |
+| `https://google.com` | `/pagead/form-data`, `/ccm/form-data` |
+| `https://ad.doubleclick.net` | `/ccm/s/collect` |
+| `https://googleads.g.doubleclick.net` | Ads conversion transport |
+
+Only `connect-src` was touched. `script-src` and `img-src` were already correct — demonstrated by
+gtag.js loading successfully the entire time, which is precisely what made the failure look like
+application code.
+
+### The blind spot, named
+
+**A local server sends no CSP.** Every test in this repo — the validator, the browser repros, the
+form-submit interception that proved the payload keys in v3.21 — runs against `python3 -m
+http.server`, which has no security headers at all. So a code-level repro **passed while
+production refused every beacon**, and it was right to pass: the code was fine.
+
+Smoke now asserts the served `connect-src`, and the guard is scoped to the **directive**, not the
+whole header. That is load-bearing: `www.google.com` is in `script-src`, so grepping the full CSP
+would have reported this exact bug as passing.
+
+Regression-tested against the real thing rather than asserted: replaying the guard against the
+**pre-fix policy** fires on exactly the five blocked hosts and correctly passes
+`*.google-analytics.com`. A CSP-less origin fires the vacuous-pass guard.
+
+### Retroactive, and offered as a lead rather than a conclusion
+
+The v2.7 anomaly — GA4 reporting ~2 users in 4 weeks against 28 GSC clicks on the homepage alone —
+was attributed to consent gating. **It may never have been only that.** `analytics.google.com` and
+`www.google.com/g/collect` were blocked for as long as this policy has stood, so some share of GA4
+traffic was being refused at the header regardless of consent.
+
+Not proven: the primary `*.google-analytics.com` endpoint *was* allowed, and which host gtag picks
+varies by region and consent state. So this is a plausible contributing cause, not a demonstrated
+one — recorded so that the next person reading the v2.7 entry knows consent was not the only
+suspect, without overclaiming what was measured.
+
+---
+
 ## Version history
 
 
 
+- **v3.24** (2026-09-03) — **the measurement layer was double-blocked: consent AND CSP.** `generate_lead_paid` never reached GA4; the three suspects proposed (build-time flag, redirect race, silent JS error) were all wrong, and a browser repro proved the site pushes the event to `dataLayer` in every scenario including a slow and a failing GHL endpoint. The blocker was CSP `connect-src` refusing every Google measurement beacon. **`script-src` governs whether a tag loads; `connect-src` governs whether it can send** — so gtag.js loaded fine the whole time and nothing looked broken. The trap: `https://*.analytics.google.com` was already listed, and a CSP host wildcard matches **subdomains only, never the bare domain**, so `analytics.google.com` was blocked by the line that appeared to allow it. Two of the seven hosts in the incoming brief were already present; the real delta was five (`analytics.google.com`, `www.google.com`, `google.com`, `ad.doubleclick.net`, `googleads.g.doubleclick.net`), `connect-src` only. Named blind spot: **a local server sends no CSP**, so every browser repro in this repo is structurally blind to this class of bug and passed while production refused every beacon. Smoke now asserts the served `connect-src` scoped to the **directive** — load-bearing, since `www.google.com` is in `script-src` and a whole-header grep would have called this bug green. Regression-tested by replaying the guard against the pre-fix policy: fires on exactly the five blocked hosts. Retroactive lead, not a conclusion: the v2.7 "~2 users vs 28 GSC clicks" anomaly may never have been only consent gating.
 - **v3.23** (2026-09-03) — the consent posture is now asserted against **production**, not just the repo: smoke checks the served `mkx-consent.js` for C1's hardcoded `ad_personalization: 'denied'` **and** the absence of the pre-C1 derived `ad_personalization: ad`, plus B1's GPC and Do Not Sell opt-out and B2's Canada gate. Both directions on C1 deliberately — "denied appears somewhere" would not catch the derived shape, which reads correct at a glance. Negative-controlled four ways including an empty body, which fires the fetch guard because the absence checks genuinely do pass vacuously (v3.20). The accompanying US-visitor behavioural check (3 timezones × 3 pages, 63/0, `ad_personalization` denied in every consent call rather than only the last) ran against a clean worktree of the deployed commit, not the live origin — egress to `marketics.io` is denied and a browser confirmed it; same bytes, not the same act, and recorded as such. Also fixes the `## Version history` heading dropped from this file in v3.22.
 - **v3.22** (2026-09-03) — the paid LP gets its **own** inbound-webhook trigger (`3c750621-…`), separating it from the shared organic hook that 29 files use, the consent beacon included. Sharing it meant the paid workflow could only distinguish itself by filtering on `source`, and a filter that silently stops matching is indistinguishable from a broken deploy — two hours were lost hunting for a serverless Function that has never existed here (every GHL call on this site is a browser fetch to an inbound webhook, so the site cannot map a field or apply a tag at all). Contacts were being created by whatever legacy workflow owns the shared hook while the new paid workflow showed 0 executions, never having been pointed at. Fix was wiring, not archaeology. The owner, once found, was "Inbound Lead" -- already restored and ruled out during the hunt as pre-dating the website; it created contacts and never tagged them. Ruling a workflow out by name and vintage is what kept the search running: a workflow can acquire a webhook trigger long after its name stopped describing it. Gated both directions — the LP must carry the paid hook and not the shared one, and no other file may carry the paid hook — negative-controlled both ways, with ids rather than full URLs in the validator. Flagged and not fixed here: after the swap nothing creates the contact unless the paid workflow does it itself.
 - **v3.21** (2026-09-01) — a form field's `name` is **not** the key the webhook sends: the LP hand-builds its JSON payload, so `name="listing_url"` transmits as `listingUrl` and is never sent as written. Code had read the markup rather than the request earlier the same day and gave Jason a wrong key while debugging a GHL error; corrected directly. The pricing dropdown already reached GHL as `pricingOwner`; `pricing_owner` added alongside it so the new custom field maps like-for-like, with the old key kept until something is known to no longer read it. The transmitted values are the option **values** (`me`, `manager`, `tool`, `unsure`, `""`), not the visible labels — a conditional branch built on "My property manager" would never have fired. Payload keys now gated by name, negative-controlled three ways; all five options verified by intercepting the real POST, 25/25.

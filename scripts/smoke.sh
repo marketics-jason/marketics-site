@@ -182,6 +182,33 @@ grep -qi 'content-security-policy' <<<"$jc" && grep -qi 'assets.calendly.com' <<
   && ok "CSP present + allows Calendly" || no "CSP missing or lacks assets.calendly.com on /join/confirmation"
 grep -qi 'fonts.googleapis.com' <<<"$jc" \
   && ok "CSP allows Google Fonts" || no "CSP lacks fonts.googleapis.com"
+
+# ── CSP connect-src: the measurement beacons (registry v3.24) ────────────────
+# script-src governs whether gtag.js LOADS; connect-src governs whether it can
+# SEND. Get the second wrong and everything looks fine: the tag loads, page_view
+# may arrive, and the conversion beacon is refused into a console the visitor
+# never opens. Three days of paid-launch debugging on 2026-09-03.
+#
+# Asserted on the SERVED header on purpose. No local server sends a CSP, so this
+# is structurally invisible to every other test here — a browser repro of the
+# form submit passed while production was refusing every beacon.
+#
+# Checked against the connect-src DIRECTIVE, not the whole policy: www.google.com
+# is in script-src already, so grepping the full header would have reported this
+# bug as passing.
+csp=$(grep -i '^content-security-policy:' <<<"$(hdr "$BASE/lp/keep-control")" | tr -d '\r')
+cs=$(grep -o 'connect-src [^;]*' <<<"$csp")
+[ -n "$cs" ] \
+  && ok "connect-src directive found (checks below are meaningful)" \
+  || no "no connect-src in the served CSP — every check below would pass vacuously"
+for host in 'https://\*\.google-analytics\.com' 'https://analytics\.google\.com' \
+            'https://www\.google\.com' 'https://google\.com' \
+            'https://ad\.doubleclick\.net' 'https://googleads\.g\.doubleclick\.net'; do
+  plain=$(sed 's/\\//g' <<<"$host")
+  grep -qE "$host(\s|$)" <<<"$cs" \
+    && ok "connect-src allows $plain" \
+    || no "connect-src BLOCKS $plain — measurement beacons will be refused"
+done
 grep -qi 'x-robots-tag:.*noindex' <<<"$jc" \
   && ok "/join noindex header" || no "/join missing X-Robots noindex"
 
