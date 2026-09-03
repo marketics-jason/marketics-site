@@ -145,6 +145,37 @@ for d in "/marketics-site-audit-2026-07" "/CANON-REGISTRY" "/CANON-SWEEP-2026-08
   done
 done
 
+# ── Consent posture on the SERVED script (board addenda B1-B4, C1) ──────────
+# mkx-consent.js decides the consent signals for every visitor on every page,
+# and it is one file — which makes it the highest-leverage thing on the site to
+# get wrong quietly. validate-site.py gates the repo copy; this is the deployed
+# one, and a stale deploy or a bad rollback would restore ad_personalization
+# without anything looking broken.
+#
+# C1 is asserted as the LITERAL, not just "denied appears somewhere": the
+# pre-C1 shape was `ad_personalization: ad`, which reads correct at a glance and
+# is exactly what a careless edit restores. Both directions are checked, so the
+# derived form failing to appear is not mistaken for the literal being present.
+echo
+echo "· Consent posture (served mkx-consent.js)"
+mc=$(body "$BASE/mkx-consent.js")
+grep -q 'updateConsent' <<<"$mc" \
+  && ok "mkx-consent.js fetched (checks below are meaningful)" \
+  || no "mkx-consent.js did not fetch — every check below would pass on an empty body"
+grep -qF "ad_personalization: 'denied'" <<<"$mc" \
+  && ok "C1: ad_personalization hardcoded denied" \
+  || no "C1 BROKEN: ad_personalization is not the hardcoded 'denied' literal"
+grep -qE "ad_personalization:[[:space:]]*ad\b" <<<"$mc" \
+  && no "C1 REVERTED: ad_personalization derived from the grant (the pre-C1 B1 shape)" \
+  || ok "C1: ad_personalization is not derived from the grant"
+grep -q 'globalPrivacyControl' <<<"$mc" \
+  && ok "B1: Global Privacy Control honoured" || no "B1: GPC support missing"
+grep -q 'mkx_ad_optout' <<<"$mc" \
+  && ok "B1: Do Not Sell opt-out present" || no "B1: Do Not Sell opt-out missing"
+grep -q 'America/Toronto' <<<"$mc" \
+  && ok "B2: Canada inside the region gate" || no "B2: Canada missing from the region gate"
+
+echo
 echo "· Security headers"
 jc=$(hdr "$BASE/join/confirmation")
 grep -qi 'content-security-policy' <<<"$jc" && grep -qi 'assets.calendly.com' <<<"$jc" \

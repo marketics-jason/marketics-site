@@ -1522,8 +1522,61 @@ shared one absent, the retired one absent. `validate-site.py` gates the repo cop
 or a bad rollback is a different question, and this is the one that would put paid leads back on
 the shared hook with nothing visibly wrong.
 
+---
+
+## v3.23 — the consent posture is asserted against production, not just the repo (2026-09-03)
+
+`mkx-consent.js` decides the consent signals for every visitor on every page, from one file. That
+makes it the highest-leverage thing on this site to get wrong quietly: nothing renders differently,
+nothing errors, and the first symptom is a regulator's question or a bidding signal that should
+never have existed.
+
+`validate-site.py` has gated the repo copy since v3.19. Smoke now gates the **served** one, on the
+unblocked CI runner against production — a different question, and the one a stale deploy or a bad
+rollback answers wrongly.
+
+| Asserted on the live file | Addendum |
+|---|---|
+| `ad_personalization: 'denied'` present as a **literal** | C1 |
+| `ad_personalization: ad` (the derived form) **absent** | C1 |
+| Global Privacy Control honoured | B1 |
+| Do Not Sell opt-out present | B1 |
+| Canada inside the region gate | B2 |
+
+**C1 is checked in both directions on purpose.** The pre-C1 shape was `ad_personalization: ad`,
+which reads correct at a glance and is exactly what a careless edit restores — so "denied appears
+somewhere in the file" would not have caught it. Asserting the literal *and* the absence of the
+derived form is what makes the check mean something.
+
+Negative-controlled four ways: reverting to the derived shape fires both C1 assertions, stripping
+GPC fires, dropping Canada fires, and an empty body fires the fetch guard — which exists because
+the absence checks **do** pass vacuously against nothing, exactly as v3.20 found when a dead origin
+made four `/legal` checks report green.
+
+### What this proves, and what it does not
+
+It proves the deployed script carries the posture the addenda specify. The US-visitor behavioural
+check that accompanied it — three timezones × three pages, `ad_storage` and `ad_user_data` granted,
+`ad_personalization` denied in *every* consent call rather than merely the last, no banner, 63/0 —
+ran against a clean worktree of the deployed commit rather than the live origin, because session
+egress to `marketics.io` is denied and a browser confirmed that (`ERR_TUNNEL_CONNECTION_FAILED`)
+rather than it being assumed. Static files plus a green production smoke make those the same bytes;
+it is still not the same act, and the distinction is recorded rather than smoothed over.
+
+### A stale local ref nearly produced a false alarm
+
+Checking whether C1 had shipped, a first pass read a **stale local `main`** and found the pre-C1
+`ad_personalization: ad`. Re-reading `origin/main` gave the correct answer. Anyone spot-checking a
+clone should fetch first: that ref would have reported C1 as never having shipped, on the morning
+of a paid launch.
+
+---
+
+## Version history
 
 
+
+- **v3.23** (2026-09-03) — the consent posture is now asserted against **production**, not just the repo: smoke checks the served `mkx-consent.js` for C1's hardcoded `ad_personalization: 'denied'` **and** the absence of the pre-C1 derived `ad_personalization: ad`, plus B1's GPC and Do Not Sell opt-out and B2's Canada gate. Both directions on C1 deliberately — "denied appears somewhere" would not catch the derived shape, which reads correct at a glance. Negative-controlled four ways including an empty body, which fires the fetch guard because the absence checks genuinely do pass vacuously (v3.20). The accompanying US-visitor behavioural check (3 timezones × 3 pages, 63/0, `ad_personalization` denied in every consent call rather than only the last) ran against a clean worktree of the deployed commit, not the live origin — egress to `marketics.io` is denied and a browser confirmed it; same bytes, not the same act, and recorded as such. Also fixes the `## Version history` heading dropped from this file in v3.22.
 - **v3.22** (2026-09-03) — the paid LP gets its **own** inbound-webhook trigger (`3c750621-…`), separating it from the shared organic hook that 29 files use, the consent beacon included. Sharing it meant the paid workflow could only distinguish itself by filtering on `source`, and a filter that silently stops matching is indistinguishable from a broken deploy — two hours were lost hunting for a serverless Function that has never existed here (every GHL call on this site is a browser fetch to an inbound webhook, so the site cannot map a field or apply a tag at all). Contacts were being created by whatever legacy workflow owns the shared hook while the new paid workflow showed 0 executions, never having been pointed at. Fix was wiring, not archaeology. The owner, once found, was "Inbound Lead" -- already restored and ruled out during the hunt as pre-dating the website; it created contacts and never tagged them. Ruling a workflow out by name and vintage is what kept the search running: a workflow can acquire a webhook trigger long after its name stopped describing it. Gated both directions — the LP must carry the paid hook and not the shared one, and no other file may carry the paid hook — negative-controlled both ways, with ids rather than full URLs in the validator. Flagged and not fixed here: after the swap nothing creates the contact unless the paid workflow does it itself.
 - **v3.21** (2026-09-01) — a form field's `name` is **not** the key the webhook sends: the LP hand-builds its JSON payload, so `name="listing_url"` transmits as `listingUrl` and is never sent as written. Code had read the markup rather than the request earlier the same day and gave Jason a wrong key while debugging a GHL error; corrected directly. The pricing dropdown already reached GHL as `pricingOwner`; `pricing_owner` added alongside it so the new custom field maps like-for-like, with the old key kept until something is known to no longer read it. The transmitted values are the option **values** (`me`, `manager`, `tool`, `unsure`, `""`), not the visible labels — a conditional branch built on "My property manager" would never have fired. Payload keys now gated by name, negative-controlled three ways; all five options verified by intercepting the real POST, 25/25.
 - **v3.20** (2026-09-01) — **`/legal` corrected — the first edit Code has ever made to that document**, on Jason's approval of the C3 redline (all seven edits plus all three flagged items). Google Ads named in §04.1 and §06; §03's sell sentence kept verbatim with the advertiser claim replaced by what is actually shared; both Meta Pixel passages removed; Clarity corrected to consent-only in four jurisdictions; §08 describing the Do Not Sell control and GPC; dates moved on both tabs; and the fee basis at §390/§588/§602 corrected to net payout, **closing the Aug 27 routing** and deleting the counsel-lane exemption rather than keeping it as a courtesy. New `REQUIRED_TOKENS` gate for copy that quietly goes away, the inverse of a retired token; smoke asserts the same six facts against the served page. Two things caught in the doing: the absence assertions passed **vacuously against an empty body** when the origin died, now guarded; and `gross booking revenue` on `/calculator` is the same-phrase/different-claim trap for the third time, scoped with its reason rather than softening the token. C3 items 2 and 6 stay provisional pending the C4 lawyer review.
