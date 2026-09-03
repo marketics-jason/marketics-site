@@ -126,9 +126,9 @@
     try {
       var body = JSON.stringify({ event: event, source: 'consent-banner', path: location.pathname, timestamp: new Date().toISOString() });
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(GHL_HOOK, new Blob([body], { type: 'application/json' }));
+        navigator.sendBeacon(GHL_HOOK, new Blob([body], { type: 'text/plain' }));
       } else {
-        fetch(GHL_HOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+        fetch(GHL_HOOK, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: body, keepalive: true }).catch(function () {});
       }
     } catch (e) { /* non-critical */ }
   }

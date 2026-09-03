@@ -520,6 +520,23 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                             f"the transmitted key, not the form field name, so renaming "
                             f"one empties a CRM field silently (registry v3.21)")
 
+    # 11c-bis. no GHL post may declare application/json (registry v3.28).
+    # 'application/json' is not a CORS-safelisted Content-Type, so it forces a
+    # preflight. GHL answers preflights with a wildcard Access-Control-Allow-
+    # Origin, which a browser rejects whenever the request's credentials mode is
+    # 'include' — and when a preflight fails the browser sends NOTHING. The lead
+    # is dropped before it leaves the machine, with only a console error to show
+    # for it. Demonstrated against a mock replying exactly as GHL does: with
+    # application/json the server saw the preflight and no body; with text/plain
+    # it saw the full body under the same condition.
+    # text/plain is safelisted, so there is no preflight to fail. The body is the
+    # same JSON string either way and the receiver parses it the same.
+    if re.search(r"['\"]Content-Type['\"]\s*:\s*['\"]application/json['\"]", raw) or \
+       re.search(r"type\s*:\s*['\"]application/json['\"]", raw):
+        hard.append(f"{where}: declares application/json on a webhook post — that forces "
+                    f"a CORS preflight, and a failed preflight drops the lead silently. "
+                    f"Use 'text/plain' (registry v3.28)")
+
     # 11d. the paid LP posts to its OWN webhook trigger (registry v3.22).
     # SHARED_HOOK is the organic one: 29 files use it, the consent beacon
     # included. The paid path had to be separated because a workflow sharing it

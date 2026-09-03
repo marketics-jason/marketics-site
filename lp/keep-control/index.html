@@ -1000,7 +1000,7 @@ footer a:hover{color:var(--muted);}
         utm_term: utm.utm_term || ''
       };
       try {
-        await fetch(GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+        await fetch(GHL, { method:'POST', headers:{'Content-Type': 'text/plain'}, body: JSON.stringify(payload) });
       } catch (ex) { console.warn('GHL webhook non-critical error:', ex); }
     }
 
