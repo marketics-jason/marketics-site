@@ -787,7 +787,7 @@ function submitForm() {
   try {
     fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
       method: 'POST',
-      headers: {'Content-Type': 'text/plain'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload)
     });
   } catch(e) {
