@@ -283,6 +283,15 @@ grep -q 'lpAuditForm' <<<"$ci_lp" \
 grep -q 'gclid_first' <<<"$ci_lp" \
   && ok "LP posts gclid_first (the provisioned GHL field key)" \
   || no "LP does not post gclid_first -- the GHL field will stay empty"
+# Attribution keys must match GHL's field keys EXACTLY. Proven on a live contact
+# 2026-09-04: fields whose key matches a transmitted key populate, and every
+# field whose key differs was blank -- silently, with a contact that otherwise
+# looks complete. There is no mapping bridge to fall back on.
+for k in utm_source_first utm_medium_first utm_campaign_first utm_content_first utm_term_first first_touch_lp; do
+  grep -q "$k" <<<"$ci_lp" \
+    && ok "LP posts $k" \
+    || no "LP does not post $k -- that GHL Attribution field will be silently blank"
+done
 ci_lg=$(body "$BASE/legal")
 grep -q 'GoHighLevel' <<<"$ci_lg" \
   && ok "/legal fetched (check below is meaningful)" \

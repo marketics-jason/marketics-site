@@ -560,7 +560,12 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # errors, the lead just arrives blank.
     if where == "lp/keep-control/index.html":
         for key in ("email", "listingUrl", "pricingOwner", "pricing_owner", "source",
-                    "gclid_first"):
+                    "gclid_first",
+                    # Keys matching GHL's Attribution field keys exactly. Proven
+                    # necessary on a live contact 2026-09-04: a field whose key
+                    # differs from the transmitted key stays blank, silently.
+                    "utm_source_first", "utm_medium_first", "utm_campaign_first",
+                    "utm_content_first", "utm_term_first", "first_touch_lp"):
             if not re.search(rf"^\s*{re.escape(key)}\s*:", raw, re.M):
                 hard.append(f"{where}: webhook payload key {key!r} missing — GHL maps on "
                             f"the transmitted key, not the form field name, so renaming "

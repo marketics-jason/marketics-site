@@ -2213,9 +2213,80 @@ break the thing on purpose and confirm the check notices.
 
 ---
 
+## v3.34 — campaign attribution has never reached the CRM (2026-09-04)
+
+Found by submitting one live test lead before changing anything, rather than by adding the fix and
+watching it work. That order is the whole reason the finding is this complete.
+
+### The pattern, from one contact
+
+| GHL field | Key we transmit | Result |
+|---|---|---|
+| `pricing_owner` | `pricing_owner` | **populated** ("manager") |
+| `listingUrl` | `listingUrl` | **populated** |
+| `Submitted At` | `submittedAt` | **populated** |
+| `utm_source_first` … `utm_term_first` | `utm_source` … `utm_term` | **blank** |
+| `first_touch_lp` | `landingPage` | **blank** |
+| `first_touch_ts` | nothing | blank |
+| `lead_form_id` | nothing | blank |
+| `fbclid` | nothing | blank |
+
+Every field whose key **exactly matches** a transmitted key is populated. Every field whose key
+differs is blank. **There is no mapping bridge** — GHL matches on the transmitted key, which is
+registry v3.21's rule holding at estate scale rather than as a one-off about `listingUrl`.
+
+**Consequence: UTM attribution has never reached the CRM.** The browser captured it correctly the
+whole time, the payload carried it, the contact was created, the tag was applied, and the campaign
+fields were empty. Nothing anywhere reported an error. The historical "contact created, zero
+attribution data" symptom was only half fixed when the shared-trigger problem was solved in v3.22;
+this is the other half, and it survived that fix because the visible parts all worked.
+
+### Why the submission had to come first
+
+The tempting move was to add the matching keys straight away — additive, low risk, obviously right.
+It would have fixed the five UTM fields and **permanently destroyed the evidence** for the other
+three, because a populated field cannot tell you whether it was populated by the new key or by a
+bridge that was working all along.
+
+One submission against the unchanged page answered all eight fields at once. That is the same
+discipline as v3.29 (establish which request failed before diagnosing why) applied to a different
+question: **establish what is actually broken before shipping the thing that would hide it.**
+
+### Fixed here — the mechanical half
+
+Six keys added to the LP payload, same values, keys matching the GHL field keys exactly:
+`utm_source_first`, `utm_medium_first`, `utm_campaign_first`, `utm_content_first`, `utm_term_first`,
+`first_touch_lp`. The unsuffixed keys stay until something is known not to read them; removing them is
+a separate cleanup. Gated in `validate-site.py` and asserted on the served page in `smoke.sh`, each
+negative-controlled.
+
+### Routed, not authored — the non-mechanical half
+
+- **`first_touch_ts`** — nothing captures a first-touch timestamp. `submittedAt` is a *different
+  value* (submission time, already populating its own field), so mapping it here would fill the field
+  with a plausible wrong number, which is worse than blank. Needs a real first-touch capture in
+  `mkx-utm.js`, alongside the landing page it already stores. Small, and a scope addition.
+- **`lead_form_id`** — semantics unclear. Candidates: the form's DOM id (`lpAuditForm`) or the
+  `source` value (`lp-keep-control`, which already populates GHL's built-in Contact source). Guessing
+  would put a stable-looking value in a field that means something else.
+- **`fbclid`** — nothing captures it and the estate runs no Meta Pixel (both passages were removed
+  from `/legal` on 2026-09-01). The field can never fill; it belongs on the existing dup-field cleanup
+  item.
+
+### Suspected but NOT evidenced
+
+`/get-started` and `/join` transmit the same unsuffixed UTM keys and post to the **shared** organic
+hook, whose workflow is a different mapping this test says nothing about. Their attribution is
+plausibly blank for the same reason and that is a guess, not a finding. It needs its own test contact
+through the organic form. Recorded as suspected so nobody reads this entry as having cleared them.
+
+
+---
+
 ## Version history
 
 
+- **v3.34** (2026-09-04) — **campaign attribution has never reached the CRM.** One live test lead, submitted *before* changing anything, showed the pattern exactly: every GHL field whose key matches a transmitted key is populated (`pricing_owner`, `listingUrl`, `submittedAt`), and **every field whose key differs is blank** — all five `utm_*_first`, plus `first_touch_lp`. **There is no mapping bridge**; GHL matches on the transmitted key, which is v3.21 holding at estate scale rather than a one-off about `listingUrl`. So the browser captured UTM data correctly, the payload carried it, the contact was created and tagged, and the campaign fields were empty, with nothing reporting an error. The v3.22 shared-trigger fix was only half of "contact created, zero attribution data"; this is the other half, and it survived because every visible part worked. **The order was the finding:** adding the matching keys first would have fixed five fields and permanently destroyed the evidence for the other three, since a populated field cannot say whether the new key or an existing bridge filled it. Same discipline as v3.29, applied to a different question — establish what is actually broken before shipping the thing that would hide it. Fixed here (mechanical): six keys added matching the GHL field keys exactly, unsuffixed keys retained, gated in the validator and asserted on the served page, negative-controlled. **Routed, not authored:** `first_touch_ts` (nothing captures a first-touch timestamp; `submittedAt` is a different value and would fill the field with a plausible wrong number), `lead_form_id` (semantics unclear), `fbclid` (nothing captures it and no Meta Pixel runs — it can never fill). **Suspected but not evidenced:** `/get-started` and `/join` send the same unsuffixed keys to the shared hook, whose mapping this test says nothing about; recorded as a guess needing its own test contact, so nobody reads this entry as clearing them.
 - **v3.33** (2026-09-04) — **`gclid` capture, consent-gated by ruling.** Code proposed a consent-independent capture (matching the UTM parameters) and flagged the privacy question; Jason amended it to **capture only where `ad_storage` is granted**, which **moots that question rather than deferring it** — the case of collecting an advertising identifier from someone who declined never arises. Ungated traffic, where AG1–AG3 point, captures by default. The consent-independent variant is recorded as **considered and not shipped**: it goes to counsel (C4) first if ever wanted, and must not return as a "simplification". The gate is itself gated, because dropping it looks like a tidy-up and would silently put a click identifier in the CRM for someone who declined: `validate-site.py` rejects the capture without `adStorageGranted`, and rejects `mkxCommitClickIds()` if it persists without calling it; `smoke.sh` asserts it on the served file. `/legal` gains the disclosure as a **C2 factual correction**, including the negative case ("if you have not granted advertising consent, no click identifier is collected or sent"); privacy-tab dates to Sep 4, terms tab untouched and correctly still Sep 1. Ids are held in memory and committed only on grant, so a gated visitor who accepts after navigating away is not captured — correct, not a gap. Verified in a browser across all four states (8 assertions): **gated-and-ignored does not capture and the lead still posts**. `wbraid`/`gbraid` ride the same gate under their own keys, deliberately not folded into `gclid_first`, since Ads offline import takes the three in separate columns. **And a fourth vacuous pass, found by a negative control on my own gate:** the explanatory comment I wrote began a line with `gclid_first:`, satisfying the very `^\s*<key>\s*:` gate meant to catch a rename — the check could not fail. Fourth member this week, in a fourth layer (CSP whole-header grep, a mock validating its own assumption, a workflow exiting 0 on any HTTP code, and now a gate satisfied by its own documentation). **A check that cannot fail is not a check**, and breaking it on purpose is the only reliable way to find out.
 - **v3.32** (2026-09-04) — **CTO approval of the operations-at-cost publish, granted retrospectively.** Jason released his own §4 hold as brief owner and instructed the merge ~25 minutes before the checklist arrived; recorded plainly, since "approved" and "approved before it shipped" are different facts and only the first is true. **Items 3 and 6 were unsatisfiable as written** — they required a Miami partner card and inbound links from `/partners`, neither of which exists — and the CTO ruled that his checklist had propagated Strategy's error rather than verifying those surfaces against the estate. Both accepted as substantively achievable. The load-bearing behaviour was **refusing to author a partner card to satisfy the letter of a checklist**: a manufactured card would have made every item read true and left a fabricated surface carrying a partner's statistic. Stop-and-route beat compliance, and the checklist was the thing that was wrong. **Rule adopted: a mid-flight scope addition is logged when it is authorised, not when it is approved.** The reciprocal cost-seg cards were authorised by Jason mid-flight and named in the approval summary; authorisation was never in question, but a reviewer should meet a scope addition in the ledger rather than in the summary asking them to approve it. From here, work authorised outside its commissioning brief gets a one-line registry note at the moment of authorisation, with who authorised it and why. Item 7 correction taken: Flag #4 was closed by Jason's 20–35% ruling, and the registry records it as already made rather than made by this PR. **Parked:** the specced Turno partner-card copy and its proven link treatment are recorded verbatim here, because the surface they were written for does not exist and the phrasing would otherwise be lost between now and the page being built. Two constraints already bind that page: it points at `/get-started`, never the LP (the `/lp/` gate fails CI otherwise), and the 126,000+ figure is Amy Plummer's, so it moves estate-wide in one pass if she corrects it.
 - **v3.31** (2026-09-03) — **the Turno ship: two of three corrections had no targets.** `25,000`/`25000`/`25k` appear **nowhere** on the estate (case-insensitive, every file; the only regex hits were base64 image data in an `/audits/<token>/` page), so the 126,000+ correction is a no-op in copy **and** schema. **Turno is not mentioned anywhere either** — every apparent match is the word *turnover* — so the tracked-link swap has no targets; both values ship for the first time on the new page. `/partners` and the Miami partner card **do not exist, by design** — sequenced behind partner volume, since a partner page with two cards is worse than none — so the "two internal links in (`/partners`, `/intel` index)" bar cannot be met as written; Jason took the repeated reference as his own error and corrected the standing instruction to **`/intel` index plus the nearest sibling article** until a partners page ships. That needs no new gate: a `/partners` link already fails the broken-internal-link check, negative-controlled. And **Open Flag #4 was already closed at v3.7** (2026-08-27) with the same figure and the same two sources, so §5.2 re-affirms rather than closes. Code authored no partner card, invented no `/partners`, and manufactured no links to hit a number. **Three rules recorded:** partner statistics are the partner's own figures and change estate-wide in one pass, copy and structured data together; the wedge figure is **20–35%** (settling the parenthetical v3.7 left open); and **paid-only surfaces never receive links from organic surfaces**. That last one is **gated** — the inverse of the no-exit rule, protecting the opposite direction: no-exit stops the paid page leaking traffic out, this stops organic traffic leaking in and quietly corrupting `generate_lead_paid`, since a lead still looks like a lead. Matched on the `/lp/` prefix so a second LP is covered the day it exists; negative-controlled bare and with a query string. Nothing links there today, which is why it goes in while it is free. **The page** ships the Rev B copy verbatim (Jason byline, no disclosure, tracked Turno link in a new tab, closing link to `/get-started`, 20 to 35% as written) and deliberately omits the deck, short-answer box, FAQ and CTA box its siblings carry, because the supplied copy contains none and Code does not author canon-bearing copy. Canon verified mechanically: 45% exactly once, sample and gate sentence in the same paragraph, methodology as plain text not a link, zero em dashes in prose. Three inbound links, honestly counted: the `/intel` hub card, a `Keep reading` card on the nearest sibling, and a **reciprocal pair with the cost-seg page** — the first edge of the partner intel mesh, two pages written for the same reader that did not reference each other at all until now. That mesh is the point of the sequencing: partners ramp, each gets an intel page, the pages link to each other as they ship, and the city partner pages later link *down* into a connected cluster instead of a set of islands. The recrawl at the end needs no manual step — `indexnow.yml` submits the **entire** sitemap on every push to `main`, not a diff. IndexNow now needs no action (automatic on push to `main`), closing the item left open at the Cost Seg ship. Publish was held for the CTO lane's signal; **Jason released that hold himself, as owner of the brief** — recorded as an owner release, not as the CTO signal, because **releasing the publish gate did not release the ad-spend gate**: the CTO lane's LP verification gates both, ads import stays blocked on it, and "the page shipped" must never be read back as "verification was declared". **Strategy ruled** the page ships without the deck, short-answer box, FAQ and CTA box: it is an argumentative essay with one recommendation, a FAQ would invent questions nobody asked, and a CTA box would duplicate the closing paragraph that already *is* the CTA. The one omission with real value is the **short-answer box** (AI engines extract those; unbranded prompts still score zero) and it is a content addition, not a formatting fix — left as an open Strategy item rather than improvised at merge time. **Rule recorded: evidence of a signal is not the signal.** `generate_lead_paid` firing on production is the evidence the CTO lane's verification rests on, not the declaration; a signal that gates ad spend is given once, explicitly, by its owner, never inferred from a passing observation by someone else.
