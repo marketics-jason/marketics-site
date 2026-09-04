@@ -38,3 +38,10 @@ jobs:
       # reviewable edit to scripts/llms-config.json, not an omission.
       - name: llms.txt covers the sitemap
         run: python3 scripts/gen-llms.py
+      # lastmod overclaim gate. Deliberately NOT an equality check: a squash merge
+      # re-dates the commit, so equality would turn main red for reasons unrelated
+      # to content, and a check that flaps gets ignored. This fails only when a
+      # lastmod claims a date NEWER than the file's real git date -- the case that
+      # actually misleads a crawler. Values are set by evidence, by hand.
+      - name: no sitemap lastmod overclaims its file
+        run: python3 scripts/gen-lastmod.py

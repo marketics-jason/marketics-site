@@ -293,6 +293,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold,#D6AD60);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono,monospace);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
 .skip-link:focus{top:0;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -328,7 +333,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
   <div class="hero-img"><img src="/images/jason-founder-hero.webp" alt="Jason Baxter, founder of Marketics" width="2000" height="1333"></div>
   <div class="hero-body">
     <div class="kicker"><div class="bar"></div><span>Our Story</span></div>
-    <h1 class="hero-h">Founder-led.<br>A decade in<br>one lane.</h1>
+    <h1 class="hero-h"><span class="hln">Founder-led.</span> <span class="hln">A decade in</span> <span class="hln">one lane.</span></h1>
     <p class="hero-p">Marketics does one thing. Short-term rental revenue. Five years operating a 50+ listing portfolio of my own, then building the specialist practice that runs revenue for owners. A decade in the same lane. The comp set, the ranking, the craft of the listing; the results we document span 2019–2026.</p>
     <span class="hero-byline">Jason Baxter · Founder, Marketics · Operating since 2015 · <a href="https://www.linkedin.com/in/jasonbaxter1" target="_blank" rel="noopener">LinkedIn ↗</a></span>
   </div>
@@ -345,7 +350,7 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 <section class="atelier sec">
   <div>
     <div class="kicker"><div class="bar"></div><span>How we're built</span></div>
-    <h2 class="atelier-h">An atelier,<br>not an agency.</h2>
+    <h2 class="atelier-h"><span class="hln">An atelier,</span> <span class="hln">not an agency.</span></h2>
   </div>
   <div class="atelier-rows">
     <div>Marketics is founder-led by choice. One operator is accountable for your revenue, start to finish. The person who reads your comp set is the person paid on the lift.</div>

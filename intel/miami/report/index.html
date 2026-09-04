@@ -844,6 +844,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -913,10 +918,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
   <div class="hero-content">
     <div class="hero-label">Market Intelligence Report</div>
-    <h1 class="hero-title">
-      Miami.<br>
-      <em>2026.</em>
-    </h1>
+    <h1 class="hero-title"><span class="hln">Miami.</span> <span class="hln"><em>2026.</em></span></h1>
     <p class="hero-subtitle">A deep read on one of North America's most active STR markets, where demand is year-round, the booking window is short, and a World Cup summer is about to change everything.</p>
     <div class="hero-date">Published March 2026 · Marketics Research</div>
   </div>
@@ -1219,7 +1221,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
   <div class="cta-inner">
     <div class="cta-left">
       <div class="section-label">From Market to Property</div>
-      <h2 class="section-title">The average tells you<br>where the market is.<br>It can't tell you <em>where you are.</em></h2>
+      <h2 class="section-title"><span class="hln">The average tells you</span> <span class="hln">where the market is.</span> <span class="hln">It can't tell you <em>where you are.</em></span></h2>
       <div class="cta-separator"></div>
 
       <p class="cta-philosophy">Market averages are useful for context. They tell you what the typical Miami property earns, charges, and fills. But your property isn't typical. It has a specific bedroom count, a specific neighbourhood, a specific listing quality, and a specific set of problems and opportunities that no market average can identify.</p>

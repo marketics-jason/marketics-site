@@ -480,6 +480,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -627,7 +632,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
   <!-- SECTION 1: THE OPPORTUNITY -->
   <div class="section">
     <div class="section-label">The Opportunity</div>
-    <h2 class="section-h">The Largest STR Demand Event<br>in <em>US History</em></h2>
+    <h2 class="section-h"><span class="hln">The Largest STR Demand Event</span> <span class="hln">in <em>US History</em></span></h2>
     <p class="body-text">The 2026 FIFA World Cup is the first to be hosted across three countries and the first with 48 teams. Miami is one of 11 US host cities. What that means for short-term rental operators in Miami is simple: <strong>six specific dates where demand will be unlike anything this market has ever seen</strong>, and six dates where hosts without a strategy will leave three to five times their normal revenue on the table.</p>
     <p class="body-text">In 2022, Qatar World Cup host-adjacent markets in other countries saw Airbnb ADR spikes of 4–6× during match days. Miami is not host-adjacent. Miami <em>is</em> the host. The fans will sleep here.</p>
 
@@ -977,7 +982,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
   <!-- FOOTER CTA -->
   <div class="footer-cta">
-    <h2 class="fca-h">Your Market.<br><em>Mastered.™</em></h2>
+    <h2 class="fca-h"><span class="hln">Your Market.</span> <span class="hln"><em>Mastered.™</em></span></h2>
     <p class="fca-sub">Request your free Miami revenue audit. We'll show you exactly what your property should be earning, and the fastest moves to close the gap.</p>
     <p class="fca-sub">Whether you're preparing for FIFA or optimizing year-round, see how <a href="/markets#market-miami">Marketics for Miami hosts</a> turns market data into Miami short-term rental revenue optimization.</p>
     <a href="#audit" class="fca-btn">Get My Free Revenue Audit →</a>

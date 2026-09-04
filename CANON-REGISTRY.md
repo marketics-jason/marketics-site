@@ -2363,6 +2363,106 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.36 — the GEO batch (2026-09-04)
+
+### llms.txt: gated, not generated
+
+The brief asked for build-step generation. **There is no build step**, and nothing emits
+`sitemap.xml` — it is hand-maintained, which is why 39 of 42 `lastmod` values were frozen at
+2026-07-18. The goal (coverage cannot drift) is met differently: the sitemap is the source,
+`scripts/gen-llms.py` gates `llms.txt` against it, and CI fails when a page is in one and not the
+other. Exclusions, section routing and Strategy-supplied copy live in `scripts/llms-config.json`, so
+a coverage decision appears in a diff instead of inside a script.
+
+**Wholesale regeneration was considered and refused.** The 22 pre-existing entries carry curated GEO
+copy; replacing their descriptions with meta descriptions would be **authoring by side-effect** —
+rewriting approved text under cover of "generation". Existing entries are never touched; only missing
+ones are added, sourced from each page's own approved `<meta name="description">`. Result: 41 of 42,
+**zero lines removed**.
+
+The audit cited 21 omitted URLs; the live sitemap yields 20. Most likely
+`/intel/airbnb-operations-at-cost`, published after the audit ran. **The fixture is derived from the
+current sitemap, not inherited from a stale count** — the same failure as a Mapping Reference
+labelled "Active" (v3.35).
+
+### ClaimReview retired as a class
+
+Both nodes were Marketics reviewing Marketics: `author` and `itemReviewed.author` the same
+organisation, rating our own 45% claim five stars with `alternateName: "Documented"`. ClaimReview is
+fact-checking markup for accredited publishers; a claim we make about ourselves does not qualify.
+
+Gated as a class: **ClaimReview banned outright, and any Review whose author is Marketics banned.**
+The three customer reviews on `/results` are untouched — their authors are `Person` nodes, which is
+exactly what makes them legitimate. Negative-controlled three ways including a **false-positive
+control** proving the real reviews produce zero findings.
+
+### lastmod: set by evidence, gated only against overclaims (ruled Jason, option B)
+
+Naive git-per-file was built, run, and **rejected before shipping**. It dated 35 pages to 2026-09-03
+and 7 to 2026-09-04, because commit `825222c` ("Correct the consent stub comment on all 53 pages")
+touched 54 files. Verified on three files independently: 19 changed lines each, **zero outside the
+HTML comment**. Shipping that tells crawlers the whole estate changed because a comment was edited —
+the exact harm the brief chose git-per-file to avoid, arriving one day later.
+
+**Git-per-file is only as honest as commit hygiene.** A mechanical sweep re-dates the estate exactly
+like a build timestamp.
+
+Values are now set by evidence: pages this batch genuinely changed → today; otherwise the page's own
+JSON-LD `dateModified` where it has one; otherwise left alone. 20 / 14 / 8.
+
+`scripts/gen-lastmod.py` is kept for `--check` only, wired into CI. It fails when a `lastmod` claims
+a date **newer** than the file's real git date. It deliberately does **not** enforce equality: a
+squash merge re-dates the commit, so equality would turn main red for reasons unrelated to content,
+and a check that flaps gets ignored — the vacuous-pass family from the other direction.
+
+**`lastmod` and `dateModified` are different facts** and are not driven from one source.
+`lastmod` = this file changed. `dateModified` = this article was revised. Driving both from git makes
+a heading sweep re-date every article, which `intel/SCHEMA-CHECKLIST.md` forbids in terms ("don't
+fake a refresh"). The homepage contradiction the brief named is resolved honestly: its H1 **copy**
+changed today, so both moved to 2026-09-04. The other 19 pages had markup swapped with identical
+rendered text, so **zero** `dateModified` values moved.
+
+### Byline scope: nothing to strip, and the stated goal is not true
+
+There is no Melgar `Person` node anywhere. The author page is `WebPage`-only by design and the
+article carries an `Organization` author — implemented under v3.11, before the brief asked for it.
+**Second specified change in two briefs with no target** (after `25,000` and Turno).
+
+The brief's goal — "the entity graph carries exactly one person, Jason Baxter" — **is not true and
+should not be made true.** Eight other `Person` nodes exist: five media participants on `/media`, and
+the three customer review authors on `/results`. Enforcing it literally would delete the very review
+authors whose `Person` nodes make those reviews valid. Read as intent ("no manufactured
+Marketics-side person"), it is already satisfied. Recorded as scope, not identity.
+
+A gate written for this was **deleted before commit**: its negative control fired a message Code had
+not written, revealing a comprehensive pen-name gate already at lines 511-535. Two gates for one rule
+drift apart and the stale one gets trusted.
+
+### `<br>` in headings: 60 across 28 files
+
+`<br>` yields no whitespace when tags are stripped, so extraction read `YOURMARKET.MASTERED.` as one
+token. Replaced with `<span class="hln">` blocks joined by a **real space** — the space is what makes
+extraction correct; `display:block` restores the visual break. Both named test cases now read
+correctly: "YOUR MARKET. MASTERED." and "Two Disasters. Zero Collapse." One **pre-existing** glue on
+`/markets` (a nested block span with no preceding whitespace) fixed in passing.
+
+Homepage H1 is now Strategy's verbatim sentence; the wordmark is a `div` carrying the same class, and
+the hero is pixel-identical. Placement is visually hidden via the existing `.sr-only` — a
+Design/Strategy question flagged, not decided.
+
+**A corruption caught by testing, not by review.** The first sweep matched an `<h1>` inside an HTML
+*comment* in `/calculator` and swallowed everything to the next `</h1>` 93 lines later, mangling the
+real heading and leaving an orphan `</span>`. Found by an extraction test, not by reading the diff.
+The whole sweep was reverted and redone with comments, `<style>` and `<script>` masked out.
+**A regex that finds tags will find them in comments too.**
+
+### Routed, not authored
+
+The done-when asks for an **"Anthony alias note"**. Nothing in the repo records that `Anthony` is an
+alias, and `/case-studies/anthony-san-antonio` uses the name throughout with no such indication.
+Writing that entry would mean asserting something Code does not know — and if the name *is* an alias,
+whether it needs disclosure is the same class of question as the pen name (v3.11): Strategy's and
+counsel's, not Code's.
 
 
 ---
@@ -2370,6 +2470,7 @@ organic hook, whose mapping this says nothing about. Needs its own test contact.
 ## Version history
 
 
+- **v3.36** (2026-09-04) — **the GEO batch.** `llms.txt` is **gated, not generated**: there is no build step and nothing emits `sitemap.xml`, so the sitemap is the source and CI fails when a page is in one and not the other. Wholesale regeneration refused as **authoring by side-effect** — 41 of 42 covered, **zero existing lines removed**. Audit cited 21 omissions, live sitemap yields 20; fixture derived from the current sitemap, not a stale count. **ClaimReview retired as a class** (both nodes were Marketics reviewing Marketics); customer reviews untouched because their authors are `Person` nodes, proven by a false-positive control. **lastmod set by evidence, not git-per-file:** the naive version dated 35 pages to Sep 3 because a comment-only sweep touched 54 files — the exact harm the brief chose git-per-file to avoid. Git-per-file is only as honest as commit hygiene. CI keeps the **overclaim gate only** (never equality: a squash merge re-dates commits, and a check that flaps gets ignored). **`lastmod` and `dateModified` are different facts** and are not driven from one source; the homepage moved both because its H1 copy genuinely changed, and zero other `dateModified` values moved. **Byline scope: nothing to strip** — no Melgar `Person` node exists, implemented under v3.11 before the brief asked. The stated goal ("exactly one person") **is not true and must not be made true**: eight legitimate third-party `Person` nodes exist, including the review authors whose nodes make those reviews valid. A gate written for it was deleted before commit when its negative control revealed an existing gate. **60 `<br>` removed from headings across 28 files**, replaced with block spans joined by a real space — the space is what fixes extraction. **A corruption caught by testing, not review:** the first sweep matched an `<h1>` inside an HTML comment and swallowed 93 lines; reverted and redone with comments masked. **A regex that finds tags will find them in comments too.** **Routed:** the "Anthony alias note" — nothing in the repo records that name as an alias, and asserting it would be authoring a fact Code does not have.
 - **v3.35** (2026-09-04) — **the paid funnel is proven end to end, and v3.34's mechanism was wrong.** A live contact now carries `gclid_first: TESTGCLID_SEP4`, `first_touch_lp: /lp/keep-control` and all five `utm_*_first`; GHL's own event message confirms twelve fields written and the full chain executed. **Capture → transport → CRM field is closed for the first time**, and offline conversion import finally has an identifier to match on. Closes the CTO's §7 done-when. **The correction:** v3.34 concluded there was no mapping bridge and GHL matched on the transmitted key. Wrong — `gclid_first` was transmitted under the exact field key and landed nowhere until an explicit row was added to the `Create contact` action. Rows are mandatory; a matching key is necessary, not sufficient. The fix was right, the recorded reason was not — the v3.27 shape again, corrected in place at v3.34 too so a reader hitting the old entry does not carry the wrong model away. **Fifth vacuous pass:** the tokens were unselectable because GHL builds its picker from one captured request, and the `MAPPING REFERENCE` read *"Active: (2026-09-03 13:02:59)"* — a snapshot from the day before the keys existed. Re-pointing it to the Sep 4 request made both available at once. Nothing indicated staleness: the trigger said *Active*, contacts were created, tagged and emailed. **Rule: when the site starts sending a new payload key, the Mapping Reference must be re-pointed before the mapping can be created** — the failure is invisible, the field simply reads `--`. **Near-miss worth keeping:** the first attempt selected `Contact . Custom Fields . gclid_first` as the value — the field reading its own empty value back into itself, a permanent silent no-op that would have looked configured forever. Jason caught it before saving and asked rather than assuming. **Still unexplained and deliberately not invented:** why `utm_source_first` was blank at 15:43 and populated at 16:05 when its chip reads the unsuffixed key, sent in both. It works; the mechanism is not recorded because it is not known.
 - **v3.34** (2026-09-04) — **campaign attribution has never reached the CRM.** One live test lead, submitted *before* changing anything, showed the pattern exactly: every GHL field whose key matches a transmitted key is populated (`pricing_owner`, `listingUrl`, `submittedAt`), and **every field whose key differs is blank** — all five `utm_*_first`, plus `first_touch_lp`. **There is no mapping bridge**; GHL matches on the transmitted key, which is v3.21 holding at estate scale rather than a one-off about `listingUrl`. So the browser captured UTM data correctly, the payload carried it, the contact was created and tagged, and the campaign fields were empty, with nothing reporting an error. The v3.22 shared-trigger fix was only half of "contact created, zero attribution data"; this is the other half, and it survived because every visible part worked. **The order was the finding:** adding the matching keys first would have fixed five fields and permanently destroyed the evidence for the other three, since a populated field cannot say whether the new key or an existing bridge filled it. Same discipline as v3.29, applied to a different question — establish what is actually broken before shipping the thing that would hide it. Fixed here (mechanical): six keys added matching the GHL field keys exactly, unsuffixed keys retained, gated in the validator and asserted on the served page, negative-controlled. **Routed, not authored:** `first_touch_ts` (nothing captures a first-touch timestamp; `submittedAt` is a different value and would fill the field with a plausible wrong number), `lead_form_id` (semantics unclear), `fbclid` (nothing captures it and no Meta Pixel runs — it can never fill). **Suspected but not evidenced:** `/get-started` and `/join` send the same unsuffixed keys to the shared hook, whose mapping this test says nothing about; recorded as a guess needing its own test contact, so nobody reads this entry as clearing them.
 - **v3.33** (2026-09-04) — **`gclid` capture, consent-gated by ruling.** Code proposed a consent-independent capture (matching the UTM parameters) and flagged the privacy question; Jason amended it to **capture only where `ad_storage` is granted**, which **moots that question rather than deferring it** — the case of collecting an advertising identifier from someone who declined never arises. Ungated traffic, where AG1–AG3 point, captures by default. The consent-independent variant is recorded as **considered and not shipped**: it goes to counsel (C4) first if ever wanted, and must not return as a "simplification". The gate is itself gated, because dropping it looks like a tidy-up and would silently put a click identifier in the CRM for someone who declined: `validate-site.py` rejects the capture without `adStorageGranted`, and rejects `mkxCommitClickIds()` if it persists without calling it; `smoke.sh` asserts it on the served file. `/legal` gains the disclosure as a **C2 factual correction**, including the negative case ("if you have not granted advertising consent, no click identifier is collected or sent"); privacy-tab dates to Sep 4, terms tab untouched and correctly still Sep 1. Ids are held in memory and committed only on grant, so a gated visitor who accepts after navigating away is not captured — correct, not a gap. Verified in a browser across all four states (8 assertions): **gated-and-ignored does not capture and the lead still posts**. `wbraid`/`gbraid` ride the same gate under their own keys, deliberately not folded into `gclid_first`, since Ads offline import takes the three in separate columns. **And a fourth vacuous pass, found by a negative control on my own gate:** the explanatory comment I wrote began a line with `gclid_first:`, satisfying the very `^\s*<key>\s*:` gate meant to catch a rename — the check could not fail. Fourth member this week, in a fourth layer (CSP whole-header grep, a mock validating its own assumption, a workflow exiting 0 on any HTTP code, and now a gate satisfied by its own documentation). **A check that cannot fail is not a check**, and breaking it on purpose is the only reliable way to find out.

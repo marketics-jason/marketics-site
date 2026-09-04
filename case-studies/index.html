@@ -113,6 +113,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -124,7 +129,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
 <div class="page-header">
   <div class="eyebrow fi">Case Studies</div>
-  <h1 class="fi" style="transition-delay:.05s">Real Properties.<br><em>Real Results.</em></h1>
+  <h1 class="fi" style="transition-delay:.05s"><span class="hln">Real Properties.</span> <span class="hln"><em>Real Results.</em></span></h1>
   <p class="fi" style="transition-delay:.1s">Three stories. Three markets. Three different operators. One consistent outcome: when optimization is done right, the numbers move.</p>
 </div>
 

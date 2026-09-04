@@ -360,6 +360,11 @@ footer{background:var(--ink);}
 .skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold,#D6AD60);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono,monospace);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
 .skip-link:focus{top:0;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -393,7 +398,7 @@ footer{background:var(--ink);}
 <!-- HERO -->
 <section class="hero col">
   <div class="kicker"><span class="bar"></span><span>Insights</span></div>
-  <h1>FIELD NOTES ON<br>RENTAL <em>REVENUE.</em></h1>
+  <h1><span class="hln">FIELD NOTES ON</span> <span class="hln">RENTAL <em>REVENUE.</em></span></h1>
   <p class="hero-lead">What a decade in one lane teaches you about why listings stall, and how the market really decides what a property is worth. Published as we learn it, market by market.</p>
 </section>
 
