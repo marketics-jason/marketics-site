@@ -15,6 +15,9 @@ Marketics is a performance-based short-term rental optimization company that com
 - [Our story](https://marketics.io/story): How Marketics started and the founder's background.
 - [Media](https://marketics.io/media): Press, coverage, and podcast/panel appearances.
 - [Media kit](https://marketics.io/media-kit): Downloadable brand assets, boilerplate, founder bio, and fast facts.
+- [FAQ — The honest answers.](https://marketics.io/faq): The questions owners ask before they start — the model, the commitment, and how we work alongside what's in place. 10% of net payout, no lock-in.
+- [Marketics Legal: Privacy Policy & Terms of Service](https://marketics.io/legal): Marketics, LLC privacy policy and terms: what we collect, the $500 Commitment Deposit and its refund, and the 10% performance fee.
+- [Sample Revenue Audit — What a Marketics Audit Looks Like](https://marketics.io/sample-audit): A sample Marketics revenue audit: the tier gap, the comp-set read, five levers, and the projection. Illustrative, no obligation.
 
 ## Intel / GEO Content
 
@@ -31,6 +34,18 @@ Free market-intelligence and strategy reports for short-term rental hosts.
 - [Montréal STR revenue intelligence](https://marketics.io/intel/montreal): A festival-and-season market where regulation, not demand, is the real gatekeeper.
 - [Muskoka summer & fall 2026 intel](https://marketics.io/intel/muskoka): Cottage-country demand patterns and shoulder-season pricing.
 - [How the Airbnb algorithm actually works](https://marketics.io/intel/algorithm): Search-ranking factors and the signals that determine listing placement.
+- [How to Run Airbnb Operations at Cost (Without a Property Manager)](https://marketics.io/intel/airbnb-operations-at-cost): The turnover, messaging and access layers a self-managing owner needs, what each costs, and the one job left that is worth a percentage.
+- [Your First 90 Days Decide the Next Three Years](https://marketics.io/intel/first-90-days): A new Airbnb listing gets a burst of visibility while the platform gathers performance data. It's a test, not momentum — and a weak launch compounds.
+- [The Money Behind the Booking: Marketics](https://marketics.io/intel/money): Most STR operators manage by looking at the booking calendar. That's the last place the story starts. Here's what actually moves demand.
+- [Why Pricing Tools Aren't Enough](https://marketics.io/intel/performance-based-management): Pricing tools optimize one variable. Marketics manages the system — visibility, algorithm signals and pricing — on a performance basis.
+- [Is Low Occupancy a Pricing or Positioning Problem?](https://marketics.io/intel/pricing-problem-or-positioning-problem): A soft calendar caused by pricing and one caused by positioning look identical in the data — and the fixes are opposite. How to tell which you have.
+- [Property Manager or Revenue Manager: Which Do You Need?](https://marketics.io/intel/property-manager-vs-revenue-manager): A property manager runs the house. A revenue manager runs the market. Most owners hire the wrong one for the problem they actually have.
+- [The Tax Half of the STR Buy Decision](https://marketics.io/intel/str-cost-segregation-tax-half): Cost segregation explained for STR owners: what a study reclassifies, the material participation test, and the question a refund can't answer.
+- [How to Switch From a Property Manager to Revenue Only](https://marketics.io/intel/switch-property-manager-to-revenue-manager): Leaving full-service management doesn't mean self-managing. The contract terms to check, the order of operations, and how to cover operations at cost.
+- [The Trust Architecture: Marketics](https://marketics.io/intel/trust): Two properties, same market, same size, similar price. One runs 87% occupancy, the other 52%. The gap is the signals the listing sends.
+- [What You're Actually Paying a Property Manager For](https://marketics.io/intel/what-a-property-manager-actually-costs): Full-service managers charge 20–35% of gross revenue — but most of that fee buys commodity labor with no link to your growth. Here's the honest math.
+- [Why Lowering Your Price Doesn't Work](https://marketics.io/intel/why-lowering-your-price-doesnt-work): Lowering your price rarely fixes a slow calendar. Low bookings are usually a perceived-value problem, not a price problem — here's the durable fix.
+- [You're Not Underpriced. You're Mispositioned.](https://marketics.io/intel/wrong-tier): Most underperforming rentals aren't underpriced — they're in the wrong tier. Presentation sets the tier, and no price cut can fix a tier mismatch.
 
 ## Markets
 
@@ -38,6 +53,13 @@ Marketics optimizes in any market across the United States, Canada, and Mexico; 
 
 - [All markets](https://marketics.io/markets): How Marketics reads any STR market — the market is the variable, the method is the constant.
 - [San Antonio, TX](https://marketics.io/markets/san-antonio): San Antonio short-term rental revenue optimization — demand rhythm, Type 2 density caps (12.5% per block face), and what an optimized listing earns.
+
+## Case Studies
+
+- [Case Studies](https://marketics.io/case-studies): Documented client results: occupancy turnarounds, portfolio scaling, and revenue multiples — methodology at /intel/str-performance-index.
+- [Case Study: The Experiment Nobody Planned to Run](https://marketics.io/case-studies/anthony-san-antonio): San Antonio portfolio — 15 listings, $12K to $41K per month.
+- [Case Study: A Montréal Hotel, Year Two Compounding](https://marketics.io/case-studies/montreal-hotel): Montréal boutique hotel — occupancy from 43% to 80%, foreclosure turnaround.
+- [Case Study: Seasonal to Year-Round in Puerto Rico](https://marketics.io/case-studies/wally-puerto-rico): Puerto Rico luxury property — 2.5× revenue in 12 months under Marketics revenue management.
 
 ## What Marketics Does
 

@@ -18,7 +18,10 @@ on:
       - '**/*.html'
       - '_redirects'
       - 'sitemap.xml'
+      - 'llms.txt'
       - 'scripts/validate-site.py'
+      - 'scripts/gen-llms.py'
+      - 'scripts/llms-config.json'
       - '.github/workflows/validate-site.yml'
 
 jobs:
@@ -28,3 +31,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run site invariant gate
         run: python3 scripts/validate-site.py
+      # llms.txt coverage is gated against sitemap.xml rather than generated at
+      # build time -- there is no build step here, and sitemap.xml is itself
+      # hand-maintained. This is what makes coverage unable to drift: a page in
+      # one and not the other fails the PR. Excluding a URL is a deliberate,
+      # reviewable edit to scripts/llms-config.json, not an omission.
+      - name: llms.txt covers the sitemap
+        run: python3 scripts/gen-llms.py

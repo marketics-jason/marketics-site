@@ -1,0 +1,34 @@
+{
+  "_comment": [
+    "Config for scripts/gen-llms.py. Committed as config rather than hardcoded so a",
+    "coverage decision is reviewable in a diff instead of buried in a script.",
+    "",
+    "exclude:  sitemap URLs deliberately kept OUT of llms.txt. /join and /audits are",
+    "          already absent from the sitemap (robots.txt disallows both), so they",
+    "          are listed here to record the intent, not because they would leak.",
+    "sections: URL prefix -> llms.txt section heading. Longest prefix wins.",
+    "descriptions: verbatim copy that OVERRIDES a page's meta description. Use only",
+    "          for lines supplied by Strategy. Everything else takes the page's own",
+    "          approved meta description so no description is authored by Code."
+  ],
+
+  "exclude": [
+    "/authors/jamie-melgar",
+    "/join",
+    "/audits"
+  ],
+
+  "sections": {
+    "/case-studies": "Case Studies",
+    "/intel": "Intel / GEO Content",
+    "/markets": "Markets",
+    "/": "Core Pages"
+  },
+
+  "descriptions": {
+    "/case-studies/wally-puerto-rico": "Puerto Rico luxury property — 2.5× revenue in 12 months under Marketics revenue management.",
+    "/case-studies/montreal-hotel": "Montréal boutique hotel — occupancy from 43% to 80%, foreclosure turnaround.",
+    "/case-studies/anthony-san-antonio": "San Antonio portfolio — 15 listings, $12K to $41K per month.",
+    "/case-studies": "Documented client results: occupancy turnarounds, portfolio scaling, and revenue multiples — methodology at /intel/str-performance-index."
+  }
+}
