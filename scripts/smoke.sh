@@ -252,10 +252,42 @@ echo "· Retired-claim sweep (rendered copy + inline JSON-LD + meta tags)"
 for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sample-audit" \
          "/calculator" "/faq" "/case-studies" "/case-studies/montreal-hotel" \
          "/case-studies/anthony-san-antonio" "/case-studies/wally-puerto-rico" \
-         "/story" "/markets" "/media" "/media-kit" "/lp/keep-control" "/llms.txt"; do
+         "/story" "/markets" "/media" "/media-kit" "/lp/keep-control" \
+         "/intel/airbnb-operations-at-cost" "/llms.txt"; do
   found=$(grep -Eoh "$RETIRED" <<<"$(body "$BASE$p")" | sort -u | tr '\n' ' ')
   [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
 done
+
+# ── /intel/airbnb-operations-at-cost: partner claim + link (registry v3.31) ──
+# Two things here are a PARTNER's, not ours, and both were supplied by Amy Plummer
+# (Turno) rather than measured by us: the 126,000+ marketplace figure and the
+# tracked referral URL. A partner statistic changes estate-wide in one pass when
+# the partner corrects it, so the served page is where that is checked -- the repo
+# being right is a different question from the visitor seeing it.
+#
+# The absence check is the load-bearing one and it runs behind a fetch guard:
+# there is NO fee or referral arrangement with Turno, so no disclosure belongs on
+# the page. Disclosure language appearing later would mean either an arrangement
+# nobody recorded or a copy-paste from the Cost Seg Smart treatment, which is a
+# genuinely different relationship.
+echo
+echo "· /intel/airbnb-operations-at-cost (partner claim + tracked link)"
+ops=$(body "$BASE/intel/airbnb-operations-at-cost")
+grep -q 'Airbnb Software Partner' <<<"$ops" \
+  && ok "page fetched (checks below are meaningful)" \
+  || no "/intel/airbnb-operations-at-cost did not fetch -- every check below would pass on an empty body"
+grep -q '126,000+' <<<"$ops" \
+  && ok "partner figure 126,000+ served" || no "partner figure 126,000+ MISSING (Amy's Sept 2 correction)"
+grep -qE '25,000|25000|25k' <<<"$ops" \
+  && no "RETIRED partner figure 25,000 is back on the page" || ok "no retired 25,000 figure"
+grep -q 'utm_source=website&amp;utm_medium=partner&amp;utm_campaign=marketics_intel' <<<"$ops" \
+  && ok "tracked Turno URL served with all three utm params" \
+  || no "Turno link is NOT the tracked URL -- Amy cannot attribute referrals"
+grep -qEi 'disclos|affiliate|we may receive' <<<"$ops" \
+  && no "disclosure language present -- no Turno arrangement exists, nothing to disclose" \
+  || ok "no disclosure language (correct: no arrangement exists)"
+[ "$(grep -o '45%' <<<"$ops" | wc -l)" -eq 1 ] \
+  && ok "45% appears exactly once" || no "45% does not appear exactly once (canon)"
 
 # ── /legal disclosures (board addendum C3, 2026-09-01) ──────────────────────
 # The policy drifted out of step with the site's actual tracking for five and a

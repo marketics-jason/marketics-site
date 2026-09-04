@@ -1946,9 +1946,95 @@ than conflict.
 
 ---
 
+## v3.31 — Turno ship: two corrections that had nothing to correct (2026-09-03)
+
+The Sept 3 Strategy brief (Rev B) asked for an estate-wide data correction, a tracked-link swap, and
+the publication of `/intel/airbnb-operations-at-cost`. Two of those three had no targets.
+
+### Findings, reported rather than worked around
+
+- **`25,000` / `25000` / `25k` appear nowhere on this site.** Case-insensitive, every file. The only
+  regex hits were base64 image data inside an `/audits/<token>/` page, which is untouched by rule.
+  So the 126,000+ correction is a no-op in rendered copy **and** in structured data: there is no
+  schema anywhere carrying the old figure either. The figure ships correct on the new page, which is
+  its first appearance on the estate.
+- **Turno is not mentioned anywhere on this site.** Every apparent match is the word *turnover*.
+  There is no Turno brand mention, no partner card, and no plain `turno.com` link, so §2's tracked-link
+  swap also has no targets. The tracked URL ships on the new page, again as its first appearance.
+- **`/partners` and the Miami partner card still do not exist.** This is the **second consecutive
+  brief** to assume them: the same gap was recorded on the Cost Seg Smart ship (2026-08-31), where
+  Jason confirmed the cards get built and published afterwards. The brief's "minimum two internal
+  links in (`/partners`, `/intel` index)" therefore cannot be satisfied as written.
+- **Open Flag #4 was already closed**, at **v3.7 (2026-08-27)**, with the same 20–35% figure and the
+  same two sources (SkyRun Apr 2026, PriceLabs May 2026). §5.2 re-affirms a closed flag rather than
+  closing one. Recorded so a later reader does not think the flag was open for a week.
+
+Code did not author a partner card, invent a `/partners` page, or manufacture links to hit a number.
+
+### Registry rules added
+
+**1. Partner statistics are the partner's own supplied or published figures.** When a partner corrects
+a number it changes estate-wide in one pass, rendered copy and structured data together, never one
+surface at a time. Schema-matches-copy applies to a partner's claims exactly as to ours.
+
+**2. Wedge figure is 20–35%** (re-affirmed; see above). The 25–35% board-gate phrasing was the error,
+and this settles the parenthetical v3.7 left open.
+
+**3. Paid-only surfaces never receive links from organic surfaces.** `/lp/keep-control` is paid-only;
+no intel page, partner page, or other indexed surface links to it, now or in future. Organic
+conversion paths point to `/get-started`.
+
+Rule 3 is **gated**, not just written down. It is the inverse of the existing no-exit rule and protects
+a different thing: no-exit stops the paid page leaking traffic out, this stops organic traffic leaking
+in. One link from an indexed page pours organic sessions into `generate_lead_paid` and the paid numbers
+quietly stop meaning anything, because a lead still looks like a lead. Paid and organic never share a
+counter (board ruling 4), so they must not share an entry point. Matched on the `/lp/` prefix rather
+than the one slug, so a second landing page is covered the day it exists; negative-controlled both with
+a query string and bare. Nothing links there today, which is why it goes in now, while it is free.
+
+### The page
+
+`/intel/airbnb-operations-at-cost` ships the Rev B copy verbatim: Jason Baxter byline, no partner
+byline, no pen name, **no fee or referral disclosure** (no arrangement exists, so there is nothing to
+disclose), tracked Turno link in a new tab with `rel="noopener"`, closing link to `/get-started`, and
+the 20 to 35% wedge in the opening line as written.
+
+What it deliberately does **not** carry: the deck, the "short answer" citation box, the FAQ block, and
+the inline CTA box that the sibling intel pages have. The supplied copy contains none of them and Code
+does not author canon-bearing copy. The page is structurally lighter than its siblings as a result;
+that is a Strategy decision to make, not a gap to fill in silently. Its inherited stylesheet still
+carries the rules for those blocks, which is dead CSS on this page and not worth the breakage risk to
+strip tonight.
+
+Canon verified mechanically: 45% appears exactly once in the whole file, with sample and gate sentence
+in the same paragraph, "net of market" explained in plain language, methodology as plain text and not
+a link, the ruled fee sentence verbatim, and zero em dashes in prose (the two in the file are the
+`og:title` / `twitter:title` separators every other page uses).
+
+**Inbound links: two, honestly counted.** The `/intel` hub card, and a `Keep reading` card on
+`/intel/what-a-property-manager-actually-costs` — the closest sibling, whose grid is two columns and
+was carrying three cards, so a fourth completes it rather than distorting it. That second link is
+Code's substitution for the brief's `/partners`, which does not exist; it is a real link on a real
+page, not a manufactured one, and it is flagged here as a substitution rather than presented as
+compliance.
+
+**IndexNow needs no action** and the item left open at the Cost Seg Smart ship is closed:
+`.github/workflows/indexnow.yml` now bulk-submits every sitemap URL on each push to `main`, so adding
+the page to `sitemap.xml` is the whole job.
+
+### Held, per §4
+
+Publish is gated on the CTO lane's LP-verification signal. That signal's evidence landed the same
+evening — `generate_lead_paid` confirmed firing on production — but the ruling is the CTO lane's to
+give, not Code's to infer. The work sits on the branch; merging is the publish action.
+
+
+---
+
 ## Version history
 
 
+- **v3.31** (2026-09-03) — **the Turno ship: two of three corrections had no targets.** `25,000`/`25000`/`25k` appear **nowhere** on the estate (case-insensitive, every file; the only regex hits were base64 image data in an `/audits/<token>/` page), so the 126,000+ correction is a no-op in copy **and** schema. **Turno is not mentioned anywhere either** — every apparent match is the word *turnover* — so the tracked-link swap has no targets; both values ship for the first time on the new page. `/partners` and the Miami partner card **still do not exist**, the second consecutive brief to assume them (first: the Cost Seg Smart ship, 2026-08-31), so the "two internal links in (`/partners`, `/intel` index)" bar cannot be met as written. And **Open Flag #4 was already closed at v3.7** (2026-08-27) with the same figure and the same two sources, so §5.2 re-affirms rather than closes. Code authored no partner card, invented no `/partners`, and manufactured no links to hit a number. **Three rules recorded:** partner statistics are the partner's own figures and change estate-wide in one pass, copy and structured data together; the wedge figure is **20–35%** (settling the parenthetical v3.7 left open); and **paid-only surfaces never receive links from organic surfaces**. That last one is **gated** — the inverse of the no-exit rule, protecting the opposite direction: no-exit stops the paid page leaking traffic out, this stops organic traffic leaking in and quietly corrupting `generate_lead_paid`, since a lead still looks like a lead. Matched on the `/lp/` prefix so a second LP is covered the day it exists; negative-controlled bare and with a query string. Nothing links there today, which is why it goes in while it is free. **The page** ships the Rev B copy verbatim (Jason byline, no disclosure, tracked Turno link in a new tab, closing link to `/get-started`, 20 to 35% as written) and deliberately omits the deck, short-answer box, FAQ and CTA box its siblings carry, because the supplied copy contains none and Code does not author canon-bearing copy. Canon verified mechanically: 45% exactly once, sample and gate sentence in the same paragraph, methodology as plain text not a link, zero em dashes in prose. Two inbound links, honestly counted: the `/intel` hub card and a `Keep reading` card on the closest sibling — Code's flagged substitution for the missing `/partners`, not compliance with it. IndexNow now needs no action (automatic on push to `main`), closing the item left open at the Cost Seg ship. Publish held for the CTO lane's signal; merging is the publish action.
 - **v3.30** (2026-09-03) — **the consent beacon never worked, and "we don't set that" was the wrong check.** `navigator.sendBeacon()` **always** sends with credentials mode `include` — specified behaviour, not a quirk and not an extension. The beacon's `application/json` Blob is not CORS-safelisted, so it needed a preflight, and GHL's wildcard `Access-Control-Allow-Origin: *` is invalid under credentials mode `include`. The preflight failed every time and a failed preflight sends nothing: **zero events delivered from the day it shipped** (Aug 21 2026) to its removal. Not intermittent, not environment-dependent. This retires two things on record: v3.27's *"nothing in the estate sets `credentials: 'include'`"* — true about our code, wrong about the request — and the CTO brief's extension theory, which reached for a cause the platform was already supplying by spec. **Rule: "our code does not set X" is not the same as "X is not set."** A platform API has defaults you did not write and cannot see at the call site; read the spec, not only your own arguments. Distinct from v3.29, which was failing to establish *which* request failed — this is establishing the right request and then reasoning about it from our source instead of the platform's contract. **Jason ruled removal, not a Content-Type change:** whether GHL *parses* a `text/plain` body is an assumption about a system we did not write, and that exact assumption broke lead capture the same evening (#137). Removed `GHL_HOOK`, `beacon()`, its four call sites and the `mkx_imp` dedupe that existed only to throttle it. Nothing measurable was lost because nothing was ever measured — the v2.7 accept-rate anomaly's designated instrument was dead the whole time. If consent telemetry returns it goes same-origin through a proxy, where CORS does not apply at all. Gated three ways (no `webhook-trigger/` in `mkx-consent.js`, matched on the path segment so a *new* hook id fails too; no non-safelisted `sendBeacon` type anywhere, HTML and both JS files; the served file in smoke behind its fetch guard), negative-controlled four ways including a `text/plain` false-positive control. Also confirmed this evening: **`generate_lead_paid` fires on production** (`dataLayer` returned `['generate_lead_paid']`), and a `collect` to `analytics.google.com` came back **204** with `gcs=G111` and `npa=1` — the CSP fix proven end-to-end and **C1 verified on the wire**, not just in source.
 - **v3.29** (2026-09-03) — **the CORS errors were never the lead form.** The failing URL ends `b58c-e3a47721392e` — the **consent beacon's** hook (`1297f709-…`). The paid LP's form posts to `3c750621-…b64a-5712e15cfb5e`, which appears in none of the errors. On that page the only thing posting to `1297f709` is `beacon()` in `mkx-consent.js`, documented in-file as *"best-effort; never block the banner."* **The form has been succeeding silently throughout** — that is why a contact existed alongside the errors, not intermittency or luck. Consequences: v3.27's conclusion (harmless, contact created) was right for the wrong reason and stands; v3.28 — written, shipped and reverted the same evening — overturned it using a true general fact applied to the wrong request, breaking a working path and dropping ~20 minutes of submissions. **My reasoning failure, in two steps:** I read the error text and not the URL, so I never established *which* request failed; then I built a mock faithful about CORS but silent about identity, which could confirm the mechanism while being unable to tell me it was the wrong component. **Rule: before diagnosing why a request failed, establish which request it was — on a page with more than one endpoint, the URL is the identity, not the error text.** Durable from the reverted entry: `application/json` forces a preflight and a failed preflight sends nothing; and GHL rejects `text/plain`, so that route is closed. What is actually broken is the beacon — instrumentation only, no lead data — and it needs the same-origin proxy, not another Content-Type guess.
 - **v3.27** (2026-09-03) — **a sixth blocked host, and a CORS error that is not a bug.** The post-deploy console showed `pagead2.googlesyndication.com/ccm/collect` still refused — not an oversight in v3.24 but the shape of the problem: **a browser reports the first block, not every block**, so gtag never reached the conversion beacon while earlier hosts were being refused. "Fix what the console showed" is correct and incomplete, and will be again next time. Added it plus `www.googleadservices.com`, the latter labelled **precautionary** rather than evidenced, since every other host here was added against a demonstrated block and the two kinds of claim should stay distinguishable. Also recorded: the GHL webhook's CORS error (`ACAO must not be '*' when credentials mode is 'include'`) is **expected and harmless — the contact is created anyway**, confirmed by Jason. Nothing in the estate sets `credentials: 'include'`; the fetch is identical to `/get-started`, which has carried "show confirmation regardless of the webhook's CORS/network outcome" since long before today. Written down because it looks exactly like a broken lead path, cost a full stop on a launch day, and will alarm the next person to open a console. **The decisive test is whether the contact exists in GHL, not what the console says.**

@@ -104,6 +104,16 @@ RETIRED_TOKENS = [
 NO_EXIT_PAGES = {"lp/keep-control/index.html"}
 NO_EXIT_ALLOW = ("/legal", "/legal?tab=terms")
 
+# ── Paid-only surfaces are never linked from organic surfaces (Strategy brief
+# 2026-09-03 §5.3, registry v3.31) ──
+# The inverse of the no-exit rule above, and it protects a different thing. A paid
+# LP carries a paid conversion counter (generate_lead_paid) and is noindex. One
+# link from an indexed page pours organic traffic into that counter, and the paid
+# numbers stop meaning anything -- silently, because a lead is still a lead. Paid
+# and organic never share a counter (board ruling 4), so they must not share an
+# entry point either. Organic conversion paths point to /get-started.
+PAID_ONLY_PREFIX = "/lp/"
+
 # Contrast tokens retired by Design. Site-wide these are known debt on the older
 # page designs (Home, Pricing, Method, case studies, intel) and are Design's to
 # schedule; the pages built to the current tokens must not regress into them.
@@ -467,6 +477,15 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 continue                       # the sanctioned fine-print footer
             hard.append(f"{where}: paid LP no-exit rule — outbound link {href!r} "
                         f"(only in-page anchors and the fine-print footer are allowed)")
+
+    # 7b. and nothing organic links INTO a paid-only surface (registry v3.31).
+    if not url.startswith(PAID_ONLY_PREFIX):
+        for href in re.findall(r'<a\b[^>]*\bhref="([^"]+)"', raw):
+            if href.split("?")[0].split("#")[0].rstrip("/").startswith(PAID_ONLY_PREFIX.rstrip("/")):
+                hard.append(f"{where}: links to the paid-only surface {href!r} — a paid LP "
+                            f"is noindex and carries the paid conversion counter, so organic "
+                            f"traffic reaching it corrupts that counter silently. Organic "
+                            f"conversion paths point to /get-started (registry v3.31)")
 
     # 8. retired contrast tokens on pages built to the current palette
     if where in CURRENT_TOKEN_PAGES:
