@@ -2232,8 +2232,13 @@ watching it work. That order is the whole reason the finding is this complete.
 | `fbclid` | nothing | blank |
 
 Every field whose key **exactly matches** a transmitted key is populated. Every field whose key
-differs is blank. **There is no mapping bridge** — GHL matches on the transmitted key, which is
-registry v3.21's rule holding at estate scale rather than as a one-off about `listingUrl`.
+differs is blank.
+
+> **CORRECTED by v3.35 (2026-09-04, same evening).** This entry originally concluded "there is no
+> mapping bridge — GHL matches on the transmitted key." **That is wrong.** GHL requires an explicit
+> mapping row per field, and `gclid_first` proved it: transmitted under the exact field key, it
+> landed nowhere until a row was created. The fix shipped here was correct; the mechanism written
+> down for it was not. See v3.35 for what is actually true.
 
 **Consequence: UTM attribution has never reached the CRM.** The browser captured it correctly the
 whole time, the payload carried it, the contact was created, the tag was applied, and the campaign
@@ -2283,9 +2288,89 @@ through the organic form. Recorded as suspected so nobody reads this entry as ha
 
 ---
 
+## v3.35 — the paid funnel is proven end to end, and v3.34's mechanism was wrong (2026-09-04)
+
+### Proven, on a live contact
+
+```
+gclid_first        TESTGCLID_SEP4          first_touch_lp    /lp/keep-control
+utm_source_first   google                  utm_medium_first  cpc
+utm_campaign_first lptest                  utm_content_first ad1
+utm_term_first     str                     pricing_owner     tool
+```
+
+GHL's own event message: *"Fields included: Email, listingUrl, pricing_owner, utm_source_first,
+utm_medium_first, utm_campaign_first, utm_content_first, utm_term_first, Submitted At, Contact
+source, gclid_first, first_touch_lp"* — twelve fields written. Full chain executed: create, tag,
+Self/Tool branch, A1 confirmation, paid-lead notification.
+
+**Capture → transport → CRM field is closed for the first time.** Offline conversion import now has
+an identifier to match on. Closes the CTO's §7 done-when.
+
+### The correction: GHL requires explicit mapping rows
+
+v3.34 concluded there was **no mapping bridge** and GHL matched on the transmitted key. **Wrong.**
+`gclid_first` was transmitted under the exact field key, in a payload GHL captured and displayed, and
+the field read `--` until a row was added to the `Create contact` action. Rows are mandatory; a
+matching key is necessary and not sufficient.
+
+The v3.34 *fix* was right — send keys matching the field keys — and the *reason* recorded for it was
+not. That is the v3.27 shape again: a correct conclusion resting on a wrong mechanism. Corrected in
+place at v3.34 as well as here, because a reader who hits the old entry first would otherwise carry
+the wrong model away.
+
+**Still unexplained, and deliberately not invented:** why `utm_source_first` was blank at 15:43 and
+populated at 16:05, when its row's chip reads `Inbound Webhook Trigger . Utm Source` — the unsuffixed
+key, sent in both. Either the rows were edited between the two submissions or the chip label does not
+mean what it appears to. It works; the mechanism is not written down because it is not known.
+
+### The fifth vacuous pass: a stale sample labelled "Active"
+
+The two tokens could not be selected because GHL builds its picker from **one captured request**:
+
+> `MAPPING REFERENCE — Active: (2026-09-03 13:02:59) Request XLxmJvuvjrSdQtVBew2T`
+
+A **Sep 3** snapshot. The new keys first shipped **Sep 4 at 16:05**. A sample taken a day before a
+field existed cannot contain it. Re-pointing the reference to the Sep 4 request and saving the trigger
+made both tokens available immediately.
+
+Nothing indicated the reference was stale. The trigger said *Active*, the workflow ran, contacts were
+created, tagged and emailed. Fifth member of the family this week, in a fifth layer:
+
+1. a CSP whole-header grep that would have called the bug green (v3.24)
+2. a mock that validated its own assumption instead of testing it (v3.29)
+3. `indexnow-submit.sh` exiting 0 on any HTTP code
+4. a payload-key gate satisfied by its own explanatory comment (v3.33)
+5. a mapping reference labelled *Active* that was a day-old snapshot
+
+**Operational rule: when the site starts sending a new payload key, the GHL Mapping Reference must be
+re-pointed before the mapping can be created.** It is not discoverable from the failure — the field
+simply reads `--`, and every visible part of the workflow succeeds.
+
+### The near-miss worth keeping
+
+The first attempt at the `gclid_first` row selected `Contact . Custom Fields . gclid_first` as its
+value — reading the field's own empty value and writing it back. A permanent silent no-op that would
+have looked correctly configured forever. **Jason caught it before saving and asked rather than
+assuming.** That question was worth more than the fix.
+
+### Still open, unchanged
+
+`first_touch_ts` (nothing captures a first-touch timestamp; `submittedAt` is a different value and
+mapping it there would fill the field with a plausible wrong number), `lead_form_id` (semantics
+unclear), `fbclid` (nothing captures it, no Meta Pixel runs, it can never fill). All three remain
+routed rather than authored.
+
+Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
+organic hook, whose mapping this says nothing about. Needs its own test contact.
+
+
+---
+
 ## Version history
 
 
+- **v3.35** (2026-09-04) — **the paid funnel is proven end to end, and v3.34's mechanism was wrong.** A live contact now carries `gclid_first: TESTGCLID_SEP4`, `first_touch_lp: /lp/keep-control` and all five `utm_*_first`; GHL's own event message confirms twelve fields written and the full chain executed. **Capture → transport → CRM field is closed for the first time**, and offline conversion import finally has an identifier to match on. Closes the CTO's §7 done-when. **The correction:** v3.34 concluded there was no mapping bridge and GHL matched on the transmitted key. Wrong — `gclid_first` was transmitted under the exact field key and landed nowhere until an explicit row was added to the `Create contact` action. Rows are mandatory; a matching key is necessary, not sufficient. The fix was right, the recorded reason was not — the v3.27 shape again, corrected in place at v3.34 too so a reader hitting the old entry does not carry the wrong model away. **Fifth vacuous pass:** the tokens were unselectable because GHL builds its picker from one captured request, and the `MAPPING REFERENCE` read *"Active: (2026-09-03 13:02:59)"* — a snapshot from the day before the keys existed. Re-pointing it to the Sep 4 request made both available at once. Nothing indicated staleness: the trigger said *Active*, contacts were created, tagged and emailed. **Rule: when the site starts sending a new payload key, the Mapping Reference must be re-pointed before the mapping can be created** — the failure is invisible, the field simply reads `--`. **Near-miss worth keeping:** the first attempt selected `Contact . Custom Fields . gclid_first` as the value — the field reading its own empty value back into itself, a permanent silent no-op that would have looked configured forever. Jason caught it before saving and asked rather than assuming. **Still unexplained and deliberately not invented:** why `utm_source_first` was blank at 15:43 and populated at 16:05 when its chip reads the unsuffixed key, sent in both. It works; the mechanism is not recorded because it is not known.
 - **v3.34** (2026-09-04) — **campaign attribution has never reached the CRM.** One live test lead, submitted *before* changing anything, showed the pattern exactly: every GHL field whose key matches a transmitted key is populated (`pricing_owner`, `listingUrl`, `submittedAt`), and **every field whose key differs is blank** — all five `utm_*_first`, plus `first_touch_lp`. **There is no mapping bridge**; GHL matches on the transmitted key, which is v3.21 holding at estate scale rather than a one-off about `listingUrl`. So the browser captured UTM data correctly, the payload carried it, the contact was created and tagged, and the campaign fields were empty, with nothing reporting an error. The v3.22 shared-trigger fix was only half of "contact created, zero attribution data"; this is the other half, and it survived because every visible part worked. **The order was the finding:** adding the matching keys first would have fixed five fields and permanently destroyed the evidence for the other three, since a populated field cannot say whether the new key or an existing bridge filled it. Same discipline as v3.29, applied to a different question — establish what is actually broken before shipping the thing that would hide it. Fixed here (mechanical): six keys added matching the GHL field keys exactly, unsuffixed keys retained, gated in the validator and asserted on the served page, negative-controlled. **Routed, not authored:** `first_touch_ts` (nothing captures a first-touch timestamp; `submittedAt` is a different value and would fill the field with a plausible wrong number), `lead_form_id` (semantics unclear), `fbclid` (nothing captures it and no Meta Pixel runs — it can never fill). **Suspected but not evidenced:** `/get-started` and `/join` send the same unsuffixed keys to the shared hook, whose mapping this test says nothing about; recorded as a guess needing its own test contact, so nobody reads this entry as clearing them.
 - **v3.33** (2026-09-04) — **`gclid` capture, consent-gated by ruling.** Code proposed a consent-independent capture (matching the UTM parameters) and flagged the privacy question; Jason amended it to **capture only where `ad_storage` is granted**, which **moots that question rather than deferring it** — the case of collecting an advertising identifier from someone who declined never arises. Ungated traffic, where AG1–AG3 point, captures by default. The consent-independent variant is recorded as **considered and not shipped**: it goes to counsel (C4) first if ever wanted, and must not return as a "simplification". The gate is itself gated, because dropping it looks like a tidy-up and would silently put a click identifier in the CRM for someone who declined: `validate-site.py` rejects the capture without `adStorageGranted`, and rejects `mkxCommitClickIds()` if it persists without calling it; `smoke.sh` asserts it on the served file. `/legal` gains the disclosure as a **C2 factual correction**, including the negative case ("if you have not granted advertising consent, no click identifier is collected or sent"); privacy-tab dates to Sep 4, terms tab untouched and correctly still Sep 1. Ids are held in memory and committed only on grant, so a gated visitor who accepts after navigating away is not captured — correct, not a gap. Verified in a browser across all four states (8 assertions): **gated-and-ignored does not capture and the lead still posts**. `wbraid`/`gbraid` ride the same gate under their own keys, deliberately not folded into `gclid_first`, since Ads offline import takes the three in separate columns. **And a fourth vacuous pass, found by a negative control on my own gate:** the explanatory comment I wrote began a line with `gclid_first:`, satisfying the very `^\s*<key>\s*:` gate meant to catch a rename — the check could not fail. Fourth member this week, in a fourth layer (CSP whole-header grep, a mock validating its own assumption, a workflow exiting 0 on any HTTP code, and now a gate satisfied by its own documentation). **A check that cannot fail is not a check**, and breaking it on purpose is the only reliable way to find out.
 - **v3.32** (2026-09-04) — **CTO approval of the operations-at-cost publish, granted retrospectively.** Jason released his own §4 hold as brief owner and instructed the merge ~25 minutes before the checklist arrived; recorded plainly, since "approved" and "approved before it shipped" are different facts and only the first is true. **Items 3 and 6 were unsatisfiable as written** — they required a Miami partner card and inbound links from `/partners`, neither of which exists — and the CTO ruled that his checklist had propagated Strategy's error rather than verifying those surfaces against the estate. Both accepted as substantively achievable. The load-bearing behaviour was **refusing to author a partner card to satisfy the letter of a checklist**: a manufactured card would have made every item read true and left a fabricated surface carrying a partner's statistic. Stop-and-route beat compliance, and the checklist was the thing that was wrong. **Rule adopted: a mid-flight scope addition is logged when it is authorised, not when it is approved.** The reciprocal cost-seg cards were authorised by Jason mid-flight and named in the approval summary; authorisation was never in question, but a reviewer should meet a scope addition in the ledger rather than in the summary asking them to approve it. From here, work authorised outside its commissioning brief gets a one-line registry note at the moment of authorisation, with who authorised it and why. Item 7 correction taken: Flag #4 was closed by Jason's 20–35% ruling, and the registry records it as already made rather than made by this PR. **Parked:** the specced Turno partner-card copy and its proven link treatment are recorded verbatim here, because the surface they were written for does not exist and the phrasing would otherwise be lost between now and the page being built. Two constraints already bind that page: it points at `/get-started`, never the LP (the `/lp/` gate fails CI otherwise), and the 126,000+ figure is Amy Plummer's, so it moves estate-wide in one pass if she corrects it.
