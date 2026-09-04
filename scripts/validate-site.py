@@ -598,6 +598,38 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"wired to any workflow, so leads sent there are lost with no "
                         f"error and no contact (registry v3.22)")
 
+    # 11d-2. No self-review structured data (GEO brief finding 3, registry v3.36).
+    # A ClaimReview whose author and itemReviewed.author are both Marketics is us
+    # rating our own claim five stars. Google treats ClaimReview as fact-checking
+    # markup for accredited publishers; ours asserted "Documented" about our own
+    # numbers, which is the schema equivalent of citing yourself as the source.
+    # Gated as a CLASS, not as two known instances: ClaimReview is banned outright
+    # (we are not a fact-checking publisher and never will be), and a Review whose
+    # author is Marketics is banned too. Customer reviews are untouched -- their
+    # authors are Person nodes, which is exactly the distinction that makes them
+    # legitimate.
+    if "ClaimReview" in raw:
+        hard.append(f"{where}: ClaimReview structured data — self-review markup. "
+                    f"ClaimReview is fact-checking markup for accredited publishers; "
+                    f"a claim we make about ourselves does not qualify "
+                    f"(GEO brief finding 3, registry v3.36)")
+    for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>', raw, re.S):
+        try:
+            parsed = json.loads(blob)
+        except Exception:
+            continue                      # malformed JSON-LD is caught elsewhere
+        for node in (parsed if isinstance(parsed, list) else [parsed]):
+            if not isinstance(node, dict):
+                continue
+            if str(node.get("@type", "")).endswith("Review"):
+                auth = node.get("author") or {}
+                name = auth.get("name", "") if isinstance(auth, dict) else ""
+                if "marketics" in str(name).lower():
+                    hard.append(f"{where}: {node.get('@type')} authored by "
+                                f"{name!r} — self-review. A review of our own work "
+                                f"must have a third-party author "
+                                f"(registry v3.36)")
+
     # 11e. sendBeacon with a non-safelisted Content-Type is a dead request.
     for t in sendbeacon_violations(raw):
         hard.append(f"{where}: sendBeacon sends a {t!r} body — sendBeacon always uses "
