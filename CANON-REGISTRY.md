@@ -2139,9 +2139,84 @@ together.
 
 ---
 
+## v3.33 — `gclid` capture, consent-gated by ruling (2026-09-04)
+
+Ruled Jason, Sep 4, amending Code's CTO brief of the same day. Code proposed a **consent-independent**
+capture, matching how the UTM parameters already behave, and flagged that it raised a privacy question
+it was not the right lane to answer. Jason's amendment is better than the proposal: **capture only where
+`ad_storage` is granted.**
+
+That inverts the situation. A consent-independent capture would have needed a counsel ruling on whether
+an advertising identifier may be collected from someone who declined advertising consent. The gate
+**moots that question rather than deferring it** — the case never arises. Ungated traffic, which is
+where AG1–AG3 point, captures by default and loses nothing.
+
+**Recorded as considered and not shipped:** the consent-independent variant goes to counsel (C4) first
+if it is ever wanted. It must not be reintroduced as a simplification.
+
+### Why the gate is gated
+
+An unconditional capture reads like a harmless tidy-up — three fewer lines, one less indirection — and
+it would silently put an advertising click identifier in the CRM for a visitor who was shown a banner
+and declined. So the gate fails the build rather than relying on anyone remembering:
+`validate-site.py` rejects `mkx-utm.js` if the capture exists without `adStorageGranted`, and rejects
+`mkxCommitClickIds()` if it persists without calling it. `smoke.sh` asserts the gate on the **served**
+file. Negative-controlled both ways.
+
+### `/legal`, under C2
+
+`/legal` said GHL receives "contact information, property details, and UTM attribution data". A `gclid`
+is none of those, so the sentence would have been incomplete the day this deployed. Ruled a **factual
+correction under Board Addendum C2** — Jason rules, Code drafts and ships with the ruling dated here.
+The privacy tab now also states the negative case ("If you have not granted advertising consent, no
+click identifier is collected or sent"), which is the part that is actually load-bearing for a reader.
+Privacy tab dates moved to September 4, 2026; the terms tab is untouched by this edit and correctly
+keeps September 1.
+
+### Mechanism, and the one honest limitation
+
+Click ids are read from the URL at load and held **in memory**, then committed to `sessionStorage` only
+once `ad_storage` is granted — at load for ungated traffic, on Accept for a gated visitor. A gated
+visitor who accepts after navigating away from the landing page is **not** captured, because the URL
+carrying the id is gone. That is correct rather than a gap: they had not consented when the click
+landed.
+
+`adStorageGranted()` reads the same `dataLayer` gtag reads and **skips region-scoped defaults**, which
+apply only inside their region list and cannot be evaluated from this file. Skipping them can only
+withhold capture, never grant it.
+
+Verified in a browser, 8 assertions, all four states: ungated captures; **gated-and-ignored does not,
+and the lead still posts**; gated-and-accepted captures; and a prior Do Not Sell opt-out blocks capture,
+because the gate is on the ad signals rather than on the grant (an opt-out calls `updateConsent(true)`
+while denying all three ad signals).
+
+### `wbraid` / `gbraid`
+
+Captured under the same gate and sent under their own keys. **Deliberately not folded into
+`gclid_first`**: Ads offline conversion import takes the three in separate upload columns, so conflating
+them would produce a field that cannot be uploaded. No GHL field exists for them yet, so GHL will drop
+them until one does — flagged rather than silently conflated.
+
+### A fourth vacuous pass, found by a negative control on my own gate
+
+The payload-key gate matches `^\s*<key>\s*:` per line. The explanatory comment I wrote above the new
+key **began a line with `gclid_first:`** — so the comment satisfied the gate, and renaming the actual
+key produced no finding. The gate could not fail. Found only because the negative control was run;
+fixed by rewording the comment.
+
+That is the **fourth** member of the vacuous-pass family this week, in a fourth layer: a CSP
+whole-header grep that would have called the bug green (v3.24); a mock that validated its own
+assumption (v3.29); a workflow that exits 0 on any HTTP code; and now a gate satisfied by its own
+documentation. **A check that cannot fail is not a check** — and the only reliable way to find one is to
+break the thing on purpose and confirm the check notices.
+
+
+---
+
 ## Version history
 
 
+- **v3.33** (2026-09-04) — **`gclid` capture, consent-gated by ruling.** Code proposed a consent-independent capture (matching the UTM parameters) and flagged the privacy question; Jason amended it to **capture only where `ad_storage` is granted**, which **moots that question rather than deferring it** — the case of collecting an advertising identifier from someone who declined never arises. Ungated traffic, where AG1–AG3 point, captures by default. The consent-independent variant is recorded as **considered and not shipped**: it goes to counsel (C4) first if ever wanted, and must not return as a "simplification". The gate is itself gated, because dropping it looks like a tidy-up and would silently put a click identifier in the CRM for someone who declined: `validate-site.py` rejects the capture without `adStorageGranted`, and rejects `mkxCommitClickIds()` if it persists without calling it; `smoke.sh` asserts it on the served file. `/legal` gains the disclosure as a **C2 factual correction**, including the negative case ("if you have not granted advertising consent, no click identifier is collected or sent"); privacy-tab dates to Sep 4, terms tab untouched and correctly still Sep 1. Ids are held in memory and committed only on grant, so a gated visitor who accepts after navigating away is not captured — correct, not a gap. Verified in a browser across all four states (8 assertions): **gated-and-ignored does not capture and the lead still posts**. `wbraid`/`gbraid` ride the same gate under their own keys, deliberately not folded into `gclid_first`, since Ads offline import takes the three in separate columns. **And a fourth vacuous pass, found by a negative control on my own gate:** the explanatory comment I wrote began a line with `gclid_first:`, satisfying the very `^\s*<key>\s*:` gate meant to catch a rename — the check could not fail. Fourth member this week, in a fourth layer (CSP whole-header grep, a mock validating its own assumption, a workflow exiting 0 on any HTTP code, and now a gate satisfied by its own documentation). **A check that cannot fail is not a check**, and breaking it on purpose is the only reliable way to find out.
 - **v3.32** (2026-09-04) — **CTO approval of the operations-at-cost publish, granted retrospectively.** Jason released his own §4 hold as brief owner and instructed the merge ~25 minutes before the checklist arrived; recorded plainly, since "approved" and "approved before it shipped" are different facts and only the first is true. **Items 3 and 6 were unsatisfiable as written** — they required a Miami partner card and inbound links from `/partners`, neither of which exists — and the CTO ruled that his checklist had propagated Strategy's error rather than verifying those surfaces against the estate. Both accepted as substantively achievable. The load-bearing behaviour was **refusing to author a partner card to satisfy the letter of a checklist**: a manufactured card would have made every item read true and left a fabricated surface carrying a partner's statistic. Stop-and-route beat compliance, and the checklist was the thing that was wrong. **Rule adopted: a mid-flight scope addition is logged when it is authorised, not when it is approved.** The reciprocal cost-seg cards were authorised by Jason mid-flight and named in the approval summary; authorisation was never in question, but a reviewer should meet a scope addition in the ledger rather than in the summary asking them to approve it. From here, work authorised outside its commissioning brief gets a one-line registry note at the moment of authorisation, with who authorised it and why. Item 7 correction taken: Flag #4 was closed by Jason's 20–35% ruling, and the registry records it as already made rather than made by this PR. **Parked:** the specced Turno partner-card copy and its proven link treatment are recorded verbatim here, because the surface they were written for does not exist and the phrasing would otherwise be lost between now and the page being built. Two constraints already bind that page: it points at `/get-started`, never the LP (the `/lp/` gate fails CI otherwise), and the 126,000+ figure is Amy Plummer's, so it moves estate-wide in one pass if she corrects it.
 - **v3.31** (2026-09-03) — **the Turno ship: two of three corrections had no targets.** `25,000`/`25000`/`25k` appear **nowhere** on the estate (case-insensitive, every file; the only regex hits were base64 image data in an `/audits/<token>/` page), so the 126,000+ correction is a no-op in copy **and** schema. **Turno is not mentioned anywhere either** — every apparent match is the word *turnover* — so the tracked-link swap has no targets; both values ship for the first time on the new page. `/partners` and the Miami partner card **do not exist, by design** — sequenced behind partner volume, since a partner page with two cards is worse than none — so the "two internal links in (`/partners`, `/intel` index)" bar cannot be met as written; Jason took the repeated reference as his own error and corrected the standing instruction to **`/intel` index plus the nearest sibling article** until a partners page ships. That needs no new gate: a `/partners` link already fails the broken-internal-link check, negative-controlled. And **Open Flag #4 was already closed at v3.7** (2026-08-27) with the same figure and the same two sources, so §5.2 re-affirms rather than closes. Code authored no partner card, invented no `/partners`, and manufactured no links to hit a number. **Three rules recorded:** partner statistics are the partner's own figures and change estate-wide in one pass, copy and structured data together; the wedge figure is **20–35%** (settling the parenthetical v3.7 left open); and **paid-only surfaces never receive links from organic surfaces**. That last one is **gated** — the inverse of the no-exit rule, protecting the opposite direction: no-exit stops the paid page leaking traffic out, this stops organic traffic leaking in and quietly corrupting `generate_lead_paid`, since a lead still looks like a lead. Matched on the `/lp/` prefix so a second LP is covered the day it exists; negative-controlled bare and with a query string. Nothing links there today, which is why it goes in while it is free. **The page** ships the Rev B copy verbatim (Jason byline, no disclosure, tracked Turno link in a new tab, closing link to `/get-started`, 20 to 35% as written) and deliberately omits the deck, short-answer box, FAQ and CTA box its siblings carry, because the supplied copy contains none and Code does not author canon-bearing copy. Canon verified mechanically: 45% exactly once, sample and gate sentence in the same paragraph, methodology as plain text not a link, zero em dashes in prose. Three inbound links, honestly counted: the `/intel` hub card, a `Keep reading` card on the nearest sibling, and a **reciprocal pair with the cost-seg page** — the first edge of the partner intel mesh, two pages written for the same reader that did not reference each other at all until now. That mesh is the point of the sequencing: partners ramp, each gets an intel page, the pages link to each other as they ship, and the city partner pages later link *down* into a connected cluster instead of a set of islands. The recrawl at the end needs no manual step — `indexnow.yml` submits the **entire** sitemap on every push to `main`, not a diff. IndexNow now needs no action (automatic on push to `main`), closing the item left open at the Cost Seg ship. Publish was held for the CTO lane's signal; **Jason released that hold himself, as owner of the brief** — recorded as an owner release, not as the CTO signal, because **releasing the publish gate did not release the ad-spend gate**: the CTO lane's LP verification gates both, ads import stays blocked on it, and "the page shipped" must never be read back as "verification was declared". **Strategy ruled** the page ships without the deck, short-answer box, FAQ and CTA box: it is an argumentative essay with one recommendation, a FAQ would invent questions nobody asked, and a CTA box would duplicate the closing paragraph that already *is* the CTA. The one omission with real value is the **short-answer box** (AI engines extract those; unbranded prompts still score zero) and it is a content addition, not a formatting fix — left as an open Strategy item rather than improvised at merge time. **Rule recorded: evidence of a signal is not the signal.** `generate_lead_paid` firing on production is the evidence the CTO lane's verification rests on, not the declaration; a signal that gates ad spend is given once, explicitly, by its owner, never inferred from a passing observation by someone else.
 - **v3.30** (2026-09-03) — **the consent beacon never worked, and "we don't set that" was the wrong check.** `navigator.sendBeacon()` **always** sends with credentials mode `include` — specified behaviour, not a quirk and not an extension. The beacon's `application/json` Blob is not CORS-safelisted, so it needed a preflight, and GHL's wildcard `Access-Control-Allow-Origin: *` is invalid under credentials mode `include`. The preflight failed every time and a failed preflight sends nothing: **zero events delivered from the day it shipped** (Aug 21 2026) to its removal. Not intermittent, not environment-dependent. This retires two things on record: v3.27's *"nothing in the estate sets `credentials: 'include'`"* — true about our code, wrong about the request — and the CTO brief's extension theory, which reached for a cause the platform was already supplying by spec. **Rule: "our code does not set X" is not the same as "X is not set."** A platform API has defaults you did not write and cannot see at the call site; read the spec, not only your own arguments. Distinct from v3.29, which was failing to establish *which* request failed — this is establishing the right request and then reasoning about it from our source instead of the platform's contract. **Jason ruled removal, not a Content-Type change:** whether GHL *parses* a `text/plain` body is an assumption about a system we did not write, and that exact assumption broke lead capture the same evening (#137). Removed `GHL_HOOK`, `beacon()`, its four call sites and the `mkx_imp` dedupe that existed only to throttle it. Nothing measurable was lost because nothing was ever measured — the v2.7 accept-rate anomaly's designated instrument was dead the whole time. If consent telemetry returns it goes same-origin through a proxy, where CORS does not apply at all. Gated three ways (no `webhook-trigger/` in `mkx-consent.js`, matched on the path segment so a *new* hook id fails too; no non-safelisted `sendBeacon` type anywhere, HTML and both JS files; the served file in smoke behind its fetch guard), negative-controlled four ways including a `text/plain` false-positive control. Also confirmed this evening: **`generate_lead_paid` fires on production** (`dataLayer` returned `['generate_lead_paid']`), and a `collect` to `analytics.google.com` came back **204** with `gcs=G111` and `npa=1` — the CSP fix proven end-to-end and **C1 verified on the wire**, not just in source.

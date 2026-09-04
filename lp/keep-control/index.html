@@ -974,6 +974,7 @@ footer a:hover{color:var(--muted);}
 
     var utm     = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
     var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
+    var click   = (typeof window.mkxGetClickIds === 'function') ? window.mkxGetClickIds() : {};
 
     if (!trap) {
       var payload = {
@@ -997,7 +998,22 @@ footer a:hover{color:var(--muted);}
         utm_medium: utm.utm_medium || '',
         utm_campaign: utm.utm_campaign || '',
         utm_content: utm.utm_content || '',
-        utm_term: utm.utm_term || ''
+        utm_term: utm.utm_term || '',
+        /* Click identifiers, consent-gated in mkx-utm.js: empty unless the
+           visitor's ad_storage is granted. `gclid_first` is the key because a
+           GHL custom field of that name already exists (CTO, Sep 4) -- GHL maps
+           on the TRANSMITTED key, not the form field name, so renaming this
+           empties that field silently (registry v3.21).
+
+           wbraid/gbraid are Google's iOS and app-campaign substitutes for gclid
+           and are sent under their own keys deliberately. They have no GHL field
+           yet, so GHL will drop them until one exists. NOT folded into
+           the gclid field, because Ads offline conversion import takes the
+           three in separate upload columns and conflating them would produce a
+           field that cannot be uploaded. */
+        gclid_first: click.gclid || '',
+        wbraid: click.wbraid || '',
+        gbraid: click.gbraid || ''
       };
       try {
         await fetch(GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });

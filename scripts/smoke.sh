@@ -258,6 +258,39 @@ for p in "" "/results" "/pricing" "/method" "/intel/str-performance-index" "/sam
   [ -z "$found" ] && ok "clean ${p:-/}" || no "${p:-/} serves retired claim(s): $found"
 done
 
+# ── Click-identifier capture is consent-gated (registry v3.33) ───────────────
+# Ruled Jason, Sep 4 2026: gclid/wbraid/gbraid are captured ONLY where
+# ad_storage is granted. The gate is the ruling -- it is what moots the privacy
+# question instead of deferring it to counsel -- so it is asserted on the SERVED
+# file, not just the repo copy. An unconditional capture would look like a
+# harmless simplification and would put an advertising identifier in the CRM for
+# a visitor who was shown a banner and declined.
+echo
+echo "· Click identifiers (consent-gated)"
+ut=$(body "$BASE/mkx-utm.js")
+grep -q 'mkxGetUTM' <<<"$ut" \
+  && ok "mkx-utm.js fetched (checks below are meaningful)" \
+  || no "mkx-utm.js did not fetch -- every check below would pass on an empty body"
+grep -q 'mkxCommitClickIds' <<<"$ut" \
+  && ok "click-id capture present" || no "click-id capture missing from the served file"
+grep -q 'adStorageGranted' <<<"$ut" \
+  && ok "consent gate present on the served file" \
+  || no "CONSENT GATE GONE: click ids captured without an ad_storage check"
+ci_lp=$(body "$BASE/lp/keep-control")
+grep -q 'lpAuditForm' <<<"$ci_lp" \
+  && ok "LP fetched (checks below are meaningful)" \
+  || no "LP did not fetch -- the gclid check below would pass on an empty body"
+grep -q 'gclid_first' <<<"$ci_lp" \
+  && ok "LP posts gclid_first (the provisioned GHL field key)" \
+  || no "LP does not post gclid_first -- the GHL field will stay empty"
+ci_lg=$(body "$BASE/legal")
+grep -q 'GoHighLevel' <<<"$ci_lg" \
+  && ok "/legal fetched (check below is meaningful)" \
+  || no "/legal did not fetch -- the disclosure check would pass on an empty body"
+grep -q 'click identifier' <<<"$ci_lg" \
+  && ok "/legal discloses the click identifier" \
+  || no "/legal no longer discloses the click identifier (C2 ruling, Sep 4)"
+
 # ── /intel/airbnb-operations-at-cost: partner claim + link (registry v3.31) ──
 # Two things here are a PARTNER's, not ours, and both were supplied by Amy Plummer
 # (Turno) rather than measured by us: the 126,000+ marketplace figure and the

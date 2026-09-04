@@ -224,7 +224,7 @@ SAME_PHRASE_EXEMPT = {
 # noticing (registry v3.20, board addendum C3 item 1).
 REQUIRED_TOKENS = {
     "legal/index.html": ("Google Ads", "net payout", "Do Not Sell or Share",
-                         "Global Privacy Control"),
+                         "Global Privacy Control", "click identifier"),
 }
 
 # Pages that legitimately carry no consent script (confidential, untracked).
@@ -559,7 +559,8 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # empties a CRM field and a conditional email branch downstream; nothing
     # errors, the lead just arrives blank.
     if where == "lp/keep-control/index.html":
-        for key in ("email", "listingUrl", "pricingOwner", "pricing_owner", "source"):
+        for key in ("email", "listingUrl", "pricingOwner", "pricing_owner", "source",
+                    "gclid_first"):
             if not re.search(rf"^\s*{re.escape(key)}\s*:", raw, re.M):
                 hard.append(f"{where}: webhook payload key {key!r} missing — GHL maps on "
                             f"the transmitted key, not the form field name, so renaming "
@@ -714,6 +715,30 @@ def main():
                     hard.append(f"mkx-consent.js: ad_personalization set to {v.strip()!r} "
                                 f"— it is a hardcoded 'denied' so no code path can turn "
                                 f"it on (board addendum C1, registry v3.19)")
+
+    # Click identifiers are captured ONLY where ad_storage is granted (ruled
+    # Jason, 2026-09-04; registry v3.33). The gate IS the ruling: it is what
+    # moots the privacy question rather than deferring it, and the
+    # consent-independent variant was considered and explicitly not shipped.
+    # An unconditional capture would look like a harmless simplification and
+    # would silently put an advertising identifier in the CRM for a visitor who
+    # was shown a banner and declined, so it fails the build instead.
+    if not args:
+        upath = os.path.join(ROOT, "mkx-utm.js")
+        if os.path.exists(upath):
+            usrc = open(upath, encoding="utf-8").read()
+            if "mkx_click" in usrc or "mkxCommitClickIds" in usrc:
+                if "adStorageGranted" not in usrc:
+                    hard.append("mkx-utm.js: click identifiers are captured without an "
+                                "ad_storage check — capture is consent-gated by ruling "
+                                "(Jason, 2026-09-04), and the gate is the ruling "
+                                "(registry v3.33)")
+                else:
+                    body = usrc.split("mkxCommitClickIds = function")[-1].split("};")[0]
+                    if "adStorageGranted()" not in body:
+                        hard.append("mkx-utm.js: mkxCommitClickIds() persists without "
+                                    "calling adStorageGranted() — the consent gate has "
+                                    "been bypassed (registry v3.33)")
 
     # The consent script does not talk to the CRM (registry v3.30). A beacon
     # here posted consent_impression/accept/decline/ad_optout to a GHL inbound
