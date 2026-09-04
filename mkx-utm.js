@@ -54,6 +54,79 @@
     }
   } catch (e) { /* sessionStorage blocked — proceed without persisting */ }
 
+  /* ── Click identifiers (gclid / wbraid / gbraid) — CONSENT-GATED ──
+     Ruled Jason, Sep 4 2026, amending Code's CTO brief of the same day.
+
+     These are NOT treated like the UTM parameters above, and the difference is
+     deliberate. `utm_campaign=spring_promo` describes an ad. A `gclid` names a
+     single click, and once it sits in the CRM beside an email address it is
+     tied to a person. So it is captured ONLY where `ad_storage` is granted:
+     ungated traffic by default, gated regions on Accept, never for a visitor
+     who was shown the banner and declined or ignored it.
+
+     That gate is what MOOTS the privacy question rather than deferring it. The
+     consent-independent variant was considered and NOT shipped; it goes to
+     counsel (C4) first if it is ever wanted. Do not "simplify" this to an
+     unconditional capture — the condition is the ruling.
+
+     Held in memory until the grant arrives, because the URL carrying the id
+     exists only on the landing page. A gated-region visitor who accepts while
+     still on that page is captured; one who navigates away first is not, and
+     that is correct rather than a gap. */
+  var CLICK_KEY = 'mkx_click';
+  var CLICK_PARAMS = ['gclid', 'wbraid', 'gbraid'];
+  var pendingClick = null;
+
+  try {
+    var cparams = new URLSearchParams(window.location.search);
+    var pend = {};
+    CLICK_PARAMS.forEach(function (p) {
+      var v = cparams.get(p);
+      if (v) { pend[p] = v; }
+    });
+    for (var k in pend) { if (pend.hasOwnProperty(k)) { pendingClick = pend; break; } }
+  } catch (e) { /* no URLSearchParams — nothing pending, nothing breaks */ }
+
+  /* Effective ad_storage, read off the same dataLayer gtag reads. Region-scoped
+     defaults are skipped: they apply only inside their region list, and this
+     file cannot tell whether we are in it. Skipping them is the conservative
+     read — it can only withhold capture, never grant it. */
+  function adStorageGranted() {
+    try {
+      var dl = window.dataLayer || [];
+      var state = 'denied';
+      for (var i = 0; i < dl.length; i++) {
+        var a = dl[i];
+        if (!a || a[0] !== 'consent' || !a[2]) { continue; }
+        if (a[2].region) { continue; }
+        if (typeof a[2].ad_storage === 'string') { state = a[2].ad_storage; }
+      }
+      return state === 'granted';
+    } catch (e) { return false; }
+  }
+
+  /* Idempotent, and safe to call before or after consent resolves. Called once
+     below for ungated traffic (whose grant has already landed by the time this
+     file runs) and again by mkx-consent.js the moment a gated visitor accepts. */
+  window.mkxCommitClickIds = function () {
+    try {
+      if (!pendingClick) { return; }
+      if (!adStorageGranted()) { return; }
+      if (sessionStorage.getItem(CLICK_KEY)) { return; }   // first touch wins
+      sessionStorage.setItem(CLICK_KEY, JSON.stringify(pendingClick));
+    } catch (e) { /* sessionStorage blocked — proceed without persisting */ }
+  };
+
+  /* Read back anywhere on-site: window.mkxGetClickIds() -> {gclid} or {} */
+  window.mkxGetClickIds = function () {
+    try {
+      var raw = sessionStorage.getItem(CLICK_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  };
+
+  window.mkxCommitClickIds();
+
   /* Read back anywhere on-site: window.mkxGetLanding() -> "/lp/keep-control" or "" */
   window.mkxGetLanding = function () {
     try { return sessionStorage.getItem(LAND_KEY) || ''; } catch (e) { return ''; }

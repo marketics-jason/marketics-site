@@ -107,6 +107,16 @@
       ad_user_data: ad,
       ad_personalization: 'denied'
     });
+    /* Click identifiers (gclid/wbraid/gbraid) are captured only where ad_storage
+       is granted — ruled Jason, Sep 4 2026. mkx-utm.js holds them in memory and
+       this is the moment they become storable for a gated-region visitor who has
+       just accepted. Ungated traffic self-commits when mkx-utm.js loads, so this
+       call is the gated-region half only, and it is idempotent either way.
+       Guarded on `ad`, not on `granted`: a Do Not Sell opt-out calls this with
+       granted=true while denying every ad signal, and must not capture. */
+    if (ad === 'granted' && typeof window.mkxCommitClickIds === 'function') {
+      window.mkxCommitClickIds();
+    }
   }
 
   /* ── Consent-decision instrumentation — REMOVED 2026-09-03 (registry v3.30) ──
