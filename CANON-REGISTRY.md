@@ -2446,9 +2446,23 @@ extraction correct; `display:block` restores the visual break. Both named test c
 correctly: "YOUR MARKET. MASTERED." and "Two Disasters. Zero Collapse." One **pre-existing** glue on
 `/markets` (a nested block span with no preceding whitespace) fixed in passing.
 
-Homepage H1 is now Strategy's verbatim sentence; the wordmark is a `div` carrying the same class, and
-the hero is pixel-identical. Placement is visually hidden via the existing `.sr-only` — a
-Design/Strategy question flagged, not decided.
+Homepage H1 is now Strategy's verbatim sentence — **"Performance-based Airbnb revenue management",
+exact string, no variants** (sign-off 2026-09-05). The wordmark is a `div` carrying the same class.
+
+Placement was first shipped visually hidden via `.sr-only`, and that was flagged rather than
+defended: **an audit that flags a logotype H1 will plausibly flag a hidden one next.** Strategy ruled
+the better fix — the slot directly above the wordmark was already a kicker, so it was **promoted to
+the `h1`** and its text swapped. That yields a real, visible H1 naming the category, with no new
+element and no visual change beyond three characters of line length. `.bar` became a `<span>`
+because a `<div>` inside an `<h1>` is invalid; it is a flex item either way and renders identically.
+
+**One string, one slot, one H1.** The claim is deliberately not restated elsewhere: a second copy in
+the reach strip would be the redundant-repetition pattern the content analysis already docked. The
+audit's own suggestion — add a descriptive H1 *alongside* the wordmark — was declined in favour of
+this, which gets the same machine-readable result with one fewer element to defend.
+
+Verified at 1440px and 390px: H1 visible in both, no overflow, no page errors, wordmark box
+unchanged.
 
 **A corruption caught by testing, not by review.** The first sweep matched an `<h1>` inside an HTML
 *comment* in `/calculator` and swallowed everything to the next `</h1>` 93 lines later, mangling the

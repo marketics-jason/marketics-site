@@ -589,13 +589,14 @@ dd.fa{margin:0;}
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="kicker"><div class="bar"></div><span>Performance-based STR optimization</span></div>
-      <!-- The page H1 is the sentence that says what this company does; the wordmark
-           below is display type, not a heading (Strategy ruling, 2026-09-04). A logotype
-           as H1 gave extractors "YOURMARKET.MASTERED." as the page's subject. The H1
-           string is Strategy's, verbatim. Placement is visually-hidden so the hero is
-           unchanged -- flagged to Design/Strategy rather than decided here. -->
-      <h1 class="sr-only">Performance-based Airbnb revenue management</h1>
+      <!-- The page H1. Strategy sign-off 2026-09-05: exact string, no variants.
+           This slot was already the kicker; promoting it gives a real, visible H1
+           that names what the company does, with no new element and no visual
+           change. The wordmark below is display type, not a heading.
+           .bar is a <span> rather than a <div> because a div inside an h1 is
+           invalid; it is a flex item either way, so it renders identically.
+           One string, one slot, one H1 -- do not restate this claim elsewhere. -->
+      <h1 class="kicker"><span class="bar"></span><span>Performance-based Airbnb revenue management</span></h1>
       <div class="h1"><span class="hln">YOUR</span> <span class="hln">MARKET.</span> <span class="hln"><span class="gold">MASTERED.</span><sup>™</sup></span></div>
       <p class="hero-lead">You already know your property can earn more. The question is who you trust to run its revenue.</p>
       <p class="hero-sub">A decade building value into properties, then letting the market pay for it. 1,000+ listings across 22 markets.</p>
