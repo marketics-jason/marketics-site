@@ -974,6 +974,9 @@ footer a:hover{color:var(--muted);}
 
     var utm     = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
     var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
+    /* First-touch timestamp, read from mkx-utm.js. NOT submission time: that is
+       `submittedAt` below, a different moment already populating its own field. */
+    var firstTouch = (typeof window.mkxGetFirstTouchTS === 'function') ? window.mkxGetFirstTouchTS() : '';
     var click   = (typeof window.mkxGetClickIds === 'function') ? window.mkxGetClickIds() : {};
 
     if (!trap) {
@@ -1000,25 +1003,37 @@ footer a:hover{color:var(--muted);}
         utm_content: utm.utm_content || '',
         utm_term: utm.utm_term || '',
         /* The same five values again under the keys GHL's Attribution fields
-           actually carry. Not belt-and-braces: proven on a live contact,
-           2026-09-04. Fields whose key matches a transmitted key populate
-           (pricing_owner, listingUrl, submittedAt); every field whose key
-           differs was BLANK, including all five utm_*_first and first_touch_lp.
-           There is no mapping bridge -- GHL matches on the transmitted key, and
-           campaign attribution has therefore never reached the CRM.
-           The unsuffixed keys stay until something is known not to read them;
-           removing them is a separate cleanup, not this PR's job. */
+           carry. Shipped 2026-09-04 to fix attribution that had never reached
+           the CRM, and it worked -- but the mechanism written down for it was
+           WRONG, and the correction matters more than the fix.
+
+           The belief was: GHL matches on the transmitted key, so a field is
+           filled by sending a key of the same name. It is not. GHL requires an
+           explicit per-field MAPPING ROW, and a row can point ANY transmitted
+           key at ANY field. `gclid_first` proved it -- transmitted under the
+           exact field key, landed nowhere, because no row existed (v3.35).
+
+           So these six keys were never strictly necessary. Six mapping rows
+           pointing at the unsuffixed keys would have done the same job. They
+           work and they stay; re-keying a lead path to prove a point is not a
+           trade worth making. But nothing new gets duplicated for this reason
+           again: a CRM field that needs filling gets a MAPPING ROW, not a
+           payload key. Same rule that let /get-started be fixed on 2026-09-05
+           with zero code change, by pointing its first_touch_lp row at the
+           `landingPage` key the form had been sending all along. */
         utm_source_first: utm.utm_source || '',
         utm_medium_first: utm.utm_medium || '',
         utm_campaign_first: utm.utm_campaign || '',
         utm_content_first: utm.utm_content || '',
         utm_term_first: utm.utm_term || '',
         first_touch_lp: landing,
+        first_touch_ts: firstTouch,
         /* Click identifiers, consent-gated in mkx-utm.js: empty unless the
            visitor's ad_storage is granted. `gclid_first` is the key because a
-           GHL custom field of that name already exists (CTO, Sep 4) -- GHL maps
-           on the TRANSMITTED key, not the form field name, so renaming this
-           empties that field silently (registry v3.21).
+           GHL custom field of that name already exists (CTO, Sep 4). Renaming
+           it would empty that field silently -- not because GHL matches on the
+           key, but because the mapping ROW that fills it points at this key by
+           name, and a row whose source disappears reports nothing (v3.35).
 
            wbraid/gbraid are Google's iOS and app-campaign substitutes for gclid
            and are sent under their own keys deliberately. They have no GHL field

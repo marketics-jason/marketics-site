@@ -2,7 +2,8 @@
    Marketics UTM Capture — mkx-utm.js
    ~0.5KB. First-touch UTM capture, session-scoped.
 
-   Persists utm_source/medium/campaign/content/term to
+   Persists utm_source/medium/campaign/content/term, the
+   first-touch landing path and the first-touch timestamp to
    sessionStorage on the first page a visitor lands on with
    UTM params in the URL, so campaign attribution survives
    on-site navigation through to the conversion event (form
@@ -28,6 +29,7 @@
 
   var KEY = 'mkx_utm';
   var LAND_KEY = 'mkx_landing';
+  var TS_KEY = 'mkx_ts';
   var PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 
   /* First-touch landing page. The lead form lives on /get-started, so every CRM
@@ -38,6 +40,22 @@
   try {
     if (!sessionStorage.getItem(LAND_KEY)) {
       sessionStorage.setItem(LAND_KEY, window.location.pathname);
+
+      /* First-touch TIMESTAMP (authorised by CTO, 2026-09-05). Written INSIDE
+         the landing-page guard on purpose: the two record the SAME event, so
+         they are set together or not at all.
+
+         The case that guard exists for: a session that already carries a
+         landing page had its first touch before this line shipped. Setting the
+         timestamp there would record "now" for a moment that has already
+         passed — a plausible wrong number, which is worse than blank and is the
+         exact reason mapping `submittedAt` into this field was refused. That
+         value is real, it is just a different moment, and a CRM field full of
+         confidently wrong timestamps cannot be distinguished from a correct one
+         after the fact. Those sessions get no value, correctly.
+
+         ISO 8601 UTC, matching `submittedAt` so the two subtract cleanly. */
+      sessionStorage.setItem(TS_KEY, new Date().toISOString());
     }
   } catch (e) { /* sessionStorage blocked */ }
 
@@ -126,6 +144,11 @@
   };
 
   window.mkxCommitClickIds();
+
+  /* Read back anywhere on-site: window.mkxGetFirstTouchTS() -> ISO 8601 or "" */
+  window.mkxGetFirstTouchTS = function () {
+    try { return sessionStorage.getItem(TS_KEY) || ''; } catch (e) { return ''; }
+  };
 
   /* Read back anywhere on-site: window.mkxGetLanding() -> "/lp/keep-control" or "" */
   window.mkxGetLanding = function () {

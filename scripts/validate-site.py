@@ -190,6 +190,60 @@ DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 # event. Its errors were then misread as a broken LEAD path and "fixed" with a
 # Content-Type change GHL rejects, dropping ~20 minutes of real submissions
 # (registry v3.29/v3.30). Gated so the shape cannot return on any file.
+def _first_touch_guard_body(src):
+    """The body of `if (!sessionStorage.getItem(LAND_KEY)) { ... }`, braces matched.
+
+    Slicing on the next `} catch` instead was the obvious shortcut and it is
+    WRONG: a write moved out of the `if` but left inside the same `try` still
+    falls in that slice, so the check passed on exactly the regression it exists
+    to catch. Found by negative control before it shipped. The closing brace of
+    the if-block is the boundary that means something, so it has to be found.
+    """
+    i = src.find("if (!sessionStorage.getItem(LAND_KEY))")
+    if i < 0:
+        return ""
+    start = src.find("{", i)
+    if start < 0:
+        return ""
+    depth = 0
+    for j in range(start, len(src)):
+        if src[j] == "{":
+            depth += 1
+        elif src[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return src[start:j]
+    return ""
+
+
+# ── <br> inside a heading (registry v3.36 item 6; CTO authorised 2026-09-05) ──
+# A <br> yields NO whitespace when tags are stripped, so extraction reads
+# "YOUR MARKET. MASTERED." as "YOURMARKET.MASTERED." -- one token, in every AI
+# summariser and snippet extractor that flattens markup. 60 were removed across
+# 28 files in #143 and replaced with <span class="hln"> blocks joined by a REAL
+# space: the space is what fixes extraction, display:block restores the break.
+#
+# Until now that fix was defended ONLY by a production smoke assertion, which
+# speaks after a merge -- so a regression would ship, get crawled, and surface on
+# the next daily run rather than in review. A <br> in a heading looks like
+# ordinary markup to anyone who was not there, which makes it the one GEO finding
+# most likely to be undone by accident. Repo side and served side now agree, the
+# standard the other three already met.
+#
+# Comments, <script> and <style> go BEFORE any matching. The original sweep
+# corrupted /calculator by matching an <h1> inside an HTML COMMENT and swallowing
+# 93 lines to the next </h1>. A regex that finds tags will find them in comments
+# too, and a checker has exactly the same exposure a rewriter does.
+HEADING_BR = re.compile(r"<h[1-6]\b[^>]*>(?:(?!</h[1-6]>).)*?<br\b", re.S | re.I)
+
+
+def heading_br_violations(raw):
+    """Headings that contain a <br>. Empty list = fine."""
+    src = re.sub(r"<!--.*?-->", " ", raw, flags=re.S)
+    src = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", src, flags=re.S | re.I)
+    return [re.sub(r"\s+", " ", m.group(0))[:90] for m in HEADING_BR.finditer(src)]
+
+
 SAFELISTED_TYPES = ("text/plain", "application/x-www-form-urlencoded",
                     "multipart/form-data")
 SENDBEACON_CALL = re.compile(r"sendBeacon\s*\(([^;]{0,300})")
@@ -550,7 +604,7 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                     f"segregation studies: 'cost segregation partner' "
                     f"(Strategy ruling 2026-09-01, registry v3.18)")
 
-    # 11c. the LP webhook payload keys GHL maps on (registry v3.21).
+    # 11c. webhook payload keys a GHL mapping row points at (v3.21, v3.35).
     # A form field's `name` and the JSON key the webhook actually SENDS are two
     # different things here: the handler reads elements by id and hand-builds the
     # payload, so `name="listing_url"` is never transmitted — `listingUrl` is.
@@ -558,18 +612,32 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # markup, so the transmitted keys are gated by name. A rename here silently
     # empties a CRM field and a conditional email branch downstream; nothing
     # errors, the lead just arrives blank.
-    if where == "lp/keep-control/index.html":
-        for key in ("email", "listingUrl", "pricingOwner", "pricing_owner", "source",
-                    "gclid_first",
-                    # Keys matching GHL's Attribution field keys exactly. Proven
-                    # necessary on a live contact 2026-09-04: a field whose key
-                    # differs from the transmitted key stays blank, silently.
-                    "utm_source_first", "utm_medium_first", "utm_campaign_first",
-                    "utm_content_first", "utm_term_first", "first_touch_lp"):
+    # /get-started is listed as of 2026-09-05: Jason wired six mapping rows against
+    # its keys that day (five utm_* plus first_touch_lp <- landingPage), so those
+    # key names became load-bearing for the organic path the same way the LP's are.
+    # Before that they were inert and a rename cost nothing; now it silently empties
+    # a field on every organic lead.
+    PAYLOAD_KEYS = {
+        "lp/keep-control/index.html": (
+            "email", "listingUrl", "pricingOwner", "pricing_owner", "source",
+            "gclid_first",
+            "utm_source_first", "utm_medium_first", "utm_campaign_first",
+            "utm_content_first", "utm_term_first", "first_touch_lp",
+            "first_touch_ts",
+        ),
+        "get-started/index.html": (
+            "email", "source", "landingPage", "submittedAt",
+            "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
+            "first_touch_ts",
+        ),
+    }
+    if where in PAYLOAD_KEYS:
+        for key in PAYLOAD_KEYS[where]:
             if not re.search(rf"^\s*{re.escape(key)}\s*:", raw, re.M):
-                hard.append(f"{where}: webhook payload key {key!r} missing — GHL maps on "
-                            f"the transmitted key, not the form field name, so renaming "
-                            f"one empties a CRM field silently (registry v3.21)")
+                hard.append(f"{where}: webhook payload key {key!r} missing — a GHL "
+                            f"mapping row points at this key BY NAME, so renaming or "
+                            f"removing it empties that CRM field silently, with no "
+                            f"error on either side (registry v3.35)")
 
     # 11d. the paid LP posts to its OWN webhook trigger (registry v3.22).
     # SHARED_HOOK is the organic one: 29 files use it, the consent beacon
@@ -636,6 +704,37 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                     f"credentials mode 'include', so a non-safelisted type forces a "
                     f"preflight no wildcard ACAO can satisfy and the request never "
                     f"leaves the browser (registry v3.30)")
+
+    # 11g. first_touch_ts must be the FIRST-TOUCH moment (CTO ruling 2026-09-05).
+    # The ruling that authorised this field also refused the shortcut: mapping
+    # `submittedAt` into it fills the field with a real value from the WRONG
+    # moment, and a CRM full of confidently wrong timestamps cannot be told apart
+    # from a correct one after the fact. Blank is recoverable; wrong is not.
+    #
+    # This is the gate for that refusal, because the shortcut is one line and
+    # reads like a simplification: `first_touch_ts: new Date().toISOString()`
+    # right next to `submittedAt` doing exactly that would pass every other check
+    # in this file. So the VALUE is inspected, not just the key's presence.
+    m = re.search(r"^\s*first_touch_ts\s*:\s*([^,\n]+)", raw, re.M)
+    if m:
+        expr = m.group(1)
+        if re.search(r"new\s+Date|Date\.now|submittedAt", expr):
+            hard.append(f"{where}: first_touch_ts is derived from submission time "
+                        f"({expr.strip()!r}) — that is a different moment and is "
+                        f"already sent as submittedAt. It must come from "
+                        f"mkxGetFirstTouchTS(), which reads the value captured on "
+                        f"the session's first page (CTO ruling 2026-09-05)")
+        elif "mkxGetFirstTouchTS" not in raw:
+            hard.append(f"{where}: sends first_touch_ts but never calls "
+                        f"mkxGetFirstTouchTS() — the value cannot be a first-touch "
+                        f"timestamp (CTO ruling 2026-09-05)")
+
+    # 11f. no <br> inside a heading (registry v3.36 item 6).
+    for snippet in heading_br_violations(raw):
+        hard.append(f"{where}: <br> inside a heading — a <br> yields no whitespace "
+                    f"when tags are stripped, so extraction glues the words on "
+                    f"either side into one token. Use <span class=\"hln\"> blocks "
+                    f"joined by a real space (registry v3.36): {snippet!r}")
 
     # 12. no inline gtag.js loader on any page (registry v3.12).
     # gtag.js is loaded once, from mkx-consent.js, after this file has decided
@@ -776,6 +875,30 @@ def main():
                         hard.append("mkx-utm.js: mkxCommitClickIds() persists without "
                                     "calling adStorageGranted() — the consent gate has "
                                     "been bypassed (registry v3.33)")
+
+    # The first-touch timestamp is written INSIDE the landing-page guard, and has
+    # to stay there (CTO ruling 2026-09-05). Moving it out — or adding a second
+    # unconditional write — makes it record the CURRENT page load rather than the
+    # session's first, which is the same defect as mapping submittedAt into it,
+    # arrived at from the other direction and much harder to see: the field fills,
+    # the value looks like a timestamp, and it is wrong on every returning visitor.
+    if not args:
+        upath = os.path.join(ROOT, "mkx-utm.js")
+        if os.path.exists(upath) and "mkx_ts" in open(upath, encoding="utf-8").read():
+            usrc = open(upath, encoding="utf-8").read()
+            if "mkxGetFirstTouchTS" not in usrc:
+                hard.append("mkx-utm.js: captures mkx_ts but exposes no "
+                            "mkxGetFirstTouchTS() reader — nothing can send it")
+            writes = len(re.findall(r"setItem\(\s*TS_KEY", usrc))
+            if writes != 1:
+                hard.append(f"mkx-utm.js: TS_KEY is written {writes} time(s), want "
+                            f"exactly 1 — a second write cannot be first-touch "
+                            f"(CTO ruling 2026-09-05)")
+            elif "setItem(TS_KEY" not in _first_touch_guard_body(usrc):
+                hard.append("mkx-utm.js: the first-touch timestamp is written "
+                            "outside the landing-page guard — it now records the "
+                            "current page load, not the session's first "
+                            "(CTO ruling 2026-09-05)")
 
     # The consent script does not talk to the CRM (registry v3.30). A beacon
     # here posted consent_impression/accept/decline/ad_optout to a GHL inbound

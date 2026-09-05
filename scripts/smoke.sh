@@ -283,15 +283,61 @@ grep -q 'lpAuditForm' <<<"$ci_lp" \
 grep -q 'gclid_first' <<<"$ci_lp" \
   && ok "LP posts gclid_first (the provisioned GHL field key)" \
   || no "LP does not post gclid_first -- the GHL field will stay empty"
-# Attribution keys must match GHL's field keys EXACTLY. Proven on a live contact
-# 2026-09-04: fields whose key matches a transmitted key populate, and every
-# field whose key differs was blank -- silently, with a contact that otherwise
-# looks complete. There is no mapping bridge to fall back on.
+# These six keys are what the LP's GHL mapping rows point at BY NAME. The
+# mechanism recorded on 2026-09-04 ("GHL matches on the transmitted key") was
+# wrong and was corrected at v3.35: rows are required, and a row can point any
+# key at any field. So these keys are not magic -- they are simply the names the
+# existing rows reference, and a rename empties those fields with no error on
+# either side.
 for k in utm_source_first utm_medium_first utm_campaign_first utm_content_first utm_term_first first_touch_lp; do
   grep -q "$k" <<<"$ci_lp" \
     && ok "LP posts $k" \
     || no "LP does not post $k -- that GHL Attribution field will be silently blank"
 done
+# ── First-touch timestamp (CTO ruling 2026-09-05) ───────────────────────────
+# The ruling authorised the capture AND refused the shortcut: submission time is
+# a real value from the wrong moment, and a CRM field full of confidently wrong
+# timestamps cannot be told apart from a correct one afterwards. So the served
+# file is checked for the capture, for its reader, and for the thing that makes
+# it first-touch -- exactly one write. A second write anywhere makes every
+# returning visitor's value the current page load instead.
+grep -q 'mkx_ts' <<<"$ut" \
+  && ok "first-touch timestamp captured on the served file" \
+  || no "mkx_ts capture missing from the served mkx-utm.js"
+grep -q 'mkxGetFirstTouchTS' <<<"$ut" \
+  && ok "mkxGetFirstTouchTS() reader present" \
+  || no "no mkxGetFirstTouchTS() on the served file -- nothing can send the value"
+n=$(grep -o 'setItem(TS_KEY' <<<"$ut" | wc -l)
+[ "$n" -eq 1 ] \
+  && ok "the timestamp is written exactly once (first touch)" \
+  || no "TS_KEY is written $n time(s) on the served file, want 1 -- a second write is not first-touch"
+
+# Both forms, because both lead paths carry attribution as of 2026-09-05. The
+# value check is the one that matters: `first_touch_ts` set from new Date() is
+# the refused shortcut, and it looks entirely reasonable in a diff.
+gs=$(body "$BASE/get-started")
+grep -q 'auditForm' <<<"$gs" \
+  && ok "/get-started fetched (checks below are meaningful)" \
+  || no "/get-started did not fetch -- the checks below would pass on an empty body"
+for pg in "LP:$ci_lp" "get-started:$gs"; do
+  nm="${pg%%:*}"; src="${pg#*:}"
+  grep -q 'first_touch_ts' <<<"$src" \
+    && ok "$nm posts first_touch_ts" \
+    || no "$nm does not post first_touch_ts -- that GHL field stays blank"
+  grep -qE '^\s*first_touch_ts\s*:\s*(new Date|Date\.now)' <<<"$src" \
+    && no "$nm derives first_touch_ts from submission time -- the refused shortcut (CTO, Sep 5)" \
+    || ok "$nm does not derive first_touch_ts from submission time"
+done
+
+# Jason wired six organic mapping rows against these keys on 2026-09-05, which
+# made them load-bearing on the organic path for the first time. Before that a
+# rename here cost nothing; now it silently empties a field on every organic lead.
+for k in landingPage utm_source utm_medium utm_campaign utm_content utm_term; do
+  grep -q "$k" <<<"$gs" \
+    && ok "/get-started posts $k" \
+    || no "/get-started does not post $k -- an organic mapping row points at it"
+done
+
 ci_lg=$(body "$BASE/legal")
 grep -q 'GoHighLevel' <<<"$ci_lg" \
   && ok "/legal fetched (check below is meaningful)" \

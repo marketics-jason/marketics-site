@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.0 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.37 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,87 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.37 — a mapping row, not a payload key (2026-09-05)
+
+### Both lead paths now carry attribution
+
+Jason wired the organic workflow the morning of Sep 5: five `utm_*_first` rows plus
+`first_touch_lp` **pointed at the `landingPage` key the form had been sending since it was built**.
+Verified with a real submission — `organictest/t/c` matched, `first_touch_lp = /get-started/`, and a
+bare-URL control correctly captured `/`. **No code change, and no Mapping Reference re-point**, because
+that key was already in every snapshot. That was option C in the Sep 4 brief and it was right.
+
+### The standing rule, and why it is a rule rather than a note
+
+**A GHL field is filled by a MAPPING ROW, and a row can point ANY transmitted key at ANY field.**
+
+v3.34 recorded the opposite — "GHL matches on the transmitted key, no mapping bridge" — and v3.35
+corrected it. The consequence had not been drawn out until now, and it is the part worth keeping:
+**the LP's six suffixed keys were never strictly necessary.** Six rows pointing at the unsuffixed
+keys would have done the same job. They work and they stay; re-keying a lead path four days into
+working is not a trade worth making, and the duplicate `landingPage` / `first_touch_lp` pair on the
+LP stays deferred for the same reason.
+
+But nothing new gets duplicated for that reason again. **The next CRM field that needs filling gets a
+mapping row, not a payload change.** Recorded in three places at once — the LP's own comment, the
+`validate-site.py` failure message, and the `smoke.sh` comment — because all three were still
+teaching the wrong mechanism, and a gate whose failure message states a false rule is how the next
+person makes a confident wrong call. Same reason v3.34 was corrected in place rather than only
+superseded.
+
+### `first_touch_ts` — authorised, with the shortcut refused in code
+
+Ruled by CTO in the Sep 5 weekly. Captured in `mkx-utm.js`, session-scoped, ISO 8601 UTC, written
+**inside the landing-page guard** so the landing path and the timestamp record the same event.
+
+The refusal is the interesting half: **mapping `submittedAt` into the field stays refused.** It is a
+real value from the wrong moment, and a CRM field full of confidently wrong timestamps cannot be told
+apart from a correct one after the fact — blank is recoverable, wrong is not. That has a consequence
+people will read as a bug: **a session that already carries a landing page and no timestamp gets
+none**, because its first touch happened before the code existed. Correct, not a gap.
+
+Three gates, because the shortcut is one line and reads like a simplification:
+
+- the payload value is inspected, not just the key's presence — `first_touch_ts: new Date()...` sitting
+  next to `submittedAt` doing exactly that would otherwise pass every check in the file
+- `TS_KEY` must be written **exactly once**, so a second unconditional write cannot make every
+  returning visitor's value the current page load
+- that one write must sit inside the landing-page guard — **brace-matched**, see below
+
+Sent from **both** forms, because both paths now carry attribution and a timestamp on half the leads
+is useless for cohort analysis. No `/legal` edit: a first-touch timestamp introduces no new category
+— `submittedAt` and `landingPage` already ship under the same sentence — but that is a
+characterisation call and is flagged for **C4** rather than treated as settled.
+
+Verified in a browser, 18 assertions: capture on first page; unchanged across three navigations;
+earlier than submission time; a separate session gets its own value; a pre-existing session gets
+none; and **both forms submitted for real with the webhook intercepted** — `first_touch_ts` present
+in both payloads, matching what was captured, and distinct from `submittedAt`. That last step is
+there deliberately: verifying capture to `sessionStorage` without submitting the form is exactly the
+gap that let `gclid_first` reach the CRM as a blank field.
+
+### `<br>` in headings, now gated repo-side (CTO authorised)
+
+Item 6 of the GEO batch was defended only by a production smoke assertion, which speaks after a
+merge. `validate-site.py` now fails the PR. Comments, `<script>` and `<style>` are stripped before
+matching — the original sweep corrupted `/calculator` by matching an `<h1>` inside an HTML comment,
+and **a checker has exactly the same exposure a rewriter does.**
+
+### Vacuous passes six, seven and eight — all three inside checks written to close a vacuous-pass gap
+
+1. **The homepage `ClaimReview` smoke check ran against the cleaned body**, and the cleaner strips
+   `<script>` — where the JSON-LD lives. It inspected a document with every schema block already
+   removed. **It read green with `ClaimReview` restored to the page.**
+2. The `llms.txt` coverage failure message was unreadable in the direction where coverage *gains* the
+   excluded page ("absent: 'none'").
+3. **The first-touch guard check sliced at `} catch` instead of the `if` block's closing brace.** A
+   write moved out of the conditional but left inside the same `try` still fell in that slice, so the
+   check passed on precisely the regression it exists to catch. Replaced with real brace matching.
+
+Eight members in nine days. The pattern has stopped being about any one check: **building the guard
+and proving it can fail are different habits, and only the second one does work.** Every gate in this
+entry was broken on purpose, and three of them were wrong the first time.
+
 ## v3.36 — the GEO batch (2026-09-04)
 
 ### llms.txt: gated, not generated

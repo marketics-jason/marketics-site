@@ -537,6 +537,9 @@ function setMode(m){
        record even when GA4 never fires (see the generate_lead consent note below). */
     var utm = (typeof window.mkxGetUTM === 'function') ? window.mkxGetUTM() : {};
     var landing = (typeof window.mkxGetLanding === 'function') ? window.mkxGetLanding() : '';
+    /* First-touch timestamp, read from mkx-utm.js. NOT submission time: that is
+       `submittedAt` below, a different moment already populating its own field. */
+    var firstTouch = (typeof window.mkxGetFirstTouchTS === 'function') ? window.mkxGetFirstTouchTS() : '';
 
     /* GHL / CRM payload — keeps the established field keys so existing automations still map */
     var payload = {
@@ -550,6 +553,7 @@ function setMode(m){
       source: 'get-started',
       landingPage: landing,      /* where the session actually began; `source` is only where the form lives */
       submittedAt: new Date().toISOString(),
+      first_touch_ts: firstTouch,
       utm_source: utm.utm_source || '',
       utm_medium: utm.utm_medium || '',
       utm_campaign: utm.utm_campaign || '',
