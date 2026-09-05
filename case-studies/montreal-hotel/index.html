@@ -339,6 +339,11 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 .hero-cap{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:12.5px;line-height:1.6;color:#8C8A81;padding:14px max(72px,calc((100% - 1440px)/2 + 72px)) 4px;margin:0;}
 @media(max-width:768px){.hero-cap{padding:12px 24px 4px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -383,7 +388,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 <section class="cs-hero">
   <div class="fi">
     <div class="rule-kick kick"><div class="bar"></div><span>Case study · Montréal, Québec</span></div>
-    <h1 class="cs-h1">Year One Saved It.<br>Year Two Is<br><em>Compounding.</em></h1>
+    <h1 class="cs-h1"><span class="hln">Year One Saved It.</span> <span class="hln">Year Two Is</span> <span class="hln"><em>Compounding.</em></span></h1>
     <p class="cs-lead">A 40-room Montréal boutique hotel was three months from foreclosure in early 2025. One year later, it survived back-to-back operational disasters in Q1 2026, and still came out running 50% ahead of the prior year.</p>
   </div>
   <div class="cs-spec fi">
@@ -573,7 +578,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
   <!-- Stress test subsection -->
   <div class="subhead fi">
     <span class="sec-num">Q1 2026. WHEN EVERYTHING WENT WRONG</span>
-    <h2 class="big-title">Two Disasters.<br><em>Zero Collapse.</em></h2>
+    <h2 class="big-title"><span class="hln">Two Disasters.</span> <span class="hln"><em>Zero Collapse.</em></span></h2>
   </div>
   <div class="prose fi">
     <p><strong>January 2026:</strong> a guest incident caused water damage to multiple rooms. Half the property was taken offline. <strong>February 2026:</strong> a pipe burst forced the hotel to close for nearly two weeks. Two consecutive months of major operational disruption. Rooms offline, staff redirected, revenue constrained by physical capacity rather than demand.</p>
@@ -593,7 +598,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
   <!-- Compounding subsection -->
   <div class="subhead fi">
     <span class="sec-num">MARCH 2026. FIRST CLEAN MONTH</span>
-    <h2 class="big-title">When It Came Back,<br>It Didn't Recover.<br><em>It Surpassed.</em></h2>
+    <h2 class="big-title"><span class="hln">When It Came Back,</span> <span class="hln">It Didn't Recover.</span> <span class="hln"><em>It Surpassed.</em></span></h2>
   </div>
   <div class="prose fi">
     <p>March 2026 was the first fully operational month after two consecutive disruptions. It produced <strong>$114,000 CAD</strong>: nearly three times what March 2025 had produced under the same seasonal conditions. April followed at <strong>$115,000</strong> and climbing. May forward bookings are already at approximately <strong>$180,000</strong> against $121,000 actual in May 2025. Running 49% ahead of the prior year with weeks still to book.</p>
@@ -673,7 +678,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
   <!-- The lesson -->
   <div class="subhead fi">
     <span class="sec-num">FOR BOUTIQUE HOSPITALITY OPERATORS</span>
-    <h2 class="big-title">Optimization Is<br><em>Operational Insurance.</em></h2>
+    <h2 class="big-title"><span class="hln">Optimization Is</span> <span class="hln"><em>Operational Insurance.</em></span></h2>
   </div>
   <div class="prose fi">
     <p>Most boutique hotels approaching Airbnb are making the same mistake this one was: treating the platform like a booking channel when it's a search engine with a memory. Airbnb's algorithm builds a position over time based on the signals your listing generates. Review velocity, click-through rates, booking patterns, response rates. That position, once built correctly, doesn't disappear overnight when something goes wrong. It holds.</p>

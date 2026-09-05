@@ -576,7 +576,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
   <div class="hero-inner">
     <div class="fi">
       <div class="hero-tag">Free STR Income Calculator</div>
-      <h1 class="hero-h1">What Is Your Property<br><em>Actually Worth?</em></h1>
+      <h1 class="hero-h1"><span class="hln">What Is Your Property</span> <span class="hln"><em>Actually Worth?</em></span></h1>
       <p class="hero-sub">Market benchmark data for <strong>16 cities</strong>. See the gap between what you're earning and what your market is paying: in 30 seconds.</p>
       <div class="hero-proof">
         <span class="hp">No email required</span>
@@ -824,7 +824,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <section class="method-section z1">
   <div class="method-inner">
     <div class="eyebrow fi">Methodology</div>
-    <h2 class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s">Where This Data<br><em style="color:var(--gold);font-style:normal;">Comes From.</em></h2>
+    <h2 class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s"><span class="hln">Where This Data</span> <span class="hln"><em style="color:var(--gold);font-style:normal;">Comes From.</em></span></h2>
     <div class="method-grid fi" style="transition-delay:.12s">
       <div class="method-col">
         <div class="mc-label">Data Sources</div>
@@ -922,10 +922,15 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
     .faq-q{font-family:var(--display);font-size:clamp(15px,2vw,19px);font-weight:400;letter-spacing:.02em;color:var(--white);margin:0 0 10px;}
     .faq-a{font-size:14px;font-weight:300;color:var(--stone);line-height:1.7;margin:0;}
     @media(max-width:1024px){.faq-inner{padding-left:24px;padding-right:24px;}}
-  </style>
+  /* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
+</style>
   <div class="faq-inner">
     <div class="eyebrow fi">Common Questions</div>
-    <h2 id="faq-heading" class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s">Calculator<br><em style="color:var(--gold);font-style:normal;">FAQ.</em></h2>
+    <h2 id="faq-heading" class="fi" style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:200;letter-spacing:.04em;text-transform:uppercase;color:var(--white);transition-delay:.06s"><span class="hln">Calculator</span> <span class="hln"><em style="color:var(--gold);font-style:normal;">FAQ.</em></span></h2>
     <div class="faq-list fi" style="transition-delay:.12s">
       <div class="faq-item">
         <h3 class="faq-q">How accurate is an Airbnb revenue calculator?</h3>
@@ -947,7 +952,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <section class="final-cta z1">
   <div class="fc-inner">
     <div class="fc-ey fi">Free Revenue Audit</div>
-    <h2 class="fc-h fi" style="transition-delay:.06s">Want This Applied To<br><em>Your Actual Property?</em></h2>
+    <h2 class="fc-h fi" style="transition-delay:.06s"><span class="hln">Want This Applied To</span> <span class="hln"><em>Your Actual Property?</em></span></h2>
     <p class="fc-sub fi" style="transition-delay:.12s">The calculator uses market averages. A free revenue audit uses your specific listing, your actual comp set, and your real ranking position. It takes 48 hours or less and costs nothing.</p>
     <div class="fi" style="transition-delay:.18s">
       <a href="/get-started" class="btn-gold">Start With a Free Audit →</a>

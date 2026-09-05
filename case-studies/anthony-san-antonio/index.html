@@ -322,6 +322,11 @@ html,body{max-width:100%;}
 figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 .hero-cap{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:12.5px;line-height:1.6;color:#8C8A81;padding:14px max(72px,calc((100% - 1440px)/2 + 72px)) 4px;margin:0;}
 @media(max-width:768px){.hero-cap{padding:12px 24px 4px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -365,7 +370,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 <header class="cs-hero">
   <div>
     <div class="kicker fi"><div class="bar"></div><span>Case study · San Antonio, Texas</span></div>
-    <h1 class="cs-h1 fi" style="transition-delay:.05s">The Experiment<br>Nobody Planned<br><em>To Run.</em></h1>
+    <h1 class="cs-h1 fi" style="transition-delay:.05s"><span class="hln">The Experiment</span> <span class="hln">Nobody Planned</span> <span class="hln"><em>To Run.</em></span></h1>
     <p class="cs-lead fi" style="transition-delay:.1s">A 15-property San Antonio portfolio proved. <strong>Twice</strong>: that optimization isn't a nice-to-have. When it stopped, revenue fell. When it came back, records broke.</p>
   </div>
   <div class="spec fi" style="transition-delay:.15s">
@@ -458,7 +463,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 <section class="cs-section">
   <div class="sec-head-block fi">
     <span class="sec-label">03 · What The Data Showed</span>
-    <h2 class="sec-title">Optimization off, revenue fell.<br>Optimization on, records broke.</h2>
+    <h2 class="sec-title"><span class="hln">Optimization off, revenue fell.</span> <span class="hln">Optimization on, records broke.</span></h2>
   </div>
   <div class="prose">
     <p class="fi">In October 2025, Anthony decided to manage the portfolio himself. No notice, no transition. He simply stopped working with Marketics and took the reins.</p>

@@ -381,6 +381,11 @@ li.drow,li.rcol,ul.aud-list li{list-style:none;}
 .skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold,#D6AD60);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono,monospace);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
 .skip-link:focus{top:0;}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -413,7 +418,7 @@ li.drow,li.rcol,ul.aud-list li{list-style:none;}
 <!-- ══ HERO ══ -->
 <header class="mhero">
   <div class="kicker"><div class="bar"></div><span>The Method</span></div>
-  <h1 class="mh1">VALUE FIRST.<br>THE PRICE <span class="gold">FOLLOWS.</span></h1>
+  <h1 class="mh1"><span class="hln">VALUE FIRST.</span> <span class="hln">THE PRICE <span class="gold">FOLLOWS.</span></span></h1>
   <p class="lead">The market prices your listing on what it can see. Our method is five disciplines that change what it sees. Run in order, with price last.</p>
 </header>
 

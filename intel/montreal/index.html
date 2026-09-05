@@ -350,6 +350,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -399,7 +404,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
     <span class="kicker-badge">F1 Grand Prix</span>
   </div>
 
-  <h1 class="article-h">Montréal Hosts Are Sitting on<br><em>Their Biggest Revenue Event of the Year</em></h1>
+  <h1 class="article-h"><span class="hln">Montréal Hosts Are Sitting on</span> <span class="hln"><em>Their Biggest Revenue Event of the Year</em></span></h1>
   <p class="article-sub">The Canadian Grand Prix turns Montréal into a different city every June. 370,000 fans over race week. Every hotel at capacity. And most Airbnb hosts in this market are running the same calendar rates they use in February.</p>
 
   <div class="byline">
@@ -435,7 +440,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
   <div class="section">
     <div class="section-label">The Opportunity</div>
-    <h2 class="section-h">The City That Changes<br><em>Every June</em></h2>
+    <h2 class="section-h"><span class="hln">The City That Changes</span> <span class="hln"><em>Every June</em></span></h2>
     <p class="body-text">I'm based in Montréal. I've run an A/B test on my own listings during F1 race week. The results weren't subtle. <strong>Race weekend produces the highest ADR of the entire year. By a significant margin</strong>: and most hosts miss the majority of it because their pricing reflects a calendar event, not a demand event.</p>
     <p class="body-text">The demand window is broader than the race itself. Fans begin arriving Thursday. Hospitality zones stay active through Sunday evening. A four-night minimum strategy positioned correctly can produce more revenue in that one window than a host typically earns across the entire month of January.</p>
 
@@ -705,7 +710,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
   <div class="rule"></div>
 
   <div class="footer-cta">
-    <h2 class="fca-h">Your Market.<br><em>Mastered.™</em></h2>
+    <h2 class="fca-h"><span class="hln">Your Market.</span> <span class="hln"><em>Mastered.™</em></span></h2>
     <p class="fca-sub">Request your free Montréal revenue audit. We'll show you exactly what your property should earn during F1 2026 and the full summer event calendar.</p>
     <a href="#audit" class="fca-btn">Get My Free Revenue Audit →</a>
   </div>

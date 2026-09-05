@@ -197,6 +197,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -280,7 +285,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
   <div class="hero-content">
     <div class="hero-label">Nashville, TN · Airbnb Whole Market · Spring 2026</div>
-    <h1 class="hero-title">Nashville<br><em>Market Intel</em></h1>
+    <h1 class="hero-title"><span class="hln">Nashville</span> <span class="hln"><em>Market Intel</em></span></h1>
     <p class="hero-subtitle">287,719 bookings at a $306 ADR. 72% of listings run high dynamic pricing. This is a market where calibration (not adoption) separates the top performers from everyone else.</p>
     <div class="hero-date">Data: PriceLabs · Published Apr 02, 2026 · Prepared by Marketics</div>
   </div>
@@ -289,7 +294,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- KPI SECTION -->
 <section style="padding-top:80px;padding-bottom:60px;">
   <div class="section-label">KPIs. Key Performance Indicators</div>
-  <h2 class="section-title">The Market<br><em>At a Glance</em></h2>
+  <h2 class="section-title"><span class="hln">The Market</span> <span class="hln"><em>At a Glance</em></span></h2>
 
   <p style="font-size:15px;color:var(--stone);font-weight:300;line-height:1.8;max-width:680px;margin-bottom:48px;">Nashville is running all green. Bookings up +54,989, ADR up $1, RevPAR up $4, occupancy up 1 point. This is a market gaining strength. What the summary numbers hide is a distribution problem: 72% of listings use high dynamic pricing and capture 81% of bookings. The 11% with no dynamic pricing capture just 5%. In this market, the gap isn't visible from the headline metrics. It's buried in the comp-set data for your specific property type and zone. Where does your listing sit within it?</p>
 
@@ -359,7 +364,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- BEDROOM TABLE -->
 <section>
   <div class="section-label">Bedroom Breakdown</div>
-  <h2 class="section-title">The Numbers<br><em>By Property Type</em></h2>
+  <h2 class="section-title"><span class="hln">The Numbers</span> <span class="hln"><em>By Property Type</em></span></h2>
 
   <p class="bedroom-intro">Nashville has one of the most spread-out bedroom distributions in any US STR market. <strong>1,047 four-bedroom listings. 154 eight-bedroom listings. 25 twelve-bedroom properties.</strong> The group-travel economy here is real and enormous, and it creates specific pricing dynamics that don't apply to standard markets. A studio in The Gulch competes on completely different terms than a 4BR party house near Broadway.</p>
 
@@ -468,7 +473,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- KEY DATES -->
 <section>
   <div class="section-label">Price and Occupancy Trends. Key Future Dates</div>
-  <h2 class="section-title">Demand Windows<br><em>Already Active</em></h2>
+  <h2 class="section-title"><span class="hln">Demand Windows</span> <span class="hln"><em>Already Active</em></span></h2>
 
   <p class="dates-intro">Nashville's demand calendar doesn't have valleys. It has peaks and baselines. The peaks are where strategy matters. Apr 10–11 is happening right now. Jun 25–28 is the largest spike in the entire dataset. A listing not calibrated for these windows is leaving significant revenue behind.</p>
 
@@ -523,7 +528,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- NARRATIVE -->
 <section>
   <div class="section-label">Market Analysis</div>
-  <h2 class="section-title">What the Data<br><em>Actually Tells You</em></h2>
+  <h2 class="section-title"><span class="hln">What the Data</span> <span class="hln"><em>Actually Tells You</em></span></h2>
 
   <div class="narrative-wrap">
     <div class="narrative-body">
@@ -566,7 +571,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- CTA -->
 <section>
   <div class="section-label">Get Your Property Audit</div>
-  <h2 class="section-title">Averages Describe<br><em>The Market</em></h2>
+  <h2 class="section-title"><span class="hln">Averages Describe</span> <span class="hln"><em>The Market</em></span></h2>
 
   <div class="cta-wrap">
     <div class="cta-left">

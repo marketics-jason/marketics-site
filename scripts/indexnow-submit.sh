@@ -51,10 +51,32 @@ cat /tmp/indexnow-response.txt 2>/dev/null || true
 echo
 
 # IndexNow returns 200 or 202 on accepted submissions.
-if [ "$code" = "200" ] || [ "$code" = "202" ]; then
-  echo "OK: submission accepted"
-  exit 0
-else
-  echo "WARN: unexpected response code, not failing the build over this" >&2
-  exit 0
-fi
+#
+# This block used to `exit 0` on ANY response code, with the note "not failing
+# the build over this". That made the workflow green whether or not IndexNow
+# accepted a single URL: a check that cannot fail is not a check. It was found
+# on 2026-09-04 while confirming an audit finding, and the only reason we knew
+# the submission had actually worked was that someone read the log body.
+#
+# It joins the vacuous-pass family (registry v3.33/v3.35): a CSP whole-header
+# grep, a mock that validated its own assumption, a payload-key gate satisfied
+# by its own comment, and a GHL mapping reference labelled "Active" that was a
+# day-old snapshot. Same shape every time -- a green signal that is green
+# regardless of outcome.
+#
+# A non-2xx now fails. That means a genuine IndexNow outage will show red on
+# main, which is the correct trade: a red check that means something beats a
+# green one that means nothing, and the response body is echoed above so the
+# failure is diagnosable rather than mysterious.
+case "$code" in
+  200|202)
+    echo "OK: submission accepted (HTTP $code)"
+    exit 0
+    ;;
+  *)
+    echo "FAIL: IndexNow rejected the submission (HTTP $code)" >&2
+    echo "      Response body is echoed above. Common causes: the key file at" >&2
+    echo "      $KEY_LOCATION stopped serving, or the key no longer matches." >&2
+    exit 1
+    ;;
+esac

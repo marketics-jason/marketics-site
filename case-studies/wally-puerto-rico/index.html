@@ -310,6 +310,11 @@ main{display:block;}
 figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 .hero-cap{font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-weight:300;font-size:12.5px;line-height:1.6;color:#8C8A81;padding:14px max(72px,calc((100% - 1440px)/2 + 72px)) 4px;margin:0;}
 @media(max-width:768px){.hero-cap{padding:12px 24px 4px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -353,7 +358,7 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
   <header class="hero">
     <div>
       <div class="kicker hero-kick"><div class="bar"></div><span>Case Study · Río Grande, Puerto Rico</span></div>
-      <h1>From Seasonal<br>to Year-Round.</h1>
+      <h1><span class="hln">From Seasonal</span> <span class="hln">to Year-Round.</span></h1>
       <p class="hero-lead">A genuine year-round villa was earning like a seasonal one. Bright for eight months, dark for four. We didn't change the property. We went after the four months the market ignored, and roughly 2.5×'d its year-over-year revenue.</p>
     </div>
     <div class="cs-spec">

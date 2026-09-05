@@ -390,6 +390,11 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 .mkxf-legal a:hover{color:#8F8C83;}
 @media(max-width:1080px){.mkxf-grid{padding-left:40px;padding-right:40px;grid-template-columns:1.4fr 1fr 1fr;}.mkxf-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}.mkxf-legal{padding-left:40px;padding-right:40px;}}
 @media(max-width:600px){.mkxf-grid{grid-template-columns:1fr 1fr;gap:28px;padding:44px 24px;}.mkxf-brand{grid-column:1/-1;}.mkxf-brand p{max-width:none;}.mkxf-tag{grid-column:1/-1;}.mkxf-legal{padding:20px 24px;}}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
 </style>
 </head>
 <body>
@@ -441,7 +446,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
     <span class="kicker-badge">Booking Window Open</span>
   </div>
 
-  <h1 class="article-h">The Muskoka Booking Window<br>Is Open <em>Right Now</em></h1>
+  <h1 class="article-h"><span class="hln">The Muskoka Booking Window</span> <span class="hln">Is Open <em>Right Now</em></span></h1>
   <p class="article-sub">Toronto families are searching for Muskoka cottages today. The hosts who price and position correctly this month capture the premium guests: the ones who book early, stay longer, and leave five-star reviews. The hosts who wait until May get what's left.</p>
 
   <div class="byline">
@@ -752,7 +757,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
   <div class="rule"></div>
 
   <div class="footer-cta">
-    <h2 class="fca-h">Your Market.<br><em>Mastered.™</em></h2>
+    <h2 class="fca-h"><span class="hln">Your Market.</span> <span class="hln"><em>Mastered.™</em></span></h2>
     <p class="fca-sub">Request your free Muskoka revenue audit. We'll show you exactly what your cottage should earn in summer 2026.</p>
     <a href="#audit" class="fca-btn">Get My Free Revenue Audit →</a>
   </div>
