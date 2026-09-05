@@ -2396,6 +2396,26 @@ Two constraints on the deletion itself:
 - **Removing a mapping ROW is a different act from removing a payload key** and needs no such check
   when the row is inert, because a row whose source is never transmitted already writes nothing.
 
+### `mode` is mapped — and it is organic-only by construction
+
+Ruled CTO, 2026-09-05, on the corrected List B. It was the only item left after six of the seven
+were mapped that morning, and it clears the fit-signal bar on its own merits: **`mode` is not
+metadata about the lead, it changes what the deliverable is.** `existing_listing` means the audit
+runs against the listing's own performance data; `new_property` means there is nothing to measure
+yet, so the work is comparables and a projection. That is the ICP v3 first-time-entrant split
+arriving in the intake, and until now it landed nowhere.
+
+**The caveat that has to travel with it.** `/get-started` sets `mode` from the visitor's own toggle.
+`/lp/keep-control` **hardcodes `existing_listing`** — that audience has a live listing by definition
+and the form offers no toggle. So the field segments the organic path and is constant on the paid
+one.
+
+That is correct behaviour, not a defect. But it means **"% new_property" is an organic-only metric
+and must never be read as a whole-funnel one.** Computed across both paths it is diluted by every
+paid lead in the denominator, all of which are `existing_listing` by construction rather than by
+choice — so the number falls whenever paid spend rises, which looks like a shift in who is coming to
+us and is not. Segment on `source`, or state the constraint alongside the figure.
+
 ### The Sep 5 attribution epoch
 
 **Campaign attribution in the CRM begins on 2026-09-04 for paid and 2026-09-05 for organic.** Before
