@@ -363,6 +363,145 @@ grep -q 'Do Not Sell or Share' <<<"$lg" \
 grep -q 'Global Privacy Control' <<<"$lg" \
   && ok "/legal describes GPC support" || no "/legal omits GPC support"
 
+# ── GEO batch (registry v3.36, #143) ────────────────────────────────────────
+# Flagged in the Sep 5 weekly and asked for by Jason the same day: the
+# production run after that batch passed at exactly the same assertion count as
+# the run before it. The suite proved nothing REGRESSED and verified not one
+# thing the batch actually changed. These four close that gap.
+#
+# All four assert on the SERVED page, which is where a stale deploy or a bad
+# rollback shows up and where CI cannot look. Note what they are NOT: the repo
+# side of items 1 and 3 is gated by validate-site.py and gen-llms.py, and item 4
+# has NO repo-side gate at all -- the <br> removal can be undone in a PR without
+# failing CI, so until that is fixed this is the only thing watching it, and it
+# only speaks after a merge. Reported, not silently papered over.
+echo
+echo "· GEO batch (v3.36) — H1, llms.txt coverage, no self-review, no <br> in headings"
+
+# Strips comments, <script> and <style> before any tag matching. The heading
+# sweep in #143 corrupted /calculator by matching an <h1> inside an HTML COMMENT
+# and swallowing 93 lines to the next </h1>. A regex that finds tags will find
+# them in comments too, and a live check has the same exposure the sweep did.
+clean() { perl -0777 -pe 's/<!--.*?-->//gs; s/<(script|style)\b[^>]*>.*?<\/\1>//gs'; }
+
+# ── 1. The homepage H1 (Strategy sign-off, 2026-09-05) ──────────────────────
+H1_RULED='Performance-based Airbnb revenue management'
+# TWO bodies of the same page, deliberately. clean() strips <script>, and the
+# JSON-LD lives in one -- so the ClaimReview check below MUST run against the raw
+# body or it inspects a document with every schema block already removed and can
+# never fire. Found by negative control; it read green with ClaimReview restored.
+home_raw=$(body "$BASE/")
+home=$(printf '%s' "$home_raw" | clean)
+grep -q '<h1' <<<"$home" \
+  && ok "homepage fetched and carries an h1 (checks below are meaningful)" \
+  || no "homepage did not fetch or has no h1 — every check below would pass on an empty body"
+
+n=$(grep -o '<h1' <<<"$home" | wc -l)
+[ "$n" -eq 1 ] && ok "homepage has exactly one h1" \
+               || no "homepage has $n h1 elements (want exactly 1)"
+
+# Extracted rather than grepped page-wide: the string existing SOMEWHERE and the
+# string being the H1 are different facts, and only the second is the ruling.
+h1=$(grep -o '<h1[^>]*>.*</h1>' <<<"$home")
+[ -n "$h1" ] && ok "h1 element extracted (the string check below is meaningful)" \
+             || no "could not extract the h1 element — the string check below would pass vacuously"
+grep -qF "$H1_RULED" <<<"$h1" \
+  && ok "h1 is the ruled string: \"$H1_RULED\"" \
+  || no "h1 does NOT carry the ruled string — served h1: $h1"
+
+# The wordmark was the h1 until #143. If a revert puts it back, the count above
+# catches it; this catches the subtler case where it returns AS the h1.
+grep -qE '<h1[^>]*>.*MASTERED' <<<"$h1" \
+  && no "the wordmark is the h1 again — #143 reverted" \
+  || ok "the wordmark is not the h1"
+
+# "One string, one slot" (Strategy, 2026-09-05): a second copy in the reach strip
+# is the redundant-repetition pattern the content analysis already docked.
+n=$(grep -oF "$H1_RULED" <<<"$home" | wc -l)
+[ "$n" -eq 1 ] && ok "the ruled string appears exactly once on the page" \
+               || no "the ruled string appears $n times (want exactly 1)"
+
+# ── 2. llms.txt coverage, checked against the SERVED sitemap ────────────────
+# Deliberately not a hardcoded count. A fixed number goes stale the day a page
+# ships and turns main red for a reason that has nothing to do with coverage —
+# and a check that flaps gets ignored, which is the vacuous-pass family from the
+# other direction. The sitemap is the source on the repo side (gen-llms.py), so
+# it is the source here too; the only hardcoded value is the exclusion, which is
+# a decision and belongs in a diff.
+LLMS_EXCLUDED='/authors/jamie-melgar'
+lt=$(body "$BASE/llms.txt")
+sm=$(body "$BASE/sitemap.xml")
+grep -q '^# Marketics' <<<"$lt" \
+  && ok "llms.txt fetched (coverage checks below are meaningful)" \
+  || no "llms.txt did not fetch — coverage would compare against an empty file"
+grep -q '<loc>' <<<"$sm" \
+  && ok "sitemap.xml fetched" \
+  || no "sitemap.xml did not fetch — coverage would compare against an empty file"
+
+lt_paths=$(grep -oE '\(https://marketics\.io[^)]*\)' <<<"$lt" \
+           | sed -E 's#^\(https://marketics\.io##; s#\)$##; s#^$#/#' | sort -u)
+sm_paths=$(grep -oE '<loc>[^<]*</loc>' <<<"$sm" \
+           | sed -E 's#</?loc>##g; s#^https://marketics\.io##; s#^$#/#' | sort -u)
+
+phantom=$(comm -23 <(printf '%s\n' "$lt_paths") <(printf '%s\n' "$sm_paths") | tr '\n' ' ')
+[ -z "${phantom// }" ] && ok "llms.txt links no page that is absent from the sitemap" \
+                       || no "llms.txt links page(s) not in the sitemap: $phantom"
+
+missing=$(comm -13 <(printf '%s\n' "$lt_paths") <(printf '%s\n' "$sm_paths") | tr '\n' ' ')
+missing="${missing% }"
+if [ "$missing" = "$LLMS_EXCLUDED" ]; then
+  ok "llms.txt covers every sitemap URL except the one excluded ($LLMS_EXCLUDED)"
+elif [ -z "$missing" ]; then
+  no "llms.txt now covers $LLMS_EXCLUDED too — if that is the decision, update LLMS_EXCLUDED here AND 'exclude' in scripts/llms-config.json"
+else
+  no "llms.txt coverage drifted — sitemap URLs absent from llms.txt: '$missing' (want exactly '$LLMS_EXCLUDED')"
+fi
+
+# ── 3. No self-review markup (GEO finding 3) ────────────────────────────────
+# ClaimReview was Marketics rating a Marketics claim five stars: fact-checking
+# markup for accredited publishers, used to cite ourselves. Removed from these
+# two pages in #143.
+res=$(body "$BASE/results")
+grep -q '"@type"' <<<"$res" \
+  && ok "/results fetched (absence checks below are meaningful)" \
+  || no "/results did not fetch — the absence checks below would pass vacuously"
+grep -q 'ClaimReview' <<<"$home_raw" \
+  && no "ClaimReview is back on the homepage — self-review markup" \
+  || ok "no ClaimReview on the homepage"
+grep -q 'ClaimReview' <<<"$res" \
+  && no "ClaimReview is back on /results — self-review markup" \
+  || ok "no ClaimReview on /results"
+
+# The false-positive control, and the reason this is not just an absence check:
+# the three CUSTOMER Review nodes are legitimate — their authors are Person
+# nodes, which is exactly the distinction that made the ClaimReview illegitimate.
+# Stripping all review markup would satisfy the two checks above and be wrong.
+n=$(grep -oE '"@type":[[:space:]]*"Review"' <<<"$res" | wc -l)
+[ "$n" -eq 3 ] && ok "the three customer Review nodes survive on /results" \
+               || no "/results carries $n Review nodes (want 3 — the customer reviews)"
+grep -qE '"author":[^}]*"Marketics' <<<"$res" \
+  && no "a Marketics-authored Review is on /results — self-review by another name" \
+  || ok "no Marketics-authored Review on /results"
+
+# ── 4. No <br> inside headings (GEO finding 6) ──────────────────────────────
+# A <br> yields NO whitespace when tags are stripped, so extraction read
+# "YOURMARKET.MASTERED." as one token. #143 replaced 60 of them across 28 files
+# with block spans joined by a REAL space. The pages below are the two named test
+# cases plus the two heaviest heading pages; /calculator is included because it
+# is the page the sweep corrupted, and it is the reason clean() exists.
+for p in "" "/markets" "/results" "/calculator" "/intel/miami"; do
+  pg=$(body "$BASE$p" | clean)
+  if ! grep -q '<h1\|<h2' <<<"$pg"; then
+    no "${p:-/} did not fetch or has no headings — the <br> check would pass vacuously"
+    continue
+  fi
+  if grep -qzoP '(?s)<h[1-6][^>]*>(?:(?!</h[1-6]>).)*?<br' <<<"$pg"; then
+    no "${p:-/} has a <br> inside a heading — extraction will glue the words"
+  else
+    ok "${p:-/} — no <br> in any heading"
+  fi
+done
+
 # ── Paid LP: the conversion path itself ─────────────────────────────────────
 # The LP exists to put a lead into GHL off bought traffic. Everything below is
 # a way that silently stops working: the form never renders, a CTA points at a
