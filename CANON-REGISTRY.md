@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.37 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.38 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,51 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.38 — lead_form_id retired; delete-by-default; the Sep 5 attribution epoch (2026-09-05)
+
+### `lead_form_id` is retired, not answered
+
+Code routed it as a semantics question — form DOM id, or the source value that already populates
+Contact source? CTO retired the field instead. **The right answer to "what should this field mean"
+was that it should not exist:** `source` already carries which form produced the lead, and a second
+field meaning almost the same thing is a field two people will read differently a year from now.
+Not to be reintroduced without a stated use that `source` cannot serve.
+
+### Delete-by-default for CRM fields nothing feeds
+
+**A mapping row whose source key is never transmitted, or a CRM field nothing sends, is deleted
+rather than kept "in case".** The default was previously the other way round — an unfed field looked
+free, so it stayed — and the cost is not storage. It is that a blank field is ambiguous: nobody
+reading a contact can tell whether the value was never collected, collected and lost, or collected
+and empty. That ambiguity is what hid the fact that campaign attribution had *never* reached the CRM
+(v3.34) behind a contact record that otherwise looked complete.
+
+The bar for keeping an unfed field is now positive and narrow: **it carries qualification or fit
+signal we actually intend to collect.** Convenience, symmetry with another field, and "we might want
+it later" do not clear it. Later is when to add it, and adding is cheap now that a row can point any
+key at any field (v3.37).
+
+Two constraints on the deletion itself:
+
+- **Removing a payload key requires a condition-reference check first.** GHL workflow *conditions*
+  read transmitted keys, not just field mappings, and a branch whose condition stops matching looks
+  exactly like a broken deploy — two hours went to that on 2026-09-03. `pricing_owner` is known to
+  drive the Self/Tool branch. Check before removing, not after.
+- **Removing a mapping ROW is a different act from removing a payload key** and needs no such check
+  when the row is inert, because a row whose source is never transmitted already writes nothing.
+
+### The Sep 5 attribution epoch
+
+**Campaign attribution in the CRM begins on 2026-09-04 for paid and 2026-09-05 for organic.** Before
+those dates the fields exist and are blank on every contact, because no mapping row filled them — not
+because those leads had no campaign.
+
+This is recorded because the blank fields are indistinguishable from real absence, which is the same
+ambiguity the delete-by-default rule exists to stop creating. Any cohort analysis, CAC read or
+attribution report that spans those dates is comparing a period with no attribution data to one with
+it, and **will read as a step change in organic-vs-paid mix that did not happen.** Segment on or
+after the epoch, or state the gap.
+
 ## v3.37 — a mapping row, not a payload key (2026-09-05)
 
 ### Both lead paths now carry attribution
