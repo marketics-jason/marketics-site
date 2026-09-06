@@ -409,6 +409,49 @@ grep -q 'Do Not Sell or Share' <<<"$lg" \
 grep -q 'Global Privacy Control' <<<"$lg" \
   && ok "/legal describes GPC support" || no "/legal omits GPC support"
 
+# ── Entity graph: founding claim + Wikidata reconciliation (v3.39) ──────────
+# foundingDate read "2023" until 2026-09-06. It is entity formation and must
+# match Wikidata Q141329164's `inception` (confirmed 2025 against the live item).
+# A founding year is the anchor an AI engine dates everything else against, and
+# the two sources disagreeing is the inconsistency that suppresses citation.
+#
+# RAW BODY, never the cleaned one. clean() strips <script>, which is exactly
+# where JSON-LD lives -- the homepage ClaimReview check made that mistake and
+# read green with the markup restored to the page (v3.37). Every assertion in
+# this section inspects a schema block, so every one of them needs the raw body.
+#
+# The repo side is gated in validate-site.py. This is the deployed side, and
+# they answer different questions: a stale deploy or a bad rollback serves the
+# old value with CI still green.
+echo
+echo "· Entity graph (v3.39) — foundingDate + Wikidata reconciliation"
+ent_home=$(body "$BASE/")
+grep -q '"@type": "Organization"' <<<"$ent_home" \
+  && ok "homepage Organization schema fetched (checks below are meaningful)" \
+  || no "homepage Organization schema did not fetch — every check below would pass on an empty body"
+grep -qF '"foundingDate": "2025"' <<<"$ent_home" \
+  && ok "foundingDate is 2025 (matches Wikidata Q141329164 inception)" \
+  || no "foundingDate is NOT 2025 on the served page — it read 2023 until 2026-09-06 and must match Q141329164's inception"
+grep -q 'wikidata.org/wiki/Q141329164' <<<"$ent_home" \
+  && ok "Organization sameAs carries the Wikidata entity" \
+  || no "Organization sameAs has lost the Wikidata entity — the reconciliation target for the other six profiles"
+
+# The founder Person is defined in FULL on two pages under one @id. Both are
+# checked: a deploy that updates one and not the other leaves the two
+# definitions disagreeing about who this person is, which is the single thing a
+# sameAs exists to settle -- and it is invisible from either page alone.
+for pg in "story:/story" "media:/media"; do
+  nm="${pg%%:*}"; path="${pg#*:}"
+  src=$(body "$BASE$path")
+  if ! grep -q '"@id": "https://marketics.io/story#jason"' <<<"$src"; then
+    no "/$nm did not fetch or carries no founder Person node — the check below would pass vacuously"
+    continue
+  fi
+  grep -q 'wikidata.org/wiki/Q141330011' <<<"$src" \
+    && ok "$nm Person sameAs carries the founder Wikidata entity" \
+    || no "$nm Person sameAs has lost the founder Wikidata entity (Q141330011)"
+done
+
 # ── GEO batch (registry v3.36, #143) ────────────────────────────────────────
 # Flagged in the Sep 5 weekly and asked for by Jason the same day: the
 # production run after that batch passed at exactly the same assertion count as
