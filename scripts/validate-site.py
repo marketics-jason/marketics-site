@@ -729,6 +729,26 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"mkxGetFirstTouchTS() — the value cannot be a first-touch "
                         f"timestamp (CTO ruling 2026-09-05)")
 
+    # 11e-2. the Organization entity's founding claim and Wikidata link (v3.39).
+    # foundingDate is ENTITY FORMATION and must match Wikidata Q141329164's
+    # `inception`. It read 2023 until 2026-09-06 -- wrong, and wrong in the
+    # direction that matters: a founding year is the anchor an AI engine uses to
+    # date everything else it says about the company, and the two sources
+    # disagreeing is exactly the inconsistency that suppresses citation.
+    #
+    # Gated because it is a single token nobody would notice reverting, and
+    # because the value is only correct RELATIVE to an external record this repo
+    # cannot see -- a drift here is silent on both sides.
+    if where == "index.html":
+        if not re.search(r'"foundingDate"\s*:\s*"2025"', raw):
+            hard.append(f"{where}: Organization foundingDate is not \"2025\" — it is "
+                        f"entity formation and must match Wikidata Q141329164's "
+                        f"inception (CTO ruling 2026-09-06, registry v3.39)")
+        if "wikidata.org/wiki/Q141329164" not in raw:
+            hard.append(f"{where}: Organization sameAs no longer carries the Wikidata "
+                        f"entity — it is the reconciliation target that links the "
+                        f"other six profiles into one identity (registry v3.39)")
+
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):
         hard.append(f"{where}: <br> inside a heading — a <br> yields no whitespace "

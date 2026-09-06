@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.38 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.39 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,65 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.39 — foundingDate is entity formation, and two tenure claims that contradict it (2026-09-06)
+
+### The correction
+
+`foundingDate` read **`"2023"`**. Ruled CTO: it is **entity formation, 2025**, machine layer only, and it
+must match **Wikidata Q141329164's `inception`**. Corrected, and gated — a single token nobody would
+notice reverting, whose correctness is only definable against an external record this repo cannot
+see, so a drift is silent on both sides.
+
+**Wikidata added to the Organization `sameAs`.** The GEO audit named its absence as one of the two
+gaps most correlated with AI citation; the item exists now, so the link closes the loop in both
+directions for one array entry. It is the reconciliation target that ties the other six profiles into
+one identity, which is why the gate treats losing it as a failure rather than a nit.
+
+**Not verified by Code:** egress to `wikidata.org` is denied by policy here, so the QID's existence
+and its `inception` value are taken on the CTO's word. The smoke runner was deliberately **not** used
+to fetch it — that lane is scoped to verifying our own production, and a third-party GET would widen
+it into the ambient egress bypass its own constraint exists to prevent. Recorded so nobody later
+reads the gate as evidence the two sources actually agree: **it enforces our half of the match only.**
+
+### The rule
+
+**`foundingDate` = when the entity was formed. Nothing else.** STR tenure is a *personal* claim — it
+lives in copy and in Jason's own Wikidata item (`work period start`) and **never appears in company
+schema**. The 20+ years entrepreneurship figure appears in no schema anywhere.
+
+### Two things the class check found, neither of them Code's to fix
+
+The single-field fix would have missed both. Reported, not authored — this is canon-bearing copy.
+
+**1. "Operating since 2015" — ten pages, and it disagrees with the personal canon.** The ruling states
+Jason's `work period start` as **2016**. The site says **2015**, in a byline on `/story`, the homepage
+and eight intel pages. One of the two is wrong, and this exercise exists to stop exactly that kind of
+disagreement between our surfaces and the entity record.
+
+Worse than the year itself is the **adjacency**: the string reads
+
+> Jason Baxter · Founder, Marketics · Operating since 2015
+
+To an extraction engine reading a flattened byline, "Operating since 2015" attaches to **Marketics**,
+not to Jason — a company founded in 2025 presented as operating since 2015, a ten-year contradiction
+sitting beside the very field we just corrected. That is the **adjacency-without-distinction** pattern
+already ruled at v2.7, in a new place: two true facts, no stated relationship, and the wrong reading
+is the natural one.
+
+**2. The Organization `description` carries a decade of tenure.** It reads *"A decade of work across
+1,000+ listings in 22 markets."* By the rule recorded above, that is a personal tenure claim inside
+company schema — the thing the rule says never happens. It is also the ratified footprint phrasing, so
+it is Strategy's to re-cut, not Code's to quietly reword.
+
+Both are routed. Neither blocks the `foundingDate` correction, which is right on its own terms.
+
+### Still open
+
+**Jason's Person entity has no Wikidata link.** The ruling asked for it "if it's live" and supplied no
+QID. Code will not guess one: a wrong QID in `sameAs` is an identity assertion about a real person
+pointing at someone else's entity, which is worse than the gap it fills. Supply the QID and it is a
+one-line change.
+
 ## v3.38 — lead_form_id retired; delete-by-default; the Sep 5 attribution epoch (2026-09-05)
 
 ### `lead_form_id` is retired, not answered
