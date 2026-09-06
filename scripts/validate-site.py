@@ -749,6 +749,16 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"entity — it is the reconciliation target that links the "
                         f"other six profiles into one identity (registry v3.39)")
 
+    # The founder Person entity is defined in FULL in two places with the same @id
+    # (story is canonical, media carries a reduced copy). Both assert the identity,
+    # so both carry the Wikidata link or the two definitions disagree about who
+    # this person is — which is the one thing a sameAs exists to settle.
+    if where in ("story/index.html", "media/index.html"):
+        if "wikidata.org/wiki/Q141330011" not in raw:
+            hard.append(f"{where}: founder Person sameAs no longer carries the Wikidata "
+                        f"entity (Q141330011) — the two definitions of "
+                        f"https://marketics.io/story#jason must agree (registry v3.39)")
+
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):
         hard.append(f"{where}: <br> inside a heading — a <br> yields no whitespace "

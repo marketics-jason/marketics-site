@@ -2377,11 +2377,16 @@ gaps most correlated with AI citation; the item exists now, so the link closes t
 directions for one array entry. It is the reconciliation target that ties the other six profiles into
 one identity, which is why the gate treats losing it as a failure rather than a nit.
 
-**Not verified by Code:** egress to `wikidata.org` is denied by policy here, so the QID's existence
-and its `inception` value are taken on the CTO's word. The smoke runner was deliberately **not** used
-to fetch it — that lane is scoped to verifying our own production, and a third-party GET would widen
-it into the ambient egress bypass its own constraint exists to prevent. Recorded so nobody later
-reads the gate as evidence the two sources actually agree: **it enforces our half of the match only.**
+**Verification, precisely.** Egress to `wikidata.org` is denied by policy here — by `curl` and by a
+real browser alike, both refused at the proxy. The smoke runner was deliberately **not** used to
+reach it: that lane is scoped to verifying our own production, and a third-party GET would widen it
+into the ambient egress bypass its own constraint exists to prevent.
+
+Jason then supplied a **screenshot of the live item**, which shows `inception 2025`, `official name
+Marketics, LLC`, `instance of business`. So the Organization half is **confirmed against the actual
+record**, by evidence rather than by assertion. Recorded exactly that way, because "Code fetched it"
+and "Code was shown it" are different facts and only the second is true. The gate still enforces our
+half of the match only: it cannot detect the Wikidata side changing.
 
 ### The rule
 
@@ -2415,12 +2420,34 @@ it is Strategy's to re-cut, not Code's to quietly reword.
 
 Both are routed. Neither blocks the `foundingDate` correction, which is right on its own terms.
 
-### Still open
+### The Person entity, and the assumption inside it
 
-**Jason's Person entity has no Wikidata link.** The ruling asked for it "if it's live" and supplied no
-QID. Code will not guess one: a wrong QID in `sameAs` is an identity assertion about a real person
-pointing at someone else's entity, which is worse than the gap it fills. Supply the QID and it is a
-one-line change.
+**Q141330011 added to the founder Person `sameAs`** — in `story/index.html` (canonical) **and**
+`media/index.html`, which carries a second full definition under the same `@id`. Both assert the
+identity, so both carry the link or the two definitions disagree about who this person is, which is
+the one thing a `sameAs` exists to settle. Gated on both files.
+
+**The assumption, stated because it is about a real person.** Two QIDs were supplied unlabelled.
+Q141329164 is confirmed the Organization by the screenshot; **Q141330011 is taken to be Jason's
+Person item by elimination**, since it arrived in direct answer to the request for that QID. Code
+could not verify it — `wikidata.org` is unreachable from here by every available route. One glance at
+the item confirms or refutes it; if it is wrong, it is a two-character fix in three places and the
+gate will hold the corrected value.
+
+### A third finding: the founder entity is defined twice, and the copies disagree
+
+`story/index.html` and `media/index.html` both define `https://marketics.io/story#jason` in full. In
+JSON-LD a shared `@id` means one node, so a consumer merging them receives **both** of these:
+
+| | `story` (canonical) | `media` |
+|---|---|---|
+| `jobTitle` | "Founder" | "Founder & CEO" |
+| tenure in `description` | *(none)* | "10+ years in the vacation rental industry" |
+
+That makes **four** live variants of the same tenure fact across the estate — `2015` in the byline
+prose, `2016` on Wikidata, `10+ years` here, and `a decade` in the Organization description. Routed
+with the other two; reconciling them is a copy decision, and the reduced `media` duplicate arguably
+should not exist at all.
 
 ## v3.38 — lead_form_id retired; delete-by-default; the Sep 5 attribution epoch (2026-09-05)
 
