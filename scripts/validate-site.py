@@ -190,6 +190,39 @@ DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 # event. Its errors were then misread as a broken LEAD path and "fixed" with a
 # Content-Type change GHL rejects, dropping ~20 minutes of real submissions
 # (registry v3.29/v3.30). Gated so the shape cannot return on any file.
+def _walk_nodes(node):
+    """Every dict in a parsed JSON-LD document, at any depth."""
+    if isinstance(node, dict):
+        yield node
+        for v in node.values():
+            yield from _walk_nodes(v)
+    elif isinstance(node, list):
+        for v in node:
+            yield from _walk_nodes(v)
+
+
+_ORG_DESC_CACHE = []
+
+
+def _canonical_org_description():
+    """The description on the Organization entity as index.html defines it."""
+    if _ORG_DESC_CACHE:
+        return _ORG_DESC_CACHE[0]
+    src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                           src, re.S):
+        try:
+            doc = json.loads(blob)
+        except Exception:
+            continue
+        for node in _walk_nodes(doc):
+            if node.get("@id") == "https://marketics.io/#business" and node.get("description"):
+                _ORG_DESC_CACHE.append(node["description"])
+                return _ORG_DESC_CACHE[0]
+    _ORG_DESC_CACHE.append(None)
+    return None
+
+
 def _first_touch_guard_body(src):
     """The body of `if (!sessionStorage.getItem(LAND_KEY)) { ... }`, braces matched.
 
@@ -782,6 +815,76 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                                 f"node, and a consumer merging them gets both values. "
                                 f"Reference the @id and let story/index.html define it "
                                 f"(registry v3.39)")
+
+    # 11e-4. no page may CONTRADICT the canonical Organization (v3.39).
+    # The rule is not "never re-declare" -- /results has mirrored the canonical
+    # description since v3.1 and that was a deliberate call. The rule is never
+    # CONFLICT: a shared @id is one node, so two different descriptions merge into
+    # one entity that says two things about itself. /media-kit carried its own
+    # wording until 2026-09-07 and read as a second company of the same name.
+    #
+    # Gating on a match rather than on absence also turns the /results mirror from
+    # a silent drift risk into a build failure, which is the better trade: an
+    # intentional duplicate that nobody re-checks is one edit from becoming this
+    # exact defect.
+    #
+    # PARSED, not regexed. The first version of this check used
+    # `"@id": "...#business" .*? "description"` with re.S and fired on
+    # story/index.html -- where the @id appears inside the founder's `worksFor`
+    # and the next "description" belonged to the PERSON, a different node
+    # entirely. Same cross-node bleed as the heading sweep that corrupted
+    # /calculator. A structural question needs a structural check.
+    if where != "index.html":
+        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                               raw, re.S):
+            try:
+                doc = json.loads(blob)
+            except Exception:
+                continue                      # malformed JSON-LD is 11a's job
+            for node in _walk_nodes(doc):
+                if node.get("@id") != "https://marketics.io/#business":
+                    continue
+                desc = node.get("description")
+                if desc and desc != _canonical_org_description():
+                    hard.append(f"{where}: declares a DIFFERENT description on the "
+                                f"canonical Organization — a shared @id is one node, "
+                                f"so the entity ends up saying two things about "
+                                f"itself. Match index.html verbatim or drop it "
+                                f"(registry v3.39)")
+
+    # 11e-5. pages whose entity references have been RECONCILED stay reconciled.
+    # A negative control found the hole: /media-kit's founder could drop its @id
+    # and go back to an anonymous Person with no gate firing, because 11e-3 only
+    # catches re-declaration ALONGSIDE the @id, not its removal.
+    #
+    # The blanket rule -- every "Jason Baxter" Person node must carry the @id --
+    # is the right end state and cannot ship today: ~20 intel and case-study
+    # author nodes are still anonymous, and this file would be red on all of them.
+    # So it ratchets instead. A page joins this set when its references are
+    # reconciled, and from then on it cannot regress. The set grows as the sweep
+    # lands; it is deliberately not a wildcard.
+    ENTITY_RECONCILED = ("media/index.html", "media-kit/index.html")
+    if where in ENTITY_RECONCILED:
+        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                               raw, re.S):
+            try:
+                doc = json.loads(blob)
+            except Exception:
+                continue
+            for node in _walk_nodes(doc):
+                if node.get("@type") == "Person" and node.get("name") == "Jason Baxter" \
+                        and node.get("@id") != "https://marketics.io/story#jason":
+                    hard.append(f"{where}: a 'Jason Baxter' Person node has lost its "
+                                f"@id — this page was reconciled to the canonical "
+                                f"entity and must stay that way, or it declares a "
+                                f"second, unlinked person (registry v3.39)")
+                if node.get("@type") == "Organization" \
+                        and node.get("name") in ("Marketics", "Marketics, LLC") \
+                        and node.get("@id") != "https://marketics.io/#business":
+                    hard.append(f"{where}: a 'Marketics' Organization node has lost "
+                                f"its @id — this page was reconciled to the canonical "
+                                f"entity and must stay that way, or it declares a "
+                                f"second, unlinked company (registry v3.39)")
 
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):

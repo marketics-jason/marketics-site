@@ -2468,13 +2468,55 @@ In its place, a gate on the defect itself: **any page other than `story/index.ht
 Referencing stays allowed and is the correct pattern — the false-positive control is a bare `@id`
 reference, which must and does pass. `smoke.sh` asserts the same on the served `/media`.
 
-### Same class, not fixed: `/media-kit` declares a second, anonymous Organization
+### `/media-kit` fixed — and the class check says it was 1 of 27 files
 
-`media-kit/index.html` carries an Organization node with **no `@id` at all**, named "Marketics", and a
-`founder` Person also with no `@id`. So the estate currently asserts two unlinked companies of the
-same name and two unlinked people — the exact fragmentation the Wikidata `sameAs` work exists to
-close, one directory deeper. Two `@id` lines fix it and no copy changes. Reported rather than
-included: it is a different file and a different node type from the one ruled on.
+`media-kit/index.html` declared a **full second Organization** with no `@id`: its own name, url, logo,
+`areaServed`, `slogan`, and **its own description**, plus a `founder` Person with no `@id` whose
+`worksFor` was a third anonymous "Marketics". Collapsed to a reference carrying only what is genuinely
+page-specific — the press `contactPoint`, which is additive and conflicts with nothing.
+
+**The class check found this is not a `/media-kit` problem.** Across the estate, **27 files carry ~50
+anonymous `Organization` or "Jason Baxter" `Person` nodes** — every intel article's `author` and
+`publisher`, every case study's, `/legal`'s publisher, `/results`' provider, `/pricing`'s provider and
+founder, `/sample-audit`'s three. Fixing one page closes 2 of ~50. **Not swept**, for two reasons that
+are not effort:
+
+1. **A naive `@id` sweep collides with the gate above.** Most of those nodes carry `name`, `url`,
+   `logo` and sometimes `description`. Bolting an `@id` onto a node that also re-declares a
+   *conflicting* description converts an anonymous duplicate into a **contradicting** one — strictly
+   worse, and the new gate would correctly fail the build. Each node needs reducing, not stamping.
+2. **`/intel/str-cost-segregation-tax-half` carries the Jamie Melgar pen-name author**, whose Person
+   node GEO item 2 deliberately stripped. That page is not a mechanical case and must not be swept
+   with the rest.
+
+### The rule the gates encode: never *conflict*, not never *repeat*
+
+The first version of the Organization gate banned re-declaring a description beside `#business`. That
+was wrong: **`/results` has mirrored the canonical description verbatim since v3.1**, deliberately.
+The defect is not repetition, it is **contradiction** — a shared `@id` is one node, so two *different*
+descriptions merge into an entity that says two things about itself.
+
+So the gate requires a **match**. That keeps `/results` legal and turns its mirror from a silent drift
+risk into a build failure, which is the better trade: an intentional duplicate nobody re-checks is one
+edit away from being this exact defect.
+
+**It is parsed, not regexed, and the first version proved why.** `"@id": "…#business" .*? "description"`
+with `re.S` fired on `story/index.html`, where that `@id` sits inside the founder's `worksFor` and the
+next `"description"` belonged to the **Person** — a different node. The same cross-node bleed as the
+heading sweep that corrupted `/calculator`. **A structural question needs a structural check.**
+
+### The ratchet
+
+A negative control found the remaining hole: `/media-kit`'s founder could drop its `@id` and revert to
+an anonymous Person with nothing firing, because the re-declaration gate only catches properties
+*alongside* an `@id`, never its removal.
+
+The blanket rule — every "Jason Baxter" Person node carries the canonical `@id` — is the right end
+state and **cannot ship today**, because ~20 author nodes are still anonymous and the build would be
+red on all of them. So it ratchets: **`ENTITY_RECONCILED` names the pages whose references have been
+reconciled, and those pages cannot regress.** It holds `media/` and `media-kit/` today and grows as
+the sweep lands. Deliberately not a wildcard — a gate that is red on arrival gets disabled, and a
+disabled gate is the vacuous-pass family by another route.
 
 ## v3.38 — lead_form_id retired; delete-by-default; the Sep 5 attribution epoch (2026-09-05)
 
