@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.39 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.40 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,64 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.40 — one Marketics, one Jason Baxter (2026-09-07)
+
+**49 anonymous entity nodes across 25 files, reconciled.** Every `Organization` named "Marketics" and
+every `Person` named "Jason Baxter" on the estate now carries the canonical `@id`. Before today the
+site asserted ~28 unlinked companies of the same name and ~21 unlinked people; it now asserts one of
+each, both reconciled to Wikidata by the `sameAs` work of v3.39.
+
+### Additive only, and that was not a style preference
+
+`author.url` and `publisher.url` are **required** by `scripts/validate-intel-schema.py`, and Google's
+Article rich result wants a self-contained `author.name`. Reducing these to bare `@id` references
+would have turned CI red on 20 pages and risked the rich result. So the change adds `@id` and removes
+nothing — one line per node, 49 lines, `name` and `url` left in place.
+
+They repeat canonical values, which is legal by the v3.39 rule (**never conflict, not never repeat**)
+and is the price of satisfying two independent validators. The safety property is the point:
+**nothing was removed, so nothing could be lost.**
+
+### The tool refused before it guessed — twice
+
+The first pass rebuilt each node's text from its parsed form and matched that against the source. It
+reconciled 34 nodes and **refused 15**, because on those pages the reconstruction did not uniquely
+match: `/intel/str-performance-index` has a `creator` and a `publisher` whose text is **byte-identical**,
+and seven other files use a different JSON spacing convention entirely. A blind replace would have
+put the `@id` on the wrong node in the first case and done nothing in the second.
+
+That refusal was the tool working. The identical pair was disambiguated by parent key (`"creator": `
+vs `"publisher": `); the rest were handled by a second pass that never reconstructs anything — it
+finds each node's exact source span by **string-aware brace matching**, confirms the span parses to
+the node it expects, and inserts one key. A naive brace count would be fooled by a `{` inside a
+description, which is the same defect as the heading sweep matching an `<h1>` inside a comment.
+
+### Verification: structural, not visual
+
+The check that mattered, run independently against `HEAD` across all 25 files:
+
+> **61 JSON-LD blocks · 49 `@id` keys added · every block identical except those keys · every byte
+> outside the blocks unchanged.**
+
+That is the check the `/calculator` corruption would have failed, applied to a sweep of similar size
+two days later. Both tool passes carry the same assertion internally and abort rather than write.
+
+### The ratchet reached its end, and that is worth a line of its own
+
+`ENTITY_RECONCILED` shipped hours earlier as an explicit list of reconciled pages, **specifically
+because the blanket rule could not run**: 49 anonymous nodes would have made it red on arrival, and a
+gate that is red on arrival gets disabled — the vacuous-pass family by another route.
+
+The sweep landed the same day and the list reached every page. **A list that names everything is a
+wildcard with extra steps**, so the constant is retired and the blanket rule is now live: any
+`Organization`/"Marketics" or `Person`/"Jason Baxter" node without the canonical `@id` fails the
+build, anywhere on the estate.
+
+Negative-controlled three ways plus a false-positive control, and the third is the one that decides
+whether this work holds: **a brand-new page shipping an anonymous author and publisher fails.** That
+was the argument for doing this now rather than later — every new intel page copied the old pattern,
+so the count grew with the content programme. It cannot any more.
+
 ## v3.39 — foundingDate is entity formation, and two tenure claims that contradict it (2026-09-06)
 
 ### The correction

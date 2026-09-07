@@ -852,39 +852,36 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                                 f"itself. Match index.html verbatim or drop it "
                                 f"(registry v3.39)")
 
-    # 11e-5. pages whose entity references have been RECONCILED stay reconciled.
-    # A negative control found the hole: /media-kit's founder could drop its @id
-    # and go back to an anonymous Person with no gate firing, because 11e-3 only
-    # catches re-declaration ALONGSIDE the @id, not its removal.
+    # 11e-5. ONE Marketics, ONE Jason Baxter — the blanket rule, now active.
+    # This shipped on 2026-09-07 as ENTITY_RECONCILED, an explicit list of pages
+    # whose references had been reconciled, precisely because the blanket rule
+    # could not run: 49 anonymous nodes across 25 files would have made it red on
+    # arrival, and a gate that is red on arrival gets disabled -- the vacuous-pass
+    # family by another route. The sweep landed the same day, the list reached
+    # every page, and a list that names everything is a wildcard with extra steps.
     #
-    # The blanket rule -- every "Jason Baxter" Person node must carry the @id --
-    # is the right end state and cannot ship today: ~20 intel and case-study
-    # author nodes are still anonymous, and this file would be red on all of them.
-    # So it ratchets instead. A page joins this set when its references are
-    # reconciled, and from then on it cannot regress. The set grows as the sweep
-    # lands; it is deliberately not a wildcard.
-    ENTITY_RECONCILED = ("media/index.html", "media-kit/index.html")
-    if where in ENTITY_RECONCILED:
-        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
-                               raw, re.S):
-            try:
-                doc = json.loads(blob)
-            except Exception:
-                continue
-            for node in _walk_nodes(doc):
-                if node.get("@type") == "Person" and node.get("name") == "Jason Baxter" \
-                        and node.get("@id") != "https://marketics.io/story#jason":
-                    hard.append(f"{where}: a 'Jason Baxter' Person node has lost its "
-                                f"@id — this page was reconciled to the canonical "
-                                f"entity and must stay that way, or it declares a "
-                                f"second, unlinked person (registry v3.39)")
-                if node.get("@type") == "Organization" \
-                        and node.get("name") in ("Marketics", "Marketics, LLC") \
-                        and node.get("@id") != "https://marketics.io/#business":
-                    hard.append(f"{where}: a 'Marketics' Organization node has lost "
-                                f"its @id — this page was reconciled to the canonical "
-                                f"entity and must stay that way, or it declares a "
-                                f"second, unlinked company (registry v3.39)")
+    # So it is now what it was always meant to be: any node on the estate typed
+    # Organization/"Marketics" or Person/"Jason Baxter" carries the canonical @id.
+    # Nothing else declares those entities, anywhere.
+    for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                           raw, re.S):
+        try:
+            doc = json.loads(blob)
+        except Exception:
+            continue                          # malformed JSON-LD is 11a's job
+        for node in _walk_nodes(doc):
+            if node.get("@type") == "Organization" \
+                    and node.get("name") in ("Marketics", "Marketics, LLC") \
+                    and node.get("@id") != "https://marketics.io/#business":
+                hard.append(f"{where}: a 'Marketics' Organization node has no "
+                            f"canonical @id — it declares a second, unlinked company "
+                            f"of the same name. Add "
+                            f'"@id": "https://marketics.io/#business" (registry v3.40)')
+            if node.get("@type") == "Person" and node.get("name") == "Jason Baxter" \
+                    and node.get("@id") != "https://marketics.io/story#jason":
+                hard.append(f"{where}: a 'Jason Baxter' Person node has no canonical "
+                            f"@id — it declares a second, unlinked person. Add "
+                            f'"@id": "https://marketics.io/story#jason" (registry v3.40)')
 
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):
