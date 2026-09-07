@@ -2478,16 +2478,29 @@ page-specific — the press `contactPoint`, which is additive and conflicts with
 **The class check found this is not a `/media-kit` problem.** Across the estate, **27 files carry ~50
 anonymous `Organization` or "Jason Baxter" `Person` nodes** — every intel article's `author` and
 `publisher`, every case study's, `/legal`'s publisher, `/results`' provider, `/pricing`'s provider and
-founder, `/sample-audit`'s three. Fixing one page closes 2 of ~50. **Not swept**, for two reasons that
-are not effort:
+founder, `/sample-audit`'s three. Fixing one page closes 2 of ~50. **Not swept** — and the two reasons
+first recorded here were **both wrong**, corrected in place on 2026-09-07 after taking the full
+inventory rather than reasoning from memory of those pages:
 
-1. **A naive `@id` sweep collides with the gate above.** Most of those nodes carry `name`, `url`,
-   `logo` and sometimes `description`. Bolting an `@id` onto a node that also re-declares a
-   *conflicting* description converts an anonymous duplicate into a **contradicting** one — strictly
-   worse, and the new gate would correctly fail the build. Each node needs reducing, not stamping.
-2. **`/intel/str-cost-segregation-tax-half` carries the Jamie Melgar pen-name author**, whose Person
-   node GEO item 2 deliberately stripped. That page is not a mechanical case and must not be swept
-   with the rest.
+> ~~1. A naive `@id` sweep collides with the conflict gate: those nodes carry descriptions that would
+> contradict the canonical one.~~ **False. Not one of the 49 carries a `description` at all.** Every
+> property they do carry — `name`, `url`, `logo` — matches the canonical entity exactly. Zero
+> conflicts; the gate would not fire on any of them.
+>
+> ~~2. `/intel/str-cost-segregation-tax-half` carries the Jamie Melgar pen-name author and cannot be
+> swept.~~ **False.** GEO item 2 already removed that node. Its `author` is
+> `{"@type": "Organization", "name": "Cost Seg Smart"}` — a third party with no canonical node here,
+> so out of scope entirely. Its only in-scope node is its `publisher`, as mechanical as the rest.
+
+**And the approach inverts with them.** "Each node needs reducing, not stamping" was exactly
+backwards: `scripts/validate-intel-schema.py` **requires** `author.url` and `publisher.url` on every
+intel page, so reducing to bare references would turn CI red on 20 pages and risk Google's Article
+rich-result validation, which wants a self-contained `author.name`. The change is **purely additive —
+add `@id`, remove nothing** — one line per node. `name` and `url` stay, matching canonical, legal
+under the never-conflict rule above.
+
+Recorded this way rather than quietly rewritten: a wrong reason left standing as fact is how the next
+person makes a confident wrong call, which is the same reason v3.34 was corrected in place.
 
 ### The rule the gates encode: never *conflict*, not never *repeat*
 
