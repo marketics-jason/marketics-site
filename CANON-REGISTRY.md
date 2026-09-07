@@ -2485,12 +2485,24 @@ Both are routed. Neither blocks the `foundingDate` correction, which is right on
 identity, so both carry the link or the two definitions disagree about who this person is, which is
 the one thing a `sameAs` exists to settle. Gated on both files.
 
-**The assumption, stated because it is about a real person.** Two QIDs were supplied unlabelled.
-Q141329164 is confirmed the Organization by the screenshot; **Q141330011 is taken to be Jason's
-Person item by elimination**, since it arrived in direct answer to the request for that QID. Code
-could not verify it — `wikidata.org` is unreachable from here by every available route. One glance at
-the item confirms or refutes it; if it is wrong, it is a two-character fix in three places and the
-gate will hold the corrected value.
+**Both QIDs are confirmed. Closed 2026-09-07.** They were supplied unlabelled, and Code shipped
+Q141330011 on the Person **by elimination** — it arrived in direct answer to the request for that
+QID — flagged as an assumption rather than a fact, because it is an identity claim about a real
+person and `wikidata.org` is unreachable from here by every available route (`curl` and a real
+browser both refused at the proxy). **Jason confirmed it directly.** The pairing is now recorded as
+fact:
+
+| Entity | Wikidata item | How confirmed |
+|---|---|---|
+| Organization — `#business` | **Q141329164** | screenshot of the live item (`inception 2025`, `official name Marketics, LLC`) |
+| Founder Person — `story#jason` | **Q141330011** | Jason, 2026-09-07 |
+
+Worth keeping as a pattern rather than a footnote: the value was **shipped and gated while the
+assumption was still open**, because it was reversible (a two-character fix in three places, with the
+gate holding whatever value is correct) and because flagging it cost nothing. Blocking on
+confirmation would have held a correct change for a day. Shipping it silently would have put an
+unverified identity claim about a real person into the machine layer with nobody watching for it.
+**Flag and ship is the right shape when the change is cheap to reverse and the assumption is named.**
 
 ### A third finding, now fixed: the founder entity was defined twice
 
