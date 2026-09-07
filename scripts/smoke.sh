@@ -436,21 +436,28 @@ grep -q 'wikidata.org/wiki/Q141329164' <<<"$ent_home" \
   && ok "Organization sameAs carries the Wikidata entity" \
   || no "Organization sameAs has lost the Wikidata entity — the reconciliation target for the other six profiles"
 
-# The founder Person is defined in FULL on two pages under one @id. Both are
-# checked: a deploy that updates one and not the other leaves the two
-# definitions disagreeing about who this person is, which is the single thing a
-# sameAs exists to settle -- and it is invisible from either page alone.
-for pg in "story:/story" "media:/media"; do
-  nm="${pg%%:*}"; path="${pg#*:}"
-  src=$(body "$BASE$path")
-  if ! grep -q '"@id": "https://marketics.io/story#jason"' <<<"$src"; then
-    no "/$nm did not fetch or carries no founder Person node — the check below would pass vacuously"
-    continue
-  fi
-  grep -q 'wikidata.org/wiki/Q141330011' <<<"$src" \
-    && ok "$nm Person sameAs carries the founder Wikidata entity" \
-    || no "$nm Person sameAs has lost the founder Wikidata entity (Q141330011)"
-done
+# ONE definition, in /story. /media carried a second full one under the same @id
+# until 2026-09-07 -- disagreeing on jobTitle and carrying its own tenure claim --
+# and now references the @id instead. So the link is asserted where the entity is
+# DEFINED. Checking it on a referencing page would ask a pointer to restate what
+# it points at, which is the habit that produced the duplicate.
+ent_story=$(body "$BASE/story")
+grep -q '"@id": "https://marketics.io/story#jason"' <<<"$ent_story" \
+  && ok "/story carries the canonical founder Person node" \
+  || no "/story did not fetch or carries no founder Person node — the check below would pass vacuously"
+grep -q 'wikidata.org/wiki/Q141330011' <<<"$ent_story" \
+  && ok "canonical Person sameAs carries the founder Wikidata entity" \
+  || no "canonical Person sameAs has lost the founder Wikidata entity (Q141330011)"
+
+# And that /media has not grown the duplicate back: it may reference the @id, but
+# a jobTitle beside that @id means a second definition of one node again.
+ent_media=$(body "$BASE/media")
+grep -q 'PodcastEpisode' <<<"$ent_media" \
+  && ok "/media fetched (the check below is meaningful)" \
+  || no "/media did not fetch — the check below would pass on an empty body"
+grep -qE '"@id": "https://marketics\.io/story#jason"[^}]*"jobTitle"' <<<"$ent_media" \
+  && no "/media re-declares jobTitle on the founder Person — the duplicate definition is back" \
+  || ok "/media references the founder Person without re-defining it"
 
 # ── GEO batch (registry v3.36, #143) ────────────────────────────────────────
 # Flagged in the Sep 5 weekly and asked for by Jason the same day: the

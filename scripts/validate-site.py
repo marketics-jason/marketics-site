@@ -749,15 +749,39 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"entity — it is the reconciliation target that links the "
                         f"other six profiles into one identity (registry v3.39)")
 
-    # The founder Person entity is defined in FULL in two places with the same @id
-    # (story is canonical, media carries a reduced copy). Both assert the identity,
-    # so both carry the Wikidata link or the two definitions disagree about who
-    # this person is — which is the one thing a sameAs exists to settle.
-    if where in ("story/index.html", "media/index.html"):
+    # The founder Person is defined ONCE, in story/index.html. /media used to carry
+    # a second full definition under the same @id, disagreeing on jobTitle and
+    # carrying its own tenure claim; it was removed 2026-09-07 and its podcast
+    # `actor` nodes now reference the canonical @id instead. So this gate guards
+    # the one definition — asserting the link on a page that merely REFERENCES the
+    # entity would be asking a pointer to restate what it points at, which is how
+    # the duplicate got there in the first place.
+    if where == "story/index.html":
         if "wikidata.org/wiki/Q141330011" not in raw:
-            hard.append(f"{where}: founder Person sameAs no longer carries the Wikidata "
-                        f"entity (Q141330011) — the two definitions of "
-                        f"https://marketics.io/story#jason must agree (registry v3.39)")
+            hard.append(f"{where}: the canonical founder Person sameAs no longer "
+                        f"carries the Wikidata entity (Q141330011) — this is the only "
+                        f"definition of https://marketics.io/story#jason on the "
+                        f"estate (registry v3.39)")
+
+    # 11e-3. one definition of the founder Person, estate-wide (v3.39).
+    # A second FULL definition under the same @id is not a duplicate in the
+    # harmless sense: in JSON-LD a shared @id is one node, so a consumer merging
+    # them receives both jobTitles and both descriptions. /media carried exactly
+    # that until 2026-09-07 ("Founder" vs "Founder & CEO", plus a fourth variant
+    # of the tenure claim). Referencing the @id is correct and stays allowed;
+    # re-declaring the entity's own properties alongside it is what fails.
+    if where != "story/index.html" and '"@id": "https://marketics.io/story#jason"' in raw:
+        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                               raw, re.S):
+            if '"@id": "https://marketics.io/story#jason"' not in blob:
+                continue
+            for prop in ("jobTitle", "description", "sameAs", "knowsAbout", "hasCredential"):
+                if re.search(rf'"@id":\s*"https://marketics\.io/story#jason"[^}}]*"{prop}"', blob, re.S):
+                    hard.append(f"{where}: re-declares {prop!r} on the founder Person "
+                                f"alongside its @id — that is a second definition of one "
+                                f"node, and a consumer merging them gets both values. "
+                                f"Reference the @id and let story/index.html define it "
+                                f"(registry v3.39)")
 
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):

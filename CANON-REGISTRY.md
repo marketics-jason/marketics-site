@@ -2434,20 +2434,47 @@ could not verify it — `wikidata.org` is unreachable from here by every availab
 the item confirms or refutes it; if it is wrong, it is a two-character fix in three places and the
 gate will hold the corrected value.
 
-### A third finding: the founder entity is defined twice, and the copies disagree
+### A third finding, now fixed: the founder entity was defined twice
 
-`story/index.html` and `media/index.html` both define `https://marketics.io/story#jason` in full. In
-JSON-LD a shared `@id` means one node, so a consumer merging them receives **both** of these:
+`story/index.html` and `media/index.html` both defined `https://marketics.io/story#jason` **in full**.
+A shared `@id` in JSON-LD means one node, so a consumer merging them received **both** of these:
 
-| | `story` (canonical) | `media` |
+| | `story` (canonical) | `media` (removed) |
 |---|---|---|
 | `jobTitle` | "Founder" | "Founder & CEO" |
 | tenure in `description` | *(none)* | "10+ years in the vacation rental industry" |
 
-That makes **four** live variants of the same tenure fact across the estate — `2015` in the byline
-prose, `2016` on Wikidata, `10+ years` here, and `a decade` in the Organization description. Routed
-with the other two; reconciling them is a copy decision, and the reduced `media` duplicate arguably
-should not exist at all.
+**Resolved 2026-09-07 by deletion, not by choosing.** The `/media` block is gone and its three
+podcast `actor` nodes — which had been anonymous Jason Persons carrying *their own* two job titles —
+now reference the canonical `@id`. One definition, five pointers.
+
+Two consequences worth stating rather than discovering later:
+
+- **The merge resolves `jobTitle` to "Founder"**, because that is what the surviving definition says.
+  Code did not pick it. If **"Founder & CEO"** is the correct title, change it at
+  `story/index.html` — the one place — and every reference follows. Re-asserting it anywhere else
+  recreates exactly the defect just removed.
+- **Tenure variants drop from four to three:** `2015` in the byline prose, `2016` on Wikidata, and
+  `a decade` in the Organization description. The `10+ years` variant died with the duplicate.
+
+**The gate moved with the fix, and that coupling nearly bit.** The Wikidata link the CTO ruling added
+on 2026-09-06 was asserted on **both** pages, in `validate-site.py` and in `smoke.sh`. Deleting the
+`/media` definition would have turned `main` red — a check demanding a `sameAs` on a page that no
+longer defines the entity. Both now guard the **canonical** definition only: asking a pointer to
+restate what it points at is the habit that produced the duplicate.
+
+In its place, a gate on the defect itself: **any page other than `story/index.html` that re-declares
+`jobTitle`, `description`, `sameAs`, `knowsAbout` or `hasCredential` alongside that `@id` fails.**
+Referencing stays allowed and is the correct pattern — the false-positive control is a bare `@id`
+reference, which must and does pass. `smoke.sh` asserts the same on the served `/media`.
+
+### Same class, not fixed: `/media-kit` declares a second, anonymous Organization
+
+`media-kit/index.html` carries an Organization node with **no `@id` at all**, named "Marketics", and a
+`founder` Person also with no `@id`. So the estate currently asserts two unlinked companies of the
+same name and two unlinked people — the exact fragmentation the Wikidata `sameAs` work exists to
+close, one directory deeper. Two `@id` lines fix it and no copy changes. Reported rather than
+included: it is a different file and a different node type from the one ruled on.
 
 ## v3.38 — lead_form_id retired; delete-by-default; the Sep 5 attribution epoch (2026-09-05)
 
