@@ -2386,45 +2386,58 @@ conventions**: JSON-LD carries the literal `’`, rendered HTML carries `&rsquo;
 decoded inside a JSON-LD block, so using the rendered convention there would have put a literal
 `&rsquo;` into structured data. Handled per copy, and asserted after.
 
-### Held — the supplied string does not fit the page
+### Both held items, resolved same day
 
-`/results`, `/pricing` and `/method` were named as carrying the "What markets do you work in?" answer.
-**They do not.** Only the homepage has it. What those three carry are *different sentences* with the
-same problem:
+**The tenure rule is widened, and this is now its canonical statement:**
 
-| Page | Sentence |
-|---|---|
-| `/results` (hero) | "**A decade across** 1,000+ listings in 22 markets is the body of work." |
-| `/results` | "…documented across 19 engagements — **within a decade of work** across 1,000+ listings…" |
-| `/pricing` | "…across 19 documented engagements — **from a decade of work** across 1,000+ listings…" |
-| `/method` | "…across 19 documented engagements — **from a decade of work** across 1,000+ listings…" |
+> **Tenure never appears in any schema node belonging to the company entity.**
 
-Each has its own grammar and its own clause structure. Dropping the FAQ replacement into them would
-not parse, and rewriting them is authoring canon-bearing copy. **Routed back for four exact strings.**
+It began as "never in the `Organization` node" (CTO, Sep 6). Strategy widened it on the rationale
+Code proposed: **an engine merges the graph**, so a `Service` or `HowTo` node asserting a decade
+computes the same contradiction against `inception 2025` as the `Organization` would. The node type
+changes nothing about what a consumer concludes. Tenure is the founder's; it lives in visible copy
+and on his own Wikidata item.
 
-### Held — the Organization description removes more than the decade
+**Three deletions, no new copy.** `/results#service`, `/pricing#service` and `/method#howto` each
+carried a trailing *"— from/within a decade of work across 1,000+ listings in 22 markets"*. Clause
+dropped, everything before it kept.
 
-The ruling is right that tenure must leave company schema; the CTO rule is categorical and option B
-would still have put tenure inside the Organization node. But the supplied replacement —
-`"Performance-based short-term rental revenue management. 1,000+ listings optimized across 22 markets."`
-— removes **four** things, and only one of them is the decade:
+**One copy string**, `/results` hero, visible copy, no JSON-LD twin:
 
-1. the identity prefix **`Marketics, LLC (marketics.io):`** — added deliberately at **v3.1** to
-   disambiguate from the unrelated Bangalore analytics firm of the same brand name (acquired by WNS,
-   2007). Removing it undoes a disambiguation measure **in the one node whose job is disambiguation**,
-   during a programme whose entire purpose is entity resolution.
-2. the **45% median, net of market, across 19 documented engagements** — the single published
-   performance figure and its baseline.
-3. the **fee** — 10% of net payout, no monthly fee.
-4. the decade — the intended removal.
+> "**Our founder's decade** across 1,000+ listings in 22 markets is the body of work. The 19
+> documented engagements above are its measured, net-of-market subset."
 
-No gate breaks: the 45% canon lives independently in visible copy and the meta description, and smoke
-asserts it there. So this is a copy judgement, not a build problem — which is exactly why it is not
-Code's to make. **Routed back.** If items 2 and 3 are meant to go, that is a defensible editorial call
-about what schema is for; item 1 looks like collateral.
+Second sentence untouched — it was already doing the careful work of separating the body from the
+measured subset.
 
-**One coupling to carry into whatever ships:** `/results` mirrors this description **verbatim**, and
-the v3.39 gate requires the match. Both files change together or `main` goes red.
+**The Organization description**, on the homepage **and its verbatim `/results` mirror** (v3.39 gate
+requires the match, so both moved in one commit):
+
+> `"Marketics, LLC (marketics.io): performance-based short-term rental revenue management. 1,000+ listings optimized across 22 markets."`
+
+The 45% claim and the fee sentence came out **as intended** — the description is for what the entity
+*is*; the measured claims live in visible copy, the `Dataset` node and the meta description, where
+smoke already asserts them. **The `Marketics, LLC (marketics.io):` prefix was collateral and stays.**
+Code flagged it against **v3.1**, which put it there to disambiguate from the unrelated Bangalore
+analytics firm of the same brand name (WNS, 2007); removing it would have stripped a disambiguation
+measure from the one node whose job is disambiguation, in the same week that node was wired to
+Wikidata to strengthen exactly that. Strategy confirmed the catch and the v3.1 ruling stands.
+
+### The gate, and why it is scoped rather than global
+
+A categorical rule that cannot be enforced drifts back, so `validate-site.py` now fails any
+`Organization`, `Service`, `HowTo`, `Product`, `Offer`, `OfferCatalog`, `LocalBusiness` or
+`ProfessionalService` node carrying a tenure phrase — *decade*, *since 20XX*, *N+ years* — in any
+string field.
+
+It deliberately does **not** cover `Person` (Jason's tenure belongs there) or `Answer`/`Article`/
+`Review` (page content, not an entity description). That exclusion is load-bearing and is the
+false-positive control: the two FAQ answers now legitimately read *"our founder's decade"* and
+*"our founder has optimized"*, and a gate that fired on them would have punished the fix.
+
+Inventoried before writing, so it is **green on arrival** — the only tenure phrases left anywhere in
+structured data are those two `Answer` nodes. A gate that is red on arrival gets disabled, which is
+the vacuous-pass family by another route.
 
 ## v3.40 — one Marketics, one Jason Baxter (2026-09-07)
 

@@ -190,6 +190,23 @@ DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 # event. Its errors were then misread as a broken LEAD path and "fixed" with a
 # Content-Type change GHL rejects, dropping ~20 minutes of real submissions
 # (registry v3.29/v3.30). Gated so the shape cannot return on any file.
+# ── tenure never appears in COMPANY-ENTITY schema (Strategy, 2026-09-07) ──
+# The rule started as "never in the Organization node" (CTO, Sep 6) and was
+# widened by Strategy on the rationale Code proposed: an engine MERGES the graph,
+# so a Service or HowTo node asserting a decade computes the same contradiction
+# against `inception 2025` as the Organization would. The node type changes
+# nothing about what a consumer concludes.
+#
+# Scoped to nodes that DESCRIBE THE COMPANY. It deliberately does not cover:
+#   Person  — Jason's tenure is his, and belongs there
+#   Answer / Article / Review — page content, not an entity description; the two
+#            FAQ answers legitimately say "our founder's decade" post-attribution
+COMPANY_NODE_TYPES = ("Organization", "Service", "HowTo", "Product", "Offer",
+                      "OfferCatalog", "LocalBusiness", "ProfessionalService")
+TENURE_PHRASE = re.compile(r"\b(?:a |the past |over a )?decade\b|\bsince (?:19|20)\d\d\b"
+                           r"|\b\d+\+? years\b", re.I)
+
+
 def _walk_nodes(node):
     """Every dict in a parsed JSON-LD document, at any depth."""
     if isinstance(node, dict):
@@ -882,6 +899,27 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 hard.append(f"{where}: a 'Jason Baxter' Person node has no canonical "
                             f"@id — it declares a second, unlinked person. Add "
                             f'"@id": "https://marketics.io/story#jason" (registry v3.40)')
+
+    # 11e-6. no tenure claim inside a company-entity schema node (v3.41).
+    for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                           raw, re.S):
+        try:
+            doc = json.loads(blob)
+        except Exception:
+            continue
+        for node in _walk_nodes(doc):
+            if node.get("@type") not in COMPANY_NODE_TYPES:
+                continue
+            for key, val in node.items():
+                if not isinstance(val, str):
+                    continue
+                m = TENURE_PHRASE.search(val)
+                if m:
+                    hard.append(f"{where}: {node.get('@type')} node's {key!r} carries a "
+                                f"tenure claim ({m.group(0)!r}) — tenure is the founder's "
+                                f"and never appears in company schema. An engine merges "
+                                f"the graph, so this contradicts foundingDate 2025 exactly "
+                                f"as it would on the Organization node (registry v3.41)")
 
     # 11f. no <br> inside a heading (registry v3.36 item 6).
     for snippet in heading_br_violations(raw):
