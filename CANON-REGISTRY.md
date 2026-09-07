@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.40 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.41 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,69 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.41 — the decade is the founder's (2026-09-07)
+
+Strategy ruled all three items of the tenure brief. **Two shipped; two instances are held and routed
+back**, because the supplied strings do not fit what is actually on those pages.
+
+### Shipped
+
+**The date is 2016.** "Operating since 2015" was wrong on all 11 pages — it is when Jason started
+(GuestReady dba, 2016–2020), and it is what his Wikidata item already carried. The site was corrected
+to match the record rather than the reverse.
+
+**The byline now binds tenure to the person.** `Jason Baxter · Operating since 2016 · Founder,
+Marketics` — the v2.7 adjacency fix applied by re-ordering rather than rewording. A flattened byline
+now attaches the tenure to the name instead of to a company incorporated in 2025. Cheapest fix,
+eleven instances, no new copy.
+
+**Two FAQ answers re-voiced to the founder** — the LP's "Over the past decade, our founder has
+optimized…" and the homepage's "A decade of our founder's work…". Both exist twice per page, in
+rendered copy **and** in `FAQPage` JSON-LD, and the two copies use **different apostrophe
+conventions**: JSON-LD carries the literal `’`, rendered HTML carries `&rsquo;`. Entities are not
+decoded inside a JSON-LD block, so using the rendered convention there would have put a literal
+`&rsquo;` into structured data. Handled per copy, and asserted after.
+
+### Held — the supplied string does not fit the page
+
+`/results`, `/pricing` and `/method` were named as carrying the "What markets do you work in?" answer.
+**They do not.** Only the homepage has it. What those three carry are *different sentences* with the
+same problem:
+
+| Page | Sentence |
+|---|---|
+| `/results` (hero) | "**A decade across** 1,000+ listings in 22 markets is the body of work." |
+| `/results` | "…documented across 19 engagements — **within a decade of work** across 1,000+ listings…" |
+| `/pricing` | "…across 19 documented engagements — **from a decade of work** across 1,000+ listings…" |
+| `/method` | "…across 19 documented engagements — **from a decade of work** across 1,000+ listings…" |
+
+Each has its own grammar and its own clause structure. Dropping the FAQ replacement into them would
+not parse, and rewriting them is authoring canon-bearing copy. **Routed back for four exact strings.**
+
+### Held — the Organization description removes more than the decade
+
+The ruling is right that tenure must leave company schema; the CTO rule is categorical and option B
+would still have put tenure inside the Organization node. But the supplied replacement —
+`"Performance-based short-term rental revenue management. 1,000+ listings optimized across 22 markets."`
+— removes **four** things, and only one of them is the decade:
+
+1. the identity prefix **`Marketics, LLC (marketics.io):`** — added deliberately at **v3.1** to
+   disambiguate from the unrelated Bangalore analytics firm of the same brand name (acquired by WNS,
+   2007). Removing it undoes a disambiguation measure **in the one node whose job is disambiguation**,
+   during a programme whose entire purpose is entity resolution.
+2. the **45% median, net of market, across 19 documented engagements** — the single published
+   performance figure and its baseline.
+3. the **fee** — 10% of net payout, no monthly fee.
+4. the decade — the intended removal.
+
+No gate breaks: the 45% canon lives independently in visible copy and the meta description, and smoke
+asserts it there. So this is a copy judgement, not a build problem — which is exactly why it is not
+Code's to make. **Routed back.** If items 2 and 3 are meant to go, that is a defensible editorial call
+about what schema is for; item 1 looks like collateral.
+
+**One coupling to carry into whatever ships:** `/results` mirrors this description **verbatim**, and
+the v3.39 gate requires the match. Both files change together or `main` goes red.
+
 ## v3.40 — one Marketics, one Jason Baxter (2026-09-07)
 
 **49 anonymous entity nodes across 25 files, reconciled.** Every `Organization` named "Marketics" and
