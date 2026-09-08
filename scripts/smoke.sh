@@ -194,6 +194,9 @@ grep -qE "if \(!tagAllowedHere\(\)\) return;" <<<"$mc" \
 grep -qF "'marketics.io'" <<<"$mc" && grep -qF "'www.marketics.io'" <<<"$mc" \
   && ok "v3.42: both production hosts are in the allow-list" \
   || no "v3.42: a production host is missing from the served allow-list — live traffic would stop being measured"
+grep -qE "if \(!isProdHost\(\)\) return;" <<<"$mc" \
+  && ok "v3.43: Clarity is gated to production hosts on the served file" \
+  || no "v3.43 GONE: served consent script loads Clarity with no host gate — an Accept on a preview records an internal review session into the live project"
 
 # The consent beacon was removed on 2026-09-03 (registry v3.30). It posted to a
 # GHL inbound webhook via sendBeacon, which always sends with credentials mode

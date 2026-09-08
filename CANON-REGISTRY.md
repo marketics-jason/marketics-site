@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.42 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.43 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,62 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.43 — Clarity too, and tighter (2026-09-08)
+
+Ruled Board. Microsoft Clarity now loads on the production hostnames **only** — no `localhost`
+exemption, so a **tighter** gate than gtag.js got at v3.42.
+
+### The asymmetry is measured, not preferred
+
+The Board's read was that Clarity never loads under Lighthouse CI anyway, since CI accepts no
+banners, so symmetry with the GA4 gate would be free — and asked for verification rather than
+inheritance. Verified in a browser across three states:
+
+| State | Clarity |
+|---|---|
+| ungated region, no interaction — **what Lighthouse CI does** | does not load |
+| gated region, banner ignored | does not load |
+| gated region, **Accept clicked** | **loads** |
+
+So the perf-measurement reason that earns `localhost` its exemption for gtag.js **does not arise
+here**, and granting it anyway would be a hole with nothing behind it. The read was right; it is now
+evidenced.
+
+### Smaller in volume, worse in kind
+
+Clarity loads only on an explicit Accept, so the leak was narrower than GA4's. It was also worse:
+**previews are exactly where the banner gets tested**, so the people most likely to Accept on one are
+our own lanes — meaning Clarity was recording internal review sessions of unreleased pages into the
+live project, indistinguishable from EEA visitor recordings.
+
+Verified end to end after the change: on a preview the banner still renders and is clickable (the
+review workflow is untouched) and Accept now loads neither vendor; on production Accept still loads
+both; on `localhost` gtag.js still loads and Clarity still does not.
+
+**Cost, flagged:** Clarity can no longer be exercised on a deploy preview or locally. Testing it means
+production.
+
+### Two standing caveats, restated here because they now apply to both vendors
+
+Both were recorded at v3.42 and are repeated rather than assumed carried:
+
+1. **The localhost residual is accepted, not solved.** A developer browsing `localhost` in a normal
+   browser still loads **gtag.js** — unchanged by either gate, not the leak they close, and not
+   separable from CI without a discriminator this file has. It stands under v3.25's rule: **stamped,
+   not suppressed.** Clarity has no such residual, because it needs an Accept.
+2. **A green smoke run is not runtime proof.** `smoke.sh` fetches the served file and asserts the
+   gates are present and called; it cannot execute that file on five hostnames. **The browser
+   verification at build time is the evidence** — twelve assertions across apex, `www`, a deploy
+   preview, a branch subdomain, a lookalike host and `localhost`, in gated and ungated regions, with
+   and without Accept. Anyone reading a green run as proof of runtime behaviour is reading more than
+   it says.
+
+### Production result, flagged rather than implied
+
+The v3.42 gate merged at `70de444` and the production smoke run on that commit returned **156 passed
+/ 0 failed** — 153 before, so exactly the three new assertions and no regression. Recorded because a
+merge is not a deploy and a deploy is not a verification.
+
 ## v3.42 — the Google tag fires on production hostnames only (2026-09-08)
 
 Ruled Jason. `gtag.js` now loads only where `location.hostname` is exactly **`marketics.io`** or

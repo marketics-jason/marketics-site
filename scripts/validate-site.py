@@ -1148,6 +1148,42 @@ def main():
                                         f"IN the allow-list, never the list searched for "
                                         f"a fragment of the host (registry v3.42)")
 
+    # Clarity is production-hosts-only, TIGHTER than the tag gate (v3.43).
+    # It loads only on an explicit Accept, so it never runs under Lighthouse CI
+    # and needs no localhost exemption -- verified in a browser, not assumed.
+    # The leak it closes is smaller in volume and worse in kind: previews are
+    # where the banner gets tested, so the people most likely to Accept on one
+    # are our own lanes, and Clarity was recording internal review sessions of
+    # unreleased pages into the live project.
+    if not args:
+        cpath = os.path.join(ROOT, "mkx-consent.js")
+        if os.path.exists(cpath):
+            csrc = open(cpath, encoding="utf-8").read()
+            if "clarity.ms" in csrc:
+                cbody = csrc.split("function loadClarity()")[-1].split("\n  }")[0]
+                if "isProdHost()" not in cbody:
+                    hard.append("mkx-consent.js: loadClarity() has no production-host "
+                                "gate — a lane accepting the banner on a deploy preview "
+                                "would record an internal review session into the live "
+                                "Clarity project (registry v3.43)")
+                if "PERF_HOSTS" in cbody:
+                    hard.append("mkx-consent.js: loadClarity() admits the perf hosts — "
+                                "Clarity never loads under Lighthouse CI, so that "
+                                "exemption has no purpose here and is only a hole "
+                                "(registry v3.43)")
+                pbody = csrc.split("function isProdHost()")[-1].split("\n  }")[0]
+                loose = [m for m in ("endsWith", "startsWith", "includes", "match",
+                                     "test", "RegExp", "search") if m in pbody]
+                if loose:
+                    hard.append(f"mkx-consent.js: isProdHost() uses {', '.join(loose)} — "
+                                f"a substring test admits marketics.io.evil.example. "
+                                f"Compare the hostname EXACTLY (registry v3.43)")
+                for recv in re.findall(r"(\w+)\.indexOf\(", pbody):
+                    if recv != "PROD_HOSTS":
+                        hard.append(f"mkx-consent.js: isProdHost() calls {recv}.indexOf() "
+                                    f"— the host must be looked up IN the allow-list "
+                                    f"(registry v3.43)")
+
     # The consent script does not talk to the CRM (registry v3.30). A beacon
     # here posted consent_impression/accept/decline/ad_optout to a GHL inbound
     # webhook and never delivered one event: sendBeacon's credentials mode made

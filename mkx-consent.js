@@ -231,6 +231,9 @@
      discriminator this file does not have. */
   var PROD_HOSTS = ['marketics.io', 'www.marketics.io'];
   var PERF_HOSTS = ['localhost', '127.0.0.1'];
+  function isProdHost() {
+    return PROD_HOSTS.indexOf(location.hostname) !== -1;
+  }
   function tagAllowedHere() {
     var h = location.hostname;
     return PROD_HOSTS.indexOf(h) !== -1 || PERF_HOSTS.indexOf(h) !== -1;
@@ -301,6 +304,25 @@
   }
 
   function loadClarity() {
+    /* ── Production hosts only, and TIGHTER than the tag gate (Board, 2026-09-08).
+       No localhost exemption, and the asymmetry is measured rather than assumed.
+       Clarity loads only on an explicit Accept, so it never loads under
+       Lighthouse CI — CI opens a page once and clicks nothing. Verified in a
+       browser across three states: ungated with no interaction (the CI case)
+       does not load it, gated-and-ignored does not load it, gated-and-accepted
+       does. So the perf-measurement reason that exempts localhost for gtag.js
+       simply does not arise here, and exempting it anyway would be a hole with
+       no purpose behind it.
+
+       WHY IT IS WORSE IN KIND THAN THE GA4 LEAK, though smaller in volume.
+       Previews are precisely where the banner gets tested, so the people most
+       likely to click Accept on a preview are our own lanes — which means
+       Clarity was recording internal review sessions of unreleased pages into
+       the live project, indistinguishable from EEA visitor recordings.
+
+       Cost, flagged: Clarity can no longer be exercised on a deploy preview or
+       locally. Testing it now means production. */
+    if (!isProdHost()) return;
     // No consent-mode equivalent and it sets cookies unconditionally, so this
     // only runs on an actual grant.
     idle(function () {
