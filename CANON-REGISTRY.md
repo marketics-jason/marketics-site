@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.41 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.42 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,66 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.42 — the Google tag fires on production hostnames only (2026-09-08)
+
+Ruled Jason. `gtag.js` now loads only where `location.hostname` is exactly **`marketics.io`** or
+**`www.marketics.io`** — plus `localhost`, for the reason below.
+
+**What it closes.** Deploy previews are publicly reachable and get browsed by every lane during
+review, and each of those page_views landed in the **live GA4 property**, unstamped and
+indistinguishable from real traffic. The `traffic_type: 'internal'` stamp (v3.25/v3.26) never applied
+to them: it keys on `navigator.webdriver`, and a human on a preview is not webdriver.
+
+**One line, because there is only one choke point.** The inline `<head>` stub on all 53 pages queues
+the consent defaults, `gtag('js')` and `gtag('config')` into `dataLayer` during parse. **None of that
+transmits.** The queue flushes when `gtag.js` loads, and that injection is a single statement in
+`mkx-consent.js`. The stubs are untouched.
+
+Verified in a browser across five hostnames, not reasoned about: apex **loads**, `www` **loads**,
+a Netlify deploy preview **blocked**, a branch subdomain **blocked**, and
+`marketics.io.evil.example` **blocked** — the last because the comparison is exact. Consent
+machinery still runs on gated hosts: the banner renders, decisions still queue, nothing transmits.
+**Gating transmission must not gate the UI**, since previews are where the banner gets tested.
+
+### `localhost` is exempt, and that is the whole interesting part
+
+Lighthouse CI serves the built files from **`http://localhost/`** (`lighthouserc.json`), and
+`/calculator`'s **5200ms LCP budget is derived from measurement taken WITH the tag loading** — the
+workflow says so in terms: *"its measured LCP is 4678–4700ms once GA4 loads on every pageview."*
+
+Gating `localhost` too would have dropped that page's LCP by the tag's weight, converted a measured
+budget into slack, and **stopped the perf gate catching the exact regression v3.14 exists for** — the
+Ads tag costing `/calculator` ~1,850ms. The v3.25 rule stands and decided this: **stamped, not
+suppressed** — a prettier score that hides real third-party weight is the wrong trade.
+
+**Residual, reported not hidden:** a developer browsing `localhost` in a normal browser still loads
+the tag. Unchanged by this gate, not the leak it closes, and not separable from CI without a
+discriminator this file has.
+
+### The check that tested spelling instead of behaviour
+
+The first version of the CI guard matched `hostname.endsWith(`. A negative control walked straight
+past it by assigning to a local first — `var h = location.hostname; h.endsWith(…)` — which is how
+anyone would actually write the "simplification" the guard exists to stop.
+
+Rewritten to scope on `tagAllowedHere()`'s **body**: no `endsWith`/`startsWith`/`includes`/`match`/
+`test`/`RegExp`/`search` anywhere in it, and any `indexOf` receiver must be one of the host arrays,
+so the host is looked up **in** the allow-list and never the list searched for a fragment of the host.
+Four controls now fire where one did — `h.endsWith`, `h.includes`, a regex `test`, and a reversed
+`indexOf`.
+
+**A check that tests how something is written rather than what it does is the vacuous-pass family
+wearing a regex.** Ninth in ten days, and the third found in a guard written for this exact class.
+
+### What smoke can and cannot prove
+
+`smoke.sh` asserts the gate is present, is **called** at the injection point, and lists both
+production hosts. It cannot execute the file on five hostnames — that was browser work at build
+time. Recorded so a green smoke run is not read as proof of runtime behaviour it never tested.
+
+**Not in scope, flagged:** Microsoft Clarity is loaded from the same file and is **not** host-gated.
+Same leak, different vendor, and it was not what was ruled.
+
 ## v3.41 — the decade is the founder's (2026-09-07)
 
 Strategy ruled all three items of the tenure brief. **Two shipped; two instances are held and routed

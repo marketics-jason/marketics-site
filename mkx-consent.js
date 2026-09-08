@@ -203,7 +203,41 @@
     return ADS_PAGES.indexOf(p) !== -1;
   }
 
+  /* ── Production-host gate (ruled Jason, 2026-09-08) ─────────────────
+     The tag fires on the production hostnames and nowhere else. Deploy previews
+     are publicly reachable and get browsed by every lane during review, and
+     every one of those page_views landed in the same GA4 property as real
+     traffic, unstamped and indistinguishable — a preview is not webdriver, so
+     the traffic_type stamp never applied to it.
+
+     WHY THIS IS THE ONLY PLACE IT CAN GO. The inline <head> stub on all 53 pages
+     queues the consent defaults, gtag('js') and gtag('config') into dataLayer
+     during parse. None of that transmits. The queue flushes when gtag.js loads,
+     and gtag.js is injected below — so this one line is the whole choke point,
+     and the stubs need no change.
+
+     LOCALHOST IS EXEMPT, DELIBERATELY. Lighthouse CI serves the built files from
+     http://localhost/ (lighthouserc.json), and /calculator's 5200ms LCP budget
+     is derived from measurement taken WITH the tag loading — the workflow says
+     so in terms. Gating localhost too would drop that page's LCP by the tag's
+     weight, turn a measured budget into slack, and stop the perf gate catching
+     the exact regression v3.14 exists for (the Ads tag cost /calculator ~1,850ms
+     of LCP). The registry's rule stands: STAMPED, NOT SUPPRESSED — a prettier
+     score that hides real third-party weight is the wrong trade.
+
+     Residual, reported not hidden: a developer browsing localhost in a normal
+     browser still loads the tag. That is unchanged by this gate, it is not the
+     leak this closes, and it is not distinguishable from CI without a
+     discriminator this file does not have. */
+  var PROD_HOSTS = ['marketics.io', 'www.marketics.io'];
+  var PERF_HOSTS = ['localhost', '127.0.0.1'];
+  function tagAllowedHere() {
+    var h = location.hostname;
+    return PROD_HOSTS.indexOf(h) !== -1 || PERF_HOSTS.indexOf(h) !== -1;
+  }
+
   function loadGA4() {
+    if (!tagAllowedHere()) return;
     // Loaded for everyone now. Consent Mode decides whether it may use storage;
     // denied traffic still contributes cookieless pings. The inline <head> stub
     // has already queued the consent defaults + gtag('js') + gtag('config', ID)

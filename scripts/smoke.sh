@@ -175,6 +175,26 @@ grep -q 'mkx_ad_optout' <<<"$mc" \
 grep -q 'America/Toronto' <<<"$mc" \
   && ok "B2: Canada inside the region gate" || no "B2: Canada missing from the region gate"
 
+# ── The Google tag fires on production hostnames only (v3.42) ───────────────
+# Deploy previews are publicly reachable and get browsed by every lane during
+# review; each of those page_views used to land in the live GA4 property,
+# unstamped, because a preview is not webdriver. Asserted on the SERVED file
+# because that is the copy a visitor's browser actually runs.
+#
+# Note what this does NOT prove: smoke can fetch the file, not execute it on
+# five hostnames. Runtime behaviour was browser-verified across the apex, www,
+# a deploy preview, a branch subdomain and a lookalike host at build time. This
+# guards the shape shipping, and validate-site.py guards it merging.
+grep -q 'tagAllowedHere' <<<"$mc" \
+  && ok "v3.42: the served consent script carries the production-host gate" \
+  || no "v3.42 GONE: served consent script injects gtag.js with no host gate — previews would report into live GA4"
+grep -qE "if \(!tagAllowedHere\(\)\) return;" <<<"$mc" \
+  && ok "v3.42: the gate is CALLED at the injection point, not merely defined" \
+  || no "v3.42: tagAllowedHere() is not called in the served file — the gate is decorative"
+grep -qF "'marketics.io'" <<<"$mc" && grep -qF "'www.marketics.io'" <<<"$mc" \
+  && ok "v3.42: both production hosts are in the allow-list" \
+  || no "v3.42: a production host is missing from the served allow-list — live traffic would stop being measured"
+
 # The consent beacon was removed on 2026-09-03 (registry v3.30). It posted to a
 # GHL inbound webhook via sendBeacon, which always sends with credentials mode
 # 'include' -- so its preflight could never be satisfied by GHL's wildcard ACAO

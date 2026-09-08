@@ -1092,6 +1092,62 @@ def main():
                             "current page load, not the session's first "
                             "(CTO ruling 2026-09-05)")
 
+    # The Google tag fires on the production hostnames only (ruled Jason,
+    # 2026-09-08; registry v3.42). Deploy previews are publicly reachable and get
+    # browsed by every lane during review, and each of those page_views landed in
+    # the same GA4 property as real traffic -- a preview is not webdriver, so the
+    # traffic_type stamp never applied to it.
+    #
+    # Gated on three separate things, because each fails differently:
+    #   - the gate exists at all
+    #   - it is CALLED at the injection point (a helper nothing calls is the
+    #     vacuous-pass family; this file has found seven of those in nine days)
+    #   - the host list is EXACT-MATCH. An `endsWith`/`indexOf` on the string
+    #     would admit marketics.io.evil.example, and a substring test is the
+    #     natural "simplification" someone reaches for.
+    if not args:
+        cpath = os.path.join(ROOT, "mkx-consent.js")
+        if os.path.exists(cpath):
+            csrc = open(cpath, encoding="utf-8").read()
+            if "googletagmanager.com/gtag/js" in csrc:
+                if "tagAllowedHere" not in csrc:
+                    hard.append("mkx-consent.js: gtag.js is injected with no "
+                                "production-host gate — deploy previews would send "
+                                "page_views into the live GA4 property, unstamped "
+                                "and indistinguishable (registry v3.42)")
+                else:
+                    body = csrc.split("function loadGA4()")[-1].split("function loadClarity")[0]
+                    if "tagAllowedHere()" not in body:
+                        hard.append("mkx-consent.js: tagAllowedHere() is defined but "
+                                    "never called in loadGA4() — the host gate is "
+                                    "decorative (registry v3.42)")
+                    for host in ("'marketics.io'", "'www.marketics.io'"):
+                        if host not in csrc:
+                            hard.append(f"mkx-consent.js: production host {host} missing "
+                                        f"from the tag gate — live traffic would stop "
+                                        f"being measured (registry v3.42)")
+                    # SCOPED TO THE FUNCTION BODY, not to a spelling. The first
+                    # version matched `hostname.endsWith(` and a negative control
+                    # walked straight past it by assigning to a local first
+                    # (`var h = location.hostname; h.endsWith(...)`). A check that
+                    # tests how something is WRITTEN rather than what it DOES is
+                    # the vacuous-pass family wearing a regex.
+                    gate = csrc.split("function tagAllowedHere")[-1].split("\n  }")[0]
+                    loose = [m for m in ("endsWith", "startsWith", "includes",
+                                         "match", "test", "RegExp", "search")
+                             if m in gate]
+                    if loose:
+                        hard.append(f"mkx-consent.js: tagAllowedHere() uses "
+                                    f"{', '.join(loose)} — a substring/pattern test on "
+                                    f"the hostname admits marketics.io.evil.example. "
+                                    f"Compare the hostname EXACTLY (registry v3.42)")
+                    for recv in re.findall(r"(\w+)\.indexOf\(", gate):
+                        if recv not in ("PROD_HOSTS", "PERF_HOSTS"):
+                            hard.append(f"mkx-consent.js: tagAllowedHere() calls "
+                                        f"{recv}.indexOf() — the host must be looked up "
+                                        f"IN the allow-list, never the list searched for "
+                                        f"a fragment of the host (registry v3.42)")
+
     # The consent script does not talk to the CRM (registry v3.30). A beacon
     # here posted consent_impression/accept/decline/ad_optout to a GHL inbound
     # webhook and never delivered one event: sendBeacon's credentials mode made
