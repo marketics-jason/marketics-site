@@ -472,6 +472,21 @@ grep -q 'wikidata.org/wiki/Q141330011' <<<"$ent_story" \
   && ok "canonical Person sameAs carries the founder Wikidata entity" \
   || no "canonical Person sameAs has lost the founder Wikidata entity (Q141330011)"
 
+# The four claimed profiles added 2026-09-09. They are in sameAs because Jason
+# controls them and can correct them -- the same test that kept RocketReach,
+# findmemail and revenuemanagers.co OUT. sameAs asserts "this is the same
+# entity", so an uncorrectable scrape would bind his identity to whatever that
+# page happens to say. Asserted on the deployed page for the v3.39 reason: a
+# stale deploy or a bad rollback serves the old array with CI still green.
+for prof in "https://www.facebook.com/jasonbaxter1" \
+            "https://about.me/jason.baxter" \
+            "https://www.crunchbase.com/person/jason-baxter-4283" \
+            "https://www.connectively.us/p/jason-baxter"; do
+  grep -qF "$prof" <<<"$ent_story" \
+    && ok "canonical Person sameAs carries $prof" \
+    || no "canonical Person sameAs has lost $prof (registry v3.44)"
+done
+
 # And that /media has not grown the duplicate back: it may reference the @id, but
 # a jobTitle beside that @id means a second definition of one node again.
 ent_media=$(body "$BASE/media")

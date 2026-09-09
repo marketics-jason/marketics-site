@@ -813,6 +813,40 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"definition of https://marketics.io/story#jason on the "
                         f"estate (registry v3.39)")
 
+        # The four claimed profiles (2026-09-09, registry v3.44). Same reasoning
+        # as the Wikidata gate: these are identity assertions whose correctness
+        # depends on records this repo cannot see, so a silent deletion here is
+        # a silent loss of reconciliation surface. They are in sameAs because
+        # Jason controls them; the scraped broker records from the same backlink
+        # list (RocketReach, findmemail, revenuemanagers.co) are deliberately
+        # NOT here and must not be added -- sameAs means "same entity", and an
+        # uncorrectable third-party page is not something to bind an identity to.
+        # Scoped to the Person node's own sameAs array, NOT to the page. A
+        # whole-page substring search would be satisfied by a footer link to
+        # facebook.com/jasonbaxter1 while the sameAs entry itself was gone --
+        # the check would read the presence of a URL as the presence of an
+        # identity assertion. Same shape as the ClaimReview gate that read the
+        # clean()-stripped body (v3.37) and the host gate that matched spelling
+        # instead of behaviour (v3.43).
+        _person_sameas = []
+        for blob in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                               raw, re.S):
+            try:
+                node = json.loads(blob)
+            except ValueError:
+                continue
+            if node.get("@id") == "https://marketics.io/story#jason":
+                sa = node.get("sameAs")
+                _person_sameas = sa if isinstance(sa, list) else []
+        for prof in ("https://www.facebook.com/jasonbaxter1",
+                     "https://about.me/jason.baxter",
+                     "https://www.crunchbase.com/person/jason-baxter-4283",
+                     "https://www.connectively.us/p/jason-baxter"):
+            if prof not in _person_sameas:
+                hard.append(f"{where}: the canonical founder Person sameAs no longer "
+                            f"carries {prof} — one of the four claimed profiles "
+                            f"(registry v3.44)")
+
     # 11e-3. one definition of the founder Person, estate-wide (v3.39).
     # A second FULL definition under the same @id is not a duplicate in the
     # harmless sense: in JSON-LD a shared @id is one node, so a consumer merging

@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.43 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.44 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,63 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.44 — four claimed profiles on the founder Person (2026-09-09)
+
+Ruled Jason, from a list of twenty backlinks he supplied. Four were added to the `sameAs` of the one
+canonical founder Person node (`story/index.html`, `https://marketics.io/story#jason`), additively:
+
+- `https://www.facebook.com/jasonbaxter1`
+- `https://about.me/jason.baxter`
+- `https://www.crunchbase.com/person/jason-baxter-4283`
+- `https://www.connectively.us/p/jason-baxter`
+
+The Crunchbase addition is the load-bearing one: the Organization `sameAs` has carried
+`crunchbase.com/organization/marketics` since v2.8, but the **person** record was unlinked, so
+nothing told a consumer the two Crunchbase records were the same operator and his company.
+
+**v3.2's rule was applied, not skipped:** `sameAs` additions require positive identity confirmation.
+Jason supplied all four as his own and confirmed the addition on a list that named the excluded ones
+alongside them. No egress check was attempted or claimed.
+
+### The exclusion is the ruling, not the leftovers
+
+Three links from the same list — **RocketReach**, **findmemail.io** and **revenuemanagers.co** — were
+deliberately kept out, and the validator comment says so, so a later reader does not "complete the
+set." `sameAs` asserts *this is the same entity*. A scraped broker record cannot be corrected by us,
+routinely carries stale titles, locations and emails, and binding an identity to it invites a
+consumer to reconcile the founder against whatever that page happens to say — the off-site,
+uncorrectable form of exactly the duplicate-node defect v3.40 spent two days collapsing.
+
+Three further links (Business Insider, Concordia 2011, Traders Union) are **mentions, not
+identities**. `sameAs` would be wrong for all three; they belong in `/media` as coverage if anywhere,
+and are unresolved pending whether Jason is named in them.
+
+### Enforcement
+
+Repo side, `validate-site.py` gates all four **inside the Person node's own `sameAs` array**, not by
+whole-page substring. The first draft did search the page and was rewritten before commit: a future
+footer link to `facebook.com/jasonbaxter1` would have satisfied it while the `sameAs` entry itself
+was gone — the check would have read the presence of a URL as the presence of an identity assertion.
+That is the vacuous-pass family again (tenth member in eleven days), the same shape as the
+ClaimReview gate reading the `clean()`-stripped body at v3.37 and the host gate matching spelling
+instead of behaviour at v3.43. Six controls: one per profile deleted, one planting the URL in visible
+markup while removing it from `sameAs` (which the whole-page draft passed and the scoped gate fails),
+and a false-positive control on the untouched file.
+
+Deployed side, four `smoke.sh` assertions on `/story`, for the v3.39 reason — a stale deploy or a bad
+rollback serves the old array with CI still green.
+
+### Two items left open, deliberately
+
+1. **`https://jasonbaxter.ca/` has been in this array since v2.8 and was not on Jason's list.** If the
+   domain has lapsed or redirects somewhere he does not control, the estate asserts his identity
+   against it. Not verifiable from CI or this session (egress blocked, same as `clutch.co` at v3.2 and
+   `wikidata.org` at v3.39) — it needs a browser and Jason's eyes.
+2. **The Concordia 2011 Dragons' Den piece is tenure evidence, routed to Strategy.** It does not
+   disturb v3.41's ruling (STR tenure is "Operating since 2016", GuestReady dba 2016–2020, and the
+   entrepreneurship figure appears in no schema anywhere) — but it is a dated, third-party-verifiable
+   entrepreneurship citation of the kind that can carry a Wikidata reference on Q141330011.
+
 ## v3.43 — Clarity too, and tighter (2026-09-08)
 
 Ruled Board. Microsoft Clarity now loads on the production hostnames **only** — no `localhost`
@@ -2417,7 +2474,9 @@ Both were recorded at v3.42 and are repeated rather than assumed carried:
 
 The v3.42 gate merged at `70de444` and the production smoke run on that commit returned **156 passed
 / 0 failed** — 153 before, so exactly the three new assertions and no regression. Recorded because a
-merge is not a deploy and a deploy is not a verification.
+merge is not a deploy and a deploy is not a verification. The v3.43 Clarity gate then merged at `c7d7fa7`
+and its production run returned **157 passed / 0 failed** — +1, exactly the one new served-file
+assertion. Both gates are verified on production.
 
 ## v3.42 — the Google tag fires on production hostnames only (2026-09-08)
 
