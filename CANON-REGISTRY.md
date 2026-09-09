@@ -2409,16 +2409,31 @@ and a false-positive control on the untouched file.
 Deployed side, four `smoke.sh` assertions on `/story`, for the v3.39 reason — a stale deploy or a bad
 rollback serves the old array with CI still green.
 
-### Two items left open, deliberately
+### Three items raised; two closed same day
 
-1. **`https://jasonbaxter.ca/` has been in this array since v2.8 and was not on Jason's list.** If the
-   domain has lapsed or redirects somewhere he does not control, the estate asserts his identity
-   against it. Not verifiable from CI or this session (egress blocked, same as `clutch.co` at v3.2 and
-   `wikidata.org` at v3.39) — it needs a browser and Jason's eyes.
-2. **The Concordia 2011 Dragons' Den piece is tenure evidence, routed to Strategy.** It does not
-   disturb v3.41's ruling (STR tenure is "Operating since 2016", GuestReady dba 2016–2020, and the
-   entrepreneurship figure appears in no schema anywhere) — but it is a dated, third-party-verifiable
-   entrepreneurship citation of the kind that can carry a Wikidata reference on Q141330011.
+1. **`https://jasonbaxter.ca/`** — in this array since v2.8 and absent from Jason's list, so raised as
+   *unverified*, not as a defect: a lapsed or reassigned domain in `sameAs` means the estate keeps
+   asserting his identity against whatever now sits there. Not checkable from CI or the session
+   (proxy 403, same as `clutch.co` at v3.2 and `wikidata.org` at v3.39). **CLOSED by Jason
+   2026-09-09: live, his, and under active development in a parallel session.** The entry stays.
+2. **Business Insider (Aug 2026) and Traders Union** — raised as a possible `/media` addition if he is
+   named or quoted in them rather than merely linked. **CLOSED by Jason 2026-09-09: linked only.** No
+   `/media` change, and neither belongs in `sameAs` in any case — they are mentions, not identities.
+3. **The Concordia 2011 Dragons' Den piece is tenure evidence, routed to Strategy — still open.** It
+   does not disturb v3.41's ruling (STR tenure is "Operating since 2016", GuestReady dba 2016–2020,
+   and the entrepreneurship figure appears in no schema anywhere) — but it is a dated,
+   third-party-verifiable entrepreneurship citation of the kind that can carry a Wikidata reference
+   on Q141330011.
+
+### The reciprocal link is the open opportunity, not a defect
+
+`sameAs` currently points one way. `marketics.io` asserts the seven profiles; none of them assert
+back, and Wikidata is the only node in the set that reconciles in both directions. A crawler treats a
+one-directional claim as a claim and a two-directional one as a confirmation. With `jasonbaxter.ca`
+under active development, the cheap win is a `Person` node there carrying the **same `@id`**
+(`https://marketics.io/story#jason`) and the same `sameAs` set — which makes it a second declaration
+of the one node, so the v3.40 rule applies off-estate too: reference, never re-declare properties.
+Specced to Jason 2026-09-09; not this repo's to ship.
 
 ## v3.43 — Clarity too, and tighter (2026-09-08)
 
