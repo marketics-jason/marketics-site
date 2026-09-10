@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.48 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.49 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,98 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.49 — "20+ years" RETIRED; Concordia executed (2026-09-10)
+
+**Skill impact:** yes — a published figure is retired and two replacement formulations are ruled
+canon. Written back to the `marketics-canon` skill in this commit.
+
+### The figure is retired, not frozen
+
+Strategy ruled on the fact Jason supplied: earliest dateable venture is **Altitude Corporate Coffee
+Spaces, founded July 2008** — **18 years**, so "20+" overstated by more than two. Earlier
+entrepreneurship (age 7) is real but not documentable to a standard that survives a journalist, and is
+ruled **interview colour only** — never a tenure substantiation, never bios or schema.
+
+**Ruled replacements, both corroborated** by the founding date plus third-party attestation by 2011:
+- **"a founder since 2008"** — primary
+- **"nearly two decades"** — softer variant
+
+Standing rules unchanged: broader-entrepreneurship tenure never in schema, never STR-adjacent, never
+in company-entity nodes; STR tenure starts 2016; "the past decade" in STR contexts; `foundingDate`
+2025.
+
+### The sweep found it LIVE on two pages, and every previous sweep had missed it
+
+Strategy expected "few or zero hits, since the figure was already schema-banned." There were **two**,
+both reader-facing, both published:
+
+| page | the line |
+|---|---|
+| `story/index.html` | "**Twenty years** across tech, real estate, and luxury markets taught one discipline…" |
+| `media-kit/index.html` | "**Twenty years** across technology, real estate, and luxury markets shaped his central conviction…" |
+
+**Both spell the number as a word.** Every prior gate and the Aug 25 canon sweep matched digits —
+`CANON-SWEEP-2026-08-25.md` records `20 years` (STR-adjacent) as **0 hits** — so the figure sat in
+prose for months while the sweeps reported clean. **A retired number spelled as a word is still the
+number**, and that is the finding worth keeping from this entry.
+
+### Deleted, not replaced — and why that was the call
+
+Strategy set deletion as the default and replacement "only where a tenure claim is genuinely needed."
+Both instances were **also STR-adjacent**: `/story`'s very next sentence is *"On a listing, that means
+value before price"*, and `/media-kit`'s preceding paragraph is entirely STR (50+ listing portfolio,
+Superhost, 22 markets, Luxe). So swapping in "nearly two decades" would have satisfied the retirement
+while leaving a **standing-rule** violation live in both places.
+
+Deletion resolves both and **introduces no new words** — the clause is removed and the next word
+capitalised, nothing authored:
+
+- "Twenty years across tech, real estate, and luxury markets taught one discipline:" → "Tech, real
+  estate, and luxury markets taught one discipline:"
+- "Twenty years across technology, real estate, and luxury markets shaped his central conviction:" →
+  "Technology, real estate, and luxury markets shaped his central conviction:"
+
+Flagged for Strategy to overturn if the tenure clause was load-bearing in either — but the sentences
+carry their meaning without it, and the alternative was knowingly shipping an adjacency violation.
+
+### Gate 11i
+
+`RETIRED_TENURE` is now a **hard violation anywhere** — prose, meta, alt text, JSON-LD — not the
+adjacency condition it was until now. Word forms are first-class: `twenty years`, `twenty-years`,
+`20+ years`, `20 plus years`, `two decades`. Runs on the **raw** body, since the ban covers meta and
+alt text that `clean()` would drop; `/audits/` skipped, untouched as always.
+
+**`nearly two decades` is carved out**, and that carve-out is the point: a gate that fires on the
+sanctioned replacement is worse than no gate, because the replacement is what people reach for. Nine
+controls — five plants (each word form), three false-positive controls on the ruled replacements, and
+the `20–35%` PM anchor, which must survive.
+
+### Concordia — executed and closed
+
+Jason applied the Wikidata edit 2026-09-10: the article is a **second reference** on Q141330011
+`occupation (P106) = entrepreneur`, with P854, P1476, P123 (Concordia University), P577 (2011-04-18),
+P813. Two independent references now carry that statement. **No estate change.**
+
+Strategy read the full text and supplied what the slug could not: Jason is named twice **as an invited
+Dragon, not a student** — "JMSB graduate and founder of Altitude Corporate Coffee Spaces" — and is
+directly quoted. What it dates is that he was an *established* founder by April 2011, not the founding
+itself.
+
+**Option B rejected permanently, on a ground Code could not have found:** the article quotes 2011
+Jason advising a team to *"take a 30 per cent chunk"* of their tutors' business. Harmless in context —
+and one click from an ad reading "Stop Paying 20–35% Management," it is a gift to a hostile reader.
+**Machine-layer evidence only, never reading material adjacent to the estate.**
+
+### Process change: the proxy constraint is dissolved, not accommodated
+
+**Third-party citation verification now routes through the Strategy lane**, which has no proxy walls —
+proven on `concordia.ca` itself. When a brief depends on a blocked page: attach the URL and the
+specific questions, Strategy returns verified content same-session. The "human step that cannot be
+compressed" compresses to one handoff. **Wikidata *reads* route there too; Wikidata *edits* still
+require Jason** (account plus host).
+
+This supersedes v3.47 §5 and the constraint stated in Code's Sept 10 state-of-affairs brief §5.
+
 ## v3.48 — the three case-study pages (2026-09-10)
 
 **Skill impact:** no — code and CI only; no claim, phrasing, or number changes.

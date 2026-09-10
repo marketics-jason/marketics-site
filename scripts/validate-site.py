@@ -203,6 +203,37 @@ DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
 #            FAQ answers legitimately say "our founder's decade" post-attribution
 COMPANY_NODE_TYPES = ("Organization", "Service", "HowTo", "Product", "Offer",
                       "OfferCatalog", "LocalBusiness", "ProfessionalService")
+# The RETIRED broader-entrepreneurship figure (Strategy, 2026-09-10, registry v3.49).
+# Retired, not frozen: a hard violation ANYWHERE in reader-facing prose, meta or alt
+# text -- not an adjacency condition as it was until now.
+#
+# WHY THE WORD FORMS ARE HERE AND MATTER MOST. The estate sweep found the figure
+# live on TWO published pages, /story and /media-kit, both spelling it "Twenty
+# years". Every prior gate and the Aug 25 canon sweep matched digits, so all of
+# them recorded ZERO while it sat in prose for months. A retired number spelled as
+# a word is still the number.
+#
+# The true figure is 18 years (Altitude Corporate Coffee Spaces, founded July 2008),
+# so "20+" overstated by more than two years. Ruled replacements, both allowed:
+# "a founder since 2008" (primary) and "nearly two decades" (softer).
+RETIRED_TENURE = re.compile(
+    r"\b20\s*\+\s*years?\b"            # 20+ years
+    r"|\b20 plus years?\b"
+    r"|\btwenty[- ]?years?\b"             # THE FORM THAT WAS ACTUALLY LIVE
+    r"|\btwo decades\b",                  # "nearly two decades" is carved out below
+    re.I)
+# "nearly two decades" is a RULED replacement, so it must not trip the gate. This
+# carve-out is the false-positive control: a gate that fires on the sanctioned fix
+# is worse than no gate, because the fix is what people will reach for.
+ALLOWED_TENURE = re.compile(r"\bnearly two decades\b", re.I)
+
+
+def retired_tenure_hits(text):
+    """Hits after removing the sanctioned phrasings, so the carve-out cannot be
+    defeated by a hit that merely overlaps one."""
+    return RETIRED_TENURE.findall(ALLOWED_TENURE.sub("", text))
+
+
 TENURE_PHRASE = re.compile(r"\b(?:a |the past |over a )?decade\b|\bsince (?:19|20)\d\d\b"
                            r"|\b\d+\+? years\b", re.I)
 
@@ -848,6 +879,20 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 hard.append(f"{where}: the canonical founder Person sameAs no longer "
                             f"carries {prof} — one of the claimed profiles "
                             f"(registry v3.44/v3.45)")
+
+    # 11i. the retired broader-entrepreneurship figure, ANYWHERE (v3.49).
+    # Runs on the RAW body deliberately: the ban covers prose, meta description,
+    # alt text and JSON-LD alike, and clean() would drop most of those. Base64 in
+    # /audits/ cannot false-positive because every alternative requires the word
+    # "years" or "decades" after the number -- but /audits/ is skipped regardless,
+    # since those token pages are untouched, always.
+    if not where.startswith("audits/"):
+        for hit in retired_tenure_hits(raw):
+            hard.append(f"{where}: {hit!r} — the broader-entrepreneurship figure is "
+                        f"RETIRED, not frozen (Strategy 2026-09-10). The real figure "
+                        f"is 18 years (Altitude, July 2008), so 20+ overstated it by "
+                        f"more than two. Use 'a founder since 2008' or 'nearly two "
+                        f"decades', and never adjacent to an STR claim (v3.49)")
 
     # 11h. /calculator: nothing above the fold may be opacity-gated on JS (v3.46).
     # .fi is opacity:0 until script adds .vis, and Chrome does not treat an
