@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.46 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.47 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,131 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.47 — outranked-or-loosened controls, named and enforced (2026-09-10)
+
+**Skill impact:** yes — the "20+ years" freeze in §4 below changes a claim phrasing and is written
+back to the `marketics-canon` skill in the same commit, which is the first live use of the mechanism
+this entry builds.
+
+### The new failure class, adopted by CTO
+
+**Outranked-or-loosened controls**, sibling to the vacuous-pass family. A gate defeated not by lying,
+but by **losing precedence** or by **having its threshold rewritten around an undiagnosed symptom**.
+Two members, both found this week:
+
+- **v3.44a — outranked.** The `marketics-canon` skill declares itself the canonical claims home and
+  states it wins where it conflicts with other sources. Its own Rule 16 requires write-back the same
+  session. For v3.41 that did not happen, so for three days the skill and registry disagreed **with
+  the stale one holding precedence**, undetectably, across five lanes during a live paid launch.
+- **v3.46a — loosened.** `/calculator`'s LCP budget was raised to 5200ms around a 4678–4700ms
+  measurement nobody had root-caused.
+
+**The generalisation, and it is the durable part:** a vacuous-pass audit asks *"can this check
+fail?"* This class needs a second question — ***"does this check still decide anything?"*** Neither
+member leaves a red check behind.
+
+**3b gets its own line, per CTO:** *an exception is a claim, and carries the same evidence standard as
+any other.* "Cannot be engineered away" was substantiation with no experiment behind it. The
+four-minute causation test that disproved it — unhide the block, watch LCP collapse onto FCP with the
+element unchanged — existed for the whole ten days the exception stood.
+
+### The enforcement layer (CTO ruling, minimal version, capped)
+
+1. **`**Skill impact:** yes|no` is required on every registry version entry from v3.47 onward.**
+   Pre-v3.47 entries are grandfathered: retrofitting 46 of them is busywork, and the field only has
+   to bind going forward to do its job.
+2. **`scripts/check-skill-sync.py`** — check A: the field is present and well-formed. Check B: the
+   skill's `Build: … aligned to CANON-REGISTRY.md vX.Y` line is compared against the registry, and any
+   newer entry declaring `Skill impact: yes` fails as an unwritten-back ruling.
+
+**The checker was itself vacuous on first build, and a control caught it.** Check A originally
+searched the whole entry body for `**Skill impact:** yes|no`. But *this very entry describes the
+field using that literal string* — so the regex matched the "yes" inside "yes|no", and **the check
+was satisfied by its own explanatory text.** That is the payload-key gate, member four of the
+vacuous-pass family, reproduced inside the tool built to police that family, on its first day. It
+went undetected through a green run and was found only by CTO's landing condition: deliberately drift
+it and watch it go red. It did not go red. Both checks now share one anchored definition — the field
+must be a line of its own, at line start, in the entry's opening lines — so they cannot disagree
+about what a declaration is.
+
+**The residual, stated rather than implied.** A `Skill impact: no` is **a claim by a human, not
+something a diff can falsify**. Control C4 confirms the gate stays green when an entry that really
+does change a phrasing declares `no`. This tool catches *forgetting to write back a ruling you
+admitted was relevant*; it cannot catch *mislabelling a ruling as irrelevant*. That is the honest
+boundary of the minimal version, and widening it would need the diff to understand claim semantics,
+which is well past the cap.
+
+**The vacuity trap in this checker, and how it is avoided.** The skill lives outside the repo, so in
+CI it is absent. The obvious implementation skips silently when the file is missing — which would
+make this checker a member of the family it exists to police. A missing skill is therefore reported
+as **NOT VERIFIED with check B recorded as not run**, never as a pass. Check A binds everywhere,
+including CI, because it reads only the registry. No dashboard, no automation beyond the diff, per
+the cap.
+
+### The Concordia 2011 piece — CLOSED (Strategy, 2026-09-10)
+
+**Option A.** Strategy read the full text: **Jason was an invited Dragon/judge**, named as founder of
+**Altitude Corporate Coffee Spaces**, and directly quoted. Code never read the article — the proxy
+blocks `concordia.ca`, the fourth such host — and declined to characterise it from the URL slug, so
+the brief was issued as three questions rather than a recommendation dressed as a finding.
+
+- **No repo change. The estate is untouched.**
+- **Never `/media`** — the adjacency risk in the brief, plus the 30%-advice quote.
+- **"20+ years" is frozen in prose** pending the first-venture year. Fallback formulation where
+  something is needed: **"founder since before 2011."**
+- This line closes the item against future backlink sweeps.
+
+Code's second-order finding stands and is what the freeze responds to: if 2011 is the earliest
+datable public evidence, the "20+ years" figure has no public corroboration while "since 2011" has a
+university-hosted source — making it the weakest number we hold.
+
+### Correction: the sending-domain DNS item was stale, and is struck
+
+The Sept 10 state-of-affairs brief listed *"sending-domain DNS (oldest open item)"* under Jason.
+**That was pre-Sep-4 state.** `mail.marketics.io` has been configured since March 28 with
+SPF/DKIM/DMARC header-verified against a Workspace inbox; the console reference closed it on Sep 4
+and explicitly named the "unverified" belief as the stale reference that motivated the file. There is
+no second DNS item — DMARC tightening from `p=NONE` was ruled cosmetic/no-action.
+
+**It is the former, not a different item.** Verified before answering: there is zero DNS, SPF, DKIM or
+DMARC material anywhere in this repo, the registry, or Code's working files — the belief had no
+evidence behind it in this session at all, which is precisely why it should not have been asserted.
+This is the same confident-reference-to-unverified pattern the brief's own §4 dissects, and it was
+caught only because CTO held the closing reference. **Struck, so tomorrow's weekly cannot inherit it.**
+
+### Probe answered: the pattern is NOT confined to /calculator
+
+CTO asked whether the `opacity:0`-until-observer defect predated a later PR, and whether it exists
+elsewhere.
+
+**When:** since the page's first commit (`77f4cc8`), not a later regression.
+
+**Where else:** measured behaviourally rather than grepped for class names — every page using
+`IntersectionObserver` was loaded at 412×823 **with JavaScript disabled**, and any element in the
+first viewport with computed `opacity:0` after animations settle was recorded. That is the decisive
+test: content a reader cannot see is content Chrome cannot pick as an LCP candidate.
+
+| page | above-the-fold content hidden without JS |
+|---|---|
+| `/` | none |
+| `/intel`, `/intel/miami/report`, `/intel/muskoka/report`, `/intel/str-performance-index` | none |
+| `/calculator` | 1 — `div.stat-card` (residual; not the LCP element after v3.46) |
+| **`/case-studies`** | **3 — including `h1.fi` and its lead paragraph** |
+| **`/case-studies/anthony-san-antonio`** | **4 — including `h1.cs-h1` and `p.cs-lead`** |
+| **`/case-studies/montreal-hotel`** | **2 — including `p.cs-lead`** |
+
+Measured LCP on the three: **1164ms / 1116ms / 980ms**, against FCPs of 252 / 384 / 280ms — the same
+signature `/calculator` had.
+
+**So the probe resolves as NOT closed.** Three case-study pages carry the defect, hero copy included.
+**None of them are in `lighthouserc.json`**, which tests only `/`, `/calculator` and
+`/lp/keep-control` — so their LCP is unmeasured and CI cannot see this. That is itself an
+outranked-or-loosened observation: the control does not cover the pages the defect is on.
+
+Not fixed in this entry. The conversion is mechanically identical to v3.46 and Code can apply it, but
+it changes above-the-fold rendering on three published pages and is a larger scope than the probe
+asked for — **routed for ruling, with the measurements above rather than an estimate.**
+
 ## v3.46 — /calculator: the hero was invisible to the metric (2026-09-10)
 
 Ruled Jason ("Fix /calculator"). **First, a correction to what Code reported:** the page was carried
