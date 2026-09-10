@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.47 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.48 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,49 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.48 — the three case-study pages (2026-09-10)
+
+**Skill impact:** no — code and CI only; no claim, phrasing, or number changes.
+
+Ruled Jason. The `opacity:0`-until-observer defect found estate-wide at v3.47 is fixed on all three
+case-study pages, same conversion as v3.46: `.fi-atf` runs the existing fade from CSS at first paint,
+below-the-fold keeps `.fi` and the observer. **No animation removed, no copy changed.**
+
+Which elements were converted was decided by **measuring** — JS off, 412×823, every `.fi` whose box
+intersects the first viewport — not by reading the markup and judging what looked "above the fold":
+
+| page | converted | hidden-above-fold, JS off | LCP |
+|---|---|---|---|
+| `/case-studies` | 4 — eyebrow, `h1`, lead, first card | 3 → **0** | **416ms**, = FCP |
+| `/case-studies/anthony-san-antonio` | 4 — kicker, `h1`, lead, spec | 4 → **0** | **380ms**, = FCP |
+| `/case-studies/montreal-hotel` | 2 — kicker block, spec | 2 → **0** | **328ms**, = FCP |
+
+Each page needed its own `@keyframes fadeUp` (none had one) and its own `.fi-atf` rule. The two pages
+that already had a `prefers-reduced-motion` guard got `.fi-atf` added to it; `/case-studies` had no
+guard at all and now has one — a small accessibility gain that came free with the fix.
+
+### Gate 11h extended, and it was vacuous for the second time
+
+The gate now covers all four pages, naming **the exact wrappers measured in each first viewport**
+rather than counting them — a count passes while the wrong element carries the class.
+
+**The presence check was vacuous, and control C4 caught it.** `".fi-atf{" not in raw` was satisfied by
+`@media (prefers-reduced-motion:reduce){.fi-atf{animation:none;…}}` — a rule that contains the
+substring **while doing the opposite of what the gate guarantees**. Deleting the real animation left
+the override behind and the gate read green. It now checks the declaration, `.fi-atf{animation:fadeUp`.
+
+That is the second gate in two days to ship vacuous and be caught only by a control — after
+`check-skill-sync.py` satisfying itself with its own explanatory text at v3.47. **Both were found by
+the control, neither by writing the check carefully.** The practice that works is not "write better
+checks", it is "never land a check without deliberately breaking the thing it guards."
+
+### Still not covered by Lighthouse, stated rather than implied
+
+None of these three are in `lighthouserc.json`, which tests `/`, `/calculator` and `/lp/keep-control`.
+Gate 11h is a static check and now covers them, so a class regression fails CI — but **their LCP
+remains unmeasured**. Adding all three would roughly double the Lighthouse job (9 runs → 18). Not
+done; flagged as a cost-versus-coverage question rather than decided quietly.
+
 ## v3.47 — outranked-or-loosened controls, named and enforced (2026-09-10)
 
 **Skill impact:** yes — the "20+ years" freeze in §4 below changes a claim phrasing and is written

@@ -74,6 +74,15 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 }
 @media(min-width:769px){.nav-hamburger{display:none!important;}.nav-mobile-menu{display:none!important;}}
 .fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}.fi.vis{opacity:1;transform:none;}
+/* Above-the-fold twin of .fi (registry v3.48). .fi is opacity:0 until JS adds
+   .vis, and Chrome does not treat an opacity:0 element as an LCP candidate --
+   so hero copy was invisible to the metric AND to any reader whose JS had not
+   run yet. Same fade, started by CSS at first paint. Below the fold keeps .fi.
+   Matches the /calculator fix at v3.46. */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.fi-atf{animation:fadeUp .6s ease both;}
+@media (prefers-reduced-motion:reduce){.fi-atf{animation:none;opacity:1;transform:none;}}
+
 .skip-link{position:absolute;left:-9999px;top:0;z-index:200;background:#D6AD60;color:#0f0f0f;font-family:'DM Sans',-apple-system,system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;padding:12px 20px;text-decoration:none;}.skip-link:focus{left:16px;top:16px;}
 </style>
 <!-- Google Analytics 4 (G-51HW9TQFTJ) — consent-gated: loader injected by /mkx-consent.js only after consent -->
@@ -128,15 +137,15 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <main id="main-content">
 
 <div class="page-header">
-  <div class="eyebrow fi">Case Studies</div>
-  <h1 class="fi" style="transition-delay:.05s"><span class="hln">Real Properties.</span> <span class="hln"><em>Real Results.</em></span></h1>
-  <p class="fi" style="transition-delay:.1s">Three stories. Three markets. Three different operators. One consistent outcome: when optimization is done right, the numbers move.</p>
+  <div class="eyebrow fi-atf">Case Studies</div>
+  <h1 class="fi-atf" style="animation-delay:.05s"><span class="hln">Real Properties.</span> <span class="hln"><em>Real Results.</em></span></h1>
+  <p class="fi-atf" style="animation-delay:.1s">Three stories. Three markets. Three different operators. One consistent outcome: when optimization is done right, the numbers move.</p>
 </div>
 
 <div class="cs-cards">
 
   <!-- WALLY -->
-  <a href="/case-studies/wally-puerto-rico" class="cs-card fi">
+  <a href="/case-studies/wally-puerto-rico" class="cs-card fi-atf">
     <div class="cs-card-img">
       <picture>
           <source srcset="/case-studies/wally-puerto-rico/images/after-kitchen.webp" type="image/webp">

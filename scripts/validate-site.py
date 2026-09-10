@@ -859,21 +859,51 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # Checked on the wrappers by class, because that is the thing that regresses:
     # someone adds a section above the fold and reaches for .fi like everywhere
     # else on the page.
-    if where == "calculator/index.html":
-        if ".fi-atf{" not in raw:
+    # v3.48: the same defect was found on three case-study pages by measuring
+    # (JS off, 412x823, elements still opacity:0 in the first viewport once
+    # animations settle) rather than by grepping for class names. NONE of them
+    # are in lighthouserc.json, so Lighthouse cannot see a regression here --
+    # the control did not cover the pages the defect was on, which is itself the
+    # outranked-or-loosened class. This static gate is what covers them now.
+    ATF_PAGES = ("calculator/index.html",
+                 "case-studies/index.html",
+                 "case-studies/anthony-san-antonio/index.html",
+                 "case-studies/montreal-hotel/index.html")
+    if where in ATF_PAGES:
+        # The DECLARATION, not the selector. Checking for ".fi-atf{" alone was
+        # vacuous: every one of these pages also carries
+        # @media (prefers-reduced-motion:reduce){.fi-atf{animation:none;...}},
+        # which contains that substring while doing the OPPOSITE of what this
+        # gate guarantees. Deleting the real rule left the override behind and
+        # the check read green. Caught by control C4, not by review.
+        if ".fi-atf{animation:fadeUp" not in raw:
             hard.append(f"{where}: the .fi-atf rule is gone — the above-the-fold "
                         f"fade is JS-gated again and LCP goes with it (v3.46)")
-        for sel, what in ((r'<div class="fi-atf">', "hero block"),
-                          (r'class="calc-wrap fi-atf"', "calculator panel")):
+        # Per page, the exact wrappers that were measured in the first viewport.
+        # Named individually rather than counted, because a count passes while the
+        # wrong element carries the class.
+        EXPECT = {
+            "calculator/index.html": ((r'<div class="fi-atf">', "hero block"),
+                                      (r'class="calc-wrap fi-atf"', "calculator panel")),
+            "case-studies/index.html": ((r'class="eyebrow fi-atf"', "eyebrow"),
+                                        (r'<h1 class="fi-atf"', "h1"),
+                                        (r'<p class="fi-atf"', "lead paragraph"),
+                                        (r'class="cs-card fi-atf"', "first card")),
+            "case-studies/anthony-san-antonio/index.html":
+                                       ((r'class="kicker fi-atf"', "kicker"),
+                                        (r'class="cs-h1 fi-atf"', "h1"),
+                                        (r'class="cs-lead fi-atf"', "lead paragraph"),
+                                        (r'class="spec fi-atf"', "spec block")),
+            "case-studies/montreal-hotel/index.html":
+                                       ((r'<div class="fi-atf">', "kicker block"),
+                                        (r'class="cs-spec fi-atf"', "spec block")),
+        }
+        for sel, what in EXPECT[where]:
             if sel not in raw:
                 hard.append(f"{where}: the {what} no longer carries .fi-atf — if it "
                             f"went back to bare .fi it is opacity:0 until script "
-                            f"runs, which removes it as an LCP candidate (v3.46)")
-        for bad, what in ((r'<div class="fi">\s*<div class="hero-tag"', "hero block"),
-                          (r'class="calc-wrap fi"', "calculator panel")):
-            if re.search(bad, raw):
-                hard.append(f"{where}: the {what} is back on bare .fi — that is the "
-                            f"1776ms-LCP regression this gate exists for (v3.46)")
+                            f"runs, which removes it as an LCP candidate and hides "
+                            f"it from a reader whose JS has not run (v3.48)")
 
     # 11e-3. one definition of the founder Person, estate-wide (v3.39).
     # A second FULL definition under the same @id is not a duplicate in the

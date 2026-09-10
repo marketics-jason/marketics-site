@@ -304,6 +304,15 @@ nav.scrolled{background:rgba(13,13,12,.97);}
 .fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
 .fi.vis{opacity:1;transform:none;}
 @media (prefers-reduced-motion:reduce){.fi{opacity:1;transform:none;transition:none;}}
+/* Above-the-fold twin of .fi (registry v3.48). .fi is opacity:0 until JS adds
+   .vis, and Chrome does not treat an opacity:0 element as an LCP candidate --
+   so hero copy was invisible to the metric AND to any reader whose JS had not
+   run yet. Same fade, started by CSS at first paint. Below the fold keeps .fi.
+   Matches the /calculator fix at v3.46. */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.fi-atf{animation:fadeUp .6s ease both;}
+@media (prefers-reduced-motion:reduce){.fi-atf{animation:none;opacity:1;transform:none;}}
+
 html,body{max-width:100%;}
 </style>
 <style>
@@ -369,11 +378,11 @@ figure.hero-photo,figure.cs-heroimg,figure.hero-img{margin:0;}
 <!-- HERO -->
 <header class="cs-hero">
   <div>
-    <div class="kicker fi"><div class="bar"></div><span>Case study · San Antonio, Texas</span></div>
-    <h1 class="cs-h1 fi" style="transition-delay:.05s"><span class="hln">The Experiment</span> <span class="hln">Nobody Planned</span> <span class="hln"><em>To Run.</em></span></h1>
-    <p class="cs-lead fi" style="transition-delay:.1s">A 15-property San Antonio portfolio proved. <strong>Twice</strong>: that optimization isn't a nice-to-have. When it stopped, revenue fell. When it came back, records broke.</p>
+    <div class="kicker fi-atf"><div class="bar"></div><span>Case study · San Antonio, Texas</span></div>
+    <h1 class="cs-h1 fi-atf" style="animation-delay:.05s"><span class="hln">The Experiment</span> <span class="hln">Nobody Planned</span> <span class="hln"><em>To Run.</em></span></h1>
+    <p class="cs-lead fi-atf" style="animation-delay:.1s">A 15-property San Antonio portfolio proved. <strong>Twice</strong>: that optimization isn't a nice-to-have. When it stopped, revenue fell. When it came back, records broke.</p>
   </div>
-  <div class="spec fi" style="transition-delay:.15s">
+  <div class="spec fi-atf" style="animation-delay:.15s">
     <div class="spec-item"><span class="k">Property</span><span class="v">15-unit STR portfolio</span></div>
     <div class="spec-item"><span class="k">Configuration</span><span class="v">14 luxury apartments · 1 three-bedroom house</span></div>
     <div class="spec-item"><span class="k">Timeframe</span><span class="v gold">Aug 2025 – Apr 2026</span></div>
