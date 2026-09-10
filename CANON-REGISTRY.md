@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.44 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.45 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,24 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.45 — BiggerPockets logged on the founder Person (2026-09-10)
+
+Ruled Jason. `https://www.biggerpockets.com/users/jasonb1515` added to the `sameAs` of the canonical
+founder Person node, additively, bringing that array to nine entries. Same test as v3.44 and the same
+v3.2 rule: a profile Jason controls and can correct, supplied by him as his own. No egress check was
+attempted or claimed — the proxy blocks third-party hosts (`clutch.co` v3.2, `wikidata.org` v3.39,
+`jasonbaxter.ca` v3.44).
+
+Of the profiles in that array this is the most **topically** aligned — a real-estate-investor
+community rather than a general professional or identity profile — which is what a consumer reading
+the graph for subject-matter association gets from it that LinkedIn or about.me do not supply.
+
+Both gates from v3.44 were extended rather than duplicated: the validator's tuple and the smoke
+loop each take one more entry, so the enforcement stays one mechanism as the set grows. Re-controlled
+at the new size — deletion fires, the vacuity control (URL planted in page markup while removed from
+`sameAs`) still fires because the gate reads the array and not the page, and the false-positive
+control is green on the real file. Smoke goes 161 → 162.
+
 ## v3.44 — four claimed profiles on the founder Person (2026-09-09)
 
 Ruled Jason, from a list of twenty backlinks he supplied. Four were added to the `sameAs` of the one

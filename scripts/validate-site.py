@@ -813,7 +813,8 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"definition of https://marketics.io/story#jason on the "
                         f"estate (registry v3.39)")
 
-        # The four claimed profiles (2026-09-09, registry v3.44). Same reasoning
+        # The claimed profiles (2026-09-09 x4, +BiggerPockets 2026-09-10;
+        # registry v3.44/v3.45). Same reasoning
         # as the Wikidata gate: these are identity assertions whose correctness
         # depends on records this repo cannot see, so a silent deletion here is
         # a silent loss of reconciliation surface. They are in sameAs because
@@ -841,11 +842,12 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
         for prof in ("https://www.facebook.com/jasonbaxter1",
                      "https://about.me/jason.baxter",
                      "https://www.crunchbase.com/person/jason-baxter-4283",
-                     "https://www.connectively.us/p/jason-baxter"):
+                     "https://www.connectively.us/p/jason-baxter",
+                     "https://www.biggerpockets.com/users/jasonb1515"):
             if prof not in _person_sameas:
                 hard.append(f"{where}: the canonical founder Person sameAs no longer "
-                            f"carries {prof} — one of the four claimed profiles "
-                            f"(registry v3.44)")
+                            f"carries {prof} — one of the claimed profiles "
+                            f"(registry v3.44/v3.45)")
 
     # 11e-3. one definition of the founder Person, estate-wide (v3.39).
     # A second FULL definition under the same @id is not a duplicate in the

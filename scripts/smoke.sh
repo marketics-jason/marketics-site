@@ -472,7 +472,8 @@ grep -q 'wikidata.org/wiki/Q141330011' <<<"$ent_story" \
   && ok "canonical Person sameAs carries the founder Wikidata entity" \
   || no "canonical Person sameAs has lost the founder Wikidata entity (Q141330011)"
 
-# The four claimed profiles added 2026-09-09. They are in sameAs because Jason
+# The claimed profiles: four added 2026-09-09, BiggerPockets 2026-09-10. They
+# are in sameAs because Jason
 # controls them and can correct them -- the same test that kept RocketReach,
 # findmemail and revenuemanagers.co OUT. sameAs asserts "this is the same
 # entity", so an uncorrectable scrape would bind his identity to whatever that
@@ -481,10 +482,11 @@ grep -q 'wikidata.org/wiki/Q141330011' <<<"$ent_story" \
 for prof in "https://www.facebook.com/jasonbaxter1" \
             "https://about.me/jason.baxter" \
             "https://www.crunchbase.com/person/jason-baxter-4283" \
-            "https://www.connectively.us/p/jason-baxter"; do
+            "https://www.connectively.us/p/jason-baxter" \
+            "https://www.biggerpockets.com/users/jasonb1515"; do
   grep -qF "$prof" <<<"$ent_story" \
     && ok "canonical Person sameAs carries $prof" \
-    || no "canonical Person sameAs has lost $prof (registry v3.44)"
+    || no "canonical Person sameAs has lost $prof (registry v3.44/v3.45)"
 done
 
 # And that /media has not grown the duplicate back: it may reference the @id, but
