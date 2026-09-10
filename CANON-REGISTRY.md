@@ -2381,6 +2381,25 @@ at the new size — deletion fires, the vacuity control (URL planted in page mar
 `sameAs`) still fires because the gate reads the array and not the page, and the false-positive
 control is green on the real file. Smoke goes 161 → 162.
 
+### Same day: the canon skill's Tenure row corrected
+
+Ruled Jason. Writing the jasonbaxter.ca canon extract surfaced that the **`marketics-canon` skill**
+still carried a pre-v3.41 Tenure row — *"the past decade" / "10+ years"*, with none of Strategy's
+2026-09-07 ruling: no 2016 date, no bind-to-the-person rule, no company-schema prohibition. The skill
+declares itself the canonical claims home and states that it wins where it conflicts with other
+sources, and its own Rule 16 requires rulings to be written back the same session. For v3.41 that did
+not happen, so the registry and the skill disagreed for three days with the stale source holding
+precedence.
+
+Corrected 2026-09-10: the row rewritten, **"Operating since 2015"** added to RETIRED (it was live on
+11 pages until Sept 7 — not a hypothetical), and a **Tenure Attribution Rule** subsection added
+beside the Two-Baseline Rule, which is the existing pattern for a rule that outgrows its row. The
+rest of the skill was checked against this registry; **tenure was the only drift**.
+
+**Caveat recorded rather than assumed away:** the edit was applied to the session's *synced* copy of
+the skill. If skills are authored elsewhere and synced down, the change must also be made at that
+source or it will be overwritten. Flagged to Jason with the corrected file.
+
 ## v3.44 — four claimed profiles on the founder Person (2026-09-09)
 
 Ruled Jason, from a list of twenty backlinks he supplied. Four were added to the `sameAs` of the one
