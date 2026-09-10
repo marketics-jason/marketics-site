@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.49 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.50 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,47 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.50 — the deletion upheld, and why it beats the swap (2026-09-10)
+
+**Skill impact:** no — a ruling on an edit already shipped at v3.49; no claim, phrasing or number
+changes, and the STR formulation cited below was already canon.
+
+Strategy upheld Code's call to **delete** the tenure clause on `/story` and `/media-kit` rather than
+swap in "nearly two decades". Ruled **not load-bearing**, and the reversal ruled **a downgrade**.
+
+### The reasoning is worth keeping, because it generalises past this instance
+
+> An unattributed tenure number next to Airbnb copy invites the reader to compute STR experience from
+> it. A **named, dated, different-industry fact forecloses that reading entirely** — "In 2008 I
+> founded a corporate coffee company" cannot be misread as short-term rentals, while "nearly two
+> decades" sitting near STR claims absolutely can.
+
+So the adjacency hazard is not fixed by making the number smaller or softer. **An aggregate is
+conflatable and a specific is not.** That is the durable rule: where tenure sits near STR copy, reach
+for a named-and-dated fact, never a total.
+
+### Both passages were re-read after the edit; neither reads thin
+
+- **`/story`** — "Tech, real estate, and luxury markets taught one discipline: understand the system,
+  then build from the structure out. On a listing, that means value before price." The sentence never
+  needed the number; the three industries carry the breadth on their own.
+- **`/media-kit`** — the preceding paragraph already does the substantiating work (five years
+  operating a 50+ listing portfolio, 35× Superhost, 22 markets, 1 Luxe). The second paragraph is a
+  conviction statement and reads as one.
+
+**No further edit made.** Strategy's fill options are recorded below as available, not applied —
+authoring new copy on a "if it reads thin" condition that Code judges unmet would be inventing work.
+
+### Available if either page is later judged thin (Strategy, not yet ruled in)
+
+- **`/story`:** chapters, not a figure — Altitude (2008, corporate coffee) → GuestReady (2016, STR) →
+  Marketics. Each verifiable, none conflatable, and the sequence conveys duration without asserting
+  one. **Blocked on Code's side:** the nine ruled chapters live in the facts file, which this repo
+  does not hold.
+- **`/media-kit`:** the STR-specific formulation ("the past decade in short-term rentals," already
+  approved in STR contexts) plus the Wikidata item as the pointer for anyone chasing the broader arc
+  — which is precisely why the Concordia reference now sits on Q141330011.
+
 ## v3.49 — "20+ years" RETIRED; Concordia executed (2026-09-10)
 
 **Skill impact:** yes — a published figure is retired and two replacement formulations are ruled
