@@ -2403,13 +2403,37 @@ the hero was invisible without script); after a full scroll 13 of 14 below-fold 
 the fourteenth being inside a `display:none` container that opens only after a result — pre-existing
 and correct.
 
-### Not done, deliberately
+### The runner confirmed it, and the exception is gone
 
-**The 5200ms `/calculator` LCP budget stays at 5200ms for now.** The workflow's own note books
-lowering it back toward 4000ms once a real perf pass lands. Local numbers cannot authorise that: this
-sandbox blocks `googletagmanager.com`, so a local run scores a page with no tag on it — precisely the
-v3.14 mistake. The budget moves only on Lighthouse CI evidence from the runner, and that is a separate
-change.
+Lighthouse CI, median of 3, on the runner with the tag loading — `main` (`0ee6954`) against the fix
+(`3e184ed`):
+
+| metric | before | after |
+|---|---|---|
+| **Performance** | **0.82** | **0.98** |
+| Largest Contentful Paint | **4.7 s** | **2.0 s** |
+| Time to Interactive | 4.7 s | 4.0 s |
+| First Contentful Paint | 0.8 s | 0.9 s |
+| Speed Index | 0.8 s | 0.9 s |
+| Total Blocking Time | 120 ms | 140 ms |
+| Cumulative Layout Shift | 0 | 0 |
+
+TBT and FCP move within run-to-run noise; LCP does not. **The `/calculator` LCP budget is therefore
+back to the site standard 4000ms**, from the 5200ms exception it carried since 2026-08-31, with ~2×
+headroom on the measured 2.0s. The separate `assertMatrix` entry stays — LHCI applies *every* matching
+entry, so the base pattern excludes this URL deliberately and a catch-all would double up.
+
+**The v3.14 rule was honoured, not waived:** the budget moved only on runner evidence. Local numbers
+could not authorise it, because this sandbox blocks `googletagmanager.com` and scores a page with no
+tag on it.
+
+### What the exception was actually hiding
+
+The workflow's note justified 5200ms on the grounds that the measured 4678–4700ms LCP "cannot be
+engineered away" because GA4 loads on every pageview under the Board's Consent Mode ruling. **That
+diagnosis was wrong.** LCP was never waiting on the tag; it was waiting on script to un-hide the
+element. A budget raised to accommodate a number nobody had root-caused is slack, and slack is where
+the next regression hides. The note has been rewritten to say so.
 
 Gate 11h in `validate-site.py`, four controls: hero reverted to bare `.fi`, panel reverted to bare
 `.fi`, the CSS rule deleted while the classes stay, and a false-positive control on the real file.

@@ -9,32 +9,32 @@ name: Lighthouse CI (mobile)
 # redirects. Treat Best-Practices/cache deltas vs production PageSpeed as
 # expected; the core perf metrics (FCP/LCP/TBT/CLS/image sizing) are the signal.
 #
-# ── Why /calculator has its own LCP budget (lighthouserc.json assertMatrix) ──
-# Every page is held to LCP <= 4000ms. /calculator alone is held to 5200ms.
-# JSON can't carry comments, so the reasoning lives here.
+# ── /calculator's LCP exception, and why it is gone (2026-09-10) ──────────────
+# Every page is held to LCP <= 4000ms. /calculator was held to 5200ms from
+# 2026-08-31 until 2026-09-10. It is now back on the standard budget, and the
+# reason the exception existed turned out to be a defect rather than a property
+# of the page.
 #
-# The calculator is the densest page on the site (~83KB of inline HTML/CSS/JS,
-# a 16-market benchmark table, live sliders). Its LCP element is the <h1> TEXT,
-# and its measured LCP is 4678-4700ms once GA4 loads on every pageview -- which
-# is required by the Board's Consent Mode ruling (2026-08-21) and is the whole
-# point of that change, so it cannot be engineered away.
+# What the exception was for: the page's measured LCP was 4678-4700ms, its LCP
+# element was hero text, and the note here said that could not be engineered away
+# because GA4 loads on every pageview under the Board's Consent Mode ruling.
 #
-# This is a deliberately narrow exception, not a relaxed gate:
-#   - It applies to ONE url pattern. The homepage stays at 4000ms and currently
-#     reports zero findings.
-#   - The user-facing metrics on this page are strong: FCP 0.9s, Speed Index
-#     0.9s, CLS 0. The page is perceived as instant; LCP here is a heavy-DOM
-#     text-paint artifact.
-#   - 5200ms is derived from measurement, not comfort: median 4678-4700ms with
-#     observed run-to-run variance up to ~350ms, leaving ~500ms of headroom.
-#     A regression the size of the one just fixed (Clarity, ~1000ms) still
-#     fails the build.
-#   - The two patterns are mutually exclusive on purpose. LHCI applies EVERY
-#     matching assertMatrix entry, so a catch-all ".*" base would silently
-#     re-impose the 4000ms budget on the calculator.
+# That diagnosis was wrong. The hero block and the calculator panel both carried
+# .fi, which is opacity:0 until script adds .vis on IntersectionObserver, and
+# Chrome does not treat an opacity:0 element as an LCP candidate. LCP was not
+# waiting on the tag; it was waiting on the 17.7KB inline script parsing,
+# executing, registering the observer and the observer firing. Moving those two
+# above-the-fold blocks to a CSS animation that starts at first paint (.fi-atf,
+# same fadeUp keyframes, identical visual) took the runner's median LCP from
+# 4.7s to 2.0s and the performance score from 0.82 to 0.98.
 #
-# Booked, not dropped: /calculator needs a real performance pass (main-thread
-# work runs to ~2.1s). When that lands, lower this back toward 4000ms.
+# So the budget is 4000ms again, with ~2x headroom on the measured 2.0s. Keep the
+# separate assertMatrix entry: LHCI applies EVERY matching entry, so the base
+# pattern deliberately excludes this URL, and a catch-all ".*" would double up.
+#
+# The lesson worth keeping: a budget raised to accommodate a number nobody had
+# root-caused is slack, and slack is where the next regression hides. Registry
+# v3.46.
 
 on:
   pull_request:
