@@ -137,6 +137,14 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .fi{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
 .fi.vis{opacity:1;transform:none;}
+/* Above-the-fold twin of .fi, and the reason it exists: .fi is opacity:0 until JS
+   adds .vis, and Chrome does not treat an opacity:0 element as an LCP candidate.
+   The hero holds the LCP element (p.hero-sub), so LCP was pinned to the moment the
+   17.7KB inline script below parsed, ran, registered an IntersectionObserver and
+   that observer fired -- measured at 1776ms against a 940ms FCP. Same animation,
+   started by CSS at first paint instead, so nothing waits on script. Reuses the
+   fadeUp keyframes already defined above. Anything below the fold keeps .fi. */
+.fi-atf{animation:fadeUp .6s ease both;}
 
 /* ══ 1. HERO ══════════════════════════════════════════════════ */
 .calc-hero{padding:104px 0 40px;text-align:center;position:relative;z-index:1;}
@@ -574,7 +582,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 <!-- ══ 1. HERO ══════════════════════════════════════════════ -->
 <section class="calc-hero">
   <div class="hero-inner">
-    <div class="fi">
+    <div class="fi-atf">
       <div class="hero-tag">Free STR Income Calculator</div>
       <h1 class="hero-h1"><span class="hln">What Is Your Property</span> <span class="hln"><em>Actually Worth?</em></span></h1>
       <p class="hero-sub">Market benchmark data for <strong>16 cities</strong>. See the gap between what you're earning and what your market is paying: in 30 seconds.</p>
@@ -593,7 +601,7 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
 <!-- ══ 2. CALCULATOR ════════════════════════════════════════ -->
 <section class="calc-section z1">
-  <div class="calc-wrap fi" style="transition-delay:.08s">
+  <div class="calc-wrap fi-atf" style="animation-delay:.08s">
 
     <div class="panel">
       <!-- INPUTS LEFT -->

@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.45 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.46 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,59 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.46 — /calculator: the hero was invisible to the metric (2026-09-10)
+
+Ruled Jason ("Fix /calculator"). **First, a correction to what Code reported:** the page was carried
+on the open list as *0.79 against its 0.80 floor*. A Lighthouse CI dispatch against `main` (`0ee6954`)
+came back with **no assertion failures on any of the three URLs**. The gate was passing. The 0.79 was
+a dated observation repeated without re-checking — the same failure mode as the two false hazards at
+v3.40, and the reason the number was re-measured before any code was touched.
+
+### The finding
+
+Both above-the-fold blocks — the hero `<div class="fi">` and `<div class="calc-wrap fi">` — are
+`opacity:0` until script adds `.vis` on IntersectionObserver. **Chrome does not treat an `opacity:0`
+element as an LCP candidate.** So LCP could not be recorded until the 17.7KB inline script at line 967
+parsed, executed, registered the observer, and the observer fired. The LCP element was `p.hero-sub`,
+inside the hero block.
+
+Measured in a throttled mobile browser (412×823, 4× CPU), not inferred:
+
+| | FCP | LCP | LCP element |
+|---|---|---|---|
+| As shipped | 940ms | **1776ms** | `p.hero-sub` |
+| Hero unhidden (experiment) | 616ms | **616ms** | `p.hero-sub` |
+| Shipped fix, both blocks | 284–472ms | **284–472ms** | `img.nav-wordmark` |
+
+The middle row is the causation check: unhiding the block alone collapses LCP onto FCP with the
+element unchanged. Fixing only the hero moved LCP to 1196ms and surfaced `label.input-lbl` as the new
+candidate — the calculator panel is the second gated block and sits in the initial viewport at 412px,
+so both had to move.
+
+### The fix
+
+`.fi-atf{animation:fadeUp .6s ease both;}` — the same visual fade, started by CSS at first paint
+instead of by script, reusing the `fadeUp` keyframes already in the file. **No animation was removed
+and no copy changed.** Everything below the fold keeps `.fi` and the observer.
+
+Verified beyond the metric: hero and panel render at `opacity:1` with JS **on and off** (previously
+the hero was invisible without script); after a full scroll 13 of 14 below-fold `.fi` elements reveal,
+the fourteenth being inside a `display:none` container that opens only after a result — pre-existing
+and correct.
+
+### Not done, deliberately
+
+**The 5200ms `/calculator` LCP budget stays at 5200ms for now.** The workflow's own note books
+lowering it back toward 4000ms once a real perf pass lands. Local numbers cannot authorise that: this
+sandbox blocks `googletagmanager.com`, so a local run scores a page with no tag on it — precisely the
+v3.14 mistake. The budget moves only on Lighthouse CI evidence from the runner, and that is a separate
+change.
+
+Gate 11h in `validate-site.py`, four controls: hero reverted to bare `.fi`, panel reverted to bare
+`.fi`, the CSS rule deleted while the classes stay, and a false-positive control on the real file.
+The gate checks the wrappers by class because that is what regresses — someone adds a section above
+the fold and reaches for `.fi` like everywhere else on the page.
+
 ## v3.45 — BiggerPockets logged on the founder Person (2026-09-10)
 
 Ruled Jason. `https://www.biggerpockets.com/users/jasonb1515` added to the `sameAs` of the canonical

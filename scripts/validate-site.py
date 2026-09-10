@@ -849,6 +849,32 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                             f"carries {prof} — one of the claimed profiles "
                             f"(registry v3.44/v3.45)")
 
+    # 11h. /calculator: nothing above the fold may be opacity-gated on JS (v3.46).
+    # .fi is opacity:0 until script adds .vis, and Chrome does not treat an
+    # opacity:0 element as an LCP candidate. Both above-the-fold blocks carried
+    # it, so LCP was pinned to the moment the 17.7KB inline script parsed, ran,
+    # registered an IntersectionObserver and that observer fired -- measured at
+    # 1776ms against a 940ms FCP, against a 5200ms budget with ~500ms headroom.
+    # .fi-atf runs the same fadeUp animation from CSS at first paint instead.
+    # Checked on the wrappers by class, because that is the thing that regresses:
+    # someone adds a section above the fold and reaches for .fi like everywhere
+    # else on the page.
+    if where == "calculator/index.html":
+        if ".fi-atf{" not in raw:
+            hard.append(f"{where}: the .fi-atf rule is gone — the above-the-fold "
+                        f"fade is JS-gated again and LCP goes with it (v3.46)")
+        for sel, what in ((r'<div class="fi-atf">', "hero block"),
+                          (r'class="calc-wrap fi-atf"', "calculator panel")):
+            if sel not in raw:
+                hard.append(f"{where}: the {what} no longer carries .fi-atf — if it "
+                            f"went back to bare .fi it is opacity:0 until script "
+                            f"runs, which removes it as an LCP candidate (v3.46)")
+        for bad, what in ((r'<div class="fi">\s*<div class="hero-tag"', "hero block"),
+                          (r'class="calc-wrap fi"', "calculator panel")):
+            if re.search(bad, raw):
+                hard.append(f"{where}: the {what} is back on bare .fi — that is the "
+                            f"1776ms-LCP regression this gate exists for (v3.46)")
+
     # 11e-3. one definition of the founder Person, estate-wide (v3.39).
     # A second FULL definition under the same @id is not a duplicate in the
     # harmless sense: in JSON-LD a shared @id is one node, so a consumer merging
