@@ -656,6 +656,25 @@ lp=$(body "$BASE/lp/keep-control")
 grep -q '3c750621-84a1-444d-b64a-5712e15cfb5e' <<<"$lp" \
   && ok "LP posts to its own paid trigger" \
   || no "LP is NOT on the paid trigger -- paid leads are going somewhere else"
+
+# EMPTY-KEY CLOBBER (v3.51). Measured in GHL 2026-09-11: a key present but empty
+# is WRITTEN over a populated CRM field, while an ABSENT key is left alone. One
+# resubmission with no campaign parameters blanked five utm_*_first fields AND
+# gclid_first on a real contact. Both forms now POST a filtered copy.
+#
+# Asserted on the SERVED file for the v3.39 reason -- a stale deploy or a bad
+# rollback serves the old handler with CI still green -- and asserted on the
+# FILTER, not on the word "wire": a copy that copies everything is not a filter,
+# which is the regression that would actually happen.
+for lead in "/lp/keep-control" "/get-started"; do
+  lb=$(body "$BASE$lead")
+  grep -q "JSON.stringify(wire)" <<<"$lb" \
+    && ok "$lead transmits the filtered payload copy" \
+    || no "$lead POSTs the raw payload -- empty keys will clobber CRM fields (v3.51)"
+  grep -qF "payload[k] !== ''" <<<"$lb" \
+    && ok "$lead still filters empty keys out of it" \
+    || no "$lead has a payload copy but no empty-key filter (v3.51)"
+done
 grep -q '1297f709-5970-411d-b58c-e3a47721392e' <<<"$lp" \
   && no "LP posts to the SHARED organic trigger -- the separation has been reverted" \
   || ok "LP is off the shared organic trigger"

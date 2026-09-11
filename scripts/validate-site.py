@@ -894,6 +894,33 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"more than two. Use 'a founder since 2008' or 'nearly two "
                         f"decades', and never adjacent to an STR claim (v3.49)")
 
+    # 11j. neither lead form may transmit empty-valued keys (v3.51).
+    # Measured in GHL 2026-09-11 across four submissions on one contact:
+    #   key with a value -> writes | key present but EMPTY -> WRITES THE EMPTY
+    #   | key ABSENT -> preserved.
+    # The middle rule cost a real record its whole attribution: five utm_*_first
+    # AND gclid_first went populated -> blank on one resubmission with no campaign
+    # parameters. So both forms POST a FILTERED COPY, and a blank can no longer
+    # clobber what an earlier submission captured.
+    #
+    # COMMENTS ARE STRIPPED FIRST, and that is not paranoia: the explanatory
+    # comment beside this fix necessarily discusses empty keys and payloads, so a
+    # check reading the raw file could be satisfied by the prose describing the
+    # thing rather than the code doing it. That is exactly how check-skill-sync
+    # shipped vacuous yesterday (v3.47) and how gate 11h did (v3.48).
+    if where in ("get-started/index.html", "lp/keep-control/index.html"):
+        code = re.sub(r"/\*.*?\*/", "", raw, flags=re.S)
+        if "JSON.stringify(payload)" in code:
+            hard.append(f"{where}: POSTs the raw payload — empty-valued keys go on "
+                        f"the wire and GHL writes them over populated CRM fields. "
+                        f"Stringify the filtered copy (registry v3.51)")
+        if "JSON.stringify(wire)" not in code:
+            hard.append(f"{where}: no filtered payload copy is transmitted — the "
+                        f"empty-key clobber is back (registry v3.51)")
+        if not re.search(r"payload\[k\]\s*!==\s*''", code):
+            hard.append(f"{where}: the empty-key filter is gone — `wire` may exist "
+                        f"but nothing removes the blanks from it (registry v3.51)")
+
     # 11h. /calculator: nothing above the fold may be opacity-gated on JS (v3.46).
     # .fi is opacity:0 until script adds .vis, and Chrome does not treat an
     # opacity:0 element as an LCP candidate. Both above-the-fold blocks carried

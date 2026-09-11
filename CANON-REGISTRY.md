@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.50 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.51 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,87 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.51 — the empty-key clobber, found and closed (2026-09-11)
+
+**Skill impact:** no — lead-path code and CI; no claim, phrasing or number changes.
+
+Found during Jason's GHL sitting, by measurement rather than inspection. **P1: a returning lead was
+erasing their own attribution, including `gclid`, with nothing failing anywhere.**
+
+### GHL's write rule, established across four submissions on one contact
+
+| the payload says | GHL does |
+|---|---|
+| key present, with a value | writes it |
+| **key present, but empty** | **writes the empty — clobbers what was there** |
+| key absent entirely | leaves the field untouched |
+
+Evidence, all on `jason+lp0911b@gmail.com`: one LP submission from a clean session with no campaign
+parameters took `utm_source_first`, `utm_medium_first`, `utm_campaign_first`, `utm_term_first`,
+`utm_content_first` **and `gclid_first` from populated to blank**. In the same submission
+`auditQuestion` kept `Test 6` — because the LP never sends that key at all. Present-and-empty
+clobbers; absent preserves.
+
+### What it meant in production
+
+A lead converts from an ad with full attribution and a `gclid`. They come back later by bookmark,
+typed URL or brand search, submit again, and **erase their own attribution**. Paid conversions become
+unattributed and CAC under-counts paid. No error, no failed request, no signal of any kind — the lead
+still lands, the contact still updates, the attribution is simply gone.
+
+### The fix uses GHL's third rule against its second
+
+Both forms now POST a **filtered copy** — every key whose value is `''` is omitted, turning every
+clobber into a preserve. Built as a copy rather than a mutation so the payload object stays intact
+for anything reading it after the POST.
+
+Chosen over a per-field *set-if-empty* workflow condition because that would have to be configured
+correctly on every attribution field **on both triggers** and stay that way; this is one filter, in
+code, gated. **No GHL work, no mapping changes.**
+
+Verified on the wire in a real browser, not by reading the diff:
+
+| | keys sent | empty keys sent |
+|---|---|---|
+| `/get-started`, no campaign | 7 | **none** |
+| `/get-started`, with campaign | 12 | **none** — all five `utm_*` present |
+| `/lp/keep-control`, no campaign or gclid | 8 | **none** |
+| `/lp/keep-control`, with campaign + gclid | 19 | **none** — `gclid_first = "GC_TEST"` present |
+
+### Gates
+
+**11j**, and it strips comments before reading. That is not caution for its own sake: the comment
+explaining this fix necessarily discusses empty keys and payloads, so a check reading the raw file
+could be satisfied by *the prose describing the thing rather than the code doing it* — which is
+exactly how `check-skill-sync.py` shipped vacuous at v3.47 and gate 11h at v3.48. **Control C4 plants
+the strings in a comment while reverting the code, and the gate still fires.**
+
+Five controls: each form reverted to the raw payload; the filter deleted while `wire` stays (a copy
+that copies everything is not a filter); the vacuity control; a false-positive control. Four smoke
+assertions on the served files, for the v3.39 reason.
+
+### Two things left open, deliberately
+
+1. **The four intel market pages** (`/intel/miami`, `/montreal`, `/muskoka`, `/nashville`) build their
+   own payloads and carry the same hazard in smaller form — a blank optional field on a resubmission
+   would clobber. No attribution and no CAC impact, so lower severity. **Not fixed: outside the scope
+   Jason approved**, which was the two lead forms. Flagged with the same one-line fix ready.
+2. **The existing damaged records.** This fix stops new losses; it does not restore attribution
+   already blanked. How many live contacts are affected is a GHL question, not a repo one.
+
+### Also established during the sitting
+
+- **Dedup is on email.** Repeat submissions update one contact; re-testing is safe and purging is
+  per-email. Closes the oldest open question in the runbook.
+- **Last-write-wins** for mapped fields that receive a value.
+- **The two webhook triggers have separate mapping tables.** `first_touch_ts` and `mode` land from the
+  organic trigger and not the paid one — so those rows are missing on the **LP trigger only**, which
+  halves that job and locates it exactly.
+- **The `_first` family is not first-touch across sessions.** The browser layer locks first touch per
+  session correctly; GHL overwrites the record on each later submission. With the empty-key fix in,
+  a blank can no longer win — but a *populated* later value still will. Recorded as a known
+  limitation, not fixed here.
+
 ## v3.50 — the deletion upheld, and why it beats the swap (2026-09-10)
 
 **Skill impact:** no — a ruling on an edit already shipped at v3.49; no claim, phrasing or number

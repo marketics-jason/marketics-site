@@ -561,7 +561,33 @@ function setMode(m){
       utm_term: utm.utm_term || ''
     };
     try{
-      await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      /* OMIT EMPTY KEYS — measured in GHL on 2026-09-11, not assumed.
+         GHL's write rule, established by testing one contact through four
+         submissions on both triggers:
+
+           key present with a value  -> writes
+           key present but EMPTY     -> WRITES THE EMPTY. Clobbers.
+           key absent entirely       -> preserved, untouched
+
+         The middle rule is the defect. A lead who converts from a campaign and
+         later submits again from any visit without campaign parameters erases
+         their own attribution: five utm_*_first fields AND gclid_first all went
+         from populated to blank on a single resubmission. Paid conversions turn
+         unattributed and CAC under-counts paid, silently, with nothing failing.
+
+         The third rule is the fix. Send only what we have, and a blank can no
+         longer overwrite what an earlier submission captured. Cheaper and safer
+         than a per-field set-if-empty workflow condition, which would have to be
+         configured correctly on every field on both triggers and stay that way.
+
+         Built as a COPY, not a mutation: the payload object stays intact for
+         anything that reads it after the POST. */
+      var wire = {};
+      Object.keys(payload).forEach(function (k) {
+        if (payload[k] !== '') { wire[k] = payload[k]; }
+      });
+
+      await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(wire) });
     }catch(err){ console.warn('GHL webhook non-critical error:', err); }
 
     /* Show confirmation regardless of the webhook's CORS/network outcome */
