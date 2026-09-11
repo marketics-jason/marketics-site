@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.52 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.53 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,70 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.53 — sitting close-out and verification record (2026-09-11)
+
+**Skill impact:** no — verification results and process notes; no claim, phrasing or number changes.
+
+The write-back for the GHL sitting. **Items already recorded at v3.51/v3.52 are cross-referenced,
+not restated** — a fact written twice in this file is a future contradiction waiting for someone to
+notice the copies have drifted.
+
+### Verified by Code, by value
+
+Both lead paths exercised after the empty-key fix **and** after the inert-row deletions, each on a
+fresh contact so the write could only have come from the payload:
+
+| path | contact | result |
+|---|---|---|
+| `/lp/keep-control` (paid trigger) | `cap0911`, 21:19Z | **12 of 12 identical** |
+| `/get-started` (organic trigger) | `jasongs0911c`, 21:39Z | **11 of 11 identical** |
+
+Both carry `first_touch_ts` and `mode` populated from the payload — the two rows that were missing on
+the LP trigger and the two most at risk from the row deletions.
+
+**`gclid_first` live-verified:** `TEST_GCLID_0911` landed on a consented LP submission. At v3.35 this
+key was the example of one that transmitted and went nowhere; it now has a row and works.
+
+**The filter visible on real contacts, not just in a harness.** On `cap0911`, `wbraid`/`gbraid` are
+absent rather than empty. On `jasongs0911c`, `city`/`bedrooms`/`propertyType` are absent. Before today
+all five would have arrived as `""` and overwritten whatever was there.
+
+### Reported by Jason, not independently verified by Code
+
+Recorded with attribution because Code has no GHL access, and an unattributed second-hand fact is how
+the sending-domain item survived four days on the ledger (v3.47):
+
+- **`accountHolder` inert row deleted**, orange token cleared.
+- **Test contacts purged.** Rein Ongcangco and Steve Nhuiber confirmed surviving the purge.
+- **Notifications confirmed** — verified 2026-09-05; this entry is the missing line, not a new check.
+- **Paid-lead blanking count = `[n]`** — filter `source = lp-keep-control`, created Sep 4–11,
+  excluding test addresses. Expected zero: the CRM reset was Sep 5 and AG1 never produced
+  impressions. **The zero is to be counted, not assumed** — the whole point of the line.
+
+### Two definitions worth having written down
+
+- **An orange token is an unresolved reference, not a danger.** It means the mapping points at
+  something the current context cannot resolve — usually a stale sample — not that data is at risk.
+- **A payload key is a contract with every gate that reads it.** Renaming or removing one silently
+  empties a CRM field with no error on either side, so removal is a **two-part commit** — retarget
+  the assertions and drop the key together. Code's, never a drive-by.
+
+### Ledger accuracy: the intel fix already shipped
+
+Flagged because it was about to enter the weekly the other way round. The four intel pages were
+**fixed and merged today** (`e60c296`, v3.52), gate 11j scoped to six, smoke **166 → 174**. What is
+deferred to next week is the **live submission test** on one intel page — the third trigger has never
+been exercised. *Fix shipped; test pending.* Not the reverse.
+
+### Already recorded — see, do not restate
+
+- GHL write rule (value writes · empty clobbers · absent preserves) — **v3.51**
+- Separate mapping tables per trigger — **v3.51**
+- Dedup on email; last-write-wins — **v3.51**
+- §6a capture wide, transmit narrow — **v3.51**
+- The `_first` family is not first-touch across sessions — **v3.51**, accepted as a limitation at
+  **v3.52** with its revisit trigger
+
 ## v3.52 — four CTO rulings on the empty-key finding (2026-09-11)
 
 **Skill impact:** no — code, CI and process; no claim, phrasing or number changes.
