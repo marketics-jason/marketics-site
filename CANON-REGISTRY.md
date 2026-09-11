@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.51 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.52 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,73 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.52 — four CTO rulings on the empty-key finding (2026-09-11)
+
+**Skill impact:** no — code, CI and process; no claim, phrasing or number changes.
+
+### 1. Intel pages — FIXED, and the gate now guards six surfaces
+
+The four intel market pages carried the same clobber in smaller form. Code proposed leaving them on
+severity grounds; **CTO fixed them, and the reason is the one worth keeping:**
+
+> The severity argument is right but it's not the deciding one: leaving four known clobbers in place
+> because they're cheap means **a gate that guards two of six surfaces while reading as covered.**
+
+That is the coverage-gap shape from the Sep 3–4 ledger, and it is a better rule than "fix what is
+severe": a control's *apparent* scope is what people rely on, so a partially-scoped gate is worse
+than an honestly absent one.
+
+Demonstrated before and after on `/intel/miami`, identical submission with the optional fields blank:
+
+| | keys sent | empty-valued |
+|---|---|---|
+| before | 12 | **4** — `lastName`, `bedrooms`, `zone`, `listingUrl` |
+| after | 8 | **none** — those four absent |
+
+The required-fields-only path was A/B'd against the pre-change file first, because the form's own
+`if(!fname || !email) return;` blocks a sparser submission and would have read as a regression.
+
+Gate 11j scoped to **`LEAD_FORMS`, six entries**, with the rule that any new payload-POSTing form
+joins the tuple the day it ships. Nine controls: each of the six reverted individually, the filter
+deleted while `wire` stays, the vacuity control on an intel page, and a false-positive control.
+Smoke extended 4 → 12 assertions across the six.
+
+### 2. The `_first` cross-session overwrite — ACCEPTED as a known limitation
+
+**Do not spend the GHL configuration.** Per-field conditions on both triggers that have to stay
+correct is exactly the fragility the v3.51 fix avoided; buying it back for a lower-severity case is
+the wrong trade.
+
+**If it is ever worth closing, the fix belongs in the browser layer** — persist first touch across
+sessions rather than per session. One place, in code, gate-able. But that is a *storage-duration*
+change, so **it routes through the consent posture before it routes through Code.** Not a quiet
+refactor.
+
+**Trigger to revisit:** paid volume makes repeat-visitor misattribution material.
+
+### 3. The eleven redundant payload keys — LEAVE, standing rather than pending
+
+Every duplicate is read by `smoke.sh` or `validate-site.py`, so removal is a two-part change
+(retarget the assertions and drop the keys in one commit). It is Code's, and **not scheduled**. The
+trigger is: *a payload change is happening in that file anyway.*
+
+**Source annotated** so the duplication reads as a **v3.35 artifact, not intentional design** — the
+thing a later reader would otherwise have to reconstruct from the registry.
+
+### 4. The two timezone gaps — RIDE WITH THE `/api/lead` PROXY
+
+`America/Coral_Harbour` (Nunavut) and `Arctic/Longyearbyen` (Svalbard, **Norway — EEA**) get no
+banner. **"Ride with" means days, not someday:** the proxy is the next consent touch and is dated P1
+this week, and these are two array entries alongside work already opening that file.
+
+Taken at all because of the framing, not the population: **a successful detection returning the wrong
+answer is not covered by the over-inclusive fail-safe**, which only catches detection *failures*. And
+Svalbard being EEA makes it compliance-shaped rather than cosmetic.
+
+**Montréal was checked and is fine** — Chromium normalises `America/Montreal` → `America/Toronto`
+before the page sees it. Code hypothesised a gap there and the test disproved it; CTO noted that as
+the discipline from the previous day's §5 working.
+
 ## v3.51 — the empty-key clobber, found and closed (2026-09-11)
 
 **Skill impact:** no — lead-path code and CI; no claim, phrasing or number changes.

@@ -908,7 +908,17 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
     # check reading the raw file could be satisfied by the prose describing the
     # thing rather than the code doing it. That is exactly how check-skill-sync
     # shipped vacuous yesterday (v3.47) and how gate 11h did (v3.48).
-    if where in ("get-started/index.html", "lp/keep-control/index.html"):
+    # SIX surfaces as of CTO's ruling 2026-09-11, not two. The four intel market
+    # pages post their own payloads to a third trigger and carried the same
+    # clobber in smaller form (no attribution, so lower severity). The severity
+    # argument was right and was NOT the deciding one: a gate guarding two of six
+    # form surfaces reads as COVERED while four clobbers stay in place, which is
+    # the coverage-gap shape from the Sep 3-4 ledger. Any new form that POSTs a
+    # payload belongs in this tuple on the day it ships.
+    LEAD_FORMS = ("get-started/index.html", "lp/keep-control/index.html",
+                  "intel/miami/index.html", "intel/montreal/index.html",
+                  "intel/muskoka/index.html", "intel/nashville/index.html")
+    if where in LEAD_FORMS:
         code = re.sub(r"/\*.*?\*/", "", raw, flags=re.S)
         if "JSON.stringify(payload)" in code:
             hard.append(f"{where}: POSTs the raw payload — empty-valued keys go on "

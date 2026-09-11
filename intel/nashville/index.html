@@ -675,9 +675,22 @@ function submitForm() {
     tags: ['nashville', 'spring-2026', 'intel-lead'],
     timestamp: new Date().toISOString()
   };
+  /* Omit empty keys — the same rule as the two lead forms (v3.51). GHL writes a
+     transmitted empty string OVER a populated field, and leaves a field alone
+     when the key is ABSENT, so a resubmission with a blank optional field would
+     clobber what an earlier one captured.
+     Extended here on CTO's ruling 2026-09-11. The severity argument for leaving
+     these four alone was correct and was not the deciding one: a gate guarding
+     two of six form surfaces READS AS COVERED while four clobbers stay in place,
+     which is the coverage-gap shape from the Sep 3-4 ledger. */
+  var wire = {};
+  Object.keys(payload).forEach(function (k) {
+    if (payload[k] !== '') { wire[k] = payload[k]; }
+  });
+
   try {
     fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
-      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(wire)
     });
   } catch(e) { console.warn('GHL webhook non-critical error:', e); }
   window.location.href = '/intel/nashville/thank-you/';

@@ -666,7 +666,11 @@ grep -q '3c750621-84a1-444d-b64a-5712e15cfb5e' <<<"$lp" \
 # rollback serves the old handler with CI still green -- and asserted on the
 # FILTER, not on the word "wire": a copy that copies everything is not a filter,
 # which is the regression that would actually happen.
-for lead in "/lp/keep-control" "/get-started"; do
+# SIX surfaces as of CTO's ruling 2026-09-11, not two: the four intel market
+# pages post their own payloads to a third trigger and carried the same clobber.
+# A gate guarding two of six reads as covered while four stay broken.
+for lead in "/lp/keep-control" "/get-started" \
+            "/intel/miami" "/intel/montreal" "/intel/muskoka" "/intel/nashville"; do
   lb=$(body "$BASE$lead")
   grep -q "JSON.stringify(wire)" <<<"$lb" \
     && ok "$lead transmits the filtered payload copy" \

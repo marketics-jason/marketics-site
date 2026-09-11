@@ -1002,7 +1002,22 @@ footer a:hover{color:var(--muted);}
         utm_campaign: utm.utm_campaign || '',
         utm_content: utm.utm_content || '',
         utm_term: utm.utm_term || '',
-        /* The same five values again under the keys GHL's Attribution fields
+        /* ARTIFACT OF A CORRECTED BELIEF (v3.35) — NOT intentional design.
+           CTO ruling 2026-09-11: these duplicates STAY, and that is now standing
+           rather than pending. Every one of them is read by smoke.sh or
+           validate-site.py, so removal is a two-part change -- retarget the
+           assertions and drop the keys in ONE commit -- and it is not scheduled.
+           The trigger to do it is: a payload change is happening in this file
+           anyway. Until then nobody should read the duplication as deliberate.
+
+           Eleven keys do six keys' work here: pricingOwner/pricing_owner,
+           landingPage/first_touch_lp, and the five below. Confirmed byte-identical
+           on the wire in a single request on 2026-09-11 -- demonstrated, not
+           merely suspected.
+
+           The original note follows, and its correction is the point.
+
+           The same five values again under the keys GHL's Attribution fields
            carry. Shipped 2026-09-04 to fix attribution that had never reached
            the CRM, and it worked -- but the mechanism written down for it was
            WRONG, and the correction matters more than the fix.
