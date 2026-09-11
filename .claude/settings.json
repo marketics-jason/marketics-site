@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__github__pull_request_read",
+      "mcp__Netlify__netlify-project-services-reader",
+      "mcp__Netlify__netlify-deploy-services-reader",
+      "Bash(git merge-base *)"
+    ]
+  }
+}
