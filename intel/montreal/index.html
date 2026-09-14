@@ -838,7 +838,14 @@ function submitForm() {
     zone: zone,
     listingUrl: listing,
     reportUrl: 'https://marketics.io/intel/montreal/report/',
-    city: 'Montréal',
+    /* ASCII deliberately, and ONLY here. The page says Montréal everywhere a
+       human reads it -- this is a Québec market and the copy spells it properly.
+       The TRANSMITTED value is plain 'Montreal' because GHL tags on this field:
+       an accented tag is awkward to type into a filter and trivially mismatches
+       'Montreal', which silently splits one market's segment in two. Jason's
+       ruling 2026-09-14. Every future market transmits ASCII for the same
+       reason -- gated in validate-site.py. */
+    city: 'Montreal',
     tags: ['montreal', 'spring-2026', 'intel-lead'],
     timestamp: new Date().toISOString()
   };

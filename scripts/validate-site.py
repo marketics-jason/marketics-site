@@ -775,6 +775,20 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 hard.append(f"{where}: also sends the {other!r} route — a page has exactly "
                             f"one trigger, and two labels means one of them is a "
                             f"copy-paste that will misroute leads (registry v3.56)")
+        # The TRANSMITTED city must be ASCII (Jason's ruling 2026-09-14, v3.58).
+        # GHL tags on this field, and an accented tag mismatches its ASCII twin
+        # silently -- one market's segment quietly becomes two, with nothing
+        # failing. Montréal was the first; the rule is written for the ones after
+        # it, because markets are being added. This governs the PAYLOAD ONLY:
+        # reader-facing copy keeps its accents, and /intel/montreal still spells
+        # the city properly 38 times on the page.
+        m_city = re.search(r"city:\s*'([^']*)'", code)
+        if m_city and not m_city.group(1).isascii():
+            hard.append(f"{where}: transmits a non-ASCII city {m_city.group(1)!r} — "
+                        f"GHL tags on this value and an accented tag splits the "
+                        f"market's segment against its ASCII twin. Page copy keeps "
+                        f"the accent; the payload does not (registry v3.58)")
+
         # The intel pages fire the POST and navigate on the next line, so the
         # request MUST be keepalive or the browser may cancel it as the document
         # goes away -- a lead lost with no error on either side. Asserted only
