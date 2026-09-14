@@ -2363,6 +2363,99 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.61 — the five-Projects check was the wrong check (2026-09-14)
+
+**Skill impact:** no — the claim rows do not change; the skill already wins on conflict with a Project
+prompt. What changes is where claims may be *restated*. Flagged for a ruling: whether the skill should
+carry an explicit "no second canon copy anywhere" line, rather than relying on precedence alone.
+
+### The one line first, stated rather than inferred
+
+**Neither v3.59 nor v3.60 touched a claim row.** Both are Code's own inserts, scanned by the same
+method as v3.50-v3.58: the only claim-vocabulary hit in either is the word "tenure" inside the
+boilerplate *"No claim, phrasing, number or tenure fact changes."* **The last entry to change a claim
+row remains v3.49** — precisely what the skill's Build line is stamped to.
+
+### The finding: a control that could only ever read one file
+
+`marketics-canon` is enabled at the **account** level. The sync bucket is keyed
+`<organizationUuid>_<accountUuid>` with no project segment, and `ListSkills` returns one definition,
+`skill_01XbXeQk4DThZNvg1Jn5NPT7`. **There is one copy, not five.**
+
+So every "verified in all five Projects" pass — Sept 14's included — was **five reads of the same
+file.** Each read was correct. The conclusion drawn from them was not: it confirmed *the skill file is
+current*, and was recorded as *canon is current everywhere*. The check never had the reach to find a
+second canon copy, which is the thing the Sept 12 staleness class was actually about.
+
+**Fourth instance of outranked-or-loosened, and the most expensive yet** — because unlike the other
+three this one consumed real effort five times over and returned a green that closed the wrong
+question. Repeating a check does not widen it. **Five reads of one file is one read.**
+
+### The second copy exists, and it names a retired token as active guidance
+
+**Reported by CTO; Code cannot read Project instructions from a session and is not claiming to have
+verified this** (the v3.53 attribution discipline).
+
+This Project's own instructions (**v2.7**) carry a full CANONICAL-STAT REGISTRY section — fee,
+deposit, benchmark, retired list, tenure, markets, sample. Its tenure row reads **"the past decade" /
+"10+ years"** for STR with the 20+ figure reassigned to broader entrepreneurship.
+
+**The skill did not reassign that figure. It RETIRED it**, outright, on Sept 10. STR tenure is
+`Operating since 2016`; entrepreneurship is `a founder since 2008` or `nearly two decades`. So the
+Project prompt is not merely stale — **it names a retired token as live guidance**, in the same week
+"Twenty years" was found on two published pages.
+
+Four further rows are variants or absent: the fee phrasing predates the Aug 27 ratification (no
+*"you keep 90%"*, no *"our fee only grows when your revenue does"*); turnaround, formation date,
+Superhost, Luxe, the PM cost anchor and CNBC are not there at all.
+
+**Precedence saves the output — the skill wins on conflict. Nothing catches the drift at the authoring
+step, which is where copy gets written.** A lane reading the Project prompt composes from the stale
+row first and only then meets the skill, if it loads it at all.
+
+**Verified by Code, against the live tree:** no retired tenure token appears on any published page
+today — `20 years`, `20+ years`, `twenty years`, `two decades+`, zero hits across every HTML file,
+`/audits/` included and untouched. The drift is confined to the authoring source.
+
+### The fix, already ruled twice
+
+`marketics-facts.md` §1 and §8 were cut to pointers on Sept 12 for exactly this reason. **v2.7's
+CANONICAL-STAT REGISTRY section is cut to a pointer at the skill.** Same session, same pattern. Jason
+executes it — Project instructions are not reachable from a session and not in this repo. Draft text
+is recorded below so the edit is a paste rather than a rewrite.
+
+### Ledger row, corrected again
+
+| Was | Is |
+|---|---|
+| `SKILL.md` — installed copies OPEN across five Projects | **one account-level copy — CLOSED, at v3.49, which is correct** |
+| *(absent — nobody was looking)* | **a second canon copy in this Project's instructions — OPEN until cut to a pointer** |
+
+The row that mattered was never on the ledger. It could not be: the instrument that would have found
+it was the one being used to close the other row.
+
+### Pointer draft — replaces v2.7's CANONICAL-STAT REGISTRY section verbatim
+
+> ## CANONICAL-STAT REGISTRY
+>
+> **Replaced by a pointer, 2026-09-14 (registry v3.61). Do not restate claims here.**
+>
+> Every Marketics claim — fee, deposit, benchmark, sample window, turnaround, tenure, formation date,
+> Superhost, footprint, Luxe, PM cost anchor, CNBC, and the retired-token list — lives in the
+> **`marketics-canon` skill** and nowhere else. Load it before producing, editing or reviewing
+> anything a client, prospect, partner, journalist or crawler could read. It wins wherever it
+> conflicts with this prompt.
+>
+> **Why this section is a pointer and not a copy.** It previously carried the full registry, and it
+> went stale with nothing able to detect it — it still named a tenure figure the skill had retired
+> four days earlier, and its fee phrasing predated the Aug 27 ratification. Precedence protected the
+> published output, but a stale copy at the authoring step is where wrong copy gets written in the
+> first place. A second copy of the canon cannot be kept honest; it can only be removed.
+>
+> If a fact is not in the skill and not in `marketics-facts.md`, it is not invented, averaged, or
+> recalled from memory. Flag it to Jason.
+
+---
 ## v3.60 — control branches carry an expiry (2026-09-14)
 
 **Skill impact:** no — repo hygiene. No claim, phrasing, number or tenure fact changes.
