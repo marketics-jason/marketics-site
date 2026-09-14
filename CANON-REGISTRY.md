@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.57 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.58 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,60 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.58 — ASCII city, and what GHL actually does with tags (2026-09-14)
+
+**Skill impact:** no — payload values, CI, and CRM operational facts. No claim, phrasing, number or
+tenure fact changes.
+
+### The transmitted city is ASCII (Jason's ruling)
+
+`/intel/montreal` sends `city: 'Montreal'`. **Payload only** — the page still spells **Montréal** 38
+times in title, H1, schema and body copy. It is a Québec market and the copy is correct as written;
+what changed is the string that becomes a CRM value.
+
+**Why:** GHL segments on this field, and an accented value mismatches its ASCII twin silently — one
+market's segment quietly becomes two, with nothing failing anywhere. The same shape as every defect
+this week: it looks like lower volume, not like a bug.
+
+**Gated rather than fixed once, because markets are being added.** Any intel page transmitting a
+non-ASCII city now fails `validate-site.py`. Montréal was the first; the rule exists for the ones
+after it. Control fires when the accent is restored to the payload.
+
+### GHL and tags — three facts, established rather than assumed
+
+1. **An inbound webhook does NOT map a JSON array to contact tags.** The four intel pages have always
+   sent `tags: [market, campaign, 'intel-lead']`. Not one of those values has ever reached a contact.
+2. **Merge fields in a tag action are case-sensitive**, and the workflow's tag carried a lowercase
+   literal. The picker emits camelCase — visible in the tooltip on a working mapping
+   (`inboundWebhookRequest.reportUrl`). The lowercase string never resolved and was stored verbatim,
+   so **every intel lead was tagged with an unresolved merge-field literal.**
+3. **Whether a tag action resolves merge fields at all was never established**, and now will not be:
+   the action was deleted rather than repaired.
+
+**The tag action is gone (Jason, 2026-09-14), single action only — not "delete all actions from
+here", which would have taken the pipeline stage and the report delivery with it.**
+
+**Nothing was lost by deleting it.** Market and campaign are both already queryable on every contact:
+`City` and `Contact source` land correctly, verified on three separate live contacts today.
+
+### The payload array is KEPT, and marked inert
+
+Reversing an earlier offer to strip it. The shape is already the one wanted — market, campaign,
+funnel stage, per page, ASCII — so wiring tagging later is a GHL mapping change rather than an edit
+across four pages. **Checked rather than assumed:** nothing in `smoke.sh` or `validate-site.py` reads
+the key, so it stays free to remove. Annotated in all four files so it cannot be mistaken for
+something that works.
+
+### The site's own gate caught the person writing this entry
+
+The first draft of that annotation wrote the merge-field literal out in full. `validate-site.py`
+rejected it: **retired token present**. The gate is right — an unresolved-reference marker does not
+belong in page source, not even inside prose explaining one. Worth recording which side of this
+system has the guardrails: the literal that ran unnoticed in the CRM for weeks could not survive one
+second in the repo.
+
+---
+
 ## v3.57 — keepalive on the navigating forms, and what the counter caught on day one (2026-09-14)
 
 **Skill impact:** no — lead-path robustness and CI. No claim, phrasing, number or tenure fact changes.
