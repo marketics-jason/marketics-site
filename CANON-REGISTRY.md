@@ -2617,9 +2617,13 @@ the sending-domain item survived four days on the ledger (v3.47):
 - **`accountHolder` inert row deleted**, orange token cleared.
 - **Test contacts purged.** Rein Ongcangco and Steve Nhuiber confirmed surviving the purge.
 - **Notifications confirmed** — verified 2026-09-05; this entry is the missing line, not a new check.
-- **Paid-lead blanking count = `[n]`** — filter `source = lp-keep-control`, created Sep 4–11,
-  excluding test addresses. Expected zero: the CRM reset was Sep 5 and AG1 never produced
-  impressions. **The zero is to be counted, not assumed** — the whole point of the line.
+- **Paid-lead blanking count = `0`** — CLOSED 2026-09-14, reported by Jason: **there have been no
+  paid leads yet.** The filter (`source = lp-keep-control`, created Sep 4–11, excluding test
+  addresses) returns an empty set because the population is empty, not because blanking was
+  survived. That is a stronger result than the expected zero and a weaker one than it looks:
+  **no paid attribution existed to lose**, so the historical damage from the v3.51 clobber on the
+  paid path is nil — and equally, the fix has not yet been exercised by a real paid lead.
+  The zero was counted rather than assumed, which was the point of the line.
 
 ### Two definitions worth having written down
 
