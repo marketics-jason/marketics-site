@@ -846,6 +846,17 @@ function submitForm() {
        ruling 2026-09-14. Every future market transmits ASCII for the same
        reason -- gated in validate-site.py. */
     city: 'Montreal',
+    /* INERT AS OF 2026-09-14, and kept deliberately. GHL's inbound webhook does
+       NOT map a JSON array to contact tags -- these three values are transmitted
+       and ignored, and the workflow's own tag action was deleted the same day
+       after landing an unresolved merge-field literal on three contacts.
+       Kept rather than stripped because the SHAPE is already the one Jason
+       wants: market, campaign, funnel stage, per page, ASCII. Wiring tags later
+       is then a GHL mapping change, not an edit across four pages. Nothing in
+       smoke.sh or validate-site.py reads this key, so it is free to remove if
+       that judgement changes -- checked, not assumed.
+       Market and campaign are BOTH already queryable without it: `City` and
+       `Contact source` land correctly on every contact. */
     tags: ['montreal', 'spring-2026', 'intel-lead'],
     timestamp: new Date().toISOString()
   };
