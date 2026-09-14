@@ -1127,8 +1127,7 @@ function submitForm() {
       fetch(MKX_LEAD_ENDPOINT, {
         method: 'POST',
         headers: {'Content-Type':'application/json','X-Marketics-Form':'intel'},
-        body: JSON.stringify(wire),
-        keepalive: true
+        body: JSON.stringify(wire)
       });
     } catch(e) {
       console.warn('GHL webhook non-critical error:', e);

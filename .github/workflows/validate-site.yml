@@ -13,6 +13,27 @@ on:
   # not acceptable. This makes the gate available for any ref, any time, which
   # is what a gate guarding published claims should be.
   workflow_dispatch: {}
+
+  # PUSH TO MAIN, added 2026-09-14 (CTO ruling, registry v3.59).
+  #
+  # Until today this workflow fired on `pull_request` ONLY, so any direct push to
+  # main skipped the gate entirely -- and NOBODY WOULD HAVE KNOWN, because a gate
+  # that never ran leaves no red check, only an absence. It was found because a
+  # registry-only commit was fast-forwarded onto main and someone asked whether
+  # the gate had run. It had not. Nor had it on any earlier direct push.
+  #
+  # That is the same shape as check-skill-sync.py reading one installed copy: a
+  # control whose SCOPE is narrower than how its RESULT reads. The ruling that
+  # changes go via PR fixes the instance; this trigger fixes the mechanism, and
+  # only the mechanism survives someone being in a hurry.
+  #
+  # DELIBERATELY NO `paths:` FILTER HERE, unlike the pull_request trigger below.
+  # A paths filter is precisely how something slips through -- it re-creates the
+  # hole one file type at a time. The whole run is ~7 seconds; completeness is
+  # worth more than the seconds.
+  push:
+    branches: [main, claude/gate-scope-control]
+
   pull_request:
     paths:
       - '**/*.html'
