@@ -34,6 +34,27 @@ make this checker a member of the very family it exists to police. So a missing
 skill is reported as NOT VERIFIED and check B is explicitly recorded as not run.
 Check A still binds everywhere, including CI, because it reads only the registry.
 
+SCOPE -- WHAT CHECK B ACTUALLY COVERS (recorded 2026-09-14, registry v3.59)
+
+Check B reads ONE skill file: the path given by --skill, or the first match of the
+default glob. The skill is installed separately in each Claude Project, so there are
+several copies, and this checker can see exactly the one on the machine it runs on.
+
+The gate never claimed fleet coverage. Its OUTPUT just read that way: "registry/skill
+sync gate passes" is a sentence about the whole pairing, and a green result was taken
+as "the skill is current" rather than "the copy I could reach is current". Closing the
+authoring source therefore does not close the installed copies, and on 2026-09-14 one
+Project was still loading the pre-correction file behind a green run of this script.
+
+That is the third member of the OUTRANKED-OR-LOOSENED family, and the generating
+pattern is now stated: A CONTROL REPORTS ON WHAT IT CAN REACH, AND THE REPORT GETS
+READ AS COVERING THE WHOLE CLASS. The fix is not more scope -- this script cannot
+reach another machine's filesystem, and pretending otherwise would be the vacuous
+pass. The fix is that the output says what it covers, which it now does.
+
+Verifying the other copies is a human step: open each Project and read the skill's
+Build line. This script cannot do it and does not claim to.
+
 Usage:
   python3 scripts/check-skill-sync.py [--skill PATH] [--require-skill]
 
@@ -140,6 +161,9 @@ def main():
     print(f"registry: {len(entries)} version entries, {checked_a} require the field")
     if b_ran:
         print(f"skill:    {skill}\n          aligned to {bm.group(2)}")
+        print("          SCOPE: this copy only. The skill is installed per Project; "
+              "other\n          installed copies are not reachable from here and are "
+              "NOT verified.")
     elif skill:
         print(f"skill:    {skill} — build line unreadable")
     else:
@@ -156,7 +180,8 @@ def main():
             print(f"   - {f}")
         return 1
     print("\n✓ registry/skill sync gate passes"
-          + ("" if b_ran else "  (check A only — see above)"))
+          + ("  (one installed copy — see SCOPE above)" if b_ran
+             else "  (check A only — see above)"))
     return 0
 
 
