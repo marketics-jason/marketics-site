@@ -2435,8 +2435,38 @@ assertions on the served file, by zone name, because removing one is silent ever
 **A control caught my own instrument, not the code.** The first run reported all three gated zones
 failing — including `America/Toronto`, which has been gated since Addendum B2. The banner detector
 was wrong (guessing at selectors instead of reading `banner.id = 'mkx-consent'`), and the known-good
-control is the only reason that read as a broken test rather than a broken gate. Controls in a
-verification run earn their keep in exactly this direction too.
+control is the only reason that read as a broken test rather than a broken gate.
+
+### 3a. THE INSTRUMENT IS ALSO A CONTROL, and that is the durable part of today
+
+**It happened twice, and the second one nearly shipped as a code defect.** The behavioural verifier
+matched lead submissions on the *host* `leadconnectorhq.com`. `/get-started` also loads the **GHL
+chat widget's `loader.js`** from that host about 5s after page load (B4), inside the observation
+window — so a `GET` for a script was counted as a lead `POST`, and one surface reported *"the human
+IS dropped"* on code that was working correctly. The instrumented run was unambiguous:
+
+```
++3042ms  POST …/webhook-trigger/1297f709…   {"email":"…","mode":"existing_listing",…}   ← the lead
++5121ms  GET  …/loader.js                                                               ← the widget
+```
+
+With the honeypot filled there was no lead POST at all — only `loader.js`. The matcher now keys on
+`/webhook-trigger/` **and** `method === 'POST'`. **46/46 behavioural checks pass on all six surfaces.**
+
+**What said the measurement was wrong rather than the code:** `/lp/keep-control` runs the identical
+async-handler shape and passed both times. A failure on one of two identical implementations is a
+statement about the observer, not the observed.
+
+**The generalisation, and it belongs beside the vacuous-pass family:** *a verification script is a
+control, and it needs a control of its own.* A gate that cannot fail is a vacuous pass; a **verifier
+that fires on the wrong signal is its mirror image — a vacuous FAILURE**, and it is more expensive,
+because it sends someone to fix code that was never broken. Both of today's were caught by a
+known-good case sitting in the same run, and neither by re-reading the script.
+
+I also called this wrong twice before instrumenting it — first "harness contention", then "a real
+defect, not the harness." It was the harness, in a part I had not guessed. **The rule: instrument
+before characterising.** A hypothesis offered ahead of a measurement is a dated observation repeated
+without re-checking, which is §6.1 of the 09-12 weekly wearing different clothes.
 
 ### 4. Correction — the proxy was assigned, and I carried "unassigned" forward
 
