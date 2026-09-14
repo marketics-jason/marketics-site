@@ -2552,6 +2552,24 @@ files. Env-var readability proved by a probe that forwards nothing: a valid rout
 broken JSON returns 400 if the var is readable and 502 if it is not, because the config check runs
 before the body is read. Three routes, three 400s.
 
+### Verified on PRODUCTION, end to end (2026-09-14, after merge)
+
+The last leg no test of ours could reach: **a real submission on `marketics.io/intel/miami` routed
+through the live Function and landed a contact in GHL**, with `Contact source`, `Zone`, `bedrooms`,
+`listingUrl` and `Report URL` all matching — field for field — the direct-to-GHL baseline captured
+that morning before the switch.
+
+**That match is the byte-identity claim tested against a control rather than asserted.** Same form,
+same values, one posted direct and one through the proxy; if the Function had altered the request
+shape, the two contacts would differ and GHL's field-picker samples would be stale. They do not.
+
+Sequence, because each step was a different question:
+1. Function tests + controls — does it send the right bytes to the right hook?
+2. Deploy-preview submission — does GHL accept them?
+3. **Production submission — does the live path work for a real prospect?**
+
+Production smoke **228 / 0** on `df7458e`, including every proxy assertion on its first production run.
+
 ### What this does NOT close, stated so the entry is not over-read
 
 **Anyone who already scraped a hook UUID can still POST to GHL directly.** This narrows the surface;
