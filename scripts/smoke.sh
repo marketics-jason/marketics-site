@@ -663,9 +663,14 @@ lp=$(body "$BASE/lp/keep-control")
 # Confirmed live 2026-09-03 after the owner turned out to be "Inbound Lead",
 # which created contacts and never tagged them. Absence checks are meaningful
 # here because the form-renders assertion above already proves the body arrived.
-grep -q '3c750621-84a1-444d-b64a-5712e15cfb5e' <<<"$lp" \
-  && ok "LP posts to its own paid trigger" \
-  || no "LP is NOT on the paid trigger -- paid leads are going somewhere else"
+# ROUTE LABEL, not a UUID (v3.56). The hook ids left public source with the
+# /api/lead proxy, which means the old "the LP does not contain the shared hook"
+# assertion became TRUE FOR THE WRONG REASON -- trivially true everywhere, and
+# guarding nothing. The organic/paid separation is unchanged; what proves it
+# moved to the label the page sends.
+grep -qF "'X-Marketics-Form':'lp-keep-control'" <<<"$lp" \
+  && ok "LP sends the paid route label" \
+  || no "LP does not send X-Marketics-Form: lp-keep-control -- paid leads are going somewhere else (v3.56)"
 
 # EMPTY-KEY CLOBBER (v3.51). Measured in GHL 2026-09-11: a key present but empty
 # is WRITTEN over a populated CRM field, while an ABSENT key is left alone. One
@@ -713,13 +718,24 @@ for lead in "/lp/keep-control" "/get-started" \
   grep -qF 'mkxWait' <<<"$lb" && grep -qE 'setTimeout\([^;]*mkxWait' <<<"$lb" \
     && ok "$lead waits the remainder out instead of dropping it" \
     || no "$lead computes no deferral — the timing floor is a drop again (v3.55)"
+
+  # Deliverable 2, asserted where it actually matters -- on what the visitor's
+  # browser receives, not on what the repo contains. A rollback or a stale
+  # deploy is exactly what would put a hook URL back, with nothing else to show
+  # for it.
+  grep -qE 'leadconnectorhq\.com/hooks/|webhook-trigger/[0-9a-f-]+' <<<"$lb" \
+    && no "$lead serves a CRM webhook URL in public source (v3.56)" \
+    || ok "$lead serves no CRM webhook URL"
+  grep -qF 'fetch(MKX_LEAD_ENDPOINT' <<<"$lb" \
+    && ok "$lead POSTs same-origin to /api/lead" \
+    || no "$lead is not posting through the proxy (v3.56)"
 done
-grep -q '1297f709-5970-411d-b58c-e3a47721392e' <<<"$lp" \
-  && no "LP posts to the SHARED organic trigger -- the separation has been reverted" \
-  || ok "LP is off the shared organic trigger"
-grep -q '2ebb4312-80b3-4ef6-9e78-10e3807abc40' <<<"$lp" \
-  && no "LP posts to the RETIRED trigger -- leads are lost with no error" \
-  || ok "no retired trigger on the LP"
+grep -qF "'X-Marketics-Form':'get-started'" <<<"$lp" \
+  && no "LP sends the ORGANIC route label -- the separation has been reverted" \
+  || ok "LP is off the organic route"
+grep -qE 'leadconnectorhq\.com/hooks/|webhook-trigger/[0-9a-f-]+' <<<"$lp" \
+  && no "a CRM webhook URL is back in the LP's public source (v3.56)" \
+  || ok "no CRM webhook URL in the LP's public source"
 
 grep -q 'id="lp-audit-form"' <<<"$lp" \
   && ok "form anchor present" || no "form anchor #lp-audit-form missing"
@@ -728,8 +744,9 @@ grep -q 'id="lpAuditForm"' <<<"$lp" \
 for f in 'name="listing_url"' 'name="email"' 'name="pricing_owner"' 'name="source"'; do
   grep -q "$f" <<<"$lp" && ok "field $f" || no "field $f missing"
 done
-grep -q 'leadconnectorhq.com/hooks/' <<<"$lp" \
-  && ok "GHL webhook wired" || no "GHL webhook missing — leads would go nowhere"
+grep -qF "fetch(MKX_LEAD_ENDPOINT" <<<"$lp" \
+  && ok "LP POSTs same-origin to the proxy" \
+  || no "LP does not POST to MKX_LEAD_ENDPOINT — leads would go nowhere (v3.56)"
 [ "$(grep -c 'href="#lp-audit-form"' <<<"$lp")" -ge 2 ] \
   && ok "CTAs anchor to the form" || no "CTAs no longer anchor to the form"
 

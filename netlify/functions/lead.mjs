@@ -57,6 +57,12 @@ const ROUTES = {
   'get-started':    'GHL_HOOK_ORGANIC',
   'lp-keep-control': 'GHL_HOOK_PAID',
   'intel':          'GHL_HOOK_INTEL',
+  /* /join is not a lead form -- it posts `deposit_checkout_started` at the
+     checkout step. It rides the ORGANIC hook, as it always has, but under its
+     own route label so the counter can tell a deposit event from a lead.
+     In scope here for one reason: deliverable 2's success criterion is ZERO
+     hook-UUID hits in the deploy, and /join carried one. */
+  'join':           'GHL_HOOK_ORGANIC',
 };
 
 /* Deliverable 4: the consent denominator. This route is NOT a lead route --

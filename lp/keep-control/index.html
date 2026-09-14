@@ -913,18 +913,30 @@ footer a:hover{color:var(--muted);}
    — the webhook trigger itself.
 
    DEDICATED TRIGGER, not the shared one (registry v3.22). Every other form on
-   this site posts to 1297f709-…, and so did this one until tonight: 29 files,
-   including /get-started, /join, /404, every intel page and the consent
-   banner's beacon. Sharing it meant the paid workflow could only distinguish
-   itself by filtering on `source`, and a filter that silently fails to match is
-   indistinguishable from a broken deploy — which is exactly the two hours the
-   CTO lost hunting for which workflow owned the shared hook.
+   this site posted to the SHARED ORGANIC trigger, and so did this one until
+   2026-09-03: 29 files, including /get-started, /join, /404, every intel page
+   and the consent banner's beacon. Sharing it meant the paid workflow could
+   only distinguish itself by filtering on `source`, and a filter that silently
+   fails to match is indistinguishable from a broken deploy — which is exactly
+   the two hours the CTO lost hunting for which workflow owned the shared hook.
+
+   The trigger is NAMED BY ROUTE now, not by UUID: this page sends
+   X-Marketics-Form: lp-keep-control and the Function resolves it to
+   GHL_HOOK_PAID. The UUID that used to sit in this comment was the last one in
+   public source (v3.56) — a truncated UUID in a comment is still a UUID in the
+   deploy, which is why it reads this way instead.
 
    It also matters for bidding: this is the only path that fires a conversion
    Smart Bidding learns from, and it should not share an entry point with 29
    organic surfaces and a cookie banner. The organic hook is untouched. */
 (function(){
-  var GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/3c750621-84a1-444d-b64a-5712e15cfb5e";
+  /* Same-origin. The hook URL lives in a Netlify env var and is read only by
+     netlify/functions/lead.mjs -- it is not in this file, not in the deploy, and
+     not greppable from the page source (CTO deliverable 2, registry v3.56).
+     X-Marketics-Form names the trigger: routing travels in a header so the POSTed
+     BYTES stay identical to what GHL received before the proxy, which keeps its
+     field-picker samples valid. */
+  var MKX_LEAD_ENDPOINT = '/api/lead';
 
   /* Ruling 4 (board memo, Aug 30): the paid conversion event is DISTINCT from
      the organic form's `generate_lead`. Sharing the name would let organic
@@ -1125,7 +1137,7 @@ footer a:hover{color:var(--muted);}
          Awaited rather than fired from a bare setTimeout, so the request cannot
          be lost to an unload while the timer is still pending. */
       if (mkxWait) await new Promise(function (r) { setTimeout(r, mkxWait); });
-      await fetch(GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(wire) });
+      await fetch(MKX_LEAD_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','X-Marketics-Form':'lp-keep-control'}, body: JSON.stringify(wire) });
       } catch (ex) { console.warn('GHL webhook non-critical error:', ex); }
     }
 

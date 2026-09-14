@@ -803,6 +803,14 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
    mkxFormT0 is PAGE LOAD, not first interaction, so the elapsed time is as
    generous as it can honestly be, and a real human is past the floor long before
    they reach the button -- mkxWait is 0 for them and this costs them nothing. */
+/* Same-origin. The hook URL lives in a Netlify env var and is read only by
+   netlify/functions/lead.mjs -- it is not in this file, not in the deploy, and
+   not greppable from the page source (CTO deliverable 2, registry v3.56).
+   X-Marketics-Form names the trigger: routing travels in a header so the POSTed
+   BYTES stay identical to what GHL received before the proxy, which keeps its
+   field-picker samples valid. */
+var MKX_LEAD_ENDPOINT = '/api/lead';
+
 var MKX_MIN_FILL_MS = 3000;
 var mkxFormT0 = Date.now();
 
@@ -864,9 +872,9 @@ function submitForm() {
      real completion, so this page behaves as before for every human. */
   function mkxSend() {
     if (!botty) try {
-      fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
+      fetch(MKX_LEAD_ENDPOINT, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type':'application/json','X-Marketics-Form':'intel'},
         body: JSON.stringify(wire)
       });
     } catch(e) {

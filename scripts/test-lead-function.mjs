@@ -60,7 +60,8 @@ r = await call(post('get-started', JSON.stringify({ x: 'y'.repeat(70000) })));
 ok(r.status === 413 && sent.length === 0, 'oversized body → 413, forwards nothing');
 
 // ── routing ──
-for (const [route, hook] of [['get-started','ORGANIC'],['lp-keep-control','PAID'],['intel','INTEL']]) {
+for (const [route, hook] of [['get-started','ORGANIC'],['lp-keep-control','PAID'],
+                             ['intel','INTEL'],['join','ORGANIC']]) {
   reset();
   await call(post(route, '{"email":"a@b.c"}'));
   ok(!threw && sent.length === 1 && sent[0].url.endsWith('/' + hook), `${route} → the ${hook} trigger, and only that one`);

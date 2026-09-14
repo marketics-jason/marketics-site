@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.55 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.56 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,100 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.56 — /api/lead: the proxy, and the routing that had to move with it (2026-09-14)
+
+**Skill impact:** no — lead-path infrastructure and CI. No claim, phrasing, number or tenure fact
+changes.
+
+CTO's four deliverables, assigned in the 2026-09-12 weekly §8.1 with a Monday start. All four
+shipped; the two timezone entries riding the ticket landed earlier at v3.55.
+
+### The four
+
+| | |
+|---|---|
+| **1. CORS-class kill** | Every CRM caller POSTs **same-origin** to `/api/lead`; `netlify/functions/lead.mjs` forwards server-side. No browser-originated request to `leadconnectorhq.com` from any form. |
+| **2. URLs out of public source** | Three Netlify env vars, **Functions scope**. Hook UUIDs in deployable files: **0**. |
+| **3. Submission counter** | One structured line per forwarded POST, counts only, independent of consent and GA4. |
+| **4. Consent denominator** | impression / accept / deny / ignore — unknown since 2026-09-04. |
+
+### The forward is byte-for-byte, and that is the constraint that shaped the design
+
+The body is read as **text** and forwarded as **text**, never parsed and re-serialized. Routing
+parses a *separate copy*; the parsed object never reaches the wire, and a runtime assert refuses to
+forward if `outbound !== inbound`.
+
+The reason is the v3.51 P1. GHL writes a transmitted empty string **over** a populated field, so the
+browser strips `''`-valued keys. Any server-side normalisation could put one back — **the clobber
+returning through the back door, downstream of every gate that watches the browser.** Two controls
+break exactly that (re-serialize from the parsed object; strip empty keys server-side) and both fire.
+
+Byte-identity also satisfies CTO's second constraint for free: **routing travels in a header**
+(`X-Marketics-Form`), never in the payload. GHL's field picker learns from a captured sample, so an
+unchanged request shape keeps the Mapping Reference rows valid — and a renamed `source` value cannot
+silently misroute a lead, because routing never reads the body.
+
+### SEVEN callers, not six — and the last UUID was in a comment
+
+The ticket said six form surfaces. The **zero-hits criterion** said otherwise, and it was right:
+
+- **`/join`** posts `deposit_checkout_started` at the checkout step. Not a lead form — which is why
+  it was correctly *excluded* from the bot gate hours earlier — but it carried a hook UUID. Routed
+  as `join` → `GHL_HOOK_ORGANIC`: same trigger it always used, own label, so the counter can tell a
+  deposit event from a lead.
+- **33 pages** declared `var MARKETICS_GHL = "…"` and never used it. Dead code that read like a lead
+  path to anyone auditing later, and 33 copies of a live webhook URL. Removed.
+- **The last hit was prose.** `/lp/keep-control` carried a comment explaining the v3.22 separation
+  and naming the trigger id in it. **A truncated UUID in a comment is still a UUID in the deploy.**
+
+### Removing the UUIDs would have manufactured a vacuous pass. That is the part to remember.
+
+`LP does not contain the shared hook` (v3.22) was a real gate for eleven days. The moment no page
+contains any hook, it becomes **true for every page, for the wrong reason** — a green check guarding
+nothing, created by the same commit that satisfies deliverable 2.
+
+So the organic/paid separation moved from *which UUID is embedded* to *which route label is sent*,
+in the same commit that removed the UUIDs — never sequentially, because the window between them is
+exactly the vacuous pass. Control C3 (paid LP sending the organic label) proves it can still fail.
+
+**The id list went too, replaced by a pattern.** Control C2 is the argument: a **brand-new** trigger
+id sails straight past a list of known ones. That reasoning was already in this file for the consent
+beacon at v3.30 — it had simply never been applied to pages.
+
+### Verified
+
+39 function tests · 8/8 function controls · 8/8 gate-11d controls · 14/14 gate-11k controls ·
+13 browser assertions on the consent events · smoke **212 → 224** · **0** hook UUIDs in deployable
+files. Env-var readability proved by a probe that forwards nothing: a valid route with deliberately
+broken JSON returns 400 if the var is readable and 502 if it is not, because the config check runs
+before the body is read. Three routes, three 400s.
+
+### What this does NOT close, stated so the entry is not over-read
+
+**Anyone who already scraped a hook UUID can still POST to GHL directly.** This narrows the surface;
+it does not close it. Server-side honeypot and timing enforcement *inside the Function* is the
+follow-on, and is not in this ticket.
+
+### The instrument ledger, because it is now a pattern rather than an anecdote
+
+Five instrument defects today, **zero code defects found by instruments**:
+
+1. Consent detector guessed at selectors → reported `America/Toronto` ungated (gated since B2).
+2. Verifier matched the GHL **host** → counted the chat widget's `loader.js` GET as a lead POST.
+3. A CDN fetch on a fresh deploy → one red smoke assertion on code that was untouched.
+4. `sendBeacon` at unload never reaches `page.route()`, and arrives as `resourceType: ping` whose
+   body Playwright does not expose at all → the `ignore` event read as missing, twice.
+5. **Mine, and new in kind:** both browser verifiers were committed into `scripts/`, where Playwright
+   cannot resolve because the repo has no `node_modules` by design. They failed with
+   `ERR_MODULE_NOT_FOUND`, which reads exactly like a failing verification. They now exit 2 saying
+   *"This is a MISSING DEPENDENCY, not a failing verification."*
+
+Every one was caught by a known-good case in the same run, and none by re-reading the script.
+**Instrument before characterising** held each time; the two occasions I characterised first, I was
+wrong both times.
+
+---
+
 ## v3.55 — the timing floor defers instead of dropping; two consent zones closed (2026-09-14)
 
 **Skill impact:** no — lead-path behaviour and a consent-gate region list. No claim, phrasing, number

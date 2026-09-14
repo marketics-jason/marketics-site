@@ -1,4 +1,23 @@
-import { chromium } from 'playwright';
+/* Requires Playwright, which this repo deliberately does NOT depend on -- there
+   is no package.json and no build step (see netlify.toml [functions]). Run it
+   against an install elsewhere:
+
+     NODE_PATH=/path/to/node_modules node --input-type=module \
+       -e "$(cat scripts/verify-consent-events.mjs)"
+   or simply copy it next to a node_modules that has playwright and run it there.
+
+   It fails with this message rather than a stack trace, because "cannot find
+   module" reads like a broken test when it actually means "not installed".
+   Today's ledger has four instrument defects in it; this is one fewer. */
+let chromium;
+try {
+  ({ chromium } = await import('playwright'));
+} catch {
+  console.error('playwright is not installed here — see the header of this file.\n'
+    + 'This is a MISSING DEPENDENCY, not a failing verification.');
+  process.exit(2);
+}
+
 const BASE='http://127.0.0.1:8834';
 let fails=0; const ok=(c,m)=>{console.log(`  ${c?'PASS':'FAIL'}  ${m}`); if(!c)fails++;};
 const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome',args:['--no-sandbox']});

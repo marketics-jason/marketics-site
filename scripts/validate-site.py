@@ -167,15 +167,36 @@ CURRENT_TOKEN_PAGES = {"lp/keep-control/index.html"}
 COUNSEL_LANE_EXEMPT: dict = {}
 
 # ── Webhook triggers (registry v3.22) ──
-# Trigger ids only, never the full URL: these strings are already public in the
-# page source of every visitor's browser, but there is no reason for a grep of
-# this file to hand someone a ready-to-POST endpoint.
-SHARED_HOOK = "1297f709-5970-411d-b58c-e3a47721392e"   # organic: 29 files + the consent beacon
-PAID_HOOK = "3c750621-84a1-444d-b64a-5712e15cfb5e"     # /lp/keep-control ONLY
-# 2ebb4312-… was superseded before it ever shipped — named here so a stale copy
-# of it in a branch, a doc or someone's clipboard fails loudly rather than
-# quietly posting paid leads into a trigger nobody is watching.
-DEAD_HOOKS = ("2ebb4312-80b3-4ef6-9e78-10e3807abc40",)
+# NO HOOK IDS LIVE HERE ANY MORE (registry v3.56). They used to, as trigger ids
+# without the host, because they were public in every visitor's page source
+# anyway. Since the /api/lead proxy they are Netlify env vars, read only by
+# netlify/functions/lead.mjs, and this file matches the SHAPE instead:
+#
+#   * a PATTERN beats an id list, and always did -- a brand-new trigger id sails
+#     straight past a list of known ones. The consent-beacon check at the bottom
+#     of this file has used the pattern form since v3.30; this is the same move,
+#     applied to every page.
+#   * organic-vs-paid separation is now carried by the ROUTE LABEL a page sends,
+#     not by which UUID it embeds. That is the load-bearing swap: with the UUIDs
+#     gone, "the LP does not contain the shared hook" became TRUE FOR THE WRONG
+#     REASON -- trivially true for every page, guarding nothing. A gate that
+#     passes because the thing it inspected no longer exists is a vacuous pass,
+#     and removing the UUID without moving the assertion would have manufactured
+#     one in the same commit that named the class.
+HOOK_URL_RE = re.compile(r"leadconnectorhq\.com/hooks/|webhook-trigger/[0-9a-f-]+")
+
+# Every page that POSTs to the CRM, and the route label it must send. The
+# Function resolves the label to an env var; nothing here knows a URL.
+LEAD_ROUTES = {
+    "get-started/index.html":    "get-started",
+    "lp/keep-control/index.html": "lp-keep-control",
+    "join/index.html":           "join",
+    "intel/miami/index.html":    "intel",
+    "intel/montreal/index.html": "intel",
+    "intel/muskoka/index.html":  "intel",
+    "intel/nashville/index.html": "intel",
+}
+ALL_ROUTES = ("get-started", "lp-keep-control", "join", "intel")
 
 # ── sendBeacon + a non-safelisted Content-Type (registry v3.30) ──
 # navigator.sendBeacon() ALWAYS sends with credentials mode 'include'. That is
@@ -720,32 +741,44 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                             f"removing it empties that CRM field silently, with no "
                             f"error on either side (registry v3.35)")
 
-    # 11d. the paid LP posts to its OWN webhook trigger (registry v3.22).
-    # SHARED_HOOK is the organic one: 29 files use it, the consent beacon
-    # included. The paid path had to be separated because a workflow sharing it
-    # can only tell itself apart by filtering on `source`, and a filter that
-    # quietly stops matching looks exactly like a broken deploy — two hours were
-    # lost to that on 2026-09-03. Gated in both directions: the LP must carry the
-    # paid hook, and must not carry the shared one. A copy-paste from any other
-    # form's handler would otherwise put it back without anyone noticing.
-    if where == "lp/keep-control/index.html":
-        if SHARED_HOOK in raw:
-            hard.append(f"{where}: posts to the SHARED organic webhook trigger — the paid "
-                        f"path has its own, so the paid workflow does not have to filter "
-                        f"itself out of 29 other surfaces (registry v3.22)")
-        if PAID_HOOK not in raw:
-            hard.append(f"{where}: paid webhook trigger {PAID_HOOK!r} missing — this is the "
-                        f"only entry point for the paid conversion path (registry v3.22)")
-    elif PAID_HOOK in raw:
-        hard.append(f"{where}: uses the PAID LP webhook trigger — it belongs to "
-                    f"/lp/keep-control alone, and a second caller would put organic "
-                    f"traffic into the paid conversion workflow (registry v3.22)")
+    # 11d. the CRM endpoint is same-origin and the route label is correct
+    # (registry v3.56, replacing the UUID-based separation of v3.22).
+    #
+    # Why the separation still matters: a workflow sharing a trigger can only
+    # tell itself apart by filtering on `source`, and a filter that quietly
+    # stops matching looks exactly like a broken deploy -- two hours were lost
+    # to that on 2026-09-03. The separation is unchanged; only its enforcement
+    # moved, from "which UUID is embedded" to "which route label is sent".
+    if HOOK_URL_RE.search(raw):
+        hard.append(f"{where}: a CRM webhook URL is back in public page source — "
+                    f"it belongs in a Netlify env var read by "
+                    f"netlify/functions/lead.mjs, and anyone who greps the deploy "
+                    f"for it can POST straight into the CRM (registry v3.56)")
 
-    for dead in DEAD_HOOKS:
-        if dead in raw:
-            hard.append(f"{where}: posts to a RETIRED webhook trigger {dead!r} — it is not "
-                        f"wired to any workflow, so leads sent there are lost with no "
-                        f"error and no contact (registry v3.22)")
+    if where in LEAD_ROUTES:
+        want = LEAD_ROUTES[where]
+        code = re.sub(r"<!--.*?-->", "", raw, flags=re.S)
+        code = re.sub(r"/\*.*?\*/", "", code, flags=re.S)
+
+        if "MKX_LEAD_ENDPOINT = '/api/lead'" not in code:
+            hard.append(f"{where}: does not declare the same-origin endpoint "
+                        f"MKX_LEAD_ENDPOINT = '/api/lead' (registry v3.56)")
+        if "fetch(MKX_LEAD_ENDPOINT" not in code:
+            hard.append(f"{where}: declares the endpoint but does not POST to it — "
+                        f"the browser is still talking to someone else (v3.56)")
+        if f"'X-Marketics-Form':'{want}'" not in code.replace(" ", ""):
+            hard.append(f"{where}: does not send X-Marketics-Form: {want} — without the "
+                        f"route label the Function rejects the POST, and with the WRONG "
+                        f"one the lead lands in another workflow (registry v3.56)")
+        for other in ALL_ROUTES:
+            if other != want and f"'X-Marketics-Form':'{other}'" in code.replace(" ", ""):
+                hard.append(f"{where}: also sends the {other!r} route — a page has exactly "
+                            f"one trigger, and two labels means one of them is a "
+                            f"copy-paste that will misroute leads (registry v3.56)")
+    elif "X-Marketics-Form" in raw:
+        hard.append(f"{where}: sends an X-Marketics-Form route but is not in LEAD_ROUTES — "
+                    f"a new CRM caller must be registered there on the day it ships, or "
+                    f"nothing checks where its leads go (registry v3.56)")
 
     # 11d-2. No self-review structured data (GEO brief finding 3, registry v3.36).
     # A ClaimReview whose author and itemReviewed.author are both Marketics is us

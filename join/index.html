@@ -266,7 +266,13 @@ strong{color:var(--bright);font-weight:500;}
 
 <script>
 var STRIPE_URL = 'https://buy.stripe.com/28EaEWfq83KvbOS2uB5EY01';
-var GHL = 'https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e';
+/* Same-origin. The hook URL lives in a Netlify env var and is read only by
+   netlify/functions/lead.mjs -- it is not in this file, not in the deploy, and
+   not greppable from the page source (CTO deliverable 2, registry v3.56).
+   X-Marketics-Form names the trigger: routing travels in a header so the POSTed
+   BYTES stay identical to what GHL received before the proxy, which keeps its
+   field-picker samples valid. */
+var MKX_LEAD_ENDPOINT = '/api/lead';
 
 function syncAgree(){
   var c = document.getElementById('agreeCheck').checked;
@@ -299,7 +305,7 @@ async function pay(){
 
   /* Record the checkout intent (non-blocking); Stripe collects email + card on its hosted page */
   try{
-    await fetch(GHL,{method:'POST',headers:{'Content-Type':'application/json'},
+    await fetch(MKX_LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','X-Marketics-Form':'join'},
       body:JSON.stringify(Object.assign({event:'deposit_checkout_started',tcAccepted:true,tcTimestamp:new Date().toISOString(),amount:500,currency:'USD',product:'Marketics Commitment Deposit',source:'join',landingPage:landing},{
         utm_source: utm.utm_source || '', utm_medium: utm.utm_medium || '', utm_campaign: utm.utm_campaign || '', utm_content: utm.utm_content || '', utm_term: utm.utm_term || ''
       }))});

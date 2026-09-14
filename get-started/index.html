@@ -510,7 +510,13 @@ textarea{min-height:92px;resize:none;}
 
 <script>
 /* ══ AUDIT FORM — low-friction lead capture, posts to the same GHL webhook, fires generate_lead ══ */
-var MARKETICS_GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";
+/* Same-origin. The hook URL lives in a Netlify env var and is read only by
+   netlify/functions/lead.mjs -- it is not in this file, not in the deploy, and
+   not greppable from the page source (CTO deliverable 2, registry v3.56).
+   X-Marketics-Form names the trigger: routing travels in a header so the POSTed
+   BYTES stay identical to what GHL received before the proxy, which keeps its
+   field-picker samples valid. */
+var MKX_LEAD_ENDPOINT = '/api/lead';
 var auditMode = 'listing';
 
 /* BOT GATE (CTO ruling 2026-09-14). Two cheap, self-hosted checks, no third
@@ -639,7 +645,7 @@ function setMode(m){
          Awaited rather than fired from a bare setTimeout, so the request cannot
          be lost to an unload while the timer is still pending. */
       if (mkxWait) await new Promise(function (r) { setTimeout(r, mkxWait); });
-      await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(wire) });
+      await fetch(MKX_LEAD_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json','X-Marketics-Form':'get-started'}, body: JSON.stringify(wire) });
     }catch(err){ console.warn('GHL webhook non-critical error:', err); }
 
     /* Show confirmation regardless of the webhook's CORS/network outcome */
