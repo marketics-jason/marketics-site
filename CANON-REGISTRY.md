@@ -2363,6 +2363,68 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.59 — the gate that never ran, and the class it belongs to (2026-09-14)
+
+**Skill impact:** no — CI triggers, checker scope, and a control-design pattern. No claim, phrasing,
+number or tenure fact changes.
+
+### `validate-site.yml` now fires on pushes to `main`
+
+It fired on `pull_request` only. **Any direct push to `main` skipped the gate entirely, and nobody
+would have known** — a gate that never runs leaves no red check, only an absence, and absence is what
+nobody looks for. Found because `7847de0` was fast-forwarded onto `main` and the question was asked:
+*did the gate run on that head?* It had not. Nor had it on any earlier direct push.
+
+`workflow_dispatch` on `main` recovered the substance for that specific commit (run 172, conclusion
+success). That closes the instance. The trigger closes the mechanism, and **only the mechanism
+survives someone being in a hurry.**
+
+**No `paths:` filter on the push trigger**, unlike the `pull_request` one. A paths filter re-creates
+this same hole one file type at a time. The run is about seven seconds.
+
+**Negative-controlled rather than assumed.** A trigger nobody has seen fail is a trigger nobody has
+tested — and after seven instrument defects this month, a green-by-construction claim is not
+evidence. A scratch branch carrying the same trigger received a deliberate gate 11k violation
+(`keepalive` removed from `/intel/miami`). **Run 173: `event: push`, conclusion `failure`**, red on
+the planted violation and on nothing else. The branch is deleted; the result is the artefact.
+
+### `check-skill-sync.py` — scope recorded, in the file and in its own output
+
+Check B reads **one** skill file: the copy on the machine it runs on. The skill is installed
+per Project, so there are five.
+
+**The gate never claimed fleet coverage. Its output just read that way.** "registry/skill sync gate
+passes" is a sentence about the whole pairing, and a green result was taken as *the skill is current*
+rather than *the copy I could reach is current*. That is how the authoring source could be closed at
+v3.49 while a Project still loaded the pre-correction file behind a green run.
+
+The fix is **not** more scope — the script cannot reach another machine's filesystem, and pretending
+otherwise is exactly the vacuous pass it was written to avoid. The fix is that the report now states
+what it covers: `SCOPE: this copy only`, and the pass line reads `(one installed copy)`. Verifying
+the others is a human step, by Build line, per Project.
+
+### The class, stated once at the level it generalises
+
+**Outranked-or-loosened controls** now has three members:
+
+| # | Control | What it could reach | How the result read |
+|---|---|---|---|
+| a | stale-source precedence (v3.44a) | the registry | "the skill is authoritative" |
+| b | undiagnosed budget exception (v3.46a) | the stated budget | "spend is governed" |
+| c | scope-narrower-than-report (v3.59) | one skill copy · PRs only | "the skill is synced" · "the site is gated" |
+
+**The generating pattern: a control reports on what it can reach, and the report gets read as
+covering the whole class.** Nothing lies. The check is correct about its own scope every time. The
+gap is between the scope and the sentence, and it is invisible from inside the control — which is why
+re-reading the script never finds it.
+
+**Detection, matching the vacuous-pass audit question.** A vacuous pass asks *can this check fail?*
+Outranked-or-loosened asks *does this check still decide anything?* This third member adds:
+**what is inside the scope of this check, and what does its output sound like it covers?** When those
+two differ, fix the sentence if you cannot widen the scope. An honest narrow report beats a broad one
+that is true by accident.
+
+---
 ## v3.58 — ASCII city, and what GHL actually does with tags (2026-09-14)
 
 **Skill impact:** no — payload values, CI, and CRM operational facts. No claim, phrasing, number or
