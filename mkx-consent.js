@@ -433,6 +433,46 @@
   }
 
   /* ── Remove the banner ────────────────────────────── */
+  /* ── Consent denominator (CTO deliverable 4, 2026-09-14, registry v3.56) ──
+     Four counts for a dated window: impression / accept / deny / ignore.
+     UNKNOWN SINCE 2026-09-04, when the original beacon died: it sent to GHL
+     cross-origin, GHL's wildcard ACAO rejected every credentialed send, and it
+     failed silently -- four console errors per banner and zero data. The
+     "know the denominator" requirement has been unmet since launch.
+
+     This works now for one reason: /api/lead is SAME-ORIGIN, so there is no
+     ACAO negotiation to lose. The deliverable was unbuildable until the proxy
+     removed the cross-origin path.
+
+     ANONYMOUS BY CONSTRUCTION, because these necessarily fire BEFORE the
+     visitor has answered: an action name, a gated flag, a pathname. No
+     identifier, no cookie, no storage read. The server drops anything else.
+     Counting must never break the banner, so every call is wrapped and
+     fire-and-forget -- a failed count is invisible, a thrown exception here
+     would leave a visitor unable to consent. */
+  var MKX_COUNT_URL = '/api/lead';
+  var bannerDecided = false;
+
+  function trackConsent(action, isGated) {
+    var body = JSON.stringify({ a: action, g: isGated ? 1 : 0, p: location.pathname });
+    try {
+      /* 'ignore' fires while the page is unloading -- the one moment a fetch is
+         not guaranteed to survive -- so it goes by beacon. sendBeacon CANNOT set
+         headers, hence ?f=consent rather than X-Marketics-Form. */
+      if (action === 'ignore' && navigator.sendBeacon) {
+        navigator.sendBeacon(MKX_COUNT_URL + '?f=consent',
+                             new Blob([body], { type: 'text/plain' }));
+        return;
+      }
+      fetch(MKX_COUNT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Marketics-Form': 'consent' },
+        body: body,
+        keepalive: true,
+      }).catch(function () { /* a lost count is not a visitor-facing failure */ });
+    } catch (e) { /* same */ }
+  }
+
   function dismiss(banner) {
     banner.style.opacity = '0';
     banner.style.transform = 'translateY(8px)';
@@ -519,7 +559,17 @@
 
     document.body.appendChild(banner);
 
+    /* Counted at MOUNT, not at the decision to show: an impression is a banner
+       a human could actually see. showBanner() is only reached on the gated and
+       undecided path, so `true` here is the fact, not an assumption. */
+    trackConsent('impression', true);
+    window.addEventListener('pagehide', function () {
+      if (!bannerDecided) trackConsent('ignore', true);
+    }, { once: true });
+
     document.getElementById('mkx-accept').addEventListener('click', function () {
+      bannerDecided = true;
+      trackConsent('accept', true);
       setConsent(true);
       updateConsent(true);    // B3, as amended by C1: everything except ad_personalization
       loadClarity();          // GA4 is already loaded; this is the cookie-setting one
@@ -528,6 +578,8 @@
     });
 
     document.getElementById('mkx-decline').addEventListener('click', function () {
+      bannerDecided = true;
+      trackConsent('deny', true);
       setConsent(false);
       updateConsent(false);   // explicit denial; GA4 keeps sending cookieless pings
       dismiss(banner);

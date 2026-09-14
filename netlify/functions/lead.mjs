@@ -59,6 +59,13 @@ const ROUTES = {
   'intel':          'GHL_HOOK_INTEL',
 };
 
+/* Deliverable 4: the consent denominator. This route is NOT a lead route --
+   it is counted here and forwarded NOWHERE. It shares the endpoint on CTO's
+   instruction, and the separation is enforced by returning before the hook
+   lookup can happen, not by remembering not to forward. */
+const CONSENT_ROUTE = 'consent';
+const CONSENT_ACTIONS = ['impression', 'accept', 'deny', 'ignore'];
+
 const MAX_BODY_BYTES = 64 * 1024;
 
 /* The outbound body must be the inbound body. Cheap, and it is the only thing
@@ -75,7 +82,19 @@ export default async (req) => {
     return new Response('method not allowed', { status: 405 });
   }
 
-  const route = (req.headers.get('x-marketics-form') || '').trim();
+  /* Routing travels in the URL or a header, never in the payload -- the body
+     must stay byte-identical, and a renamed `source` value must not be able to
+     misroute a lead. The ?f= fallback exists because navigator.sendBeacon
+     CANNOT SET HEADERS, and the consent 'ignore' event has to be a beacon: it
+     fires while the page is unloading, which is the one moment a fetch is not
+     guaranteed to survive. Header wins where both are present. */
+  const route = (req.headers.get('x-marketics-form')
+                 || new URL(req.url).searchParams.get('f')
+                 || '').trim();
+  if (route === CONSENT_ROUTE) {
+    return await handleConsent(req);
+  }
+
   const envName = ROUTES[route];
   if (!envName) {
     console.log(JSON.stringify({ evt: 'lead_rejected', reason: 'unknown_route', route }));
@@ -156,5 +175,44 @@ export default async (req) => {
     headers: { 'Content-Type': 'application/json' },
   });
 };
+
+/* ── Consent denominator (deliverable 4) ────────────────────────────────────
+   Four counts for a dated window: impression / accept / deny / ignore. Unknown
+   since 2026-09-04, when the original consent beacon died -- it used
+   sendBeacon against GHL cross-origin, and GHL's wildcard ACAO made every send
+   fail silently. Four console errors per banner, zero data. Same-origin is
+   what makes a beacon safe here, so this deliverable only became possible
+   BECAUSE deliverable 1 removed the cross-origin path.
+
+   PRIVACY, and it is the reason this is shaped the way it is: these events
+   necessarily fire BEFORE the visitor has answered the banner, so the payload
+   is strictly anonymous and non-identifying -- an action name, whether the
+   region is gated, and a pathname. No identifiers, no cookies, no storage
+   read, nothing client-level. Anything more would be measuring people who have
+   not yet agreed to be measured, which is the thing the banner exists to ask.
+   ────────────────────────────────────────────────────────────────────────── */
+async function handleConsent(req) {
+  const raw = await req.text();
+  let ev;
+  try { ev = JSON.parse(raw); } catch { ev = null; }
+
+  const action = ev && typeof ev.a === 'string' ? ev.a : '';
+  if (!CONSENT_ACTIONS.includes(action)) {
+    console.log(JSON.stringify({ evt: 'consent_rejected', reason: 'unknown_action' }));
+    return new Response(null, { status: 400 });
+  }
+
+  console.log(JSON.stringify({
+    evt: 'consent_event',
+    action,
+    gated: !!(ev && ev.g),
+    page: typeof ev.p === 'string' ? ev.p.slice(0, 120) : '',
+    ts: new Date().toISOString(),
+  }));
+
+  /* 204: nothing to say, and nothing to forward. A beacon ignores the body
+     anyway, and a lead hook must never be reachable from this branch. */
+  return new Response(null, { status: 204 });
+}
 
 export const config = { path: '/api/lead' };

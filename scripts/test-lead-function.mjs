@@ -104,6 +104,54 @@ r = await call(post('get-started', '{"email":"a@b.c"}'));
 ok(r.status === 502, 'upstream unreachable → 502, not a false success');
 ok(logs.some(l => l.evt === 'lead_forwarded' && l.ok === false), 'the failure is recorded in the counter line');
 
+
+// ── Deliverable 4: the consent denominator ────────────────────────────────
+console.log('\n/api/lead — consent events\n');
+
+for (const a of ['impression', 'accept', 'deny', 'ignore']) {
+  reset();
+  const res = await call(post('consent', JSON.stringify({ a, g: 1, p: '/get-started' })));
+  ok(!threw && res?.status === 204, `consent "${a}" accepted (204)`);
+  ok(sent.length === 0, `consent "${a}" forwards NOTHING to GHL`);
+  ok(logs.some(l => l.evt === 'consent_event' && l.action === a && l.gated === true),
+     `consent "${a}" counted, with the gated flag`);
+}
+
+reset();
+let cr = await call(post('consent', JSON.stringify({ a: 'something-else' })));
+ok(cr?.status === 400 && sent.length === 0, 'an unknown consent action is rejected, not counted');
+
+reset();
+cr = await call(post('consent', 'not json'));
+ok(cr?.status === 400 && sent.length === 0, 'malformed consent payload rejected');
+
+// The privacy shape is the reason this deliverable is allowed to fire pre-consent.
+reset();
+await call(post('consent', JSON.stringify({
+  a: 'impression', g: 0, p: '/lp/keep-control',
+  email: 'person@example.com', id: 'visitor-42',
+})));
+const cl = logs.find(l => l.evt === 'consent_event');
+ok(!!cl && !JSON.stringify(cl).includes('person@example.com') && !JSON.stringify(cl).includes('visitor-42'),
+   'extra fields are DROPPED — the consent line can only ever carry action/gated/page');
+ok(cl && cl.gated === false, 'an ungated impression records gated:false (the flag distinguishes, so it is not vacuous)');
+
+// sendBeacon cannot set headers: the ?f= fallback must route.
+reset();
+const beacon = new Request('https://marketics.io/api/lead?f=consent', {
+  method: 'POST', headers: { 'content-type': 'text/plain' },
+  body: JSON.stringify({ a: 'ignore', g: 1, p: '/x' }),
+});
+const br = await call(beacon);
+ok(!threw && br?.status === 204 && logs.some(l => l.evt === 'consent_event' && l.action === 'ignore'),
+   '?f=consent routes without a header — the path sendBeacon has to use');
+ok(sent.length === 0, 'the beacon route still forwards nothing to GHL');
+
+// A lead must never be reachable from the consent branch, nor vice versa.
+reset();
+await call(post('consent', JSON.stringify({ a: 'accept', g: 1, p: '/x' })));
+ok(!logs.some(l => l.evt === 'lead_forwarded'), 'a consent event never produces a lead_forwarded line');
+
 console.log = realLog;
 console.log(fails === 0 ? '\nALL FUNCTION TESTS PASS' : `\n${fails} FAILED`);
 process.exit(fails ? 1 : 0);
