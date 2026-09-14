@@ -2363,6 +2363,41 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.60 — control branches carry an expiry (2026-09-14)
+
+**Skill impact:** no — repo hygiene. No claim, phrasing, number or tenure fact changes.
+
+**Rule (CTO, 2026-09-14): a control branch is deleted in the run that creates it, or its name
+carries an expiry.** A branch called `gate-scope-control` is self-explanatory today and an unexplained
+`CONTROL (do not merge)` commit in a month. The v3.59 negative control left one behind because the
+delete could not be issued from the session that made it — this container's git relay drops ref
+deletions (`send-pack: unexpected disconnect`, three attempts, both forms). **The rule accounts for
+that: if the run cannot delete it, the name must say when it stops mattering** — `tmp-control-0914`
+rather than a name that reads permanent.
+
+### Two corrections to the count, measured rather than accepted
+
+1. **`claude/gate-scope-control` is NOT one of the unreferenced-but-merged branches.** It carries a
+   commit that is in nothing else — the planted violation, correctly never merged. Deleting it
+   discards that commit, which is the intent; it is not the tidy-up case.
+2. **The four fully-merged remote branches are** `new-session-yznqsu`, `permission-allowlist`,
+   `samplelink-touch-target-fix`, `upbeat-hypatia-mogqyn`. **`new-session-yznqsu` is the active
+   development branch and must not be deleted** despite being fully contained in `main` — "merged"
+   and "finished" are not the same predicate, which is the same scope-versus-report confusion v3.59
+   records, in miniature.
+
+Twenty-eight other `claude/*` branches carry unmerged commits and are out of scope here.
+
+### The ranking held this time
+
+Jason reported the branch deleted; three independent reads (`ls-remote`, the REST branch list, a
+direct ref fetch **with a non-existent ref as a negative control in the same run**) said otherwise,
+at an unchanged SHA. Code pressed rather than recording it as done. **That is the v3.57 ranking
+applied the right way round** — a write reporting success is a claim, a read disagreeing is evidence
+— after the Netlify episode where it was inverted and cost a test cycle. Recorded because the
+instinct is the asset, not the branch.
+
+---
 ## v3.59 — the gate that never ran, and the class it belongs to (2026-09-14)
 
 **Skill impact:** no — CI triggers, checker scope, and a control-design pattern. No claim, phrasing,
