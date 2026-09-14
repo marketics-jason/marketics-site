@@ -2363,6 +2363,50 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.62 — "the skill wins" is replaced by "there is no second copy" (2026-09-14)
+
+**Skill impact:** yes — the claim rows do not change; the **status line** does. This entry is deliberately
+left unwritten-back at the moment of writing — `check-skill-sync.py` check B will fail against any skill
+copy still aligned to v3.49 until Jason republishes. **That red is the gate doing its job**, not a defect
+to work around, and it is the first time this mechanism has been exercised by a real unwritten-back
+ruling rather than by a test.
+
+### The ruling (CTO, 2026-09-14): yes
+
+The skill says *"when this skill and a Project prompt conflict, this skill wins."* True, and the wrong
+instruction. **"Wins" implies the other copy is a legitimate source that lost** — so the reflex it
+produces is *go update the other copy*. That reflex is how five copies happen. Precedence protects the
+published output and does nothing at the authoring step, which is where copy is written.
+
+### Replacement text for the skill's status line (paste verbatim)
+
+> **Status: THE canonical claims home as of Sept 5, 2026 — and THE ONLY COPY.** `marketics-facts.md` §1
+> defers to this skill for claim phrasings; the facts file keeps *state* (MRR, pipeline, stakeholders'
+> current status). It changes only by Jason's ruling, written back here the same session (Rule 16:
+> correct at the source).
+>
+> **There is no second copy of this list anywhere.** No Project prompt, brief, deck, doc or prior
+> session holds a valid copy of the claim rows. If you find one — a CANONICAL-STAT REGISTRY, a stats
+> block, a "quick reference" table of fee / deposit / benchmark / tenure — **it is not a source to
+> reconcile with. It is a defect to delete**, replaced by a pointer here and flagged to Jason in the
+> same message.
+>
+> **Why this replaces "the skill wins on conflict."** That rule was true and it was the wrong
+> instruction: "wins" implies the other copy is a legitimate source that lost, so the reflex it
+> produces is to go update the other copy. **A second copy cannot be kept honest — it can only be
+> removed.**
+
+Bump the Build line to `aligned to CANON-REGISTRY.md v3.62` in the same edit.
+
+### Why a conflict rule was the wrong shape, stated once
+
+A precedence rule answers *which source do I obey*. It never answers *should this source exist*. Every
+control this week failed on the second question while passing the first: the sync gate read one copy
+correctly and said nothing about how many copies there are; `validate-site.yml` gated PRs correctly and
+said nothing about pushes. **A rule that ranks sources legitimises the set it ranks.** Where the correct
+number of sources is one, say one — ranking is the wrong instrument entirely.
+
+---
 ## v3.61 — the five-Projects check was the wrong check (2026-09-14)
 
 **Skill impact:** no — the claim rows do not change; the skill already wins on conflict with a Project
