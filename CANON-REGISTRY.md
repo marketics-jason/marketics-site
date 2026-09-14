@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.53 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.54 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,97 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.54 — bot gate on the six lead forms: honeypot + submit-timing (2026-09-14)
+
+**Skill impact:** no — a spam control on the lead path. No claim, phrasing, number or tenure fact
+changes, and nothing a reader sees.
+
+**Ruling:** CTO, 2026-09-14. *"Honeypot + submit-timing check on all six form surfaces. Hidden field
+a human never sees; if filled, drop silently. Catches most of this class, costs nothing, no
+third-party script, no CSP change, no consent implication."*
+
+Shipped as ruled. No third party, no new request, no cookie, nothing consent-gated — the whole
+control is two variables and one branch per form.
+
+### What each form now does
+
+| | |
+|---|---|
+| **Honeypot** | `<input id="mkxHpField" name="hp_field" tabindex="-1">`, moved off-screen by `.mkx-hp`, `aria-hidden`. Anything in it is automation. |
+| **Timing floor** | `MKX_MIN_FILL_MS = 3000`, measured from **page load** (`mkxFormT0`), not first interaction. |
+| **On rejection** | The normal confirmation renders and **nothing is POSTed** — no error, no retry hint. A visible rejection only tells the author what to change. GA4 `generate_lead` is suppressed on the same branch, so a blocked bot cannot inflate the conversion count either. |
+
+Six surfaces, the same tuple as v3.51: `/get-started`, `/lp/keep-control`, and the four intel market
+pages. Adding a form to `LEAD_FORMS` picks up both gates at once.
+
+### Two decisions inside the ruling that were Code's, and are worth the ink
+
+**1. The honeypot's NAME is load-bearing, and the one already live was the risky choice.**
+`/lp/keep-control` has carried a working honeypot since August — field present, read, POST guarded.
+It was named `company`. **`company` and `organization` are real Chrome autofill tokens**, so a
+visitor with an organization in their autofill profile could have had the trap filled *for* them and
+their lead dropped with no error and no trace. Renamed to `hp_field`, which matches no autofill
+heuristic, and **gate 11k now rejects both tokens by name** rather than trusting nobody reaches for
+the obvious word. No evidence this ever fired; the exposure was real and is now closed.
+
+That is the same failure shape as v3.51 — an invisible loss on a path that reports success — arriving
+this time through a control built to *prevent* loss. A spam control that silently drops humans is
+worse than no spam control, because the damage is indistinguishable from quiet demand.
+
+**2. The timing floor is the piece with a genuine false-positive path, and it was designed down
+rather than accepted.** `t0` is page load, so elapsed time is as generous as it can honestly be: a
+human must land, read, click a field, type or autofill, and click send. 3s sits below any real
+completion of these forms and above a scripted submit. **Verified in a browser both ways** — a
+sub-floor submit posts nothing, and *the same submit past the floor posts normally.* The "no human is
+lost" leg is the one that needed proving, and it is asserted on every surface.
+
+*Open to CTO, not blocking:* if even that residual risk is unwanted, the one-line swap is to **defer**
+the send to the floor instead of dropping it. Zero human loss, and it still defeats fire-and-forget
+automation; it does let a patient headless browser through, which the honeypot then has to catch
+alone. Shipped as the drop because that is what was ruled.
+
+### Gate 11k and its landing condition
+
+`validate-site.py` gate 11k, on the same six surfaces, comment-stripped. Asserts the field exists,
+is named `hp_field`, is tab-unreachable, is moved **off-screen rather than `display:none`** (a bot
+that can tell a field is hidden skips it), **is read**, has a floor of at least 1000ms compared
+against `mkxFormT0` — and, the load-bearing one, that **`if (!botty)` appears before the transmitting
+fetch**. Computing the check and posting anyway is the regression that would actually happen and is
+invisible to every other assertion.
+
+**10 controls, all fired, including the vacuity control on the first attempt** — code reverted while
+every telltale string is left behind in a comment. Second consecutive gate to pass that control
+first time (11j was the first, v3.51). Plus 24 smoke assertions on the served files: **174 → 198**.
+
+**One real bug found by the controls, in the gate itself.** Stripping `/* */` before `<!-- -->`
+deletes any `-->` that lives inside a CSS comment, after which the next `<!--` runs 16KB to the
+following close and swallows the `<style>` block the gate reads. `/lp/keep-control` failed with *"no
+`.mkx-hp` rule"* while the rule was plainly there. HTML comments now come out first, on the raw file,
+where they are still well-formed. **It failed safe — the same mistake in the other direction is a
+vacuous pass**, and the note is in the file.
+
+### Scope, checked rather than assumed
+
+Every page that POSTs to GHL was enumerated, not inferred from the v3.51 list. **Six is the right
+number.** Two findings alongside it:
+
+- **`/join` was examined and deliberately excluded.** It posts `deposit_checkout_started` to GHL, but
+  it is a checkout step, not lead capture: its only input is a T&C checkbox, there is no email to
+  harvest, and a honeypot there would be noise with no threat model behind it.
+- **18 intel article pages declare `var MARKETICS_GHL = "…"` and never use it** — no form, no input,
+  no fetch. Harmless dead code that *reads* like a lead path to anyone auditing this later. Not
+  touched (out of scope, zero runtime cost). **Trigger to remove it: the next edit that touches
+  scripts on those pages.**
+
+### What this does not do
+
+It catches automation that drives the real page. **Neither check helps against a script POSTing
+straight to the webhook URL**, which is public in the page source — that is the `/api/lead` proxy's
+job (§8.1 of the 2026-09-12 weekly, ownership still unconfirmed). Worth stating plainly so this entry
+is not read later as closing more than it closes.
+
+---
+
 ## v3.53 — sitting close-out and verification record (2026-09-11)
 
 **Skill impact:** no — verification results and process notes; no claim, phrasing or number changes.

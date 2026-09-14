@@ -678,6 +678,22 @@ for lead in "/lp/keep-control" "/get-started" \
   grep -qF "payload[k] !== ''" <<<"$lb" \
     && ok "$lead still filters empty keys out of it" \
     || no "$lead has a payload copy but no empty-key filter (v3.51)"
+
+  # BOT GATE (v3.54). Four assertions, and the fourth is the one that matters:
+  # a honeypot and a timer that are computed but do not gate the POST look
+  # identical to working ones in every other check.
+  grep -qF 'name="hp_field"' <<<"$lb" \
+    && ok "$lead serves the honeypot field" \
+    || no "$lead has no honeypot on the served page (v3.54)"
+  grep -qF '.mkx-hp{position:absolute;left:-9999px' <<<"$lb" \
+    && ok "$lead keeps the honeypot off-screen" \
+    || no "$lead honeypot is not moved off-screen -- humans can see it, or bots can detect it (v3.54)"
+  grep -qF "getElementById('mkxHpField')" <<<"$lb" \
+    && ok "$lead actually reads the honeypot" \
+    || no "$lead has a honeypot nothing inspects -- a control that cannot fire (v3.54)"
+  grep -qF 'if (!botty)' <<<"$lb" && grep -qF 'MKX_MIN_FILL_MS' <<<"$lb" \
+    && ok "$lead gates the POST on the honeypot and the timing floor" \
+    || no "$lead computes the bot check but does not gate the POST on it (v3.54)"
 done
 grep -q '1297f709-5970-411d-b58c-e3a47721392e' <<<"$lp" \
   && no "LP posts to the SHARED organic trigger -- the separation has been reverted" \

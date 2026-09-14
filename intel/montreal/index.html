@@ -245,6 +245,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .form-select{background:var(--n4);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:12px 14px;font-family:var(--s);font-size:15px;color:var(--white);outline:none;transition:border-color .15s;width:100%;cursor:pointer;appearance:none;-webkit-appearance:none;}
 .form-select:focus{border-color:rgba(214,173,96,.4);}
 .form-btn{width:100%;padding:16px;background:var(--gold);color:var(--night);border:none;border-radius:3px;font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:filter .2s;margin-top:8px;}
+/* Honeypot: OFF-SCREEN rather than display:none or hidden -- a bot that skips
+   inputs it can tell are hidden fills everything else, and the whole point is
+   that it fills this one. Never focusable (tabindex -1), never announced
+   (aria-hidden), and deliberately named `hp_field`: an organization-shaped name
+   (company, organization) is a REAL Chrome autofill token, and an autofilled
+   honeypot would silently drop a genuine lead -- the same shape of invisible
+   loss as the v3.51 clobber. `hp_field` matches no autofill heuristic. */
+.mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 .form-btn:hover{filter:brightness(1.08);}
 .form-btn:disabled{opacity:.6;cursor:not-allowed;}
 .form-fine{font-size:11px;color:var(--dim);text-align:center;margin-top:12px;line-height:1.6;}
@@ -647,6 +655,10 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
           <input class="form-input" type="url" id="listing" placeholder="airbnb.com/rooms/...">
         </div>
       </div>
+      <div class="mkx-hp" aria-hidden="true">
+        <label for="mkxHpField">Leave this field empty</label>
+        <input type="text" id="mkxHpField" name="hp_field" tabindex="-1" autocomplete="off">
+      </div>
       <button class="form-btn" id="submitBtn" onclick="submitForm()">Get My Montréal Revenue Report →</button>
       <div class="form-fine">Free. No credit card. No commitment. Delivered in 48 hours or less.<br>By submitting you agree to our <a href="/legal">Privacy Policy</a>.</div>
     </div>
@@ -757,6 +769,18 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 </footer>
 
 <script>
+/* BOT GATE (CTO ruling 2026-09-14). Two cheap, self-hosted checks, no third
+   party, no CSP change, no consent implication.
+     1. Honeypot  -- a field a human never sees. Anything in it is automation.
+     2. Timing    -- a floor on how fast the form can honestly be completed.
+   mkxFormT0 is PAGE LOAD, not first interaction, so elapsed time is as generous
+   as it can honestly be. 3s sits below any real completion of these forms (land,
+   read, click a field, type or autofill, click send) and above a scripted
+   submit. Both rejections show the NORMAL confirmation and post nothing: a
+   visible rejection only tells the author what to change. */
+var MKX_MIN_FILL_MS = 3000;
+var mkxFormT0 = Date.now();
+
 function submitForm() {
   var fname = document.getElementById('fname').value.trim();
   var lname = document.getElementById('lname').value.trim();
@@ -769,6 +793,12 @@ function submitForm() {
     document.getElementById('email').focus();
     return;
   }
+
+  /* See MKX_MIN_FILL_MS above. Read as a pair so one branch cannot be
+     satisfied while the other is dead. */
+  var mkxHp = document.getElementById('mkxHpField');
+  var botty = (mkxHp && mkxHp.value !== '') ||
+              (Date.now() - mkxFormT0 < MKX_MIN_FILL_MS);
 
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -802,7 +832,8 @@ function submitForm() {
     if (payload[k] !== '') { wire[k] = payload[k]; }
   });
 
-  try {
+  /* Bot gate: fall through to the same thank-you page, post nothing. */
+  if (!botty) try {
     fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

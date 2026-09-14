@@ -165,6 +165,14 @@ textarea{min-height:92px;resize:none;}
 .btn-send:disabled{opacity:.6;cursor:default;}
 .submit-note{font-size:13px;color:var(--dim);}
 .privacy-note{font-size:12px;line-height:1.6;color:var(--faint);margin-top:4px;}
+/* Honeypot: OFF-SCREEN rather than display:none or hidden -- a bot that skips
+   inputs it can tell are hidden fills everything else, and the whole point is
+   that it fills this one. Never focusable (tabindex -1), never announced
+   (aria-hidden), and deliberately named `hp_field`: an organization-shaped name
+   (company, organization) is a REAL Chrome autofill token, and an autofilled
+   honeypot would silently drop a genuine lead -- the same shape of invisible
+   loss as the v3.51 clobber. `hp_field` matches no autofill heuristic. */
+.mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 .err-msg{font-size:13px;color:#c98079;display:none;}
 
 /* right rail */
@@ -369,6 +377,11 @@ textarea{min-height:92px;resize:none;}
 
         <span class="err-msg" id="errMsg">Please add your listing link (or address) and a valid email so we can send the audit.</span>
 
+        <div class="mkx-hp" aria-hidden="true">
+          <label for="mkxHpField">Leave this field empty</label>
+          <input type="text" id="mkxHpField" name="hp_field" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="submit-row">
           <button type="submit" class="btn-send" id="submitBtn"><span id="submitTxt">Send my free audit</span></button>
           <span class="submit-note">No credit card. No obligation. No lock-in.</span>
@@ -500,6 +513,18 @@ textarea{min-height:92px;resize:none;}
 var MARKETICS_GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/1297f709-5970-411d-b58c-e3a47721392e";
 var auditMode = 'listing';
 
+/* BOT GATE (CTO ruling 2026-09-14). Two cheap, self-hosted checks, no third
+   party, no CSP change, no consent implication.
+     1. Honeypot  -- a field a human never sees. Anything in it is automation.
+     2. Timing    -- a floor on how fast the form can honestly be completed.
+   mkxFormT0 is PAGE LOAD, not first interaction, so elapsed time is as generous
+   as it can honestly be. 3s sits below any real completion of these forms (land,
+   read, click a field, type or autofill, click send) and above a scripted
+   submit. Both rejections show the NORMAL confirmation and post nothing: a
+   visible rejection only tells the author what to change. */
+var MKX_MIN_FILL_MS = 3000;
+var mkxFormT0 = Date.now();
+
 function setMode(m){
   auditMode = m;
   document.getElementById('tabListing').classList.toggle('on', m==='listing');
@@ -528,6 +553,12 @@ function setMode(m){
     if(!primary){ fail(primaryEl); ok=false; }
     if(!emailRe.test(email)){ fail(document.getElementById('email')); ok=false; }
     if(!ok){ document.getElementById('errMsg').style.display='block'; return; }
+
+    /* See MKX_MIN_FILL_MS above. Read as a pair so one branch cannot be
+       satisfied while the other is dead. */
+    var mkxHp = document.getElementById('mkxHpField');
+    var botty = (mkxHp && mkxHp.value !== '') ||
+                (Date.now() - mkxFormT0 < MKX_MIN_FILL_MS);
 
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
@@ -560,7 +591,8 @@ function setMode(m){
       utm_content: utm.utm_content || '',
       utm_term: utm.utm_term || ''
     };
-    try{
+    /* Bot gate: fall through to the same confirmation, post nothing. */
+    if (!botty) try{
       /* OMIT EMPTY KEYS — measured in GHL on 2026-09-11, not assumed.
          GHL's write rule, established by testing one contact through four
          submissions on both triggers:
@@ -598,7 +630,7 @@ function setMode(m){
        (see mkx-consent.js) and this call queues into dataLayer but is never sent — GA4 undercounts
        leads by design here. GHL (above) is consent-independent and is the source of truth for lead
        count; GA4 is the source of truth for campaign attribution on the consented subset only. */
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', Object.assign({ form: 'get-started', landing_page: landing }, utm));
+    if (!botty && typeof gtag === 'function') gtag('event', 'generate_lead', Object.assign({ form: 'get-started', landing_page: landing }, utm));
     window.scrollTo({top:0,behavior:'smooth'});
   });
 })();

@@ -931,6 +931,95 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
             hard.append(f"{where}: the empty-key filter is gone — `wire` may exist "
                         f"but nothing removes the blanks from it (registry v3.51)")
 
+    # 11k. every lead form carries a honeypot AND a submit-timing floor, and the
+    # POST is actually guarded by both (CTO ruling 2026-09-14, v3.54).
+    #
+    # Same six surfaces as 11j, deliberately the same tuple: a bot gate that
+    # covers four of six forms reads as covered while two stay open, which is the
+    # coverage-gap shape 11j's note already names. Add a new form to LEAD_FORMS
+    # once and both gates pick it up.
+    #
+    # What each assertion is FOR, since a honeypot is easy to ship inert:
+    #   * the field must exist, be named `hp_field`, and be unreachable by tab.
+    #     The name is load-bearing. `company`/`organization` are real Chrome
+    #     autofill tokens, and an AUTOFILLED honeypot silently drops a genuine
+    #     lead -- invisible loss, the exact shape of the v3.51 clobber. This gate
+    #     rejects those names rather than trusting nobody will reach for them.
+    #   * off-screen, NOT display:none or hidden. A bot that can tell a field is
+    #     hidden skips it, and then the trap catches nothing while looking fine.
+    #   * the JS must READ it. /lp/keep-control shipped 2026-08 with the field in
+    #     the markup, and it was read -- but a honeypot planted and never
+    #     inspected is a one-line edit away and leaves no trace in the rendered
+    #     page, so the read is asserted rather than assumed.
+    #   * the POST must be POSITIONALLY guarded: `if (!botty)` has to appear
+    #     before the fetch that transmits `wire`. Computing `botty` and then
+    #     posting anyway is the regression that would actually happen, and it is
+    #     invisible in every other check here.
+    # Comments stripped first, HTML and JS both, for the 11j reason: the comment
+    # explaining this fix necessarily contains every string the gate looks for.
+    if where in LEAD_FORMS:
+        # ORDER MATTERS, and it bit on the first run. Stripping /* */ first
+        # deletes any `-->` that lives inside a CSS comment, after which the
+        # NEXT `<!--` runs 16KB to the following close and swallows the <style>
+        # block this gate reads -- LP failed with "no .mkx-hp rule" while the
+        # rule was right there. HTML comments come out first, on the raw file,
+        # where they are still well-formed. It failed safe this time; the same
+        # mistake in the other direction is a vacuous pass.
+        code = re.sub(r"<!--.*?-->", "", raw, flags=re.S)
+        code = re.sub(r"/\*.*?\*/", "", code, flags=re.S)
+
+        if 'id="mkxHpField"' not in code or 'name="hp_field"' not in code:
+            hard.append(f"{where}: no honeypot field — expected an input with "
+                        f'id="mkxHpField" name="hp_field" (v3.54)')
+        elif 'tabindex="-1"' not in code:
+            hard.append(f"{where}: the honeypot is reachable by keyboard — it needs "
+                        f'tabindex="-1" so a human never lands in it (v3.54)')
+
+        for token in ('name="company"', 'name="organization"'):
+            if token in code:
+                hard.append(f"{where}: {token} is a browser-autofill token — an "
+                            f"autofilled honeypot drops a REAL lead silently. Use "
+                            f'name="hp_field" (v3.54)')
+
+        m = re.search(r"\.mkx-hp\{([^}]*)\}", code)
+        if not m:
+            hard.append(f"{where}: no .mkx-hp rule — the honeypot is VISIBLE to "
+                        f"every human filling this form (v3.54)")
+        else:
+            rule = m.group(1)
+            if "position:absolute" not in rule or "left:-9999px" not in rule:
+                hard.append(f"{where}: .mkx-hp does not move the field off-screen "
+                            f"(position:absolute; left:-9999px) (v3.54)")
+            if "display:none" in rule or "visibility:hidden" in rule:
+                hard.append(f"{where}: .mkx-hp hides the honeypot instead of moving "
+                            f"it off-screen — a bot that detects hidden inputs skips "
+                            f"it and the trap catches nothing (v3.54)")
+
+        if "getElementById('mkxHpField')" not in code:
+            hard.append(f"{where}: the honeypot is never READ — the field is in the "
+                        f"markup and nothing inspects it, which is a control that "
+                        f"cannot fire (v3.54)")
+
+        mt = re.search(r"MKX_MIN_FILL_MS\s*=\s*(\d+)", code)
+        if not mt:
+            hard.append(f"{where}: no MKX_MIN_FILL_MS submit-timing floor (v3.54)")
+        elif int(mt.group(1)) < 1000:
+            hard.append(f"{where}: MKX_MIN_FILL_MS is {mt.group(1)}ms — below 1000ms "
+                        f"the floor stops deciding anything (v3.54)")
+        if not re.search(r"Date\.now\(\)\s*-\s*mkxFormT0\s*<\s*MKX_MIN_FILL_MS", code):
+            hard.append(f"{where}: the timing floor is declared but never compared "
+                        f"against mkxFormT0 (v3.54)")
+
+        guard = code.find("if (!botty)")
+        post = code.find("JSON.stringify(wire)")
+        if guard < 0:
+            hard.append(f"{where}: nothing guards the POST on the bot check — "
+                        f"expected `if (!botty)` (v3.54)")
+        elif post >= 0 and guard > post:
+            hard.append(f"{where}: `if (!botty)` appears AFTER the transmitting "
+                        f"fetch — the bot check runs but the POST is not gated by "
+                        f"it (v3.54)")
+
     # 11h. /calculator: nothing above the fold may be opacity-gated on JS (v3.46).
     # .fi is opacity:0 until script adds .vis, and Chrome does not treat an
     # opacity:0 element as an LCP candidate. Both above-the-fold blocks carried
