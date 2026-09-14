@@ -174,6 +174,16 @@ grep -q 'mkx_ad_optout' <<<"$mc" \
   && ok "B1: Do Not Sell opt-out present" || no "B1: Do Not Sell opt-out missing"
 grep -q 'America/Toronto' <<<"$mc" \
   && ok "B2: Canada inside the region gate" || no "B2: Canada missing from the region gate"
+# The two zones that resolved cleanly and matched nothing (v3.52 §4, shipped
+# v3.55). Asserted by name because the over-inclusive fail-safe DOES NOT cover
+# them: it catches detection FAILURES, and these were successful detections
+# returning the wrong answer. Removing either is silent in every other check.
+grep -q 'America/Coral_Harbour' <<<"$mc" \
+  && ok "B2: Coral Harbour (Nunavut) inside the region gate" \
+  || no "B2: America/Coral_Harbour dropped — a Canadian visitor gets no banner (v3.55)"
+grep -q 'Arctic/Longyearbyen' <<<"$mc" \
+  && ok "B2: Svalbard inside the EEA gate" \
+  || no "B2: Arctic/Longyearbyen dropped — an EEA data subject gets no banner (v3.55)"
 
 # ── The Google tag fires on production hostnames only (v3.42) ───────────────
 # Deploy previews are publicly reachable and get browsed by every lane during
@@ -694,6 +704,15 @@ for lead in "/lp/keep-control" "/get-started" \
   grep -qF 'if (!botty)' <<<"$lb" && grep -qF 'MKX_MIN_FILL_MS' <<<"$lb" \
     && ok "$lead gates the POST on the honeypot and the timing floor" \
     || no "$lead computes the bot check but does not gate the POST on it (v3.54)"
+  # The floor DEFERS, it does not drop (v3.55). `botty` must be the honeypot
+  # ALONE -- folding the timer back into it reads like a tidy-up and silently
+  # reinstates dropping real humans, which is the whole reason for the swap.
+  grep -qF "var botty = !!(mkxHp" <<<"$lb" \
+    && ok "$lead keeps the honeypot drop separate from the timing defer" \
+    || no "$lead folded the timing floor back into botty — sub-floor humans are DROPPED (v3.55)"
+  grep -qF 'mkxWait' <<<"$lb" && grep -qE 'setTimeout\([^;]*mkxWait' <<<"$lb" \
+    && ok "$lead waits the remainder out instead of dropping it" \
+    || no "$lead computes no deferral — the timing floor is a drop again (v3.55)"
 done
 grep -q '1297f709-5970-411d-b58c-e3a47721392e' <<<"$lp" \
   && no "LP posts to the SHARED organic trigger -- the separation has been reverted" \

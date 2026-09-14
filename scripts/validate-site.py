@@ -1006,9 +1006,31 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
         elif int(mt.group(1)) < 1000:
             hard.append(f"{where}: MKX_MIN_FILL_MS is {mt.group(1)}ms — below 1000ms "
                         f"the floor stops deciding anything (v3.54)")
-        if not re.search(r"Date\.now\(\)\s*-\s*mkxFormT0\s*<\s*MKX_MIN_FILL_MS", code):
-            hard.append(f"{where}: the timing floor is declared but never compared "
-                        f"against mkxFormT0 (v3.54)")
+
+        # The floor DEFERS, it does not drop (CTO ruling 2026-09-14, v3.55). The
+        # asymmetry is the whole point: spam costs a delete click, a dropped real
+        # lead is silent and unrecoverable and lands on the one constraint the
+        # business is bottlenecked on. So the two checks are asserted SEPARATELY
+        # here, and the regression this pair exists to catch is someone folding
+        # the timer back into `botty` -- which reads like a tidy-up, passes every
+        # other assertion in this gate, and silently reinstates the drop.
+        if not re.search(r"var\s+botty\s*=\s*!!\(\s*mkxHp\s*&&", code):
+            hard.append(f"{where}: `botty` is not the honeypot alone — the honeypot "
+                        f"drops and the timing floor defers, and they must not be "
+                        f"the same expression (v3.55)")
+        bm = re.search(r"var\s+botty\s*=([^;]*);", code)
+        if bm and ("mkxFormT0" in bm.group(1) or "MKX_MIN_FILL_MS" in bm.group(1)):
+            hard.append(f"{where}: the timing floor is folded back into `botty` — a "
+                        f"sub-floor human submit would be DROPPED instead of "
+                        f"deferred, silently (v3.55)")
+        if not re.search(r"var\s+mkxWait\s*=\s*Math\.max\(\s*0\s*,\s*"
+                         r"MKX_MIN_FILL_MS\s*-\s*\(\s*Date\.now\(\)\s*-\s*mkxFormT0",
+                         code):
+            hard.append(f"{where}: no mkxWait remainder computed from MKX_MIN_FILL_MS "
+                        f"and mkxFormT0 — the floor decides nothing (v3.55)")
+        if not re.search(r"setTimeout\([^;]*?\bmkxWait\b", code):
+            hard.append(f"{where}: mkxWait is computed but never waited out — the "
+                        f"deferral is declared and not performed (v3.55)")
 
         guard = code.find("if (!botty)")
         post = code.find("JSON.stringify(wire)")

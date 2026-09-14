@@ -514,14 +514,30 @@ var MARKETICS_GHL = "https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW
 var auditMode = 'listing';
 
 /* BOT GATE (CTO ruling 2026-09-14). Two cheap, self-hosted checks, no third
-   party, no CSP change, no consent implication.
-     1. Honeypot  -- a field a human never sees. Anything in it is automation.
-     2. Timing    -- a floor on how fast the form can honestly be completed.
-   mkxFormT0 is PAGE LOAD, not first interaction, so elapsed time is as generous
-   as it can honestly be. 3s sits below any real completion of these forms (land,
-   read, click a field, type or autofill, click send) and above a scripted
-   submit. Both rejections show the NORMAL confirmation and post nothing: a
-   visible rejection only tells the author what to change. */
+   party, no CSP change, no consent implication. THEY DO DIFFERENT THINGS, and
+   that asymmetry is the second ruling of the same day:
+
+     1. Honeypot -- a field a human never sees. Anything in it is automation,
+        with no false-positive path worth the name, so it DROPS: the normal
+        confirmation renders and nothing is posted. A visible rejection would
+        only tell the author what to change.
+
+     2. Timing -- a floor on how fast the form can honestly be completed. This
+        one DEFERS, it does not drop. A sub-floor submit waits out the remainder
+        and then posts normally.
+
+   Why deferring rather than dropping, given a drop is simpler: the costs are not
+   symmetric. Spam costs a delete click. A dropped real lead is silent,
+   unrecoverable, and lands on the constraint the business is actually bottlenecked
+   on. The residual false-positive path here was small -- land, autofill, submit,
+   all inside 3s -- but small is not zero, and it produces exactly the failure
+   shape the v3.51 clobber had: a loss with no error and no signal, invisible to us
+   and to the person. Deferring gives that up for nothing except the patient
+   headless case, which the honeypot still catches.
+
+   mkxFormT0 is PAGE LOAD, not first interaction, so the elapsed time is as
+   generous as it can honestly be, and a real human is past the floor long before
+   they reach the button -- mkxWait is 0 for them and this costs them nothing. */
 var MKX_MIN_FILL_MS = 3000;
 var mkxFormT0 = Date.now();
 
@@ -554,11 +570,11 @@ function setMode(m){
     if(!emailRe.test(email)){ fail(document.getElementById('email')); ok=false; }
     if(!ok){ document.getElementById('errMsg').style.display='block'; return; }
 
-    /* See MKX_MIN_FILL_MS above. Read as a pair so one branch cannot be
-       satisfied while the other is dead. */
+    /* Honeypot DROPS; the timing floor DEFERS -- see MKX_MIN_FILL_MS above.
+       mkxWait is the remainder still owed, and 0 for any real completion. */
     var mkxHp = document.getElementById('mkxHpField');
-    var botty = (mkxHp && mkxHp.value !== '') ||
-                (Date.now() - mkxFormT0 < MKX_MIN_FILL_MS);
+    var botty = !!(mkxHp && mkxHp.value !== '');
+    var mkxWait = Math.max(0, MKX_MIN_FILL_MS - (Date.now() - mkxFormT0));
 
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
@@ -619,6 +635,10 @@ function setMode(m){
         if (payload[k] !== '') { wire[k] = payload[k]; }
       });
 
+      /* DEFER, don't drop: wait out any remaining floor, then post as normal.
+         Awaited rather than fired from a bare setTimeout, so the request cannot
+         be lost to an unload while the timer is still pending. */
+      if (mkxWait) await new Promise(function (r) { setTimeout(r, mkxWait); });
       await fetch(MARKETICS_GHL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(wire) });
     }catch(err){ console.warn('GHL webhook non-critical error:', err); }
 

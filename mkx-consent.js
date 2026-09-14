@@ -36,7 +36,14 @@
      EEA/UK/CH, plus CANADA as of Addendum B2 (Quebec Law 25 posture).
      Timezone-based: no network call, no dependency, and deliberately
      over-inclusive — a detection failure gets the banner, which is the
-     safe direction. */
+     safe direction.
+
+     The fail-safe does NOT cover everything, and that is why the two entries
+     added on 2026-09-14 mattered (registry v3.52 §4, v3.55). It catches
+     detection FAILURES — the catch below returns true. A zone that resolves
+     cleanly to a name missing from these lists is a SUCCESSFUL detection
+     returning the wrong answer, and nothing catches that. Adding a zone here
+     is the only remedy. */
   var CA_ZONES = [
     'America/Toronto', 'America/Vancouver', 'America/Edmonton', 'America/Winnipeg',
     'America/Halifax', 'America/St_Johns', 'America/Regina', 'America/Moncton',
@@ -45,7 +52,12 @@
     'America/Swift_Current', 'America/Rankin_Inlet', 'America/Resolute',
     'America/Cambridge_Bay', 'America/Glace_Bay', 'America/Goose_Bay',
     'America/Blanc-Sablon', 'America/Atikokan', 'America/Nipigon',
-    'America/Thunder_Bay', 'America/Pangnirtung', 'America/Rainy_River'
+    'America/Thunder_Bay', 'America/Pangnirtung', 'America/Rainy_River',
+    /* Coral Harbour (Southampton Island, Nunavut) is the one Canadian zone that
+       never observes DST, so it carries its own tz name instead of normalising
+       to a neighbour the way America/Montreal normalises to America/Toronto.
+       It resolved cleanly and matched nothing: no banner, in Canada. */
+    'America/Coral_Harbour'
   ];
   function inGatedRegion() {
     try {
@@ -53,8 +65,13 @@
       if (tz.indexOf('Europe/') === 0) return true;
       if (CA_ZONES.indexOf(tz) !== -1) return true;
       // EEA territories that don't sit under Europe/*
+      // Arctic/Longyearbyen is Svalbard: Norwegian sovereignty, inside the EEA,
+      // and filed under Arctic/ rather than Europe/ so the prefix test above
+      // misses it. Compliance-shaped, not cosmetic — population is beside the
+      // point when the visitor is an EEA data subject getting no banner.
       return ['Atlantic/Reykjavik', 'Atlantic/Canary', 'Atlantic/Madeira',
-              'Atlantic/Azores', 'Atlantic/Faroe'].indexOf(tz) !== -1;
+              'Atlantic/Azores', 'Atlantic/Faroe',
+              'Arctic/Longyearbyen'].indexOf(tz) !== -1;
     } catch (e) {
       return true; // can't tell -> show the banner
     }

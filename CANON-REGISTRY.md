@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.54 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.55 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,98 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.55 — the timing floor defers instead of dropping; two consent zones closed (2026-09-14)
+
+**Skill impact:** no — lead-path behaviour and a consent-gate region list. No claim, phrasing, number
+or tenure fact changes.
+
+Two CTO rulings and one correction, same day as v3.54.
+
+### 1. The floor DEFERS. It does not drop.
+
+**Ruling:** CTO, 2026-09-14. *"Swap to defer. Rationale is asymmetry, not elegance. Spam costs a
+delete click. A dropped real lead is silent, unrecoverable, and lands on the one constraint the whole
+business is bottlenecked on — booked conversations."*
+
+The two checks now do different things, and the asymmetry is the design:
+
+| | behaviour | why |
+|---|---|---|
+| **Honeypot** | **drops**, silently, showing the normal confirmation | no false-positive path worth the name once the field is named `hp_field` (v3.54) |
+| **Timing floor** | **defers** — waits out the remainder, then posts as normal | the residual false-positive path was small but not zero, and a small silent loss is still a silent loss |
+
+`botty` is the honeypot alone. `mkxWait = Math.max(0, MKX_MIN_FILL_MS - (Date.now() - mkxFormT0))` is
+the remainder still owed, and it is **0 for every real completion** — a human is past a 3s floor long
+before they reach the button, so this costs them nothing and changes nothing they can perceive.
+
+**What deferral gives up, stated plainly:** a bot that drives the page and waits now gets through the
+timing check. The honeypot is what catches it. The trade is that case for zero human loss.
+
+**Two implementation details that are the difference between a deferral and a new silent loss:**
+
+- On `/get-started` and `/lp/keep-control` the wait is **awaited before the fetch**, not fired from a
+  bare `setTimeout`. A pending timer that the page unloads out from under is a lost lead, which is
+  the thing being fixed, not a smaller version of it.
+- On the four intel pages **the redirect waits WITH the POST**. Those pages navigate to a thank-you
+  page immediately after submitting; deferring only the fetch would have the browser cancel it on
+  navigation. `mkxSend()` does both, or neither.
+
+**Verified in a browser on all six, four ways each:** a sub-floor submit posts nothing immediately
+and **is posted after the remainder** with the real lead intact; the same submit past the floor posts
+with no added delay; the honeypot filled posts nothing at any speed; and honeypot-plus-sub-floor
+drops without posting when the timer fires. On the intel pages, the thank-you redirect lands after
+the POST rather than racing it.
+
+**Gate 11k extended, four new controls, 14/14 firing.** The one worth naming: **C6a folds the timer
+back into `botty`** — a two-token edit that looks like tidying, passes every other assertion in the
+gate, and silently reinstates dropping real humans. That is the regression this ruling exists to
+prevent, so it is the one the gate is built to catch. Smoke 198 → 212.
+
+### 2. The spam boundary is a stated limit, not an implied one
+
+CTO: *"v3.54 closes fire-and-forget browser automation on six surfaces. It does not close
+direct-to-webhook POSTs."* Recorded in the console reference as a boundary. Nothing in v3.54 or v3.55
+should be read as closing the second class — the webhook URL is in the page source, and that is the
+`/api/lead` proxy's job.
+
+### 3. The two consent-gate zones — CLOSED
+
+`America/Coral_Harbour` added to `CA_ZONES`; `Arctic/Longyearbyen` added to the non-`Europe/*` EEA
+list. Both were **successful detections returning the wrong answer**, which is the class the
+over-inclusive fail-safe does not cover — it catches detection *failures*, and that distinction is
+now written into the file above the lists so the next person does not re-derive it.
+
+Coral Harbour is the one Canadian zone that never observes DST, so it keeps its own tz name instead
+of normalising to a neighbour the way `America/Montreal` normalises to `America/Toronto`. Svalbard is
+Norwegian, inside the EEA, and filed under `Arctic/` where the `Europe/` prefix test cannot see it.
+
+**Browser-verified across seven timezones**, both new zones plus five controls (`America/Toronto`,
+`Europe/Berlin`, `Atlantic/Reykjavik` gated; `America/New_York`, `Asia/Tokyo` not). Two smoke
+assertions on the served file, by zone name, because removing one is silent everywhere else.
+
+**A control caught my own instrument, not the code.** The first run reported all three gated zones
+failing — including `America/Toronto`, which has been gated since Addendum B2. The banner detector
+was wrong (guessing at selectors instead of reading `banner.id = 'mkx-consent'`), and the known-good
+control is the only reason that read as a broken test rather than a broken gate. Controls in a
+verification run earn their keep in exactly this direction too.
+
+### 4. Correction — the proxy was assigned, and I carried "unassigned" forward
+
+The `/api/lead` proxy was assigned in the **CTO weekly of Friday 2026-09-12, §8.1**, with a Monday
+2026-09-14 start and the two timezone entries riding it. My 2026-09-12 weekly listed its owner as
+**unconfirmed**, and I repeated that in the v3.54 report today — two days after the answer existed.
+
+That is the confident-reference-to-unverified pattern, and the second stale cross-lane status this
+week (the first being the sending-domain DNS item in §6.2 of the 09-12 weekly, closed Sep 4 and
+carried anyway). **The countermeasure already exists** — the send-date column in the console
+reference, added because of the first one — and it only works if the copy being read is the current
+one. The failure here was not the missing column. It was reading Friday's state on Monday.
+
+**Standing rule from this, mine:** a status I am carrying from another lane's report gets re-read at
+the source before it goes into a brief, not quoted from my own last copy of it.
+
+---
+
 ## v3.54 — bot gate on the six lead forms: honeypot + submit-timing (2026-09-14)
 
 **Skill impact:** no — a spam control on the lead path. No claim, phrasing, number or tenure fact
@@ -2371,6 +2463,11 @@ changes, and nothing a reader sees.
 **Ruling:** CTO, 2026-09-14. *"Honeypot + submit-timing check on all six form surfaces. Hidden field
 a human never sees; if filled, drop silently. Catches most of this class, costs nothing, no
 third-party script, no CSP change, no consent implication."*
+
+> **The timing half of this entry is superseded by v3.55, same day.** CTO ruled the deferral this
+> entry offers below as an open item. The honeypot still drops; the floor now defers. This entry is
+> left standing rather than rewritten because it is the true record of what was ruled and built on
+> the 14th, and the open item it raised is what produced v3.55.
 
 Shipped as ruled. No third party, no new request, no cookie, nothing consent-gated — the whole
 control is two variables and one branch per form.

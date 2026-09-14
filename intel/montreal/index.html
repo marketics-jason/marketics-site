@@ -770,14 +770,30 @@ gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{t
 
 <script>
 /* BOT GATE (CTO ruling 2026-09-14). Two cheap, self-hosted checks, no third
-   party, no CSP change, no consent implication.
-     1. Honeypot  -- a field a human never sees. Anything in it is automation.
-     2. Timing    -- a floor on how fast the form can honestly be completed.
-   mkxFormT0 is PAGE LOAD, not first interaction, so elapsed time is as generous
-   as it can honestly be. 3s sits below any real completion of these forms (land,
-   read, click a field, type or autofill, click send) and above a scripted
-   submit. Both rejections show the NORMAL confirmation and post nothing: a
-   visible rejection only tells the author what to change. */
+   party, no CSP change, no consent implication. THEY DO DIFFERENT THINGS, and
+   that asymmetry is the second ruling of the same day:
+
+     1. Honeypot -- a field a human never sees. Anything in it is automation,
+        with no false-positive path worth the name, so it DROPS: the normal
+        confirmation renders and nothing is posted. A visible rejection would
+        only tell the author what to change.
+
+     2. Timing -- a floor on how fast the form can honestly be completed. This
+        one DEFERS, it does not drop. A sub-floor submit waits out the remainder
+        and then posts normally.
+
+   Why deferring rather than dropping, given a drop is simpler: the costs are not
+   symmetric. Spam costs a delete click. A dropped real lead is silent,
+   unrecoverable, and lands on the constraint the business is actually bottlenecked
+   on. The residual false-positive path here was small -- land, autofill, submit,
+   all inside 3s -- but small is not zero, and it produces exactly the failure
+   shape the v3.51 clobber had: a loss with no error and no signal, invisible to us
+   and to the person. Deferring gives that up for nothing except the patient
+   headless case, which the honeypot still catches.
+
+   mkxFormT0 is PAGE LOAD, not first interaction, so the elapsed time is as
+   generous as it can honestly be, and a real human is past the floor long before
+   they reach the button -- mkxWait is 0 for them and this costs them nothing. */
 var MKX_MIN_FILL_MS = 3000;
 var mkxFormT0 = Date.now();
 
@@ -794,11 +810,11 @@ function submitForm() {
     return;
   }
 
-  /* See MKX_MIN_FILL_MS above. Read as a pair so one branch cannot be
-     satisfied while the other is dead. */
+  /* Honeypot DROPS; the timing floor DEFERS -- see MKX_MIN_FILL_MS above.
+     mkxWait is the remainder still owed, and 0 for any real completion. */
   var mkxHp = document.getElementById('mkxHpField');
-  var botty = (mkxHp && mkxHp.value !== '') ||
-              (Date.now() - mkxFormT0 < MKX_MIN_FILL_MS);
+  var botty = !!(mkxHp && mkxHp.value !== '');
+  var mkxWait = Math.max(0, MKX_MIN_FILL_MS - (Date.now() - mkxFormT0));
 
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -832,17 +848,24 @@ function submitForm() {
     if (payload[k] !== '') { wire[k] = payload[k]; }
   });
 
-  /* Bot gate: fall through to the same thank-you page, post nothing. */
-  if (!botty) try {
-    fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(wire)
-    });
-  } catch(e) {
-    console.warn('GHL webhook non-critical error:', e);
+  /* Honeypot hit: fall through to the same thank-you page, post nothing.
+     Sub-floor submit: DEFER. The redirect waits WITH the POST -- firing the
+     request and navigating immediately would have the browser cancel it, which
+     is exactly the silent loss this swap exists to avoid. mkxWait is 0 for a
+     real completion, so this page behaves as before for every human. */
+  function mkxSend() {
+    if (!botty) try {
+      fetch('https://services.leadconnectorhq.com/hooks/Hdy5evIhEWpOMeRW92XG/webhook-trigger/0f762c7c-78f6-4702-85ad-f2003c55a58f', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(wire)
+      });
+    } catch(e) {
+      console.warn('GHL webhook non-critical error:', e);
+    }
+    window.location.href = '/intel/montreal/thank-you/';
   }
-  window.location.href = '/intel/montreal/thank-you/';
+  if (mkxWait) { setTimeout(mkxSend, mkxWait); } else { mkxSend(); }
 }
 </script>
 <script>(function(){var nav=document.querySelector('nav:not(.sf-nav)');if(nav){window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});}var btn=document.getElementById('navHamburger');var menu=document.getElementById('navMobileMenu');if(!btn||!menu)return;function cl(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow='';}btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?cl():(menu.classList.add('open'),btn.classList.add('open'),btn.setAttribute('aria-expanded','true'),document.body.style.overflow='hidden');});menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',cl);});document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))cl();});})();</script>
