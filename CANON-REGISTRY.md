@@ -2363,6 +2363,98 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.63 — the partner rail becomes countable (2026-09-14)
+
+**Skill impact:** no — a measurement rail and its CI gates. No claim, phrasing, number or tenure fact
+changes. **Flagged for a ruling:** canon's `(partner)` label does not mean *signed*, and that ambiguity
+produced a real error today (below).
+
+### The defect: partner leads were not mislabelled, they were absent
+
+CTO's brief said partner leads "come in looking like they came from Google." Measured against the tree:
+**they do not come in looking like anything.** A bare partner link carries no UTMs, the empty-key filter
+drops the empty `utm_source` before the POST (v3.51), and `source` only ever records *which form was
+used* — never the channel. A partner lead and an organic lead are byte-identical in what the site sends.
+**CTO withdrew the assertion unprompted**, naming it the same pattern as the sending-domain belief: a
+confident statement about GHL's downstream behaviour made without being able to see GHL.
+
+The consequence is worse than a wrong label. On **Oct 16**, paid has spend, clicks and `gclid`; partner
+has nothing. **Partner would not lose that comparison — it would be absent from it**, and a comparison
+with one populated side has exactly one possible outcome regardless of what is true.
+
+### The convention (CTO, ratified)
+
+| Field | Value | Why |
+|---|---|---|
+| `utm_medium` | `partner` — fixed literal | the channel flag; what makes the rail countable |
+| `utm_source` | `<slug>`, from `scripts/partner-registry.json` | node-level identity; time-to-first-referral and node survival both need it |
+| `utm_content` | `<surface>`, optional free text | `one-pager`, `email-sig`, `podcast` |
+| `utm_campaign` | **empty** | nothing reads it; an invented taxonomy is worse than a blank |
+
+**`/p/<slug>[/<surface>]` is the interface; the UTM convention is the mechanism.** Query strings get
+stripped by humans, email clients and anyone retyping a link off a slide. A short branded path survives
+all three.
+
+### Jason's rule: signed first, slug after
+
+**Two slugs ship: `cost-seg-smart` and `pricelabs`.** Code proposed seven off canon's partner rows and
+CTO ratified them; **Jason rejected five as still in negotiation.** He was right, and not for tidiness:
+a branded referral link is a commitment signal, and issuing one tells a node they are a partner before
+they have agreed to be one.
+
+**The canon ambiguity that caused it.** Canon labels Mark Lumpkin — STR Cribs `(partner)`, identically
+to the two Jason names as signed. In that row **"partner" denotes a relationship, not an agreement.**
+Any lane reading canon today would derive the same wrong list from the same evidence. Recorded in
+`partner-registry.json` so the next person does not repeat it; whether canon should itself distinguish
+*signed* from *in negotiation* is Jason's ruling, and is not recorded here as decided.
+
+Also corrected: `Jon / Pacer (PriceLabs partner)` means **Pacer is a partner of PriceLabs, as Marketics
+is** — not a partner of ours. Code read it the other way and asked rather than picking, which is the
+only reason it is not now a permanent slug.
+
+### Three defects the gates caught in Code's own work
+
+1. **The consent-impression near-miss — the one that mattered.** Gate 2 failed the stub for carrying no
+   consent script. The obvious repair is to add one. **That would have posted a `consent_impression`
+   for a page nobody ever sees**, on every partner click, inflating the denominator deliverable 4 exists
+   to restore (v3.56). `mkx-consent.js` fires `trackConsent('impression')` at banner MOUNT, not at
+   display. The stub goes in `CONSENT_EXEMPT_PREFIXES` instead — a branch that also *forbids* loading
+   consent there, making it a rule rather than an omission. **The gate was right, and the first repair
+   that satisfied it was wrong.**
+2. **An outbound false positive.** The link gate fired on `/intel/airbnb-operations-at-cost` →
+   `turno.com?utm_source=website&utm_medium=partner`. That is **Turno's convention describing us**, not
+   ours describing them. Gate re-scoped to inbound links; a false-positive control now holds it there.
+3. **A prefix that over-matched.** `url_for()` renders `p/index.html` as `/p`, and a bare `/p` prefix
+   would have swallowed **`/pricing`**. Exact-or-subpath matching instead. The miss failed *safe* —
+   `/pricing` carries the consent script, so the exempt branch would have rejected it loudly — but a
+   gate should not rely on its own mistakes being noisy.
+
+And one fabrication caught before it shipped: the registry's first draft wrote `"signed": "2026-09-14"`,
+a signing date **nobody supplied**. Replaced with `slug_issued`, a date that is actually known. A
+plausible wrong date is worse than an absent one (v3.52).
+
+### Verified, not asserted
+
+**Six negative controls fire, one false-positive control stays green, bracketed by a known-good case:**
+stub/registry drift · uppercase slug · wrong `medium` · malformed JSON · unregistered `/p/` link ·
+unregistered inbound `utm_source` · outbound link left alone.
+
+**Browser, 15/15:** the stamp survives the redirect, `landingPage` records `/p/pricelabs`, an unknown
+slug still forwards the visitor but stamps nothing, and **zero consent posts fire from the partner
+path.**
+
+**Payload, 10/10 with a direct-visit control:** a real submission after `/p/pricelabs` produces
+`utm_medium=partner`, `utm_source=pricelabs`, `landingPage=/p/pricelabs`, `source=get-started`, and no
+empty-valued keys. The control submission carries none of them.
+
+### What this does NOT establish
+
+**Whether the partners change their links.** The mechanism is done; two people have to update an email
+signature or a one-pager. If they do not, this ships and measures nothing, and Oct 16 is as blind as it
+would otherwise have been. No gate here can verify that, and it is the part that decides whether the
+rail has numbers.
+
+---
 ## v3.62 — "the skill wins" is replaced by "there is no second copy" (2026-09-14)
 
 **Skill impact:** yes — the claim rows do not change; the **status line** does. This entry is deliberately
