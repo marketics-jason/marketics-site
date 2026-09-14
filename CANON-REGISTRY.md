@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.56 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.57 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,66 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.57 — keepalive on the navigating forms, and what the counter caught on day one (2026-09-14)
+
+**Skill impact:** no — lead-path robustness and CI. No claim, phrasing, number or tenure fact changes.
+
+### The fix
+
+The four intel pages fire the lead POST and navigate on the **next line**. Without `keepalive: true`
+the browser is free to cancel a request still in flight when the document goes away — **a lead lost
+with no error on either side.** The pattern predates the proxy and worked; the proxy adds a
+cold-start to the round trip and widens that window from nothing to hundreds of milliseconds.
+
+Asserted only where the page navigates. `/get-started` and `/lp/keep-control` `await` the fetch and
+unmount in place, so keepalive would be noise there. Gate fires when it is removed; smoke **224 →
+228**.
+
+**This was not provable by the browser tests, and that is the part worth keeping.** They intercept at
+**dispatch**, so *"one request was made"* holds whether or not it survives the navigation. That is
+the v3.51 lesson one layer down: an outbound control proves we sent it, never that it arrived.
+
+### What actually broke the preview test — and what found it
+
+The first live submission through the proxy produced no contact. The function log said so exactly:
+
+```
+{"evt":"lead_misconfigured","route":"intel","envName":"GHL_HOOK_INTEL"}
+```
+
+**The Function refused rather than silently succeeding** — 502, nothing forwarded, reason attached.
+That is control C3's behaviour holding in production on its first outing: the lead was declined
+loudly instead of disappearing.
+
+**Deliverable 3 diagnosed it.** Without that line the failure was indistinguishable from a cancelled
+request, and the two have opposite fixes. The counter paid for itself in under an hour.
+
+**Deliverable 4 verified itself in the same log** — `impression` then `accept`, both `gated: true`,
+on `/intel/miami/`. **The first consent denominator data since 2026-09-04**, through the same-origin
+beacon that only became possible because deliverable 1 removed the cross-origin path.
+
+### Correction: the env-var writes did not persist, and I read that backwards
+
+The Netlify MCP returned `"Environment variable upserted"` three times and its reader returned `[]`
+both before and after. I concluded **the reader was broken**, reasoning from a known-good case — my
+own writes. Wrong: the writes had not persisted, and the reader was correct both times.
+
+The known-good-case method is sound and has been right six times today. **What failed was treating a
+tool's success *string* as the known-good case.** A write that reports success is a claim; a read
+that disagrees is evidence. I ranked them the wrong way round, and it cost a test cycle and sent
+Jason to re-do work.
+
+Two consequences, both recorded rather than remembered:
+
+- **Env vars are set in the Netlify UI, not through the MCP**, until that write is demonstrated to
+  persist. Scope must include **Functions**; context must be **All deploy contexts** — Production-only
+  leaves every deploy preview blind, which is exactly where this gets tested.
+- The probe that *appeared* to confirm readability earlier ran against a **branch-deploy URL that does
+  not exist**, so its three 400s confirmed nothing. A green result from an unverified endpoint is not
+  a green result.
+
+---
+
 ## v3.56 — /api/lead: the proxy, and the routing that had to move with it (2026-09-14)
 
 **Skill impact:** no — lead-path infrastructure and CI. No claim, phrasing, number or tenure fact

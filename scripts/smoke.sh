@@ -729,6 +729,15 @@ for lead in "/lp/keep-control" "/get-started" \
   grep -qF 'fetch(MKX_LEAD_ENDPOINT' <<<"$lb" \
     && ok "$lead POSTs same-origin to /api/lead" \
     || no "$lead is not posting through the proxy (v3.56)"
+  # Only the intel pages navigate immediately after posting; the two lead forms
+  # await the fetch and unmount in place, so keepalive is asserted where the
+  # cancellation risk actually is (v3.57).
+  case "$lead" in
+    /intel/*)
+      grep -qF 'keepalive: true' <<<"$lb" \
+        && ok "$lead keeps the POST alive across its redirect" \
+        || no "$lead POSTs then navigates without keepalive — the lead can be cancelled silently (v3.57)" ;;
+  esac
 done
 grep -qF "'X-Marketics-Form':'get-started'" <<<"$lp" \
   && no "LP sends the ORGANIC route label -- the separation has been reverted" \

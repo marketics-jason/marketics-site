@@ -872,10 +872,21 @@ function submitForm() {
      real completion, so this page behaves as before for every human. */
   function mkxSend() {
     if (!botty) try {
+      /* keepalive: the POST is fired and the page navigates on the NEXT LINE.
+         Without this the browser is free to cancel a request still in flight
+         when the document goes away, and the lead is gone with no error on
+         either side. The pattern predates the proxy, but the proxy adds a
+         cold-start to the round trip and widens that window from ~nothing to
+         hundreds of milliseconds. mkx-consent.js already uses keepalive for
+         exactly this reason.
+         NOT provable by the browser tests here: they intercept at DISPATCH, so
+         `one request was made` is true whether or not it survives. Proving
+         delivery needs the receiving end -- the v3.51 lesson, one layer down. */
       fetch(MKX_LEAD_ENDPOINT, {
         method: 'POST',
         headers: {'Content-Type':'application/json','X-Marketics-Form':'intel'},
-        body: JSON.stringify(wire)
+        body: JSON.stringify(wire),
+        keepalive: true
       });
     } catch(e) {
       console.warn('GHL webhook non-critical error:', e);

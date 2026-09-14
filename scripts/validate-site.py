@@ -775,6 +775,19 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                 hard.append(f"{where}: also sends the {other!r} route — a page has exactly "
                             f"one trigger, and two labels means one of them is a "
                             f"copy-paste that will misroute leads (registry v3.56)")
+        # The intel pages fire the POST and navigate on the next line, so the
+        # request MUST be keepalive or the browser may cancel it as the document
+        # goes away -- a lead lost with no error on either side. Asserted only
+        # where the page navigates: /get-started and /lp/keep-control await the
+        # fetch and never navigate, so keepalive would be noise there.
+        # This is NOT provable by the browser tests: they intercept at dispatch,
+        # so "a request was made" holds whether or not it survives.
+        if where.startswith("intel/") and "window.location.href" in code:
+            if "keepalive: true" not in code:
+                hard.append(f"{where}: POSTs and navigates on the next line without "
+                            f"keepalive — the browser may cancel the request and the "
+                            f"lead is lost silently (registry v3.57)")
+
     elif "X-Marketics-Form" in raw:
         hard.append(f"{where}: sends an X-Marketics-Form route but is not in LEAD_ROUTES — "
                     f"a new CRM caller must be registered there on the day it ships, or "
