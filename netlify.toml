@@ -153,3 +153,23 @@
   for = "/audits/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# ── Serverless functions (first server-side code in this repo, 2026-09-14) ──
+# /api/lead forwards form submissions to GoHighLevel SERVER-SIDE. The route is
+# declared by the function itself (`export const config = { path: '/api/lead' }`),
+# so there is no redirect rule to keep in sync with it.
+#
+# NOTE FOR CLAUDE.md's "no build step": still true for the SITE. Netlify bundles
+# functions on its own; there is no package.json, no dependency install and no
+# lockfile — the function uses only the platform's global fetch. Keep it that
+# way unless a deliverable genuinely requires a dependency, and say so out loud
+# if one ever does.
+#
+# The three hook URLs live in env vars, NOT here and NOT in page source:
+#   GHL_HOOK_ORGANIC  organic  (/get-started)
+#   GHL_HOOK_PAID     paid     (/lp/keep-control)
+#   GHL_HOOK_INTEL    intel    (the four market pages)
+# A missing var is a 502 that forwards nothing, never a silent success.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
