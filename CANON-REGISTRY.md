@@ -2450,6 +2450,17 @@ Five instrument defects today, **zero code defects found by instruments**:
    cannot resolve because the repo has no `node_modules` by design. They failed with
    `ERR_MODULE_NOT_FOUND`, which reads exactly like a failing verification. They now exit 2 saying
    *"This is a MISSING DEPENDENCY, not a failing verification."*
+6. **The harness, not the instrument.** The bot-gate suite crashed post-switch on
+   `page.fill('#mkxHpField')` — a 30s **timeout, not a failed assertion**. `#fname` filled on the
+   same page, a fresh page had the field, and the honeypot sits *after* `#email` in the document:
+   `waitUntil:'domcontentloaded'` racing a stalled stream from a **single-threaded**
+   `python -m http.server` under many browser contexts. Tested rather than asserted — same code,
+   same suite, **threaded** server: **46/46, exit 0.** The dev server was the constraint.
+
+**Six, and the shape is now unmistakable: the failures cluster in the measuring apparatus, not in
+the code.** That is not luck — it is what happens when the code is gated and the instruments are
+not. The instruments are now the least-tested layer in this repo, and that is the standing item this
+day produces.
 
 Every one was caught by a known-good case in the same run, and none by re-reading the script.
 **Instrument before characterising** held each time; the two occasions I characterised first, I was
