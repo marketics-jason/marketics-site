@@ -2399,6 +2399,13 @@ here", which would have taken the pipeline stage and the report delivery with it
 **Nothing was lost by deleting it.** Market and campaign are both already queryable on every contact:
 `City` and `Contact source` land correctly, verified on three separate live contacts today.
 
+**Verified after the deletion, reported by Jason** (Code has no GHL access, so this is attributed
+rather than absorbed — the v3.53 discipline): a fresh submission on `/intel/miami` produced a contact
+with **no tag**, `Contact source` and `Zone` populated, **an opportunity on the Intel Lead pipeline**,
+and **the report email delivered**. The single-node delete took nothing downstream with it. The risk
+being checked was real: the tag node sat directly above the pipeline stage and the delivery, and
+GHL's other option on that menu — *delete all actions from here* — would have removed both.
+
 ### The payload array is KEPT, and marked inert
 
 Reversing an earlier offer to strip it. The shape is already the one wanted — market, campaign,
