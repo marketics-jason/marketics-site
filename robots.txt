@@ -4,5 +4,6 @@ Disallow: /join
 Disallow: /join/
 Disallow: /audits
 Disallow: /audits/
+Disallow: /p/
 
 Sitemap: https://marketics.io/sitemap.xml

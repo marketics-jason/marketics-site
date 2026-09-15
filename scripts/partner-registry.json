@@ -1,0 +1,33 @@
+{
+  "_comment": [
+    "Partner referral node registry. Ratified by Jason, 2026-09-14 (registry v3.63).",
+    "",
+    "SIGNED PARTNERS ONLY. A slug is a branded link the partner puts their name next to,",
+    "so issuing one to a node still in negotiation tells them they are a partner before",
+    "they have agreed to be one. Jason's rule: signed first, slug after. Nodes in",
+    "negotiation get a slug the day they sign -- one line here plus p/index.html.",
+    "",
+    "NOTE ON CANON: the marketics-canon skill labels some nodes '(partner)' that are NOT",
+    "signed -- STR Cribs among them. In that row 'partner' denotes a relationship, not an",
+    "agreement. Do not derive this file from that row; it was tried on 2026-09-14 and",
+    "produced referral links for four nodes still in negotiation.",
+    "",
+    "ORGANISATION LABELS ONLY -- NO PERSON NAMES, DELIBERATELY. Two reasons, both load-",
+    "bearing: (1) scripts/ is not blocked from the web, so this file is fetchable, and the",
+    "person-to-node mapping is relationship structure canon keeps private for some nodes;",
+    "(2) that mapping already lives in canon's stakeholder rows, and a second copy of a",
+    "canon row is a defect rather than a convenience (registry v3.62). Look the contact up",
+    "in canon; do not restate one here.",
+    "",
+    "Slug rules: lowercase, [a-z0-9-], STABLE FOREVER once issued. A slug appears in",
+    "reporting and in the link the partner themselves holds, so renaming one silently",
+    "splits that node's history in two.",
+    "",
+    "slug_issued is the date THIS FILE issued the slug. It is NOT the signing date --\n     that is not recorded here because it was not supplied, and a plausible wrong date\n     is worse than an absent one (registry v3.52)."
+  ],
+  "medium": "partner",
+  "partners": {
+    "cost-seg-smart": { "label": "Cost Seg Smart", "slug_issued": "2026-09-14" },
+    "pricelabs":      { "label": "PriceLabs",      "slug_issued": "2026-09-14" }
+  }
+}

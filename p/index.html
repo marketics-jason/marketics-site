@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Redirecting…</title>
+<!--
+  PARTNER REFERRAL STAMP — /p/<slug>[/<surface>]
+
+  Not a page. A stamp-and-forward stub, served for every /p/* path by a Netlify
+  rewrite (see _redirects) so one file covers any number of slugs.
+
+  WHAT IT IS FOR. A partner link with no UTMs on it is indistinguishable from
+  organic at the payload level: the empty-key filter drops the empty utm_source
+  before the POST (registry v3.51), so a partner lead arrives carrying nothing
+  that names its channel. Not mislabelled -- absent. This makes the partner rail
+  countable (utm_medium) and diagnosable per node (utm_source).
+
+  WHY A PATH AND NOT A QUERY STRING. Query strings get stripped by humans, email
+  clients, and anyone retyping a link off a slide. /p/pricelabs survives all
+  three. The UTM convention is the mechanism; the short path is the interface.
+
+  THE SLUG LIST BELOW IS GATED, NOT DUPLICATED. validate-site.py fails the build
+  if it differs from scripts/partner-registry.json by even one entry, which is
+  the same treatment llms.txt gets against sitemap.xml. A derived copy whose
+  divergence is impossible is not a second source of truth; an ungated one is
+  (registry v3.62).
+
+  FAILURE DIRECTION IS DELIBERATE. An unknown slug still forwards to
+  /get-started, just without stamping. The lead path never breaks for the sake
+  of attribution -- losing a visitor costs more than losing a label.
+
+  THE STAMP CANNOT BE CANCELLED BY THE REDIRECT. sessionStorage writes are
+  synchronous, so unlike the keepalive case (v3.57) navigation cannot race them.
+  Same shape, opposite outcome, stated because the resemblance invites the wrong
+  conclusion.
+-->
+<script src="/mkx-utm.js"></script>
+<script>
+(function () {
+  'use strict';
+  /* GATED against scripts/partner-registry.json — do not edit one without the other. */
+  var SLUGS = ['cost-seg-smart', 'pricelabs'];
+  var MEDIUM = 'partner';
+  var DEST = '/get-started';
+
+  var parts = window.location.pathname.split('/').filter(Boolean);   /* ['p', slug, surface?] */
+  var slug = (parts[1] || '').toLowerCase();
+  var surface = (parts[2] || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+
+  var url = DEST;
+  if (SLUGS.indexOf(slug) !== -1) {
+    url += '?utm_source=' + encodeURIComponent(slug) + '&utm_medium=' + MEDIUM;
+    if (surface) { url += '&utm_content=' + encodeURIComponent(surface); }
+  }
+  /* replace(), not assign(): the stub must not sit in history and bounce the back button. */
+  window.location.replace(url);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=/get-started"></noscript>
+</head>
+<body>
+<h1>Redirecting to <a href="/get-started">marketics.io/get-started</a>…</h1>
+</body>
+</html>

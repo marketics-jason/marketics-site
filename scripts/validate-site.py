@@ -384,7 +384,15 @@ REQUIRED_TOKENS = {
 }
 
 # Pages that legitimately carry no consent script (confidential, untracked).
-CONSENT_EXEMPT_PREFIXES = ("/audits/",)
+#
+# /p/ is the partner referral stub (registry v3.63), and its exemption is LOAD-BEARING
+# rather than cosmetic. mkx-consent.js fires trackConsent('impression') at banner MOUNT.
+# The stub forwards in the head before anything renders, so a visitor never sees a
+# banner there -- but the script would still mount one in a gated region and post an
+# impression for a page nobody saw, inflating the consent denominator that deliverable 4
+# exists to restore (v3.56). The exempt branch below also FORBIDS loading consent on
+# these prefixes, which is what makes this a rule rather than an omission.
+CONSENT_EXEMPT_PREFIXES = ("/audits/", "/p/")
 # /cdn-cgi/ is Cloudflare's namespace, not our routing — never treat as a broken
 # internal link. It IS surfaced as a warning so the counsel-scoped artifacts stay visible.
 IGNORE_LINK_PREFIXES = ("/cdn-cgi/",)
@@ -511,7 +519,13 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
                         f"to keep describing this (board addendum C3, registry v3.20)")
 
     # 2. consent gating
-    if not url.startswith(CONSENT_EXEMPT_PREFIXES):
+    # Exact-or-subpath, NOT startswith on the bare prefix: url_for() renders
+    # p/index.html as "/p", and a bare "/p" prefix would silently swallow
+    # /pricing. (That miss fails SAFE -- /pricing carries the consent script, so
+    # the exempt branch below would reject it loudly rather than wave it through
+    # -- but a gate should not rely on its own mistakes being noisy.)
+    if not any(url == pre.rstrip("/") or url.startswith(pre)
+               for pre in CONSENT_EXEMPT_PREFIXES):
         if "mkx-consent.js" not in raw:
             hard.append(f"{where}: missing consent script (/mkx-consent.js)")
     else:
@@ -1561,6 +1575,88 @@ def main():
                             f"beacon was removed on 2026-09-03 because sendBeacon can "
                             f"never satisfy that endpoint's preflight; telemetry from "
                             f"this file goes same-origin or not at all (registry v3.30)")
+
+    # 11m. the partner referral rail (registry v3.63).
+    #
+    # Three separate failures, gated separately because each breaks differently:
+    #
+    #   1. A published link carrying utm_medium=partner with a slug nobody
+    #      registered. This is the one that costs money: the link works, the
+    #      visitor converts, and the lead lands under a source that matches
+    #      nothing in reporting. Silent, and only visible as a rail that
+    #      undercounts -- the same shape as every defect found this month.
+    #   2. p/index.html's embedded slug list drifting from the registry. The
+    #      stub cannot read JSON without a fetch, and a fetch that fails would
+    #      lose attribution silently, so the list is DERIVED and gated instead.
+    #      Gated, a derived copy cannot diverge; ungated it is a second source
+    #      of truth, which is the defect v3.62 exists to prevent.
+    #   3. A malformed slug. Slugs are permanent -- a partner holds the link --
+    #      so an uppercase or space-bearing slug issued once cannot be tidied
+    #      later without splitting that node's history in two.
+    reg_path = os.path.join(ROOT, "scripts", "partner-registry.json")
+    stub_rel = "p/index.html"
+    if os.path.exists(reg_path):
+        try:
+            reg = json.load(open(reg_path, encoding="utf-8"))
+        except ValueError as e:
+            reg = None
+            hard.append(f"scripts/partner-registry.json: not valid JSON ({e}) — the "
+                        f"partner rail's single source of slugs is unreadable, so every "
+                        f"check below is vacuous")
+        if reg is not None:
+            reg_slugs = set(reg.get("partners", {}))
+            medium = reg.get("medium", "")
+            if medium != "partner":
+                hard.append(f"scripts/partner-registry.json: medium is {medium!r}, must be "
+                            f"'partner' — it is the fixed channel flag the Oct 16 "
+                            f"paid-vs-partner comparison counts on")
+            for sl in sorted(reg_slugs):
+                if not re.fullmatch(r"[a-z0-9-]+", sl):
+                    hard.append(f"scripts/partner-registry.json: slug {sl!r} is not "
+                                f"lowercase [a-z0-9-] — slugs are permanent once a "
+                                f"partner holds the link")
+
+            # 2. the stub's derived list must match exactly
+            stub_path = os.path.join(ROOT, stub_rel)
+            if os.path.exists(stub_path):
+                stub_src = open(stub_path, encoding="utf-8").read()
+                m = re.search(r"var SLUGS\s*=\s*\[([^\]]*)\]", stub_src)
+                if not m:
+                    hard.append(f"{stub_rel}: no parseable 'var SLUGS = [...]' — without it "
+                                f"the registry gates nothing and an unregistered slug "
+                                f"would stamp silently")
+                else:
+                    stub_slugs = set(re.findall(r"'([^']*)'", m.group(1)))
+                    if stub_slugs != reg_slugs:
+                        missing = sorted(reg_slugs - stub_slugs)
+                        extra = sorted(stub_slugs - reg_slugs)
+                        hard.append(f"{stub_rel}: SLUGS differs from "
+                                    f"partner-registry.json — missing {missing}, "
+                                    f"unregistered {extra}")
+
+            # 1. every published partner link resolves to a registered slug
+            for rel in sorted(set(pages.values())):
+                src = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+                if rel == stub_rel:
+                    continue
+                # INBOUND ONLY. An outbound link may carry utm_medium=partner under the
+                # DESTINATION's convention -- /intel/airbnb-operations-at-cost links to
+                # turno.com with utm_source=website, which is Turno describing us. Gating
+                # that is a false positive, and it fired on the first run.
+                own = [m for m in re.findall(r'href=[\"\']([^\"\']*utm_medium=partner[^\"\']*)', src)
+                       if not re.match(r"https?://(?!marketics\.io)", m)]
+                for qs in own:
+                    src_m = re.search(r"utm_source=([^&\"'\s>]*)", qs)
+                    got = src_m.group(1) if src_m else ""
+                    if got not in reg_slugs:
+                        hard.append(f"{rel}: partner link carries utm_source={got!r}, "
+                                    f"which is not in partner-registry.json — the lead "
+                                    f"lands under a source matching nothing in reporting")
+                for pm in re.findall(r"href=[\"']/p/([a-zA-Z0-9-]*)", src):
+                    if pm not in reg_slugs:
+                        hard.append(f"{rel}: links to /p/{pm} but {pm!r} is not in "
+                                    f"partner-registry.json — the stub will forward "
+                                    f"without stamping and the referral is uncounted")
 
     # orphan check only meaningful on a full run
     if not args:

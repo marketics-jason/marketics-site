@@ -37,14 +37,22 @@ Check A still binds everywhere, including CI, because it reads only the registry
 SCOPE -- WHAT CHECK B ACTUALLY COVERS (recorded 2026-09-14, registry v3.59)
 
 Check B reads ONE skill file: the path given by --skill, or the first match of the
-default glob. The skill is installed separately in each Claude Project, so there are
-several copies, and this checker can see exactly the one on the machine it runs on.
+default glob.
 
-The gate never claimed fleet coverage. Its OUTPUT just read that way: "registry/skill
-sync gate passes" is a sentence about the whole pairing, and a green result was taken
-as "the skill is current" rather than "the copy I could reach is current". Closing the
-authoring source therefore does not close the installed copies, and on 2026-09-14 one
-Project was still loading the pre-correction file behind a green run of this script.
+CORRECTED 2026-09-14 (registry v3.61): this section previously said the skill is
+installed separately in each Project, so there were "several copies". THAT WAS WRONG.
+The skill is enabled at the ACCOUNT level -- the sync bucket is keyed
+<organizationUuid>_<accountUuid> with no project segment -- so there is exactly one
+copy, and the "verified in all five Projects" passes were five reads of this same file.
+
+The real limitation is different, and worse. This gate compares the registry against a
+SKILL FILE. It cannot see a Project prompt, a brief, a deck, or any other document that
+restates the claim rows -- and one did: a full CANONICAL-STAT REGISTRY section in this
+Project's instructions, naming a retired token as active guidance, behind a green run
+of this script.
+
+The gate never claimed that coverage. Its OUTPUT read that way: "registry/skill sync
+gate passes" is a sentence about canon, not about one file.
 
 That is the third member of the OUTRANKED-OR-LOOSENED family, and the generating
 pattern is now stated: A CONTROL REPORTS ON WHAT IT CAN REACH, AND THE REPORT GETS
@@ -161,9 +169,10 @@ def main():
     print(f"registry: {len(entries)} version entries, {checked_a} require the field")
     if b_ran:
         print(f"skill:    {skill}\n          aligned to {bm.group(2)}")
-        print("          SCOPE: this copy only. The skill is installed per Project; "
-              "other\n          installed copies are not reachable from here and are "
-              "NOT verified.")
+        print("          SCOPE: this file only. This gate cannot see Project "
+              "instructions,\n          briefs, decks or any other document that may "
+              "restate the claim\n          rows — and one of those existed (registry "
+              "v3.61).")
     elif skill:
         print(f"skill:    {skill} — build line unreadable")
     else:
@@ -180,7 +189,7 @@ def main():
             print(f"   - {f}")
         return 1
     print("\n✓ registry/skill sync gate passes"
-          + ("  (one installed copy — see SCOPE above)" if b_ran
+          + ("  (one skill file — see SCOPE above)" if b_ran
              else "  (check A only — see above)"))
     return 0
 

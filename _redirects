@@ -121,5 +121,10 @@
 /LEGAL-REDLINE-2026-09-01          /404.html                  404!
 /LEGAL-REDLINE-2026-09-01.md       /404.html                  404!
 
+# Partner referral stamp. One stub serves every /p/<slug>[/<surface>] path, so a new
+# partner needs a registry line, not a new file. MUST stay above the catch-all below:
+# Netlify is first-match, and under /* this route is dead.
+/p/*  /p/index.html  200
+
 # 404 fallback
 /* /404.html 404
