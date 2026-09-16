@@ -50,6 +50,8 @@ on:
       - 'CANON-REGISTRY.md'
       - 'scripts/check-skill-sync.py'
       - 'scripts/gen-llms.py'
+      - 'scripts/gen-estate.py'
+      - 'ESTATE.md'
       - 'scripts/llms-config.json'
       - '.github/workflows/validate-site.yml'
 
@@ -83,3 +85,11 @@ jobs:
       # session or anywhere the skill is present, which is where B can bind.
       - name: registry declares skill impact
         run: python3 scripts/check-skill-sync.py
+
+      # ESTATE.md is GENERATED from the repo, never hand-written. It did not
+      # exist until 2026-09-16 even though two briefs named it as the home for
+      # repo truth and one said it "regenerates on merge" (registry v3.66). This
+      # step is what makes that sentence true: the file cannot say something the
+      # repo does not.
+      - name: ESTATE.md matches the repo
+        run: python3 scripts/gen-estate.py
