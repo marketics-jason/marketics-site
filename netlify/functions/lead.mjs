@@ -252,4 +252,12 @@ async function handleConsent(req) {
    empty-key filter, the byte-identical forwarding and the 502-before-read
    ordering -- and this month is a long argument about what a second copy costs.
    The paths differ; the plumbing does not. */
-export const config = { path: ['/api/lead', PARTNER_PATH] };
+export const config = { path: ['/api/lead', '/api/partner'] };
+/* LITERALS, NOT `PARTNER_PATH`. Netlify parses this export STATICALLY -- it
+   reads the file, it does not execute it -- so an identifier here is
+   unresolvable and the bundling stage fails the whole deploy, every function
+   with it. The first version used the constant, `node` loaded the module
+   happily, and the deploy died at "Build script returned non-zero exit code: 2".
+   "The module loads" was the wrong test for a property that is never evaluated
+   at runtime. The constant still governs the handler below, where it IS
+   evaluated; gate 11q keeps the two in agreement. */

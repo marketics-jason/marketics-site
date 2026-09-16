@@ -1813,6 +1813,44 @@ def main():
                         + (f"; missing {missing}" if missing else "")
                         + (f"; unexpected {extra}" if extra else ""))
 
+    # 11q. the function's `config` export must be STATICALLY analysable
+    #      (registry v3.67).
+    #
+    # Netlify READS this export; it does not execute the module. An identifier
+    # in it is unresolvable at build time and fails the bundling stage -- which
+    # takes down EVERY function in the deploy, not just the one with the typo.
+    #
+    # It shipped once: `path: ['/api/lead', PARTNER_PATH]`. `node` loaded the
+    # module happily, the 39-test function suite passed, and the deploy died at
+    # "Build script returned non-zero exit code: 2". "The module loads" is the
+    # wrong test for a property that is never evaluated at runtime, so this gate
+    # tests it the way Netlify does: by reading, not running.
+    fn_path = os.path.join(ROOT, "netlify", "functions", "lead.mjs")
+    if os.path.exists(fn_path):
+        fsrc = open(fn_path, encoding="utf-8").read()
+        cm = re.search(r"export const config\s*=\s*(\{.*?\});", fsrc, re.S)
+        if not cm:
+            hard.append("netlify/functions/lead.mjs: no parseable `export const config` "
+                        "— Netlify reads this statically and the deploy needs it")
+        else:
+            blob = cm.group(1)
+            # Strip string literals, then anything that remains which looks like an
+            # identifier is a build-time failure waiting to happen.
+            stripped = re.sub(r"'[^']*'|\"[^\"]*\"", "", blob)
+            leftover = re.findall(r"[A-Za-z_$][A-Za-z0-9_$]*", stripped)
+            leftover = [x for x in leftover if x not in ("path",)]
+            if leftover:
+                hard.append(f"netlify/functions/lead.mjs: `config` export references "
+                            f"{leftover} — Netlify parses this statically and cannot "
+                            f"resolve an identifier. Use string literals; the whole "
+                            f"deploy fails otherwise, every function with it")
+            # And the runtime constant must agree with the literal it duplicates.
+            pm = re.search(r"const PARTNER_PATH\s*=\s*'([^']+)'", fsrc)
+            if pm and pm.group(1) not in blob:
+                hard.append(f"netlify/functions/lead.mjs: PARTNER_PATH is "
+                            f"{pm.group(1)!r} but the config export does not list it — "
+                            f"the handler would answer on a path Netlify never routes")
+
     # 11p. the partner APPLICATION form (build sheet FINAL, registry v3.67).
     #
     # Three separate failures, and the first is the expensive one:

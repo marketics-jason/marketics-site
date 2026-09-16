@@ -150,7 +150,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 
 ## CI gates (`scripts/validate-site.py`)
 
-**38 numbered gates.** Each fails the build.
+**39 numbered gates.** Each fails the build.
 
 | # | Gate |
 |---|---|
@@ -190,6 +190,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 | 11n | the partner door's four constraints (registry v3.64) |
 | 11n-2 | /partner is a PUBLISHED surface now: no fee figures, no geography |
 | 11n-3 | FOOTER CONSISTENCY (D8 §3, registry v3.65) |
+| 11q | the function's `config` export must be STATICALLY analysable |
 | 11p | the partner APPLICATION form (build sheet FINAL, registry v3.67) |
 | 11o | /p/ must forward BOTH pairs, not just the UTMs (registry v3.64) |
 

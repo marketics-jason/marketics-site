@@ -2428,6 +2428,22 @@ becoming "None" · `/partner`'s footer losing a link · a **nav** link to `/part
 honeypot drops silently and the bot still sees the same confirmation · standard nav present and
 `/partner` not in it · Partners in its own footer · still `noindex`.
 
+### The deploy failed, and the reason is worth keeping
+
+`export const config = { path: ['/api/lead', PARTNER_PATH] }` **failed the Netlify build** —
+*"Build script returned non-zero exit code: 2"* — taking the whole deploy with it, every function
+included, not just the one carrying the identifier.
+
+**Netlify READS that export; it does not execute the module.** An identifier in it is unresolvable at
+build time. Locally `node` loaded the file happily and the 39-test function suite passed, because both
+of those *run* the code — and this property is never evaluated at runtime. **"The module loads" was the
+wrong instrument for a statically-parsed declaration**, which is the same mistake as scanning raw
+source for a percentage that only exists in CSS: a correct check pointed at the wrong surface.
+
+Gate 11q now tests it the way Netlify does, by reading rather than running: the `config` export must
+contain string literals only, and `PARTNER_PATH` must agree with the literal it duplicates. Both halves
+negative-controlled, and the original failure reproduced before the fix was accepted.
+
 ### Still blocked, and the blockers are not Code's
 
 - **`GHL_HOOK_PARTNER`** is not set. The function returns 502 **before reading the body**, by design —
