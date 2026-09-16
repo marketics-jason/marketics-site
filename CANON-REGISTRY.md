@@ -2406,6 +2406,11 @@ applying D8's rule literally to all 54 would have put two gates in direct contra
   nav here would make one gate demand what another forbids.
 - **`/partner`** — legal-only footer by design; a self-link is noise.
 
+- **`/audits/` token pages** — untouched, always. **The first pass of this change added a Partners
+  link to a live client audit**, and it was caught reading the commit's own file list, not by a gate.
+  A site-wide footer edit is precisely the shape of change that reaches those pages by accident, so
+  the exemption is now enforced in the gate rather than remembered. **51 pages carry the link, not 52.**
+
 Recorded as a stated assumption rather than a silent choice.
 
 ### The scan surface is the gate

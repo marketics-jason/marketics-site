@@ -1789,7 +1789,12 @@ def main():
                       "mailto:marketing@marketics.io")
     FOOTER_EXEMPT = ("lp/keep-control/index.html", "partner/index.html")
     for rel3 in sorted(set(pages.values())):
-        if rel3 in FOOTER_EXEMPT:
+        # /audits/ token pages are UNTOUCHED, ALWAYS -- a standing constraint, not
+        # a preference. The first pass of this change added a Partners link to a
+        # live client audit before the file list caught it. A site-wide footer
+        # edit is exactly the shape of change that reaches them by accident, so
+        # the exemption is enforced here rather than remembered.
+        if rel3.startswith("audits/") or rel3 in FOOTER_EXEMPT:
             continue
         src3 = open(os.path.join(ROOT, rel3), encoding="utf-8").read()
         cm = re.search(r'class="(?:fh|mkxf-h)">Company</span>(.*?)</div>', src3, re.S)
