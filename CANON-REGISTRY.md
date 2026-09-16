@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.69 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.70 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,56 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.70 — a handoff read three times, answering only the question in front of it (2026-09-16)
+
+**Skill impact:** no — layout and type on one page. No claim row moves; every word of copy is unchanged.
+
+### The finding
+
+Jason put Design's artboard and the live page side by side. Beyond the trades list, **five things on the
+page did not match**, and Code had the artboard file open three separate times without seeing any of
+them — once for the gutter, once for the list, once for the footer.
+
+Each read answered the question asked and stopped. **The handoff is a specification for a whole page;
+it was used as a reference to look things up in.** Worse, one of the five was quoted verbatim in
+Code's own earlier extraction — the `One of each:` label, printed to the terminal as DM Mono 11px gold
+uppercase and read straight past, because the question that pass was about the `<ul>` beneath it.
+
+| | artboard | shipped | now |
+|---|---|---|---|
+| `PARTNERS` kicker | gold rule + 12px label above the h1 | **absent entirely** | present, using the existing `.kicker` component |
+| `<h1>` | 66px, letter-spacing 2px, max-width 900px | 54px / 1px / none | matches |
+| the lede | **two columns**, 1fr 1fr, gap 64, second paragraph brighter | one column, both the same colour | matches |
+| `One of each:` | mono 11px gold uppercase — a **label** | Josefin 34px white — a **display heading** | matches, still an `<h2>` |
+| the CTA | lead-in and button on **one line**, 30px Josefin, gap 36 | stacked, 16.5px body text | matches |
+
+Vertical rhythm was off with it: hero `118px` where the artboard says `96`, `.pt-who` 64 where it says
+68, `.pt-form-wrap` 64 where it says 76.
+
+### The rule
+
+**A design handoff is read once, whole, before the first line of it is built — not consulted per
+question.** The per-question read is what produced four passes on one page, each shipping something
+that still did not match, and it is the same shape as the defect in v3.68: *the spec looked complete,
+so nobody asked what else it said.*
+
+`One of each:` stays an `<h2>`. Design specified its **type**, not its role in the document; dropping
+the heading to get the look would quietly change the page's outline for a screen reader and for
+extraction. Type changed, element did not.
+
+### Verified rendered, both artboard widths
+
+Every value above was read back out of a browser at 1440 and 390 — kicker size and tracking, h1 size
+and tracking, the lede grid resolving to `616px 616px` and to one column, the two lede colours, the
+label's family, the CTA sitting on one line at desktop and stacking at mobile, and no horizontal
+overflow at either width.
+
+### Left as it is, and flagged
+
+**The artboard's APPLY button is a third button size** — 14px/600 at `21px 52px`, against `.btn-gold`'s
+13px/500 at `18px 40px` and `/get-started`'s `.btn-send` at `19px 44px`. The page keeps `.btn-gold`.
+Adding a third gold button size to the site to match one artboard is Design's call, not Code's.
+
 ## v3.69 — the class that was never defined, and what a gate can and cannot see (2026-09-16)
 
 **Skill impact:** no — a layout defect, a CSS fix and one new gate. No claim row moves, no copy changes.

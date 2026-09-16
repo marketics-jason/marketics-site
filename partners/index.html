@@ -318,10 +318,15 @@ td.mcell{vertical-align:top;}
 </style>
 <style>
 /* ══ /partner — the referring-partner door ══ */
-.pt-hero{padding-top:118px;padding-bottom:0;}
-.pt-hero h1{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:54px;
-  line-height:1.1;letter-spacing:1px;color:#fff;margin:0;text-wrap:pretty;}
-.pt-lede{font-size:19px;line-height:1.72;color:#E6E3DA;margin:30px 0 0;max-width:820px;}
+.pt-hero{padding-top:96px;padding-bottom:0;}
+.pt-hero h1{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:66px;
+  line-height:1.1;letter-spacing:2px;color:#fff;margin:0;max-width:900px;text-wrap:pretty;}
+/* The lede is TWO columns on the artboard, not one stacked pair, and the two
+   paragraphs are deliberately unequal in weight: the second is the one that
+   says what this page is asking for. */
+.pt-lede-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;padding-top:44px;}
+.pt-lede{font-size:18px;line-height:1.72;color:#B4B2A9;margin:0;}
+.pt-lede.hi{color:#E6E3DA;}
 .pt-grid{display:grid;grid-template-columns:1fr 340px;gap:72px;align-items:start;padding-top:52px;}
 .pt-eyebrow{display:block;font-family:var(--mono,'DM Mono',monospace);font-size:11px;letter-spacing:2.5px;
   text-transform:uppercase;color:#D6AD60;}
@@ -338,9 +343,12 @@ td.mcell{vertical-align:top;}
 .pt-standard{padding-top:56px;}
 .pt-standard p{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:24px;
   line-height:1.5;color:#E6E3DA;margin:0;max-width:980px;text-wrap:pretty;}
-.pt-who{padding-top:64px;}
-.pt-who h2{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:34px;
-  color:#fff;margin:0 0 16px;letter-spacing:.5px;}
+.pt-who{padding-top:68px;}
+/* "One of each:" is a LABEL on the artboard, not a display heading -- mono,
+   gold, 11px. It stays an <h2> so the document outline is unchanged; only its
+   type is. */
+.pt-who h2{font-family:var(--mono,'DM Mono',monospace);font-weight:400;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;color:#D6AD60;margin:0;}
 .pt-who-body{font-size:17px;line-height:1.7;color:#B4B2A9;margin:0 0 22px;max-width:720px;}
 /* Trades list, Design artboard 2026-09-16, taken whole: 4 columns on desktop,
    one on mobile, row rules rather than bullets, and the 7th item spanning the
@@ -354,9 +362,14 @@ td.mcell{vertical-align:top;}
   padding:26px 24px 26px 0;border-bottom:1px solid #242422;}
 .pt-trades li:nth-child(4n),.pt-trades li:last-child{padding-right:0;}
 .pt-trades li:last-child{grid-column:3 / -1;}
-.pt-who-close{font-size:16px;line-height:1.7;color:#8F8C83;margin:24px 0 0;}
-.pt-form-wrap{padding-top:64px;padding-bottom:96px;}
-.pt-apply-line{font-size:16.5px;line-height:1.7;color:#E6E3DA;margin:0 0 28px;max-width:720px;}
+.pt-who-close{font-size:15.5px;line-height:1.7;color:#8C8A81;margin:34px 0 0;}
+.pt-form-wrap{padding-top:76px;padding-bottom:96px;}
+/* The lead-in and the button sit on ONE line (artboard): the question and the
+   answer read as a single gesture. The forward sentence stays below, in --dim,
+   never a button (Board §4). */
+.pt-cta-row{display:flex;align-items:center;gap:36px;flex-wrap:wrap;}
+.pt-apply-line{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:30px;
+  letter-spacing:1px;line-height:1.2;color:#fff;margin:0;}
 .pt-card{border:1px solid rgba(214,173,96,.35);background:#171716;padding:38px;max-width:720px;}
 .pt-form-header{font-size:15px;line-height:1.7;color:#8F8C83;margin:0 0 30px;}
 .pf{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
@@ -385,8 +398,15 @@ td.mcell{vertical-align:top;}
 }
 @media (max-width:900px){
   .pt-hero{padding-top:92px;}
-  .pt-hero h1{font-size:32px;}
-  .pt-lede{font-size:16.5px;}
+  .pt-hero h1{font-size:40px;line-height:1.08;letter-spacing:1px;}
+  .pt-kicker span{font-size:10.5px;letter-spacing:2.5px;}
+  .pt-lede-grid{grid-template-columns:1fr;gap:0;padding-top:26px;}
+  .pt-lede{font-size:15px;line-height:1.8;}
+  .pt-lede + .pt-lede{margin-top:26px;}
+  .pt-who h2{font-size:10px;letter-spacing:2.5px;}
+  .pt-cta-row{gap:22px;}
+  .pt-apply-line{font-size:24px;letter-spacing:.5px;}
+  .pt-who-close{font-size:14px;}
   .pt-grid{grid-template-columns:1fr;gap:34px;padding-top:34px;}
   .pt-ret{grid-template-columns:30px 1fr;gap:14px;padding:20px 0;}
   .pt-ret .n{font-size:22px;}
@@ -442,9 +462,12 @@ td.mcell{vertical-align:top;}
        copy from different rulings; none was reconciled by Code, because
        reconciling cleared copy is authoring. Raised to the Board 2026-09-16. -->
   <section class="pt-hero wrap">
+    <div class="kicker pt-kicker"><div class="bar"></div><span>Partners</span></div>
     <h1>The circle around your property.</h1>
-    <p class="pt-lede">Revenue is my job. But your property runs on more than a rate. It runs on the photographer whose shots stop the scroll, the cleaner who protects every review, the accountant who knows what a cost segregation study is actually worth to you.</p>
-    <p class="pt-lede">So I&rsquo;m assembling a circle in each market I work: one of each trade, chosen slowly, because when I point an owner at someone, my name rides on the introduction.</p>
+    <div class="pt-lede-grid">
+      <p class="pt-lede">Revenue is my job. But your property runs on more than a rate. It runs on the photographer whose shots stop the scroll, the cleaner who protects every review, the accountant who knows what a cost segregation study is actually worth to you.</p>
+      <p class="pt-lede hi">So I&rsquo;m assembling a circle in each market I work: one of each trade, chosen slowly, because when I point an owner at someone, my name rides on the introduction.</p>
+    </div>
   </section>
 
   <section class="wrap pt-who">
@@ -464,8 +487,10 @@ td.mcell{vertical-align:top;}
        sentence, never a button: two equal buttons make a visitor stop and work
        out which one is them. -->
   <section class="wrap pt-form-wrap">
-    <p class="pt-apply-line">Do work that holds up?</p>
-    <a class="btn-gold" href="/partners/apply">Apply</a>
+    <div class="pt-cta-row">
+      <p class="pt-apply-line">Do work that holds up?</p>
+      <a class="btn-gold" href="/partners/apply">Apply</a>
+    </div>
     <p class="pt-who-close">Know someone who&rsquo;d be a good fit? Send them this page.</p>
   </section>
 
