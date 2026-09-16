@@ -1670,11 +1670,21 @@ def main():
     if os.path.exists(part_path):
         psrc = open(part_path, encoding="utf-8").read()
 
-        # 1. noindex in the head (the X-Robots-Tag in netlify.toml is the backstop,
-        #    not the primary -- an edge header is invisible when reading the page).
+        # 1. noindex in the head — PR A STATE ONLY, and PR B DELETES THIS RULE.
+        #
+        # D8 reverses it: /partner becomes indexed once the §2d conditions hold
+        # (copy placed and canon-passing, market list in the CI secret, apply
+        # button leading somewhere real). Left as-is, this rule blocks PR B
+        # permanently, so it is flagged rather than left for someone to discover
+        # while fighting a gate that is doing exactly what it was told.
+        #
+        # It stays for now because PR A ships the gates while the page is still
+        # noindex, and a page that is noindex should FAIL if that silently
+        # changes -- which is the condition this rule actually guards.
         if not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc):
-            hard.append(f"{part_rel}: no noindex meta — the partner door must never "
-                        f"be indexed (spec, three documents)")
+            hard.append(f"{part_rel}: no noindex meta — /partner is noindex until "
+                        f"D8 PR B flips it. If this IS PR B, delete this rule (it is "
+                        f"marked 'PR A state only') rather than working around it")
 
         # 2. out of sitemap.xml
         smp2 = os.path.join(ROOT, "sitemap.xml")
@@ -1690,18 +1700,114 @@ def main():
                 hard.append("llms.txt: lists /partner — the partner door is unlisted; "
                             "exclude it in scripts/llms-config.json")
 
-        # 4. NO INBOUND LINK FROM ANY ORGANIC SURFACE.
-        #    The one most likely to be added by someone being helpful -- a footer
-        #    row, a nav item, a "for partners" line on /about. Same shape as the
-        #    rule keeping organic pages out of /lp/keep-control (gate 7b).
+        # 4. INBOUND LINKS: FOOTER ONLY (D8, registry v3.65).
+        #    REWRITES the PR #151 rule, which was "no inbound link anywhere". D8
+        #    reversed it: the door is findable through exactly one door of its
+        #    own, the site-wide footer, and nowhere else. The gate did not
+        #    loosen -- it moved. A nav item, a body link, a "for partners" line
+        #    on /about or the paid LP all still fail.
         for rel2 in sorted(set(pages.values())):
             if rel2 == part_rel:
                 continue
             src2 = open(os.path.join(ROOT, rel2), encoding="utf-8").read()
-            if re.search(r'href=[\"\']/partner(?:[/\"\'?#]|$)', src2):
-                hard.append(f"{rel2}: links to /partner — the partner door takes no "
-                            f"inbound link from any surface (never in nav, never in a "
-                            f"footer). It is handed over directly or not at all")
+            # Everything from the last <footer> onward is the footer block.
+            fi = src2.rfind("<footer")
+            body, foot = (src2[:fi], src2[fi:]) if fi != -1 else (src2, "")
+            if re.search(r'href=[\"\']/partner(?:[/\"\'?#]|$)', body):
+                hard.append(f"{rel2}: links to /partner OUTSIDE the footer — D8 allows "
+                            f"the footer link and nothing else (never in nav, never in "
+                            f"body copy, never on the paid LP)")
+
+    # 11n-2. /partner is a PUBLISHED surface now: no fee figures, no geography
+    #        (D8 Board conditions 1 and 3, registry v3.65).
+    #
+    # SCAN RULE, and it is the whole reason this is not a one-line regex: these
+    # scan RENDERED TEXT, META AND STRUCTURED DATA, never raw source. The page's
+    # own stylesheet carries `max-width:100%` and `width:100%`, so a naive
+    # percentage regex over the file fails the build on a CSS declaration. Same
+    # family as the gate 11k comment-strip order: the wrong scan surface makes a
+    # correct rule fire on the wrong thing.
+    if os.path.exists(part_path):
+        pp = Page()
+        pp.feed(psrc)
+        rendered = " ".join([pp.text()] if hasattr(pp, "text") else [])
+        if not rendered:
+            # Fall back to a tag-stripped body with <style>/<script> removed first,
+            # which is the surface a reader and a crawler actually see.
+            bodyonly = re.sub(r"(?is)<(style|script)\b.*?</\1>", " ", psrc)
+            bodyonly = re.sub(r"(?s)<!--.*?-->", " ", bodyonly)
+            rendered = re.sub(r"(?s)<[^>]+>", " ", bodyonly)
+        metas = " ".join(re.findall(r'<meta[^>]+content="([^"]*)"', psrc))
+        ld = " ".join(re.findall(r"(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>", psrc))
+        surface = f"{rendered} {metas} {ld}"
+
+        # No fee figures. The ladder lives in the one-pager, after the call --
+        # never on a page a stranger can read.
+        for m in re.findall(r"(?:[$€£]\s?\d[\d,.]*|\b\d+(?:\.\d+)?\s?%)", surface):
+            hard.append(f"{part_rel}: fee figure {m!r} in rendered text/meta/schema — "
+                        f"/partner carries no currency amounts and no percentages "
+                        f"(D8 §3). The ladder belongs in the one-pager, after the call")
+
+        # No geography. The market list is PRIVATE (canon: internal focus list),
+        # so it is read from a CI secret and NEVER written to any output. Absent
+        # secret is reported, never silently skipped -- that would be the vacuous
+        # pass this repo keeps finding.
+        mk_raw = os.environ.get("PARTNER_VET_MARKETS", "").strip()
+        if mk_raw:
+            for name in [x.strip() for x in re.split(r"[,\n]", mk_raw) if x.strip()]:
+                if re.search(rf"\b{re.escape(name)}\b", surface, re.I):
+                    hard.append(f"{part_rel}: market name {name!r} appears in rendered "
+                                f"text/meta/schema — /partner names no geography "
+                                f"(D8 Board condition 1)")
+        else:
+            indexed = not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc)
+            msg = (f"{part_rel}: PARTNER_VET_MARKETS is not set — the no-geography gate "
+                   f"DID NOT RUN. Reported, not skipped")
+            if indexed:
+                hard.append(msg + ", and the page is set to index. D8 §2d: PR B cannot "
+                                  "merge without the list")
+            else:
+                warn.append(msg + " (page is still noindex, so this is a warning)")
+
+        if re.search(r'"areaServed"', psrc):
+            hard.append(f"{part_rel}: structured data contains areaServed — /partner "
+                        f"carries no service-area geography (D8 §2a)")
+
+    # 11n-3. FOOTER CONSISTENCY (D8 §3, registry v3.65).
+    #
+    # There is no shared footer component -- 54 hand-authored footers, no build
+    # step, no includes -- and they HAD ALREADY DRIFTED when D8 landed: 404.html
+    # was missing its Media Kit link and nobody had noticed. Adding a sixth link
+    # by hand across 52 files without a gate just schedules the next drift.
+    #
+    # Scoped to pages that HAVE a Company column. The two that do not are
+    # deliberate, and one is enforced by another gate:
+    #   * lp/keep-control -- paid LP, no-exit rule (gate 7). Adding footer nav
+    #     here would put two gates in direct contradiction.
+    #   * partner itself  -- legal-only footer by design; a self-link is noise.
+    FOOTER_COMPANY = ("/pricing", "/story", "/partner", "/media", "/media-kit",
+                      "mailto:marketing@marketics.io")
+    FOOTER_EXEMPT = ("lp/keep-control/index.html", "partner/index.html")
+    for rel3 in sorted(set(pages.values())):
+        # /audits/ token pages are UNTOUCHED, ALWAYS -- a standing constraint, not
+        # a preference. The first pass of this change added a Partners link to a
+        # live client audit before the file list caught it. A site-wide footer
+        # edit is exactly the shape of change that reaches them by accident, so
+        # the exemption is enforced here rather than remembered.
+        if rel3.startswith("audits/") or rel3 in FOOTER_EXEMPT:
+            continue
+        src3 = open(os.path.join(ROOT, rel3), encoding="utf-8").read()
+        cm = re.search(r'class="(?:fh|mkxf-h)">Company</span>(.*?)</div>', src3, re.S)
+        if not cm:
+            continue
+        got = tuple(re.findall(r'href="([^"]+)"', cm.group(1)))
+        if got != FOOTER_COMPANY:
+            missing = [x for x in FOOTER_COMPANY if x not in got]
+            extra = [x for x in got if x not in FOOTER_COMPANY]
+            hard.append(f"{rel3}: footer Company column is {list(got)} — expected "
+                        f"{list(FOOTER_COMPANY)} in that order"
+                        + (f"; missing {missing}" if missing else "")
+                        + (f"; unexpected {extra}" if extra else ""))
 
     # 11o. /p/ must forward BOTH pairs, not just the UTMs (registry v3.64).
     #

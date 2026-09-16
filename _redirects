@@ -121,6 +121,10 @@
 /LEGAL-REDLINE-2026-09-01          /404.html                  404!
 /LEGAL-REDLINE-2026-09-01.md       /404.html                  404!
 
+# Canonical is the no-slash form (D8 §2a, same rule as the indexing brief).
+# One hop, no chain: /partner/ -> /partner, never via an intermediate.
+/partner/  /partner  301
+
 # Owner-to-owner referral shorthand. The link Jason says out loud; partners
 # never touch it (they get /p/<slug>). A redirect, deliberately not a page:
 # nothing to render, and src=referral lands via the same first-touch capture

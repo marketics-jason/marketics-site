@@ -2363,6 +2363,102 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.65 — D8: the partner door becomes findable (PR A) (2026-09-16)
+
+**Skill impact:** no — routing, gates and a footer link. No claim, phrasing, number or tenure fact
+changes. The §2a page copy is Strategy-cleared and lands in PR B; Code authors none of it.
+
+### A deliberate reversal, named as one
+
+**D8 reverses four of the five partner-page rows that merged in PR #151 an hour earlier.** Recorded
+plainly so it reads as a ruling rather than as drift — and because a reversal that is not named is
+indistinguishable from a mistake six weeks later.
+
+| | PR #151 | D8 |
+|---|---|---|
+| Indexing | `noindex` | indexed, self-canonical |
+| Sitemap | excluded | listed |
+| `llms.txt` | excluded | listed, verbatim line |
+| Inbound links | none, CI-gated | **footer only**, CI-gated |
+| Main nav | never | never — the one row that stands |
+
+**The gate did not loosen; it moved.** "No inbound link anywhere" became "the footer link and nothing
+else", and a nav item, a body link or a line on the paid LP still fails.
+
+### Two PRs, because publishing is the irreversible half
+
+**PR A (this one):** every gate and all the infrastructure. The page stays `noindex`.
+**PR B:** one switch — robots, sitemap and `llms.txt` together — and only when D8 §2d's three
+conditions hold. **The page is never indexed while missing required sections.** Code proposed the
+split; Strategy approved it in v1.1.
+
+### What the footer actually is
+
+**There is no shared footer component.** 54 hand-authored footers, no build step, no includes — and
+**two variants** with identical link sets under different class names (`.foot`/`.fh` on 37 pages,
+`.mkxf`/`.mkxf-h` on 15). They had already drifted: **`404.html` was missing its Media Kit link and
+nobody had noticed.** Fixed in the same pass.
+
+**Scoped to the 52 pages that carry a Company column.** The two that do not are deliberate, and
+applying D8's rule literally to all 54 would have put two gates in direct contradiction:
+
+- **`/lp/keep-control`** — paid LP under the no-exit rule, already enforced by gate 7. Adding footer
+  nav here would make one gate demand what another forbids.
+- **`/partner`** — legal-only footer by design; a self-link is noise.
+
+- **`/audits/` token pages** — untouched, always. **The first pass of this change added a Partners
+  link to a live client audit**, and it was caught reading the commit's own file list, not by a gate.
+  A site-wide footer edit is precisely the shape of change that reaches those pages by accident, so
+  the exemption is now enforced in the gate rather than remembered. **51 pages carry the link, not 52.**
+
+Recorded as a stated assumption rather than a silent choice.
+
+### The scan surface is the gate
+
+The fee and geography gates read **rendered text, meta tags and structured data — never raw source.**
+The page's own stylesheet carries `max-width:100%` and `width:100%`, so a percentage regex over the
+file fails the build on a CSS declaration. **Same family as the gate 11k comment-strip order: a
+correct rule pointed at the wrong surface fires on the wrong thing.** A false-positive control holds
+it there.
+
+### The market list never enters the repo
+
+D8 §4 says the list is internal. **`scripts/` was served** — `marketics.io/scripts/partner-registry.json`
+was fetchable, and `validate-site.py` beside it. Nothing there is secret today (the partner registry
+deliberately carries no person names, v3.63), but *"nothing sensitive is in there yet" is not a
+control.* The directory is now closed at the edge rather than audited file by file, and the market
+list lives in a CI secret read at build time and never written to output.
+
+**Absence is reported, never skipped:** with the secret unset the gate says `DID NOT RUN` — a warning
+while the page is `noindex`, and a **hard failure the moment the page is set to index.** That is what
+makes D8 §2d enforceable rather than remembered.
+
+### Verified
+
+**Eleven negative controls fire, two false-positive controls stay green, bracketed by known-good:**
+currency in body · percentage in body · percentage in meta · market name with the secret set ·
+`areaServed` in schema · indexed while the secret is absent · a page losing its Partners link · a page
+losing Media Kit (the original drift) · a body link to `/partner` outside the footer.
+**Staying green, correctly:** the untouched page's CSS percentages, and the footer link itself.
+
+**Checked for masking rather than assumed:** the indexed-without-list control fires red on *two*
+separate rules, so the D8 §2d branch was confirmed to fire on its own rather than being hidden behind
+gate 11n's noindex rule. An untested branch is the vacuous-pass family.
+
+**Gate 11n's noindex rule is annotated PR-A-only**, because left unmarked it blocks PR B permanently
+and the next person meets a gate doing exactly what it was told.
+
+### Owed, and not guessed at
+
+**Four artifacts disagree on the partner-link route** — the build spec says `/r/{CODE}`, D8 §6 repeats
+it as owed, the Design README asks for confirmation of `/r/{CODE}`, and **`/p/{slug}` shipped and
+merged (v3.63, v3.64)**. Listed in PR A's description so Jason rules against the actual set. **No
+artifact is corrected to either answer until he does.**
+
+Not in PR A: the §2a copy (PR B), the market list (Jason), the vet agent (batch 2 — it has no input
+until the 13-question form exists).
+
+---
 ## v3.64 — the partner door, and the second pair the ladder pays on (2026-09-15)
 
 **Skill impact:** no — a page, a route, and CI gates. No claim, phrasing, number or tenure fact changes.
