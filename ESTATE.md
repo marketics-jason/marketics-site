@@ -152,7 +152,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 
 ## CI gates (`scripts/validate-site.py`)
 
-**39 numbered gates.** Each fails the build.
+**40 numbered gates.** Each fails the build.
 
 | # | Gate |
 |---|---|
@@ -195,6 +195,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 | 11q | the function's `config` export must be STATICALLY analysable |
 | 11p | the partner APPLICATION form (build sheet FINAL, registry v3.67) |
 | 11o | /p/ must forward BOTH pairs, not just the UTMs (registry v3.64) |
+| 11r | a class used in markup must be DEFINED in that page's own CSS |
 
 ---
 

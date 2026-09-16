@@ -87,6 +87,9 @@ body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);fo
 a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 section{max-width:1440px;margin-left:auto;margin-right:auto;}
+/* Site gutter: 72px desktop / 24px at <=640 — the same measure nav and
+   footer are built to. Sections are already capped at 1440 above. */
+.wrap{padding-left:72px;padding-right:72px;}
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
@@ -264,7 +267,7 @@ main{padding-top:74px;}
   nav{padding:0 24px;height:64px;}
   .nav-mobile{top:64px;}
   main{padding-top:64px;}
-  .p-hero,.sec,.closing{padding-left:24px;padding-right:24px;}
+  .p-hero,.sec,.closing,.wrap{padding-left:24px;padding-right:24px;}
   .p-hero{padding-top:56px;padding-bottom:56px;}
   .sec{padding-top:56px;padding-bottom:56px;}
   .p-hero-h{font-size:42px;letter-spacing:2px;}
@@ -339,10 +342,18 @@ td.mcell{vertical-align:top;}
 .pt-who h2{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:34px;
   color:#fff;margin:0 0 16px;letter-spacing:.5px;}
 .pt-who-body{font-size:17px;line-height:1.7;color:#B4B2A9;margin:0 0 22px;max-width:720px;}
-.pt-trades{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px 40px;max-width:820px;}
-.pt-trades li{position:relative;padding-left:20px;font-size:16px;line-height:1.6;color:#B4B2A9;}
-.pt-trades li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:#D6AD60;}
+/* Trades list, Design artboard 2026-09-16, taken whole: 4 columns on desktop,
+   one on mobile, row rules rather than bullets, and the 7th item spanning the
+   trailing tracks -- NOT an empty 8th <li> propping the grid up, which is what
+   the first artboard did and which a screen reader announces as a blank item.
+   Right padding is the column gutter, so the item that ends a row drops it. */
+.pt-trades{list-style:none;padding:0;margin:28px 0 0;display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #242422;}
+.pt-trades li{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;
+  font-size:25px;letter-spacing:.5px;line-height:1.25;color:#FFFFFF;
+  padding:26px 24px 26px 0;border-bottom:1px solid #242422;}
+.pt-trades li:nth-child(4n),.pt-trades li:last-child{padding-right:0;}
+.pt-trades li:last-child{grid-column:3 / -1;}
 .pt-who-close{font-size:16px;line-height:1.7;color:#8F8C83;margin:24px 0 0;}
 .pt-form-wrap{padding-top:64px;padding-bottom:96px;}
 .pt-apply-line{font-size:16.5px;line-height:1.7;color:#E6E3DA;margin:0 0 28px;max-width:720px;}
@@ -361,6 +372,17 @@ td.mcell{vertical-align:top;}
 #pfDone p{font-size:16px;line-height:1.75;color:#B4B2A9;margin:0;}
 /* Honeypot: off-screen, never display:none — a hidden input some bots skip. */
 .mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+/* Design drew this list at 1440 and at 390 only. MEASURED: the 4-column
+   treatment holds down to ~1080, below which 'CPA & bookkeeper' wraps first and
+   the whole grid row grows with it. This 2-column step covers 901-1080, which no
+   artboard includes; the trailing item still fills out its own row. Code's
+   addition, not Design's -- flagged for Design to overrule. */
+@media (max-width:1080px){
+  .pt-trades{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .pt-trades li:nth-child(4n){padding-right:24px;}
+  .pt-trades li:nth-child(2n){padding-right:0;}
+  .pt-trades li:last-child{grid-column:1 / -1;padding-right:0;}
+}
 @media (max-width:900px){
   .pt-hero{padding-top:92px;}
   .pt-hero h1{font-size:32px;}
@@ -369,7 +391,9 @@ td.mcell{vertical-align:top;}
   .pt-ret{grid-template-columns:30px 1fr;gap:14px;padding:20px 0;}
   .pt-ret .n{font-size:22px;}
   .pt-standard p{font-size:19px;}
-  .pt-trades{grid-template-columns:1fr;}
+  .pt-trades{grid-template-columns:1fr;margin-top:18px;}
+  .pt-trades li{font-size:21px;letter-spacing:0;padding:18px 0;}
+  .pt-trades li:last-child{grid-column:auto;}
   .pt-card{padding:22px;}
   .pt-form-wrap{padding-bottom:64px;}
 }
@@ -384,7 +408,7 @@ td.mcell{vertical-align:top;}
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/pricing" class="active">Pricing</a>
+    <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
     <a href="/intel">Insights</a>
   </div>
@@ -441,7 +465,7 @@ td.mcell{vertical-align:top;}
        out which one is them. -->
   <section class="wrap pt-form-wrap">
     <p class="pt-apply-line">Do work that holds up?</p>
-    <a class="btn" href="/partners/apply">Apply</a>
+    <a class="btn-gold" href="/partners/apply">Apply</a>
     <p class="pt-who-close">Know someone who&rsquo;d be a good fit? Send them this page.</p>
   </section>
 
