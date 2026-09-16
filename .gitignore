@@ -5,3 +5,10 @@
 # a stray run would put full performance reports (and every audited URL) on the
 # live site. Ignored so a local diagnostic run can't ship itself.
 .lighthouseci/
+
+# Python bytecode. `scripts/__pycache__/validate-site.cpython-311.pyc` was
+# tracked, so every local run of the validator showed up as a modified file in
+# `git status` and had to be reverted by hand before each commit. Build output
+# is never source.
+__pycache__/
+*.pyc

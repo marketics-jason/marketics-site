@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.73 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.74 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,23 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.74 — housekeeping: one component with two spellings, and build output in source control (2026-09-16)
+
+**Skill impact:** no — no claim, no copy, no route, no rendered pixel changes.
+
+- **`.readnext` → `.read-next`** on `/intel/algorithm` and `/intel/airbnb-occupancy-rate`. **One component, two
+  spellings** — which is what made v3.73's component count read three where there are four. Now three real
+  components: `.rel-card` (10 pages), `.read-next` (4), `.next` (3, two of which retire in Phase 2).
+  **Verified: computed styles byte-identical on all three affected pages before and after.** Control: renaming
+  the markup without the CSS fails the build on gate 11r, which is the only real risk in a rename.
+
+  Not touched: `bigquote` and `sigtable` are concatenated the same way, but each is a single component with one
+  name. A name is only worth changing when it is the *same* thing spelled two ways.
+
+- **`scripts/__pycache__/validate-site.cpython-311.pyc` was tracked in git.** Every local run of the validator
+  showed it as a modified file, and it had to be reverted by hand before each commit — four times today.
+  Untracked, with `__pycache__/` and `*.pyc` in `.gitignore`. Build output is not source.
+
 ## v3.73 — the link did not need adding, it needed repointing (2026-09-16)
 
 **Skill impact:** no — two `href`s and two titles, both titles copied verbatim from existing cross-links.
