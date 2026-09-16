@@ -121,6 +121,12 @@
 /LEGAL-REDLINE-2026-09-01          /404.html                  404!
 /LEGAL-REDLINE-2026-09-01.md       /404.html                  404!
 
+# Owner-to-owner referral shorthand. The link Jason says out loud; partners
+# never touch it (they get /p/<slug>). A redirect, deliberately not a page:
+# nothing to render, and src=referral lands via the same first-touch capture
+# every other entry point uses.
+/start  /get-started?src=referral  302
+
 # Partner referral stamp. One stub serves every /p/<slug>[/<surface>] path, so a new
 # partner needs a registry line, not a new file. MUST stay above the catch-all below:
 # Netlify is first-match, and under /* this route is dead.

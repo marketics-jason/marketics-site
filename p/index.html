@@ -51,7 +51,15 @@
 
   var url = DEST;
   if (SLUGS.indexOf(slug) !== -1) {
+    /* TWO PAIRS, ONE STRING (CTO brief 2026-09-15, registry v3.64).
+       utm_* feeds the five utm_*_first fields -- reporting continuity, the
+       channel flag. src/ref feeds source_first/partner_ref_first, which is the
+       ladder's match key and the thing Jonathan's payment fires on.
+       DO NOT collapse the second pair into the UTMs: utm_* is a shared
+       namespace an ad also writes, and it carries the cross-session overwrite
+       limitation. The ladder needs a field nothing else writes. */
     url += '?utm_source=' + encodeURIComponent(slug) + '&utm_medium=' + MEDIUM;
+    url += '&src=' + MEDIUM + '&ref=' + encodeURIComponent(slug);
     if (surface) { url += '&utm_content=' + encodeURIComponent(surface); }
   }
   /* replace(), not assign(): the stub must not sit in history and bounce the back button. */

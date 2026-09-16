@@ -1658,6 +1658,70 @@ def main():
                                     f"partner-registry.json — the stub will forward "
                                     f"without stamping and the referral is uncounted")
 
+    # 11n. the partner door's four constraints (registry v3.64).
+    #
+    # All four were specified in three separate documents and in none of the
+    # code. A constraint that lives only in a README is a constraint that
+    # drifts: the page is unlisted, so nothing about it looks wrong when one of
+    # these silently stops holding. Nobody would notice /partner entering the
+    # sitemap until it ranked.
+    part_rel = "partner/index.html"
+    part_path = os.path.join(ROOT, part_rel)
+    if os.path.exists(part_path):
+        psrc = open(part_path, encoding="utf-8").read()
+
+        # 1. noindex in the head (the X-Robots-Tag in netlify.toml is the backstop,
+        #    not the primary -- an edge header is invisible when reading the page).
+        if not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc):
+            hard.append(f"{part_rel}: no noindex meta — the partner door must never "
+                        f"be indexed (spec, three documents)")
+
+        # 2. out of sitemap.xml
+        smp2 = os.path.join(ROOT, "sitemap.xml")
+        if os.path.exists(smp2):
+            if re.search(r"<loc>[^<]*/partner\b", open(smp2, encoding="utf-8").read()):
+                hard.append("sitemap.xml: contains /partner — the partner door is "
+                            "unlisted and must not be submitted for indexing")
+
+        # 3. out of llms.txt
+        lp2 = os.path.join(ROOT, "llms.txt")
+        if os.path.exists(lp2):
+            if re.search(r"/partner\b", open(lp2, encoding="utf-8").read()):
+                hard.append("llms.txt: lists /partner — the partner door is unlisted; "
+                            "exclude it in scripts/llms-config.json")
+
+        # 4. NO INBOUND LINK FROM ANY ORGANIC SURFACE.
+        #    The one most likely to be added by someone being helpful -- a footer
+        #    row, a nav item, a "for partners" line on /about. Same shape as the
+        #    rule keeping organic pages out of /lp/keep-control (gate 7b).
+        for rel2 in sorted(set(pages.values())):
+            if rel2 == part_rel:
+                continue
+            src2 = open(os.path.join(ROOT, rel2), encoding="utf-8").read()
+            if re.search(r'href=[\"\']/partner(?:[/\"\'?#]|$)', src2):
+                hard.append(f"{rel2}: links to /partner — the partner door takes no "
+                            f"inbound link from any surface (never in nav, never in a "
+                            f"footer). It is handed over directly or not at all")
+
+    # 11o. /p/ must forward BOTH pairs, not just the UTMs (registry v3.64).
+    #
+    # Silent-loss guard, not style. If a later edit drops src/ref, the visitor
+    # still lands, the UTMs still populate, the lead still arrives -- and
+    # partner_ref_first sits blank, so the ladder never matches and the partner's
+    # payment never fires. Nothing errors. Same family as the empty-key clobber
+    # and the keepalive loss: correct-looking output, no trace, and you learn
+    # about it from the partner rather than from a gate.
+    stub2 = os.path.join(ROOT, "p", "index.html")
+    if os.path.exists(stub2):
+        ssrc = open(stub2, encoding="utf-8").read()
+        for needle, why in (("utm_source=", "the utm_*_first pair"),
+                            ("utm_medium=", "the channel flag"),
+                            ("&src=", "source_first"),
+                            ("&ref=", "partner_ref_first — the ladder's match key")):
+            if needle not in ssrc:
+                hard.append(f"p/index.html: no {needle!r} in the forward URL — "
+                            f"{why} would never be stamped, and nothing would error")
+
     # orphan check only meaningful on a full run
     if not args:
         sm = ""
