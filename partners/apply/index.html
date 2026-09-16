@@ -87,6 +87,9 @@ body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);fo
 a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 section{max-width:1440px;margin-left:auto;margin-right:auto;}
+/* Site gutter: 72px desktop / 24px at <=640 — the same measure nav and
+   footer are built to. Sections are already capped at 1440 above. */
+.wrap{padding-left:72px;padding-right:72px;}
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
@@ -264,7 +267,7 @@ main{padding-top:74px;}
   nav{padding:0 24px;height:64px;}
   .nav-mobile{top:64px;}
   main{padding-top:64px;}
-  .p-hero,.sec,.closing{padding-left:24px;padding-right:24px;}
+  .p-hero,.sec,.closing,.wrap{padding-left:24px;padding-right:24px;}
   .p-hero{padding-top:56px;padding-bottom:56px;}
   .sec{padding-top:56px;padding-bottom:56px;}
   .p-hero-h{font-size:42px;letter-spacing:2px;}
@@ -359,6 +362,10 @@ td.mcell{vertical-align:top;}
 .pf-err{color:#e0a090;font-size:14.5px;line-height:1.6;margin:0 0 18px;}
 #pfDone h3{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:26px;color:#fff;margin:0 0 14px;}
 #pfDone p{font-size:16px;line-height:1.75;color:#B4B2A9;margin:0;}
+.btn-send{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:#171717;background:var(--gold);border:none;padding:19px 44px;cursor:pointer;transition:filter .15s;}
+.btn-send:hover{filter:brightness(1.06);}
+.btn-send:disabled{opacity:.6;cursor:default;}
 /* Honeypot: off-screen, never display:none — a hidden input some bots skip. */
 .mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 @media (max-width:900px){
@@ -384,7 +391,7 @@ td.mcell{vertical-align:top;}
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/pricing" class="active">Pricing</a>
+    <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
     <a href="/intel">Insights</a>
   </div>
@@ -521,7 +528,7 @@ td.mcell{vertical-align:top;}
         </div>
 
         <p class="pf-err" id="pfErr" role="alert" hidden></p>
-        <button type="submit" class="btn" id="pfSubmit">Send it in</button>
+        <button type="submit" class="btn-send" id="pfSubmit">Send it in</button>
       </form>
 
       <div id="pfDone" hidden>

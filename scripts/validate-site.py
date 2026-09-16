@@ -1905,6 +1905,82 @@ def main():
                 hard.append(f"p/index.html: no {needle!r} in the forward URL — "
                             f"{why} would never be stamped, and nothing would error")
 
+    # 11r. a class used in markup must be DEFINED in that page's own CSS.
+    #
+    # Why this gate exists: /partners and /partners/apply shipped with
+    # `<section class="... wrap">` while `.wrap` was never defined -- the class
+    # came from a bespoke stylesheet that was discarded when the pages were
+    # rebuilt on the /pricing chrome. An undefined class is silent: the markup
+    # is valid, the CSS is valid, every gate passed, and the pages went live
+    # with every section flush against the viewport edge. It was caught by a
+    # human looking at a screenshot, four days after it shipped.
+    #
+    # SCOPE -- this gate checks that a class RESOLVES TO A RULE, nothing more.
+    # A class that is defined but carries the wrong value still passes. It
+    # would not catch a 96px gutter where 72px was meant, an override that
+    # loses a specificity fight, or a rule inside a media query that never
+    # matches. Layout correctness is not machine-checked anywhere; this closes
+    # exactly one failure mode -- the rule that does not exist at all.
+    #
+    # Known-inert leftovers, per (page, class), each verified to carry no rule
+    # ANYWHERE and therefore no visual effect. Keyed per page on purpose: the
+    # same token on a different page is a new finding, not a grandfathered one.
+    UNDEF_OK = {
+        ("case-studies/wally-puerto-rico/index.html", "fi"),
+        ("intel/miami/index.html", "stone"),
+        ("intel/nashville/report/index.html", "active"),
+        ("sample-audit/index.html", "lux"),
+    }
+    def _js_strings(blob):
+        # Script REFERENCES a class only inside a string literal --
+        # classList.add('open'), querySelector('.btn'), className = 'x'. A bare
+        # identifier is a variable, so matching those suppresses real findings:
+        # `var btn = document.getElementById('pfSubmit')` hid an undefined
+        # `.btn` on BOTH partner pages, one of them the form's submit button.
+        return "\n".join(m.group(1) or m.group(2) or m.group(3) or ""
+                         for m in re.finditer(r"'([^'\n]*)'|\"([^\"\n]*)\"|`([^`]*)`", blob))
+
+    def _js_token(cls, strings):
+        # Whole token only. Substring containment is useless here: 'wrap' is a
+        # substring of 'nowrap' and 'flexWrap', so a containment test reports
+        # clean on the very defect this gate was written for. (It did, once.)
+        return re.search(r"(?<![\w-])%s(?![\w-])" % re.escape(cls), strings) is not None
+
+    js_blob = ""
+    for jn in sorted(os.listdir(ROOT)):
+        if jn.endswith(".js"):
+            js_blob += open(os.path.join(ROOT, jn), encoding="utf-8", errors="replace").read()
+    js_blob = _js_strings(js_blob)
+
+    seen_undef = set()
+    for _u, rel in sorted(targets.items()):
+        src_h = open(os.path.join(ROOT, rel), encoding="utf-8", errors="replace").read()
+        styles = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", src_h, re.S))
+        inline_js = _js_strings("\n".join(
+            re.findall(r"<script[^>]*>(.*?)</script>", src_h, re.S)))
+        defined = set(re.findall(r"\.([A-Za-z][\w-]*)", styles))
+        used = set()
+        for m in re.finditer(r"class=[\"\']([^\"\']+)[\"\']", src_h):
+            used.update(m.group(1).split())
+        for cls in sorted(used - defined):
+            if _js_token(cls, inline_js) or _js_token(cls, js_blob):
+                continue          # toggled or referenced by script
+            if (rel, cls) in UNDEF_OK:
+                seen_undef.add((rel, cls))
+                continue
+            hard.append(f"{rel}: class {cls!r} is used in the markup but no "
+                        f"`.{cls}` rule exists on the page — it renders as "
+                        f"nothing. If it is deliberately inert, add it to "
+                        f"UNDEF_OK with the reason")
+
+    # A grandfathered entry that no longer applies has to leave, or the
+    # allowlist quietly becomes the place where real findings go to be
+    # forgotten. Full runs only -- a PR-scoped run does not read every page.
+    if not args:
+        for rel, cls in sorted(UNDEF_OK - seen_undef):
+            hard.append(f"UNDEF_OK lists ({rel}, {cls!r}) but that class is no "
+                        f"longer undefined there — drop the entry")
+
     # orphan check only meaningful on a full run
     if not args:
         sm = ""

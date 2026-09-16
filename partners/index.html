@@ -87,6 +87,9 @@ body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);fo
 a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
 section{max-width:1440px;margin-left:auto;margin-right:auto;}
+/* Site gutter: 72px desktop / 24px at <=640 — the same measure nav and
+   footer are built to. Sections are already capped at 1440 above. */
+.wrap{padding-left:72px;padding-right:72px;}
 
 /* ══ NAV ══ */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
@@ -264,7 +267,7 @@ main{padding-top:74px;}
   nav{padding:0 24px;height:64px;}
   .nav-mobile{top:64px;}
   main{padding-top:64px;}
-  .p-hero,.sec,.closing{padding-left:24px;padding-right:24px;}
+  .p-hero,.sec,.closing,.wrap{padding-left:24px;padding-right:24px;}
   .p-hero{padding-top:56px;padding-bottom:56px;}
   .sec{padding-top:56px;padding-bottom:56px;}
   .p-hero-h{font-size:42px;letter-spacing:2px;}
@@ -384,7 +387,7 @@ td.mcell{vertical-align:top;}
     <a href="/method">Method</a>
     <a href="/markets">Markets</a>
     <a href="/results">Results</a>
-    <a href="/pricing" class="active">Pricing</a>
+    <a href="/pricing">Pricing</a>
     <a href="/story">Our Story</a>
     <a href="/intel">Insights</a>
   </div>
@@ -441,7 +444,7 @@ td.mcell{vertical-align:top;}
        out which one is them. -->
   <section class="wrap pt-form-wrap">
     <p class="pt-apply-line">Do work that holds up?</p>
-    <a class="btn" href="/partners/apply">Apply</a>
+    <a class="btn-gold" href="/partners/apply">Apply</a>
     <p class="pt-who-close">Know someone who&rsquo;d be a good fit? Send them this page.</p>
   </section>
 
@@ -468,7 +471,7 @@ td.mcell{vertical-align:top;}
       <span class="fh">Company</span>
       <a href="/pricing">Pricing</a>
       <a href="/story">Our Story</a>
-      <a href="/partners">Partners</a>
+      <a href="/partners" class="gold">Partners</a>
       <a href="/media">Media</a>
       <a href="/media-kit">Media Kit</a>
       <a href="mailto:marketing@marketics.io">Contact</a>

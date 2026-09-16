@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.58 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.69 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,111 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.69 — the class that was never defined, and what a gate can and cannot see (2026-09-16)
+
+**Skill impact:** no — a layout defect, a CSS fix and one new gate. No claim row moves, no copy changes.
+
+### What shipped broken
+
+`/partners` and `/partners/apply` went live in #153 with `<section class="... wrap">` on every content
+section and **no `.wrap` rule defined anywhere on either page.** The class came from a bespoke
+stylesheet that was discarded when the pages were rebuilt on the `/pricing` chrome; the markup that
+referenced it was kept. Result: every section on both pages sat flush against the left viewport edge,
+while the nav and footer — which use the real gutter token — stayed correctly inset.
+
+Measured on the shipped files, before and after:
+
+| viewport | `.wrap` padding-left, before | after | `<h1>` left edge, before → after |
+|---|---|---|---|
+| 1600 | `0px` | `72px` | 80 → 152 |
+| 1440 | `0px` | `72px` | 0 → 72 |
+| 390 | `0px` | `24px` | 0 → 24 |
+
+### Why nothing caught it
+
+Both files are valid HTML and valid CSS. An undefined class is not an error in either language — it
+is simply a token that matches no rule. Every gate in `validate-site.py` passed, the deploy was green,
+and the pages were live for four days. **It was caught by Jason looking at a screenshot.**
+
+**The generalisation:** *the gates check what a page says. Nothing checked what a page looks like.*
+That is not a gap that can be closed in full — layout correctness is not statically decidable — but
+the specific failure mode here is: **a class that resolves to no rule at all.**
+
+### The gate, and its stated scope
+
+**11r — a class used in markup must be defined in that page's own CSS.** Known-inert leftovers are
+grandfathered per `(page, class)` pair, never per token, so the same name on another page is a new
+finding. A grandfathered entry that stops applying fails the full run, so the allowlist cannot quietly
+become the place findings go to be forgotten.
+
+**SCOPE, recorded in the gate itself:** *this checks that a class resolves to a rule, nothing more. A
+class that is defined but carries the wrong value still passes.* It would not have caught a 96px gutter
+where 72px was meant, an override that loses a specificity fight, or a rule inside a media query that
+never matches. **This is a fifth member of the outranked-or-loosened family** — a control that reports
+on what it can reach, where the report is liable to be read as covering the whole class. It closes one
+failure mode: the rule that does not exist.
+
+### The gate was loosened twice before it was right, and the second loosening was hiding a second defect
+
+The exclusion for script-toggled classes — a class that JS adds at runtime is legitimately absent from
+the CSS the gate can see — was wrong twice, and each time it was the exclusion, not the rule.
+
+**First draft: `cls not in js_blob`, substring containment.** `wrap` is a substring of `nowrap` and
+`flexWrap`, so the probe reported the broken tree clean. Caught by running it against a tree known to
+be broken, not by reading it.
+
+**Second draft: token-boundary match against all JavaScript.** It named both pages for `.wrap` and
+passed everything else — including `class="btn"`, which is **also undefined on both pages**, because
+each page's inline script happens to contain `var btn = document.getElementById(...)`. **A variable
+name suppressed a class finding.** A script names a class inside a string literal; a bare identifier is
+a variable. The gate now matches only within string literals.
+
+**What the second loosening was hiding, live since #153 alongside the gutter:**
+
+| page | element | shipped as | should be |
+|---|---|---|---|
+| `/partners` | the Apply CTA | unstyled gold text link | `.btn-gold`, the site's gold button |
+| `/partners/apply` | the form's **submit button** | browser-default grey button | `.btn-send`, per `/get-started` |
+
+The application form's submit control — the one thing on that page that has to be pressed — was a
+default browser button on a black page. Neither fix authors anything: `.btn-gold` was already defined
+on the page, and `.btn-send` is copied from `/get-started`, the only other gold `<button>` on the site
+and the one that already carries the states a `<button>` needs (`border:none`, `cursor`, `:disabled`)
+that a link button does not.
+
+**Restates v3.57 in a new place, twice:** the check was written, run, and believed on the strength of
+having been written. Both times, what made the difference was running it against a tree known to be
+broken. The control pair and both loosenings are recorded in the gate's own comment, because the next
+person to relax that regex needs to know what each relaxation cost.
+
+**And the generating pattern, stated plainly:** *an exclusion added to prevent false positives is the
+part of a gate most likely to be wrong, and its errors are silent by construction.* The rule fired
+correctly on the first run both times. The exclusion is what let the finding through.
+
+### Also corrected in the same pass
+
+- **The main nav carried `class="active"` on Pricing** on both partner pages — inherited from the
+  `/pricing` chrome the rebuild copied. Neither route has a nav entry at all, so the nav was marking a
+  page the visitor was not on. `/faq` and `/media` set the precedent: no `active` at all.
+- **`/partners` footer now carries the current-page gold on Partners**, per Design's artboard.
+  **Flagged, not resolved:** the shipped footer component marks **Insights** gold on all 51 pages as
+  permanent emphasis, not as a current-page state. Design's artboard shows Insights muted and Partners
+  gold. Both cannot be true. `/partners` now shows two gold footer links; the shared component was not
+  touched. **This is Design's to rule on.**
+
+### Design's gutter ruling, recorded
+
+**72px is the site gutter** — every page with standard chrome (Home, Pricing, Method, Markets, and now
+`/partners` and `/partners/apply`). Nav and footer are shared components built to that measure, so a
+content gutter that disagrees leaves the header inset from its own content. **96px is the LP gutter**,
+for chrome-free single-column pages with nothing to align to (`lp/keep-control` uses 88px). `/partners/apply`
+was drawn at 96px as a standalone door and **moves to 72px now that it is a route inside the site**.
+
+**Premise correction on that ruling:** it was made on the understanding that `/partners/apply` is
+chrome-free. It is not — the move in #153 gave it the standard nav and footer. The recommendation's
+conclusion is unaffected and its reasoning is stronger: the page already had the chrome it needed to
+align to.
+
 ## v3.68 — the partner surface had no stated reader, and that was the defect (2026-09-16)
 
 **Skill impact:** no — routes, gates and a directory page. `/partners` copy is Execute verbatim;
