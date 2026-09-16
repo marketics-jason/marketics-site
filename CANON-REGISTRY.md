@@ -2449,11 +2449,31 @@ correctly on the first run both times. The exclusion is what let the finding thr
 - **The main nav carried `class="active"` on Pricing** on both partner pages — inherited from the
   `/pricing` chrome the rebuild copied. Neither route has a nav entry at all, so the nav was marking a
   page the visitor was not on. `/faq` and `/media` set the precedent: no `active` at all.
-- **`/partners` footer now carries the current-page gold on Partners**, per Design's artboard.
-  **Flagged, not resolved:** the shipped footer component marks **Insights** gold on all 51 pages as
-  permanent emphasis, not as a current-page state. Design's artboard shows Insights muted and Partners
-  gold. Both cannot be true. `/partners` now shows two gold footer links; the shared component was not
-  touched. **This is Design's to rule on.**
+- **Footer gold — raised by Code, ruled by Design, resolved:** the shipped component marks **Insights**
+  gold on all 51 pages as *permanent emphasis*, not as a current-page state. Design's artboard showed
+  Insights muted and Partners gold; both could not be true. **Design's ruling: the shipped component's
+  reading wins. Gold in the footer is emphasis on Insights, and no page marks itself in the footer.**
+  Design withdrew the artboard on this point. `/partners` uses the shared footer unmodified — verified
+  in a browser: `/partners`, `/partners/apply` and `/pricing` each render exactly one gold footer link,
+  `/intel`.
+
+### The trades list, taken whole (Design ruling, same day)
+
+Code offered the column count alone; **Design declined it** — *"the column count alone would look
+unfinished"* — and ruled the full artboard treatment in one pass: 4 columns desktop / 1 mobile, 25px /
+21px Josefin 300, row rules instead of dash bullets, no spacer `<li>`, `grid-column: 3 / -1` on the
+7th. Built from the 15:08 handoff, which already carries it. Verified rendered: 7 items, 0 empty, the
+trailing item filling its own row at every width.
+
+**One gap Code filled and is flagging:** the artboards cover **1440 and 390 only**. Measured, the
+4-column treatment holds down to **~1080**, below which `CPA & bookkeeper` wraps first and takes the
+whole grid row's height with it. A 2-column step now covers 901–1080. **That breakpoint is Code's, not
+Design's**, and is marked as such in the stylesheet.
+
+**Still divergent, deliberately:** `/partners/apply` carries the same seven trades under *"Who this is
+for"* and keeps the old dash-bullet treatment, because **Design has not drawn that list in either
+handoff** — the Apply artboard contains no `<ul>` at all. Reconciling it would be Code choosing a
+treatment for a surface Design has not specified.
 
 ### Design's gutter ruling, recorded
 
