@@ -9,73 +9,27 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>Pricing — You Keep 90% of a Bigger Number | Marketics</title>
-<meta name="description" content="You keep 90%. Marketics is paid 10% of your net payout, per booking — our fee only grows when your revenue does. No retainer, no upfront fee. $500 deposit, refunded on completion.">
-<link rel="canonical" href="https://marketics.io/pricing">
+<title>Referring Partner Program | Marketics</title>
+<meta name="description" content="For professionals who serve short-term rental owners: introduce owners to a revenue specialist and get updated at every stage. Apply to be considered.">
+<link rel="canonical" href="https://marketics.io/partners/apply">
+
+<!-- NOINDEX UNTIL D8 PR B. The switch is one PR: robots -> index,follow, add to
+     sitemap.xml, add the §2c line to llms.txt. It cannot merge until the market
+     list is in the PARTNER_VET_MARKETS CI secret -- the no-geography gate hard
+     fails if this page is set to index without it (D8 §2d, registry v3.65). -->
+<meta name="robots" content="noindex, nofollow">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Marketics">
-<meta property="og:title" content="Marketics Pricing — You Keep 90% of a Bigger Number.">
-<meta property="og:description" content="10% of net payout, split automatically per booking — no retainer, no upfront fee, no invoice. Our fee only grows when your revenue does — a median 45%, net of market.">
-<meta property="og:url" content="https://marketics.io/pricing">
+<meta property="og:title" content="Referring Partner Program | Marketics">
+<meta property="og:description" content="For professionals who serve short-term rental owners. Applications are reviewed, and fit is confirmed on a call.">
+<meta property="og:url" content="https://marketics.io/partners/apply">
 <meta property="og:image" content="https://marketics.io/og/default.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Marketics Pricing — You Keep 90% of a Bigger Number.">
-<meta name="twitter:description" content="10% of net payout, no retainer, no upfront fee, no invoice — while we grow that revenue by a median 45%, net of market.">
+<meta name="twitter:title" content="Referring Partner Program | Marketics">
+<meta name="twitter:description" content="For professionals who serve short-term rental owners. Applications are reviewed, and fit is confirmed on a call.">
 <meta name="twitter:image" content="https://marketics.io/og/default.jpg">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Service",
-      "@id": "https://marketics.io/pricing#service",
-      "name": "Marketics STR Revenue Optimization",
-      "url": "https://marketics.io/pricing",
-      "description": "Full-stack short-term rental revenue optimization, paid 10% of net payout with no retainer, no upfront fee, and no invoice. A documented 45% median revenue lift, net of market, across 19 documented engagements. A $500 commitment deposit is refunded in full on completion of the 90-day program.",
-      "serviceType": "Short-Term Rental Revenue Optimization",
-      "areaServed": ["United States", "Canada", "Mexico"],
-      "provider": {"@id": "https://marketics.io/#business", 
-        "@type": "Organization",
-        "name": "Marketics",
-        "url": "https://marketics.io",
-        "logo": "https://marketics.io/assets/logo.svg",
-        "founder": {"@id": "https://marketics.io/story#jason",  "@type": "Person", "name": "Jason Baxter" },
-        "slogan": "Your Market. Mastered."
-      },
-      "offers": {
-        "@type": "Offer",
-        "description": "10% of net payout, split automatically per booking at channel payout. No retainer, no upfront fee, no invoice. Cancel anytime.",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "10",
-          "priceCurrency": "USD",
-          "unitText": "PERCENT of revenue"
-        }
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://marketics.io/" },
-        { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://marketics.io/pricing" }
-      ]
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    { "@type": "Question", "name": "How much does Marketics cost?", "acceptedAnswer": { "@type": "Answer", "text": "10% of your net payout, taken per booking. No retainer, nothing up front, no setup fee. A $500 deposit holds your onboarding slot and is refunded once the first 90 days are complete." } },
-    { "@type": "Question", "name": "Why a percentage instead of a flat fee?", "acceptedAnswer": { "@type": "Answer", "text": "A flat fee gets paid whether your revenue moves or not. A percentage only grows when yours does — so every decision we make points at the same number you care about." } },
-    { "@type": "Question", "name": "What’s the $500 deposit?", "acceptedAnswer": { "@type": "Answer", "text": "A commitment deposit that holds your onboarding slot, refunded in full when you complete the 90-day program. It isn’t an extra fee." } }
-  ]
-}
-</script>
 
 <link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -359,6 +313,67 @@ td.mcell{vertical-align:top;}
    real space keep the visual break and make the extracted text correct. */
 .hln{display:block;}
 </style>
+<style>
+/* ══ /partner — the referring-partner door ══ */
+.pt-hero{padding-top:118px;padding-bottom:0;}
+.pt-hero h1{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:54px;
+  line-height:1.1;letter-spacing:1px;color:#fff;margin:0;text-wrap:pretty;}
+.pt-lede{font-size:19px;line-height:1.72;color:#E6E3DA;margin:30px 0 0;max-width:820px;}
+.pt-grid{display:grid;grid-template-columns:1fr 340px;gap:72px;align-items:start;padding-top:52px;}
+.pt-eyebrow{display:block;font-family:var(--mono,'DM Mono',monospace);font-size:11px;letter-spacing:2.5px;
+  text-transform:uppercase;color:#D6AD60;}
+.pt-returns{display:flex;flex-direction:column;margin-top:22px;border-top:1px solid #252525;}
+.pt-ret{display:grid;grid-template-columns:44px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid #252525;}
+.pt-ret .n{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:30px;line-height:1;color:#D6AD60;}
+.pt-ret p{margin:0;font-size:16.5px;line-height:1.72;color:#B4B2A9;}
+.pt-ret b{font-weight:500;color:#E6E3DA;}
+.pt-ask{border-left:2px solid rgba(214,173,96,.5);padding:4px 0 4px 28px;margin-top:34px;}
+.pt-ask p{margin:0;font-size:15.5px;line-height:1.7;color:#8F8C83;}
+.pt-ask b{font-weight:500;color:#E6E3DA;}
+/* The integrity claim, set at display size — it is the reason a professional
+   would put their own relationship at risk on an introduction. */
+.pt-standard{padding-top:56px;}
+.pt-standard p{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:24px;
+  line-height:1.5;color:#E6E3DA;margin:0;max-width:980px;text-wrap:pretty;}
+.pt-who{padding-top:64px;}
+.pt-who h2{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:34px;
+  color:#fff;margin:0 0 16px;letter-spacing:.5px;}
+.pt-who-body{font-size:17px;line-height:1.7;color:#B4B2A9;margin:0 0 22px;max-width:720px;}
+.pt-trades{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px 40px;max-width:820px;}
+.pt-trades li{position:relative;padding-left:20px;font-size:16px;line-height:1.6;color:#B4B2A9;}
+.pt-trades li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:#D6AD60;}
+.pt-who-close{font-size:16px;line-height:1.7;color:#8F8C83;margin:24px 0 0;}
+.pt-form-wrap{padding-top:64px;padding-bottom:96px;}
+.pt-apply-line{font-size:16.5px;line-height:1.7;color:#E6E3DA;margin:0 0 28px;max-width:720px;}
+.pt-card{border:1px solid rgba(214,173,96,.35);background:#171716;padding:38px;max-width:720px;}
+.pt-form-header{font-size:15px;line-height:1.7;color:#8F8C83;margin:0 0 30px;}
+.pf{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.pf label{font-size:14.5px;line-height:1.5;color:#E6E3DA;}
+.pf .req{color:#D6AD60;}
+.pf input,.pf select,.pf textarea{width:100%;background:#1a1a18;border:1px solid #2b2b2a;color:#E6E3DA;
+  font-family:inherit;font-size:15px;padding:12px 14px;border-radius:0;}
+.pf textarea{resize:vertical;}
+.pf input:focus,.pf select:focus,.pf textarea:focus{outline:2px solid #D6AD60;outline-offset:1px;border-color:#D6AD60;}
+.pf input.bad,.pf select.bad,.pf textarea.bad{border-color:#b4553f;}
+.pf-err{color:#e0a090;font-size:14.5px;line-height:1.6;margin:0 0 18px;}
+#pfDone h3{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:26px;color:#fff;margin:0 0 14px;}
+#pfDone p{font-size:16px;line-height:1.75;color:#B4B2A9;margin:0;}
+/* Honeypot: off-screen, never display:none — a hidden input some bots skip. */
+.mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+@media (max-width:900px){
+  .pt-hero{padding-top:92px;}
+  .pt-hero h1{font-size:32px;}
+  .pt-lede{font-size:16.5px;}
+  .pt-grid{grid-template-columns:1fr;gap:34px;padding-top:34px;}
+  .pt-ret{grid-template-columns:30px 1fr;gap:14px;padding:20px 0;}
+  .pt-ret .n{font-size:22px;}
+  .pt-standard p{font-size:19px;}
+  .pt-trades{grid-template-columns:1fr;}
+  .pt-card{padding:22px;}
+  .pt-form-wrap{padding-bottom:64px;}
+}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -388,193 +403,136 @@ td.mcell{vertical-align:top;}
 
 <main id="main-content">
 
-  <!-- HERO -->
-  <section class="p-hero">
+  <!-- ══ THE LETTER ══
+       Copy is Execute §4.1 v1.3 and the D8 §2a Strategy-cleared slots, VERBATIM.
+       Code authored none of it. Layout may move; a claim may not. -->
+  <section class="pt-hero wrap">
+    <h1>You send one introduction. <span class="gold">Here is what comes back.</span></h1>
+    <p class="pt-lede">I run Marketics, a revenue practice for short-term rental owners. I am building a small circle in each market: a realtor, a photographer, a designer, a cleaner, a CPA, a builder. People who each see owners at a different moment, who route work to each other, and who don&rsquo;t overlap.</p>
+  </section>
+
+  <section class="wrap pt-grid">
     <div>
-      <div class="kicker"><div class="bar"></div><span>Pricing</span></div>
-      <h1 class="p-hero-h"><span class="hln">YOU KEEP 90%.</span> <span class="hln">OF A MUCH BIGGER <span>NUMBER.</span></span></h1>
-      <p class="p-hero-lead">When we partner (your property, my expertise) you do less and keep more. I'm paid 10% of your net payout, per booking — you keep 90%. My fee only grows when your revenue does. Across the portfolio that's been a <a href="/intel/str-performance-index">median 45% lift, net of market</a>, across 19 documented engagements (2019–2026), but every property is different, and the audit shows yours.</p>
-    </div>
-    <div class="fee-card">
-      <span class="lbl">MY FEE</span>
-      <div class="big">10<sup>%</sup></div>
-      <span class="desc">of your <strong>net payout</strong>: my fee only grows when your revenue does. No retainer, no upfront fee, no invoice.</span>
-    </div>
-  </section>
-
-  <!-- THE WEDGE -->
-  <section class="sec">
-    <div class="kicker"><div class="bar"></div><span>The three-way choice</span></div>
-    <h2 class="h2" style="font-size:46px;">Three ways to run your rental.</h2>
-    <p class="wedge-lead">The full-service fee isn't broken because it's expensive. It charges a revenue-linked percentage for work that has nothing to do with revenue. <strong>Pay a percentage for what grows the number. Positioning, ranking, pricing. Pay a flat or per-task cost for what doesn't. Cleaning, turnovers, maintenance.</strong> Both jobs still get done; each is priced for what it is.</p>
-
-    <ul class="cards3">
-      <li class="wcard">
-        <h3 class="tag">DO IT MYSELF</h3>
-        <div class="rows">
-          <span><b>Cash cost</b>: lowest out of pocket: software and your own hours.</span>
-          <span><b>Your time</b>: all of it, every week.</span>
-          <span><b>Pay a % for</b>: nothing; nobody is paid to grow the number.</span>
-          <span><b>Alignment</b>: perfect, but alone.</span>
-        </div>
-        <span class="win"><b>Wins when</b>: small portfolio, time to spare, and you enjoy the craft.</span>
-      </li>
-      <li class="wcard on">
-        <h3 class="tag">MARKETICS</h3>
-        <div class="rows">
-          <span><b>Cash cost</b>: 10% of net payout, plus operations paid by the task.</span>
-          <span><b>Your time</b>: oversight. I run the market; your operator runs the house.</span>
-          <span><b>Pay a % for</b>: only the work that grows revenue: positioning, ranking, pricing.</span>
-          <span><b>Alignment</b>: my fee only grows when your revenue does.</span>
-        </div>
-        <span class="win"><b>Wins when</b>: you want expert revenue work priced correctly, operations handled separately.</span>
-      </li>
-      <li class="wcard">
-        <h3 class="tag">FULL-SERVICE PM</h3>
-        <div class="rows">
-          <span><b>Cash cost</b>: 20–35% of gross, everything bundled.*</span>
-          <span><b>Your time</b>: near zero. That's what the bundle buys.</span>
-          <span><b>Pay a % for</b>: everything, cleaning and key handoffs included.</span>
-          <span><b>Alignment</b>: paid the same whether it grows or not.</span>
-        </div>
-        <span class="win"><b>Wins when</b>: you want zero involvement, or you're remote and need boots on the ground.</span>
-      </li>
-    </ul>
-    <p class="footnote">* Full-service short-term rental management typically runs 20–35% of gross revenue (SkyRun, Apr 2026; PriceLabs industry guide, May 2026); premium and luxury portfolios trend 25–40% (Weekender Management, May 2026). Actual terms vary by market and operator.</p>
-  </section>
-
-  <!-- THE COMPARISON -->
-  <section class="sec">
-    <div class="kicker"><div class="bar"></div><span>The comparison</span></div>
-    <h2 class="h2" style="font-size:40px;line-height:1.15;">Your all-in cost, side by side.</h2>
-
-    <div class="legend">
-      <div class="li"><div class="sw" style="background:var(--gold);"></div><span>My fee. 10%</span></div>
-      <div class="li"><div class="sw" style="background:rgba(214,173,96,.34);border:1px solid rgba(214,173,96,.45);"></div><span>Hosting costs. Up to ~10%</span></div>
-      <div class="li"><div class="sw" style="background:rgba(214,173,96,.12);border:1px solid rgba(214,173,96,.28);"></div><span>Full-service manager</span></div>
-      <span class="axis-lbl">ALL-IN COST, % OF REVENUE</span>
-    </div>
-
-    <div class="chart">
-      <div class="yax">
-        <span style="bottom:234px;">30%</span><span style="bottom:154px;">20%</span><span style="bottom:74px;">10%</span><span style="bottom:-6px;">0</span>
-      </div>
-      <div class="plot">
-        <div class="grid" style="bottom:240px;"></div>
-        <div class="grid" style="bottom:160px;"></div>
-        <div class="grid" style="bottom:80px;"></div>
-        <div class="grid" style="bottom:0;background:var(--line-3);"></div>
-        <div class="pivot"></div>
-        <span class="pivot-lbl">FULL-SERVICE STARTS HERE</span>
-        <div class="bars">
-          <div class="barcol">
-            <span class="cap" style="color:var(--gold);">YOUR ALL-IN</span>
-            <div class="stack">
-              <div class="seg-host"><span class="t">hosting costs</span><span class="s">up to ~10%, varies</span></div>
-              <div class="seg-fee"><span>10%</span></div>
-            </div>
-          </div>
-          <div class="barcol">
-            <span class="cap" style="color:#7C7A72;">FULL-SERVICE</span>
-            <div class="stack">
-              <div class="seg-up"><span>…and up</span></div>
-              <div class="seg-pm"><span class="big">20%+</span><span class="s">of gross</span></div>
-            </div>
-          </div>
-        </div>
+      <span class="pt-eyebrow">What comes back to you</span>
+      <div class="pt-returns">
+        <div class="pt-ret"><span class="n">01</span>
+          <p><b>Work sent back to you.</b> When an owner in my world needs what you do, you&rsquo;re who I think of first. No fee either way &mdash; that&rsquo;s just how the circle works.</p></div>
+        <div class="pt-ret"><span class="n">02</span>
+          <p><b>And when I can&rsquo;t send work, I send money.</b> Not every market gives me something to route back, so the introduction itself is paid, whether or not the traffic ever runs both ways. One statement a month, from me to you. You never invoice anything.</p></div>
+        <div class="pt-ret"><span class="n">03</span>
+          <p><b>A revenue report for any address, in 48 hours or less.</b> You are working a property, you send me the address, you get a report you can use in your own sale. No owner has to sign anything for you to use this.</p></div>
       </div>
     </div>
-    <div class="chart-cats">
-      <div class="c"><div class="h" style="color:var(--gold);">MARKETICS</div><div class="s">10% fee + hosting costs</div></div>
-      <div class="c"><div class="h" style="color:#7C7A72;">FULL-SERVICE PM</div><div class="s">20%+ of gross</div></div>
+    <div class="pt-ask">
+      <p><b>What you send:</b> an introduction, when one makes sense. Nothing more. No quota, no scripts, no pitching on my behalf.</p>
     </div>
-
-    <p class="chart-note">Your all-in cost is my 10% fee plus your hosting costs. Cleaning, turnovers, supplies. Those vary by market, but tend to stay within roughly ten percent of revenue. Full-service managers generally begin around 20% of gross and climb from there. <strong>The exact numbers differ by market and operator. The shape is the point: a fee tied to your growth, and hosting costs that stay under control.</strong></p>
   </section>
 
-  <!-- WHAT YOU PAY -->
-  <section class="sec">
-    <div class="kicker"><div class="bar"></div><span>What you pay, and how it works</span></div>
-    <ul class="cards3" style="margin-top:0;">
-      <li class="pay-card">
-        <span class="lbl">MY FEE</span>
-        <h3 class="big">10% of net payout</h3>
-        <p>Split automatically per booking (90% to you, 10% to me) at channel payout. No retainer, no upfront fee, no invoice. Cancel anytime.</p>
-      </li>
-      <li class="pay-card">
-        <span class="lbl">TRADES · OWNER-PAID</span>
-        <h3 class="big">Directed, never marked up</h3>
-        <p>When a shoot or a design refresh is worth it, I write the brief and direct the work. You engage and pay the photographer or designer <strong>directly, at their rate</strong>. I take no margin on vendors.</p>
-      </li>
-      <li class="pay-card">
-        <span class="lbl">COMMITMENT</span>
-        <h3 class="big">$500, refundable</h3>
-        <p>A commitment deposit that filters for serious owners. Refunded in full when you complete the 90-day program. It's a handshake, not a cost.</p>
-      </li>
+  <section class="wrap pt-standard">
+    <p>Not every owner is a fit. When one isn&rsquo;t, I say so and point them somewhere better, and I will tell you exactly what I take and what I don&rsquo;t. An introduction you make should never come back on you. <span class="gold">That is the standard this circle runs on, in both directions.</span></p>
+  </section>
+
+  <!-- ══ WHO THIS IS FOR — D8 §2a, trade types only, no geography ══ -->
+  <section class="wrap pt-who">
+    <h2>Who this is for</h2>
+    <p class="pt-who-body">Professionals who already work with short-term rental owners, and get asked who else they trust.</p>
+    <ul class="pt-trades">
+      <li>Realtors who work with short-term rental buyers</li>
+      <li>Photographers</li>
+      <li>Interior designers and stagers</li>
+      <li>Cleaning and turnover teams</li>
+      <li>CPAs, tax advisors and cost segregation specialists</li>
+      <li>Builders and contractors</li>
     </ul>
-
-    <ol class="hiw">
-      <li class="col"><span>PER BOOKING</span><p>The 90/10 split is calculated on every reservation. Never tallied and invoiced at month-end.</p></li>
-      <li class="col"><span>AT PAYOUT</span><p>Settled at channel payout, about 24 hours after the guest checks in. At the source.</p></li>
-      <li class="col"><span>SEPARATE ACCOUNTS</span><p>Your 90% and my 10% land in our own accounts. I never hold, touch, or route your money.</p></li>
-      <li class="col hl"><span>NOTHING TO SEND</span><p>No invoice, no chasing, no retainer. Nothing you could ever fall behind on.</p></li>
-    </ol>
+    <p class="pt-who-close">If your work sits somewhere else, apply anyway and tell us about it.</p>
   </section>
 
-  <!-- WORKED EXAMPLE -->
-  <section class="sec worked">
-    <div class="kicker"><div class="bar"></div><span>The math, from an illustrative audit</span></div>
-    <h2 class="h2" style="font-size:42px;">One audit, line by line.</h2>
+  <!-- ══ THE APPLICATION ══ -->
+  <section class="wrap pt-form-wrap" id="apply">
+    <p class="pt-apply-line">Applying starts a conversation. It isn&rsquo;t an acceptance. Every application is reviewed, and when there&rsquo;s a fit, the next step is a short call.</p>
 
-    <table class="money-grid"><tbody><tr>
-      <td class="mcell">
-        <span class="lbl">REVENUE BEFORE</span>
-        <span class="num">$3,690</span>
-        <span class="note">Untouched. <strong>100% yours.</strong></span>
-      </td>
-      <td class="mcell">
-        <span class="lbl g">+ THE MARKET ADDED</span>
-        <span class="num g">+$1,710</span>
-        <span class="note">New demand we captured together, <strong>net of market.</strong></span>
-      </td>
-      <td class="mcell">
-        <span class="lbl">− MY TEN PERCENT</span>
-        <span class="num m">−$540</span>
-        <span class="note">10% of net payout. A <strong>third of the raise</strong> I created.</span>
-      </td>
-      <td class="mcell">
-        <span class="lbl g">= YOU KEPT</span>
-        <span class="num">$4,860</span>
-        <span class="note"><span class="g">+$1,170 more</span> in your pocket every month. After my fee.</span>
-      </td>
-    </tr></tbody></table>
-    <p class="worked-quote">The raise paid for me three times over. My fee came out of money that didn't exist before. <span>Yours will look different; the audit shows your number, not an average.</span></p>
-    <p class="footnote">Illustrative, using the sample-audit property. Your numbers come from your own comp set (the comparable listings you’re priced against) and the free audit shows them before you owe a thing. Marketics' fee is 10% of net payout, split automatically per booking at channel payout.</p>
-  </section>
+    <div class="pt-card">
+      <p class="pt-form-header"><em>Longer than most forms, on purpose. We only work with a few people in each market, so this is a real read rather than a mailing list. Everything here is used to decide fit and to know what to send back to you.</em></p>
 
-  <!-- FAQ · On the fee -->
-  <section class="sec">
-    <div class="kicker"><div class="bar"></div><span>Straight answers</span></div>
-    <h2 class="h2" style="font-size:40px;">On the fee.</h2>
-    <dl class="pay-faq">
-      <div class="pf-row"><dt>How much does Marketics cost?</dt><dd>10% of your net payout, taken per booking. No retainer, nothing up front, no setup fee. A $500 deposit holds your onboarding slot and is refunded once the first 90 days are complete.</dd></div>
-      <div class="pf-row"><dt>Why a percentage instead of a flat fee?</dt><dd>A flat fee gets paid whether your revenue moves or not. A percentage only grows when yours does, so every decision we make points at the same number you care about.</dd></div>
-      <div class="pf-row"><dt>What’s the $500 deposit?</dt><dd>A commitment deposit that holds your onboarding slot, refunded in full when you complete the 90-day program. It isn’t an extra fee.</dd></div>
-    </dl>
-  </section>
+      <form id="partnerForm" novalidate>
+        <!-- Q1 -->
+        <div class="pf"><label for="pfName">Your name <span class="req">*</span></label><input type="text" id="pfName" autocomplete="name"></div>
+        <div class="pf"><label for="pfBusiness">Business name <span class="req">*</span></label><input type="text" id="pfBusiness" autocomplete="organization"></div>
+        <!-- Q2 / Q3 — deliberately optional: the vet does most of its work here,
+             but a node with no web presence is a nurture signal, not a rejection. -->
+        <div class="pf"><label for="pfWebsite">Website URL</label><input type="url" id="pfWebsite" placeholder="https://" autocomplete="url"></div>
+        <div class="pf"><label for="pfLinkedin">LinkedIn URL (personal)</label><input type="url" id="pfLinkedin" placeholder="https://"></div>
+        <!-- Q4 -->
+        <div class="pf"><label for="pfService">What service do you provide to STR owners? <span class="req">*</span></label>
+          <select id="pfService">
+            <option value="">Choose one</option>
+            <option>Realtor / broker</option>
+            <option>Photographer / media</option>
+            <option>Interior designer / stager</option>
+            <option>Cleaning / turnover</option>
+            <option>Co-host</option>
+            <option>Property manager</option>
+            <option>CPA / bookkeeper</option>
+            <option>Cost segregation</option>
+            <option>Builder / contractor</option>
+            <option>Lender / financing</option>
+            <option>Pricing or revenue services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="pf" id="pfServiceOtherRow" hidden><label for="pfServiceOther">Tell us what you do</label><input type="text" id="pfServiceOther"></div>
+        <!-- Q5 -->
+        <div class="pf"><label for="pfMarkets">Which market(s) do you work in? <span class="req">*</span></label><input type="text" id="pfMarkets"></div>
+        <!-- Q6 -->
+        <div class="pf"><label for="pfClient">Describe your typical STR-owner client in a line or two <span class="req">*</span></label><textarea id="pfClient" rows="3"></textarea></div>
+        <!-- Q7 — "None yet", never "none". It is a stage, not a verdict. -->
+        <div class="pf"><label for="pfVolume">Roughly how many STR owners do you talk to in a month? <span class="req">*</span></label>
+          <select id="pfVolume"><option value="">Choose one</option><option>None yet</option><option>1&ndash;3</option><option>4&ndash;10</option><option>more</option></select>
+        </div>
+        <!-- Q8 -->
+        <div class="pf"><label for="pfRefersTo">Who do you currently refer your clients to, when they need something you don&rsquo;t do? &mdash; or, if you haven&rsquo;t yet, who would you want to?</label><textarea id="pfRefersTo" rows="3"></textarea></div>
+        <!-- Q9 — corroborates Q8. The nurture trigger reads CONTENT across both,
+             not emptiness of either (build sheet FINAL §2). -->
+        <div class="pf"><label for="pfReferredIn">Has anyone referred a client to you in the last six months? <span class="req">*</span></label>
+          <select id="pfReferredIn"><option value="">Choose one</option><option>Yes</option><option>No</option></select>
+        </div>
+        <div class="pf"><label for="pfReferredInDetail">If yes, who?</label><input type="text" id="pfReferredInDetail"></div>
+        <!-- Q10 -->
+        <div class="pf"><label for="pfIdeal">What does your ideal client look like &mdash; the one you&rsquo;d want sent to you? <span class="req">*</span></label><textarea id="pfIdeal" rows="3"></textarea></div>
+        <!-- Q11 -->
+        <div class="pf"><label for="pfWhyNow">What made you reach out now?</label><textarea id="pfWhyNow" rows="3"></textarea></div>
+        <!-- Q12 -->
+        <div class="pf"><label for="pfTeam">Will anyone else on your team make introductions? <span class="req">*</span></label>
+          <select id="pfTeam"><option value="">Choose one</option><option>just me</option><option>a few people</option><option>a team</option></select>
+        </div>
+        <!-- Q13 -->
+        <div class="pf"><label for="pfEmail">Email <span class="req">*</span></label><input type="email" id="pfEmail" autocomplete="email"></div>
+        <div class="pf"><label for="pfPhone">Phone</label><input type="tel" id="pfPhone" autocomplete="tel"></div>
+        <div class="pf"><label for="pfChannel">Preferred channel</label>
+          <select id="pfChannel"><option value="">No preference</option><option>Email</option><option>Phone</option><option>Text</option></select>
+        </div>
 
-  <!-- CLOSING -->
-  <section class="closing">
-    <h2 class="closing-h">The only rate aligned with your growth.</h2>
-    <p>Start with a free audit of your real comp set. You'll see your bigger number (and the 90% you keep) before you owe a thing.</p>
-    <div class="closing-cta">
-      <a href="/get-started" class="btn-gold">Get My Free Revenue Audit</a>
-      <a href="/sample-audit" class="link-sample">see a sample audit <span class="arw">→</span></a>
+        <!-- Bot gate: honeypot + submit-timing floor, same convention as the six
+             lead surfaces (registry v3.54, v3.55). Autocomplete is off and the
+             token is deliberately NOT a name a browser would autofill. -->
+        <div class="mkx-hp" aria-hidden="true">
+          <label for="mkxHpField">Leave this field empty</label>
+          <input type="text" id="mkxHpField" name="hp_field" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="pf-err" id="pfErr" role="alert" hidden></p>
+        <button type="submit" class="btn" id="pfSubmit">Send it in</button>
+      </form>
+
+      <div id="pfDone" hidden>
+        <h3>Received. I read every one of these myself.</h3>
+        <p>You&rsquo;ll hear from me within a few days, whichever way it goes. If a property crosses your desk in the meantime and you want a revenue read on it, reply to the confirmation email with the address &mdash; that offer starts now, not after we formalize anything.</p>
+      </div>
     </div>
-    <span class="closing-fine">The audit is free. No lock-in after. Cancel anytime.</span>
   </section>
 
 </main>
+
 
 <footer>
   <div class="foot">
@@ -628,6 +586,123 @@ td.mcell{vertical-align:top;}
     else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
   document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+<script src="/mkx-utm.js"></script>
+<script>
+/* ══ PARTNER APPLICATION — posts to /api/partner, never /api/lead ══
+   Data contract, build sheet FINAL 2026-09-16 §3. A partner applying about
+   themselves is NOT an owner lead: different contact type, different pipeline,
+   different hook. The endpoint is chosen by PATH, so this form cannot reach the
+   owner hook even if a header said otherwise.
+
+   The two paths, so they never collide again:
+     /p/{slug}  -> /get-started?src=partner&ref={slug}   an OWNER, introduced
+     /partner   -> /api/partner                          a PARTNER, applying   */
+(function () {
+  'use strict';
+  var ENDPOINT = '/api/partner';
+  var MIN_FILL_MS = 3000;
+  var t0 = Date.now();
+
+  var form = document.getElementById('partnerForm');
+  if (!form) { return; }
+  var errEl = document.getElementById('pfErr');
+  var svc = document.getElementById('pfService');
+  var otherRow = document.getElementById('pfServiceOtherRow');
+
+  svc.addEventListener('change', function () { otherRow.hidden = svc.value !== 'Other'; });
+
+  var REQUIRED = [
+    ['pfName', 'Your name'], ['pfBusiness', 'Business name'],
+    ['pfService', 'What service do you provide'], ['pfMarkets', 'Which market(s)'],
+    ['pfClient', 'Describe your typical STR-owner client'],
+    ['pfVolume', 'How many STR owners'], ['pfReferredIn', 'Has anyone referred a client to you'],
+    ['pfIdeal', 'Your ideal client'], ['pfTeam', 'Anyone else on your team'],
+    ['pfEmail', 'Email']
+  ];
+  var v = function (id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.hidden = true;
+    form.querySelectorAll('.bad').forEach(function (el) { el.classList.remove('bad'); });
+
+    var firstBad = null;
+    REQUIRED.forEach(function (row) {
+      var el = document.getElementById(row[0]);
+      if (!el.value.trim()) { el.classList.add('bad'); if (!firstBad) { firstBad = el; } }
+    });
+    if (firstBad) {
+      errEl.textContent = 'This one I need answered.';
+      errEl.hidden = false; firstBad.focus(); return;
+    }
+    var email = v('pfEmail');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      var em = document.getElementById('pfEmail');
+      em.classList.add('bad');
+      errEl.textContent = 'That email doesn’t look complete — check it once?';
+      errEl.hidden = false; em.focus(); return;
+    }
+
+    var hp = document.getElementById('mkxHpField');
+    var botty = !!(hp && hp.value !== '');
+
+    var ref = (typeof window.mkxGetRef === 'function') ? window.mkxGetRef() : {};
+    var payload = {
+      partner_name: v('pfName'),
+      partner_business: v('pfBusiness'),
+      partner_website: v('pfWebsite'),
+      partner_linkedin: v('pfLinkedin'),
+      partner_service: v('pfService'),
+      partner_service_other: svc.value === 'Other' ? v('pfServiceOther') : '',
+      partner_markets: v('pfMarkets'),
+      partner_client_profile: v('pfClient'),
+      partner_owner_volume: v('pfVolume'),
+      partner_refers_to: v('pfRefersTo'),
+      partner_referred_in: v('pfReferredIn'),
+      partner_referred_in_detail: v('pfReferredInDetail'),
+      partner_ideal_client: v('pfIdeal'),
+      partner_why_now: v('pfWhyNow'),
+      partner_team: v('pfTeam'),
+      partner_email: email,
+      partner_phone: v('pfPhone'),
+      partner_channel: v('pfChannel'),
+      partner_submitted_at: new Date().toISOString(),
+      src: ref.src || '',
+      ref: ref.ref || ''
+    };
+    /* OMIT EMPTY KEYS — GHL writes an empty value over a populated field
+       (registry v3.51). Send only what we have. Built as a copy so the payload
+       object stays intact for anything reading it after the POST. */
+    var wire = {};
+    Object.keys(payload).forEach(function (k) { if (payload[k] !== '') { wire[k] = payload[k]; } });
+
+    var btn = document.getElementById('pfSubmit');
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    function done() {
+      form.hidden = true;
+      document.getElementById('pfDone').hidden = false;
+      document.getElementById('pfDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    /* Timing floor DEFERS, never drops (registry v3.55): a human who fills this
+       in under three seconds has not, and a bot that waits is welcome to. */
+    var wait = Math.max(0, MIN_FILL_MS - (Date.now() - t0));
+    function send() {
+      if (botty) { done(); return; }   /* silent drop, same confirmation */
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(wire),
+        keepalive: true
+      }).then(done).catch(function (err) {
+        console.warn('partner application non-critical error:', err);
+        done();
+      });
+    }
+    if (wait) { setTimeout(send, wait); } else { send(); }
+  });
 })();
 </script>
 </body>

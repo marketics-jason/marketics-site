@@ -121,9 +121,16 @@
 /LEGAL-REDLINE-2026-09-01          /404.html                  404!
 /LEGAL-REDLINE-2026-09-01.md       /404.html                  404!
 
+# /partner is RETIRED (Board, 2026-09-16). It was named for a thing it never
+# was: an application door. The directory is /partners and the application is
+# /partners/apply. 301 rather than delete -- the footer carried /partner on 51
+# pages for a day, and anything already linked or bookmarked lands where it
+# meant to go.
+/partner   /partners  301
+/partner/  /partners  301
+
 # Canonical is the no-slash form (D8 §2a, same rule as the indexing brief).
 # One hop, no chain: /partner/ -> /partner, never via an intermediate.
-/partner/  /partner  301
 
 # Owner-to-owner referral shorthand. The link Jason says out loud; partners
 # never touch it (they get /p/<slug>). A redirect, deliberately not a page:

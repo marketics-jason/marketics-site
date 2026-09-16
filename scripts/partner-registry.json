@@ -23,11 +23,23 @@
     "reporting and in the link the partner themselves holds, so renaming one silently",
     "splits that node's history in two.",
     "",
-    "slug_issued is the date THIS FILE issued the slug. It is NOT the signing date --\n     that is not recorded here because it was not supplied, and a plausible wrong date\n     is worse than an absent one (registry v3.52)."
+    "slug_issued is the date THIS FILE issued the slug. It is NOT the signing date --\n     that is not recorded here because it was not supplied, and a plausible wrong date\n     is worse than an absent one (registry v3.52).",
+    "",
+    "RETIRED 2026-09-16: 'pricelabs'. It fails the bundled-tool test -- an owner would never buy",
+    "PriceLabs separately from Marketics, because the listing sits inside the service and runs on",
+    "Marketics' own account. No outbound referral direction exists, so no ladder rung can ever be",
+    "owed on it; the relationship runs the other way, with Marketics in THEIR partner program.",
+    "",
+    "/p/pricelabs still FORWARDS: an unknown slug reaches /get-started unstamped rather than",
+    "404ing, so anyone already holding the link still lands. They are simply uncounted. That is",
+    "the correct failure direction -- never lose the visitor for the sake of the record -- and it",
+    "is deliberate, not a leftover."
   ],
   "medium": "partner",
   "partners": {
-    "cost-seg-smart": { "label": "Cost Seg Smart", "slug_issued": "2026-09-14" },
-    "pricelabs":      { "label": "PriceLabs",      "slug_issued": "2026-09-14" }
+    "cost-seg-smart": {
+      "label": "Cost Seg Smart",
+      "slug_issued": "2026-09-14"
+    }
   }
 }
