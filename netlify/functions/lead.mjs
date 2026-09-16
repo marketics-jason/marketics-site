@@ -63,12 +63,28 @@ const ROUTES = {
      In scope here for one reason: deliverable 2's success criterion is ZERO
      hook-UUID hits in the deploy, and /join carried one. */
   'join':           'GHL_HOOK_ORGANIC',
+  'partner':        'GHL_HOOK_PARTNER',   /* see PARTNER_ROUTE below */
 };
 
 /* Deliverable 4: the consent denominator. This route is NOT a lead route --
    it is counted here and forwarded NOWHERE. It shares the endpoint on CTO's
    instruction, and the separation is enforced by returning before the hook
    lookup can happen, not by remembering not to forward. */
+/* The partner APPLICATION route (build sheet FINAL, 2026-09-16). A different
+   contact type, a different pipeline and a different hook: a Referring Partner
+   applying about themselves, never an owner lead.
+
+   PATH-DERIVED, NOT HEADER-DERIVED, and that is the whole point. Every other
+   route is named by a header the page sets, which is fine when the worst case
+   is a mislabelled lead. Here the worst case is a partner landing in the owner
+   pipeline -- forbidden by spec §2 B4, and the doorway to the open email-dedup
+   problem where a partner already on an owner contact merges last-write-wins.
+   Deriving it from /api/partner makes that structurally impossible rather than
+   a rule someone has to keep. A header can never reach this route, and this
+   route can never reach an owner hook. */
+const PARTNER_ROUTE = 'partner';
+const PARTNER_PATH = '/api/partner';
+
 const CONSENT_ROUTE = 'consent';
 const CONSENT_ACTIONS = ['impression', 'accept', 'deny', 'ignore'];
 
@@ -94,9 +110,20 @@ export default async (req) => {
      CANNOT SET HEADERS, and the consent 'ignore' event has to be a beacon: it
      fires while the page is unloading, which is the one moment a fetch is not
      guaranteed to survive. Header wins where both are present. */
-  const route = (req.headers.get('x-marketics-form')
-                 || new URL(req.url).searchParams.get('f')
-                 || '').trim();
+  const url = new URL(req.url);
+  const onPartnerPath = url.pathname === PARTNER_PATH;
+
+  const route = onPartnerPath
+    ? PARTNER_ROUTE
+    : (req.headers.get('x-marketics-form') || url.searchParams.get('f') || '').trim();
+
+  /* Both directions are closed, not just the dangerous one. A header cannot
+     reach the partner hook, and the partner path cannot be talked into an
+     owner route or into the consent counter. */
+  if (!onPartnerPath && route === PARTNER_ROUTE) {
+    console.log(JSON.stringify({ evt: 'lead_rejected', reason: 'partner_route_is_path_only' }));
+    return new Response('unknown form route', { status: 400 });
+  }
   if (route === CONSENT_ROUTE) {
     return await handleConsent(req);
   }
@@ -162,7 +189,7 @@ export default async (req) => {
      is wired. `keys` and `emptyKeys` are counts, never values -- client-level
      data does not travel downstream. */
   console.log(JSON.stringify({
-    evt: 'lead_forwarded',
+    evt: onPartnerPath ? 'partner_forwarded' : 'lead_forwarded',
     route,
     ok: failed === null && status >= 200 && status < 300,
     status,
@@ -221,4 +248,8 @@ async function handleConsent(req) {
   return new Response(null, { status: 204 });
 }
 
-export const config = { path: '/api/lead' };
+/* Two paths, ONE implementation. A second file would mean a second copy of the
+   empty-key filter, the byte-identical forwarding and the 502-before-read
+   ordering -- and this month is a long argument about what a second copy costs.
+   The paths differ; the plumbing does not. */
+export const config = { path: ['/api/lead', PARTNER_PATH] };

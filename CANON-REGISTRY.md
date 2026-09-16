@@ -2363,6 +2363,80 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.67 — the partner application, and the pipeline it must never enter (2026-09-16)
+
+**Skill impact:** no — a form, an endpoint and gates. All page and form copy is Execute §4.1 v1.3 and
+the D8 §2a Strategy-cleared slots, **verbatim**; Code authored none of it.
+
+### The correction that mattered most was made before it was built
+
+The 09-15 build sheet's data contract routed the partner application through
+`/get-started?src=partner&ref={CODE}`. **That is the owner referral path** — a partner sending an
+*owner* to the audit form. This form is a partner applying about themselves.
+
+Built as written: partner applications land in the **owner** pipeline, which spec §2 B4 forbids, and
+walk straight into the open email-dedup problem where a partner already on an owner contact merges
+last-write-wins. **The form would have worked. The applicant would have seen the confirmation.
+Nothing would have errored.** Flagged before building; the FINAL sheet corrected it.
+
+**The two paths, now structurally separate:**
+
+| Link | Who | Pipeline |
+|---|---|---|
+| `marketics.io/p/{slug}` → `/get-started?src=partner&ref={slug}` | an **owner**, introduced | owner |
+| `marketics.io/partner` → `/api/partner` | a **partner**, applying | partner |
+
+### The endpoint is chosen by PATH, not by a header
+
+`/api/partner` is a second path on the **same function** — one implementation, so the empty-key filter,
+the byte-identical forwarding and the 502-before-read ordering cannot drift between two files.
+
+**The route is derived from `url.pathname`, and every other route is derived from a header.** That
+difference is the point: elsewhere the worst case is a mislabelled lead; here the worst case is a
+partner in the owner pipeline. Deriving it from the path makes that **impossible rather than
+forbidden**. Both directions are closed — a header cannot reach the partner hook, and the partner path
+cannot be talked into an owner route or the consent counter.
+
+### Ship gate 2 supersedes the Design treatment
+
+`/partner` now carries **standard site chrome** — header, nav and footer, same as every other page —
+replacing Design's letter treatment (logo only, legal-only footer, no exits). It therefore **leaves
+`FOOTER_EXEMPT`** and carries the Company column including a link to itself, which is what "same as
+every other page" means. **Still never in the main nav**, and that is gated.
+
+Built by transplanting `/pricing`'s chrome rather than hand-matching it: with 54 hand-authored pages
+and no build step, "same as every other page" is only true if it is the same bytes.
+
+### Two things caught by running the code rather than reading it
+
+1. **A temporal dead zone.** `ROUTES` referenced `PARTNER_ROUTE` before its declaration — the module
+   would have failed to load, taking every lead route down with it. Found by executing the file, not
+   by re-reading the diff.
+2. **The JSON-LD was dropped, not adapted.** The reference page's graph carries an `Offer` with
+   figures. D8 forbids fee figures and geography on `/partner`, and structured data is *allowed*, not
+   required. Omitting is the only version that cannot smuggle either onto a page whose gates forbid
+   both.
+
+### Verified
+
+**Seven negative controls fire, bracketed by known-good:** the form repointed at `/api/lead` · one of
+the thirteen questions disappearing · honeypot removed · timing floor removed · Q7's bottom option
+becoming "None" · `/partner`'s footer losing a link · a **nav** link to `/partner` appearing.
+
+**Browser, 20/20:** both cleared error strings exactly · posts to `/api/partner` and **never**
+`/api/lead` · `partner_` prefix on every business key · optional blanks **absent rather than empty** ·
+honeypot drops silently and the bot still sees the same confirmation · standard nav present and
+`/partner` not in it · Partners in its own footer · still `noindex`.
+
+### Still blocked, and the blockers are not Code's
+
+- **`GHL_HOOK_PARTNER`** is not set. The function returns 502 **before reading the body**, by design —
+  so ship gate 1 (a real submission landing a partner contact) cannot be run until it exists.
+- **`PARTNER_VET_MARKETS`** is not set. PR B's indexing flip hard-fails without it, which is the gate
+  doing its job.
+- The page stays `noindex` until both land.
+
+---
 ## v3.66 — RULING: the partner link is `/p/{slug}` (2026-09-16)
 
 **Skill impact:** no — a route, not a claim.

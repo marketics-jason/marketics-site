@@ -1787,7 +1787,11 @@ def main():
     #   * partner itself  -- legal-only footer by design; a self-link is noise.
     FOOTER_COMPANY = ("/pricing", "/story", "/partner", "/media", "/media-kit",
                       "mailto:marketing@marketics.io")
-    FOOTER_EXEMPT = ("lp/keep-control/index.html", "partner/index.html")
+    # /partner LEFT this list on 2026-09-16: build sheet FINAL ship gate 2 gives it
+    # standard site chrome -- header, nav and footer, same as every other page --
+    # superseding Design's letter treatment. It carries the Company column now,
+    # including a link to itself, which is what "same as every other page" means.
+    FOOTER_EXEMPT = ("lp/keep-control/index.html",)
     for rel3 in sorted(set(pages.values())):
         # /audits/ token pages are UNTOUCHED, ALWAYS -- a standing constraint, not
         # a preference. The first pass of this change added a Partners link to a
@@ -1808,6 +1812,51 @@ def main():
                         f"{list(FOOTER_COMPANY)} in that order"
                         + (f"; missing {missing}" if missing else "")
                         + (f"; unexpected {extra}" if extra else ""))
+
+    # 11p. the partner APPLICATION form (build sheet FINAL, registry v3.67).
+    #
+    # Three separate failures, and the first is the expensive one:
+    #
+    #   1. Posting to /api/lead instead of /api/partner. The form would work, the
+    #      applicant would see the confirmation, and a partner would land in the
+    #      OWNER pipeline -- forbidden by spec §2 B4, and the doorway to the open
+    #      email-dedup problem where a partner already on an owner contact merges
+    #      last-write-wins. Nothing errors. The old build sheet specified exactly
+    #      this, and it was corrected before it was built; this gate is what stops
+    #      it coming back.
+    #   2. A question quietly disappearing. Thirteen were ratified; a form that
+    #      silently ships twelve still submits, and the vet reads a field that is
+    #      never populated.
+    #   3. No bot gate. Same reasoning as the six lead surfaces (v3.54).
+    if os.path.exists(part_path):
+        if "/api/partner" not in psrc:
+            hard.append(f"{part_rel}: the application form does not post to "
+                        f"/api/partner — a partner application must never enter "
+                        f"the owner pipeline (build sheet FINAL §3)")
+        if re.search(r"""ENDPOINT\s*=\s*['\"]/api/lead""", psrc):
+            hard.append(f"{part_rel}: the application form posts to /api/lead — "
+                        f"that is the OWNER path. A partner applies about "
+                        f"themselves; an owner is introduced BY them")
+        PARTNER_FIELDS = (
+            "partner_name", "partner_business", "partner_website", "partner_linkedin",
+            "partner_service", "partner_markets", "partner_client_profile",
+            "partner_owner_volume", "partner_refers_to", "partner_referred_in",
+            "partner_ideal_client", "partner_why_now", "partner_team",
+            "partner_email", "partner_phone", "partner_channel",
+        )
+        for f in PARTNER_FIELDS:
+            if f not in psrc:
+                hard.append(f"{part_rel}: payload key {f!r} is missing — the "
+                            f"thirteen questions are ratified; a form that ships "
+                            f"one fewer still submits and the vet reads a field "
+                            f"that is never populated")
+        if "mkxHpField" not in psrc or "MIN_FILL_MS" not in psrc:
+            hard.append(f"{part_rel}: the application form has no honeypot and/or "
+                        f"no submit-timing floor (registry v3.54, v3.55)")
+        if "'None yet'" in psrc or ">None yet<" not in psrc:
+            if ">None yet<" not in psrc:
+                hard.append(f"{part_rel}: Q7's bottom option is not 'None yet' — "
+                            f"never 'none'. It is a stage, not a verdict")
 
     # 11o. /p/ must forward BOTH pairs, not just the UTMs (registry v3.64).
     #

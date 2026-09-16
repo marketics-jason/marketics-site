@@ -9,206 +9,701 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<title>Partner with Marketics</title>
-<meta name="description" content="You send one introduction. Here is what comes back.">
+<title>Referring Partner Program | Marketics</title>
+<meta name="description" content="For professionals who serve short-term rental owners: introduce owners to a revenue specialist and get updated at every stage. Apply to be considered.">
+<link rel="canonical" href="https://marketics.io/partner">
 
-<!-- UNLISTED PARTNER DOOR. Four constraints, all gated in validate-site.py so
-     none of them survives only in a README:
-       1. noindex          (this tag + the X-Robots-Tag on /partner in netlify.toml)
-       2. out of sitemap.xml
-       3. out of llms.txt  (scripts/llms-config.json exclude list)
-       4. no inbound link from ANY organic surface — never in nav, never in a footer
-     Unlisted is not secret. The URL loads for anyone who types it, and the page
-     is forwardable by design — that is what a partner does with it. The
-     protection is a discipline line, not a technical one: nobody is handed the
-     link until the intake form actually submits (field copy is batch 2,
-     week of Sep 28). Until then the CTA is a live anchor to a shell. -->
+<!-- NOINDEX UNTIL D8 PR B. The switch is one PR: robots -> index,follow, add to
+     sitemap.xml, add the §2c line to llms.txt. It cannot merge until the market
+     list is in the PARTNER_VET_MARKETS CI secret -- the no-geography gate hard
+     fails if this page is set to index without it (D8 §2d, registry v3.65). -->
 <meta name="robots" content="noindex, nofollow">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Marketics">
+<meta property="og:title" content="Referring Partner Program | Marketics">
+<meta property="og:description" content="For professionals who serve short-term rental owners. Applications are reviewed, and fit is confirmed on a call.">
+<meta property="og:url" content="https://marketics.io/partner">
+<meta property="og:image" content="https://marketics.io/og/default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Referring Partner Program | Marketics">
+<meta name="twitter:description" content="For professionals who serve short-term rental owners. Applications are reviewed, and fit is confirmed on a call.">
+<meta name="twitter:image" content="https://marketics.io/og/default.jpg">
+
+
+<link rel="preload" href="/fonts/josefin-sans-latin-200-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/josefin-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:200;font-display:optional;src:url('/fonts/josefin-sans-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/josefin-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/josefin-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:optional;src:url('/fonts/dm-sans-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:optional;src:url('/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:optional;src:url('/fonts/dm-mono-latin-400-normal.woff2') format('woff2');}
+</style>
+
+<link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com">
+<link rel="dns-prefetch" href="https://www.clarity.ms">
 <script src="/mkx-consent.js" defer></script>
+<script src="/mkx-utm.js" defer></script>
+<!-- Consent Mode v2. Board ruling 2026-08-21, as amended by Addendum B (2026-08-30) and
+     Addendum C (2026-09-01). Denied by default in the EEA, UK, Switzerland and CANADA, where
+     the banner asks; analytics and the two ad MEASUREMENT signals granted elsewhere, and
+     reversible there by the footer "Do Not Sell or Share" control or by GPC.
+     ad_personalization is denied EVERYWHERE and no Accept grants it -- see C1, and the
+     hardcoded literal in mkx-consent.js that CI asserts against the SERVED file.
+     These defaults MUST sit in dataLayer before the config command below, which is why they
+     are inline here rather than in mkx-consent.js.
+     The config below stamps traffic_type on automated traffic, at config time rather than
+     via a later gtag('set'), so CI's own page_view is marked at source: GA4 data filters
+     match only Developer/Internal traffic, never URL patterns, so the page has to do it.
+     Rationale: CANON-REGISTRY v3.0, v3.10 (Addendum B), v3.19 (C1), v3.26 (the stamp). -->
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'],wait_for_update:500});
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted',functionality_storage:'granted',personalization_storage:'granted',security_storage:'granted'});
+gtag('js',new Date());gtag('config','G-51HW9TQFTJ',navigator.webdriver===true?{traffic_type:'internal'}:{});</script>
+
 <style>
 :root{
-  --gold:#D6AD60;--gold-hi:#e8c47c;
-  --ink:#111110;--panel:#171716;--raised:#1a1a18;
-  --line:#1c1c1a;--line-2:#252525;--line-3:#2b2b2a;
+  --gold:#D6AD60;--gold-hi:#e8c47c;--gold-dk:#A8895A;
+  --ink:#111110;--panel:#171716;--raised:#1a1a18;--sink:#0d0d0c;
+  --line:#202020;--line-2:#252525;--line-3:#2b2b2a;
   --white:#FFFFFF;--bright:#E6E3DA;--body:#B4B2A9;--muted:#8F8C83;
-  --dim:#8C8A81;--faint:#86847C;
+  --dim:#8C8A81;--faint:#86847C;--green:#3f9e6b;
   --mono:'DM Mono',ui-monospace,Menlo,monospace;
   --sans:'DM Sans',-apple-system,system-ui,sans-serif;
   --display:'Josefin Sans',-apple-system,system-ui,sans-serif;
-  /* The design artboard's own pair (1440 canvas / 96px gutter), flat rather
-     than calculated — same fix as the LP, where a calc against a different
-     canvas squeezed the measure wider the bigger the screen got. */
-  --gutter:96px;
-  --canvas:1440px;
+  --gutter:max(72px, calc((100% - 1440px) / 2 + 72px));
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body{margin:0;background:var(--ink);color:var(--body);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 a{color:var(--gold);text-decoration:none;}
 img{display:block;max-width:100%;}
-.wrap{padding-left:var(--gutter);padding-right:var(--gutter);max-width:var(--canvas);margin:0 auto;}
+section{max-width:1440px;margin-left:auto;margin-right:auto;}
 
-/* ══ MASTHEAD — logo only, and not a link. ══
-   No nav on this page at all: the reader arrives warm from Jason, and every
-   exit is a way out of a letter. The lockup is PLACED as an asset, never set
-   as type. */
-.mast{padding-top:34px;}
-.mast img{width:168px;height:auto;}
-/* Hero CTA exists for the mobile fold requirement only — see the media query.
-   On desktop the single CTA lives in .cta-block; two identical controls on one
-   screen is a choice between them, not an easier decision. */
-.hero-cta{display:none;}
+/* ══ NAV ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gutter);height:74px;background:rgba(17,17,16,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(214,173,96,.12);transition:background .25s;}
+nav.scrolled{background:rgba(13,13,12,.97);}
+.nav-logo{display:block;flex-shrink:0;margin-left:-8px;}
+.nav-logo img{height:30px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-links a{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--body);font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--gold);}
+.nav-cta{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(214,173,96,.4);padding:13px 26px;transition:border-color .2s,background .2s;white-space:nowrap;}
+.nav-cta:hover{border-color:var(--gold);background:rgba(214,173,96,.06);}
+.nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px;background:none;border:none;cursor:pointer;}
+.nav-hamburger span{width:22px;height:1px;background:var(--body);display:block;transition:transform .25s,opacity .2s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(3px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){transform:translateY(-3px) rotate(-45deg);}
+.nav-mobile{position:fixed;top:74px;left:0;right:0;z-index:99;background:rgba(13,13,12,.99);border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:12px 24px 24px;transform:translateY(-140%);transition:transform .3s ease;}
+.nav-mobile.open{transform:translateY(0);}
+.nav-mobile a{font-family:var(--sans);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--body);padding:15px 0;border-bottom:1px solid var(--line);}
+.nav-mobile a.cta{color:var(--gold);border-bottom:none;margin-top:8px;}
+
+/* ══ shared ══ */
+main{padding-top:74px;}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.kicker .bar{width:32px;height:1px;background:var(--gold);}
+.kicker span{font-family:var(--sans);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;}
+.sec{padding:88px 72px;border-bottom:1px solid var(--line);}
+.h2{font-family:var(--display);font-weight:200;letter-spacing:2px;color:var(--white);margin:0;}
 
 /* ══ HERO ══ */
-.hero{padding-top:68px;}
-h1{font-family:var(--display);font-weight:200;font-size:58px;line-height:1.1;letter-spacing:1px;
-  color:var(--white);margin:0;text-wrap:pretty;}
-h1 .soft{color:var(--gold);}
+.p-hero{padding:64px 72px 64px;display:grid;grid-template-columns:1fr 480px;gap:80px;align-items:center;border-bottom:1px solid var(--line);}
+.p-hero-h{font-family:var(--display);font-weight:200;font-size:72px;line-height:1.05;letter-spacing:5px;color:var(--white);}
+.p-hero-h span{color:var(--gold);}
+.p-hero-lead{font-size:18px;line-height:1.65;color:var(--bright);margin:30px 0 0;max-width:560px;}
+.p-hero-lead a{border-bottom:1px solid rgba(214,173,96,.45);transition:border-color .2s;}
+.p-hero-lead a:hover{border-bottom-color:var(--gold);}
+.p-hero-lead a:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.fee-card{border:1px solid rgba(214,173,96,.4);background:rgba(214,173,96,.03);padding:44px 48px;display:flex;flex-direction:column;gap:8px;}
+.fee-card .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);}
+.fee-card .big{font-family:var(--display);font-weight:200;font-size:88px;line-height:1;color:var(--white);}
+.fee-card .big sup{font-size:40px;top:-.4em;}
+.fee-card .desc{font-size:15px;line-height:1.6;color:var(--body);}
+.fee-card .desc strong{color:var(--white);font-weight:400;}
 
-/* ══ BODY — the three returns left, the ask right ══
-   The asymmetry IS the offer: what you get back is three numbered items at
-   full weight; what you send is one line in a narrower column. Keep it. */
-.body-grid{display:grid;grid-template-columns:1fr 360px;gap:72px;align-items:start;
-  padding-top:44px;}
-.lede{font-size:19px;line-height:1.72;color:var(--bright);margin:0;}
-.eyebrow{display:block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--gold);margin-top:40px;}
-.returns{display:flex;flex-direction:column;margin-top:22px;border-top:1px solid var(--line-2);}
-.ret{display:grid;grid-template-columns:44px 1fr;gap:24px;padding:28px 0;
-  border-bottom:1px solid var(--line-2);}
-.ret .n{font-family:var(--display);font-weight:200;font-size:30px;line-height:1;color:var(--gold);}
-.ret p{margin:0;font-size:16.5px;line-height:1.72;}
-.ret b{font-weight:500;color:var(--bright);}
-.ask{border-left:2px solid rgba(214,173,96,0.5);padding:4px 0 4px 28px;margin-top:6px;}
-.ask p{margin:0;font-size:15.5px;line-height:1.7;color:var(--muted);}
-.ask b{font-weight:500;color:var(--bright);}
+/* ══ WEDGE ══ */
+.wedge-lead{font-size:16px;line-height:1.75;color:var(--body);margin:30px 0 0;max-width:900px;}
+.wedge-lead strong{color:var(--bright);font-weight:400;}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;align-items:start;}
+.wcard{border:1px solid var(--line-2);padding:32px 30px;display:flex;flex-direction:column;gap:18px;}
+.wcard.on{border-color:rgba(214,173,96,.45);background:rgba(214,173,96,.04);}
+.wcard .tag{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--body);}
+.wcard.on .tag{color:var(--gold);}
+.wcard .rows{display:flex;flex-direction:column;gap:12px;}
+.wcard .rows span{font-size:13.5px;line-height:1.6;color:var(--body);}
+.wcard .rows span b{color:var(--dim);font-weight:400;}
+.wcard .win{font-size:13.5px;line-height:1.6;color:var(--bright);border-top:1px solid var(--line);padding-top:16px;}
+.wcard.on .win{border-top-color:rgba(214,173,96,.18);}
+.wcard .win b{color:var(--dim);font-weight:400;}
+.wcard.on .win b{color:var(--gold-dk);}
+.footnote{font-size:11.5px;line-height:1.6;color:var(--faint);margin:40px 0 0;max-width:780px;}
 
-/* ══ THE STANDARD ══
-   Set at display size, not body text. This is the integrity claim — the reason
-   a professional would put their own relationship at risk on an introduction —
-   and it is the last thing read before the CTA. */
-.standard{padding-top:56px;}
-.standard p{font-family:var(--display);font-weight:300;font-size:24px;line-height:1.5;
-  color:var(--bright);margin:0;max-width:980px;text-wrap:pretty;}
-.standard .close{color:var(--gold);}
+/* ══ COMPARISON CHART ══ */
+.legend{display:flex;align-items:center;gap:24px;margin-top:40px;max-width:780px;flex-wrap:wrap;}
+.legend .li{display:flex;align-items:center;gap:9px;}
+.legend .sw{width:22px;height:12px;}
+.legend span{font-size:12px;color:var(--body);}
+.legend .axis-lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--faint);margin-left:auto;}
+.chart{margin-top:24px;max-width:780px;display:flex;gap:0;}
+.chart .yax{width:46px;position:relative;height:320px;flex-shrink:0;}
+.chart .yax span{position:absolute;right:12px;font-family:var(--mono);font-size:10px;color:var(--faint);}
+.chart .plot{position:relative;height:320px;border-left:1px solid var(--line-3);flex:1;}
+.chart .grid{position:absolute;left:0;right:0;height:1px;background:var(--line);}
+.chart .pivot{position:absolute;left:0;right:0;bottom:160px;border-top:1px dashed rgba(214,173,96,.5);}
+.chart .pivot-lbl{position:absolute;right:8px;bottom:166px;font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--gold-dk);}
+.chart .bars{position:absolute;inset:0;display:flex;align-items:flex-end;padding-left:52px;gap:120px;}
+.barcol{display:flex;flex-direction:column;align-items:center;}
+.barcol .cap{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;margin-bottom:10px;}
+.barcol .stack{display:flex;flex-direction:column;width:130px;}
+.seg-host{height:80px;background:rgba(214,173,96,.32);border:1px solid rgba(214,173,96,.45);border-top:1px dashed rgba(214,173,96,.7);border-bottom:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;padding:0 10px;}
+.seg-host .t{font-weight:500;font-size:12.5px;color:#F0E4C8;}
+.seg-host .s{font-size:10.5px;color:#D6C9A8;}
+.seg-fee{height:80px;background:var(--gold);display:flex;align-items:center;justify-content:center;}
+.seg-fee span{font-weight:700;font-size:17px;color:#171717;}
+.seg-up{height:130px;background:linear-gradient(to top,rgba(214,173,96,.12),rgba(214,173,96,0));display:flex;align-items:flex-start;justify-content:center;padding-top:8px;}
+.seg-up span{font-size:11px;color:#7C7A72;}
+.seg-pm{height:160px;background:rgba(214,173,96,.12);border:1px solid rgba(214,173,96,.28);border-top:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;}
+.seg-pm .big{font-weight:600;font-size:18px;color:var(--gold-dk);}
+.seg-pm .s{font-size:11px;color:#7C7A72;}
+.chart-cats{display:flex;padding-left:98px;gap:120px;margin-top:14px;max-width:780px;}
+.chart-cats .c{width:130px;text-align:center;}
+.chart-cats .c .h{font-family:var(--mono);font-size:11px;letter-spacing:2px;}
+.chart-cats .c .s{font-size:12.5px;color:var(--muted);margin-top:6px;}
+.chart-note{font-size:16px;line-height:1.7;color:var(--body);margin:40px 0 0;max-width:620px;}
+.chart-note strong{color:var(--white);font-weight:400;}
 
-/* ══ CTA + FORM ══ */
-.cta-block{padding-top:72px;padding-bottom:88px;margin-top:64px;border-top:1px solid var(--line);
-  display:grid;grid-template-columns:1fr 480px;gap:72px;align-items:start;}
-.btn{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--ink);background:var(--gold);padding:19px 44px;
-  transition:filter .2s;text-align:center;}
-.btn:hover{filter:brightness(1.08);}
-.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
-.form-intro{font-style:italic;font-size:15px;line-height:1.7;color:var(--muted);
-  margin:26px 0 0;max-width:460px;}
-.form-card{border:1px solid rgba(214,173,96,0.35);background:var(--panel);padding:34px;}
-.form-card .label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--gold);}
-.shell{display:flex;flex-direction:column;gap:14px;margin-top:20px;}
-.shell i{display:block;height:46px;border:1px dashed var(--line-3);background:var(--raised);}
-.shell i.tall{height:92px;}
-.pending{display:block;font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--faint);
-  margin-top:20px;}
+/* ══ WHAT YOU PAY ══ */
+.pay-card{border:1px solid var(--line-2);padding:36px 34px;display:flex;flex-direction:column;gap:14px;}
+.pay-card .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;color:var(--gold);}
+.pay-card .big{font-family:var(--display);font-weight:300;font-size:24px;letter-spacing:1px;color:var(--white);}
+.pay-card p{font-size:14px;line-height:1.65;color:var(--muted);margin:0;}
+.pay-card p strong{color:var(--body);font-weight:400;}
+.hiw{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:44px;border-top:1px solid var(--line);padding-top:36px;}
+.hiw .col span:first-child{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--gold);display:block;margin-bottom:8px;}
+.hiw .col p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0;}
+.hiw .col.hl span:first-child{color:var(--body);}
+.hiw .col.hl p{color:var(--body);}
 
-/* ══ FOOTER — legal only. No nav exits. ══ */
-footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:24px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
-footer span,footer a{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--faint);}
-footer a:hover{color:var(--gold);}
+/* ══ WORKED EXAMPLE ══ */
+.worked{background:radial-gradient(120% 140% at 50% 0%, rgba(214,173,96,.05) 0%, rgba(17,17,16,0) 65%);}
+.money-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px;border:1px solid var(--line-2);}
+.mcell{padding:32px 30px;border-right:1px solid var(--line-2);display:flex;flex-direction:column;gap:10px;}
+.mcell:last-child{border-right:none;background:rgba(214,173,96,.06);}
+.mcell .lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--dim);}
+.mcell .lbl.g{color:var(--gold);}
+.mcell .num{font-family:var(--display);font-weight:200;font-size:44px;line-height:1;color:var(--white);}
+.mcell .num.g{color:var(--gold);}
+.mcell .num.m{color:var(--muted);}
+.mcell .note{font-size:13px;line-height:1.55;color:var(--muted);}
+.mcell .note strong{color:var(--bright);font-weight:400;}
+.mcell .note .g{color:var(--gold);}
+.worked-quote{font-family:var(--display);font-weight:300;font-size:24px;line-height:1.45;letter-spacing:.5px;color:var(--bright);margin:30px 0 0;max-width:820px;}
+.worked-quote span{color:var(--gold);}
 
-/* ══ MOBILE ══
-   Spec requirement, not a preference: lockup → H1 → opening paragraph → CTA
-   must all land above the 844px fold. Measured at 390×844 in CI. If you change
-   these type sizes, re-check it. */
+/* ══ CLOSING ══ */
+.closing{padding:100px 72px;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid var(--line);}
+.closing-h{font-family:var(--display);font-weight:200;font-size:50px;line-height:1.12;letter-spacing:4px;color:var(--white);max-width:860px;margin:0;}
+.closing p{font-size:17px;line-height:1.7;color:var(--body);margin:26px 0 0;max-width:520px;}
+.closing-cta{display:flex;align-items:center;gap:30px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
+.btn-gold{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#171717;background:var(--gold);padding:18px 40px;transition:filter .15s;}
+.btn-gold:hover{filter:brightness(1.06);}
+.link-sample{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:1px;color:var(--body);}
+.link-sample:hover{color:var(--white);}
+.link-sample .arw{color:var(--gold);font-size:15px;}
+.closing-fine{font-size:12px;letter-spacing:1px;color:var(--dim);margin-top:22px;}
+
+/* ══ FOOTER ══ */
+.foot{border-top:1px solid rgba(214,173,96,.15);padding:72px 72px 56px;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:48px;align-items:start;}
+.foot-brand img{height:30px;width:auto;margin-left:-8px;margin-bottom:20px;}
+.foot-brand p{font-size:12px;line-height:1.8;color:var(--dim);margin:0;max-width:300px;}
+.foot-col{display:flex;flex-direction:column;gap:14px;}
+.foot-col .fh{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--faint);text-transform:uppercase;}
+.foot-col a{font-size:13px;color:var(--muted);}
+.foot-col a:hover{color:var(--gold);}
+.foot-col a.gold{color:var(--gold);}
+.foot-tag{display:flex;flex-direction:column;align-items:flex-end;gap:10px;text-align:right;}
+.foot-tag .ft-t{font-family:var(--display);font-weight:200;font-size:16px;letter-spacing:2.2px;text-transform:uppercase;color:var(--gold);}
+.foot-tag .ft-u{font-size:12px;color:var(--dim);}
+.foot-legal{max-width:1440px;margin:0 auto;border-top:1px solid var(--raised);padding:20px 72px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.foot-legal .fl-l{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.foot-legal .fl-links{display:flex;align-items:center;gap:20px;}
+.foot-legal span,.foot-legal a{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--faint);}
+.foot-legal a:hover{color:var(--muted);}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1080px){ nav{padding:0 40px;} }
+@media (max-width:960px){
+  .p-hero{grid-template-columns:1fr;gap:40px;}
+  .cards3{grid-template-columns:1fr;}
+  .hiw{grid-template-columns:1fr 1fr;gap:28px;}
+  .money-grid{grid-template-columns:1fr 1fr;}
+  .mcell:nth-child(2){border-right:none;}
+  .mcell:nth-child(1),.mcell:nth-child(2){border-bottom:1px solid var(--line-2);}
+}
 @media (max-width:900px){
-  :root{--gutter:24px;}
-  .mast{padding-top:22px;}
-  .mast img{width:132px;}
-  .hero{padding-top:32px;}
-  h1{font-size:33px;line-height:1.14;}
-  .body-grid{grid-template-columns:1fr;gap:34px;padding-top:34px;}
-  .lede{font-size:16.5px;}
-  .ret{grid-template-columns:30px 1fr;gap:14px;padding:20px 0;}
-  .ret .n{font-size:22px;}
-  .ret p{font-size:15.5px;}
-  .standard{padding-top:40px;}
-  .standard p{font-size:19px;}
-  .cta-block{grid-template-columns:1fr;gap:34px;padding-top:44px;padding-bottom:56px;margin-top:40px;}
-  .btn{display:block;width:100%;}
-  /* Hoisted above the argument so the CTA clears the 844px fold; the form
-     card itself stays at the bottom, where the reader actually ends up. */
-  .hero-cta{display:block;margin-top:26px;}
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .foot{grid-template-columns:1fr 1fr;gap:28px;}
+  .foot-brand{grid-column:1/-1;}
+  .foot-brand p{max-width:none;}
+  .foot-tag{grid-column:1/-1;align-items:flex-start;text-align:left;}
+}
+@media (max-width:640px){
+  nav{padding:0 24px;height:64px;}
+  .nav-mobile{top:64px;}
+  main{padding-top:64px;}
+  .p-hero,.sec,.closing{padding-left:24px;padding-right:24px;}
+  .p-hero{padding-top:56px;padding-bottom:56px;}
+  .sec{padding-top:56px;padding-bottom:56px;}
+  .p-hero-h{font-size:42px;letter-spacing:2px;}
+  .fee-card .big{font-size:60px;}
+  .h2{font-size:28px!important;}
+  .money-grid{grid-template-columns:1fr;}
+  .mcell{border-right:none;border-bottom:1px solid var(--line-2);}
+  .hiw{grid-template-columns:1fr;}
+  .chart .bars{gap:40px;padding-left:28px;}
+  .barcol .stack{width:84px;}
+  .chart-cats{padding-left:74px;gap:40px;}
+  .chart-cats .c{width:84px;}
+  .closing-h{font-size:32px;letter-spacing:2px;}
+}
+</style>
+
+<style>
+/* hero: align eyebrow+header to logo, uniform 24px eyebrow gap */
+.p-hero .kicker{margin-bottom:24px !important;margin-left:-6px !important;}
+.p-hero h1{margin-top:0 !important;margin-left:-6px !important;}
+.p-hero .p-hero-lead{margin-left:-6px !important;}
+</style>
+<style>
+/* GEO semantic tags — preserve exact spacing, no visual change */
+ul.cards3{margin:48px 0 0;padding:0;list-style:none;}
+li.wcard,li.pay-card,li.col{list-style:none;}
+h3.tag,h3.big{margin:0;}
+ol.hiw{margin:44px 0 0;padding-left:0;list-style:none;}
+table.money-grid{margin:46px 0 0;}
+.money-grid tbody,.money-grid tr{display:contents;}
+td.mcell{vertical-align:top;}
+/* Pricing FAQ (new) */
+.pay-faq{display:flex;flex-direction:column;border-top:1px solid var(--line);margin:44px 0 0;max-width:1040px;}
+.pf-row{padding:30px 0;border-bottom:1px solid var(--line-2);display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start;}
+.pf-row dt{font-family:var(--sans);font-weight:500;font-size:18px;line-height:1.4;color:var(--white);margin:0;}
+.pf-row dd{font-size:15px;line-height:1.75;color:var(--body);margin:0;}
+@media(max-width:640px){.pf-row{grid-template-columns:1fr;gap:8px;}.pf-row dt{font-size:15px;}}
+</style>
+<style>
+.skip-link{position:absolute;left:8px;top:-48px;z-index:1000;background:var(--gold,#D6AD60);color:#0f0f0f;padding:9px 16px;border-radius:0 0 4px 4px;font-family:var(--mono,monospace);font-size:12px;letter-spacing:.04em;text-decoration:none;transition:top .15s;}
+.skip-link:focus{top:0;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+/* Heading line breaks. Replaces <br> inside headings: <br> yields no
+   whitespace when tags are stripped, so naive extraction read
+   "YOURMARKET.MASTERED." as a single token. Block spans separated by a
+   real space keep the visual break and make the extracted text correct. */
+.hln{display:block;}
+</style>
+<style>
+/* ══ /partner — the referring-partner door ══ */
+.pt-hero{padding-top:118px;padding-bottom:0;}
+.pt-hero h1{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:54px;
+  line-height:1.1;letter-spacing:1px;color:#fff;margin:0;text-wrap:pretty;}
+.pt-lede{font-size:19px;line-height:1.72;color:#E6E3DA;margin:30px 0 0;max-width:820px;}
+.pt-grid{display:grid;grid-template-columns:1fr 340px;gap:72px;align-items:start;padding-top:52px;}
+.pt-eyebrow{display:block;font-family:var(--mono,'DM Mono',monospace);font-size:11px;letter-spacing:2.5px;
+  text-transform:uppercase;color:#D6AD60;}
+.pt-returns{display:flex;flex-direction:column;margin-top:22px;border-top:1px solid #252525;}
+.pt-ret{display:grid;grid-template-columns:44px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid #252525;}
+.pt-ret .n{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:30px;line-height:1;color:#D6AD60;}
+.pt-ret p{margin:0;font-size:16.5px;line-height:1.72;color:#B4B2A9;}
+.pt-ret b{font-weight:500;color:#E6E3DA;}
+.pt-ask{border-left:2px solid rgba(214,173,96,.5);padding:4px 0 4px 28px;margin-top:34px;}
+.pt-ask p{margin:0;font-size:15.5px;line-height:1.7;color:#8F8C83;}
+.pt-ask b{font-weight:500;color:#E6E3DA;}
+/* The integrity claim, set at display size — it is the reason a professional
+   would put their own relationship at risk on an introduction. */
+.pt-standard{padding-top:56px;}
+.pt-standard p{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:24px;
+  line-height:1.5;color:#E6E3DA;margin:0;max-width:980px;text-wrap:pretty;}
+.pt-who{padding-top:64px;}
+.pt-who h2{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:200;font-size:34px;
+  color:#fff;margin:0 0 16px;letter-spacing:.5px;}
+.pt-who-body{font-size:17px;line-height:1.7;color:#B4B2A9;margin:0 0 22px;max-width:720px;}
+.pt-trades{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px 40px;max-width:820px;}
+.pt-trades li{position:relative;padding-left:20px;font-size:16px;line-height:1.6;color:#B4B2A9;}
+.pt-trades li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:#D6AD60;}
+.pt-who-close{font-size:16px;line-height:1.7;color:#8F8C83;margin:24px 0 0;}
+.pt-form-wrap{padding-top:64px;padding-bottom:96px;}
+.pt-apply-line{font-size:16.5px;line-height:1.7;color:#E6E3DA;margin:0 0 28px;max-width:720px;}
+.pt-card{border:1px solid rgba(214,173,96,.35);background:#171716;padding:38px;max-width:720px;}
+.pt-form-header{font-size:15px;line-height:1.7;color:#8F8C83;margin:0 0 30px;}
+.pf{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.pf label{font-size:14.5px;line-height:1.5;color:#E6E3DA;}
+.pf .req{color:#D6AD60;}
+.pf input,.pf select,.pf textarea{width:100%;background:#1a1a18;border:1px solid #2b2b2a;color:#E6E3DA;
+  font-family:inherit;font-size:15px;padding:12px 14px;border-radius:0;}
+.pf textarea{resize:vertical;}
+.pf input:focus,.pf select:focus,.pf textarea:focus{outline:2px solid #D6AD60;outline-offset:1px;border-color:#D6AD60;}
+.pf input.bad,.pf select.bad,.pf textarea.bad{border-color:#b4553f;}
+.pf-err{color:#e0a090;font-size:14.5px;line-height:1.6;margin:0 0 18px;}
+#pfDone h3{font-family:var(--display,'Josefin Sans',sans-serif);font-weight:300;font-size:26px;color:#fff;margin:0 0 14px;}
+#pfDone p{font-size:16px;line-height:1.75;color:#B4B2A9;margin:0;}
+/* Honeypot: off-screen, never display:none — a hidden input some bots skip. */
+.mkx-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+@media (max-width:900px){
+  .pt-hero{padding-top:92px;}
+  .pt-hero h1{font-size:32px;}
+  .pt-lede{font-size:16.5px;}
+  .pt-grid{grid-template-columns:1fr;gap:34px;padding-top:34px;}
+  .pt-ret{grid-template-columns:30px 1fr;gap:14px;padding:20px 0;}
+  .pt-ret .n{font-size:22px;}
+  .pt-standard p{font-size:19px;}
+  .pt-trades{grid-template-columns:1fr;}
+  .pt-card{padding:22px;}
+  .pt-form-wrap{padding-bottom:64px;}
 }
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<div class="wrap mast"><img src="/assets/logo.svg" alt="Marketics" width="168" height="30"></div>
-
-<main>
-  <div class="wrap hero">
-    <h1>You send one introduction. <span class="soft">Here is what comes back.</span></h1>
-    <a class="btn hero-cta" href="#partner-form-card">Tell me who you are</a>
+<nav id="siteNav">
+  <a href="/" class="nav-logo" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
+  <div class="nav-links">
+    <a href="/method">Method</a>
+    <a href="/markets">Markets</a>
+    <a href="/results">Results</a>
+    <a href="/pricing" class="active">Pricing</a>
+    <a href="/story">Our Story</a>
+    <a href="/intel">Insights</a>
   </div>
+  <a href="/get-started" class="nav-cta">Get My Free Audit</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobileMenu">
+  <a href="/method">Method</a>
+  <a href="/markets">Markets</a>
+  <a href="/results">Results</a>
+  <a href="/pricing">Pricing</a>
+  <a href="/story">Our Story</a>
+  <a href="/intel">Insights</a>
+  <a href="/get-started" class="cta">Get My Free Audit →</a>
+</div>
 
-  <div class="wrap body-grid">
+<main id="main-content">
+
+  <!-- ══ THE LETTER ══
+       Copy is Execute §4.1 v1.3 and the D8 §2a Strategy-cleared slots, VERBATIM.
+       Code authored none of it. Layout may move; a claim may not. -->
+  <section class="pt-hero wrap">
+    <h1>You send one introduction. <span class="gold">Here is what comes back.</span></h1>
+    <p class="pt-lede">I run Marketics, a revenue practice for short-term rental owners. I am building a small circle in each market: a realtor, a photographer, a designer, a cleaner, a CPA, a builder. People who each see owners at a different moment, who route work to each other, and who don&rsquo;t overlap.</p>
+  </section>
+
+  <section class="wrap pt-grid">
     <div>
-      <p class="lede">I run Marketics, a revenue practice for short-term rental owners. I am building a small circle in each market: a realtor, a photographer, a designer, a cleaner, a CPA, a builder. People who each see owners at a different moment, who route work to each other, and who don&rsquo;t overlap.</p>
-
-      <span class="eyebrow">What comes back to you</span>
-      <div class="returns">
-        <div class="ret">
-          <span class="n">01</span>
-          <p><b>Work sent back to you.</b> When an owner in my world needs what you do, you&rsquo;re who I think of first. No fee either way &mdash; that&rsquo;s just how the circle works.</p>
-        </div>
-        <div class="ret">
-          <span class="n">02</span>
-          <p><b>And when I can&rsquo;t send work, I send money.</b> Not every market gives me something to route back, so the introduction itself is paid, whether or not the traffic ever runs both ways. One statement a month, from me to you. You never invoice anything.</p>
-        </div>
-        <div class="ret">
-          <span class="n">03</span>
-          <p><b>A revenue report for any address, in 48 hours or less.</b> You are working a property, you send me the address, you get a report you can use in your own sale. No owner has to sign anything for you to use this.</p>
-        </div>
+      <span class="pt-eyebrow">What comes back to you</span>
+      <div class="pt-returns">
+        <div class="pt-ret"><span class="n">01</span>
+          <p><b>Work sent back to you.</b> When an owner in my world needs what you do, you&rsquo;re who I think of first. No fee either way &mdash; that&rsquo;s just how the circle works.</p></div>
+        <div class="pt-ret"><span class="n">02</span>
+          <p><b>And when I can&rsquo;t send work, I send money.</b> Not every market gives me something to route back, so the introduction itself is paid, whether or not the traffic ever runs both ways. One statement a month, from me to you. You never invoice anything.</p></div>
+        <div class="pt-ret"><span class="n">03</span>
+          <p><b>A revenue report for any address, in 48 hours or less.</b> You are working a property, you send me the address, you get a report you can use in your own sale. No owner has to sign anything for you to use this.</p></div>
       </div>
     </div>
-
-    <div class="ask">
+    <div class="pt-ask">
       <p><b>What you send:</b> an introduction, when one makes sense. Nothing more. No quota, no scripts, no pitching on my behalf.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="wrap standard">
-    <p>Not every owner is a fit. When one isn&rsquo;t, I say so and point them somewhere better, and I will tell you exactly what I take and what I don&rsquo;t. An introduction you make should never come back on you. <span class="close">That is the standard this circle runs on, in both directions.</span></p>
-  </div>
+  <section class="wrap pt-standard">
+    <p>Not every owner is a fit. When one isn&rsquo;t, I say so and point them somewhere better, and I will tell you exactly what I take and what I don&rsquo;t. An introduction you make should never come back on you. <span class="gold">That is the standard this circle runs on, in both directions.</span></p>
+  </section>
 
-  <div class="wrap cta-block">
-    <div>
-      <a class="btn" href="#partner-form-card">Tell me who you are</a>
-      <p class="form-intro">Longer than most forms, on purpose. We only work with a few people in each market, so this is a real read rather than a mailing list. Everything here is used to decide fit and to know what to send back to you.</p>
+  <!-- ══ WHO THIS IS FOR — D8 §2a, trade types only, no geography ══ -->
+  <section class="wrap pt-who">
+    <h2>Who this is for</h2>
+    <p class="pt-who-body">Professionals who already work with short-term rental owners, and get asked who else they trust.</p>
+    <ul class="pt-trades">
+      <li>Realtors who work with short-term rental buyers</li>
+      <li>Photographers</li>
+      <li>Interior designers and stagers</li>
+      <li>Cleaning and turnover teams</li>
+      <li>CPAs, tax advisors and cost segregation specialists</li>
+      <li>Builders and contractors</li>
+    </ul>
+    <p class="pt-who-close">If your work sits somewhere else, apply anyway and tell us about it.</p>
+  </section>
+
+  <!-- ══ THE APPLICATION ══ -->
+  <section class="wrap pt-form-wrap" id="apply">
+    <p class="pt-apply-line">Applying starts a conversation. It isn&rsquo;t an acceptance. Every application is reviewed, and when there&rsquo;s a fit, the next step is a short call.</p>
+
+    <div class="pt-card">
+      <p class="pt-form-header"><em>Longer than most forms, on purpose. We only work with a few people in each market, so this is a real read rather than a mailing list. Everything here is used to decide fit and to know what to send back to you.</em></p>
+
+      <form id="partnerForm" novalidate>
+        <!-- Q1 -->
+        <div class="pf"><label for="pfName">Your name <span class="req">*</span></label><input type="text" id="pfName" autocomplete="name"></div>
+        <div class="pf"><label for="pfBusiness">Business name <span class="req">*</span></label><input type="text" id="pfBusiness" autocomplete="organization"></div>
+        <!-- Q2 / Q3 — deliberately optional: the vet does most of its work here,
+             but a node with no web presence is a nurture signal, not a rejection. -->
+        <div class="pf"><label for="pfWebsite">Website URL</label><input type="url" id="pfWebsite" placeholder="https://" autocomplete="url"></div>
+        <div class="pf"><label for="pfLinkedin">LinkedIn URL (personal)</label><input type="url" id="pfLinkedin" placeholder="https://"></div>
+        <!-- Q4 -->
+        <div class="pf"><label for="pfService">What service do you provide to STR owners? <span class="req">*</span></label>
+          <select id="pfService">
+            <option value="">Choose one</option>
+            <option>Realtor / broker</option>
+            <option>Photographer / media</option>
+            <option>Interior designer / stager</option>
+            <option>Cleaning / turnover</option>
+            <option>Co-host</option>
+            <option>Property manager</option>
+            <option>CPA / bookkeeper</option>
+            <option>Cost segregation</option>
+            <option>Builder / contractor</option>
+            <option>Lender / financing</option>
+            <option>Pricing or revenue services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="pf" id="pfServiceOtherRow" hidden><label for="pfServiceOther">Tell us what you do</label><input type="text" id="pfServiceOther"></div>
+        <!-- Q5 -->
+        <div class="pf"><label for="pfMarkets">Which market(s) do you work in? <span class="req">*</span></label><input type="text" id="pfMarkets"></div>
+        <!-- Q6 -->
+        <div class="pf"><label for="pfClient">Describe your typical STR-owner client in a line or two <span class="req">*</span></label><textarea id="pfClient" rows="3"></textarea></div>
+        <!-- Q7 — "None yet", never "none". It is a stage, not a verdict. -->
+        <div class="pf"><label for="pfVolume">Roughly how many STR owners do you talk to in a month? <span class="req">*</span></label>
+          <select id="pfVolume"><option value="">Choose one</option><option>None yet</option><option>1&ndash;3</option><option>4&ndash;10</option><option>more</option></select>
+        </div>
+        <!-- Q8 -->
+        <div class="pf"><label for="pfRefersTo">Who do you currently refer your clients to, when they need something you don&rsquo;t do? &mdash; or, if you haven&rsquo;t yet, who would you want to?</label><textarea id="pfRefersTo" rows="3"></textarea></div>
+        <!-- Q9 — corroborates Q8. The nurture trigger reads CONTENT across both,
+             not emptiness of either (build sheet FINAL §2). -->
+        <div class="pf"><label for="pfReferredIn">Has anyone referred a client to you in the last six months? <span class="req">*</span></label>
+          <select id="pfReferredIn"><option value="">Choose one</option><option>Yes</option><option>No</option></select>
+        </div>
+        <div class="pf"><label for="pfReferredInDetail">If yes, who?</label><input type="text" id="pfReferredInDetail"></div>
+        <!-- Q10 -->
+        <div class="pf"><label for="pfIdeal">What does your ideal client look like &mdash; the one you&rsquo;d want sent to you? <span class="req">*</span></label><textarea id="pfIdeal" rows="3"></textarea></div>
+        <!-- Q11 -->
+        <div class="pf"><label for="pfWhyNow">What made you reach out now?</label><textarea id="pfWhyNow" rows="3"></textarea></div>
+        <!-- Q12 -->
+        <div class="pf"><label for="pfTeam">Will anyone else on your team make introductions? <span class="req">*</span></label>
+          <select id="pfTeam"><option value="">Choose one</option><option>just me</option><option>a few people</option><option>a team</option></select>
+        </div>
+        <!-- Q13 -->
+        <div class="pf"><label for="pfEmail">Email <span class="req">*</span></label><input type="email" id="pfEmail" autocomplete="email"></div>
+        <div class="pf"><label for="pfPhone">Phone</label><input type="tel" id="pfPhone" autocomplete="tel"></div>
+        <div class="pf"><label for="pfChannel">Preferred channel</label>
+          <select id="pfChannel"><option value="">No preference</option><option>Email</option><option>Phone</option><option>Text</option></select>
+        </div>
+
+        <!-- Bot gate: honeypot + submit-timing floor, same convention as the six
+             lead surfaces (registry v3.54, v3.55). Autocomplete is off and the
+             token is deliberately NOT a name a browser would autofill. -->
+        <div class="mkx-hp" aria-hidden="true">
+          <label for="mkxHpField">Leave this field empty</label>
+          <input type="text" id="mkxHpField" name="hp_field" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="pf-err" id="pfErr" role="alert" hidden></p>
+        <button type="submit" class="btn" id="pfSubmit">Send it in</button>
+      </form>
+
+      <div id="pfDone" hidden>
+        <h3>Received. I read every one of these myself.</h3>
+        <p>You&rsquo;ll hear from me within a few days, whichever way it goes. If a property crosses your desk in the meantime and you want a revenue read on it, reply to the confirmation email with the address &mdash; that offer starts now, not after we formalize anything.</p>
+      </div>
     </div>
+  </section>
 
-    <!-- FORM SHELL. Field copy is a batch-2 item (week of Sep 28). The shell is
-         at final width and rhythm so the fields drop in without re-laying the
-         section. The CTA anchors here and goes no further on purpose: the page
-         is not handed to anyone until this submits. -->
-    <div class="form-card" id="partner-form-card">
-      <span class="label">The form</span>
-      <div class="shell"><i></i><i></i><i></i><i class="tall"></i></div>
-      <span class="pending">Field copy not yet written &mdash; the intake form is a batch-2 item. Shell shown at final width and rhythm.</span>
-    </div>
-  </div>
 </main>
 
-<footer class="wrap">
-  <span>&copy; 2026 Marketics, LLC</span>
-  <a href="/legal">Privacy Policy</a>
+
+<footer>
+  <div class="foot">
+    <div class="foot-brand">
+      <a href="/" aria-label="Marketics home"><img src="/assets/logo.svg" alt="Marketics" width="607" height="120"></a>
+      <p>Full-stack short-term rental revenue · 1,000+ listings across 22 markets.</p>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Explore</span>
+      <a href="/method">Method</a>
+      <a href="/markets">Markets</a>
+      <a href="/results">Results</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/intel" class="gold">Insights</a>
+      <a href="/faq">FAQ</a>
+    </div>
+    <div class="foot-col">
+      <span class="fh">Company</span>
+      <a href="/pricing">Pricing</a>
+      <a href="/story">Our Story</a>
+      <a href="/partner">Partners</a>
+      <a href="/media">Media</a>
+      <a href="/media-kit">Media Kit</a>
+      <a href="mailto:marketing@marketics.io">Contact</a>
+    </div>
+    <div class="foot-tag">
+      <div class="ft-t">Your Market. Mastered.</div>
+      <span class="ft-u">marketics.io</span>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <div class="fl-l">
+      <span>© 2026 Marketics, LLC</span>
+      <div class="fl-links">
+        <a href="/legal">Privacy Policy</a>
+        <a href="/legal?tab=terms">Terms</a>
+      </div>
+    </div>
+    <span>Performance-based STR optimization</span>
+  </div>
 </footer>
 
+<script>
+(function(){
+  var nav=document.getElementById('siteNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var btn=document.getElementById('navHamburger'),menu=document.getElementById('navMobileMenu');
+  function close(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',function(e){e.stopPropagation();
+    if(menu.classList.contains('open'))close();
+    else{menu.classList.add('open');btn.classList.add('open');btn.setAttribute('aria-expanded','true');}});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target))close();});
+})();
+</script>
+<script src="/mkx-utm.js"></script>
+<script>
+/* ══ PARTNER APPLICATION — posts to /api/partner, never /api/lead ══
+   Data contract, build sheet FINAL 2026-09-16 §3. A partner applying about
+   themselves is NOT an owner lead: different contact type, different pipeline,
+   different hook. The endpoint is chosen by PATH, so this form cannot reach the
+   owner hook even if a header said otherwise.
+
+   The two paths, so they never collide again:
+     /p/{slug}  -> /get-started?src=partner&ref={slug}   an OWNER, introduced
+     /partner   -> /api/partner                          a PARTNER, applying   */
+(function () {
+  'use strict';
+  var ENDPOINT = '/api/partner';
+  var MIN_FILL_MS = 3000;
+  var t0 = Date.now();
+
+  var form = document.getElementById('partnerForm');
+  if (!form) { return; }
+  var errEl = document.getElementById('pfErr');
+  var svc = document.getElementById('pfService');
+  var otherRow = document.getElementById('pfServiceOtherRow');
+
+  svc.addEventListener('change', function () { otherRow.hidden = svc.value !== 'Other'; });
+
+  var REQUIRED = [
+    ['pfName', 'Your name'], ['pfBusiness', 'Business name'],
+    ['pfService', 'What service do you provide'], ['pfMarkets', 'Which market(s)'],
+    ['pfClient', 'Describe your typical STR-owner client'],
+    ['pfVolume', 'How many STR owners'], ['pfReferredIn', 'Has anyone referred a client to you'],
+    ['pfIdeal', 'Your ideal client'], ['pfTeam', 'Anyone else on your team'],
+    ['pfEmail', 'Email']
+  ];
+  var v = function (id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errEl.hidden = true;
+    form.querySelectorAll('.bad').forEach(function (el) { el.classList.remove('bad'); });
+
+    var firstBad = null;
+    REQUIRED.forEach(function (row) {
+      var el = document.getElementById(row[0]);
+      if (!el.value.trim()) { el.classList.add('bad'); if (!firstBad) { firstBad = el; } }
+    });
+    if (firstBad) {
+      errEl.textContent = 'This one I need answered.';
+      errEl.hidden = false; firstBad.focus(); return;
+    }
+    var email = v('pfEmail');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      var em = document.getElementById('pfEmail');
+      em.classList.add('bad');
+      errEl.textContent = 'That email doesn’t look complete — check it once?';
+      errEl.hidden = false; em.focus(); return;
+    }
+
+    var hp = document.getElementById('mkxHpField');
+    var botty = !!(hp && hp.value !== '');
+
+    var ref = (typeof window.mkxGetRef === 'function') ? window.mkxGetRef() : {};
+    var payload = {
+      partner_name: v('pfName'),
+      partner_business: v('pfBusiness'),
+      partner_website: v('pfWebsite'),
+      partner_linkedin: v('pfLinkedin'),
+      partner_service: v('pfService'),
+      partner_service_other: svc.value === 'Other' ? v('pfServiceOther') : '',
+      partner_markets: v('pfMarkets'),
+      partner_client_profile: v('pfClient'),
+      partner_owner_volume: v('pfVolume'),
+      partner_refers_to: v('pfRefersTo'),
+      partner_referred_in: v('pfReferredIn'),
+      partner_referred_in_detail: v('pfReferredInDetail'),
+      partner_ideal_client: v('pfIdeal'),
+      partner_why_now: v('pfWhyNow'),
+      partner_team: v('pfTeam'),
+      partner_email: email,
+      partner_phone: v('pfPhone'),
+      partner_channel: v('pfChannel'),
+      partner_submitted_at: new Date().toISOString(),
+      src: ref.src || '',
+      ref: ref.ref || ''
+    };
+    /* OMIT EMPTY KEYS — GHL writes an empty value over a populated field
+       (registry v3.51). Send only what we have. Built as a copy so the payload
+       object stays intact for anything reading it after the POST. */
+    var wire = {};
+    Object.keys(payload).forEach(function (k) { if (payload[k] !== '') { wire[k] = payload[k]; } });
+
+    var btn = document.getElementById('pfSubmit');
+    btn.disabled = true; btn.textContent = 'Sending…';
+
+    function done() {
+      form.hidden = true;
+      document.getElementById('pfDone').hidden = false;
+      document.getElementById('pfDone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    /* Timing floor DEFERS, never drops (registry v3.55): a human who fills this
+       in under three seconds has not, and a bot that waits is welcome to. */
+    var wait = Math.max(0, MIN_FILL_MS - (Date.now() - t0));
+    function send() {
+      if (botty) { done(); return; }   /* silent drop, same confirmation */
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(wire),
+        keepalive: true
+      }).then(done).catch(function (err) {
+        console.warn('partner application non-critical error:', err);
+        done();
+      });
+    }
+    if (wait) { setTimeout(send, wait); } else { send(); }
+  });
+})();
+</script>
 </body>
 </html>
