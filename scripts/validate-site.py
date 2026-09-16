@@ -1717,25 +1717,38 @@ def main():
     # percentage regex over the file fails the build on a CSS declaration. Same
     # family as the gate 11k comment-strip order: the wrong scan surface makes a
     # correct rule fire on the wrong thing.
-    if os.path.exists(part_path):
+    # BOTH ROUTES, not just the application. D8 v1.3 §3 puts the no-fee and
+    # no-geography rules on `/partners` AND `/partners/apply`. This gate was
+    # built scanning only the application, which left the DIRECTORY page with
+    # no fee or geography check at all -- and §2d ships that one indexed FIRST,
+    # because it has no market-list dependency to hold it back. The gate named
+    # both routes in its own failure messages while reading one file.
+    # Outranked-or-loosened again: a control reported on what it could reach
+    # and was read as covering the class it names.
+    dir_path = os.path.join(ROOT, dir_rel)
+    for _rel, _path in ((part_rel, part_path), (dir_rel, dir_path)):
+        if not os.path.exists(_path):
+            continue
+        _src = open(_path, encoding="utf-8").read()
         pp = Page()
-        pp.feed(psrc)
+        pp.feed(_src)
         rendered = " ".join([pp.text()] if hasattr(pp, "text") else [])
         if not rendered:
             # Fall back to a tag-stripped body with <style>/<script> removed first,
             # which is the surface a reader and a crawler actually see.
-            bodyonly = re.sub(r"(?is)<(style|script)\b.*?</\1>", " ", psrc)
+            bodyonly = re.sub(r"(?is)<(style|script)\b.*?</\1>", " ", _src)
             bodyonly = re.sub(r"(?s)<!--.*?-->", " ", bodyonly)
             rendered = re.sub(r"(?s)<[^>]+>", " ", bodyonly)
-        metas = " ".join(re.findall(r'<meta[^>]+content="([^"]*)"', psrc))
-        ld = " ".join(re.findall(r"(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>", psrc))
+        metas = " ".join(re.findall(r'<meta[^>]+content="([^"]*)"', _src))
+        ld = " ".join(re.findall(r"(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>", _src))
         surface = f"{rendered} {metas} {ld}"
+        route = "/" + _rel[: -len("/index.html")]
 
         # No fee figures. The ladder lives in the one-pager, after the call --
         # never on a page a stranger can read.
         for m in re.findall(r"(?:[$€£]\s?\d[\d,.]*|\b\d+(?:\.\d+)?\s?%)", surface):
-            hard.append(f"{part_rel}: fee figure {m!r} in rendered text/meta/schema — "
-                        f"/partners/apply carries no currency amounts and no percentages "
+            hard.append(f"{_rel}: fee figure {m!r} in rendered text/meta/schema — "
+                        f"{route} carries no currency amounts and no percentages "
                         f"(D8 §3). The ladder belongs in the one-pager, after the call")
 
         # No geography. The market list is PRIVATE (canon: internal focus list),
@@ -1746,21 +1759,29 @@ def main():
         if mk_raw:
             for name in [x.strip() for x in re.split(r"[,\n]", mk_raw) if x.strip()]:
                 if re.search(rf"\b{re.escape(name)}\b", surface, re.I):
-                    hard.append(f"{part_rel}: market name {name!r} appears in rendered "
-                                f"text/meta/schema — /partners/apply names no geography "
+                    hard.append(f"{_rel}: market name {name!r} appears in rendered "
+                                f"text/meta/schema — {route} names no geography "
                                 f"(D8 Board condition 1)")
         else:
-            indexed = not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc)
-            msg = (f"{part_rel}: PARTNER_VET_MARKETS is not set — the no-geography gate "
+            indexed = not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', _src)
+            msg = (f"{_rel}: PARTNER_VET_MARKETS is not set — the no-geography gate "
                    f"DID NOT RUN. Reported, not skipped")
-            if indexed:
+            # Only the APPLICATION is blocked on the list. D8 §2d is explicit
+            # that `/partners` is not: "it has no market-list dependency: the
+            # page names trades and nobody", and until the secret exists the
+            # areaServed check and the canon review cover it. Extending the
+            # scan to both routes must not quietly extend the BLOCK to both --
+            # that would hold up the one route D8 clears to ship first.
+            if indexed and _rel == part_rel:
                 hard.append(msg + ", and the page is set to index. D8 §2d: PR B cannot "
                                   "merge without the list")
             else:
-                warn.append(msg + " (page is still noindex, so this is a warning)")
+                warn.append(msg + (" (page is still noindex, so this is a warning)"
+                                   if not indexed else
+                                   " (D8 §2d: this route is not blocked on the list)"))
 
-        if re.search(r'"areaServed"', psrc):
-            hard.append(f"{part_rel}: structured data contains areaServed — /partners/apply "
+        if re.search(r'"areaServed"', _src):
+            hard.append(f"{_rel}: structured data contains areaServed — {route} "
                         f"carries no service-area geography (D8 §2a)")
 
     # 11n-3. FOOTER CONSISTENCY (D8 §3, registry v3.65).
