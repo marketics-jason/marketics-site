@@ -2363,6 +2363,90 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.64 — the partner door, and the second pair the ladder pays on (2026-09-15)
+
+**Skill impact:** no — a page, a route, and CI gates. No claim, phrasing, number or tenure fact changes.
+Copy on `/partner` is Execute §4.1 v1.3 **verbatim**; Code authored none of it.
+
+### One string per node, two pairs from it
+
+CTO's ruling closed a collision that was hard to see because both designs used `/p/`: Code's build
+stamped `utm_source={slug}`, the briefs stamped `src=partner&ref={CODE}` from a **GHL-issued** code.
+Two authors of partner identity is the defect removed from the canon layer the day before. **The repo
+issues the string; it is the org slug; canon says who is a partner and the registry says what their
+route is.**
+
+`/p/<slug>` now stamps **both pairs from the one slug**:
+
+| Stamped | Lands in | Why it cannot be collapsed into the other |
+|---|---|---|
+| `utm_source={slug}` · `utm_medium=partner` | the five `utm_*_first` fields | reporting continuity, the channel flag |
+| `src=partner` · `ref={slug}` | `source_first` · `partner_ref_first` | `utm_*` is a shared namespace an ad also writes; the ladder needs a field nothing else writes |
+
+**Key names ruled by Jason: the short URL-symmetric pair, not the GHL field names** — with a mechanical
+backup that settles it rather than a preference: *a GHL mapping row points any transmitted key at any
+field and never matches on the key name.* The LP's suffixed keys were never necessary.
+
+### First-touch, and why the rule is stricter here than for UTMs
+
+`src`/`ref` are **strictly first-touch**: the first write wins outright. The `utm_*` block above it is
+not — it re-writes whenever a URL carries UTM params, so a second campaign URL in the same session
+replaces the first, and only UTM-free internal navigation leaves it alone. **Recorded because that was
+news to Code while writing this**, and it changes how `utm_source_first` should be read on any contact.
+
+The stricter rule is deliberate, and the reason is the consequence, not the mechanism: **on
+`utm_*_first` a cross-session overwrite costs a misattributed lead; on `partner_ref_first` it costs a
+payment to the wrong partner.** Same mechanism, different bill. Accepted at two signed nodes. **Revisit
+trigger: a third node, or the first disputed payout.**
+
+### `/partner` — unlisted, and unlisted is not secret
+
+Built now with the CTA anchoring a **form shell**; field copy is a batch-2 item (week of Sep 28). Safe
+because nothing reaches the page: noindex, out of sitemap, out of `llms.txt`, no inbound link anywhere.
+**The page is forwardable by design — that is what a partner does with it — so the protection is a
+discipline line, not a technical one: nobody is handed the link until the form submits.**
+
+**All four constraints were specified in three documents and in none of the code.** They are now gated,
+because a constraint living only in a README is a constraint that drifts — and this page is unlisted,
+so nothing about it *looks* wrong when one silently stops holding. Nobody would notice `/partner`
+entering the sitemap until it ranked.
+
+Also shipped: `/start` → `/get-started?src=referral`, a redirect and deliberately not a page — the
+owner-to-owner link Jason says out loud. Partners never touch it.
+
+### The test caught a defect the gates could not
+
+The full-chain browser test failed on `payload src` and `payload ref` while `utm_medium` passed. **The
+cause was Code's own control harness**: the negative-control loop restored `get-started/index.html`
+with `git checkout` instead of from its backup copy, silently reverting the payload wiring made minutes
+earlier. Every gate stayed green, because the gates check the stub and the registry, not the payload.
+
+Left unfound, this ships a chain where the URL carries `src`/`ref`, the capture stores them, and the
+payload drops them — **partner_ref_first blank, ladder never matches, payment never fires, nothing
+errors.** The exact family the brief names. **Eighth instrument defect this month, zero code defects
+found by instruments; and the thing that caught it was a differential — one assertion failing beside
+two that passed.**
+
+### Verified
+
+**Seven negative controls fire, bracketed by known-good:** noindex removed · `/partner` in sitemap ·
+`/partner` in `llms.txt` · **a footer "Partners" link** · `/p/` dropping `&src=`, `&ref=`, or
+`utm_medium=`.
+
+**Browser, 17/17:** CTA bottom at **311px against the 844px mobile fold** (spec requirement, measured
+not eyeballed) · CTA is a real anchor · no horizontal scroll at 390px · only exit is `/legal` ·
+`/p/pricelabs` → payload carrying `src=partner`, `ref=pricelabs`, `utm_medium=partner`, no empty keys ·
+`/start` → `src=referral` with `ref` **absent** rather than empty · direct visit carries neither.
+
+### Not established, and it is the half that matters
+
+**No contact has been read in GHL.** Verification by value — field by field, `partner_ref_first` reading
+the exact string — requires production and CRM access Code does not have. **CTO's mapping rows must
+exist before the first production submission, not after**; that sequencing is the intel-hook lesson and
+the brief names it. A sequencing correction was flagged as owed and has not arrived, so the production
+test is held rather than run on an assumption.
+
+---
 ## v3.63 — the partner rail becomes countable (2026-09-14)
 
 **Skill impact:** no — a measurement rail and its CI gates. No claim, phrasing, number or tenure fact

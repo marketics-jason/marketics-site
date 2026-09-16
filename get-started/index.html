@@ -593,6 +593,13 @@ function setMode(m){
     /* First-touch timestamp, read from mkx-utm.js. NOT submission time: that is
        `submittedAt` below, a different moment already populating its own field. */
     var firstTouch = (typeof window.mkxGetFirstTouchTS === 'function') ? window.mkxGetFirstTouchTS() : '';
+    /* Referral pair, first-touch (mkx-utm.js). Feeds source_first /
+       partner_ref_first in GHL -- the ladder matches the partner record to the
+       owner record on `ref`, so a blank here is a payment that never fires with
+       nothing erroring anywhere. Key names ruled by Jason 2026-09-15: the short
+       URL-symmetric pair, NOT the GHL field names -- a mapping row points any
+       transmitted key at any field and never matches on the key name. */
+    var mkxRef = (typeof window.mkxGetRef === 'function') ? window.mkxGetRef() : {};
 
     /* GHL / CRM payload — keeps the established field keys so existing automations still map */
     var payload = {
@@ -611,7 +618,9 @@ function setMode(m){
       utm_medium: utm.utm_medium || '',
       utm_campaign: utm.utm_campaign || '',
       utm_content: utm.utm_content || '',
-      utm_term: utm.utm_term || ''
+      utm_term: utm.utm_term || '',
+      src: mkxRef.src || '',
+      ref: mkxRef.ref || ''
     };
     /* Bot gate: fall through to the same confirmation, post nothing. */
     if (!botty) try{

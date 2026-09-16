@@ -137,6 +137,16 @@
 # /intel/switch-property-manager-to-revenue-manager) and must never compete with
 # them in search; that's the whole reason they're separate pages. The in-head
 # meta robots tag says the same thing — this is the edge-level backstop.
+# Partner door — unlisted. The page is reachable by URL on purpose (it is
+# forwardable, which is the point), but it must never be indexed, never appear
+# in nav, and never be linked from an organic surface. The in-head meta robots
+# tag says the same thing; this is the edge-level backstop, and validate-site.py
+# gates all four constraints so none of them survives only in a README.
+[[headers]]
+  for = "/partner"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 [[headers]]
   for = "/lp/*"
   [headers.values]
