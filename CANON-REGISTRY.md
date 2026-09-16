@@ -2363,6 +2363,109 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.68 — the partner surface had no stated reader, and that was the defect (2026-09-16)
+
+**Skill impact:** no — routes, gates and a directory page. `/partners` copy is Execute verbatim;
+`/partners/apply` copy is unchanged from v3.67. Code authored none of it.
+
+### The correction, and the rule that comes out of it
+
+**Every document on this surface treated `/partner` as an application door. It was always meant to be
+a directory.** The Board named the error as its own; the more useful finding is the one it added
+second: **the premise survived four rounds because nobody at any point asked who the page was for.**
+
+**The rule, two-sided, effective now:**
+
+1. Jason states in one sentence who lands on a surface and what they do, **before** it is specified.
+2. **A lane that meets a surface with no stated audience stops and asks.** Building first and
+   discovering later costs the whole build, and it recurs.
+
+**Why it needs to be a named check rather than a habit:** *a missing audience is harder to see than a
+missing question, because the spec looks complete. Nothing is blank.* Code had the footer-link question
+in front of it twice and treated it as routing both times.
+
+Same instinct as the two refusals that worked this week — Strategy declining to paraphrase a ruling it
+had not read, Code declining to invent ten form questions — **pointed one level earlier, at the brief's
+premise rather than its gaps.**
+
+### The route shape
+
+| Route | Reader | State |
+|---|---|---|
+| `/partners` | an **owner** browsing the circle | built, `noindex` pending §2d |
+| `/partners/apply` | a **professional** applying | the v3.67 page, moved. Form unchanged |
+| `/partner` | — | **retired.** 301 to `/partners`, both slash forms |
+| `/p/{slug}` | an **owner**, introduced | unchanged |
+
+### §3.8 answered before anything was built: nothing was broken
+
+The Board gated the build on one grep, and it was right to. **The live footer pointed at `/partner`
+singular — 51 pages, zero links to the plural.** The console-reference phantom was about `/partners`,
+which did not exist. No 404s were ever live. One minute, and it removed the only scenario that would
+have reordered the work.
+
+### §3.9 — three gates deleted, and one deliberately left alone
+
+Deleted: noindex · absent from sitemap · absent from `llms.txt`. D8 reversed all three, so each would
+now fail on **correct** behaviour. **Deleted rather than commented out** — a disabled gate is one
+somebody re-enables by accident.
+
+**The fourth was not inverted, because it did not need it.** D8 PR A had already rewritten it to
+footer-only, and it asserts *no link outside the footer block*, which is exactly the main-nav rule the
+Board asked for. **Re-inverting a gate that already says the right thing is how a correct rule gets
+broken** — recorded because the instruction to invert it was reasonable on its face.
+
+Verified in **both** directions: the revoked gates are gone (the full D8 end state — indexed, in
+sitemap, in `llms.txt`, market list set — passes clean), and the surviving §2d condition still blocks
+indexing when the list is absent.
+
+One exemption added: **both** partner routes are outside the inbound check, not just the application.
+`/partners` linking to `/partners/apply` is the Apply CTA — movement *within* the tree, not a way in.
+Gating it would have failed the page's entire reason for existing.
+
+### Three trade lists, left unreconciled on purpose
+
+`/partners` names **seven** trades (Execute), `/partners/apply` names **six** (D8 bundles CPA with cost
+segregation), and the form's Q4 offers **twelve**. All three are cleared copy from different rulings.
+**Code reconciled none of them, because reconciling cleared copy is authoring.** Annotated in the page
+so the next person sees the difference is known rather than accidental; raised to the Board.
+
+### PriceLabs retired from the rail
+
+`pricelabs` is out of `partner-registry.json`: it fails the bundled-tool test — an owner would never buy
+it separately, the listing runs on Marketics' own account, and no outbound referral direction exists, so
+no ladder rung can ever be owed. **The relationship runs the other way.**
+
+**`/p/pricelabs` still forwards.** An unknown slug reaches `/get-started` unstamped rather than 404ing,
+so anyone already holding that link still lands — uncounted, but not lost. That failure direction was
+built in v3.63 and this is the first time it has been load-bearing.
+
+**Correcting v3.63**, which recorded two signed partners: **the rail is at one node, Cost Seg Smart.**
+Recorded plainly because the Oct 16 read depends on it, and *"the rail has not been given enough nodes
+to be judged"* is a different statement from *"it failed."*
+
+### Verified
+
+**Six negative controls fire, one revocation proved in both directions, bracketed by known-good:** fee
+figure on the apply page · the form repointed at the owner pipeline · a footer link lost · a **nav** link
+to `/partners` · an organic page deep-linking to `/partners/apply` · the retired slug returning to the
+stub.
+
+**Browser, 18/18:** the cleared H1 · seven trades · exactly one button, Apply → `/partners/apply` · the
+forward line present and **not** styled as a button · **no partner names listed** · no form on the
+directory · footer links `/partners`, nav does not · the application still posting to `/api/partner`
+and never `/api/lead` · `/p/cost-seg-smart` stamps and `/p/pricelabs` forwards without stamping.
+
+### Still blocked, unchanged
+
+`GHL_HOOK_PARTNER` (CTO) blocks the ship gate. `PARTNER_VET_MARKETS` (Jason) blocks indexing. Both
+pages stay `noindex` until the second lands.
+
+**And one that is nobody's yet:** D8 §2c's verbatim `llms.txt` line points at `https://marketics.io/partner`
+— now a 301. It is Strategy-cleared and marked *do not add to it*, so **Code cannot edit it**. It needs
+re-clearing for `/partners` before the indexing flip.
+
+---
 ## v3.67 — the partner application, and the pipeline it must never enter (2026-09-16)
 
 **Skill impact:** no — a form, an endpoint and gates. All page and form copy is Execute §4.1 v1.3 and

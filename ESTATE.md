@@ -12,7 +12,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 
 ## Routes
 
-**57 pages.**
+**58 pages.**
 
 | URL | File | robots |
 |---|---|---|
@@ -68,13 +68,14 @@ A hand-edit is a second source of truth, and it will be overwritten.
 | `/media-kit` | `media-kit/index.html` | — |
 | `/method` | `method/index.html` | — |
 | `/p` | `p/index.html` | noindex,nofollow |
-| `/partner` | `partner/index.html` | noindex, nofollow |
+| `/partners` | `partners/index.html` | noindex, nofollow |
+| `/partners/apply` | `partners/apply/index.html` | noindex, nofollow |
 | `/pricing` | `pricing/index.html` | — |
 | `/results` | `results/index.html` | — |
 | `/sample-audit` | `sample-audit/index.html` | index,follow |
 | `/story` | `story/index.html` | — |
 
-**15 noindex:** `/404`, `/audits/2b58f8f68f97014e4949cbd8ac855c0d`, `/intel/miami/report`, `/intel/miami/thank-you`, `/intel/montreal/report`, `/intel/montreal/thank-you`, `/intel/muskoka/report`, `/intel/muskoka/thank-you`, `/intel/nashville/report`, `/intel/nashville/thank-you`, `/join`, `/join/confirmation`, `/lp/keep-control`, `/p`, `/partner`
+**16 noindex:** `/404`, `/audits/2b58f8f68f97014e4949cbd8ac855c0d`, `/intel/miami/report`, `/intel/miami/thank-you`, `/intel/montreal/report`, `/intel/montreal/thank-you`, `/intel/muskoka/report`, `/intel/muskoka/thank-you`, `/intel/nashville/report`, `/intel/nashville/thank-you`, `/join`, `/join/confirmation`, `/lp/keep-control`, `/p`, `/partners`, `/partners/apply`
 
 ### Redirects and rewrites (`_redirects`, first match wins)
 
@@ -138,7 +139,8 @@ A hand-edit is a second source of truth, and it will be overwritten.
 | `/LEGAL-ROUTING-2026-09-01.md` | `/404.html` | 404! |
 | `/LEGAL-REDLINE-2026-09-01` | `/404.html` | 404! |
 | `/LEGAL-REDLINE-2026-09-01.md` | `/404.html` | 404! |
-| `/partner/` | `/partner` | 301 |
+| `/partner` | `/partners` | 301 |
+| `/partner/` | `/partners` | 301 |
 | `/start` | `/get-started?src=referral` | 302 |
 | `/p/*` | `/p/index.html` | 200 |
 | `/*` | `/404.html` | 404 |

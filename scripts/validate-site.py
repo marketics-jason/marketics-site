@@ -1665,40 +1665,24 @@ def main():
     # drifts: the page is unlisted, so nothing about it looks wrong when one of
     # these silently stops holding. Nobody would notice /partner entering the
     # sitemap until it ranked.
-    part_rel = "partner/index.html"
+    part_rel = "partners/apply/index.html"   # the application
+    dir_rel = "partners/index.html"          # the owner-facing directory
     part_path = os.path.join(ROOT, part_rel)
     if os.path.exists(part_path):
         psrc = open(part_path, encoding="utf-8").read()
 
-        # 1. noindex in the head — PR A STATE ONLY, and PR B DELETES THIS RULE.
+        # GATES 1-3 REVOKED by the Board, 2026-09-16 (§3.9): noindex · absent
+        # from sitemap · absent from llms.txt. D8 reversed all three, so each
+        # would now fail on CORRECT behaviour. A gate red on a rule nobody
+        # remembers authorising is worse than no gate: the next person works
+        # around it rather than reading it. DELETED, not commented out -- a
+        # disabled gate is one somebody re-enables by accident.
         #
-        # D8 reverses it: /partner becomes indexed once the §2d conditions hold
-        # (copy placed and canon-passing, market list in the CI secret, apply
-        # button leading somewhere real). Left as-is, this rule blocks PR B
-        # permanently, so it is flagged rather than left for someone to discover
-        # while fighting a gate that is doing exactly what it was told.
-        #
-        # It stays for now because PR A ships the gates while the page is still
-        # noindex, and a page that is noindex should FAIL if that silently
-        # changes -- which is the condition this rule actually guards.
-        if not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc):
-            hard.append(f"{part_rel}: no noindex meta — /partner is noindex until "
-                        f"D8 PR B flips it. If this IS PR B, delete this rule (it is "
-                        f"marked 'PR A state only') rather than working around it")
-
-        # 2. out of sitemap.xml
-        smp2 = os.path.join(ROOT, "sitemap.xml")
-        if os.path.exists(smp2):
-            if re.search(r"<loc>[^<]*/partner\b", open(smp2, encoding="utf-8").read()):
-                hard.append("sitemap.xml: contains /partner — the partner door is "
-                            "unlisted and must not be submitted for indexing")
-
-        # 3. out of llms.txt
-        lp2 = os.path.join(ROOT, "llms.txt")
-        if os.path.exists(lp2):
-            if re.search(r"/partner\b", open(lp2, encoding="utf-8").read()):
-                hard.append("llms.txt: lists /partner — the partner door is unlisted; "
-                            "exclude it in scripts/llms-config.json")
+        # The fourth was NOT inverted, because it did not need it. D8 PR A had
+        # already rewritten it to footer-only, and it asserts 'no link outside
+        # the footer block' -- which is exactly the main-nav rule the Board
+        # asked for. Re-inverting a gate that already says the right thing is
+        # how a correct rule gets broken.
 
         # 4. INBOUND LINKS: FOOTER ONLY (D8, registry v3.65).
         #    REWRITES the PR #151 rule, which was "no inbound link anywhere". D8
@@ -1707,14 +1691,20 @@ def main():
         #    loosen -- it moved. A nav item, a body link, a "for partners" line
         #    on /about or the paid LP all still fail.
         for rel2 in sorted(set(pages.values())):
-            if rel2 == part_rel:
+            # BOTH partner routes are exempt, not just the application. The rule
+            # is "no ORGANIC surface links into the partner tree except via the
+            # footer" -- and /partners linking to /partners/apply is the Apply
+            # CTA, movement WITHIN the tree rather than a way in. Gating it would
+            # fail the page's whole reason for existing, which is how a correct
+            # rule earns a reputation for being wrong.
+            if rel2 in (part_rel, dir_rel):
                 continue
             src2 = open(os.path.join(ROOT, rel2), encoding="utf-8").read()
             # Everything from the last <footer> onward is the footer block.
             fi = src2.rfind("<footer")
             body, foot = (src2[:fi], src2[fi:]) if fi != -1 else (src2, "")
-            if re.search(r'href=[\"\']/partner(?:[/\"\'?#]|$)', body):
-                hard.append(f"{rel2}: links to /partner OUTSIDE the footer — D8 allows "
+            if re.search(r'href=[\"\']/partners(?:/apply)?(?:[\"\'?#/]|$)', body):
+                hard.append(f"{rel2}: links to /partners OUTSIDE the footer — D8 allows "
                             f"the footer link and nothing else (never in nav, never in "
                             f"body copy, never on the paid LP)")
 
@@ -1745,7 +1735,7 @@ def main():
         # never on a page a stranger can read.
         for m in re.findall(r"(?:[$€£]\s?\d[\d,.]*|\b\d+(?:\.\d+)?\s?%)", surface):
             hard.append(f"{part_rel}: fee figure {m!r} in rendered text/meta/schema — "
-                        f"/partner carries no currency amounts and no percentages "
+                        f"/partners/apply carries no currency amounts and no percentages "
                         f"(D8 §3). The ladder belongs in the one-pager, after the call")
 
         # No geography. The market list is PRIVATE (canon: internal focus list),
@@ -1757,7 +1747,7 @@ def main():
             for name in [x.strip() for x in re.split(r"[,\n]", mk_raw) if x.strip()]:
                 if re.search(rf"\b{re.escape(name)}\b", surface, re.I):
                     hard.append(f"{part_rel}: market name {name!r} appears in rendered "
-                                f"text/meta/schema — /partner names no geography "
+                                f"text/meta/schema — /partners/apply names no geography "
                                 f"(D8 Board condition 1)")
         else:
             indexed = not re.search(r'<meta\s+name="robots"\s+content="[^"]*noindex', psrc)
@@ -1770,7 +1760,7 @@ def main():
                 warn.append(msg + " (page is still noindex, so this is a warning)")
 
         if re.search(r'"areaServed"', psrc):
-            hard.append(f"{part_rel}: structured data contains areaServed — /partner "
+            hard.append(f"{part_rel}: structured data contains areaServed — /partners/apply "
                         f"carries no service-area geography (D8 §2a)")
 
     # 11n-3. FOOTER CONSISTENCY (D8 §3, registry v3.65).
@@ -1785,7 +1775,7 @@ def main():
     #   * lp/keep-control -- paid LP, no-exit rule (gate 7). Adding footer nav
     #     here would put two gates in direct contradiction.
     #   * partner itself  -- legal-only footer by design; a self-link is noise.
-    FOOTER_COMPANY = ("/pricing", "/story", "/partner", "/media", "/media-kit",
+    FOOTER_COMPANY = ("/pricing", "/story", "/partners", "/media", "/media-kit",
                       "mailto:marketing@marketics.io")
     # /partner LEFT this list on 2026-09-16: build sheet FINAL ship gate 2 gives it
     # standard site chrome -- header, nav and footer, same as every other page --
