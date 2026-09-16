@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.70 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.71 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,81 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.71 — one claim, fifteen published formulations; and a gate that named two routes and read one (2026-09-16)
+
+**Skill impact:** no — **but see §1: a claim-row question is OPEN and routed to Strategy.** Code has changed
+no published word and proposes none. This entry records a measurement and a gate fix, nothing else.
+
+### 1. The benchmark, as actually published — MEASUREMENT ONLY, ruling owed by Strategy
+
+CTO flagged the footer line as carrying `45% median lift` where canon is **`45% median, net of market`**, and
+as rendering without the gate sentence. He asked for a canon check rather than his own assertion. Run.
+
+**CTO's flagged string is not in any footer.** The live footer brand line, on 39 pages, reads
+*"Full-stack short-term rental revenue · 1,000+ listings across 22 markets."* — no benchmark at all. The
+string he quoted is **Design's artboard footer**, which was never built: `/partners` uses the shared footer
+component, per Design's own ruling this session. Had that artboard footer shipped, it would have put a
+non-canonical benchmark on every page.
+
+**But the underlying flag is right, and much larger than the footer.** Across the live site:
+
+| | count |
+|---|---|
+| pages stating the benchmark | **14** |
+| total occurrences | **22** |
+| **distinct formulations of the one canonical claim** | **15** |
+| occurrences matching canon's exact string, `45% median, net of market` | **1** |
+
+The qualifier noun is the drift: **`lift`** (most), **`revenue lift`**, **`benchmark`**. Canon's row carries
+none of them. Canon procedure rule 1 puts any line with a number under SUBSTANTIATION — *exact canonical
+phrasing, or it doesn't ship* — and rule 2 says a claim is *"stated once per page/asset, then linked — never
+paraphrased into variants."*
+
+The gate sentence is present in substance on most of those pages but **also in variants** — six distinct
+forms of *"every property is audited before a target is set"*, against canon's one. Six of the 14 pages
+state the benchmark without linking the STR Performance Index, which canon names as the methodology home
+all surfaces link to.
+
+**A second, smaller deviation, unflagged until now:** canon's footprint row is
+**`1,000+ listings optimized across 22 markets`**. The footer drops **`optimized`** on all 39 pages; the
+full phrasing survives only on `/results` and `/media-kit`.
+
+**Nothing here is Code's to fix.** Canon: *Design/Execute never invent, change, or "clarify" a factual
+claim — verbatim from this registry or flagged to Jason.* The same binds Code. **Routed to Strategy with
+the measurement; no copy proposed, no page edited.**
+
+**Version gap, per the skill's own rule:** the `marketics-canon` skill's build line reads *aligned to
+v3.49*, and this registry is at v3.71. The skill says that when the registry is at a higher version the
+difference is unresolved and goes to Jason rather than being assumed either way. It is raised here. No
+entry between v3.50 and v3.70 touches the benchmark or footprint rows, so the strings above are believed
+current — **believed, not confirmed.**
+
+### 2. Gate 11n-2 named two routes and read one
+
+D8 v1.3 §3 puts the no-fee and no-geography rules on **`/partners` AND `/partners/apply`**. The gate was
+built reading only the application — while writing `/partners/apply` into its own failure messages, which
+is what made it read as covering the pair. **`/partners` carried no fee check and no geography check at
+all**, and it is the route D8 §2d ships indexed **first**, precisely because it has no market-list
+dependency to hold it back.
+
+**Fifth-and-sixth of the outranked-or-loosened family in two days.** Same generating pattern, stated again:
+*a control reports on what it can reach, and the report gets read as covering the class it names.* Here the
+control named the class **in its own output** and still only reached half of it.
+
+**The scan is now on both routes. The BLOCK is not** — and that distinction was nearly lost in the fix.
+D8 §2d is explicit that `/partners` is **not** blocked on the market list; extending the scan to both
+routes would have quietly extended the block to both and held up the one route the brief clears to ship.
+Caught before push, by re-reading §2d rather than the code.
+
+Control pair, four cases, all verified:
+
+| control | expected | result |
+|---|---|---|
+| fee figure injected on `/partners` | fail, naming `/partners` | fails — previously invisible |
+| market name present, secret set | fail on both routes | fails on both |
+| `/partners` indexed, no secret | **warn, never block** (§2d) | warns |
+| `/partners/apply` indexed, no secret | **hard fail** (§2d) | fails |
+
 ## v3.70 — a handoff read three times, answering only the question in front of it (2026-09-16)
 
 **Skill impact:** no — layout and type on one page. No claim row moves; every word of copy is unchanged.
