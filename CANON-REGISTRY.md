@@ -2363,6 +2363,52 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.66 — RULING: the partner link is `/p/{slug}` (2026-09-16)
+
+**Skill impact:** no — a route, not a claim.
+
+**Jason's ruling, 2026-09-16: `/p/{slug}` is the partner link format.** `/r/{CODE}` is retired. It is
+already built, shipped and merged (v3.63, v3.64), so nothing in the repo changes — what changes is that
+three documents still saying otherwise are now wrong rather than merely unresolved.
+
+| Artifact | Said | Reachable from Code? |
+|---|---|---|
+| `marketics-two-door-build-spec-2026-09-15` | `/r/{CODE}` | **no** |
+| D8 build brief §6 | `/r/{CODE}` still owed | yes — an artifact |
+| Design handoff README | asks to confirm `/r/{CODE}` | **no** (a file in a zip, not a live doc) |
+| The repo | **`/p/{slug}`** — live | yes |
+
+### The instruction was "correct the other three." The doc standard says something narrower
+
+`marketics-doc-standard` §2: *a second copy of a ruling is a defect, not a source — it is cut to a
+pointer, **never reconciled, never updated to match**. Reconciling is what keeps five copies alive.*
+§4: *a ruling that appears paraphrased in four documents is four chances to drift.*
+
+So correcting three documents to read `/p/{slug}` would produce **four copies of one ruling that all
+happen to agree today** — which is the same shape as the canon copy closed at v3.62, and the same shape
+as the ambiguity that produced the seven-slug partner list. **Agreeing copies are not safer than
+disagreeing ones; they are the same defect before it has had time to drift.**
+
+**The correction is therefore: one home, three pointers** — not three edits.
+
+### And the home named by the briefs does not exist
+
+The D8 write-back and the CTO brief both name **`ESTATE.md`** as where routes live, and the CTO brief
+says it *"regenerates on merge."* **There is no `ESTATE.md` in this repo, and nothing regenerates it.**
+Repo-root `.md` files are `CANON-REGISTRY.md`, `CANON-SWEEP-2026-08-25.md`, `CLAUDE.md`, three
+`LEGAL-*` files and a July audit.
+
+The doc standard's own table says repo/site truth lives in `ESTATE.md`. So the ruling has **no canonical
+home to point at**, and that is the actual blocker to executing this correctly — not the three
+documents. Recorded here rather than worked around: writing the route into three briefs because the
+home is missing is how the home stays missing.
+
+**Raised, not decided:** whether Code creates `ESTATE.md` as the repo-truth home (routes, sitemap,
+`llms.txt`, CI gates, generated on merge) or whether it already exists outside the repo and the briefs
+are pointing somewhere Code cannot see. Both are plausible; guessing between them is how two homes get
+created instead of one.
+
+---
 ## v3.65 — D8: the partner door becomes findable (PR A) (2026-09-16)
 
 **Skill impact:** no — routing, gates and a footer link. No claim, phrasing, number or tenure fact
