@@ -145,6 +145,47 @@
 
   window.mkxCommitClickIds();
 
+  /* ── Referral source + partner ref — src / ref ──
+     Ruled Jason, Sep 15 2026 (registry v3.64). Stamped by /p/<slug> alongside
+     the UTMs, and by /start as src=referral.
+
+     STRICTLY FIRST-TOUCH, and that is a DIFFERENT rule from the utm_* block
+     above. That block re-writes whenever a URL carries UTM params, so a second
+     campaign URL in the same session replaces the first; only UTM-free internal
+     navigation leaves it alone. Here the first write wins outright, matching the
+     click-id guard below.
+
+     The difference is deliberate, because the consequence is: on utm_*_first a
+     cross-session overwrite costs a misattributed lead, on partner_ref_first it
+     costs a PAYMENT TO THE WRONG PARTNER. So the first partner to introduce
+     keeps credit within the session, whatever the visitor does afterwards.
+
+     Accepted limitation, recorded rather than discovered: ACROSS sessions the
+     later touch still wins, because sessionStorage is the whole memory. Accepted
+     at two signed nodes. Revisit at a third node, or at the first disputed
+     payout. */
+  var REF_KEY = 'mkx_ref';
+  try {
+    if (!sessionStorage.getItem(REF_KEY)) {
+      var rparams = new URLSearchParams(window.location.search);
+      var rfound = {};
+      var rAny = false;
+      ['src', 'ref'].forEach(function (k) {
+        var v = rparams.get(k);
+        if (v) { rfound[k] = v; rAny = true; }
+      });
+      if (rAny) { sessionStorage.setItem(REF_KEY, JSON.stringify(rfound)); }
+    }
+  } catch (e) { /* sessionStorage blocked — proceed without persisting */ }
+
+  /* Read back anywhere on-site: window.mkxGetRef() -> {src, ref} or {} */
+  window.mkxGetRef = function () {
+    try {
+      var raw = sessionStorage.getItem(REF_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  };
+
   /* Read back anywhere on-site: window.mkxGetFirstTouchTS() -> ISO 8601 or "" */
   window.mkxGetFirstTouchTS = function () {
     try { return sessionStorage.getItem(TS_KEY) || ''; } catch (e) { return ''; }
