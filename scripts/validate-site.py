@@ -480,15 +480,28 @@ def redirect_patterns(redirects):
     A rule like `/costseg/:placement` is stored literally by collect(), so a
     real link to /costseg/intel-article would be reported broken. `:param`
     matches one path segment, `*` (splat) matches the rest.
+
+    A rule that compiles to something matching EVERY path is not usable here.
+    The link check treats "matches a redirect pattern" as "not broken", so one
+    root-level splat would silently turn the broken-internal-link gate into a
+    pass-everything. `/*/` -- the shape a site-wide trailing-slash rule takes --
+    compiles to `^/.*$` and does exactly that. Such rules are dropped from the
+    link check and reported, so the redirect can still exist while the gate
+    keeps working and nobody has to notice on their own.
     """
-    pats = []
+    PROBE = "/__link_gate_probe_not_a_route__"
+    pats, overbroad = [], []
     for r in redirects:
         if ":" not in r and "*" not in r:
             continue
         rx = "".join(r"[^/]+" if seg.startswith(":") else re.escape(seg)
                      for seg in re.split(r"(?<=/)", r)).replace(re.escape("*"), ".*")
-        pats.append(re.compile("^" + rx.rstrip("/") + "$"))
-    return pats
+        cx = re.compile("^" + rx.rstrip("/") + "$")
+        if cx.match(PROBE):
+            overbroad.append(r)
+            continue
+        pats.append(cx)
+    return pats, overbroad
 
 
 EXTERNAL = re.compile(r"^(https?:)?//|^mailto:|^tel:|^javascript:|^#|^data:")
@@ -1331,7 +1344,7 @@ def check(rel, pages, assets, redirects, rpats, inbound, hard, warn):
 
 def main():
     pages, assets, redirects = collect()
-    rpats = redirect_patterns(redirects)
+    rpats, overbroad_rules = redirect_patterns(redirects)
     args = sys.argv[1:]
     if args:
         targets = {}
@@ -1349,6 +1362,11 @@ def main():
         targets = pages
 
     hard, warn, inbound = [], [], {}
+    for r in overbroad_rules:
+        hard.append(f"_redirects: rule {r!r} matches every path, so the "
+                    f"broken-internal-link check would treat ANY link as valid. "
+                    f"The rule is excluded from that check; scope it to a prefix "
+                    f"or the gate silently stops finding broken links")
     for url, rel in sorted(targets.items()):
         check(rel, pages, assets, redirects, rpats, inbound, hard, warn)
 

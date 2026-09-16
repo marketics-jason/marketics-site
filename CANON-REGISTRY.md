@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.71 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.73 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,124 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.73 — the link did not need adding, it needed repointing (2026-09-16)
+
+**Skill impact:** no — two `href`s and two titles, both titles copied verbatim from existing cross-links.
+
+### Strategy declined all three options Code offered, and was right
+
+Code found three pages that could not take a related-reading card and offered three ways to force one:
+port the grid CSS, stack a second single-slot block, or drop the links. **Strategy declined all three,
+because every one of them assumed the link had to be *added*.**
+
+It did not. Each of those pages already carried a single-slot cross-link, and **two of them pointed at
+pages on this brief's own Phase 2 merge list** — links that would have to be repointed anyway when their
+targets became redirects.
+
+| Page | Slot pointed at | On the merge list | Action |
+|---|---|---|---|
+| `/intel/algorithm` | `/intel/performance-based-management` (#15) | **yes** | repointed to `/intel/airbnb-occupancy-rate` |
+| `/intel/money` | `/intel/trust` (#17) | **yes** | repointed to `/intel/what-a-property-manager-actually-costs` |
+| `/intel/airbnb-cohost-revenue-share-model` | `/intel/money` | **no** | **dropped** — Code checked, as the ruling asked |
+
+No markup added, no CSS copied onto any page, no second block under a duplicate heading, and **no Design
+dependency at all** — nothing about how any page looks changed. The two titles are verbatim from cards
+already on the site.
+
+**The generalisation, and it is the useful part:** *three options that differ only in how to do a thing
+are worth less than one question about whether the thing needs doing.* Code framed the problem as
+"which way do we add this" and handed Strategy a menu; the answer was outside the menu. A lane offering
+options should state the assumption they share, so the lane ruling can reject it.
+
+### The gate earned its keep
+
+Dropping `.rel-card` markup onto three pages that do not define it would have shipped three unstyled
+blocks — the v3.69 defect again. **Gate 11r would have failed the build.** First time that gate
+prevented a defect rather than recording one after the fact, and the reason Ruling 3 exists: the gate
+turned a silent regression into a routing question.
+
+### A fourth component spelling
+
+Counted while verifying: the intel set carries **four** cross-link vocabularies — `.rel-card`
+("Keep reading" grid), `.readnext` (`/intel/algorithm`), `.read-next` (`/intel/money`, the same
+component hyphenated) and `.next` (`/intel/airbnb-cohost-revenue-share-model`). Two of the four differ
+by a hyphen. Not fixed here; noted so the next lane counting components does not read three where there
+are four.
+
+### Phase 2's new pre-check is already satisfied
+
+v1.3 §3 adds: *"repoint every single-slot cross-link that points at the retired page… Code checks each
+merge target for inbound single-slot components before the redirect ships."* Audited all five merge
+targets across every page: **zero single-slot links remain**, because the two that existed were the two
+repointed above. Phase 2 has nothing left to do on that step. Remaining inbound links to the five are
+related-cards and body links, which the redirects handle.
+
+## v3.72 — indexing batch Phase 1: two of five, and a fix the repo already knows cannot be built (2026-09-16)
+
+**Skill impact:** no — internal links, four canonical tags, one gate hardening. No claim row moves, no copy is authored.
+
+### What shipped
+
+Indexing batch brief **v1.2**, §2a Ruling 2 (five cards) and §2b (four canonicals approved).
+
+- **Two of the five cards.** `/intel/why-airbnb-not-getting-bookings` and `/intel/first-90-days` now carry the
+  `/intel/airbnb-occupancy-rate` card, **copied verbatim** from `/intel/pricing-problem-or-positioning-problem`
+  including its description line. Verified rendered: identical padding and border to the source card, four cards
+  in each grid.
+- **Four self-canonicals** on `/intel/{miami,montreal,muskoka,nashville}/thank-you`, which carried none.
+
+### The other three cards could not ship, and the reason is structural
+
+Strategy's Ruling 1 reads: *"the house style is the related-reading card… every §2a target already has a cleared
+card living on other pages, so placing one is copying cleared copy, not authoring."* The card **content** is
+cleared. The **component is not on the source pages.**
+
+**There are three cross-link components in the intel set, not one:**
+
+| component | markup | on |
+|---|---|---|
+| "Keep reading" card grid | `.related` · `.rel-grid` · `.rel-card` | `why-airbnb-not-getting-bookings`, `first-90-days`, `pricing-problem…` |
+| "Read next in The Playbook" | `.readnext` · `.rn-label` · `.rn-title` | `algorithm`, `money`, `trust` |
+| "More in The Playbook" | `.next` · `.nx-meta` · `.nx-label` · `.nx-title` | `airbnb-cohost-revenue-share-model` |
+
+The three pages that could not take a card — `algorithm`, `money`, `airbnb-cohost-revenue-share-model` —
+**do not define `.rel-card` in their CSS at all.** Dropping the markup there would have produced an unstyled
+block: **the exact `.wrap` defect from v3.69, three pages of it.** Gate 11r would now fail the build for it,
+which is the first time that gate has prevented a defect rather than recorded one.
+
+Porting the component means copying ~1,155 characters of CSS and deciding whether the page's existing
+single-slot component stays alongside a new grid. That is a layout decision on three live pages, so it is
+**routed to Strategy and Design** rather than improvised.
+
+### §2b's trailing-slash rule: already attempted three times, and not buildable here
+
+v1.2 §2b records a production check — `curl -I https://marketics.io/intel/algorithm/` returns **200, not a
+301** — and assigns Code *"a site-wide trailing-slash rule… implementation is Code's call."*
+
+**`netlify.toml` already carries the answer, written to stop a fourth attempt.** Two approaches were tried
+against deploy preview 115 and both failed: forced 301s in `netlify.toml` (Netlify's directory-index resolution
+still won), and the same rules in `_redirects` (Netlify normalises the trailing slash off a `from` pattern, so
+`/:seg/` matched the no-slash form too — **self-redirecting the site, 13 smoke failures, reverted**). The file
+states the only remaining option is structural — flatten every `foo/index.html` to `foo.html` — and that it was
+**routed to the Boardroom** because it touches every page and every internal link.
+
+So the item is not Code's call in the sense v1.2 means. **Not re-attempted.** The decision is already upstream.
+
+**A second reason it must not be improvised, found while evaluating it:** the rule's natural shape, `/*/`,
+compiles in `validate-site.py` to `^/.*$`. The link check treats *"matches a redirect pattern"* as *"not
+broken"*, so that one rule would have **silently turned the broken-internal-link gate into a pass-everything**
+across the whole site. Measured, not theorised.
+
+### Gate hardening
+
+`redirect_patterns()` now probes each compiled pattern against a sentinel path. Anything matching every path is
+**excluded from the link check and reported as a hard failure**, so the redirect can exist while the gate keeps
+working. Controls: inserting `/*/` fails the build with the named rule, **and** a deliberately broken link is
+still caught in the same run — the gate is narrowed, not blinded.
+
+Today's three real patterns (`/costseg/:placement`, `/fr/*`, `/p/*`) are unaffected; none was over-broad, so
+this is a trap closed before anyone stepped in it rather than a bug fixed.
+
 ## v3.71 — one claim, fifteen published formulations; and a gate that named two routes and read one (2026-09-16)
 
 **Skill impact:** no — **but see §1: a claim-row question is OPEN and routed to Strategy.** Code has changed
