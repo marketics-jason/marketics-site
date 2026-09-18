@@ -1904,19 +1904,65 @@ def main():
             hard.append(f"{part_rel}: the application form posts to /api/lead — "
                         f"that is the OWNER path. A partner applies about "
                         f"themselves; an owner is introduced BY them")
+        # THE PAYLOAD CONTRACT (CTO 2026-09-18). Keys are UNPREFIXED: a GHL
+        # mapping row points any transmitted key at any field, so the partner_
+        # prefix stays on the GHL field and off the wire.
+        #
+        # SCAN SURFACE, and it is why this is not `if key not in psrc`: the old
+        # keys were distinctive ("partner_owner_volume" appears nowhere else),
+        # so a substring test over the file worked. The new ones are ordinary
+        # words -- "email", "phone", "service", "channel" -- each of which
+        # appears in this page's markup, labels and validation regardless of
+        # what the payload sends. A substring test would pass on a form that
+        # transmits none of them. So the payload OBJECT is parsed and its keys
+        # are compared.
         PARTNER_FIELDS = (
-            "partner_name", "partner_business", "partner_website", "partner_linkedin",
-            "partner_service", "partner_markets", "partner_client_profile",
-            "partner_owner_volume", "partner_refers_to", "partner_referred_in",
-            "partner_ideal_client", "partner_why_now", "partner_team",
-            "partner_email", "partner_phone", "partner_channel",
+            "firstName", "lastName", "email", "phone",
+            "business_name", "website", "linkedin",
+            "service", "service_other", "markets", "client_profile",
+            "owner_volume", "refers_to", "referred_in", "referred_in_detail",
+            "ideal_client", "why_now", "team_size", "channel",
+            "submitted_at", "revisit_date",
         )
-        for f in PARTNER_FIELDS:
-            if f not in psrc:
-                hard.append(f"{part_rel}: payload key {f!r} is missing — the "
-                            f"thirteen questions are ratified; a form that ships "
-                            f"one fewer still submits and the vet reads a field "
-                            f"that is never populated")
+        pm = re.search(r"(?s)var payload = \{(.*?)\n\s*\};", psrc)
+        if not pm:
+            hard.append(f"{part_rel}: no parseable `var payload = {{...}}` — the "
+                        f"payload contract cannot be checked, which is worse than "
+                        f"it being wrong")
+        else:
+            sent = set(re.findall(r"^\s*([A-Za-z_][A-Za-z_0-9]*)\s*:", pm.group(1), re.M))
+            for f in PARTNER_FIELDS:
+                if f not in sent:
+                    hard.append(f"{part_rel}: payload key {f!r} is missing — the "
+                                f"thirteen questions are ratified; a form that ships "
+                                f"one fewer still submits and the vet reads a field "
+                                f"that is never populated")
+            # The prefix belongs to GHL, never to the wire. A partner_ key here
+            # means the contract has drifted back to the pre-2026-09-18 shape and
+            # every mapping row built against the new one reads empty.
+            stale = sorted(k for k in sent if k.startswith("partner_"))
+            if stale:
+                hard.append(f"{part_rel}: payload sends prefixed key(s) {stale} — "
+                            f"payload keys are unprefixed; the partner_ prefix is "
+                            f"the GHL FIELD's, and a mapping row points any "
+                            f"transmitted key at any field (CTO 2026-09-18)")
+
+        # CODED VALUES, not labels. A <option> with no value= attribute sends its
+        # label text, which is how this form shipped: the vet's branch would have
+        # read "Property manager", not property_manager. These two codes are the
+        # vet's most consequential branch and have to land exactly.
+        sm = re.search(r'(?s)<select[^>]*id="pfService".*?</select>', psrc)
+        if sm:
+            vals = set(re.findall(r'<option value="([^"]*)"', sm.group(0)))
+            bare = len(re.findall(r"<option>", sm.group(0)))
+            if bare:
+                hard.append(f"{part_rel}: {bare} service option(s) carry no value= "
+                            f"attribute, so the browser sends the LABEL text and "
+                            f"the vet branches on a display string")
+            for code in ("property_manager", "revenue_services", "co_host", "lender", "other"):
+                if code not in vals:
+                    hard.append(f"{part_rel}: service option value {code!r} is "
+                                f"missing — the vet's flag branch reads this field")
         if "mkxHpField" not in psrc or "MIN_FILL_MS" not in psrc:
             hard.append(f"{part_rel}: the application form has no honeypot and/or "
                         f"no submit-timing floor (registry v3.54, v3.55)")

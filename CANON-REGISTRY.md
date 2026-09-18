@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.74 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.76 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,140 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.76 — THE DECAYED-GATE FAMILY: a check that was valid when written and stops being valid when the data moves (2026-09-18)
+
+**Skill impact:** no — a class of defect, named. No claim, no copy, no code.
+
+**Ruled registry-grade by CTO 2026-09-18, and ruled to be its own class rather than a note under the
+vacuous-pass family.** His boundary, and it is the whole distinction:
+
+> *"Gate 11p wasn't vacuous when written. It would have decayed into vacuity at the exact moment the
+> contract it guards changed shape, and reported green while doing it. That's distinct from the
+> vacuous-pass family, where the gate never tested what it claimed: this one did."*
+
+### The two families, side by side
+
+| | **vacuous-pass** (v3.5x) | **decayed gate** (this) |
+|---|---|---|
+| At the moment it was written | already could not fail | tested exactly what it claimed |
+| What breaks it | nothing — it was born wrong | **a change to the data it reads** |
+| What it reports afterwards | green | green |
+| When it breaks | never worked | **the moment the contract changes** |
+| Who is looking then | — | **nobody — attention is on the contract** |
+
+That last row is why the class is worth naming. **The event that invalidates the gate is the same event
+that occupies everyone's attention elsewhere.** A contract change is reviewed as a contract change; the
+gate is a file nobody opened, still green, still listed in the inventory.
+
+### The instance
+
+Gate 11p checked payload keys with `if key not in psrc`. Correct when written: `partner_owner_volume`
+appears nowhere else in that file, so a substring test over the source was a sound proxy for *"the form
+transmits this key."*
+
+CTO's rename replaced those keys with **ordinary words** — `email`, `phone`, `service`, `channel` —
+each of which appears in the page's markup, labels and validation **regardless of what the payload
+sends**. The rule was untouched and still read correctly. Its proxy had stopped being a proxy.
+
+**A form transmitting none of the twenty-one keys would have passed.**
+
+> **The rule: a check's scan surface is only valid for the data it was written against. Change the shape
+> of the data and the surface must be re-derived — even when the rule itself is correct and untouched.**
+
+### The extension Code owes back: the control decays with the gate
+
+A gate's **negative control** is written against the old data shape too, so it is not independent
+evidence — it can decay in the same move and keep passing for the same reason. Re-running an old control
+after a contract change proves the control still fires, not that the gate still covers the contract.
+
+**So the check on a decayed gate is: re-derive the scan surface, then write a control against the NEW
+shape.** The three controls run for v3.75 were new ones — plant a `partner_`-prefixed key, drop
+`revisit_date`, strip a `value=` attribute. None of them could have been carried over.
+
+### Second instance, one layer down, same day
+
+`svc.value !== 'Other'` — the toggle revealing the "please describe" row — compared against the option's
+**label**. Correct until the option values were coded, at which point the comparison silently stopped
+matching and `other` became a dead end. Not a gate, but the identical shape: **code that was right about
+data that then changed underneath it.**
+
+Found by grepping the page's JavaScript for every option label after the change. CTO's framing:
+
+> *"The diff showed what changed; the grep showed what didn't and should have."*
+
+**That is the detection method for this family.** A diff shows the edit. Decay lives in the code the
+edit did not touch, which is why reviewing the diff cannot find it — and why the search has to be run
+from the changed values outward, not from the changed lines.
+
+### Where the family now stands
+
+- **vacuous-pass** — a check that cannot fail.
+- **vacuous failure** — a verifier firing on the wrong signal; caught by a known-good case in the same run.
+- **outranked-or-loosened** — a control reports on what it can reach and is read as covering the class.
+- **decayed gate** — a control that was sound and is silently invalidated by a change to its data. *New.*
+
+## v3.75 — the partner payload contract, and a rename that would have made its own gate decorative (2026-09-18)
+
+**Skill impact:** no — payload keys, option values and a gate. No claim, no copy, no route.
+
+### The contract, as ruled by CTO 2026-09-18 and now transmitting
+
+Payload keys are **unprefixed**; the `partner_` prefix belongs to the GHL *field*, because a mapping row
+points any transmitted key at any field. Captured from the running form, not read off the source:
+
+`firstName · lastName · email · phone · business_name · website · linkedin · service · service_other ·
+markets · client_profile · owner_volume · refers_to · referred_in · referred_in_detail · ideal_client ·
+why_now · team_size · channel · submitted_at · revisit_date · src · ref`
+
+### The defect this replaced: the vet was going to branch on a display string
+
+The twelve service `<option>` elements **carried no `value=` attribute**, so the browser sent the label.
+The vet's most consequential branch would have read `"Property manager"` and `"Pricing or revenue
+services"` rather than `property_manager` and `revenue_services`. Same for every other select —
+`owner_volume` would have sent `1–3` **with an en dash**.
+
+**A `<select>` with no `value=` is the same shape as the undefined class in v3.69: valid markup, nothing
+errors, and the wrong thing travels.** Now gated — a bare `<option>` in the service select fails the
+build.
+
+### The near-miss inside the fix
+
+Adding coded values broke a line nobody was looking at: `svc.value !== 'Other'` — the toggle that reveals
+the "please describe" row — still compared against the **label**. Coding the values would have made
+`other` a dead end: the field would never appear, and CTO's reason for keeping `service_other` at all
+would have been silently defeated. Caught by grepping the page's JavaScript for **every** option label
+after the change, not by reading the diff. Verified by driving the form: the row appears, the key
+transmits.
+
+### The rename would have made the gate decorative
+
+Gate 11p now parses the `payload` object and compares its **keys**, because the substring test it used
+before would have silently stopped testing anything when the keys became ordinary words.
+
+**Full account and the class it names: v3.76.** Not restated here.
+
+### Also ruled, and recorded because three of these reversed an earlier instruction
+
+| Item | Ruling | Whose |
+|---|---|---|
+| The five UTMs and click ID | **dropped** — `/partners` is noindex, footer-linked, no campaign points at it; they would be empty on essentially every submission | CTO reversed his own |
+| `service_other`, `referred_in_detail` | **shipped shape wins** — coded half branchable, detail half not | CTO adopted Code's |
+| `firstName`/`lastName` | **split** — all three intake emails open `[First name],` and a concatenated name renders every greeting blank | CTO |
+| `revisit_date` | **computed client-side, pre-formatted** — removes the GHL date-maths unknown rather than answering it | CTO |
+| `co_host` · `lender` | codes issued; `lender` eligibility is a **Board question**, routed separately — canon forbids a fee on any financing leg, so the ladder can structurally never pay a lender | CTO |
+
+**Ninety days is not an invention:** CTO's worked example, *December 17, 2026*, is exactly 90 days from
+the date he wrote it. Month names are a literal array — `toLocaleDateString` follows the **visitor's**
+locale, so the same submission would otherwise reach GHL as `17 dicembre 2026` from an Italian browser.
+
+### Premise correction, CTO's own
+
+CTO instructed *"one line in a handler you haven't written yet."* The handler shipped in #153. He
+corrected it himself before Code raised it, naming the class — *reasoning from the spec's build order
+instead of from the deploy* — and accepted that the cost framing changes: every item was a payload
+change to live code, not a line in an unwritten one. Three of the four still stood on their merits; the
+UTM instruction did not.
+
 ## v3.74 — housekeeping: one component with two spellings, and build output in source control (2026-09-16)
 
 **Skill impact:** no — no claim, no copy, no route, no rendered pixel changes.

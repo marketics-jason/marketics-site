@@ -473,18 +473,18 @@ td.mcell{vertical-align:top;}
         <div class="pf"><label for="pfService">What service do you provide to STR owners? <span class="req">*</span></label>
           <select id="pfService">
             <option value="">Choose one</option>
-            <option>Realtor / broker</option>
-            <option>Photographer / media</option>
-            <option>Interior designer / stager</option>
-            <option>Cleaning / turnover</option>
-            <option>Co-host</option>
-            <option>Property manager</option>
-            <option>CPA / bookkeeper</option>
-            <option>Cost segregation</option>
-            <option>Builder / contractor</option>
-            <option>Lender / financing</option>
-            <option>Pricing or revenue services</option>
-            <option>Other</option>
+            <option value="realtor">Realtor / broker</option>
+            <option value="photographer">Photographer / media</option>
+            <option value="designer">Interior designer / stager</option>
+            <option value="cleaning">Cleaning / turnover</option>
+            <option value="co_host">Co-host</option>
+            <option value="property_manager">Property manager</option>
+            <option value="cpa">CPA / bookkeeper</option>
+            <option value="cost_seg">Cost segregation</option>
+            <option value="builder">Builder / contractor</option>
+            <option value="lender">Lender / financing</option>
+            <option value="revenue_services">Pricing or revenue services</option>
+            <option value="other">Other</option>
           </select>
         </div>
         <div class="pf" id="pfServiceOtherRow" hidden><label for="pfServiceOther">Tell us what you do</label><input type="text" id="pfServiceOther"></div>
@@ -494,14 +494,14 @@ td.mcell{vertical-align:top;}
         <div class="pf"><label for="pfClient">Describe your typical STR-owner client in a line or two <span class="req">*</span></label><textarea id="pfClient" rows="3"></textarea></div>
         <!-- Q7 — "None yet", never "none". It is a stage, not a verdict. -->
         <div class="pf"><label for="pfVolume">Roughly how many STR owners do you talk to in a month? <span class="req">*</span></label>
-          <select id="pfVolume"><option value="">Choose one</option><option>None yet</option><option>1&ndash;3</option><option>4&ndash;10</option><option>more</option></select>
+          <select id="pfVolume"><option value="">Choose one</option><option value="none">None yet</option><option value="1_3">1&ndash;3</option><option value="4_10">4&ndash;10</option><option value="more">more</option></select>
         </div>
         <!-- Q8 -->
         <div class="pf"><label for="pfRefersTo">Who do you currently refer your clients to, when they need something you don&rsquo;t do? &mdash; or, if you haven&rsquo;t yet, who would you want to?</label><textarea id="pfRefersTo" rows="3"></textarea></div>
         <!-- Q9 — corroborates Q8. The nurture trigger reads CONTENT across both,
              not emptiness of either (build sheet FINAL §2). -->
         <div class="pf"><label for="pfReferredIn">Has anyone referred a client to you in the last six months? <span class="req">*</span></label>
-          <select id="pfReferredIn"><option value="">Choose one</option><option>Yes</option><option>No</option></select>
+          <select id="pfReferredIn"><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select>
         </div>
         <div class="pf"><label for="pfReferredInDetail">If yes, who?</label><input type="text" id="pfReferredInDetail"></div>
         <!-- Q10 -->
@@ -510,13 +510,13 @@ td.mcell{vertical-align:top;}
         <div class="pf"><label for="pfWhyNow">What made you reach out now?</label><textarea id="pfWhyNow" rows="3"></textarea></div>
         <!-- Q12 -->
         <div class="pf"><label for="pfTeam">Will anyone else on your team make introductions? <span class="req">*</span></label>
-          <select id="pfTeam"><option value="">Choose one</option><option>just me</option><option>a few people</option><option>a team</option></select>
+          <select id="pfTeam"><option value="">Choose one</option><option value="just_me">just me</option><option value="few">a few people</option><option value="team">a team</option></select>
         </div>
         <!-- Q13 -->
         <div class="pf"><label for="pfEmail">Email <span class="req">*</span></label><input type="email" id="pfEmail" autocomplete="email"></div>
         <div class="pf"><label for="pfPhone">Phone</label><input type="tel" id="pfPhone" autocomplete="tel"></div>
         <div class="pf"><label for="pfChannel">Preferred channel</label>
-          <select id="pfChannel"><option value="">No preference</option><option>Email</option><option>Phone</option><option>Text</option></select>
+          <select id="pfChannel"><option value="">No preference</option><option value="email">Email</option><option value="phone">Phone</option><option value="text">Text</option></select>
         </div>
 
         <!-- Bot gate: honeypot + submit-timing floor, same convention as the six
@@ -618,7 +618,7 @@ td.mcell{vertical-align:top;}
   var svc = document.getElementById('pfService');
   var otherRow = document.getElementById('pfServiceOtherRow');
 
-  svc.addEventListener('change', function () { otherRow.hidden = svc.value !== 'Other'; });
+  svc.addEventListener('change', function () { otherRow.hidden = svc.value !== 'other'; });
 
   var REQUIRED = [
     ['pfName', 'Your name'], ['pfBusiness', 'Business name'],
@@ -656,26 +656,51 @@ td.mcell{vertical-align:top;}
     var botty = !!(hp && hp.value !== '');
 
     var ref = (typeof window.mkxGetRef === 'function') ? window.mkxGetRef() : {};
+    /* The applicant types one name. GHL merges a STANDARD first-name field into
+       the greeting of all three intake emails, so a single concatenated name
+       renders every one of them blank. Split on the first space: the remainder
+       is the surname, which keeps multi-word surnames intact. A single-word
+       name leaves lastName empty and the empty-key rule drops it -- the
+       greeting still works, which is the only thing this split is for. */
+    var whole = v('pfName');
+    var cut = whole.indexOf(' ');
+    var firstName = cut === -1 ? whole : whole.slice(0, cut);
+    var lastName  = cut === -1 ? ''    : whole.slice(cut + 1).trim();
+
+    /* revisit_date is computed HERE, pre-formatted, because nurture-hold email
+       (b) names a specific date and must never render blank. Computing it in
+       the payload removes the question of whether GHL does date maths in a
+       merge field rather than answering it. Ninety days, per CTO 2026-09-18.
+       Month names are a literal array on purpose: toLocaleDateString follows
+       the VISITOR's locale, so the same submission would reach GHL as
+       "17 dicembre 2026" from an Italian browser. */
+    var MONTHS = ['January','February','March','April','May','June','July',
+                  'August','September','October','November','December'];
+    var rv = new Date(Date.now() + 90 * 86400000);
+    var revisitDate = MONTHS[rv.getMonth()] + ' ' + rv.getDate() + ', ' + rv.getFullYear();
+
     var payload = {
-      partner_name: v('pfName'),
-      partner_business: v('pfBusiness'),
-      partner_website: v('pfWebsite'),
-      partner_linkedin: v('pfLinkedin'),
-      partner_service: v('pfService'),
-      partner_service_other: svc.value === 'Other' ? v('pfServiceOther') : '',
-      partner_markets: v('pfMarkets'),
-      partner_client_profile: v('pfClient'),
-      partner_owner_volume: v('pfVolume'),
-      partner_refers_to: v('pfRefersTo'),
-      partner_referred_in: v('pfReferredIn'),
-      partner_referred_in_detail: v('pfReferredInDetail'),
-      partner_ideal_client: v('pfIdeal'),
-      partner_why_now: v('pfWhyNow'),
-      partner_team: v('pfTeam'),
-      partner_email: email,
-      partner_phone: v('pfPhone'),
-      partner_channel: v('pfChannel'),
-      partner_submitted_at: new Date().toISOString(),
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: v('pfPhone'),
+      business_name: v('pfBusiness'),
+      website: v('pfWebsite'),
+      linkedin: v('pfLinkedin'),
+      service: v('pfService'),
+      service_other: svc.value === 'other' ? v('pfServiceOther') : '',
+      markets: v('pfMarkets'),
+      client_profile: v('pfClient'),
+      owner_volume: v('pfVolume'),
+      refers_to: v('pfRefersTo'),
+      referred_in: v('pfReferredIn'),
+      referred_in_detail: v('pfReferredInDetail'),
+      ideal_client: v('pfIdeal'),
+      why_now: v('pfWhyNow'),
+      team_size: v('pfTeam'),
+      channel: v('pfChannel'),
+      submitted_at: new Date().toISOString(),
+      revisit_date: revisitDate,
       src: ref.src || '',
       ref: ref.ref || ''
     };
