@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.76 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.78 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,164 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.78 — a finding recorded as a generalisation is a finding closed without being fixed (2026-09-18)
+
+**Skill impact:** no — a claim about how this ledger is used, and one counter fix.
+
+### CTO's finding, and it is about us rather than the code
+
+The v3.77 defect **was already recorded.** Console §6 names *"the confirmation screen that renders
+regardless of outcome"* as the **third member of the silent-loss family**. It went in as a lesson. It
+never went in as an open item. CTO, naming it:
+
+> *"Writing a defect up as a pattern retires it in everyone's head while it stays live on eight
+> surfaces."*
+
+The write-up felt like the work. A pattern reads as understood, and understood reads as handled — so
+the entry that should have started a fix ended one. **Nobody was wrong at any point; the defect was
+known, described accurately, and left running for weeks.**
+
+> **The rule: recording a defect as a pattern does not retire the instance. A generalisation needs the
+> instance's status written beside it — open, fixed, or accepted — or the ledger reads as a list of
+> solved problems.**
+
+CTO's consequence, which is the actionable half: *the ledger is full of patterns, and which of them are
+also still true is not currently knowable from reading it.* An audit of every named pattern against the
+live repo is owed. **Not yet run.**
+
+### Instrument before characterising — and the reader was blind to a surface
+
+CTO's first move was the count, not the fix: `lead.mjs` logs `ok: false` on every failed forward, so the
+losses since `/api/lead` shipped are **countable, not unknowable.** *A counted zero and an assumed zero
+are different artifacts,* and an assumed one was being carried.
+
+Running that count would have produced a confidently wrong number. `scripts/count-lead-events.py`
+filtered `evt == "lead_forwarded"` — and the partner route emits **`partner_forwarded`**. The reader was
+written before that route existed.
+
+Same synthetic log, four events, two failures, one on each surface:
+
+| | get-started | partner | TOTAL |
+|---|---|---|---|
+| **Old reader** | 2 (1 did not) | **absent** | **2 (1 did not)** |
+| **Fixed reader** | 2 (1 did not) | 2 (1 did not) | **4 (2 did not)** |
+
+It omits the surface silently and the TOTAL absorbs the omission, so the output is wrong **downward** —
+the direction nobody checks, because a low failure count reads as good news. It would have excluded
+CTO's own 17:43 loss from the count he ordered to find it.
+
+### A decayed MEASUREMENT instrument is worse than a decayed gate, and the reason is not severity
+
+Same family as v3.76, but CTO's distinction belongs in the entry rather than filed as another instance:
+
+> *"A gate that decays goes quiet. A counter that decays reads as good news."*
+
+A decayed gate stops objecting. Someone eventually notices that a thing which used to fail never fails.
+**A decayed counter answers.** It returns a number, in the right format, to the right question — and the
+number is low. It would have reported few losses to a question *asked specifically to find losses*, and
+omitted the very submission that prompted the question.
+
+**Nothing about a low failure count invites a second look.** That is the whole of it: decay in a
+measurement instrument is **self-concealing in a way decay in a gate is not, because the wrong answer is
+the one you were hoping for.** The instrument does not merely fail to warn; it reassures.
+
+**Worst member of the family so far**, and the ranking is by concealment, not by blast radius.
+
+The counter is fixed and controlled; **the count itself is still owed** and needs a log export Code
+cannot perform from this container.
+
+### Third time today
+
+Three times on 2026-09-18 a control's scope was narrower than its result — gate 11p's substring test,
+the `svc.value !== 'Other'` comparison, and this counter. **All three were found by someone deliberately
+looking, none by the control.** Recorded as a count rather than a conclusion; three is a number, not yet
+a pattern.
+
+### The affordance question, answered: it narrows the ask but does not dissolve it
+
+CTO asked whether the error state already has copy on all eight surfaces, in which case the v3.77 fix is
+wiring rather than copy. Measured:
+
+| | error mechanism | transport-failure copy |
+|---|---|---|
+| `/get-started` · `/lp/keep-control` · `/join` · `/partners/apply` | **yes** | **no** |
+| `/intel/miami` · `/montreal` · `/muskoka` · `/nashville` | **none at all** | **no** |
+
+**The mechanism exists on four of eight. The copy exists on none.** Every string on the four is a
+*validation* message about the visitor's input — *"Please add your last name"* — never about our failure
+to deliver. The four intel pages have no error element, no styling and no message: a validation failure
+there calls `focus()` on the field and says nothing.
+
+So: four pages need element, style and copy; four need one string each; one shared string could serve
+all eight.
+
+## v3.77 — every lead form tells the visitor it worked, without ever asking (2026-09-18)
+
+**Skill impact:** no — a measured defect and its scope. No fix shipped in this entry: the fix is
+user-facing and needs copy Code does not write.
+
+### How it surfaced
+
+CTO's 17:43 partner submission reached a GHL webhook UUID that no longer existed. **The confirmation
+screen rendered. Nothing errored.** He named it the fourth instance of the silent-loss family and the
+first one self-inflicted. Investigating the cause found the mechanism is not partner-specific.
+
+### The server side is already correct
+
+`netlify/functions/lead.mjs` checks the upstream response, returns **502** on any non-2xx from GHL,
+returns 502 on an unreachable host, and logs `ok: false` with the upstream status on every forward. The
+loss is recorded server-side the moment it happens.
+
+### The client side never looks
+
+```js
+}).then(done).catch(function (err) { console.warn(...); done(); });
+```
+
+**`fetch` resolves for every HTTP status.** A 502 is a resolved promise, so `.then(done)` renders the
+confirmation. `.catch` only fires on a network failure — and it calls `done()` too. **There is no path
+through this code that does not tell the visitor it worked.**
+
+### Scope: eight surfaces, not one
+
+| Surface | Posts to | Inspects the response |
+|---|---|---|
+| `/get-started` | `/api/lead` | **no** |
+| `/lp/keep-control` | `/api/lead` | **no** |
+| `/join` | `/api/lead` | **no** |
+| `/intel/miami` · `/montreal` · `/muskoka` · `/nashville` | `/api/lead` | **no** |
+| `/partners/apply` | `/api/partner` | **no** |
+
+**Every lead-capture surface on the site**, owner funnel and paid LP included. A GHL outage, a rotated
+hook, a revoked webhook — any of them loses every submission for its duration while each visitor is told
+it succeeded.
+
+### Why it looks deliberate, and is not
+
+The partner handler's `catch` carries `/* silent drop, same confirmation */` — which **is** deliberate,
+for the honeypot path: a bot gets the same screen a human does. That reasoning is sound and applies to
+`botty`. It was never meant to cover a real submission that failed, and the code does not distinguish
+the two.
+
+### What the fix needs, and why it is not in this entry
+
+Honouring the status means a visitor sometimes sees a failure — **new user-facing copy on eight pages,
+seven of which carry cleared copy.** Code does not write it. The shape, for whoever rules it:
+
+1. `res.ok` → confirmation, unchanged.
+2. non-2xx or network error → surface the page's existing error affordance, keep what they typed, offer
+   a retry.
+3. `botty` → confirmation regardless, unchanged and separately reasoned.
+
+Then a gate: **a surface posting to `/api/` must inspect the response.** It cannot ship before the
+eight, because it would fail on all of them the day it lands.
+
+### The standing shape
+
+*A success screen is a claim about something that has not been checked.* Same family as a write
+reporting success while a read disagrees (v3.57) — here the write reports nothing at all, and the screen
+claims anyway.
+
 ## v3.76 — THE DECAYED-GATE FAMILY: a check that was valid when written and stops being valid when the data moves (2026-09-18)
 
 **Skill impact:** no — a class of defect, named. No claim, no copy, no code.

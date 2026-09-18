@@ -59,7 +59,13 @@ def main():
               "read as 'no traffic' when the truth is 'no data'.)")
         return 2
 
-    leads = [e for e in events if e.get("evt") == "lead_forwarded"]
+    # BOTH forward events. The partner route emits `partner_forwarded`, not
+    # `lead_forwarded` -- this reader was written before that route existed, so
+    # until 2026-09-18 it counted partner submissions as zero and printed a
+    # TOTAL that silently excluded them. A reader that omits a surface reports a
+    # number that is wrong in the one direction nobody checks: downward.
+    leads = [e for e in events
+             if e.get("evt") in ("lead_forwarded", "partner_forwarded")]
     consent = [e for e in events if e.get("evt") == "consent_event"]
     rejected = [e for e in events if e.get("evt") in ("lead_rejected", "consent_rejected")]
     misconfig = [e for e in events if e.get("evt") == "lead_misconfigured"]
