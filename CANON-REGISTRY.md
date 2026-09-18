@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.75 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.76 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,78 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.76 — THE DECAYED-GATE FAMILY: a check that was valid when written and stops being valid when the data moves (2026-09-18)
+
+**Skill impact:** no — a class of defect, named. No claim, no copy, no code.
+
+**Ruled registry-grade by CTO 2026-09-18, and ruled to be its own class rather than a note under the
+vacuous-pass family.** His boundary, and it is the whole distinction:
+
+> *"Gate 11p wasn't vacuous when written. It would have decayed into vacuity at the exact moment the
+> contract it guards changed shape, and reported green while doing it. That's distinct from the
+> vacuous-pass family, where the gate never tested what it claimed: this one did."*
+
+### The two families, side by side
+
+| | **vacuous-pass** (v3.5x) | **decayed gate** (this) |
+|---|---|---|
+| At the moment it was written | already could not fail | tested exactly what it claimed |
+| What breaks it | nothing — it was born wrong | **a change to the data it reads** |
+| What it reports afterwards | green | green |
+| When it breaks | never worked | **the moment the contract changes** |
+| Who is looking then | — | **nobody — attention is on the contract** |
+
+That last row is why the class is worth naming. **The event that invalidates the gate is the same event
+that occupies everyone's attention elsewhere.** A contract change is reviewed as a contract change; the
+gate is a file nobody opened, still green, still listed in the inventory.
+
+### The instance
+
+Gate 11p checked payload keys with `if key not in psrc`. Correct when written: `partner_owner_volume`
+appears nowhere else in that file, so a substring test over the source was a sound proxy for *"the form
+transmits this key."*
+
+CTO's rename replaced those keys with **ordinary words** — `email`, `phone`, `service`, `channel` —
+each of which appears in the page's markup, labels and validation **regardless of what the payload
+sends**. The rule was untouched and still read correctly. Its proxy had stopped being a proxy.
+
+**A form transmitting none of the twenty-one keys would have passed.**
+
+> **The rule: a check's scan surface is only valid for the data it was written against. Change the shape
+> of the data and the surface must be re-derived — even when the rule itself is correct and untouched.**
+
+### The extension Code owes back: the control decays with the gate
+
+A gate's **negative control** is written against the old data shape too, so it is not independent
+evidence — it can decay in the same move and keep passing for the same reason. Re-running an old control
+after a contract change proves the control still fires, not that the gate still covers the contract.
+
+**So the check on a decayed gate is: re-derive the scan surface, then write a control against the NEW
+shape.** The three controls run for v3.75 were new ones — plant a `partner_`-prefixed key, drop
+`revisit_date`, strip a `value=` attribute. None of them could have been carried over.
+
+### Second instance, one layer down, same day
+
+`svc.value !== 'Other'` — the toggle revealing the "please describe" row — compared against the option's
+**label**. Correct until the option values were coded, at which point the comparison silently stopped
+matching and `other` became a dead end. Not a gate, but the identical shape: **code that was right about
+data that then changed underneath it.**
+
+Found by grepping the page's JavaScript for every option label after the change. CTO's framing:
+
+> *"The diff showed what changed; the grep showed what didn't and should have."*
+
+**That is the detection method for this family.** A diff shows the edit. Decay lives in the code the
+edit did not touch, which is why reviewing the diff cannot find it — and why the search has to be run
+from the changed values outward, not from the changed lines.
+
+### Where the family now stands
+
+- **vacuous-pass** — a check that cannot fail.
+- **vacuous failure** — a verifier firing on the wrong signal; caught by a known-good case in the same run.
+- **outranked-or-loosened** — a control reports on what it can reach and is read as covering the class.
+- **decayed gate** — a control that was sound and is silently invalidated by a change to its data. *New.*
+
 ## v3.75 — the partner payload contract, and a rename that would have made its own gate decorative (2026-09-18)
 
 **Skill impact:** no — payload keys, option values and a gate. No claim, no copy, no route.
@@ -2396,23 +2468,12 @@ would have been silently defeated. Caught by grepping the page's JavaScript for 
 after the change, not by reading the diff. Verified by driving the form: the row appears, the key
 transmits.
 
-### The rename would have made the gate decorative — and that is the transferable part
+### The rename would have made the gate decorative
 
-Gate 11p checked payload keys with `if key not in psrc`. That worked because the old keys were
-**distinctive**: `partner_owner_volume` appears nowhere else in the file.
+Gate 11p now parses the `payload` object and compares its **keys**, because the substring test it used
+before would have silently stopped testing anything when the keys became ordinary words.
 
-The new keys are **ordinary words**. `email`, `phone`, `service`, `channel` each appear in the page's
-markup, labels and validation no matter what the payload sends. **A substring test would have passed on
-a form transmitting none of them** — the gate would have gone from load-bearing to decorative at the
-exact moment the contract it guards changed, and it would have reported green while doing it.
-
-The gate now parses the `payload` object and compares its **keys**.
-
-> **The rule: a check's scan surface is only valid for the data it was written against. Change the shape
-> of the data and the surface has to be re-chosen, even when the rule itself is untouched.**
-
-Fourth member of the scan-surface family (CSS `max-width:100%` vs a fee percentage · `node` running a
-module vs Netlify parsing it · a variable named `btn` vs a class named `btn` · this).
+**Full account and the class it names: v3.76.** Not restated here.
 
 ### Also ruled, and recorded because three of these reversed an earlier instruction
 
