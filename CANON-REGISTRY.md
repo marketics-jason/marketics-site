@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.74 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.75 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,79 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.75 — the partner payload contract, and a rename that would have made its own gate decorative (2026-09-18)
+
+**Skill impact:** no — payload keys, option values and a gate. No claim, no copy, no route.
+
+### The contract, as ruled by CTO 2026-09-18 and now transmitting
+
+Payload keys are **unprefixed**; the `partner_` prefix belongs to the GHL *field*, because a mapping row
+points any transmitted key at any field. Captured from the running form, not read off the source:
+
+`firstName · lastName · email · phone · business_name · website · linkedin · service · service_other ·
+markets · client_profile · owner_volume · refers_to · referred_in · referred_in_detail · ideal_client ·
+why_now · team_size · channel · submitted_at · revisit_date · src · ref`
+
+### The defect this replaced: the vet was going to branch on a display string
+
+The twelve service `<option>` elements **carried no `value=` attribute**, so the browser sent the label.
+The vet's most consequential branch would have read `"Property manager"` and `"Pricing or revenue
+services"` rather than `property_manager` and `revenue_services`. Same for every other select —
+`owner_volume` would have sent `1–3` **with an en dash**.
+
+**A `<select>` with no `value=` is the same shape as the undefined class in v3.69: valid markup, nothing
+errors, and the wrong thing travels.** Now gated — a bare `<option>` in the service select fails the
+build.
+
+### The near-miss inside the fix
+
+Adding coded values broke a line nobody was looking at: `svc.value !== 'Other'` — the toggle that reveals
+the "please describe" row — still compared against the **label**. Coding the values would have made
+`other` a dead end: the field would never appear, and CTO's reason for keeping `service_other` at all
+would have been silently defeated. Caught by grepping the page's JavaScript for **every** option label
+after the change, not by reading the diff. Verified by driving the form: the row appears, the key
+transmits.
+
+### The rename would have made the gate decorative — and that is the transferable part
+
+Gate 11p checked payload keys with `if key not in psrc`. That worked because the old keys were
+**distinctive**: `partner_owner_volume` appears nowhere else in the file.
+
+The new keys are **ordinary words**. `email`, `phone`, `service`, `channel` each appear in the page's
+markup, labels and validation no matter what the payload sends. **A substring test would have passed on
+a form transmitting none of them** — the gate would have gone from load-bearing to decorative at the
+exact moment the contract it guards changed, and it would have reported green while doing it.
+
+The gate now parses the `payload` object and compares its **keys**.
+
+> **The rule: a check's scan surface is only valid for the data it was written against. Change the shape
+> of the data and the surface has to be re-chosen, even when the rule itself is untouched.**
+
+Fourth member of the scan-surface family (CSS `max-width:100%` vs a fee percentage · `node` running a
+module vs Netlify parsing it · a variable named `btn` vs a class named `btn` · this).
+
+### Also ruled, and recorded because three of these reversed an earlier instruction
+
+| Item | Ruling | Whose |
+|---|---|---|
+| The five UTMs and click ID | **dropped** — `/partners` is noindex, footer-linked, no campaign points at it; they would be empty on essentially every submission | CTO reversed his own |
+| `service_other`, `referred_in_detail` | **shipped shape wins** — coded half branchable, detail half not | CTO adopted Code's |
+| `firstName`/`lastName` | **split** — all three intake emails open `[First name],` and a concatenated name renders every greeting blank | CTO |
+| `revisit_date` | **computed client-side, pre-formatted** — removes the GHL date-maths unknown rather than answering it | CTO |
+| `co_host` · `lender` | codes issued; `lender` eligibility is a **Board question**, routed separately — canon forbids a fee on any financing leg, so the ladder can structurally never pay a lender | CTO |
+
+**Ninety days is not an invention:** CTO's worked example, *December 17, 2026*, is exactly 90 days from
+the date he wrote it. Month names are a literal array — `toLocaleDateString` follows the **visitor's**
+locale, so the same submission would otherwise reach GHL as `17 dicembre 2026` from an Italian browser.
+
+### Premise correction, CTO's own
+
+CTO instructed *"one line in a handler you haven't written yet."* The handler shipped in #153. He
+corrected it himself before Code raised it, naming the class — *reasoning from the spec's build order
+instead of from the deploy* — and accepted that the cost framing changes: every item was a payload
+change to live code, not a line in an unwritten one. Three of the four still stood on their merits; the
+UTM instruction did not.
+
 ## v3.74 — housekeeping: one component with two spellings, and build output in source control (2026-09-16)
 
 **Skill impact:** no — no claim, no copy, no route, no rendered pixel changes.
