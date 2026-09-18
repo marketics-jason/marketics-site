@@ -2409,9 +2409,32 @@ It omits the surface silently and the TOTAL absorbs the omission, so the output 
 the direction nobody checks, because a low failure count reads as good news. It would have excluded
 CTO's own 17:43 loss from the count he ordered to find it.
 
-**Decayed reader, same family as v3.76** — sound when written, invalidated by a route added later. The
-counter is fixed and controlled; **the count itself is still owed** and needs a log export Code cannot
-perform from this container.
+### A decayed MEASUREMENT instrument is worse than a decayed gate, and the reason is not severity
+
+Same family as v3.76, but CTO's distinction belongs in the entry rather than filed as another instance:
+
+> *"A gate that decays goes quiet. A counter that decays reads as good news."*
+
+A decayed gate stops objecting. Someone eventually notices that a thing which used to fail never fails.
+**A decayed counter answers.** It returns a number, in the right format, to the right question — and the
+number is low. It would have reported few losses to a question *asked specifically to find losses*, and
+omitted the very submission that prompted the question.
+
+**Nothing about a low failure count invites a second look.** That is the whole of it: decay in a
+measurement instrument is **self-concealing in a way decay in a gate is not, because the wrong answer is
+the one you were hoping for.** The instrument does not merely fail to warn; it reassures.
+
+**Worst member of the family so far**, and the ranking is by concealment, not by blast radius.
+
+The counter is fixed and controlled; **the count itself is still owed** and needs a log export Code
+cannot perform from this container.
+
+### Third time today
+
+Three times on 2026-09-18 a control's scope was narrower than its result — gate 11p's substring test,
+the `svc.value !== 'Other'` comparison, and this counter. **All three were found by someone deliberately
+looking, none by the control.** Recorded as a count rather than a conclusion; three is a number, not yet
+a pattern.
 
 ### The affordance question, answered: it narrows the ask but does not dissolve it
 
