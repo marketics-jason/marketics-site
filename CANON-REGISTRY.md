@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.79 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.80 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,91 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.80 — a rule that is never reached is not a control, and the config still reads correct (2026-09-19)
+
+**Skill impact:** no — a config and verification finding. No claim, no phrasing.
+
+### The exposure
+
+`marketics.io/scripts/partner-registry.json` **returned 200 in production.** So did everything else
+under `/scripts/`. The directory has been publicly fetchable since the block was written on
+2026-09-14.
+
+`netlify.toml` carries exactly the right rule — `/scripts/*` → `/404.html`, status 404, `force = true` —
+and has carried it the whole time. **The rule was declared at line 149. The `/:a/:b` depth rewrite is
+declared at line 44.** Netlify is first-match: `/scripts/partner-registry.json` matched `/:a/:b`
+first; that rule is deliberately non-force so real files keep static-file precedence; a real deployed
+file exists at that path; so the file was served and rule processing stopped. **The forced 404 was
+never reached.**
+
+> **The rule: a rule that is never reached is not a control. Correctness and reachability are separate
+> properties, and reading the file only ever shows you the first one.**
+
+Nothing about the block looked wrong, because nothing about it *was* wrong. It was inert. The same
+first-match trap is called out by name eleven lines above the `/p/*` rule in `_redirects` — *"MUST stay
+above the catch-all below: Netlify is first-match, and under `/*` this route is dead"* — so the lane
+already knew the mechanism and still shipped an instance of it in the other config file.
+
+### How it was found, and what that says
+
+The first run of the new partner smoke block, which **fetched the URL**. It took one assertion and one
+run. Nothing else in five days had fetched it.
+
+### The correction owed, and it is mine
+
+**Registry v3.63 recorded this exposure as closed.** The pattern audit delivered to CTO on 2026-09-18
+repeated that verdict — v3.63, *"still live: no"*, evidence *"`/scripts/*` 404-forced at the edge."*
+
+**That evidence was a read of `netlify.toml`.** The audit's own framing was *"verified against the repo,
+not remembered"* — and the repo was not the system that decides. I upgraded "the config says so" to
+"verified" in a document whose entire purpose was to separate the two.
+
+**The audit's CLOSED column is now suspect as a class, not just in this row.** Six of its seven CLOSED
+rows were established by reading repo files; one by execution. Production disagreed with the only row
+anyone has since fetched. The remaining five are not disproven — several are covered by smoke — but
+they carry the same evidence type as the row that was wrong, and that is worth saying plainly rather
+than leaving CTO to discover it the way this was discovered.
+
+### Where it sits in the family
+
+Directly downstream of **v3.79**, written the day before: *a read-back proves the value is stored, not
+that the consumer can see it.* Same error, one day later, in a different system — I read the thing that
+**stores the rule** rather than the thing that **applies** it. v3.79 was about a value; this is about a
+rule. The generalisation covers both:
+
+> **Reading the artefact that holds a control tells you what it says. Only the system that executes it
+> can tell you whether it runs.**
+
+What v3.80 adds beyond v3.79 is the failure mode: not staleness, not the wrong signal — **inertness by
+precedence.** A correct rule, present and current, silently outranked by an earlier one. That is now the
+seventh member:
+
+| Member | Failure |
+|---|---|
+| vacuous-pass | the check cannot fail |
+| vacuous failure | the check fires on the wrong signal |
+| outranked-or-loosened (v3.47) | reports on what it can reach, read as covering the class |
+| decayed gate (v3.76) | was sound; a later change silently invalidated it |
+| decayed measurement instrument (v3.78) | the same, in a counter, where the wrong answer reads as good news |
+| wrong-side read (v3.79) | queries the system that stores the value, not the one that uses it |
+| **unreachable rule (v3.80)** | **correct, present, current — and never evaluated, because something earlier claimed the path** |
+
+### The fix, and the control
+
+The block moved above the depth rewrites. Smoke asserts the 404 on **two** paths under `/scripts/`,
+not one: a single glob means one assertion would cover the class, but the failure mode here is the rule
+being unreachable, which fails every path at once — two paths make the blast radius legible in the log
+instead of inferred from a single line. `netlify.toml` now carries the ordering constraint and the
+reason in the block itself.
+
+### Severity, stated rather than implied
+
+The registry file deliberately carries no person names, and `validate-site.py` is gate logic rather than
+a secret. **The market list that D8 needs is PRIVATE per canon and was never placed there** — the
+directory was closed precisely so that "nothing sensitive is in there yet" would not have to stay true.
+It stayed true, and that is luck rather than control. The exposure window is five days; what was exposed
+is slugs, relationship stages and build tooling.
+
 ## v3.79 — a read-back proves the value is stored, not that the consumer can see it (2026-09-18)
 
 **Skill impact:** no — an integration-verification rule. No claim, no phrasing, no published string.

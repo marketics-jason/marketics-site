@@ -32,6 +32,33 @@
 # every internal link, so it is a scoped decision, not a config tweak — routed
 # to the Boardroom rather than improvised here.
 #
+# ── /scripts/ IS NOT PUBLIC ───────────────────────────
+# Build-time tooling and config, never a served surface. This exposure was live
+# and unnoticed until D8 §4: marketics.io/scripts/partner-registry.json was
+# fetchable, and validate-site.py alongside it. Nothing there is a secret today
+# -- the partner registry deliberately carries no person names (registry v3.63)
+# -- but "nothing sensitive is in there yet" is not a control, and the market
+# list D8 needs is PRIVATE per canon. So the directory is closed rather than
+# audited file by file.
+#
+# ORDER IS THE WHOLE RULE, and getting it wrong is why this block did nothing
+# for five days. It sat BELOW the /:a/:b depth rewrite. Netlify is first-match:
+# /scripts/partner-registry.json matched /:a/:b first, that rule is non-force,
+# a real deployed file exists at the path, so the static file was served and
+# processing stopped. The forced 404 below was never reached. Production
+# returned 200 the entire time while the rule sat in this file looking correct,
+# and registry v3.63 recorded the exposure as closed on the strength of reading
+# it here. Found 2026-09-19 by the first run of the partner smoke block, which
+# fetched the URL instead of reading the config (registry v3.79, v3.80).
+#
+# DO NOT MOVE THIS BELOW THE DEPTH REWRITES. Smoke asserts the 404 on two paths
+# so a re-order cannot go unnoticed again.
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # No-slash form: served as a 200 rewrite (not a redirect) so /method,
 # /intel/miami, and /intel/miami/report resolve directly, matching the
 # canonical tags with no hop. Non-force, so real files (/assets/*,
@@ -137,20 +164,6 @@
 # /intel/switch-property-manager-to-revenue-manager) and must never compete with
 # them in search; that's the whole reason they're separate pages. The in-head
 # meta robots tag says the same thing — this is the edge-level backstop.
-# ── /scripts/ IS NOT PUBLIC ───────────────────────────
-# Build-time tooling and config, never a served surface. This exposure was live
-# and unnoticed until D8 §4: marketics.io/scripts/partner-registry.json was
-# fetchable, and validate-site.py alongside it. Nothing there is a secret today
-# -- the partner registry deliberately carries no person names (registry v3.63)
-# -- but "nothing sensitive is in there yet" is not a control, and the market
-# list D8 needs is PRIVATE per canon. So the directory is closed rather than
-# audited file by file.
-[[redirects]]
-  from = "/scripts/*"
-  to = "/404.html"
-  status = 404
-  force = true
-
 # Partner door — unlisted. The page is reachable by URL on purpose (it is
 # forwardable, which is the point), but it must never be indexed, never appear
 # in nav, and never be linked from an organic surface. The in-head meta robots

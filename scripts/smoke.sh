@@ -883,11 +883,17 @@ c=$(code "$BASE/p/cost-seg-smart"); [ "$c" = "200" ] \
 grep -q 'cost-seg-smart' <<<"$(body "$BASE/p/cost-seg-smart")" \
   && ok "/p/ stub carries the registered slug" || no "/p/ stub has lost its slug list (v3.63)"
 
-# The registry file itself is not public (registry v3.63). It is build input,
-# and it names relationships that are not all announced.
-c=$(code "$BASE/scripts/partner-registry.json"); [ "$c" = "404" ] \
-  && ok "/scripts/partner-registry.json blocked at the edge" \
-  || no "/scripts/partner-registry.json returned $c (want 404 -- the rail's registry is public)"
+# /scripts/ is not a served surface (registry v3.63). Two paths, not one: the
+# netlify.toml rule is a single /scripts/* glob, so one assertion would cover
+# the class -- but the failure mode found on 2026-09-19 was the rule being
+# UNREACHABLE behind an earlier depth rewrite, and an unreachable rule fails
+# for every path at once. Two paths cost nothing and make the blast radius
+# legible in the log rather than inferred from one line (registry v3.80).
+for f in "partner-registry.json" "validate-site.py"; do
+  c=$(code "$BASE/scripts/$f"); [ "$c" = "404" ] \
+    && ok "/scripts/$f blocked at the edge" \
+    || no "/scripts/$f returned $c (want 404 -- /scripts/ is publicly fetchable)"
+done
 
 echo
 echo "Result: $pass passed, $fail failed"
