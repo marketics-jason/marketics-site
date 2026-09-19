@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.78 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.80 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,188 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.80 — a rule that is never reached is not a control, and the config still reads correct (2026-09-19)
+
+**Skill impact:** no — a config and verification finding. No claim, no phrasing.
+
+### The exposure
+
+`marketics.io/scripts/partner-registry.json` **returned 200 in production.** So did everything else
+under `/scripts/`. The directory has been publicly fetchable since the block was written on
+2026-09-14.
+
+`netlify.toml` carried exactly the right rule the whole time — `/scripts/*` → `/404.html`, status 404,
+`force = true`. **It was in the wrong file.** `_redirects` is evaluated **before** `netlify.toml`;
+that file's `/*` catch-all is non-force; a real deployed file exists at the path; so the static file
+was served and `netlify.toml` was never consulted for those paths at all.
+
+> **The rule: a rule that is never reached is not a control. Correctness and reachability are separate
+> properties, and reading the file only ever shows you the first one.**
+
+### The first fix was wrong, and the preview is the only reason that is known
+
+The initial diagnosis was that the block sat *below* the `/:a/:b` depth rewrite **within**
+`netlify.toml`, and that first-match ordering inside that file made it inert. The block was moved
+above the rewrites, the TOML was re-parsed to confirm the new order, and that mechanism was written
+into this entry and the commit message as established fact.
+
+**It was wrong. Both paths still returned 200 on the deploy preview built from that commit.**
+
+The position inside `netlify.toml` was never the variable — the file itself was, and the precedence
+that decides it is documented in a comment **eleven lines above** the block being edited: *"`_redirects`
+… IS evaluated before this file."* The answer was in the file the whole time, on screen, and reading
+the config produced a confident wrong diagnosis twice in a row on the same defect.
+
+**The fix now lives in `_redirects`** with the `404!` force syntax, beside the internal-doc shadows
+that use the same mechanism. The `netlify.toml` rule stays as defence in depth with its own history
+written into it.
+
+### How it was found, and what that says
+
+The first run of the new partner smoke block, which **fetched the URL**. It took one assertion and one
+run. Nothing else in five days had fetched it.
+
+### The correction owed, and it is mine
+
+**Registry v3.63 recorded this exposure as closed.** The pattern audit delivered to CTO on 2026-09-18
+repeated that verdict — v3.63, *"still live: no"*, evidence *"`/scripts/*` 404-forced at the edge."*
+
+**That evidence was a read of `netlify.toml`.** The audit's own framing was *"verified against the repo,
+not remembered"* — and the repo was not the system that decides. I upgraded "the config says so" to
+"verified" in a document whose entire purpose was to separate the two.
+
+**The audit's CLOSED column is now suspect as a class, not just in this row.** Six of its seven CLOSED
+rows were established by reading repo files; one by execution. Production disagreed with the only row
+anyone has since fetched. The remaining five are not disproven — several are covered by smoke — but
+they carry the same evidence type as the row that was wrong, and that is worth saying plainly rather
+than leaving CTO to discover it the way this was discovered.
+
+### Where it sits in the family
+
+Directly downstream of **v3.79**, written the day before: *a read-back proves the value is stored, not
+that the consumer can see it.* Same error, one day later, in a different system — I read the thing that
+**stores the rule** rather than the thing that **applies** it. v3.79 was about a value; this is about a
+rule. The generalisation covers both:
+
+> **Reading the artefact that holds a control tells you what it says. Only the system that executes it
+> can tell you whether it runs.**
+
+What v3.80 adds beyond v3.79 is the failure mode: not staleness, not the wrong signal — **inertness by
+precedence.** A correct rule, present and current, in a file that loses to another file. It also adds a
+second lesson the lane paid for twice in one hour: **a diagnosis read off the config is a hypothesis, and
+the first one was wrong.** Only the preview settled it. That is now the
+seventh member:
+
+| Member | Failure |
+|---|---|
+| vacuous-pass | the check cannot fail |
+| vacuous failure | the check fires on the wrong signal |
+| outranked-or-loosened (v3.47) | reports on what it can reach, read as covering the class |
+| decayed gate (v3.76) | was sound; a later change silently invalidated it |
+| decayed measurement instrument (v3.78) | the same, in a counter, where the wrong answer reads as good news |
+| wrong-side read (v3.79) | queries the system that stores the value, not the one that uses it |
+| **unreachable rule (v3.80)** | **correct, present, current — and never evaluated, because it is in a file the request never reaches** |
+
+### The fix, and the control
+
+The block moved above the depth rewrites. Smoke asserts the 404 on **two** paths under `/scripts/`,
+not one: a single glob means one assertion would cover the class, but the failure mode here is the rule
+being unreachable, which fails every path at once — two paths make the blast radius legible in the log
+instead of inferred from a single line. `netlify.toml` now carries the ordering constraint and the
+reason in the block itself.
+
+### Severity, stated rather than implied
+
+The registry file deliberately carries no person names, and `validate-site.py` is gate logic rather than
+a secret. **The market list that D8 needs is PRIVATE per canon and was never placed there** — the
+directory was closed precisely so that "nothing sensitive is in there yet" would not have to stay true.
+It stayed true, and that is luck rather than control. The exposure window is five days; what was exposed
+is slugs, relationship stages and build tooling.
+
+## v3.79 — a read-back proves the value is stored, not that the consumer can see it (2026-09-18)
+
+**Skill impact:** no — an integration-verification rule. No claim, no phrasing, no published string.
+
+### What happened
+
+`GHL_HOOK_PARTNER` was set, then rotated. Both writes were confirmed by reading the value back from
+Netlify's API across all four deploy contexts — and the rotation needed that read-back twice, because
+the API returns **422 while writing the value anyway** (twice-observed; owed to console §1e). Code
+reported the variable verified.
+
+It was. The value was stored, correct, and present in every context.
+
+**The partner rail was dead for roughly five hours anyway.** Netlify injects environment variables into
+a function bundle **at deploy time**. The `lead` function serving `/api/partner` had been sealed at
+20:43:35 UTC by the merge of #159 — before either write. It held whatever the variable was at that
+instant and could not see either update. A redeploy of the byte-identical commit fixed it in under a
+minute.
+
+> **The rule: a read-back proves the value is stored. It does not prove the consumer can see it. The
+> store and the consumer are two different reads, and confirming the first says nothing about the
+> second.**
+
+### Why this is its own entry rather than an instance of v3.76
+
+A decayed gate was valid when written and was silently invalidated by a later change to its data. This
+check was **never** valid for the question asked of it. It did not decay. Nothing changed underneath
+it. It read the wrong system from the start, and read it accurately — which is precisely why it was
+believed.
+
+The family now reads:
+
+| Member | Failure |
+|---|---|
+| vacuous-pass | the check cannot fail |
+| vacuous failure | the check fires on the wrong signal |
+| outranked-or-loosened (v3.47) | the check reports on what it can reach, and is read as covering the class |
+| decayed gate (v3.76) | the check was sound; a later change silently invalidated it |
+| decayed measurement instrument (v3.78) | the same, in a counter, where the wrong answer reads as good news |
+| **wrong-side read (v3.79)** | **the check queries the system that STORES the value rather than the system that USES it, and is accurate about the wrong thing** |
+
+### The shape it shares with last week, which is the part that should worry us
+
+v3.51's generalisable half was that **our controls were all outbound** — they proved what we sent and
+never what the recipient did with it. This is the same blind spot one layer further in: every
+verification habit in this lane points at the system we control. **Two weeks running, the week's main
+incident came from the side we did not read.** That is no longer a coincidence and should be treated
+as a property of how this lane verifies things.
+
+### The detection method
+
+A read-back answers *"is it stored?"* The question was *"can the consumer see it?"* Only the consumer
+is an honest respondent to that.
+
+For a Netlify function, the cheap proxy is arithmetic: **compare the deploy's `created_at` against the
+variable's write time.** If the deploy predates the write, the verification is void no matter what the
+store returns. That comparison took one API read and settled in seconds what five hours of correct
+read-backs could not.
+
+> **Generalised: when a stored value is verified, name the consumer and the moment it last loaded that
+> value. A verification that cannot name both has not been performed.**
+
+### What it cost
+
+CTO's 17:43 form submission and the 16:20 curl capture — both lost, neither producing an error. The
+form told the applicant it worked, which is v3.77, unfixed, and the reason the loss was silent on both
+ends: the visitor saw success, and the operator saw a verified environment variable.
+
+### The countermeasure, and the limit written into it
+
+Production smoke now covers the partner surface — `/partners`, `/partners/apply`, `/api/partner`,
+`/p/{slug}`. **0 of 228 assertions touched any of it before this entry**, on the surface built this week
+and shipped live; that gap was found by grepping the smoke script while writing the weekly report, not
+by any failure.
+
+**The new coverage cannot close this finding, and says so in its own comment.** Proving the hook is
+reachable requires a POST, and by standing constraint the smoke runner carries read-only verification
+against production and nothing else — no writes, no credentials, no third-party authentication. The
+block asserts the route is wired, the function is deployed, the endpoint rejects non-POST, the form
+targets `/api/partner` rather than `/api/lead`, and no webhook URL is exposed. Whether the function can
+see its own environment is provable only by a real submission. **That boundary is stated in the block
+rather than left to be inferred, because a control read as broader than it is becomes the next
+v3.47.**
+
 ## v3.78 — a finding recorded as a generalisation is a finding closed without being fixed (2026-09-18)
 
 **Skill impact:** no — a claim about how this ledger is used, and one counter fix.

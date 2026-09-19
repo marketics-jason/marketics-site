@@ -107,6 +107,16 @@
 /costseg/:placement    https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement    301!
 /costseg               https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct         301!
 
+# /scripts/ — build tooling and config, never a served surface.
+# MUST live HERE, not in netlify.toml. _redirects is evaluated BEFORE that file
+# (see the netlify.toml trailing-slash comment). A /scripts/* force-404 in
+# netlify.toml is unreachable: this file's /* catch-all is non-force, a real
+# deployed file exists at the path, the static file is served, and netlify.toml
+# is never consulted. That is exactly what happened from 2026-09-14 to
+# 2026-09-19 -- the rule sat in netlify.toml looking correct and did nothing.
+# Same `404!` force syntax as the doc shadows below, which do work.
+/scripts/*                         /404.html                  404!
+
 # Internal docs — never serve publicly (force-shadow the static files)
 /marketics-site-audit-2026-07      /404.html                  404!
 /marketics-site-audit-2026-07.md   /404.html                  404!

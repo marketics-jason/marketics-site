@@ -32,6 +32,35 @@
 # every internal link, so it is a scoped decision, not a config tweak — routed
 # to the Boardroom rather than improvised here.
 #
+# ── /scripts/ IS NOT PUBLIC ───────────────────────────
+# Build-time tooling and config, never a served surface. This exposure was live
+# and unnoticed until D8 §4: marketics.io/scripts/partner-registry.json was
+# fetchable, and validate-site.py alongside it. Nothing there is a secret today
+# -- the partner registry deliberately carries no person names (registry v3.63)
+# -- but "nothing sensitive is in there yet" is not a control, and the market
+# list D8 needs is PRIVATE per canon. So the directory is closed rather than
+# audited file by file.
+#
+# THE RULE THAT ACTUALLY BLOCKS /scripts/ IS IN `_redirects`, NOT HERE.
+# This one is defence in depth and nothing more. _redirects is evaluated BEFORE
+# netlify.toml (see the trailing-slash comment at the top of this file), so its
+# non-force /* catch-all lets the real static file win and this file is never
+# reached for those paths. From 2026-09-14 to 2026-09-19 that is precisely what
+# happened: /scripts/partner-registry.json returned 200 in production while a
+# correct-looking force-404 sat in this file.
+#
+# A first fix on 2026-09-19 moved this block above the depth rewrites, on the
+# theory that /:a/:b was shadowing it. THAT WAS WRONG and the deploy preview
+# said so -- both paths still returned 200 with the new order. The position
+# inside this file was never the variable; the file itself was. Recorded
+# because a wrong diagnosis that looks plausible is worth more as a comment
+# than as a deleted commit (registry v3.80).
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # No-slash form: served as a 200 rewrite (not a redirect) so /method,
 # /intel/miami, and /intel/miami/report resolve directly, matching the
 # canonical tags with no hop. Non-force, so real files (/assets/*,
@@ -137,20 +166,6 @@
 # /intel/switch-property-manager-to-revenue-manager) and must never compete with
 # them in search; that's the whole reason they're separate pages. The in-head
 # meta robots tag says the same thing — this is the edge-level backstop.
-# ── /scripts/ IS NOT PUBLIC ───────────────────────────
-# Build-time tooling and config, never a served surface. This exposure was live
-# and unnoticed until D8 §4: marketics.io/scripts/partner-registry.json was
-# fetchable, and validate-site.py alongside it. Nothing there is a secret today
-# -- the partner registry deliberately carries no person names (registry v3.63)
-# -- but "nothing sensitive is in there yet" is not a control, and the market
-# list D8 needs is PRIVATE per canon. So the directory is closed rather than
-# audited file by file.
-[[redirects]]
-  from = "/scripts/*"
-  to = "/404.html"
-  status = 404
-  force = true
-
 # Partner door — unlisted. The page is reachable by URL on purpose (it is
 # forwardable, which is the point), but it must never be indexed, never appear
 # in nav, and never be linked from an organic surface. The in-head meta robots

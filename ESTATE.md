@@ -127,6 +127,7 @@ A hand-edit is a second source of truth, and it will be overwritten.
 | `/costseg/author-page` | `https://costsegsmart.com/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=author-page` | 301! |
 | `/costseg/:placement` | `https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=:placement` | 301! |
 | `/costseg` | `https://costsegsmart.com/order/?ref=MARKETICS-Q0DZ&utm_source=marketics&utm_medium=partner&utm_campaign=costseg&utm_content=direct` | 301! |
+| `/scripts/*` | `/404.html` | 404! |
 | `/marketics-site-audit-2026-07` | `/404.html` | 404! |
 | `/marketics-site-audit-2026-07.md` | `/404.html` | 404! |
 | `/CANON-REGISTRY` | `/404.html` | 404! |

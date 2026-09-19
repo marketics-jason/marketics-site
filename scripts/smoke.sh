@@ -768,6 +768,144 @@ exits=$(grep -Eoh 'href="[^"#][^"]*"' <<<"$lp" \
 grep -q 'noindex, follow' <<<"$lp" \
   && ok "noindex, follow" || no "robots meta wrong on the paid LP"
 
+echo "· Partner surface"
+# Added 2026-09-18. Before this block, 0 of 228 assertions touched the partner
+# surface -- the newest surface on the site, the only one with a live
+# application form, and the one shipped the same week. Found by grepping this
+# file while writing a report, not by any failure.
+#
+# WHAT THIS BLOCK CANNOT DO, written here so it is never read as broader than
+# it is. It cannot prove that /api/partner reaches GHL. That needs a POST, and
+# the constraint on this runner is absolute: read-only verification against
+# production and nothing else. On 2026-09-18 the function held a stale
+# GHL_HOOK_PARTNER for roughly five hours -- Netlify seals env vars into the
+# bundle at deploy time -- and every assertion below would have passed for the
+# whole of it (registry v3.79). "The route is wired" and "the route works" are
+# different claims. Only the first one is in here.
+
+for p in "/partners" "/partners/apply"; do
+  c=$(code "$BASE$p"); [ "$c" = "200" ] && ok "200 $p" || no "$p returned $c (want 200)"
+done
+
+# /partner retired to /partners, single 301, both slash forms (D8, registry
+# v3.65). The footer carried /partner on 51 pages before the rename, so a
+# soft-200 or a wrong target here strands every one of them silently.
+for p in "/partner" "/partner/"; do
+  c=$(code "$BASE$p"); t=$(loc "$BASE$p")
+  { [ "$c" = "301" ] && [ "$t" = "/partners" ]; } \
+    && ok "$p -> 301 /partners" || no "$p = $c -> '$t' (want 301 /partners)"
+done
+
+part=$(body "$BASE/partners")
+appl=$(body "$BASE/partners/apply")
+
+# Both routes are noindex,nofollow. Indexing them is a separate gated decision
+# and the copy is still DRAFT, so a page that quietly became indexable would
+# put uncleared copy into the index.
+grep -q 'content="noindex, nofollow"' <<<"$part" \
+  && ok "/partners is noindex, nofollow" || no "/partners is no longer noindex, nofollow"
+grep -q 'content="noindex, nofollow"' <<<"$appl" \
+  && ok "/partners/apply is noindex, nofollow" || no "/partners/apply is no longer noindex, nofollow"
+
+# The application must post to /api/partner. Posting to /api/lead would work,
+# return 200, look correct to the applicant, and file every professional as an
+# owner lead -- the wrong pipeline entirely. Gate 11p checks the source; this
+# checks what production serves.
+#
+# Read the value that travels, not prose about it. A bare substring test for
+# "/api/lead" PASSES ON THE CORRECT PAGE: its own comment reads "posts to
+# /api/partner, never /api/lead". That is the same shape that made gate 11h and
+# check-skill-sync vacuous on 2026-09-10 -- a check satisfied by the
+# documentation of the thing it checks. Caught here by controlling the
+# assertion against the clean file before shipping it, which is the only reason
+# this comment exists.
+grep -qE "ENDPOINT[[:space:]]*=[[:space:]]*'/api/partner'[[:space:]]*;" <<<"$appl" \
+  && ok "/partners/apply's endpoint is /api/partner" \
+  || no "/partners/apply's endpoint is not /api/partner -- applications would file as leads"
+grep -qE "ENDPOINT[[:space:]]*=[[:space:]]*'/api/lead'" <<<"$appl" \
+  && no "/partners/apply's endpoint has been switched to /api/lead" \
+  || ok "/partners/apply is off the lead route"
+# And the constant is the one actually submitted through -- a correct constant
+# with the fetch pointed elsewhere would satisfy both checks above.
+grep -qE 'fetch\(ENDPOINT' <<<"$appl" \
+  && ok "/partners/apply submits through that endpoint" \
+  || no "/partners/apply does not fetch(ENDPOINT) -- the constant may be dead"
+
+# Same rule as the six lead surfaces: no CRM webhook URL in public source.
+grep -qE 'leadconnectorhq\.com/hooks/|webhook-trigger/[0-9a-f-]+' <<<"$appl" \
+  && no "a CRM webhook URL is in /partners/apply's public source (v3.56)" \
+  || ok "no CRM webhook URL in /partners/apply's public source"
+grep -qE 'leadconnectorhq\.com/hooks/|webhook-trigger/[0-9a-f-]+' <<<"$part" \
+  && no "a CRM webhook URL is in /partners's public source (v3.56)" \
+  || ok "no CRM webhook URL in /partners's public source"
+
+# Bot gate, same convention as the six lead forms (v3.54, v3.55).
+grep -q 'name="hp_field"' <<<"$appl" \
+  && ok "/partners/apply serves the honeypot field" || no "/partners/apply honeypot field missing"
+grep -q 'class="mkx-hp"' <<<"$appl" \
+  && ok "/partners/apply keeps the honeypot off-screen" || no "/partners/apply honeypot is not hidden"
+grep -q 'mkxHpField' <<<"$appl" \
+  && ok "/partners/apply actually reads the honeypot" || no "/partners/apply never reads the honeypot"
+grep -q 'MIN_FILL_MS' <<<"$appl" \
+  && ok "/partners/apply carries a submit-timing floor" || no "/partners/apply has no timing floor"
+
+# Payload contract (registry v3.75). Keys are unprefixed -- the partner_ prefix
+# belongs to the GHL field, not the wire -- and the two coded values the vet
+# branches on must be codes, never labels. A <select> whose options carry no
+# value= transmits the visible label instead, which is valid markup that sends
+# the wrong thing.
+grep -qE '"?partner_[a-z_]+"?[[:space:]]*:' <<<"$appl" \
+  && no "/partners/apply transmits a partner_-prefixed key -- the contract is unprefixed (v3.75)" \
+  || ok "/partners/apply transmits the unprefixed contract"
+grep -q 'revisit_date' <<<"$appl" \
+  && ok "/partners/apply transmits revisit_date" || no "/partners/apply dropped revisit_date (v3.75)"
+for v in 'value="property_manager"' 'value="revenue_services"'; do
+  grep -q "$v" <<<"$appl" \
+    && ok "/partners/apply serves coded $v" \
+    || no "/partners/apply missing coded $v -- the vet would read a label (v3.75)"
+done
+
+# The function is deployed and both paths are routed to it. GET must be
+# rejected: the handler is POST-only, so a 405 proves the route resolves to the
+# function rather than to a 404 page. This is the strongest read-only claim
+# available about /api/partner and it is still only about routing.
+c=$(code "$BASE/api/partner"); [ "$c" = "405" ] \
+  && ok "/api/partner routed to the function (405 on GET)" \
+  || no "/api/partner returned $c on GET (want 405 -- 404 means the route is not wired)"
+c=$(code "$BASE/api/lead"); [ "$c" = "405" ] \
+  && ok "/api/lead routed to the function (405 on GET)" \
+  || no "/api/lead returned $c on GET (want 405 -- 404 means the route is not wired)"
+
+# The referral rail. /p/<slug> is a permanent link a partner holds, so it must
+# resolve for a registered slug and must never lose the visitor.
+c=$(code "$BASE/p/cost-seg-smart"); [ "$c" = "200" ] \
+  && ok "/p/cost-seg-smart resolves" || no "/p/cost-seg-smart returned $c (want 200)"
+grep -q 'cost-seg-smart' <<<"$(body "$BASE/p/cost-seg-smart")" \
+  && ok "/p/ stub carries the registered slug" || no "/p/ stub has lost its slug list (v3.63)"
+
+# /scripts/ is not a served surface (registry v3.63). Two paths, not one: the
+# netlify.toml rule is a single /scripts/* glob, so one assertion would cover
+# the class -- but the failure mode found on 2026-09-19 was the rule being
+# UNREACHABLE behind an earlier depth rewrite, and an unreachable rule fails
+# for every path at once. Two paths cost nothing and make the blast radius
+# legible in the log rather than inferred from one line (registry v3.80).
+for f in "partner-registry.json" "validate-site.py"; do
+  c=$(code "$BASE/scripts/$f"); [ "$c" = "404" ] \
+    && ok "/scripts/$f blocked at the edge" \
+    || no "/scripts/$f returned $c (want 404 -- /scripts/ is publicly fetchable)"
+done
+
+# The internal-doc shadows use the same `404!` force syntax in the same file,
+# and until 2026-09-19 nothing had ever fetched one. They are the mechanism the
+# /scripts/ block now depends on, so they get asserted rather than assumed:
+# if this pair is green the syntax works, and if it is red the exposure is far
+# wider than /scripts/ (registry v3.80).
+for d in "CANON-REGISTRY.md" "LEGAL-REDLINE-2026-09-01.md"; do
+  c=$(code "$BASE/$d"); [ "$c" = "404" ] \
+    && ok "/$d shadowed" \
+    || no "/$d returned $c (want 404 -- an internal doc is publicly fetchable)"
+done
+
 echo
 echo "Result: $pass passed, $fail failed"
 [ "$fail" -eq 0 ] || exit 1
