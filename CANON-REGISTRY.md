@@ -1,6 +1,6 @@
 # Marketics Claims Canon Registry
 
-**Version:** v3.78 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
+**Version:** v3.79 · **Maintained by:** Code, on ruling from CTO/Strategy · **Public visibility:** internal only — force-shadowed to 404 in `_redirects` (see bottom of that file), same pattern as `marketics-site-audit-2026-07.md`.
 
 This file is the single in-repo source of truth for performance-claim wording, retired phrasings, and market-tier framing. Every ruling that changes what the site is allowed to say should land here in the same PR that enforces it. `scripts/validate-site.py` `RETIRED_TOKENS` is the mechanical enforcement layer for the phrasings below — when adding a retired token here, add it there too.
 
@@ -2363,6 +2363,90 @@ routed rather than authored.
 
 Suspected but still not evidenced: `/get-started` and `/join` send unsuffixed keys to the shared
 organic hook, whose mapping this says nothing about. Needs its own test contact.
+## v3.79 — a read-back proves the value is stored, not that the consumer can see it (2026-09-18)
+
+**Skill impact:** no — an integration-verification rule. No claim, no phrasing, no published string.
+
+### What happened
+
+`GHL_HOOK_PARTNER` was set, then rotated. Both writes were confirmed by reading the value back from
+Netlify's API across all four deploy contexts — and the rotation needed that read-back twice, because
+the API returns **422 while writing the value anyway** (twice-observed; owed to console §1e). Code
+reported the variable verified.
+
+It was. The value was stored, correct, and present in every context.
+
+**The partner rail was dead for roughly five hours anyway.** Netlify injects environment variables into
+a function bundle **at deploy time**. The `lead` function serving `/api/partner` had been sealed at
+20:43:35 UTC by the merge of #159 — before either write. It held whatever the variable was at that
+instant and could not see either update. A redeploy of the byte-identical commit fixed it in under a
+minute.
+
+> **The rule: a read-back proves the value is stored. It does not prove the consumer can see it. The
+> store and the consumer are two different reads, and confirming the first says nothing about the
+> second.**
+
+### Why this is its own entry rather than an instance of v3.76
+
+A decayed gate was valid when written and was silently invalidated by a later change to its data. This
+check was **never** valid for the question asked of it. It did not decay. Nothing changed underneath
+it. It read the wrong system from the start, and read it accurately — which is precisely why it was
+believed.
+
+The family now reads:
+
+| Member | Failure |
+|---|---|
+| vacuous-pass | the check cannot fail |
+| vacuous failure | the check fires on the wrong signal |
+| outranked-or-loosened (v3.47) | the check reports on what it can reach, and is read as covering the class |
+| decayed gate (v3.76) | the check was sound; a later change silently invalidated it |
+| decayed measurement instrument (v3.78) | the same, in a counter, where the wrong answer reads as good news |
+| **wrong-side read (v3.79)** | **the check queries the system that STORES the value rather than the system that USES it, and is accurate about the wrong thing** |
+
+### The shape it shares with last week, which is the part that should worry us
+
+v3.51's generalisable half was that **our controls were all outbound** — they proved what we sent and
+never what the recipient did with it. This is the same blind spot one layer further in: every
+verification habit in this lane points at the system we control. **Two weeks running, the week's main
+incident came from the side we did not read.** That is no longer a coincidence and should be treated
+as a property of how this lane verifies things.
+
+### The detection method
+
+A read-back answers *"is it stored?"* The question was *"can the consumer see it?"* Only the consumer
+is an honest respondent to that.
+
+For a Netlify function, the cheap proxy is arithmetic: **compare the deploy's `created_at` against the
+variable's write time.** If the deploy predates the write, the verification is void no matter what the
+store returns. That comparison took one API read and settled in seconds what five hours of correct
+read-backs could not.
+
+> **Generalised: when a stored value is verified, name the consumer and the moment it last loaded that
+> value. A verification that cannot name both has not been performed.**
+
+### What it cost
+
+CTO's 17:43 form submission and the 16:20 curl capture — both lost, neither producing an error. The
+form told the applicant it worked, which is v3.77, unfixed, and the reason the loss was silent on both
+ends: the visitor saw success, and the operator saw a verified environment variable.
+
+### The countermeasure, and the limit written into it
+
+Production smoke now covers the partner surface — `/partners`, `/partners/apply`, `/api/partner`,
+`/p/{slug}`. **0 of 228 assertions touched any of it before this entry**, on the surface built this week
+and shipped live; that gap was found by grepping the smoke script while writing the weekly report, not
+by any failure.
+
+**The new coverage cannot close this finding, and says so in its own comment.** Proving the hook is
+reachable requires a POST, and by standing constraint the smoke runner carries read-only verification
+against production and nothing else — no writes, no credentials, no third-party authentication. The
+block asserts the route is wired, the function is deployed, the endpoint rejects non-POST, the form
+targets `/api/partner` rather than `/api/lead`, and no webhook URL is exposed. Whether the function can
+see its own environment is provable only by a real submission. **That boundary is stated in the block
+rather than left to be inferred, because a control read as broader than it is becomes the next
+v3.47.**
+
 ## v3.78 — a finding recorded as a generalisation is a finding closed without being fixed (2026-09-18)
 
 **Skill impact:** no — a claim about how this ledger is used, and one counter fix.
