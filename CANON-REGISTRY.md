@@ -2373,20 +2373,31 @@ organic hook, whose mapping this says nothing about. Needs its own test contact.
 under `/scripts/`. The directory has been publicly fetchable since the block was written on
 2026-09-14.
 
-`netlify.toml` carries exactly the right rule — `/scripts/*` → `/404.html`, status 404, `force = true` —
-and has carried it the whole time. **The rule was declared at line 149. The `/:a/:b` depth rewrite is
-declared at line 44.** Netlify is first-match: `/scripts/partner-registry.json` matched `/:a/:b`
-first; that rule is deliberately non-force so real files keep static-file precedence; a real deployed
-file exists at that path; so the file was served and rule processing stopped. **The forced 404 was
-never reached.**
+`netlify.toml` carried exactly the right rule the whole time — `/scripts/*` → `/404.html`, status 404,
+`force = true`. **It was in the wrong file.** `_redirects` is evaluated **before** `netlify.toml`;
+that file's `/*` catch-all is non-force; a real deployed file exists at the path; so the static file
+was served and `netlify.toml` was never consulted for those paths at all.
 
 > **The rule: a rule that is never reached is not a control. Correctness and reachability are separate
 > properties, and reading the file only ever shows you the first one.**
 
-Nothing about the block looked wrong, because nothing about it *was* wrong. It was inert. The same
-first-match trap is called out by name eleven lines above the `/p/*` rule in `_redirects` — *"MUST stay
-above the catch-all below: Netlify is first-match, and under `/*` this route is dead"* — so the lane
-already knew the mechanism and still shipped an instance of it in the other config file.
+### The first fix was wrong, and the preview is the only reason that is known
+
+The initial diagnosis was that the block sat *below* the `/:a/:b` depth rewrite **within**
+`netlify.toml`, and that first-match ordering inside that file made it inert. The block was moved
+above the rewrites, the TOML was re-parsed to confirm the new order, and that mechanism was written
+into this entry and the commit message as established fact.
+
+**It was wrong. Both paths still returned 200 on the deploy preview built from that commit.**
+
+The position inside `netlify.toml` was never the variable — the file itself was, and the precedence
+that decides it is documented in a comment **eleven lines above** the block being edited: *"`_redirects`
+… IS evaluated before this file."* The answer was in the file the whole time, on screen, and reading
+the config produced a confident wrong diagnosis twice in a row on the same defect.
+
+**The fix now lives in `_redirects`** with the `404!` force syntax, beside the internal-doc shadows
+that use the same mechanism. The `netlify.toml` rule stays as defence in depth with its own history
+written into it.
 
 ### How it was found, and what that says
 
@@ -2419,7 +2430,9 @@ rule. The generalisation covers both:
 > can tell you whether it runs.**
 
 What v3.80 adds beyond v3.79 is the failure mode: not staleness, not the wrong signal — **inertness by
-precedence.** A correct rule, present and current, silently outranked by an earlier one. That is now the
+precedence.** A correct rule, present and current, in a file that loses to another file. It also adds a
+second lesson the lane paid for twice in one hour: **a diagnosis read off the config is a hypothesis, and
+the first one was wrong.** Only the preview settled it. That is now the
 seventh member:
 
 | Member | Failure |
@@ -2430,7 +2443,7 @@ seventh member:
 | decayed gate (v3.76) | was sound; a later change silently invalidated it |
 | decayed measurement instrument (v3.78) | the same, in a counter, where the wrong answer reads as good news |
 | wrong-side read (v3.79) | queries the system that stores the value, not the one that uses it |
-| **unreachable rule (v3.80)** | **correct, present, current — and never evaluated, because something earlier claimed the path** |
+| **unreachable rule (v3.80)** | **correct, present, current — and never evaluated, because it is in a file the request never reaches** |
 
 ### The fix, and the control
 

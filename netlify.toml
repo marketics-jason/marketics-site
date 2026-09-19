@@ -41,18 +41,20 @@
 # list D8 needs is PRIVATE per canon. So the directory is closed rather than
 # audited file by file.
 #
-# ORDER IS THE WHOLE RULE, and getting it wrong is why this block did nothing
-# for five days. It sat BELOW the /:a/:b depth rewrite. Netlify is first-match:
-# /scripts/partner-registry.json matched /:a/:b first, that rule is non-force,
-# a real deployed file exists at the path, so the static file was served and
-# processing stopped. The forced 404 below was never reached. Production
-# returned 200 the entire time while the rule sat in this file looking correct,
-# and registry v3.63 recorded the exposure as closed on the strength of reading
-# it here. Found 2026-09-19 by the first run of the partner smoke block, which
-# fetched the URL instead of reading the config (registry v3.79, v3.80).
+# THE RULE THAT ACTUALLY BLOCKS /scripts/ IS IN `_redirects`, NOT HERE.
+# This one is defence in depth and nothing more. _redirects is evaluated BEFORE
+# netlify.toml (see the trailing-slash comment at the top of this file), so its
+# non-force /* catch-all lets the real static file win and this file is never
+# reached for those paths. From 2026-09-14 to 2026-09-19 that is precisely what
+# happened: /scripts/partner-registry.json returned 200 in production while a
+# correct-looking force-404 sat in this file.
 #
-# DO NOT MOVE THIS BELOW THE DEPTH REWRITES. Smoke asserts the 404 on two paths
-# so a re-order cannot go unnoticed again.
+# A first fix on 2026-09-19 moved this block above the depth rewrites, on the
+# theory that /:a/:b was shadowing it. THAT WAS WRONG and the deploy preview
+# said so -- both paths still returned 200 with the new order. The position
+# inside this file was never the variable; the file itself was. Recorded
+# because a wrong diagnosis that looks plausible is worth more as a comment
+# than as a deleted commit (registry v3.80).
 [[redirects]]
   from = "/scripts/*"
   to = "/404.html"

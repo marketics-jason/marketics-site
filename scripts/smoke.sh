@@ -895,6 +895,17 @@ for f in "partner-registry.json" "validate-site.py"; do
     || no "/scripts/$f returned $c (want 404 -- /scripts/ is publicly fetchable)"
 done
 
+# The internal-doc shadows use the same `404!` force syntax in the same file,
+# and until 2026-09-19 nothing had ever fetched one. They are the mechanism the
+# /scripts/ block now depends on, so they get asserted rather than assumed:
+# if this pair is green the syntax works, and if it is red the exposure is far
+# wider than /scripts/ (registry v3.80).
+for d in "CANON-REGISTRY.md" "LEGAL-REDLINE-2026-09-01.md"; do
+  c=$(code "$BASE/$d"); [ "$c" = "404" ] \
+    && ok "/$d shadowed" \
+    || no "/$d returned $c (want 404 -- an internal doc is publicly fetchable)"
+done
+
 echo
 echo "Result: $pass passed, $fail failed"
 [ "$fail" -eq 0 ] || exit 1
